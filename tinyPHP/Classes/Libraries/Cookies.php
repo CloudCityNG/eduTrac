@@ -75,12 +75,13 @@ class Cookies {
 		if(!isset($vars['data'])) {
 			return NULL;
 		}
+        
+        $bind = array( ":vars" => $vars['data'] );
 		
-		$sql = DB::inst()->query( "SELECT * FROM person WHERE uname = '".$vars['data']."'" );
-		$r = $sql->fetch(\PDO::FETCH_ASSOC);
-		if($sql->rowCount() > 0) {
-			return $r[$field];
-		}
+        $sql = DB::inst()->select( "person","uname = :vars","","*",$bind );
+        foreach($sql as $r) {
+            return $r[$field];
+        }
 	}
 	
 	/**
@@ -97,9 +98,13 @@ class Cookies {
 		if(!isset($vars['data'])) {
 			return NULL;
 		}
+        
+        $bind = array( ":vars" => $vars['data'] );
 		
-		$sql = DB::inst()->query( "SELECT * FROM person WHERE uname = '".$vars['data']."'" );
-		$r = $sql->fetch(\PDO::FETCH_ASSOC);
+        $sql = DB::inst()->select( "person","uname = :vars","","*",$bind );
+        foreach( $sql as $r ) {
+            $array[] = $r;
+        }
 		
 		if($r['auth_token'] == $this->getCookieName()) {
 			return true;
