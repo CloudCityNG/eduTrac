@@ -62,7 +62,7 @@
                             <div class="controls">
                                 <select style="width:100%" name="buildingCode" id="select2_10" required>
                                     <option value="">&nbsp;</option>
-                                    <?=table_dropdown('building', 'buildingCode', 'buildingName');?>
+                                    <?=table_dropdown('building', '', 'buildingCode', 'buildingName');?>
                                 </select>
                             </div>
                         </div>

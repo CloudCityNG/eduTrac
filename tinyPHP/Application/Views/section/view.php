@@ -101,7 +101,7 @@ jQuery(document).ready(function() {
 							<div class="controls">
 								<select style="width:100%;" name="termCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('term', 'termCode', 'termName',_h($this->sec[0]['termCode'])); ?>
+                            		<?php table_dropdown('term', '', 'termCode', 'termName',_h($this->sec[0]['termCode'])); ?>
                             	</select>
 							</div>
 						</div>
@@ -130,7 +130,7 @@ jQuery(document).ready(function() {
                             <div class="controls">
                                 <select style="width:100%;" name="deptCode" id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', 'deptCode', 'deptName', _h($this->sec[0]['deptCode'])); ?>
+                                    <?php table_dropdown('department', '', 'deptCode', 'deptName', _h($this->sec[0]['deptCode'])); ?>
                                 </select>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ jQuery(document).ready(function() {
                             <div class="controls">
                                 <select style="width:100%;" name="locationCode" id="select2_12" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location', 'locationCode', 'locationName', _h($this->sec[0]['locationCode'])); ?>
+                                    <?php table_dropdown('location', '', 'locationCode', 'locationName', _h($this->sec[0]['locationCode'])); ?>
                                 </select>
                             </div>
                         </div>

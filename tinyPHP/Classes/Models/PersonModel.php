@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -80,6 +81,7 @@ class PersonModel {
     }
     
     public function addAddr($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT * 
                 FROM 
                     person a 
@@ -88,18 +90,18 @@ class PersonModel {
                 ON 
                     a.personID = b.personID 
                 WHERE 
-                    a.personID = '$id'" 
+                    a.personID = :id",
+                $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function addr($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT * 
                 FROM 
                     person a 
@@ -108,21 +110,20 @@ class PersonModel {
                 ON 
                     a.personID = b.personID 
                 WHERE 
-                    a.personID = '$id' 
+                    a.personID = :id 
                 AND 
-                    b.addressType = 'H' 
+                    b.addressType = 'P' 
                 AND 
                     b.endDate = '0000-00-00' 
                 AND 
-                    b.addressStatus = 'C'" 
+                    b.addressStatus = 'C'",
+                $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function addrSum($id) {
@@ -169,14 +170,12 @@ class PersonModel {
     }
     
     public function rolePerm($id) {
-        $q = DB::inst()->query( "SELECT personID FROM person WHERE personID = '$id'" );
-                
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "person","personID = :id","","personID",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function runRolePerm($data) {

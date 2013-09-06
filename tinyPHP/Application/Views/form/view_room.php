@@ -64,7 +64,7 @@
                             <div class="controls">
                                 <select style="width:100%" name="buildingCode" id="select2_9" required>
                                     <option value="">&nbsp;</option>
-                                    <?=table_dropdown('building', 'buildingCode', 'buildingName', _h($this->room[0]['buildingCode']) );?>
+                                    <?=table_dropdown('building', '', 'buildingCode', 'buildingName', _h($this->room[0]['buildingCode']) );?>
                                 </select>
                             </div>
                         </div>

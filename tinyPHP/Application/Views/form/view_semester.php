@@ -78,7 +78,7 @@
 							<div class="controls">
 								<select style="width:100%" name="acadYearCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown("acad_year", "acadYearCode", "acadYearDesc", _h($this->sem[0]['acadYearCode'])); ?>
+                            		<?php table_dropdown("acad_year", "", "acadYearCode", "acadYearDesc", _h($this->sem[0]['acadYearCode'])); ?>
                             	</select>
 							</div>
 						</div>

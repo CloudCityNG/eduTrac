@@ -95,7 +95,7 @@ jQuery(document).ready(function() {
 							<div class="controls">
 								<select style="width:100%;" name="progCode" id="select2_11" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('acad_program', 'acadProgCode', 'acadProgTitle'); ?>
+                            		<?php table_dropdown('acad_program', '', 'acadProgCode', 'acadProgTitle'); ?>
                             	</select>
 							</div>
 						</div>
@@ -170,7 +170,7 @@ jQuery(document).ready(function() {
                             <div class="controls">
                                 <select style="width:100%;" name="catYear" id="select2_13" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_year', 'acadYearCode', 'acadYearDesc'); ?>
+                                    <?php table_dropdown('acad_year', '', 'acadYearCode', 'acadYearDesc'); ?>
                                 </select>
                             </div>
                         </div>

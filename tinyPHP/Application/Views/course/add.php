@@ -58,7 +58,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
 							<div class="controls">
 								<select style="width:100%;" name="deptCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('department', 'deptCode', 'deptName'); ?>
+                            		<?php table_dropdown('department', '', 'deptCode', 'deptName'); ?>
                             	</select>
 							</div>
 						</div>

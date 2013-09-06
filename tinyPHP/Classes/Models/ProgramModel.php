@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -43,16 +44,14 @@ class ProgramModel {
 	
 	public function search() {
         $post = isPostSet('prog');
+        $bind = array( ":post" => "%$post%" );
         $q = DB::inst()->query( "SELECT acadProgID,acadProgCode,acadProgTitle,currStatus,startDate,endDate 
-            FROM acad_program WHERE acadProgCode LIKE '%".$post."%'" 
+            FROM acad_program WHERE acadProgCode LIKE :post", $bind
         );
-        
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function runProg($data) {
@@ -78,6 +77,7 @@ class ProgramModel {
     }
     
     public function prog($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.acadProgID,a.acadProgCode,a.acadProgTitle,a.programDesc,a.currStatus,
                 a.statusDate,a.approvedDate,a.deptCode,a.schoolCode,a.acadYearCode,
@@ -132,21 +132,22 @@ class ProgramModel {
             ON 
                 a.locationCode = l.locationCode 
             WHERE 
-                a.acadProgID = '$id'" 
+                a.acadProgID = :id",
+            $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function runEditProg($data) {
-        
-        $sql = DB::inst()->query( "SELECT currStatus FROM acad_program WHERE acadProgID = '".$data['acadProgID']."'" );
-        $r = $sql->fetch();
+        $bind = array( ":acadProgID" => $data['acadProgID'] );
+        $sql = DB::inst()->select( "acad_program","acadProgID = :acadProgID","","currStatus",$bind );
+        foreach($sql as $r) {
+            $array[] = $r;
+        }
         
         $statusDate = date("Y-m-d");
         
@@ -159,15 +160,18 @@ class ProgramModel {
                     "cipCode" => $data['cipCode'],"locationCode" => $data['locationCode']
         );
         
-        $bind = array( ":acadProgID" => $data['acadProgID'] );
         $q = DB::inst()->update( "acad_program", $update1, "acadProgID = :acadProgID", $bind );
         
         $update2 = array( "statusDate" => $statusDate );
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "acad_program", $update2, "acadProgID = :acadProgID", $bind );
         }
-        $this->_log->writeLog("Update",$data['acadProgTitle'],$data['acadProgID']);
+        $this->_log->writeLog("Update","Academic Program",$data['acadProgTitle']);
         redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . bm() );
+    }
+    
+    public function __destruct() {
+        DB::inst()->close();
     }
 	
 }

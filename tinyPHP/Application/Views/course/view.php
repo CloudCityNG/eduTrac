@@ -63,7 +63,7 @@
 							<div class="controls">
 								<select style="width:100%;" name="deptCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('department', 'deptCode', 'deptName', _h($this->crse[0]['deptCode'])); ?>
+                            		<?php table_dropdown('department', '', 'deptCode', 'deptName', _h($this->crse[0]['deptCode'])); ?>
                             	</select>
 							</div>
 						</div>

@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -86,7 +87,7 @@ class StudentModel {
         $ID = DB::inst()->lastInsertId('stuID');
         
         if(!$q1 && !$q2) {
-            redirect( BASE_URL . 'error/saveData/' );
+            redirect( BASE_URL . 'error/save_data/' );
         } else {
             redirect( BASE_URL . 'student/view/' . $ID . '/' . bm() );
         }
@@ -124,6 +125,7 @@ class StudentModel {
     }
     
     public function student($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.stuID,
                 a.advisorID,
@@ -142,19 +144,18 @@ class StudentModel {
             ON 
                 a.stuID = b.personID
             WHERE 
-                a.stuID = '$id' 
+                a.stuID = :id 
             AND 
                 addressStatus = 'C' 
             AND 
-                (b.endDate = '' OR b.endDate = '0000-00-00')" 
+                (b.endDate = '' OR b.endDate = '0000-00-00')",
+            $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function prog($id) {
@@ -360,9 +361,9 @@ class StudentModel {
             if($status != $data['currStatus']) {
                 DB::inst()->update( "stu_program", $update2, "stuID = :stuID AND stuProgID = :stuProgID", $bind );
             }
-            redirect( BASE_URL . 'student/viewProg/' . $data['stuProgID'] . '/' . bm() );
+            redirect( BASE_URL . 'student/view_prog/' . $data['stuProgID'] . '/' . bm() );
         } else {
-            redirect( BASE_URL . 'error/saveData/' );
+            redirect( BASE_URL . 'error/save_data/' );
         }
     }
     

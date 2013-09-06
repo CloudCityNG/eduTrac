@@ -129,7 +129,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width:100%;" name="deptCode" id="select2_10">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department','deptCode','deptName',_h($this->prog[0]['deptCode']));?>
+                                    <?php table_dropdown('department','','deptCode','deptName',_h($this->prog[0]['deptCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width:100%;" name="schoolCode" id="select2_11">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('school','schoolCode','schoolName',_h($this->prog[0]['schoolCode']));?>
+                                    <?php table_dropdown('school','','schoolCode','schoolName',_h($this->prog[0]['schoolCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -153,7 +153,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width: 100%;" name="acadYearCode" id="select2_12" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_year','acadYearCode','acadYearDesc',_h($this->prog[0]['acadYearCode']));?>
+                                    <?php table_dropdown('acad_year','','acadYearCode','acadYearDesc',_h($this->prog[0]['acadYearCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width:100%" name="degreeCode" id="select2_13" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('degree','degreeCode','degreeName',_h($this->prog[0]['degreeCode']));?>
+                                    <?php table_dropdown('degree','','degreeCode','degreeName',_h($this->prog[0]['degreeCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -207,7 +207,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width: 100%;" name="ccdCode" id="select2_14">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('ccd','ccdCode','ccdName',_h($this->prog[0]['ccdCode']));?>
+                                    <?php table_dropdown('ccd','','ccdCode','ccdName',_h($this->prog[0]['ccdCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -219,7 +219,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width: 100%;" name="majorCode" id="select2_15">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('major','majorCode','majorName',_h($this->prog[0]['majorCode']));?>
+                                    <?php table_dropdown('major','','majorCode','majorName',_h($this->prog[0]['majorCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -231,7 +231,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width: 100%;" name="minorCode" id="select2_16">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('minor','minorCode','minorName',_h($this->prog[0]['minorCode']));?>
+                                    <?php table_dropdown('minor','','minorCode','minorName',_h($this->prog[0]['minorCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -243,7 +243,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width: 100%;" name="specCode" id="select2_17">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('specialization', 'specCode', 'specName',_h($this->prog[0]['specCode'])); ?>
+                                    <?php table_dropdown('specialization', '', 'specCode', 'specName',_h($this->prog[0]['specCode'])); ?>
                                 </select>
                             </div>
                         </div>
@@ -264,7 +264,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width:100%;" name="cipCode" id="select2_19">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('cip','cipCode','cipName',_h($this->prog[0]['cipCode']));?>
+                                    <?php table_dropdown('cip','','cipCode','cipName',_h($this->prog[0]['cipCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -276,7 +276,7 @@ $auth = new \tinyPHP\Classes\Libraries\Cookies;
                             <div class="controls">
                                 <select style="width:100%;" name="locationCode" id="select2_20">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location','locationCode','locationName',_h($this->prog[0]['locationCode']));?>
+                                    <?php table_dropdown('location','','locationCode','locationName',_h($this->prog[0]['locationCode']));?>
                                 </select>
                             </div>
                         </div>

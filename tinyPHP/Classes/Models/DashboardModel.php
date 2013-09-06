@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -44,8 +45,12 @@ class DashboardModel {
 	public function search($data) {
 		$acro = $data['screen'];
 		$screen = explode(" ", $acro);
-		$q = DB::inst()->query( "SELECT * FROM screen WHERE code  = '".$screen[0]."' LIMIT 1" );
-		$r = $q->fetch();
+        $bind = array( ":code" => $screen[0] );
+        $q = DB::inst()->select( "screen","code = :code LIMIT 1","","*",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        
 		if(!$r['relativeURL']) {
 			redirect( BASE_URL . 'error/screen_error?code=' . $screen[0] );
 		} else {
@@ -63,7 +68,10 @@ class DashboardModel {
 	public function logout() {
 	    session_start();
 		$uname = $this->_auth->getPersonField('uname');
-		DB::inst()->query( "UPDATE person SET auth_token = 'NULL' WHERE uname = '$uname'" );
+        $update = array( "auth_token" => 'NULL' );
+        $bind = array( ":uname" => $uname );
+        
+        DB::inst()->update( "person", $update, "uname = :uname", $bind );
 		
 		setcookie("et_cookname", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
       	setcookie("et_cookid", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());

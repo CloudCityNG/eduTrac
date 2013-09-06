@@ -124,8 +124,8 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * @param string $tableID - optional
      * @return mixed
      */
-    function table_dropdown($table, $code, $name, $activeCode = NULL) {
-        $q = DB::inst()->select( $table,"",$code,"$code,$name" );
+    function table_dropdown($table, $where = NULL, $code, $name, $activeCode = NULL) {
+        $q = DB::inst()->select( $table,$where,$code,"$code,$name" );
         
         foreach( $q as $k => $v ) {
             echo '<option value="'.$v[$code].'"'.selected( $activeCode, _h($v[$code]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
@@ -317,6 +317,27 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     /**
+     * Student program status select: shows general list of student 
+     * statuses and if $status is not NULL, shows the status 
+     * for a particular student program record.
+     * 
+     * @since 1.0
+     * @param string $status - optional
+     * @return mixed
+     */
+    function stu_prog_status_select($status = NULL) {
+        $select = '<select style="width:60%;" name="currStatus" id="select2_9"' . gs($status) . ' required>
+                <option value="">&nbsp;</option>
+                <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Active') . '</option>
+                <option value="' . _t('P') . '"'.selected( $status, _t('P'), false ).'>' . _t('P Potential') . '</option>
+                <option value="' . _t('W') . '"'.selected( $status, _t('W'), false ).'>' . _t('W Withdrawn') . '</option>
+                <option value="' . _t('C') . '"'.selected( $status, _t('C'), false ).'>' . _t('C Changed Mind') . '</option>
+                <option value="' . _t('G') . '"'.selected( $status, _t('G'), false ).'>' . _t('G Graduated') . '</option>
+                </select>';
+        return Hooks::apply_filter('stu_prog_status', $select, $status);
+    }
+    
+    /**
      * Course section status select: shows general list of course sec statuses and
      * if $status is not NULL, shows the status 
      * for a particular student course section record.
@@ -452,9 +473,25 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     function get_name($ID) {
-        $q = DB::inst()->query( "SELECT lname,fname FROM person WHERE personID = '$ID'" );
-        $r = $q->fetch(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $ID );
+        $q = DB::inst()->select( "person","personID = :id","","lname,fname",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
         return _h($r['lname']).', '._h($r['fname']);
+    }
+    
+    /**
+     * Graduated Status: if the status on a student's program 
+	 * is "G", then the status and status dates are disabled.
+	 * 
+	 * @since 1.0
+	 * @return mixed
+	 */
+    function gs($s) {
+        if($s == 'G') {
+            return ' disabled';
+        }
     }
 	
 	/**

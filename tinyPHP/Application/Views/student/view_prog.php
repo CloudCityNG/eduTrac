@@ -81,7 +81,7 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <?=status_select($this->stuProg[0]['currStatus']);?>
+                                <?=stu_prog_status_select($this->stuProg[0]['currStatus']);?>
                             </div>
                         </div>
                         <!-- // Group END -->

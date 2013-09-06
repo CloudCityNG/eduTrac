@@ -90,7 +90,7 @@ jQuery(document).ready(function() {
                             <div class="controls">
                                 <select style="width:50%" name="termCode" id="select2_9" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown("term","termCode","termName",_h($this->setup[0]['termCode'])); ?>
+                                    <?php table_dropdown("term","","termCode","termName",_h($this->setup[0]['termCode'])); ?>
                                 </select>
                             </div>
                         </div>

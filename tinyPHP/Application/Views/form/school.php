@@ -76,7 +76,7 @@
 							<div class="controls">
 								<select style="width:100%" name="buildingCode" id="select2_10">
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('building', 'buildingCode', 'buildingName'); ?>
+                            		<?php table_dropdown('building', '', 'buildingCode', 'buildingName'); ?>
                             	</select>
 							</div>
 						</div>

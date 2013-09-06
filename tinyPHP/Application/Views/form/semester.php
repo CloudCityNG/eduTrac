@@ -62,7 +62,7 @@
 							<div class="controls">
 								<select style="width:100%" name="acadYearCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('acad_year', 'acadYearCode', 'acadYearDesc'); ?>
+                            		<?php table_dropdown('acad_year', '', 'acadYearCode', 'acadYearDesc'); ?>
                             	</select>
 							</div>
 						</div>

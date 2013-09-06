@@ -84,7 +84,7 @@ jQuery(document).ready(function() {
 							<div class="controls">
 								<select style="width:100%;" name="progCode" id="select2_10">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_program','acadProgCode','acadProgTitle');?>
+                                    <?php table_dropdown('acad_program','','acadProgCode','acadProgTitle');?>
                                 </select>
 							</div>
 						</div>

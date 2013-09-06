@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -77,13 +78,17 @@ class FormModel {
 	}
 	
 	public function semester($id) {
-		$q = DB::inst()->query( "SELECT * FROM semester WHERE semesterID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "semester","semesterID = :id","semesterID","*",$bind );
+        foreach($q as $r){
+            $array[] = $r;
+        }
+        return $array;
 	}
 	
 	public function deleteSemester($id) {
 	    $bind = array( ":semesterID" => $id );
-		DB::inst()->delete( "semester", "semesterID = :semesterID" );
+		DB::inst()->delete( "semester", "semesterID = :semesterID", $bind );
 		redirect( BASE_URL . 'semester/' . bm() );
 	}
 	/* Ends semester methods */
@@ -179,12 +184,17 @@ class FormModel {
 	}
 	
 	public function acadYear($id) {
-		$q = DB::inst()->query( "SELECT * FROM acad_year WHERE acadYearID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "acad_year","acadYearID = :id","","*",$bind );
+		foreach($q as $r) {
+            $array[] = $r;
+		}
+        return $array;
 	}
 	
 	public function deleteAcadYear($id) {
-		$q = DB::inst()->delete( "acad_year", "acadYearID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "acad_year", "acadYearID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -228,12 +238,17 @@ class FormModel {
 	}
 	
 	public function dept($id) {
-		$q = DB::inst()->query( "SELECT * FROM department WHERE deptID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "department","deptID = :id","","*",$bind );
+		foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
 	}
 	
 	public function deleteDept($id) {
-		$q = DB::inst()->delete( "department", "deptID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "department", "deptID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -277,12 +292,17 @@ class FormModel {
 	}
 	
 	public function cl($id) {
-		$q = DB::inst()->query( "SELECT * FROM credit_load WHERE credLoadID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "credit_load","credLoadID = :id","","*",$bind );
+		foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
 	}
 	
 	public function deleteCredLoad($id) {
-		$q = DB::inst()->delete( "credit_load", "credLoadID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "credit_load", "credLoadID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -324,12 +344,17 @@ class FormModel {
 	}
 	
 	public function degree($id) {
-		$q = DB::inst()->query( "SELECT * FROM degree WHERE degreeID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "degree","degreeID = :id","","*",$bind );
+		foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
 	}
 	
 	public function deleteDegree($id) {
-		$q = DB::inst()->delete( "degree", "degreeID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "degree", "degreeID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -371,12 +396,17 @@ class FormModel {
 	}
 	
 	public function major($id) {
-		$q = DB::inst()->query( "SELECT * FROM major WHERE majorID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "major","majorID = :id","","*",$bind );
+		foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
 	}
 	
 	public function deleteMajor($id) {
-		$q = DB::inst()->delete( "major", "majorID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "major", "majorID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -418,12 +448,17 @@ class FormModel {
 	}
 	
 	public function minor($id) {
-		$q = DB::inst()->query( "SELECT * FROM minor WHERE minorID = '$id'" );
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "minor","minorID = :id","","*",$bind );
+		foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
 	}
 	
 	public function deleteMinor($id) {
-		$q = DB::inst()->delete( "minor", "minorID = '$id'" );
+        $bind = array( ":id" => $id );
+		$q = DB::inst()->delete( "minor", "minorID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -467,12 +502,17 @@ class FormModel {
     }
     
     public function ccd($id) {
-        $q = DB::inst()->query( "SELECT * FROM ccd WHERE ccdID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "ccd","ccdID = :id","","*",$bind );
+    	foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteCCD($id) {
-        $q = DB::inst()->delete( "ccd", "ccdID = '$id'" );
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->delete( "ccd", "ccdID = :id", $bind );
         
         if($q) {
             redirect( BASE_URL . 'success/delete_record/' );
@@ -514,8 +554,12 @@ class FormModel {
     }
     
     public function cip($id) {
-        $q = DB::inst()->query( "SELECT * FROM cip WHERE cipID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "cip","cipID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteCIP($id) {
@@ -562,8 +606,12 @@ class FormModel {
     }
     
     public function location($id) {
-        $q = DB::inst()->query( "SELECT * FROM location WHERE locationID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "location","locationID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteLocation($id) {
@@ -610,8 +658,12 @@ class FormModel {
     }
     
     public function build($id) {
-        $q = DB::inst()->query( "SELECT * FROM building WHERE buildingID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "building","buildingID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteBuilding($id) {
@@ -673,8 +725,12 @@ class FormModel {
     }
     
     public function room($id) {
-        $q = DB::inst()->query( "SELECT * FROM room WHERE roomID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "room","roomID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteRoom($id) {
@@ -721,8 +777,12 @@ class FormModel {
     }
     
     public function specialization($id) {
-        $q = DB::inst()->query( "SELECT * FROM specialization WHERE specID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "specialization","specID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteSpec($id) {
@@ -771,8 +831,12 @@ class FormModel {
     }
     
     public function year($id) {
-        $q = DB::inst()->query( "SELECT * FROM class_year WHERE yearID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "class_year","yearID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteClassYear($id) {
@@ -819,8 +883,12 @@ class FormModel {
     }
     
     public function subj($id) {
-        $q = DB::inst()->query( "SELECT * FROM subject WHERE subjectID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "subject","subjectID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteSubj($id) {
@@ -869,8 +937,12 @@ class FormModel {
     }
     
     public function school($id) {
-        $q = DB::inst()->query( "SELECT * FROM school WHERE schoolID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "school","schoolID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteSchool($id) {
@@ -919,8 +991,12 @@ class FormModel {
     }
     
     public function inst($id) {
-        $q = DB::inst()->query( "SELECT * FROM institution WHERE institutionID = '$id'" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "institution","institutionID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
     }
     
     public function deleteInst($id) {

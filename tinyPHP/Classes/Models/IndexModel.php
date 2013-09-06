@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -52,27 +53,31 @@ class IndexModel {
 	    session_start();		
 		$uname = $data['uname'];
 		$pass = $data['password'];
+        $bind = array( ":uname" => $uname );
 		
 		$cookie = sprintf("data=%s&auth=%s", urlencode($uname), urlencode(et_hash_cookie($uname.$pass)));
 		$mac = hash_hmac("sha512", $cookie, $this->_enc);
 		$auth = $cookie . '&digest=' . urlencode($mac);
+        
+        $update = array( "auth_token" => $auth );
+        DB::inst()->update( "person", $update, "uname = :uname", $bind );
 		
-		DB::inst()->query("UPDATE person SET auth_token = '" . $auth . "' WHERE uname = '$uname'");
+        $q = DB::inst()->select( "person","uname = :uname","","personID,auth_token,password",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
 		
-		$query = DB::inst()->query( "SELECT * FROM person WHERE uname = '$uname'" );
-		$results = $query->fetch(\PDO::FETCH_OBJ);
-		
-		if(et_check_password( $pass, $results->password, $results->personID )) {
+		if(et_check_password( $pass, $r['password'], $r['personID'] )) {
 			if($data['rememberme']) {				
 				/* Now we can set our login cookies. */
-				setcookie("et_cookname", $results->auth_token, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      			setcookie("et_cookid", et_hash_cookie($results->personID), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-                $_SESSION['id'] = $results->personID;
+				setcookie("et_cookname", $r['auth_token'], time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+      			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+                $_SESSION['id'] = $r['personID'];
    			} else {				
    				/* Now we can set our login cookies. */
-   				setcookie("et_cookname", $results->auth_token, time()+86400, "/", $this->_auth->cookieDomain());
-      			setcookie("et_cookid", et_hash_cookie($results->personID), time()+86400, "/", $this->_auth->cookieDomain());
-      			$_SESSION['id'] = $results->personID;
+   				setcookie("et_cookname", $r['auth_token'], time()+86400, "/", $this->_auth->cookieDomain());
+      			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
+      			$_SESSION['id'] = $r['personID'];
    			}
 			redirect( BASE_URL . 'dashboard/' );
 		} else {

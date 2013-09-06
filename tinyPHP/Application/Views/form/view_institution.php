@@ -91,7 +91,7 @@
                             <div class="controls">
                                 <select style="width:100%" name="state" id="select2_10">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('state', 'code', 'name', _h($this->inst[0]['state'])); ?>
+                                    <?php table_dropdown('state', '', 'code', 'name', _h($this->inst[0]['state'])); ?>
                                 </select>
                             </div>
                         </div>

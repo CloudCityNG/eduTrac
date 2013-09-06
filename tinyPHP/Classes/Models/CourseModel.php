@@ -21,8 +21,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since eduTrac(tm) v 1.0.0
+ * @package Model
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -77,8 +78,11 @@ class CourseModel {
     }
     
     public function runEditCourse($data) {
-        $sql = DB::inst()->query( "SELECT currStatus FROM course WHERE courseID = '".$data['courseID']."'" );
-        $r = $sql->fetch();
+        $bind = array( ":id" => $data['courseID'] );
+        $sql = DB::inst()->select( "course","courseID = :id","","currStatus",$bind );
+        foreach($sql as $r) {
+            $array[] = $r;
+        }
         
         $cc = $data['subjCode'].'-'.$data['courseNumber'];
         $bind = array( ":courseID" => $data['courseID'] );
@@ -115,6 +119,7 @@ class CourseModel {
     }
     
     public function crse($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.courseID,a.courseNumber,a.courseCode,a.subjCode,a.deptCode,a.courseDesc,a.minCredit,
                 a.courseLevelCode,a.acadLevelCode,a.courseShortTitle,a.courseLongTitle,a.preReq,a.allowAudit,a.allowWaitlist,
@@ -131,15 +136,14 @@ class CourseModel {
             ON 
                 a.subjCode = c.subjCode 
             WHERE 
-                courseID = '$id'" 
+                courseID = :id",
+            $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
     public function crseList() {
@@ -153,31 +157,31 @@ class CourseModel {
     }
     
     public function addntl($id) {
+        $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 courseID,preReq,allowAudit,allowWaitlist,minEnroll,seatCap 
             FROM 
                 course 
             WHERE 
-                courseID = '$id'" 
+                courseID = :id",
+            $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
     }
     
-    /*public function deleteCourse($id) {
+    public function deleteCourse($id) {
         $q = DB::inst()->delete( "course", "courseID = '$id'" );
         
         if($q) {
-            redirect( BASE_URL . 'success/delete_course/' );
+            redirect( BASE_URL . 'success/delete_record/' );
         } else {
-            redirect( BASE_URL . 'error/delete_course/');
+            redirect( BASE_URL . 'error/delete_record/');
         }
-    }*/
+    }
     
 	public function __destruct() {
 		DB::inst()->close();

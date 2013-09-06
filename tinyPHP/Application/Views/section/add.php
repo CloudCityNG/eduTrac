@@ -100,7 +100,7 @@ $(function(){
 							<div class="controls">
 								<select style="width:100%;" name="termCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('term', 'termCode', 'termName'); ?>
+                            		<?php table_dropdown('term', '', 'termCode', 'termName'); ?>
                             	</select>
 							</div>
 						</div>
@@ -129,7 +129,7 @@ $(function(){
                             <div class="controls">
                                 <select style="width:100%;" name="deptCode" id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', 'deptCode', 'deptName', $crse->getdeptCode()); ?>
+                                    <?php table_dropdown('department', '', 'deptCode', 'deptName', $crse->getdeptCode()); ?>
                                 </select>
                             </div>
                         </div>
@@ -194,7 +194,7 @@ $(function(){
                             <div class="controls">
                                 <select style="width:100%;" name="locationCode" id="select2_12" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location', 'locationCode', 'locationName'); ?>
+                                    <?php table_dropdown('location', '', 'locationCode', 'locationName'); ?>
                                 </select>
                             </div>
                         </div>

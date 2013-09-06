@@ -64,7 +64,7 @@
 							<div class="controls">
 								<select style="width:100%" name="semCode" id="select2_10" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown("semester", "semCode", "semName", _h($this->term[0]['semCode'])); ?>
+                            		<?php table_dropdown("semester", "", "semCode", "semName", _h($this->term[0]['semCode'])); ?>
                             	</select>
 							</div>
 						</div>

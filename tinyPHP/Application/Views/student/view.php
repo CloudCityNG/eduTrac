@@ -185,7 +185,7 @@ $person = new \tinyPHP\Classes\DBObjects\Person;
                             <div class="controls">
                                 <select style="width:100%;" name="catYear" id="select2_13" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_year', 'acadYearCode', 'acadYearDesc',_h($this->student[0]['catYear'])); ?>
+                                    <?php table_dropdown('acad_year', '', 'acadYearCode', 'acadYearDesc',_h($this->student[0]['catYear'])); ?>
                                 </select>
                             </div>
                         </div>
