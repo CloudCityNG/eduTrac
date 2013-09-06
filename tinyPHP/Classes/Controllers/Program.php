@@ -22,8 +22,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
- * @since eduTrac(tm) v 1.0.0
+ * @since   eduTrac(tm) v 1.0.0
  * @package Controller
+ * @author  Joshua Parker <josh@7mediaws.org>
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
