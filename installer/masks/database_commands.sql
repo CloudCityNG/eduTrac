@@ -1,11 +1,13 @@
 CREATE TABLE `acad_cred` (
   `acadCredID` int(11) NOT NULL AUTO_INCREMENT,
-  `courseSecID` int(11) NOT NULL,
+  `courseSecCode` varchar(11) NOT NULL,
+  `termCode` varchar(11) NOT NULL,
   `stuID` int(8) NOT NULL,
   `grade` varchar(5) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`acadCredID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`acadCredID`),
+  UNIQUE KEY `acadCred` (`courseSecCode`,`termCode`,`stuID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 CREATE TABLE `acad_program` (
   `acadProgID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -30,7 +32,8 @@ CREATE TABLE `acad_program` (
   `cipCode` varchar(11) NOT NULL,
   `locationCode` varchar(11) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`acadProgID`)
+  PRIMARY KEY (`acadProgID`),
+  UNIQUE KEY `acadProgCode` (`acadProgCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `acad_year` (
@@ -95,14 +98,16 @@ CREATE TABLE `building` (
   `buildingID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `buildingCode` varchar(11) NOT NULL,
   `buildingName` varchar(180) NOT NULL,
-  PRIMARY KEY (`buildingID`)
+  PRIMARY KEY (`buildingID`),
+  UNIQUE KEY `buildingCode` (`buildingCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `catalog_year` (
   `catYearID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `catYear` varchar(4) NOT NULL,
   `catYearDesc` varchar(30) NOT NULL,
-  PRIMARY KEY (`catYearID`)
+  PRIMARY KEY (`catYearID`),
+  UNIQUE KEY `catYear` (`catYear`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ccd` (
@@ -130,7 +135,8 @@ CREATE TABLE `class_year` (
   `classYear` varchar(4) NOT NULL,
   `minCredits` double(4,1) NOT NULL DEFAULT '0.0',
   `maxCredits` double(4,1) NOT NULL DEFAULT '0.0',
-  PRIMARY KEY (`yearID`)
+  PRIMARY KEY (`yearID`),
+  UNIQUE KEY `classYear` (`classYear`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `country` (
@@ -647,7 +653,7 @@ INSERT INTO `country` VALUES(249, 'ZM', 'Zambia', 'Republic of Zambia', 'ZMB', '
 INSERT INTO `country` VALUES(250, 'ZW', 'Zimbabwe', 'Republic of Zimbabwe', 'ZWE', '716', 'yes', '263', '.zw');
 
 CREATE TABLE `course` (
-  `courseID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `courseID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `courseNumber` varchar(30) NOT NULL DEFAULT '',
   `courseCode` varchar(11) NOT NULL,
   `subjCode` varchar(11) NOT NULL,
@@ -707,7 +713,8 @@ CREATE TABLE `course_sec` (
   `approvedDate` date NOT NULL,
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`courseSecID`)
+  PRIMARY KEY (`courseSecID`),
+  UNIQUE KEY `courseSection` (`courseSecCode`,`termCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `credit_load` (
@@ -758,15 +765,17 @@ CREATE TABLE `department` (
   `deptName` varchar(180) NOT NULL,
   `deptDesc` varchar(255) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`deptID`)
+  PRIMARY KEY (`deptID`),
+  UNIQUE KEY `deptCode` (`deptCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `discipline` (
-  `disciplineID` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `disciplineID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `discCode` varchar(11) NOT NULL,
   `discName` varchar(180) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`disciplineID`)
+  PRIMARY KEY (`disciplineID`),
+  UNIQUE KEY `discCode` (`discCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `email_template` (
@@ -776,7 +785,8 @@ CREATE TABLE `email_template` (
   `email_name` varchar(80) NOT NULL,
   `email_value` longtext NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`email_id`)
+  PRIMARY KEY (`email_id`),
+  UNIQUE KEY `email_key` (`email_key`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `error` (
@@ -821,16 +831,18 @@ CREATE TABLE `graduate` (
   `gradDate` date NOT NULL,
   `addDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `addedBy` int(8) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gradID` (`gradID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `institution` (
-  `institutionID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `institutionID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `ficeCode` int(6) NOT NULL,
   `instName` varchar(180) NOT NULL,
   `city` varchar(30) NOT NULL,
   `state` varchar(2) NOT NULL,
-  PRIMARY KEY (`institutionID`)
+  PRIMARY KEY (`institutionID`),
+  UNIQUE KEY `ficeCode` (`ficeCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `location` (
@@ -847,12 +859,12 @@ CREATE TABLE `major` (
   `majorCode` varchar(11) NOT NULL,
   `majorName` varchar(180) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  UNIQUE KEY `majID` (`majorID`),
+  PRIMARY KEY (`majorID`),
   UNIQUE KEY `majKey` (`majorCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `minor` (
-  `minorID` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `minorID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `minorCode` varchar(11) NOT NULL,
   `minorName` varchar(180) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1080,7 +1092,8 @@ CREATE TABLE `person` (
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`personID`),
-  UNIQUE KEY `uname` (`uname`)
+  UNIQUE KEY `uname` (`uname`),
+  UNIQUE KEY `ssn` (`ssn`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `person_perms` (
@@ -1379,37 +1392,6 @@ CREATE TABLE `room` (
   UNIQUE KEY `roomKey` (`roomCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `room_event` (
-  `eventID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `personID` int(8) unsigned zerofill NOT NULL,
-  `subject` varchar(150) NOT NULL,
-  `roomCode` varchar(11) NOT NULL,
-  `startDate` datetime NOT NULL,
-  `endDate` datetime NOT NULL,
-  `recurInterval` varchar(15) NOT NULL,
-  `recurFreq` tinyint(4) NOT NULL,
-  `recur_until_date` date NOT NULL,
-  `description` text NOT NULL,
-  `date_time_added` datetime NOT NULL,
-  `last_mod_by_id` int(8) unsigned zerofill NOT NULL,
-  `last_mod_date_time` datetime NOT NULL,
-  PRIMARY KEY (`eventID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `room_schedule` (
-  `scheduleID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `roomCode` varchar(11) NOT NULL,
-  `room_datetime_slot_id` int(11) NOT NULL,
-  PRIMARY KEY (`scheduleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `room_time_slot` (
-  `timeSlotID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `schedule_date_time` datetime NOT NULL,
-  `day_of_the_week_id` tinyint(1) NOT NULL,
-  PRIMARY KEY (`timeSlotID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `saved_query` (
   `savedQueryID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
@@ -1428,7 +1410,7 @@ CREATE TABLE `school` (
   `buildingCode` varchar(11) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`schoolID`),
-  KEY `schools_school_id_index` (`schoolCode`)
+  UNIQUE KEY `schoolCode` (`schoolCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `screen` (
@@ -1436,7 +1418,8 @@ CREATE TABLE `screen` (
   `code` varchar(6) NOT NULL,
   `name` varchar(255) NOT NULL,
   `relativeURL` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 INSERT INTO `screen` VALUES(1, 'SYSS', 'System Settings', 'setting/');
@@ -1527,17 +1510,20 @@ CREATE TABLE `semester` (
   `semStartDate` date NOT NULL DEFAULT '0000-00-00',
   `semEndDate` date NOT NULL DEFAULT '0000-00-00',
   `active` enum('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY (`semesterID`)
+  PRIMARY KEY (`semesterID`),
+  UNIQUE KEY `semCode` (`semCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `specialization` (
   `specID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `specCode` varchar(11) NOT NULL,
   `specName` varchar(80) NOT NULL,
-  PRIMARY KEY (`specID`)
+  PRIMARY KEY (`specID`),
+  UNIQUE KEY `specCode` (`specCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `staff` (
+  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `staffID` int(8) unsigned zerofill NOT NULL,
   `schoolID` int(11) NOT NULL,
   `buildingID` int(11) NOT NULL,
@@ -1546,14 +1532,17 @@ CREATE TABLE `staff` (
   `deptID` int(11) NOT NULL,
   `addDate` datetime NOT NULL,
   `addedBy` int(8) NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `staffID` (`staffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `state` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `code` varchar(2) NOT NULL,
   `name` varchar(180) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 INSERT INTO `state` VALUES(00000000001, 'AL', 'Alabama');
@@ -1694,7 +1683,8 @@ CREATE TABLE `student` (
   `addDate` datetime NOT NULL,
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `stuID` (`stuID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `stu_comment` (
@@ -1723,22 +1713,26 @@ CREATE TABLE `stu_course_sec` (
   UNIQUE KEY `courseSec` (`stuID`,`courseSecCode`,`termCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_credit` (
-  `stuCredID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stu_acad_cred` (
+  `stuAcadCredID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
+  `courseSecCode` varchar(11) NOT NULL,
   `termCode` varchar(11) NOT NULL,
   `compCred` double(4,1) NOT NULL,
   `attCred` double(4,1) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuCredID`)
+  PRIMARY KEY (`stuAcadCredID`),
+  UNIQUE KEY `stuAcadCred` (`stuID`,`courseSecCode`,`termCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_load` (
+CREATE TABLE `stu_term_load` (
   `stuLoadID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `stuTermID` int(11) unsigned zerofill NOT NULL,
   `stuLoad` varchar(2) NOT NULL,
-  PRIMARY KEY (`stuLoadID`)
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`stuLoadID`),
+  UNIQUE KEY `stuTermLoad` (`stuID`,`stuTermID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `stu_program` (
@@ -1756,21 +1750,23 @@ CREATE TABLE `stu_program` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `stu_term` (
-  `stuTermID` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuTermID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `termCode` varchar(11) NOT NULL,
   `termCredits` double(6,1) NOT NULL DEFAULT '0.0',
   `addDateTime` datetime NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuTermID`)
+  PRIMARY KEY (`stuTermID`),
+  UNIQUE KEY `stuTerm` (`stuID`,`termCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `subject` (
-  `subjectID` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `subjectID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `subjCode` varchar(11) NOT NULL,
   `subjName` varchar(180) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`subjectID`)
+  PRIMARY KEY (`subjectID`),
+  UNIQUE KEY `subjCode` (`subjCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `term` (
@@ -1782,5 +1778,6 @@ CREATE TABLE `term` (
   `termStartDate` date NOT NULL DEFAULT '0000-00-00',
   `termEndDate` date NOT NULL DEFAULT '0000-00-00',
   `active` enum('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY (`termID`)
+  PRIMARY KEY (`termID`),
+  UNIQUE KEY `termCode` (`termCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

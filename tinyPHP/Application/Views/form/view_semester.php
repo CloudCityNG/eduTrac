@@ -21,7 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
+ * @since eduTrac(tm) v 1.0.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 ?>
@@ -57,23 +57,9 @@
 					
 					<!-- Column -->
 					<div class="span6">
-					
-						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semName"><font color="red">*</font> <?php _e( _t( 'Semester' ) ); ?></label>
-							<div class="controls"><input class="span12" id="semName" name="semName" type="text" value="<?=_h($this->sem[0]['semName']);?>" /></div>
-						</div>
-						<!-- // Group END -->
-						
-						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="semCode"><font color="red">*</font> <?php _e( _t( 'Semester Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" type="text" name="semCode" value="<?=_h($this->sem[0]['semCode']);?>" /></div>
-                        </div>
-                        <!-- // Group END -->
-						
-						<!-- Group -->
-						<div class="control-group">
+                        
+                        <!-- Group -->
+    					<div class="control-group">
 							<label class="control-label" for="acadYearID"><font color="red">*</font> <?php _e( _t( 'Academic Year' ) ); ?></label>
 							<div class="controls">
 								<select style="width:100%" name="acadYearCode" id="select2_10" required>
@@ -81,6 +67,20 @@
                             		<?php table_dropdown("acad_year", "", "acadYearCode", "acadYearDesc", _h($this->sem[0]['acadYearCode'])); ?>
                             	</select>
 							</div>
+						</div>
+						<!-- // Group END -->
+                    
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label" for="semCode"><font color="red">*</font> <?php _e( _t( 'Semester Code' ) ); ?></label>
+                            <div class="controls"><input class="span12" type="text" readonly name="semCode" value="<?=_h($this->sem[0]['semCode']);?>" /></div>
+                        </div>
+                        <!-- // Group END -->
+					
+						<!-- Group -->
+						<div class="control-group">
+							<label class="control-label" for="semName"><font color="red">*</font> <?php _e( _t( 'Semester' ) ); ?></label>
+							<div class="controls"><input class="span12" id="semName" name="semName" type="text" value="<?=_h($this->sem[0]['semName']);?>" /></div>
 						</div>
 						<!-- // Group END -->
 						

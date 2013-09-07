@@ -73,7 +73,7 @@
 						<!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="termCode"><?php _e( _t( 'Term Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" /></div>
+                            <div class="controls"><input class="span12" readonly name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" /></div>
                         </div>
                         <!-- // Group END -->
 					

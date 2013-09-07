@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="subjCode"><font color="red">*</font> <?php _e( _t( 'Subject Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="subjCode" name="subjCode" type="text" value="<?=_h($this->subj[0]['subjCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="subjCode" readonly name="subjCode" type="text" value="<?=_h($this->subj[0]['subjCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

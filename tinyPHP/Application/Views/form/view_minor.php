@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="minorCode"><font color="red">*</font> <?php _e( _t( 'Minor Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="minorCode" name="minorCode" type="text" value="<?=_h($this->minor[0]['minorCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="minorCode" readonly name="minorCode" type="text" value="<?=_h($this->minor[0]['minorCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

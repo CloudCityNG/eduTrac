@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="degreeCode"><font color="red">*</font> <?php _e( _t( 'Degree Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="degreeCode" name="degreeCode" type="text" value="<?=_h($this->degree[0]['degreeCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="degreeCode" readonly name="degreeCode" type="text" value="<?=_h($this->degree[0]['degreeCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

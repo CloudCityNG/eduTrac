@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="ccdCode"><font color="red">*</font> <?php _e( _t( 'CCD Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="ccdCode" name="ccdCode" type="text" value="<?=_h($this->ccd[0]['ccdCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="ccdCode" readonly name="ccdCode" type="text" value="<?=_h($this->ccd[0]['ccdCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

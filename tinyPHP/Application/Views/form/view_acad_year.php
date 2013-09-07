@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="acadYearCode"><?php _e( _t( 'Acad Year' ) ); ?></label>
-							<div class="controls"><input class="span12" id="acadYearCode" name="acadYearCode" type="text" value="<?=_h($this->acadYear[0]['acadYearCode']);?>" required /> <br />example: 2012</div>
+							<div class="controls"><input class="span12" id="acadYearCode" readonly name="acadYearCode" type="text" value="<?=_h($this->acadYear[0]['acadYearCode']);?>" required /> <br />example: 2012</div>
 						</div>
 						<!-- // Group END -->
 						

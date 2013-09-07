@@ -73,7 +73,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="roomCode"><font color="red">*</font> <?php _e( _t( 'Room Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="roomCode" name="roomCode" type="text" value="<?=_h($this->room[0]['roomCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="roomCode" readonly name="roomCode" type="text" value="<?=_h($this->room[0]['roomCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

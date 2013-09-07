@@ -61,7 +61,7 @@
 					    <!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="ficeCode"><font color="red">*</font> <?php _e( _t( 'FICE Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode" type="text" value="<?=_h($this->inst[0]['ficeCode']);?>" required /></div>
+                            <div class="controls"><input class="span12" id="ficeCode" readonly name="ficeCode" type="text" value="<?=_h($this->inst[0]['ficeCode']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
                         

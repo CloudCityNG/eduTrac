@@ -61,7 +61,7 @@
 					    <!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="schoolCode"><font color="red">*</font> <?php _e( _t( 'School Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="schoolCode" name="schoolCode" type="text" value="<?=$this->school[0]['schoolCode'];?>" required /></div>
+                            <div class="controls"><input class="span12" id="schoolCode" readonly name="schoolCode" type="text" value="<?=$this->school[0]['schoolCode'];?>" required /></div>
                         </div>
                         <!-- // Group END -->
 					    

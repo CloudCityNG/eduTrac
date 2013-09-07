@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="credLoadCode"><font color="red">*</font> <?php _e( _t( 'Cred Load Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="credLoadCode" name="credLoadCode" type="text" value="<?=_h($this->cl[0]['credLoadCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="credLoadCode" readonly name="credLoadCode" type="text" value="<?=_h($this->cl[0]['credLoadCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

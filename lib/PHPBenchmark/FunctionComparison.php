@@ -21,15 +21,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since   eduTrac(tm) v 1.0.0
+ * @package PHPBenchmark
  */
 
 
 /**
  * Class that can be used to compare the performance between two functions
  *
- * @package PHPBenchmark
  * @author Victor Jonsson (http://victorjonsson.se)
  * @license MIT
  */

@@ -21,8 +21,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @since   eduTrac(tm) v 1.0.0
+ * @package RESTful API
+ * @author  Joshua Parker <josh@7mediaws.org>
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
@@ -466,8 +468,7 @@ class DB_API {
 	}
 
 	/**
-	 * Output JSON encoded data.
-	 * @todo Support JSONP, with callback filtering.
+	 * Output JSON encoded data with support for JSONP.
 	 */
 	function render_json( $data, $query ) {
 
@@ -492,8 +493,7 @@ class DB_API {
 	 * Prevent malicious callbacks from being used in JSONP requests.
 	 */
 	function jsonp_callback_filter( $callback ) {
-
-		// As per <http://stackoverflow.com/a/10900911/1082542>.
+        
 		if ( preg_match( '/[^0-9a-zA-Z\$_]|^(abstract|boolean|break|byte|case|catch|char|class|const|continue|debugger|default|delete|do|double|else|enum|export|extends|false|final|finally|float|for|function|goto|if|implements|import|in|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|super|switch|synchronized|this|throw|throws|transient|true|try|typeof|var|volatile|void|while|with|NaN|Infinity|undefined)$/', $callback) ) {
 			return false;
 		}
@@ -554,7 +554,7 @@ class DB_API {
 	function render_xml( $data ) {
 
 		header ("Content-Type:text/xml");  
-		$xml = new SimpleXMLElement( '<results></results>' );
+		$xml = new \SimpleXMLElement( '<results></results>' );
 		$xml = $this->object_to_xml( $data, $xml );
 		echo $this->tidy_xml( $xml );
 		
@@ -604,7 +604,7 @@ class DB_API {
 	 */
 	function tidy_xml( $xml ) {
   	
-	   $dom = new DOMDocument();
+	   $dom = new \DOMDocument();
 	   $dom->preserveWhiteSpace = false;
 	   $dom->formatOutput = true;
 	   $dom->loadXML( $xml->asXML() );

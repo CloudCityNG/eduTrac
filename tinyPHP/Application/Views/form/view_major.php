@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="majorCode"><font color="red">*</font> <?php _e( _t( 'Major Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="majorCode" name="majorCode" type="text" value="<?=_h($this->major[0]['majorCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="majorCode" readonly name="majorCode" type="text" value="<?=_h($this->major[0]['majorCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

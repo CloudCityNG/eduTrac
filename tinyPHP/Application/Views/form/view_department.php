@@ -53,7 +53,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="deptCode"><font color="red">*</font> <?php _e( _t( 'Department Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="deptCode" name="deptCode" type="text" value="<?=_h($this->dept[0]['deptCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="deptCode" readonly name="deptCode" type="text" value="<?=_h($this->dept[0]['deptCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="cipCode"><font color="red">*</font> <?php _e( _t( 'CIP Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="cipCode" name="cipCode" type="text" value="<?=_h($this->cip[0]['cipCode']);?>" required /></div>
+							<div class="controls"><input class="span12" id="cipCode" readonly name="cipCode" type="text" value="<?=_h($this->cip[0]['cipCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

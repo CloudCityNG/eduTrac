@@ -30,12 +30,25 @@ use \tinyPHP\Classes\Libraries\Hooks;
 use \tinyPHP\Classes\Libraries\Log;
 use \tinyPHP\Classes\Libraries\Cookies;
  	
+    /**
+     * When enabled, appends url string in order to give
+     * benchmark statistics.
+     * 
+     * @since 1.0.0
+     */
  	function bm() {
  	    if(Hooks::get_option('enable_benchmark') == 1) {
  	        return '?php-benchmark-test=1&display-data=1';
  	    }
  	}
     
+    /**
+     * Renders any unwarranted special characters to HTML entities.
+     * 
+     * @since 1.0.0
+     * @param string $str
+     * @return mixed
+     */
     function _h($str) {
         return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
     }
@@ -52,11 +65,11 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	/**
 	 * Term dropdown: shows general list of terms and
 	 * if $termID is not NULL, shows the term attached 
-	 * to a part->select(icular record.
+	 * to a particular record.
 	 * 
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @param string $termID - optional
-	 * @return mixed
+	 * @return string Returns the record key if selected is true.
 	 */
 	function term_dropdown($termCode = NULL) {
         $q = DB::inst()->select( "term","","termID","termCode,termName" );
@@ -70,9 +83,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	 * if $semesterID is not NULL, shows the semester attached 
 	 * to a particular record.
 	 * 
-	 * @since 1.0
+	 * @since 1.0,0
 	 * @param string $semesterID - optional
-	 * @return mixed
+	 * @return string Returns the record key if selected is true.
 	 */
 	function semester_dropdown($semCode = NULL) {
         $q = DB::inst()->select( "semester","","acadYearCode","semCode,semName" );
@@ -86,9 +99,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	 * if $subjectID is not NULL, shows the subject attached 
 	 * to a particular record.
 	 * 
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @param string $subjectID - optional
-	 * @return mixed
+	 * @return string Returns the record key if selected is true.
 	 */
 	function subj_key_dropdown($subjCode = NULL) {
         $q = DB::inst()->select( "subject","","subjCode","subjCode,subjName" );
@@ -103,9 +116,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * if $facID is not NULL, shows the faculty attached 
      * to a particular record.
      * 
-     * @since 1.0
+     * @since 1.0.0
      * @param string $facID - optional
-     * @return mixed
+     * @return string Returns the record id if selected is true.
      */
     function facID_dropdown($facID = NULL) {
         $q = DB::inst()->select( "faculty","","facID","facID" );
@@ -120,8 +133,12 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * if $tableID is not NULL, shows the record attached 
      * to a particular record.
      * 
-     * @since 1.0
-     * @param string $tableID - optional
+     * @since 1.0.0
+     * @param string $table
+     * @param string $where
+     * @param string $code
+     * @param string $name
+     * @param string $activeCode
      * @return mixed
      */
     function table_dropdown($table, $where = NULL, $code, $name, $activeCode = NULL) {
@@ -133,13 +150,13 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     /**
-     * Department type select: shows general list of department types and
-     * if $typeCode is not NULL, shows the department type attached 
+     * Address type select: shows general list of address types and
+     * if $typeCode is not NULL, shows the address type attached 
      * to a particular record.
      * 
-     * @since 1.0
-     * @param string $typeCode - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $typeCode
+     * @return string Returns the record key if selected is true.
      */
     function address_type_select($typeCode = NULL) {
         $select = '<select style="width:30%;" name="addressType" id="select2_10" required>
@@ -151,13 +168,13 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     /**
-     * Address Type select: shows general list of department types and
+     * Department Type select: shows general list of department types and
      * if $typeCode is not NULL, shows the department type attached 
      * to a particular record.
      * 
-     * @since 1.0
-     * @param string $typeCode - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $typeCode
+     * @return string Returns the record key if selected is true.
      */
     function dept_type_select($typeCode = NULL) {
         $select = '<select style="width:50%;" name="deptType" id="select2_22" required>
@@ -169,12 +186,12 @@ use \tinyPHP\Classes\Libraries\Cookies;
     
 	/**
 	 * Acad Level select: shows general list of academic levels and
-	 * if $levelCode is not NULL, shows the academic level attached 
+	 * if $status is not NULL, shows the academic level attached 
 	 * to a particular record.
 	 * 
-	 * @since 1.0
-	 * @param string $levelCode - optional
-	 * @return mixed
+	 * @since 1.0.0
+	 * @param string $status
+	 * @return string Returns the record status if selected is true.
 	 */
 	function address_status_select($status = NULL) {
 		$select = '<select style="width:25%;" name="addressStatus" id="select2_9" required>
@@ -190,9 +207,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * if $levelCode is not NULL, shows the academic level attached 
      * to a particular record.
      * 
-     * @since 1.0
-     * @param string $levelCode - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $levelCode
+     * @return string Returns the record key if selected is true.
      */
     function acad_level_select($levelCode = NULL) {
         $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18" required>
@@ -211,9 +228,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	 * if $status is not NULL, shows the current status 
 	 * for a particular record.
 	 * 
-	 * @since 1.0
-	 * @param string $status - optional
-	 * @return mixed
+	 * @since 1.0.0
+	 * @param string $status
+	 * @return string Returns the record key if selected is true.
 	 */
 	function status_select($status = NULL) {
 		$select = '<select style="width:100%;" name="currStatus" id="select2_9" required>
@@ -231,9 +248,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * if $type is not NULL, shows the person type 
      * for a particular person record.
      * 
-     * @since 1.0
-     * @param string $type - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $type
+     * @return string Returns the record type if selected is true.
      */
     function person_type_select($type = NULL) {
         $select = '<select style="width:30%;" name="personType" id="select2_9" required>
@@ -252,9 +269,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	 * if $levelCode is not NULL, shows the course level attached 
 	 * to a particular record.
 	 * 
-	 * @since 1.0
-	 * @param string $levelCode - optional
-	 * @return mixed
+	 * @since 1.0.0
+	 * @param string $levelCode
+	 * @return string Returns the record key if selected is true.
 	 */
 	function course_level_select($levelCode = NULL) {		
 		$select = '<select style="width:100%;" name="courseLevelCode" required id="select2_21">
@@ -277,9 +294,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * if $method is not NULL, shows the instructor method 
      * for a particular course section.
      * 
-     * @since 1.0
-     * @param string $method - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $method
+     * @return string Returns the record method if selected is true.
      */
     function instructor_method($method = NULL) {
         $select = '<select style="width:60%;" name="instructorMethod" id="select2_9" required>
@@ -301,8 +318,8 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * for a particular student course section record.
      * 
      * @since 1.0
-     * @param string $status - optional
-     * @return mixed
+     * @param string $status
+     * @return string Returns the record status if selected is true.
      */
     function course_sec_status_select($status = NULL) {
         $select = '<select style="width:60%;" name="status" id="select2_9" required>
@@ -321,9 +338,9 @@ use \tinyPHP\Classes\Libraries\Cookies;
      * statuses and if $status is not NULL, shows the status 
      * for a particular student program record.
      * 
-     * @since 1.0
-     * @param string $status - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $status
+     * @return string Returns the record status if selected is true.
      */
     function stu_prog_status_select($status = NULL) {
         $select = '<select style="width:60%;" name="currStatus" id="select2_9"' . gs($status) . ' required>
@@ -338,13 +355,13 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     /**
-     * Course section status select: shows general list of course sec statuses and
-     * if $status is not NULL, shows the status 
-     * for a particular student course section record.
+     * Credit type select: shows general list of credit types and
+     * if $type is not NULL, shows the credit type 
+     * for a particular course or course section record.
      * 
-     * @since 1.0
-     * @param string $status - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $type
+     * @return string Returns the record type if selected is true.
      */
     function credit_type($type = NULL) {
         $select = '<select style="width:60%;" name="status" id="select2_9" required>
@@ -359,13 +376,13 @@ use \tinyPHP\Classes\Libraries\Cookies;
     }
     
     /**
-     * Class status select: shows general list of student class statuses and
-     * if $status is not NULL, shows the class status 
+     * Class year select: shows general list of class years and
+     * if $year is not NULL, shows the class year
      * for a particular student.
      * 
-     * @since 1.0
-     * @param string $method - optional
-     * @return mixed
+     * @since 1.0.0
+     * @param string $year
+     * @return string Returns the record year if selected is true.
      */
     function class_year($year = NULL) {
         $select = '<select style="width:60%;" name="classYear" id="select2_9" required>
@@ -380,6 +397,14 @@ use \tinyPHP\Classes\Libraries\Cookies;
         return Hooks::apply_filter('class_year', $select, $year);
     }
     
+    /**
+     * Checks against certain keywords when the SQL 
+     * terminal and saved query screens are used. Helps 
+     * against database manipulation and SQL injection.
+     * 
+     * @since 1.0.0
+     * @return boolean
+     */
     function forbidden_keyword() {
         $array = array( 
             "create","delete","drop","alter","update",
@@ -486,6 +511,7 @@ use \tinyPHP\Classes\Libraries\Cookies;
 	 * is "G", then the status and status dates are disabled.
 	 * 
 	 * @since 1.0
+     * @param string
 	 * @return mixed
 	 */
     function gs($s) {
