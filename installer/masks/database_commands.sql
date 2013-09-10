@@ -1,15 +1,15 @@
-CREATE TABLE `acad_cred` (
+CREATE TABLE IF NOT EXISTS `acad_cred` (
   `acadCredID` int(11) NOT NULL AUTO_INCREMENT,
-  `courseSecCode` varchar(11) NOT NULL,
-  `termCode` varchar(11) NOT NULL,
+  `courseSecID` int(11) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
   `stuID` int(8) NOT NULL,
   `grade` varchar(5) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`acadCredID`),
-  UNIQUE KEY `acadCred` (`courseSecCode`,`termCode`,`stuID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+  UNIQUE KEY `acadCred` (`courseSecID`,`termID`,`stuID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `acad_program` (
+CREATE TABLE IF NOT EXISTS `acad_program` (
   `acadProgID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `acadProgCode` varchar(15) NOT NULL,
   `acadProgTitle` varchar(180) NOT NULL,
@@ -18,25 +18,27 @@ CREATE TABLE `acad_program` (
   `statusDate` date NOT NULL,
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `approvedDate` date NOT NULL,
-  `deptCode` varchar(11) NOT NULL,
-  `schoolCode` varchar(11) NOT NULL,
-  `acadYearCode` text NOT NULL,
+  `deptID` int(11) unsigned zerofill NOT NULL,
+  `schoolID` int(11) unsigned zerofill NOT NULL,
+  `acadYearID` int(11) unsigned zerofill NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date DEFAULT NULL,
-  `degreeCode` varchar(11) NOT NULL,
-  `ccdCode` text,
-  `majorCode` text,
-  `minorCode` text,
-  `specCode` text,
+  `degreeID` int(11) unsigned zerofill NOT NULL,
+  `ccdID` int(11) unsigned zerofill DEFAULT NULL,
+  `majorID` int(11) unsigned zerofill DEFAULT NULL,
+  `minorID` int(11) unsigned zerofill DEFAULT NULL,
+  `specID` int(11) unsigned zerofill DEFAULT NULL,
   `acadLevelCode` varchar(11) NOT NULL,
-  `cipCode` varchar(11) NOT NULL,
-  `locationCode` varchar(11) NOT NULL,
+  `cipID` int(11) unsigned zerofill DEFAULT NULL,
+  `locationID` int(11) unsigned zerofill DEFAULT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`acadProgID`),
-  UNIQUE KEY `acadProgCode` (`acadProgCode`)
+  UNIQUE KEY `acadProgCode` (`acadProgCode`),
+  KEY `acad_prog_code` (`acadProgCode`),
+  KEY `acad_level_code` (`acadLevelCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `acad_year` (
+CREATE TABLE IF NOT EXISTS `acad_year` (
   `acadYearID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `acadYearCode` varchar(11) NOT NULL,
   `acadYearDesc` varchar(30) NOT NULL,
@@ -45,7 +47,7 @@ CREATE TABLE `acad_year` (
   UNIQUE KEY `acadYear` (`acadYearCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `activity_log` (
+CREATE TABLE IF NOT EXISTS `activity_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `action` varchar(50) NOT NULL,
   `process` varchar(255) NOT NULL,
@@ -56,7 +58,7 @@ CREATE TABLE `activity_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `address` (
+CREATE TABLE IF NOT EXISTS `address` (
   `addressID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `address1` varchar(80) NOT NULL,
@@ -80,10 +82,12 @@ CREATE TABLE `address` (
   `addDate` date NOT NULL,
   `addedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`addressID`)
+  PRIMARY KEY (`addressID`),
+  KEY `personID` (`personID`),
+  KEY `addedBy` (`addedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `attend` (
+CREATE TABLE IF NOT EXISTS `attend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sid` varchar(11) NOT NULL,
   `cc` varchar(30) NOT NULL DEFAULT '',
@@ -94,7 +98,7 @@ CREATE TABLE `attend` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `building` (
+CREATE TABLE IF NOT EXISTS `building` (
   `buildingID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `buildingCode` varchar(11) NOT NULL,
   `buildingName` varchar(180) NOT NULL,
@@ -102,15 +106,7 @@ CREATE TABLE `building` (
   UNIQUE KEY `buildingCode` (`buildingCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `catalog_year` (
-  `catYearID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `catYear` varchar(4) NOT NULL,
-  `catYearDesc` varchar(30) NOT NULL,
-  PRIMARY KEY (`catYearID`),
-  UNIQUE KEY `catYear` (`catYear`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-CREATE TABLE `ccd` (
+CREATE TABLE IF NOT EXISTS `ccd` (
   `ccdID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `ccdCode` varchar(11) NOT NULL,
   `ccdName` varchar(80) NOT NULL,
@@ -120,7 +116,7 @@ CREATE TABLE `ccd` (
   UNIQUE KEY `ccdKey` (`ccdCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `cip` (
+CREATE TABLE IF NOT EXISTS `cip` (
   `cipID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `cipCode` varchar(11) NOT NULL,
   `cipName` varchar(80) NOT NULL,
@@ -129,7 +125,7 @@ CREATE TABLE `cip` (
   UNIQUE KEY `cipKey` (`cipCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `class_year` (
+CREATE TABLE IF NOT EXISTS `class_year` (
   `yearID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `acadLevelCode` varchar(4) NOT NULL,
   `classYear` varchar(4) NOT NULL,
@@ -139,7 +135,7 @@ CREATE TABLE `class_year` (
   UNIQUE KEY `classYear` (`classYear`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `country` (
+CREATE TABLE IF NOT EXISTS `country` (
   `country_id` int(5) NOT NULL AUTO_INCREMENT,
   `iso2` char(2) DEFAULT NULL,
   `short_name` varchar(80) NOT NULL DEFAULT '',
@@ -652,12 +648,12 @@ INSERT INTO `country` VALUES(249, 'ZM', 'Zambia', 'Republic of Zambia', 'ZMB', '
 
 INSERT INTO `country` VALUES(250, 'ZW', 'Zimbabwe', 'Republic of Zimbabwe', 'ZWE', '716', 'yes', '263', '.zw');
 
-CREATE TABLE `course` (
+CREATE TABLE IF NOT EXISTS `course` (
   `courseID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `courseNumber` varchar(30) NOT NULL DEFAULT '',
-  `courseCode` varchar(11) NOT NULL,
-  `subjCode` varchar(11) NOT NULL,
-  `deptCode` varchar(11) NOT NULL,
+  `courseNumber` int(6) NOT NULL,
+  `courseCode` varchar(12) NOT NULL,
+  `subjectID` int(11) unsigned zerofill NOT NULL,
+  `deptID` int(11) unsigned zerofill NOT NULL,
   `courseDesc` text NOT NULL,
   `minCredit` double(4,1) NOT NULL DEFAULT '0.0',
   `maxCredit` double(4,1) NOT NULL DEFAULT '0.0',
@@ -678,21 +674,25 @@ CREATE TABLE `course` (
   `approvedDate` date NOT NULL DEFAULT '0000-00-00',
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`courseID`)
+  PRIMARY KEY (`courseID`),
+  KEY `course_code` (`courseCode`),
+  KEY `course_level_code` (`courseLevelCode`),
+  KEY `acad_level_code` (`acadLevelCode`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `course_sec` (
+CREATE TABLE IF NOT EXISTS `course_sec` (
   `courseSecID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `sectionNumber` varchar(5) NOT NULL,
   `courseSecCode` varchar(50) NOT NULL,
-  `buildingCode` varchar(11) NOT NULL,
-  `roomCode` varchar(11) NOT NULL,
-  `locationCode` varchar(6) NOT NULL,
+  `buildingID` int(11) unsigned zerofill NOT NULL,
+  `roomID` int(11) unsigned zerofill NOT NULL,
+  `locationID` int(11) unsigned zerofill NOT NULL,
   `courseLevelCode` int(5) NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
-  `deptCode` varchar(11) NOT NULL,
+  `deptID` int(11) unsigned zerofill NOT NULL,
   `facID` int(8) unsigned zerofill NOT NULL,
-  `termCode` varchar(11) NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
   `courseID` int(8) unsigned zerofill NOT NULL,
   `preReqs` text NOT NULL,
   `secShortTitle` varchar(180) NOT NULL,
@@ -714,10 +714,13 @@ CREATE TABLE `course_sec` (
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`courseSecID`),
-  UNIQUE KEY `courseSection` (`courseSecCode`,`termCode`)
+  UNIQUE KEY `courseSection` (`courseSecCode`,`termID`),
+  KEY `course_sec_code` (`courseSecCode`),
+  KEY `current_status` (`currStatus`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `credit_load` (
+CREATE TABLE IF NOT EXISTS `credit_load` (
   `credLoadID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `credLoadCode` varchar(6) NOT NULL,
   `credLoadName` varchar(80) NOT NULL,
@@ -727,7 +730,7 @@ CREATE TABLE `credit_load` (
   UNIQUE KEY `credLoadKey` (`credLoadCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `cronjob` (
+CREATE TABLE IF NOT EXISTS `cronjob` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `scriptpath` varchar(255) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
@@ -740,7 +743,7 @@ CREATE TABLE `cronjob` (
   KEY `fire_time` (`fire_time`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `cronlog` (
+CREATE TABLE IF NOT EXISTS `cronlog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_added` int(11) DEFAULT NULL,
   `script` varchar(128) DEFAULT NULL,
@@ -749,7 +752,7 @@ CREATE TABLE `cronlog` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `degree` (
+CREATE TABLE IF NOT EXISTS `degree` (
   `degreeID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `degreeCode` varchar(11) NOT NULL,
   `degreeName` varchar(180) NOT NULL,
@@ -758,7 +761,7 @@ CREATE TABLE `degree` (
   UNIQUE KEY `degreeKey` (`degreeCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `department` (
+CREATE TABLE IF NOT EXISTS `department` (
   `deptID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `deptTypeCode` varchar(6) NOT NULL,
   `deptCode` varchar(11) NOT NULL,
@@ -769,7 +772,7 @@ CREATE TABLE `department` (
   UNIQUE KEY `deptCode` (`deptCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `discipline` (
+CREATE TABLE IF NOT EXISTS `discipline` (
   `disciplineID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `discCode` varchar(11) NOT NULL,
   `discName` varchar(180) NOT NULL,
@@ -778,7 +781,7 @@ CREATE TABLE `discipline` (
   UNIQUE KEY `discCode` (`discCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `email_template` (
+CREATE TABLE IF NOT EXISTS `email_template` (
   `email_id` int(11) NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `email_key` varchar(60) NOT NULL,
@@ -789,7 +792,7 @@ CREATE TABLE `email_template` (
   UNIQUE KEY `email_key` (`email_key`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `error` (
+CREATE TABLE IF NOT EXISTS `error` (
   `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `type` int(4) NOT NULL,
   `time` int(10) NOT NULL,
@@ -800,7 +803,7 @@ CREATE TABLE `error` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `et_option` (
+CREATE TABLE IF NOT EXISTS `et_option` (
   `option_id` int(11) NOT NULL AUTO_INCREMENT,
   `option_name` varchar(60) NOT NULL DEFAULT '',
   `option_value` longtext NOT NULL,
@@ -808,34 +811,36 @@ CREATE TABLE `et_option` (
   UNIQUE KEY `option_name` (`option_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `faculty` (
+CREATE TABLE IF NOT EXISTS `faculty` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `facID` int(8) unsigned zerofill NOT NULL,
-  `buildingCode` varchar(11) NOT NULL,
-  `officeCode` varchar(11) NOT NULL,
+  `buildingID` int(11) unsigned zerofill NOT NULL,
+  `officeID` int(11) unsigned zerofill NOT NULL,
   `office_phone` varchar(15) NOT NULL,
-  `deptCode` varchar(11) NOT NULL,
+  `deptID` int(11) unsigned zerofill NOT NULL,
   `addDate` date NOT NULL,
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `facID` (`facID`)
+  UNIQUE KEY `facID` (`facID`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `graduate` (
+CREATE TABLE IF NOT EXISTS `graduate` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `gradID` int(8) unsigned zerofill NOT NULL,
-  `schoolID` int(11) NOT NULL,
-  `progID` int(11) NOT NULL,
-  `catYear` int(11) NOT NULL,
+  `schoolID` int(11) unsigned zerofill NOT NULL,
+  `progID` int(11) unsigned zerofill NOT NULL,
+  `catYearID` int(11) unsigned zerofill NOT NULL,
   `gradDate` date NOT NULL,
   `addDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `addedBy` int(8) NOT NULL,
+  `approvedBy` int(8) unsigned zerofill NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `gradID` (`gradID`)
+  UNIQUE KEY `gradID` (`gradID`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `institution` (
+CREATE TABLE IF NOT EXISTS `institution` (
   `institutionID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `ficeCode` int(6) NOT NULL,
   `instName` varchar(180) NOT NULL,
@@ -845,7 +850,7 @@ CREATE TABLE `institution` (
   UNIQUE KEY `ficeCode` (`ficeCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `location` (
+CREATE TABLE IF NOT EXISTS `location` (
   `locationID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `locationCode` varchar(6) NOT NULL,
   `locationName` varchar(80) NOT NULL,
@@ -854,7 +859,7 @@ CREATE TABLE `location` (
   UNIQUE KEY `locationKey` (`locationCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `major` (
+CREATE TABLE IF NOT EXISTS `major` (
   `majorID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `majorCode` varchar(11) NOT NULL,
   `majorName` varchar(180) NOT NULL,
@@ -863,7 +868,7 @@ CREATE TABLE `major` (
   UNIQUE KEY `majKey` (`majorCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `minor` (
+CREATE TABLE IF NOT EXISTS `minor` (
   `minorID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `minorCode` varchar(11) NOT NULL,
   `minorName` varchar(180) NOT NULL,
@@ -872,7 +877,7 @@ CREATE TABLE `minor` (
   UNIQUE KEY `minKey` (`minorCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `nslc_hold_file` (
+CREATE TABLE IF NOT EXISTS `nslc_hold_file` (
   `nslcHoldFileID` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `lname` varchar(150) NOT NULL,
@@ -887,7 +892,7 @@ CREATE TABLE `nslc_hold_file` (
   UNIQUE KEY `userID` (`stuID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `nslc_setup` (
+CREATE TABLE IF NOT EXISTS `nslc_setup` (
   `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `branch` varchar(2) NOT NULL,
   `termCode` varchar(8) NOT NULL,
@@ -898,7 +903,7 @@ CREATE TABLE `nslc_setup` (
 
 INSERT INTO `nslc_setup` VALUES(00000000001, '00', '13/FA', '2013-09-01', '2013-12-18');
 
-CREATE TABLE `parent` (
+CREATE TABLE IF NOT EXISTS `parent` (
   `parentID` int(8) unsigned zerofill NOT NULL,
   `parentKey` varchar(255) NOT NULL,
   `addDate` datetime NOT NULL,
@@ -906,7 +911,7 @@ CREATE TABLE `parent` (
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `parent_student` (
+CREATE TABLE IF NOT EXISTS `parent_student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_key` varchar(60) NOT NULL DEFAULT '',
   `student_id` varchar(11) NOT NULL,
@@ -915,7 +920,7 @@ CREATE TABLE `parent_student` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `permission` (
+CREATE TABLE IF NOT EXISTS `permission` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `permKey` varchar(30) NOT NULL,
   `permName` varchar(30) NOT NULL,
@@ -1065,7 +1070,7 @@ INSERT INTO `permission` VALUES(00000000000000000199, 'delete_room', 'Delete Roo
 
 INSERT INTO `permission` VALUES(00000000000000000200, 'delete_school', 'Delete School');
 
-CREATE TABLE `person` (
+CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uname` varchar(80) NOT NULL,
   `prefix` varchar(6) NOT NULL,
@@ -1093,12 +1098,14 @@ CREATE TABLE `person` (
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`personID`),
   UNIQUE KEY `uname` (`uname`),
-  UNIQUE KEY `ssn` (`ssn`)
+  UNIQUE KEY `ssn` (`ssn`),
+  KEY `person_type` (`personType`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `person_perms` (
+CREATE TABLE IF NOT EXISTS `person_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `personID` varchar(11) NOT NULL,
+  `personID` int(11) unsigned zerofill NOT NULL,
   `permID` bigint(20) NOT NULL,
   `value` tinyint(1) NOT NULL DEFAULT '0',
   `addDate` datetime NOT NULL,
@@ -1106,7 +1113,7 @@ CREATE TABLE `person_perms` (
   UNIQUE KEY `userID` (`personID`,`permID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `person_roles` (
+CREATE TABLE IF NOT EXISTS `person_roles` (
   `rID` int(11) NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `roleID` bigint(20) NOT NULL,
@@ -1115,13 +1122,40 @@ CREATE TABLE `person_roles` (
   UNIQUE KEY `userID` (`personID`,`roleID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `plugin` (
+CREATE TABLE IF NOT EXISTS `plugin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `location` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `role` (
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eventName` varchar(30) NOT NULL,
+  `eventDate` date NOT NULL DEFAULT '0000-00-00',
+  `startTime` time NOT NULL DEFAULT '00:00:00',
+  `endTime` time NOT NULL DEFAULT '00:00:00',
+  `description` text NOT NULL,
+  `recurring` tinyint(4) NOT NULL DEFAULT '0',
+  `recurDOTW` tinyint(4) DEFAULT NULL,
+  `eventDay` tinyint(4) NOT NULL DEFAULT '0',
+  `catID` int(11) unsigned zerofill NOT NULL DEFAULT '00000000001',
+  `approved` enum('1','0') NOT NULL DEFAULT '0',
+  `endDate` date NOT NULL DEFAULT '0000-00-00',
+  `roomID` int(11) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_date` (`eventDate`),
+  KEY `event_name` (`eventName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `reservation_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catName` varchar(30) NOT NULL,
+  `fgcolor` char(8) NOT NULL DEFAULT '#000000',
+  `bgcolor` char(8) NOT NULL DEFAULT '#ffffff',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `role` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `roleName` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`),
@@ -1138,7 +1172,7 @@ INSERT INTO `role` VALUES(00000000000000000011, 'Student');
 
 INSERT INTO `role` VALUES(00000000000000000008, 'Super Administrator');
 
-CREATE TABLE `role_perms` (
+CREATE TABLE IF NOT EXISTS `role_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `roleID` bigint(20) NOT NULL,
   `permID` bigint(20) NOT NULL,
@@ -1382,17 +1416,17 @@ INSERT INTO `role_perms` VALUES(00000000000000000971, 11, 180, 1, '2013-09-04 04
 
 INSERT INTO `role_perms` VALUES(00000000000000000972, 12, 180, 1, '2013-09-04 04:52:01');
 
-CREATE TABLE `room` (
+CREATE TABLE IF NOT EXISTS `room` (
   `roomID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `roomCode` varchar(11) NOT NULL,
-  `buildingCode` varchar(11) NOT NULL,
+  `buildingID` int(11) unsigned zerofill NOT NULL,
   `roomNumber` varchar(11) NOT NULL,
   `roomCap` int(4) NOT NULL,
   PRIMARY KEY (`roomID`),
   UNIQUE KEY `roomKey` (`roomCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `saved_query` (
+CREATE TABLE IF NOT EXISTS `saved_query` (
   `savedQueryID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `savedQueryName` varchar(80) NOT NULL,
@@ -1400,20 +1434,21 @@ CREATE TABLE `saved_query` (
   `purgeQuery` enum('0','1') NOT NULL DEFAULT '0',
   `createdDate` date NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`savedQueryID`)
+  PRIMARY KEY (`savedQueryID`),
+  KEY `personID` (`personID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `school` (
+CREATE TABLE IF NOT EXISTS `school` (
   `schoolID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `schoolCode` varchar(11) NOT NULL,
   `schoolName` varchar(180) NOT NULL,
-  `buildingCode` varchar(11) NOT NULL,
+  `buildingID` int(11) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`schoolID`),
   UNIQUE KEY `schoolCode` (`schoolCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `screen` (
+CREATE TABLE IF NOT EXISTS `screen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(6) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -1502,9 +1537,9 @@ INSERT INTO `screen` VALUES(39, 'SPRO', 'Student Profile', 'student/');
 
 INSERT INTO `screen` VALUES(40, 'FAC', 'Faculty Profile', 'faculty/');
 
-CREATE TABLE `semester` (
+CREATE TABLE IF NOT EXISTS `semester` (
   `semesterID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `acadYearCode` varchar(11) NOT NULL,
+  `acadYearID` int(11) unsigned zerofill NOT NULL,
   `semCode` varchar(11) NOT NULL,
   `semName` varchar(80) NOT NULL,
   `semStartDate` date NOT NULL DEFAULT '0000-00-00',
@@ -1514,7 +1549,7 @@ CREATE TABLE `semester` (
   UNIQUE KEY `semCode` (`semCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `specialization` (
+CREATE TABLE IF NOT EXISTS `specialization` (
   `specID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `specCode` varchar(11) NOT NULL,
   `specName` varchar(80) NOT NULL,
@@ -1522,7 +1557,7 @@ CREATE TABLE `specialization` (
   UNIQUE KEY `specCode` (`specCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `staff` (
+CREATE TABLE IF NOT EXISTS `staff` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `staffID` int(8) unsigned zerofill NOT NULL,
   `schoolID` int(11) NOT NULL,
@@ -1531,13 +1566,14 @@ CREATE TABLE `staff` (
   `office_phone` varchar(15) NOT NULL,
   `deptID` int(11) NOT NULL,
   `addDate` datetime NOT NULL,
-  `addedBy` int(8) NOT NULL,
+  `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `staffID` (`staffID`)
+  UNIQUE KEY `staffID` (`staffID`),
+  KEY `approvedBy` (`approvedBy`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `state` (
+CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `code` varchar(2) NOT NULL,
   `name` varchar(180) NOT NULL,
@@ -1673,72 +1709,72 @@ INSERT INTO `state` VALUES(00000000063, 'SK', 'Saskatchewan');
 
 INSERT INTO `state` VALUES(00000000064, 'YT', 'Yukon Territory');
 
-CREATE TABLE `student` (
+CREATE TABLE IF NOT EXISTS `student` (
   `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `advisorID` int(8) unsigned zerofill NOT NULL,
-  `catYear` int(11) NOT NULL,
+  `catYearID` int(11) unsigned zerofill NOT NULL,
   `antGradDate` varchar(5) NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
   `addDate` datetime NOT NULL,
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `stuID` (`stuID`)
+  UNIQUE KEY `stuID` (`stuID`),
+  KEY `approvedBy` (`approvedBy`),
+  KEY `acad_level_code` (`acadLevelCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_comment` (
+CREATE TABLE IF NOT EXISTS `stu_acad_cred` (
+  `stuAcadCredID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `courseSecID` int(11) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
+  `compCred` double(4,1) NOT NULL,
+  `attCred` double(4,1) NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`stuAcadCredID`),
+  UNIQUE KEY `stuAcadCred` (`stuID`,`courseSecID`,`termID`),
+  KEY `courseSecID` (`courseSecID`),
+  KEY `termID` (`termID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `stu_comment` (
   `commentID` int(11) NOT NULL AUTO_INCREMENT,
-  `stuID` int(8) NOT NULL,
+  `stuID` int(8) unsigned zerofill NOT NULL,
   `comment` text NOT NULL,
   `addDate` date NOT NULL,
-  `addedBy` int(8) NOT NULL,
-  PRIMARY KEY (`commentID`)
+  `addedBy` int(8) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`commentID`),
+  KEY `stuID` (`stuID`),
+  KEY `addedBy` (`addedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_course_sec` (
+CREATE TABLE IF NOT EXISTS `stu_course_sec` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
-  `courseSecCode` varchar(15) NOT NULL,
-  `termCode` varchar(11) NOT NULL,
+  `courseSecID` int(11) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
   `courseCredits` double(4,1) NOT NULL DEFAULT '0.0',
   `ceu` double(4,1) NOT NULL DEFAULT '0.0',
   `grade` varchar(2) DEFAULT NULL,
-  `status` enum('A','N') NOT NULL DEFAULT 'A',
+  `status` enum('A','N','D','W','C') NOT NULL DEFAULT 'A',
   `statusDate` date NOT NULL,
   `statusTime` varchar(10) NOT NULL,
   `addedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `courseSec` (`stuID`,`courseSecCode`,`termCode`)
+  UNIQUE KEY `courseSec` (`stuID`,`courseSecID`,`termID`),
+  KEY `courseSecID` (`courseSecID`),
+  KEY `termID` (`termID`),
+  KEY `addedBy` (`addedBy`),
+  KEY `stu_course_sec_status` (`status`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_acad_cred` (
-  `stuAcadCredID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `stuID` int(8) unsigned zerofill NOT NULL,
-  `courseSecCode` varchar(11) NOT NULL,
-  `termCode` varchar(11) NOT NULL,
-  `compCred` double(4,1) NOT NULL,
-  `attCred` double(4,1) NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuAcadCredID`),
-  UNIQUE KEY `stuAcadCred` (`stuID`,`courseSecCode`,`termCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `stu_term_load` (
-  `stuLoadID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `stuID` int(8) unsigned zerofill NOT NULL,
-  `stuTermID` int(11) unsigned zerofill NOT NULL,
-  `stuLoad` varchar(2) NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuLoadID`),
-  UNIQUE KEY `stuTermLoad` (`stuID`,`stuTermID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `stu_program` (
+CREATE TABLE IF NOT EXISTS `stu_program` (
   `stuProgID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
-  `progCode` varchar(15) NOT NULL,
+  `progID` int(11) unsigned zerofill NOT NULL,
   `currStatus` varchar(1) NOT NULL,
   `statusDate` date NOT NULL,
   `startDate` date NOT NULL,
@@ -1746,21 +1782,37 @@ CREATE TABLE `stu_program` (
   `approvedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`stuProgID`),
-  UNIQUE KEY `student_program` (`stuID`,`progCode`)
+  UNIQUE KEY `student_program` (`stuID`,`progID`),
+  KEY `approvedBy` (`approvedBy`),
+  KEY `progID` (`progID`),
+  KEY `stu_program_status` (`currStatus`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `stu_term` (
+CREATE TABLE IF NOT EXISTS `stu_term` (
   `stuTermID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
-  `termCode` varchar(11) NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
   `termCredits` double(6,1) NOT NULL DEFAULT '0.0',
   `addDateTime` datetime NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`stuTermID`),
-  UNIQUE KEY `stuTerm` (`stuID`,`termCode`)
+  UNIQUE KEY `stuTerm` (`stuID`,`termID`),
+  KEY `termID` (`termID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `subject` (
+CREATE TABLE IF NOT EXISTS `stu_term_load` (
+  `stuLoadID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `stuTermID` int(11) unsigned zerofill NOT NULL,
+  `stuLoad` varchar(2) NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`stuLoadID`),
+  UNIQUE KEY `stuTermLoad` (`stuID`,`stuTermID`),
+  KEY `stuTermID` (`stuTermID`),
+  KEY `student_load` (`stuLoad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `subject` (
   `subjectID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `subjCode` varchar(11) NOT NULL,
   `subjName` varchar(180) NOT NULL,
@@ -1769,9 +1821,9 @@ CREATE TABLE `subject` (
   UNIQUE KEY `subjCode` (`subjCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `term` (
+CREATE TABLE IF NOT EXISTS `term` (
   `termID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `semCode` varchar(11) NOT NULL,
+  `semesterID` int(11) unsigned zerofill NOT NULL,
   `termCode` varchar(11) NOT NULL,
   `termName` varchar(10) NOT NULL DEFAULT '',
   `reportingTerm` varchar(5) NOT NULL,
@@ -1779,5 +1831,70 @@ CREATE TABLE `term` (
   `termEndDate` date NOT NULL DEFAULT '0000-00-00',
   `active` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`termID`),
-  UNIQUE KEY `termCode` (`termCode`)
+  UNIQUE KEY `termCode` (`termCode`),
+  KEY `semesterID` (`semesterID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+ALTER TABLE `address` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `address` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `course` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `course_sec` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `faculty` ADD FOREIGN KEY (`facID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `faculty` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `graduate` ADD FOREIGN KEY (`gradID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `graduate` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `person` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `person_roles` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `person_perms` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `saved_query` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `staff` ADD FOREIGN KEY (`staffID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `staff` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `student` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `student` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_program` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_program` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_term` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_term_load` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_acad_cred` ADD FOREIGN KEY (`courseSecID`) REFERENCES `course_sec` (`courseSecID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_acad_cred` ADD FOREIGN KEY (`termID`) REFERENCES `term` (`termID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_course_sec` ADD FOREIGN KEY (`courseSecID`) REFERENCES `course_sec` (`courseSecID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_course_sec` ADD FOREIGN KEY (`termID`) REFERENCES `term` (`termID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_program` ADD FOREIGN KEY (`progID`) REFERENCES `acad_program` (`acadProgID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_term` ADD FOREIGN KEY (`termID`) REFERENCES `term` (`termID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_term_load` ADD FOREIGN KEY (`stuTermID`) REFERENCES `stu_term` (`stuTermID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `term` ADD FOREIGN KEY (`semesterID`) REFERENCES `semester` (`semesterID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE `stu_comment` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_comment` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_course_sec` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `stu_course_sec` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;

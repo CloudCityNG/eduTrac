@@ -3,10 +3,10 @@
  *
  * eduTrac API Compatibility File
  *  
- * PHP 5
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
- * @since   eduTrac(tm) v 1.0.0
- * @package RESTful API
- * @author  Joshua Parker <josh@7mediaws.org>
+ * @link http://www.7mediaws.org/
+ * @since 1.0.0
+ * @package eduTrac
+ * @subpackage RESTful API
  */
 
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');

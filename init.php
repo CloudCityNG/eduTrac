@@ -1,12 +1,11 @@
 <?php
 /**
- *
- * Benchmarking
+ * Benchmarking Initialization
  *  
- * PHP 5
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +20,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
  * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @link http://www.7mediaws.org/
+ * @since 1.0.0
+ * @package eduTrac
+ * @subpackage Benchmark
  */
 
 if( isset($_GET['php-benchmark-test']) ) {
