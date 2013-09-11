@@ -45,9 +45,10 @@ $file = BASE_PATH . 'eduTrac/Application/Views/upgrade/sql/'.Hooks::get_option('
                     <?php if(Hooks::get_option('dbversion') < upgradeDB(0)) { ?>
 					<!-- Alert -->
 					<div class="alert alert-primary center">
-						<strong><?php _e( _t( 'Warning!' ) ); ?></strong> <?php _e( _t( 'Hey admin, your database is out of date. Click the button below to upgrade your database.  
-                        When the upgrade is complete, please <a href="'.BASE_URL.'dashboard/"><font color="orange">click here</font></a> to return to the dashboard. 
-                        If you are behind on a few versions, you may be redirected to this page again until until you are fully up to date.' ) ); ?>
+						<strong><?php _e( _t( 'Warning!' ) ); ?></strong> <?php _e( _t( 'Hey admin, your database is out of date and currently at 
+                        version ' . Hooks::get_option('dbversion') . ' Click the button below to upgrade your database. 
+                        When the upgrade is complete, <a href="'.BASE_URL.'dashboard/"><font color="orange">click here</font></a> to return to the dashboard. 
+                        If you are behind on a few versions, you may be redirected to this page again until the system is fully up to date.' ) ); ?>
 					</div>
 					<!-- // Alert END -->
                     <!-- Form -->
@@ -62,7 +63,7 @@ $file = BASE_PATH . 'eduTrac/Application/Views/upgrade/sql/'.Hooks::get_option('
                     <!-- Alert -->
     				<div class="alert alert-success center">
 						<strong><?php _e( _t( 'Hey admin, you database is currently up to date. There is nothing else here to see. 
-                        <a href="'.BASE_URL.'dashboard/"><font color="orange">click here</font></a> to return to the dashboard.' ) ); ?>
+                        <a href="'.BASE_URL.'dashboard/"><font color="orange">Click here</font></a> to return to the dashboard.' ) ); ?>
 					</div>
 					<!-- // Alert END -->
                     

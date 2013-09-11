@@ -38,36 +38,41 @@ class PersonModel {
 		$this->_auth = new Cookies;
 	}
     
-    public function search() {
-        if(isPostSet('person')) :
-            $post = isPostSet('person');
+    public function search($data) {
+        $person = $data['person'];
+        $bind = [ ":person" => "%$person%" ];
             
-            $q = DB::inst()->query( "SELECT personID,fname,lname,uname 
-                    FROM 
-                        person 
-                    WHERE 
-                        (CONCAT(fname,' ',lname) LIKE '%".$post."%' 
-                    OR 
-                        CONCAT(lname,' ',fname) LIKE '%".$post."%' 
-                    OR 
-                        CONCAT(lname,', ',fname) LIKE '%".$post."%') 
-                    OR 
-                        fname LIKE '%".$post."%' 
-                    OR 
-                        lname LIKE '%".$post."%' 
-                    OR 
-                        uname LIKE '%".$post."%' 
-                    OR 
-                        personID LIKE '%".$post."%'" 
-            );
-            
-            if($q->rowCount() > 0) {
-                while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                    $array[] = $r;
-                }
-                return $array;
+        $q = DB::inst()->query( "SELECT personID,fname,lname,uname 
+                FROM 
+                    person 
+                WHERE 
+                    (CONCAT(fname,' ',lname) LIKE :person 
+                OR 
+                    CONCAT(lname,' ',fname) LIKE :person 
+                OR 
+                    CONCAT(lname,', ',fname) LIKE :person) 
+                OR 
+                    fname LIKE :person 
+                OR 
+                    lname LIKE :person 
+                OR 
+                    uname LIKE :person 
+                OR 
+                    personID LIKE :person",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+        
+        /*if($q->rowCount() > 0) {
+            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
+                $array[] = $r;
             }
-        endif;
+            return $array;
+        }*/
     }
     
     public function person($id) {

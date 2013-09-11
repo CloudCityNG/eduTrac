@@ -55,10 +55,12 @@ class AcadProgram {
 	private $_LastUpdate; //timestamp
 
     /**
-     * Load one row into var_class. To use the vars use for exemple echo $class->getVar_name; 
+     * Load one row into var_class. To use the vars use for example echo $class->getVar_name; 
      *
-     * @param key_table_type $key_row
-     * 
+     * @access public
+     * @since 1.0.0
+     * @param int $key_row The primary key of the academic program.
+     * @return mixed one row or an array
      */
 	public function Load_from_key($key_row) {
         $bind = array( ":id" => $key_row );
@@ -92,8 +94,11 @@ class AcadProgram {
     /**
      * Returns array of keys order by $column -> name of column $order -> desc or acs
      *
+     * @access public
+     * @since 1.0.0
      * @param string $column
      * @param string $order
+     * @return mixed ordered list
      */
 	public function GetKeysOrderBy($column, $order){
 		$keys = array(); $i = 0;
@@ -106,55 +111,84 @@ class AcadProgram {
 	}
 
 	/**
-	 * @return acadProgID - int(11) unsigned zerofill
+     * Returns the academic program's id
+     * 
+     * @since 1.0.0
+	 * @return int acadProgID - int(11) unsigned zerofill
 	 */
 	public function getAcadProgID(){
 		return $this->_acadProgID;
 	}
 
 	/**
-	 * @return acadProgCode - varchar(15)
+     * Returns the academic program's code.
+     * 
+     * @since 1.0.0
+	 * @return string acadProgCode - varchar(15)
 	 */
 	public function getAcadProgCode(){
 		return $this->_acadProgCode;
 	}
 
 	/**
-	 * @return acadProgTitle - varchar(180)
+     * Returns the academic program's title.
+     * 
+     * @since 1.0.0
+	 * @return string acadProgTitle - varchar(180)
 	 */
 	public function getAcadProgTitle(){
 		return $this->_acadProgTitle;
 	}
 
 	/**
-	 * @return programDesc - varchar(80)
+     * Returns the academic program's description.
+     * 
+     * @since 1.0.0
+	 * @return string programDesc - varchar(80)
 	 */
 	public function getProgramDesc(){
 		return $this->_programDesc;
 	}
 
 	/**
-	 * @return currStatus - varchar(1)
+     * Returns the academic program's current status.
+     * 
+     * @since 1.0.0
+	 * @return string currStatus - varchar(1)
 	 */
 	public function getCurrStatus(){
 		return $this->_currStatus;
 	}
 
 	/**
-	 * @return statusDate - date
+     * Returns the academic program's status date. 
+     * This is also the date of when the academic program 
+     * was added but will change when the status of the 
+     * program is updated
+     * 
+     * @since 1.0.0
+	 * @return mixed statusDate - date
 	 */
 	public function getStatusDate(){
 		return $this->_statusDate;
 	}
 
 	/**
-	 * @return approvedBy - int(8) unsigned zerofill
+     * Returns the academic program's creator.
+     * 
+     * @since 1.0.0
+	 * @return int approvedBy - int(8) unsigned zerofill
 	 */
 	public function getApprovedBy(){
 		return $this->_approvedBy;
 	}
 
 	/**
+     * Returns the academic program's approval date. 
+     * This is also the date the program was added/created 
+     * but will not change.
+     * 
+     * @since 1.0.0
 	 * @return approvedDate - date
 	 */
 	public function getApprovedDate(){
@@ -162,98 +196,155 @@ class AcadProgram {
 	}
 
 	/**
-	 * @return deptID - varchar(11)
+     * Returns the department id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int deptID - int(11)
 	 */
 	public function getDeptID(){
 		return $this->_deptID;
 	}
 
 	/**
-	 * @return schoolID - varchar(11)
+     * Returns the school id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int schoolID - int (11)
 	 */
 	public function getSchoolID(){
 		return $this->_schoolID;
 	}
 
 	/**
-	 * @return acadYearID - text
+     * Returns the academic year id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int acadYearID - int(11)
 	 */
 	public function getAcadYearID(){
 		return $this->_acadYearID;
 	}
 
 	/**
-	 * @return startDate - date
+     * Returns the effective date of a  
+     * paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return mixed startDate - date
 	 */
 	public function getStartDate(){
 		return $this->_startDate;
 	}
 
 	/**
-	 * @return endDate - date
+     * Returns the end date of the program.  
+     * After this date, the program should no 
+     * longer be offered.
+     * 
+     * @since 1.0.0
+	 * @return mixed endDate - date
 	 */
 	public function getEndDate(){
 		return $this->_endDate;
 	}
 
 	/**
-	 * @return degreeID - varchar(11)
+     * Returns the degree id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int degreeID - int(11)
 	 */
 	public function getDegreeID(){
 		return $this->_degreeID;
 	}
 
 	/**
-	 * @return ccdID - text
+     * Returns the CCD id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int ccdID - int(11)
 	 */
 	public function getCCDID(){
 		return $this->_ccdID;
 	}
 
 	/**
-	 * @return majorID - text
+     * Returns the major id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int majorID - int(11)
 	 */
 	public function getMajorID(){
 		return $this->_majorID;
 	}
 
 	/**
-	 * @return minorID - text
+     * Returns the minor id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int minorID - int(11)
 	 */
 	public function getMinorCode(){
 		return $this->_minorID;
 	}
 
 	/**
-	 * @return specID - text
+     * Returns the specialization id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int specID - int(11)
 	 */
 	public function getSpecID(){
 		return $this->_specID;
 	}
 
 	/**
-	 * @return acadLevelCode - varchar(11)
+     * Returns the acdemic level code associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return string acadLevelCode - varchar(11)
 	 */
 	public function getAcadLevelCode(){
 		return $this->_acadLevelCode;
 	}
 
 	/**
-	 * @return cipID - varchar(11)
+     * Returns the CIP id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int cipID - int(11)
 	 */
 	public function getCIPID(){
 		return $this->_cipID;
 	}
 
 	/**
-	 * @return locationID - varchar(11)
+     * Returns the location id associated with 
+     * the paricular academic program.
+     * 
+     * @since 1.0.0
+	 * @return int locationID - int(11)
 	 */
-	public function getLocationCode(){
+	public function getLocationID(){
 		return $this->_locationID;
 	}
 
 	/**
-	 * @return LastUpdate - timestamp
+     * Returns the date of when the academic program  
+     * was last updated.
+     * 
+     * @since 1.0.0
+	 * @return mixed LastUpdate - timestamp
 	 */
 	public function getLastUpdate(){
 		return $this->_LastUpdate;

@@ -91,7 +91,7 @@ class Savequery extends \eduTrac\Classes\Core\Controller {
 	
 	public function save() {
         if (strstra(strtolower(isPostSet('savedQuery')), forbidden_keyword())) {
-            redirect( BASE_URL . 'error/SQL/' );
+            redirect( BASE_URL . 'error/sql/' );
             exit();
         }
 		$data = array();
@@ -104,7 +104,7 @@ class Savequery extends \eduTrac\Classes\Core\Controller {
     
     public function edit() {
         if (strstra(strtolower(isPostSet('savedQuery')), forbidden_keyword())) {
-            redirect( BASE_URL . 'error/SQL/' );
+            redirect( BASE_URL . 'error/sql/' );
             exit();
         }
         $data = array();

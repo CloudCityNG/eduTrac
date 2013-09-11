@@ -409,7 +409,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return boolean
      */
     function forbidden_keyword() {
-        $array = array( 
+        $array = [ 
             "create","delete","drop","alter","update",
             "insert","change","convert","modifies",
             "optimize","purge","rename","replace",
@@ -420,7 +420,7 @@ use \eduTrac\Classes\Libraries\Cookies;
             "x=x","x = x","everything","anyone","everyone",
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
             "X=X","X = X","union","'='"
-        );
+        ];
         return $array;
     }
     
@@ -797,12 +797,12 @@ use \eduTrac\Classes\Libraries\Cookies;
     
                         if (DB::inst()->query($query) === false)
                         {
-                            echo '<p><font color="blue">ERROR:</font> ' . $query . '</p>' . "\n";
+                            echo '<p><font color="red">ERROR:</font> ' . $query . '</p>' . "\n";
                         }
     
                         else
                         {
-                            echo '<p><font color="blue">SUCCESS:</font> ' . $query . '</p>' . "\n";
+                            echo '<p><font color="green">SUCCESS:</font> ' . $query . '</p>' . "\n";
                         }
     
                         while (ob_get_level() > 0)

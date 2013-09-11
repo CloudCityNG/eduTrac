@@ -68,9 +68,9 @@ class Error extends \eduTrac\Classes\Core\Controller {
         $this->view->render('error/invalid_record');
     }
 	
-    public function SQL() {
+    public function sql() {
         $this->view->staticTitle = array('SQL Restricted Keywords');
-        $this->view->render('error/SQL');
+        $this->view->render('error/sql');
     }
     
 	public function screen_error() {

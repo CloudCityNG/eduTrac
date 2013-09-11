@@ -56,12 +56,12 @@ class SavequeryModel {
 	}
     
     public function edit($data) {
-        $update = array( 
+        $update = [ 
             "savedQueryName" => $data['savedQueryName'],"savedQuery" => $data['savedQuery'],
             "purgeQuery" => $data['purgeQuery']
-        );
+        ];
             
-        $bind = array( ":savedQueryID" => $data['savedQueryID'],":personID" => $data['personID'] );
+        $bind = [ ":savedQueryID" => $data['savedQueryID'],":personID" => $data['personID'] ];
         
         $q = DB::inst()->update( "saved_query",$update,"savedQueryID = :savedQueryID AND personID = :personID",$bind );
                 

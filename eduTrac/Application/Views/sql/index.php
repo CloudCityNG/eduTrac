@@ -104,7 +104,7 @@ $qtext = str_replace("\\","",$qtext);
 			<!-- Table -->
 			<?php
                 if (strstra(strtolower($_POST['qtext']), forbidden_keyword())) {
-                    redirect( BASE_URL . 'error/SQL/' );
+                    redirect( BASE_URL . 'error/sql/' );
                     exit();
                 }
                 

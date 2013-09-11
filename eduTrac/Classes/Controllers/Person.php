@@ -316,5 +316,11 @@ class Person extends \eduTrac\Classes\Core\Controller {
         $data['uname'] = isPostSet('uname');
         $this->model->runUsernameCheck($data);
     }
+    
+    public function search() {
+        $data = [];
+        $data['person'] = isPostSet('person');
+        $this->model->search($data);
+    }
 	
 }
