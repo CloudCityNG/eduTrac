@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * eduTrac API Class
  *  
  * PHP 5.4+
