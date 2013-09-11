@@ -41,7 +41,7 @@ $args = array(
                                         'email_template','nslc_setup',
                                         'et_option','plugin','saved_query'
                                       ),
-            'column_blacklist' => array('auth_token','password','ssn'),
+            'column_blacklist' => array('auth_token','ssn'),
 );
 
 register_db_api( 'erp', $args );

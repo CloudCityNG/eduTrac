@@ -58,11 +58,8 @@ class IndexModel {
 		$cookie = sprintf("data=%s&auth=%s", urlencode($uname), urlencode(et_hash_cookie($uname.$pass)));
 		$mac = hash_hmac("sha512", $cookie, $this->_enc);
 		$auth = $cookie . '&digest=' . urlencode($mac);
-        
-        $update = array( "auth_token" => $auth );
-        DB::inst()->update( "person", $update, "uname = :uname", $bind );
 		
-        $q = DB::inst()->select( "person","uname = :uname","","personID,auth_token,password",$bind );
+        $q = DB::inst()->select( "person","uname = :uname","","personID,password",$bind );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -70,12 +67,12 @@ class IndexModel {
 		if(et_check_password( $pass, $r['password'], $r['personID'] )) {
 			if($data['rememberme']) {				
 				/* Now we can set our login cookies. */
-				setcookie("et_cookname", $r['auth_token'], time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+				setcookie("et_cookname", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
       			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
                 $_SESSION['id'] = $r['personID'];
    			} else {				
    				/* Now we can set our login cookies. */
-   				setcookie("et_cookname", $r['auth_token'], time()+86400, "/", $this->_auth->cookieDomain());
+   				setcookie("et_cookname", $auth, time()+86400, "/", $this->_auth->cookieDomain());
       			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
       			$_SESSION['id'] = $r['personID'];
    			}
