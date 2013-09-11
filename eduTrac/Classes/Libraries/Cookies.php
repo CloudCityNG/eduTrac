@@ -37,7 +37,7 @@ class Cookies {
 	/**
 	 * Cookie Name
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @return bool Returns true if set
 	 * 
 	 */ 
@@ -50,7 +50,7 @@ class Cookies {
 	/**
 	 * Cookie ID
 	 *
-	 * @since 1.0
+	 * @since 1.0.o
 	 * @return bool Returns true if set
 	 * 
 	 */ 
@@ -63,7 +63,7 @@ class Cookies {
 	/**
 	 * Retrieve user data
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @param string (required) $field User data to print from database.
 	 * @return mixed
 	 * 
@@ -76,22 +76,22 @@ class Cookies {
 			return NULL;
 		}
         
-        $bind = array( ":vars" => $vars['data'] );
+        $bind = array( ":data" => $vars['data'] );
 		
-        $sql = DB::inst()->select( "person","uname = :vars","","*",$bind );
+        $sql = DB::inst()->select( "person","uname = :data","","*",$bind );
         foreach($sql as $r) {
             return $r[$field];
         }
 	}
 	
 	/**
-	 * Verify Auth Token
+	 * Verify Person's Username
 	 *
-	 * @since 1.1
-	 * @return bool Returns true if an auth_token in the database matches the user's cookie.
+	 * @since 1.0.0
+	 * @return bool Returns true if the person's username exists in the database.
 	 * 
 	 */
-	public function verifyAuth() {
+	public function verifyPerson() {
 		$vars = array();
 		parse_str($this->getCookieName(), $vars);
 		
@@ -99,27 +99,27 @@ class Cookies {
 			return NULL;
 		}
         
-        $bind = array( ":vars" => $vars['data'] );
+        $bind = array( ":data" => $vars['data'] );
 		
-        $sql = DB::inst()->select( "person","uname = :vars","","*",$bind );
+        $sql = DB::inst()->select( "person","uname = :data","","*",$bind );
         foreach( $sql as $r ) {
             $array[] = $r;
         }
 		
-		if($r['auth_token'] == $this->getCookieName()) {
+		if($r['uname'] == $vars['data']) {
 			return true;
 		}
 	}
 	
 	/**
-	 * Checkes if user is logged in.
+	 * Checks if user is logged in.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @return mixed Returns true if cookie hashes exist.
 	 * 
 	 */ 
 	public function isUserLoggedIn() {
-		if($this->verifyAuth() && $this->getCookieID()) {
+		if($this->verifyPerson() && $this->getCookieID()) {
 			return true;
 		} else {
 			return false;
@@ -130,7 +130,7 @@ class Cookies {
 	/**
 	 * Returns cookie domain
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @return mixed
 	 * 
 	 */ 
