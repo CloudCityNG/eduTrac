@@ -214,8 +214,8 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @param string $levelCode
      * @return string Returns the record key if selected is true.
      */
-    function acad_level_select($levelCode = NULL) {
-        $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18" required>
+    function acad_level_select($levelCode = NULL, $readonly = null) {
+        $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18"'.$readonly.' required>
             <option value="">&nbsp;</option>
             <option value="NA"'.selected( $levelCode, 'NA', false ).'>N/A Not Applicable</option>
             <option value="CE"'.selected( $levelCode, 'CE', false ).'>CE Continuing Education</option>
@@ -276,8 +276,8 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * @param string $levelCode
 	 * @return string Returns the record key if selected is true.
 	 */
-	function course_level_select($levelCode = NULL) {		
-		$select = '<select style="width:100%;" name="courseLevelCode" required id="select2_21">
+	function course_level_select($levelCode = NULL, $readonly = null) {		
+		$select = '<select style="width:100%;" name="courseLevelCode" required id="select2_21"'.$readonly.'>
 			<option value="">&nbsp;</option>
 	    	<option value="100"'.selected( $levelCode, '100', false ).'>100 Course Level</option>
 			<option value="200"'.selected( $levelCode, '200', false ).'>200 Course Level</option>

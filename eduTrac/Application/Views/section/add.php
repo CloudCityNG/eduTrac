@@ -1,12 +1,11 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- *
  * Add Section View
  *  
- * PHP 5
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +20,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
- * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       1.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 if($this->crse != '') : foreach($this->crse as $k => $v) {
@@ -129,7 +131,7 @@ $(function(){
                             <div class="controls">
                                 <select style="width:100%;" name="deptID" id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', '', 'deptID', 'deptCode', 'deptName', $crse->getDeptID()); ?>
+                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $crse->getDeptID()); ?>
                                 </select>
                             </div>
                         </div>
@@ -137,9 +139,9 @@ $(function(){
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Min/Max/Incr Credit' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="minCredit" class="span4" value="<?=$crse->getMinCredit();?>" required/>
+                                <input type="text" name="minCredit" readonly="readonly" class="span4" value="<?=$crse->getMinCredit();?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -148,7 +150,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'CEU\'s' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="ceu" readonly class="span4" />
+                                <input type="text" name="ceu" readonly="readonly" class="span4" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -157,7 +159,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
                             <div class="controls">
-                                <?=course_level_select($crse->getCourseLevelCode());?>
+                                <?=course_level_select($crse->getCourseLevelCode(),' readonly="readonly"');?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -166,7 +168,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select($crse->getAcadLevelCode());?>
+                                <?=acad_level_select($crse->getAcadLevelCode(),' readonly="readonly"');?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -175,7 +177,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Title' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="secShortTitle" readonly class="span10" value="<?=$crse->getCourseShortTitle();?>" required/>
+                                <input type="text" name="secShortTitle" readonly="readonly" class="span10" value="<?=$crse->getCourseShortTitle();?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -211,7 +213,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
                             <div class="controls">
-                                <input id="statusDate" name="statusDate" type="text" readonly value="<?=date("Y-m-d");?>" />
+                                <input id="statusDate" name="statusDate" type="text" readonly="readonly" value="<?=date("Y-m-d");?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -220,7 +222,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Approval Person' ) ); ?></label>
                             <div class="controls">
-                                <input id="approvedBy" name="approvedBy" type="text" readonly value="<?=$auth->getPersonField('personID');?>" />
+                                <input id="approvedBy" name="approvedBy" type="text" readonly="readonly" value="<?=$auth->getPersonField('personID');?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -229,7 +231,7 @@ $(function(){
 						<div class="control-group">
 							<label class="control-label"><?php _e( _t( 'Approval Date' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="approvedDate" readonly value="<?=date('Y-m-d');?>" class="span10" />
+								<input type="text" name="approvedDate" readonly="readonly" value="<?=date('Y-m-d');?>" class="span10" />
 							</div>
 						</div>
 						<!-- // Group END -->

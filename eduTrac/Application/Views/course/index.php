@@ -93,6 +93,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                     <td class="center"><?=_h($v['endDate']);?></td>
                     <td class="center">
                     	<a href="<?=BASE_URL;?>course/view/<?=_h($v['courseID']);?>/<?=bm();?>" title="View Course" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                        <a<?=ae('add_course_sec');?> href="<?=BASE_URL;?>section/add/<?=_h($v['courseID']);?>/<?=bm();?>" title="Add Course Section" class="btn btn-circle"><i class="icon-plus"></i></a>
                         <?php Hooks::do_action('search_course_action'); ?>
                     </td>
                 </tr>

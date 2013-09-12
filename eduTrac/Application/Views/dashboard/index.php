@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- *
  * Dashboard View
  *  
  * PHP 5.4+
@@ -25,10 +24,9 @@
  * @link http://www.7mediaws.org/
  * @since 1.0.0
  * @package eduTrac
- * @subpackage View
  * @author Joshua Parker <josh@7mediaws.org>
  */
-$cache = new \eduTrac\Classes\Libraries\Cache('360', BASE_PATH . 'tmp/cache/', 'rss');
+$cache = new \eduTrac\Classes\Libraries\Cache('3600', BASE_PATH . 'tmp/cache/', 'rss');
 ?>
 
 <ul class="breadcrumb">
