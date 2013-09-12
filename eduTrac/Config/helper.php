@@ -26,7 +26,6 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
- */
 
 
 $apphelp = new eduTrac\Classes\Core\Extension();
