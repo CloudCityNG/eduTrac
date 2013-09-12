@@ -24,7 +24,6 @@
  * @link        http://www.7mediaws.org/
  * @since       1.0.0
  * @package     eduTrac
- * @subpackage  View
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 

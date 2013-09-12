@@ -1,20 +1,30 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- *
  * Add Role View
  *  
- * PHP 5
+ * PHP 5.4+
  *
- * eduTrac(tm) : Student Information System (http://edutrac.org/)
- * Copyright 2013, eduTrac, LLC (http://edutrac.org/)
+ * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
  *
- * @copyright Copyright 2013, eduTrac, LLC (http://edutrac.org/)
- * @link http://edutrac.org/ eduTrac(tm) Project
- * @since eduTrac(tm) v 1.0
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       1.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 use \eduTrac\Classes\Libraries\ACL as ACL;

@@ -21,9 +21,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
- * @link http://www.7mediaws.org/
- * @since 1.0.0
- * @package eduTrac
+ * @link        http://www.7mediaws.org/
+ * @since       1.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 
     define('INST_RUNSCRIPT', pathinfo(__FILE__, PATHINFO_BASENAME));

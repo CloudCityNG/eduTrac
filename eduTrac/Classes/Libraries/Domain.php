@@ -25,6 +25,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * @link        http://www.7mediaws.org/
  * @since       1.0.0
  * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 /*

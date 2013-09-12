@@ -1,9 +1,8 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- *
  * eduTrac System Helper
  *  
-  PHP 5.4+
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
  * @copyright (c) 2013 7 Media Web Solutions, LLC
