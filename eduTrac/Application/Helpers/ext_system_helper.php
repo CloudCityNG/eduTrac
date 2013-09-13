@@ -872,16 +872,20 @@ use \eduTrac\Classes\Libraries\Cookies;
     
     }
     
+    function getCurrentVersion($array) {
+        $version = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/version.txt'));
+        return Hooks::apply_filter( 'get_current_version', $version[$array] );
+    }
+    
     function upgradeDB($array) {
     	$upgrade = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/dbversion.txt'));
 		return Hooks::apply_filter( 'upgrade_db', $upgrade[$array] );
 	}
     
     function show_update_message() {
-        $version = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/version.txt'));
         $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
         if($acl->userHasRole(8)) {
-            if(CURRENT_ET_VERSION < $version[0]) {
+            if(CURRENT_ET_VERSION < getCurrentVersion(0)) {
                 $alert = 
                     '<!-- Alert -->
     				<div class="alert alert-success center">
@@ -897,8 +901,10 @@ use \eduTrac\Classes\Libraries\Cookies;
     function redirect_upgrade_db() {
         $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
         if($acl->userHasRole(8)) {
-            if(Hooks::get_option('dbversion') < upgradeDB(0)) {
-                redirect(BASE_URL . 'upgrade/');
+            if(CURRENT_ET_VERSION == getCurrentVersion(0)) {
+                if(Hooks::get_option('dbversion') < upgradeDB(0)) {
+                    redirect(BASE_URL . 'upgrade/');
+                }
             }
         }
     }

@@ -314,4 +314,5 @@ $auth = new Cookies;
 			
 		</div>
 		<!-- Top navbar END -->
+        <?php redirect_upgrade_db(); ?>
 	
