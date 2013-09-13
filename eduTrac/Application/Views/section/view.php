@@ -140,7 +140,7 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Min/Max/Incr Credit' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
                             <div class="controls">
                                 <input type="text" name="minCredit"<?=csio();?> class="span4" value="<?=_h($this->sec[0]['minCredit']);?>" required/>
                             </div>
@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <?=status_select(_h($this->sec[0]['currStatus']));?>
+                                <?=course_sec_status_select(_h($this->sec[0]['currStatus']));?>
                             </div>
                         </div>
                         <!-- // Group END -->

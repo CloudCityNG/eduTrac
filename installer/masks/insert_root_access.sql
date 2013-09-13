@@ -1,7 +1,7 @@
 INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `email`,`personType`) 
 VALUES (NULL, '{admin_username}', '{admin_password}', '{admin_realname}', '{admin_email}','STA');
 
-INSERT INTO `et_option` VALUES(1, 'dbversion', '00002');
+INSERT INTO `et_option` VALUES(1, 'dbversion', '00003');
 
 INSERT INTO `et_option` VALUES(2, 'system_email', '{admin_email}');
 

@@ -244,6 +244,26 @@ use \eduTrac\Classes\Libraries\Cookies;
 		        </select>';
         return Hooks::apply_filter('status', $select, $status);
 	}
+    
+    /**
+     * Course section select: shows general list of statuses and
+	 * if $status is not NULL, shows the current status 
+	 * for a particular course section record.
+	 * 
+	 * @since 1.0.0
+	 * @param string $status
+	 * @return string Returns the record key if selected is true.
+	 */
+	function course_sec_status_select($status = NULL) {
+		$select = '<select style="width:100%;" name="currStatus" id="select2_9" required>
+    			<option value="">&nbsp;</option>
+    	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
+    	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
+    			<option value="P"'.selected( $status, 'P', false ).'>P Pending</option>
+    			<option value="O"'.selected( $status, 'O', false ).'>O Obsolete</option>
+		        </select>';
+        return Hooks::apply_filter('status', $select, $status);
+	}
 	
     /**
      * Person type select: shows general list of person types and
@@ -314,8 +334,8 @@ use \eduTrac\Classes\Libraries\Cookies;
         return Hooks::apply_filter('instructor_method', $select, $method);
     }
     
-    /**
-     * Course section status select: shows general list of course sec statuses and
+   /**
+     * Student Course section status select: shows general list of course sec statuses and
      * if $status is not NULL, shows the status 
      * for a particular student course section record.
      * 
@@ -323,7 +343,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @param string $status
      * @return string Returns the record status if selected is true.
      */
-    function course_sec_status_select($status = NULL) {
+    function stu_course_sec_status_select($status = NULL) {
         $select = '<select style="width:60%;" name="status" id="select2_9" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Add') . '</option>

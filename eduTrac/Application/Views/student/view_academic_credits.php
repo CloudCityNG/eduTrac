@@ -167,7 +167,7 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <?=course_sec_status_select(_h($this->viewAcadCred[0]['status']));?>
+                                <?=stu_course_sec_status_select(_h($this->viewAcadCred[0]['status']));?>
                             </div>
                         </div>
                         <!-- // Group END -->

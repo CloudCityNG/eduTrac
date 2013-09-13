@@ -658,7 +658,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `minCredit` double(4,1) NOT NULL DEFAULT '0.0',
   `maxCredit` double(4,1) NOT NULL DEFAULT '0.0',
   `increCredit` double(4,1) NOT NULL DEFAULT '0.0',
-  `courseLevelCode` int(5) NOT NULL,
+  `courseLevelCode` varchar(5) NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
   `courseShortTitle` varchar(60) NOT NULL,
   `courseLongTitle` varchar(255) NOT NULL,
@@ -688,7 +688,7 @@ CREATE TABLE IF NOT EXISTS `course_sec` (
   `buildingID` int(11) unsigned zerofill NOT NULL,
   `roomID` int(11) unsigned zerofill NOT NULL,
   `locationID` int(11) unsigned zerofill NOT NULL,
-  `courseLevelCode` int(5) NOT NULL,
+  `courseLevelCode` varchar(5) NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
   `deptID` int(11) unsigned zerofill NOT NULL,
   `facID` int(8) unsigned zerofill NOT NULL,
@@ -1032,7 +1032,7 @@ INSERT INTO `permission` VALUES(00000000000000000180, 'room_request', 'Room Requ
 
 INSERT INTO `permission` VALUES(00000000000000000181, 'delete_course', 'Delete Course');
 
-INSERT INTO `permission` VALUES(00000000000000000182, 'delete_course_section', 'Delete Course Section');
+INSERT INTO `permission` VALUES(00000000000000000182, 'delete_course_sec', 'Delete Course Section');
 
 INSERT INTO `permission` VALUES(00000000000000000183, 'delete_acad_program', 'Delete Academic Program');
 
@@ -1069,6 +1069,10 @@ INSERT INTO `permission` VALUES(00000000000000000198, 'delete_building', 'Delete
 INSERT INTO `permission` VALUES(00000000000000000199, 'delete_room', 'Delete Room');
 
 INSERT INTO `permission` VALUES(00000000000000000200, 'delete_school', 'Delete School');
+
+INSERT INTO `permission` VALUES(00000000000000000201, 'activate_course_sec', 'Activate Course Section');
+
+INSERT INTO `permission` VALUES(00000000000000000202, 'cancel_course_sec', 'Cancel Course Section');
 
 CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,

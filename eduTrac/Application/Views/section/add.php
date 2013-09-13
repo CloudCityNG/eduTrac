@@ -204,7 +204,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <?=status_select();?>
+                                <?=course_sec_status_select();?>
                             </div>
                         </div>
                         <!-- // Group END -->
