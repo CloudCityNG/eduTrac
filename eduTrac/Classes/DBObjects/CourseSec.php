@@ -34,14 +34,14 @@ class CourseSec {
 	protected $_courseSecID;
 	protected $_sectionNumber;
 	protected $_courseSecCode;
-	protected $_buildingCode;
-	protected $_roomCode;
-	protected $_locationCode;
+	protected $_buildingID;
+	protected $_roomID;
+	protected $_locationID;
 	protected $_courseLevelCode;
 	protected $_acadLevelCode;
-	protected $_deptCode;
+	protected $_deptID;
 	protected $_facID;
-	protected $_termCode;
+	protected $_termID;
 	protected $_courseID;
 	protected $_preReqs;
 	protected $_secShortTitle;
@@ -85,14 +85,14 @@ class CourseSec {
 			$this->_courseSecID = $row["courseSecID"];
 			$this->_sectionNumber = $row["sectionNumber"];
 			$this->_courseSecCode = $row["courseSecCode"];
-			$this->_buildingCode = $row["buildingCode"];
-			$this->_roomCode = $row["roomCode"];
-			$this->_locationCode = $row["locationCode"];
+			$this->_buildingID = $row["buildingID"];
+			$this->_roomID = $row["roomID"];
+			$this->_locationID = $row["locationID"];
 			$this->_courseLevelCode = $row["courseLevelCode"];
 			$this->_acadLevelCode = $row["acadLevelCode"];
-			$this->_deptCode = $row["deptCode"];
+			$this->_deptID = $row["deptID"];
 			$this->_facID = $row["facID"];
-			$this->_termCode = $row["termCode"];
+			$this->_termID = $row["termID"];
 			$this->_courseID = $row["courseID"];
 			$this->_preReqs = $row["preReqs"];
 			$this->_secShortTitle = $row["secShortTitle"];
@@ -133,14 +133,14 @@ class CourseSec {
 	/**
 	 * @return courseSecID - int(11) unsigned zerofill
 	 */
-	public function getcourseSecID(){
+	public function getCourseSecID(){
 		return $this->_courseSecID;
 	}
 
 	/**
 	 * @return sectionNumber - varchar(5)
 	 */
-	public function getsectionNumber(){
+	public function getSectionNumber(){
 		return $this->_sectionNumber;
 	}
 
@@ -154,98 +154,98 @@ class CourseSec {
 	/**
 	 * @return buildingCode - varchar(11)
 	 */
-	public function getbuildingCode(){
-		return $this->_buildingCode;
+	public function getBuildingID(){
+		return $this->_buildingID;
 	}
 
 	/**
 	 * @return roomCode - varchar(11)
 	 */
-	public function getroomCode(){
-		return $this->_roomCode;
+	public function getRoomID(){
+		return $this->_roomID;
 	}
 
 	/**
 	 * @return locationCode - varchar(6)
 	 */
-	public function getlocationCode(){
-		return $this->_locationCode;
+	public function getLocationID(){
+		return $this->_locationID;
 	}
 
 	/**
 	 * @return courseLevelCode - int(5)
 	 */
-	public function getcourseLevelCode(){
+	public function getCourseLevelCode(){
 		return $this->_courseLevelCode;
 	}
 
 	/**
 	 * @return acadLevelCode - varchar(4)
 	 */
-	public function getacadLevelCode(){
+	public function getAcadLevelCode(){
 		return $this->_acadLevelCode;
 	}
 
 	/**
 	 * @return deptCode - varchar(11)
 	 */
-	public function getdeptCode(){
+	public function getDeptID(){
 		return $this->_deptCode;
 	}
 
 	/**
 	 * @return facID - int(8)
 	 */
-	public function getfacID(){
+	public function getFacID(){
 		return $this->_facID;
 	}
 
 	/**
 	 * @return termCode - varchar(11)
 	 */
-	public function getTermCode(){
-		return $this->_termCode;
+	public function getTermID(){
+		return $this->_termID;
 	}
 
 	/**
 	 * @return courseID - int(8) unsigned zerofill
 	 */
-	public function getcourseID(){
+	public function getCourseID(){
 		return $this->_courseID;
 	}
 
 	/**
 	 * @return preReqs - text
 	 */
-	public function getpreReqs(){
+	public function getPreReqs(){
 		return $this->_preReqs;
 	}
 
 	/**
 	 * @return secShortTitle - varchar(180)
 	 */
-	public function getsecShortTitle(){
+	public function getSecShortTitle(){
 		return $this->_secShortTitle;
 	}
 
 	/**
 	 * @return termStartDate - date
 	 */
-	public function gettermStartDate(){
+	public function getTermStartDate(){
 		return $this->_termStartDate;
 	}
 
 	/**
 	 * @return termEndDate - date
 	 */
-	public function gettermEndDate(){
+	public function getTermEndDate(){
 		return $this->_termEndDate;
 	}
 
 	/**
 	 * @return dotw - varchar(7)
 	 */
-	public function getdotw(){
+	public function getDOTW(){
 		return $this->_dotw;
 	}
 
@@ -259,14 +259,14 @@ class CourseSec {
 	/**
 	 * @return maxCredit - double(4,1)
 	 */
-	public function getmaxCredit(){
+	public function getMaxCredit(){
 		return $this->_maxCredit;
 	}
 
 	/**
 	 * @return increCredit - double(4,1)
 	 */
-	public function getincreCredit(){
+	public function getIncreCredit(){
 		return $this->_increCredit;
 	}
 
@@ -280,49 +280,49 @@ class CourseSec {
 	/**
 	 * @return creditHours - int(11)
 	 */
-	public function getcreditHours(){
+	public function getCreditHours(){
 		return $this->_creditHours;
 	}
 
 	/**
 	 * @return stuReg - enum('1','0')
 	 */
-	public function getstuReg(){
+	public function getStuReg(){
 		return $this->_stuReg;
 	}
 
 	/**
 	 * @return secType - enum('Online','Hybrid','On-Campus')
 	 */
-	public function getsecType(){
+	public function getSecType(){
 		return $this->_secType;
 	}
 
 	/**
 	 * @return currStatus - varchar(1)
 	 */
-	public function getcurrStatus(){
+	public function getCurrStatus(){
 		return $this->_currStatus;
 	}
 
 	/**
 	 * @return statusDate - date
 	 */
-	public function getstatusDate(){
+	public function getStatusDate(){
 		return $this->_statusDate;
 	}
 
 	/**
 	 * @return approvedDate - date
 	 */
-	public function getapprovedDate(){
+	public function getApprovedDate(){
 		return $this->_approvedDate;
 	}
 
 	/**
 	 * @return approvedBy - int(8) unsigned zerofill
 	 */
-	public function getapprovedBy(){
+	public function getApprovedBy(){
 		return $this->_approvedBy;
 	}
 

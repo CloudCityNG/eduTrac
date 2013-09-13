@@ -28,6 +28,42 @@
  */
 ?>
 
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#stuID').live('change', function(event) {
+        $.ajax({
+            type    : 'POST',
+            url     : '<?=BASE_URL;?>section/runStuLookup/',
+            dataType: 'json',
+            data    : $('#validateSubmitForm').serialize(),
+            cache: false,
+            success: function( data ) {
+                   for(var id in data) {        
+                          $(id).val( data[id] );
+                   }
+            }
+        });
+    });
+});
+
+jQuery(document).ready(function() {
+    jQuery('#courseSecID').live('change', function(event) {
+        $.ajax({
+            type    : 'POST',
+            url     : '<?=BASE_URL;?>section/runSecLookup/',
+            dataType: 'json',
+            data    : $('#validateSubmitForm').serialize(),
+            cache: false,
+            success: function( data ) {
+                   for(var id in data) {        
+                          $(id).val( data[id] );
+                   }
+            }
+        });
+    });
+});
+</script>
+
 <ul class="breadcrumb">
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
@@ -61,7 +97,8 @@
 						<div class="control-group">
 							<label class="control-label"><?php _e( _t( 'Student ID' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="stuID" class="span12" required />
+								<input type="text" name="stuID" id="stuID" class="span12" required />
+                                <input type="text" id="stuName" readonly="readonly" class="span12 center" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -76,7 +113,11 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Course Sec ID' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="courseSecID" class="span12" required /> i.e. (00000000001)
+                                <input type="text" name="courseSecID" id="courseSecID" class="span12" required />
+                                <input type="text" id="courseSecCode" readonly="readonly" class="span4 center" required />
+                                <input type="text" id="secShortTitle" readonly="readonly" class="span4 center" required />
+                                <input type="text" id="term" readonly="readonly" class="span4 center" required />
+                                 i.e. (00000000001 or 1)
                                 <a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
                             </div>
                         </div>
@@ -91,7 +132,7 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Register' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

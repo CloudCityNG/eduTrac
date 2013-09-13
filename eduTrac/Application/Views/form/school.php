@@ -58,6 +58,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 					
 					<!-- Column -->
 					<div class="span12">
+                    
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label" for="ficeCode"><font color="red">*</font> <?php _e( _t( 'FICE Code' ) ); ?></label>
+                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode" type="text" /></div>
+                        </div>
+                        <!-- // Group END -->
 					    
 					    <!-- Group -->
                         <div class="control-group">

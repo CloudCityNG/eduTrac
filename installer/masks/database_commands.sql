@@ -1444,6 +1444,7 @@ CREATE TABLE IF NOT EXISTS `saved_query` (
 
 CREATE TABLE IF NOT EXISTS `school` (
   `schoolID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `ficeCode` varchar(8) DEFAULT NULL,
   `schoolCode` varchar(11) NOT NULL,
   `schoolName` varchar(180) NOT NULL,
   `buildingID` int(11) unsigned zerofill NOT NULL,
@@ -1868,6 +1869,8 @@ ALTER TABLE `staff` ADD FOREIGN KEY (`staffID`) REFERENCES `person` (`personID`)
 ALTER TABLE `staff` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `student` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `student` ADD FOREIGN KEY (`advisorID`) REFERENCES `faculty` (`facID`) ON UPDATE CASCADE;
 
 ALTER TABLE `student` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 

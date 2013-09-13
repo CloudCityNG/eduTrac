@@ -189,11 +189,48 @@ class SectionModel {
         echo json_encode($json);
     }
     
+    public function runStuLookup($data) {
+        $bind = [ ":id" => $data['stuID'] ];
+        $q = DB::inst()->select( "person","personID = :id","","personID,fname,lname",$bind );
+        foreach($q as $k => $v) {
+            $json = [ 'input#stuName' => $v['lname'].', '.$v['fname'] ];
+        }
+        echo json_encode($json);
+    }
+    
+    public function runSecLookup($data) {
+        $bind = [ ":id" => $data['courseSecID'] ];
+        $q = DB::inst()->query( "SELECT 
+                    a.courseSecID,
+                    a.courseSecCode,
+                    a.secShortTitle,
+                    b.termCode,
+                    b.termName 
+                FROM 
+                    course_sec a 
+                LEFT JOIN 
+                    term b 
+                ON 
+                    a.termID = b.termID 
+                WHERE 
+                    a.courseSecID = :id",
+                $bind 
+        );
+        foreach($q as $k => $v) {
+            $json = [ 
+                    'input#courseSecCode' => $v['courseSecCode'],
+                    'input#secShortTitle' => $v['secShortTitle'],
+                    'input#term' => $v['termCode'].' '.$v['termName']
+                    ];
+        }
+        echo json_encode($json);
+    }
+    
     public function runReg($data) {
         $this->_sec->Load_from_key($data['courseSecID']);
         $date = date("Y-m-d");
-        $time = date("hh:mm A");
-        $bind = array( "stuID" => $data['stuID'],"courseSecCode" => $this->_sec->getCourseSecCode(),
+        $time = date("h:m A");
+        $bind = array( "stuID" => $data['stuID'],"courseSecID" => $this->_sec->getCourseSecID(),
                        "termID" => $this->_sec->getTermID(),"courseCredits" => $this->_sec->getMinCredit(),
                        "ceu" => $this->_sec->getCEU(),"status" => "A","statusDate" => $date,
                        "statusTime" => $time,"addedBy" => $this->_auth->getPersonField('personID') );

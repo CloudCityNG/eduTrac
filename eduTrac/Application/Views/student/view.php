@@ -27,7 +27,7 @@
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-$person = new \eduTrac\Classes\DBObjects\Person;
+$facID = str_replace('0','',$this->student[0]['advisorID']);
 ?>
 
 <ul class="breadcrumb">
@@ -154,7 +154,7 @@ $person = new \eduTrac\Classes\DBObjects\Person;
                             <div class="controls">
                                 <select style="width:100%;" name="advisorID"<?=sio();?> id="select2_14" required>
                                     <option value="">&nbsp;</option>
-                                    <?php facID_dropdown($this->student[0]['advisorID']); ?>
+                                    <?php facID_dropdown($facID); ?>
                                 </select>
                             </div>
                         </div>

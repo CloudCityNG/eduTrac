@@ -30,6 +30,7 @@
 if($this->crse != '') : foreach($this->crse as $k => $v) {
     $crse = new \eduTrac\Classes\DBObjects\Course;
     $crse->Load_from_key($v['courseID']);
+    $deptID = str_replace('0','',$crse->getDeptID());
 ?>
 
 <script type="text/javascript">
@@ -131,7 +132,7 @@ $(function(){
                             <div class="controls">
                                 <select style="width:100%;" name="deptID" id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $crse->getDeptID()); ?>
+                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $deptID); ?>
                                 </select>
                             </div>
                         </div>

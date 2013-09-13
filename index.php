@@ -45,7 +45,7 @@ defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH.'DropIns/' );
 defined( 'DEFAULT_LOCALE' )		or define( 'DEFAULT_LOCALE', '' );
 defined( 'ENCODING' )			or define( 'ENCODING', 'UTF-8' );
 defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '0.8' );
-defined( 'CURRENT_ET_VERSION' )	or define( 'CURRENT_ET_VERSION', '1.0.0-ALPHA3' );
+defined( 'CURRENT_ET_VERSION' )	or define( 'CURRENT_ET_VERSION', '1.0.0-ALPHA4' );
 require( SYS_PATH . 'Config/constants.php');
 require( SYS_PATH . 'application.php');
 include( "init.php" );

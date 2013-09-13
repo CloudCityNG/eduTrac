@@ -209,6 +209,20 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $this->model->runTermLookup($data);
     }
     
+    public function runStuLookup() {
+        if(!hasPermission('add_course_sec')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = array();
+        $data['stuID'] = isPostSet('stuID');
+        $this->model->runStuLookup($data);
+    }
+    
+    public function runSecLookup() {
+        if(!hasPermission('add_course_sec')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = array();
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $this->model->runSecLookup($data);
+    }
+    
     public function runReg() {
         if(!hasPermission('register_students')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();

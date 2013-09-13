@@ -52,7 +52,7 @@ class StuProgram {
      */
 	public function New_stu_program($stuID,$progCode,$currStatus,$statusDate,$startDate,$endDate,$approvedBy,$LastUpdate){
 		$this->_stuID = $stuID;
-		$this->_progCode = $progCode;
+		$this->_progID = $progID;
 		$this->_currStatus = $currStatus;
 		$this->_statusDate = $statusDate;
 		$this->_startDate = $startDate;
@@ -73,7 +73,7 @@ class StuProgram {
 		foreach($q as $row) {
 			$this->_stuProgID = $row["stuProgID"];
 			$this->_stuID = $row["stuID"];
-			$this->_progCode = $row["progCode"];
+			$this->_progID = $row["progID"];
 			$this->_currStatus = $row["currStatus"];
 			$this->_statusDate = $row["statusDate"];
 			$this->_startDate = $row["startDate"];
@@ -116,8 +116,8 @@ class StuProgram {
 	/**
 	 * @return progCode - varchar(15)
 	 */
-	public function getProgCode(){
-		return $this->_progCode;
+	public function getProgID(){
+		return $this->_progID;
 	}
 
 	/**

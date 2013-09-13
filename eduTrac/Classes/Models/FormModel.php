@@ -906,8 +906,8 @@ class FormModel {
     /* Begin School */
     public function runSchool($data) {
         $bind = array( 
-            "schoolCode" => $data['schoolCode'],"schoolName" => $data['schoolName'],
-            "buildingID" => $data['buildingID']
+            "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
+            "schoolName" => $data['schoolName'],"buildingID" => $data['buildingID']
             );
             
         $q = DB::inst()->insert( "school", $bind );
@@ -942,8 +942,8 @@ class FormModel {
     
     public function runEditSchool($data) {
         $update = array( 
-            "schoolCode" => $data['schoolCode'],"schoolName" => $data['schoolName'],
-            "buildingID" => $data['buildingID']
+            "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
+            "schoolName" => $data['schoolName'],"buildingID" => $data['buildingID']
             );
             
         $bind = array( ":schoolID" => $data['schoolID'] );
