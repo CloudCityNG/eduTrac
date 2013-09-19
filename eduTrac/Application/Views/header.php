@@ -139,6 +139,7 @@ $auth = new Cookies;
 					<a href="" data-toggle="dropdown" class="glyphicons electrical_plug"><i></i>Plugins <span class="caret"></span></a>
 					<ul class="dropdown-menu pull-left">
 						<li<?=ae('access_plugin_screen');?>><a href="<?=BASE_URL;?>plugins/<?=bm();?>" class="glyphicons cogwheel"><i></i><?php _e( _t( 'Plugins' ) ); ?></a></li>
+                        <?php Hooks::list_plugin_admin_pages();?>
 						<!-- // Components Submenu Regular Items END -->
 					</ul>
 				</li>

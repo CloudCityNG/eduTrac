@@ -182,6 +182,15 @@ use \eduTrac\Classes\Libraries\Hooks;
                             </div>
                         </div>
                         <!-- // Group END -->
+                        
+                        <!-- Group -->
+    					<div class="control-group">
+							<label class="control-label"><?php _e( _t( 'Help Desk' ) ); ?></label>
+							<div class="controls">
+								<input type="text" name="help_desk" value="<?=_h(Hooks::get_option('help_desk'));?>" class="span12" />
+							</div>
+						</div>
+						<!-- // Group END -->
 						
 					</div>
 					<!-- // Column END -->

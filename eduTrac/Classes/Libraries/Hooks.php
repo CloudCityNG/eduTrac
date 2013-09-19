@@ -153,7 +153,7 @@ class Hooks {
 	 *
 	*/
 	public static function activate_plugin($plugin) {			
-		$sql = DB::inst()->query("INSERT INTO plugins(location) VALUES ('$plugin')");
+		$sql = DB::inst()->query("INSERT INTO plugin(location) VALUES ('$plugin')");
 	}
 	
 	
@@ -592,12 +592,12 @@ class Hooks {
  	* Display list of links to plugin admin pages, if any
  	*/
 	public static function list_plugin_admin_pages() {
-	
+    
 		if( !property_exists( DB::inst(), 'plugin_pages' ) || !DB::inst()->plugin_pages )
 			return;
 		
 		foreach( (array)DB::inst()->plugin_pages as $page ) {
-			echo '<li><a href="'.BASE_URL.'option/?page='.$page['slug'].'">'.$page['title']."</a></li>";
+			echo '<li><a href="'.BASE_URL.'plugins/options/?page='.$page['slug'].'" class="glyphicons cogwheel"><i></i>'.$page['title'].'</a></li>';
 		}
 	}
 

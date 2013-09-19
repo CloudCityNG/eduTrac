@@ -26,6 +26,7 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <!-- Wrapper -->
@@ -51,13 +52,13 @@
 			<!-- Column -->
 			<div class="span6">
 				<div class="center">
-					<p>Is this a serious error? <a href="http://www.7mediaws.org/client/">Let us know</a></p>
+					<p>Is this a serious error? <a href="<?=Hooks::get_option('help_desk');?>">Let us know</a></p>
 					<div class="row-fluid">
 						<div class="span6">
 							<a href="<?=BASE_URL;?>dashboard/" class="btn btn-icon-stacked btn-block btn-success glyphicons user_add"><i></i><span>Go back to</span><span class="strong">Dashboard</span></a>
 						</div>
 						<div class="span6">
-							<a href="http://community.7mediaws.org/projects/edutrac/" class="btn btn-icon-stacked btn-block btn-danger glyphicons circle_question_mark"><i></i><span>Browse through our</span><span class="strong">Support Centre</span></a>
+							<a href="<?=Hooks::get_option('help_desk');?>" class="btn btn-icon-stacked btn-block btn-danger glyphicons circle_question_mark"><i></i><span>Browse through our</span><span class="strong">Support Center</span></a>
 						</div>
 					</div>
 				</div>

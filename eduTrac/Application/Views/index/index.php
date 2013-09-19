@@ -26,6 +26,7 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 			<h1 class="glyphicons lock"><?php _e( _t( 'eduTrac' ) ); ?> <i></i></h1>
@@ -36,7 +37,7 @@
 				<div class="widget-body">
 				
 					<!-- Form -->
-					<form method="post" action="<?php echo BASE_URL; ?>index/runLogin/">
+					<form method="post" action="<?=BASE_URL;?>index/runLogin/">
 						<label><?php _e( _t( 'Username' ) ); ?></label>
 						<input type="text" class="input-block-level" name="uname" placeholder="Your Username" required /> 
 						<label><?php _e( _t( 'Password' ) ); ?></label>
@@ -58,7 +59,7 @@
 			<!-- // Box END -->
 			
 			<div class="innerT center">
-				<p>Having troubles? <a href="">Get Help</a></p>
+				<p>Having troubles? <a href="<?=Hooks::get_option('help_desk');?>">Get Help</a></p>
 			</div>
 			
 		</div>

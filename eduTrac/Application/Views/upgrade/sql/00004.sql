@@ -122,13 +122,13 @@ INSERT INTO `screen` VALUES(42, 'AINST', 'New Institution', 'institution/add/');
 
 INSERT INTO `screen` VALUES(43, 'APPL', 'Application', 'application/');
 
-INSERT INTO `cronjob` VALUES(2, 'cron/runStuTerms/', 'Create Student Terms Record', 3600, 1379568272, 1378311685, 0, 0);
+INSERT INTO `cronjob` VALUES(2, 'cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(3, 'cron/runStuLoad/', 'Create Student Load Record', 3600, 1379568503, 1378311385, 0, 0);
+INSERT INTO `cronjob` VALUES(3, 'cron/runStuLoad/', 'Create Student Load Record', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(4, 'cron/updateStuTerms/', 'Update Student Terms', 3600, 1379568329, 1378312885, 0, 0);
+INSERT INTO `cronjob` VALUES(4, 'cron/updateStuTerms/', 'Update Student Terms', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(5, 'cron/updateStuLoad/', 'Update Student Load', 3600, 1379568290, 1378311985, 0, 0);
+INSERT INTO `cronjob` VALUES(5, 'cron/updateStuLoad/', 'Update Student Load', NULL, 0, NULL, 0, 0);
 
 ALTER TABLE `stu_course_sec` DROP COLUMN `grade`;
 
@@ -159,5 +159,7 @@ ALTER TABLE `stu_term` ADD FOREIGN KEY (`termID`) REFERENCES `term` (`termID`) O
 ALTER TABLE `stu_term_load` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE,
 
 ALTER TABLE `stu_term_load` ADD FOREIGN KEY (`termID`) REFERENCES `stu_term` (`termID`) ON UPDATE CASCADE;
+
+INSERT INTO `et_option` VALUES('', 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');
 
 UPDATE `et_option` SET option_value = '00005' WHERE option_name = 'dbversion';

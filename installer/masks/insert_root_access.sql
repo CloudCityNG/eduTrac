@@ -43,14 +43,16 @@ INSERT INTO `et_option` VALUES(20, 'reserve_reply_email', '');
 
 INSERT INTO `et_option` VALUES(21, 'open_registration', '1');
 
+INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');
+
 INSERT INTO `person_roles` VALUES(1, 1, 8, '{datenow}');
 
-INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', 300, 1378271185, 1378270885, 0, 0);
+INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(2, '{siteurl}cron/runStuTerms/', 'Create Student Terms Record', 3600, 1379568272, 1378311685, 0, 0);
+INSERT INTO `cronjob` VALUES(2, '{siteurl}cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(3, '{siteurl}cron/runStuLoad/', 'Create Student Load Record', 3600, 1379568503, 1378311385, 0, 0);
+INSERT INTO `cronjob` VALUES(3, '{siteurl}cron/runStuLoad/', 'Create Student Load Record', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(4, '{siteurl}cron/updateStuTerms/', 'Update Student Terms', 3600, 1379568329, 1378312885, 0, 0);
+INSERT INTO `cronjob` VALUES(4, '{siteurl}cron/updateStuTerms/', 'Update Student Terms', NULL, 0, NULL, 0, 0);
 
-INSERT INTO `cronjob` VALUES(5, '{siteurl}cron/updateStuLoad/', 'Update Student Load', 3600, 1379568290, 1378311985, 0, 0);
+INSERT INTO `cronjob` VALUES(5, '{siteurl}cron/updateStuLoad/', 'Update Student Load', NULL, 0, NULL, 0, 0);

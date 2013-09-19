@@ -53,7 +53,7 @@ class Setting extends \eduTrac\Classes\Core\Controller {
     public function runSetting() {
         $options = array( 'system_email','enable_ssl','site_title','cookieexpire','cookiepath','hold_file_loc',
                           'maintenance_mode','enable_benchmark','current_term_id','enable_cron_log',
-                          'open_registration');
+                          'open_registration','help_desk');
         $this->model->runSetting($options);
     }
 }

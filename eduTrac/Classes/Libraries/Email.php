@@ -45,13 +45,13 @@ class Email {
 	  * email successfully. It just only means that the method used was able to
 	  * process the request without any errors.
 	  */
-	 public function tn_mail( $to, $subject, $message, $headers = '' ) {
+	 public function et_mail( $to, $subject, $message, $headers = '' ) {
 		$charset = 'UTF-8';
 		
 		// From email and name
 		// If we don't have a name from the input headers
 		if ( !isset( $from_name ) )
-			$from_name = 'tinyCampaign';
+			$from_name = 'eduTrac';
 		
 		if ( !isset( $from_email ) ) {
 			// Get the site domain and get rid of www.
@@ -60,12 +60,12 @@ class Email {
 				$sitename = substr( $sitename, 4 );
 			}
 
-			$from_email = 'tinyCampaign@' . $sitename;
+			$from_email = 'eduTrac@' . $sitename;
 		}
 		
 		// Plugin authors can override the default mailer
-		$this->_mailer->From     = Hooks::apply_filter( 'tn_mail_from'     , $from_email );
-		$this->_mailer->FromName = Hooks::apply_filter( 'tn_mail_from_name', $from_name  );
+		$this->_mailer->From     = Hooks::apply_filter( 'et_mail_from'     , $from_email );
+		$this->_mailer->FromName = Hooks::apply_filter( 'et_mail_from_name', $from_name  );
 		
 		// Set destination addresses
 		if ( !is_array( $to ) )
@@ -99,7 +99,7 @@ class Email {
 		if ( !isset( $content_type ) )
 			$content_type = 'text/plain';
 
-			$content_type = Hooks::apply_filter( 'tn_mail_content_type', $content_type );
+			$content_type = Hooks::apply_filter( 'et_mail_content_type', $content_type );
 
 			$this->_mailer->ContentType = $content_type;
 
@@ -108,7 +108,7 @@ class Email {
 			$this->_mailer->IsHTML( true );
 
 			// Set the content-type and charset
-			$this->_mailer->CharSet = Hooks::apply_filter( 'tn_mail_charset', $charset );
+			$this->_mailer->CharSet = Hooks::apply_filter( 'et_mail_charset', $charset );
 
 		// Set custom headers
 		if ( !empty( $headers ) ) {
@@ -130,7 +130,7 @@ class Email {
 			}
 		}
 		
-		Hooks::do_action_array( 'tnMailer_init', array( &$this->_mailer ) );
+		Hooks::do_action_array( 'etMailer_init', array( &$this->_mailer ) );
 		
 		// Send!
 		try {
@@ -141,60 +141,8 @@ class Email {
 
 			return true;
 	 }
-
-	public function tn_subscribe_email($name, $email, $pass, $host) {
-		$message = 
-		"Hello $name,\n
-		Thank you for subscribing to our mailing list. Below are your login and subscription details...\n
-		
-		User ID: $email
-		Password: $pass \n
-		
-		Thank You
-		
-		Administrator
-		$host
-		______________________________________________________
-		THIS IS AN AUTOMATED RESPONSE. 
-		***DO NOT RESPOND TO THIS EMAIL****
-		";
-		
-		$headers  = "From: \"".Hooks::get_option('system_name')." Subscription\" <auto-reply@$host>\r\n";
-		$headers .= "X-Mailer: PHP/" . phpversion();
-		
-		$this->tn_mail($email,"Newsletter Subscription",$message,$headers);
-		
-		return Hooks::apply_filter('subscribe_email',$message,$headers);
-	}
 	
-	public function tn_confirm_email($name, $email, $pass, $alink, $host) {
-		$message = 
-		"Hello $name,\n
-		Thank you for your interest in our newsletter. Below are your account details...\n
-		
-		User ID: $email
-		Password: $pass \n
-		
-		Click the link to confirm your subscription to our newsletter: $alink
-		
-		Thank You
-		
-		Administrator
-		$host
-		______________________________________________________
-		THIS IS AN AUTOMATED RESPONSE. 
-		***DO NOT RESPOND TO THIS EMAIL****
-		";
-		
-		$headers  = "From: \"".Hooks::get_option('system_name')." Confirm Subscription\" <auto-reply@$host>\r\n";
-		$headers .= "X-Mailer: PHP/" . phpversion();
-		
-		$this->tn_mail($email,"Newsletter Subscription",$message,$headers);
-		
-		return Hooks::apply_filter('confirm_email',$message,$headers);
-	}
-	
-	public function tn_reset_pass($email, $pass, $host) {
+	public function et_reset_pass($email, $pass, $host) {
 		$message = 
 		"Below is the new password you requested ...\n
 		
@@ -212,7 +160,7 @@ class Email {
 		$headers  = "From: \"".Hooks::get_option('system_name')." Reset Password\" <auto-reply@$host>\r\n";
 		$headers .= "X-Mailer: PHP/" . phpversion();
 	
-		$this->tn_mail($email,"Reset Password",$message,$headers);
+		$this->et_mail($email,"Reset Password",$message,$headers);
 		return Hooks::apply_filter('reset_pass',$message,$headers);
 	}
   
