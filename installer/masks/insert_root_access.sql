@@ -47,12 +47,12 @@ INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/p
 
 INSERT INTO `person_roles` VALUES(1, 1, 8, '{datenow}');
 
-INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(2, '{siteurl}cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(2, '{siteurl}cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(3, '{siteurl}cron/runStuLoad/', 'Create Student Load Record', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(3, '{siteurl}cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(4, '{siteurl}cron/updateStuTerms/', 'Update Student Terms', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(4, '{siteurl}cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(5, '{siteurl}cron/updateStuLoad/', 'Update Student Load', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(5, '{siteurl}cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);

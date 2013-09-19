@@ -48,7 +48,7 @@
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
 							<form class="form-search center" action="<?=BASE_URL;?>faculty/" method="post">
-							  	<input type="text" name="faculty" class="input-xxlarge" placeholder="Search by student id or name . . . " /> 
+							  	<input type="text" name="faculty" class="input-xxlarge" placeholder="Search faculty . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>

@@ -118,13 +118,13 @@ INSERT INTO `screen` VALUES(42, 'AINST', 'New Institution', 'institution/add/');
 
 INSERT INTO `screen` VALUES(43, 'APPL', 'Application', 'application/');
 
-INSERT INTO `cronjob` VALUES(2, 'cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(2, 'cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(3, 'cron/runStuLoad/', 'Create Student Load Record', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(3, 'cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(4, 'cron/updateStuTerms/', 'Update Student Terms', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(4, 'cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(5, 'cron/updateStuLoad/', 'Update Student Load', NULL, 0, NULL, 0, 0);
+INSERT INTO `cronjob` VALUES(5, 'cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);
 
 ALTER TABLE `stu_course_sec` DROP COLUMN `grade`;
 
