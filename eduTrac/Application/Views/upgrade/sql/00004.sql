@@ -112,10 +112,6 @@ INSERT INTO `permission` VALUES(00000000000000000205, 'access_application_screen
 
 INSERT INTO `permission` VALUES(00000000000000000206, 'create_application', 'Create Application');
 
-INSERT INTO `role_perms` VALUES(00000000000000000973, 12, 89, 1, '2013-09-15 21:00:54');
-
-INSERT INTO `role_perms` VALUES(00000000000000000974, 12, 85, 1, '2013-09-15 21:00:54');
-
 INSERT INTO `screen` VALUES(41, 'INST', 'Institution', 'institution/');
 
 INSERT INTO `screen` VALUES(42, 'AINST', 'New Institution', 'institution/add/');
