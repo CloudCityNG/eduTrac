@@ -47,8 +47,8 @@ class Log {
 	    $create = date("Y-m-d");
         $current_date = strtotime($create);
         $uname = $this->_auth->getPersonField('uname');
-        /* 30 days after creation date */
-        $expire = date("Y-m-d",$current_date+=2592000);
+        /* 10 days after creation date */
+        $expire = date("Y-m-d",$current_date+=864000);
         
 	    $bind = array( 
 	                   "action" => $action, "process" => $process, "record" => $record,
@@ -96,7 +96,7 @@ class Log {
                         "string" => $string,"file" => $file,"line" => (int)$line 
         );
         
-        $q = DB::inst()->insert( TP."error", $bind );
+        $q = DB::inst()->insert( "error", $bind );
     }
     
     public function error_constant_to_name($value) {

@@ -52,6 +52,11 @@ class Success extends \eduTrac\Classes\Core\Controller {
         $this->view->render('success/save_data');
     }
     
+    public function course_registration() {
+        $this->view->staticTitle = array('Course Registration Success');
+        $this->view->render('success/course_registration');
+    }
+    
     public function nslc_purge() {
         $this->view->staticTitle = array('Purge NSLC Success');
         $this->view->render('success/nslc_purge');

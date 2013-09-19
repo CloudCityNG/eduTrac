@@ -141,6 +141,60 @@ $(function()
 	    minView: 2, // this forces the picker to not go any further than days view
 	    pickerPosition: "bottom-left"
 	});
+    
+    // with date only
+    $("#datetimepicker9").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
+    
+    // with date only
+    $("#datetimepicker10").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
+    
+    // with date only
+    $("#datetimepicker11").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
+    
+    // with date only
+    $("#datetimepicker12").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
+    
+    // with date only
+    $("#datetimepicker13").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
+    
+    // with date only
+    $("#datetimepicker14").datetimepicker({
+	    format: 'yyyy-mm-dd',
+	    autoclose: true,
+        todayBtn: true,
+	    minView: 2, // this forces the picker to not go any further than days view
+	    pickerPosition: "bottom-left"
+	});
 	
 	/*
 	 * Input Masks

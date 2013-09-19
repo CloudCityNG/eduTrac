@@ -40,26 +40,6 @@ class StuProgram {
 	private $_endDate; //date
 	private $_approvedBy; //int(8) unsigned zerofill
 	private $_LastUpdate; //timestamp
-	private $_connection;
-
-	public function stu_program(){
-		$this->_connection = new DataBaseMysql();
-	}
-
-    /**
-     * New object to the class. Don�t forget to save this new object "as new" by using the function $class->Save_Active_Row_as_New(); 
-     *
-     */
-	public function New_stu_program($stuID,$progCode,$currStatus,$statusDate,$startDate,$endDate,$approvedBy,$LastUpdate){
-		$this->_stuID = $stuID;
-		$this->_progID = $progID;
-		$this->_currStatus = $currStatus;
-		$this->_statusDate = $statusDate;
-		$this->_startDate = $startDate;
-		$this->_endDate = $endDate;
-		$this->_approvedBy = $approvedBy;
-		$this->_LastUpdate = $LastUpdate;
-	}
 
     /**
      * Load one row into var_class. To use the vars use for exemple echo $class->getVar_name; 
@@ -69,7 +49,7 @@ class StuProgram {
      */
 	public function Load_from_key($key_row){
 	    $bind = array( ":id" => $key_row );
-        $q = DB::inst()->select( "stu_progra","stuProgID = :id","stuProgID","*",$bind );
+        $q = DB::inst()->select( "stu_program","stuProgID = :id","stuProgID","*",$bind );
 		foreach($q as $row) {
 			$this->_stuProgID = $row["stuProgID"];
 			$this->_stuID = $row["stuID"];
@@ -97,6 +77,28 @@ class StuProgram {
 				$i++;
 			}
 	return $keys;
+	}
+    
+    public function getAcadLevelCode($id) {
+        $bind = array( ":id" => $id);
+        $q = DB::inst()->query( "SELECT 
+                        b.acadLevelCode 
+                    FROM 
+                        stu_program a 
+                    LEFT JOIN 
+                        acad_program b 
+                    ON 
+                        a.progID = b.acadProgID 
+                    WHERE 
+                        a.stuID = :id 
+                    AND 
+                        a.currStatus = 'A'",
+                    $bind
+        );
+		foreach($q as $r) {
+			$acadLevel = $r['acadLevelCode'];
+		}
+        return $acadLevel;
 	}
 
 	/**

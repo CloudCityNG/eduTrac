@@ -47,6 +47,7 @@ class FormModel {
 	}
 	
     public function semesterList() {
+        $array = [];
         $q = DB::inst()->query( "SELECT 
                 a.semesterID, a.semName, a.semStartDate, a.semEndDate, a.active, b.acadYearID, b.acadYearCode 
             FROM 
@@ -78,6 +79,7 @@ class FormModel {
 	}
 	
 	public function semester($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "semester","semesterID = :id","semesterID","*",$bind );
         foreach($q as $r){
@@ -109,6 +111,7 @@ class FormModel {
 	}
 	
 	public function termList() {
+        $array = [];
         $q = DB::inst()->query( "SELECT 
                 a.termID, a.termName, a.termStartDate, a.termEndDate, a.active, b.semName 
             FROM 
@@ -184,6 +187,7 @@ class FormModel {
 	}
 	
 	public function acadYear($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "acad_year","acadYearID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -238,6 +242,7 @@ class FormModel {
 	}
 	
 	public function dept($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "department","deptID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -292,6 +297,7 @@ class FormModel {
 	}
 	
 	public function cl($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "credit_load","credLoadID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -344,6 +350,7 @@ class FormModel {
 	}
 	
 	public function degree($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "degree","degreeID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -396,6 +403,7 @@ class FormModel {
 	}
 	
 	public function major($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "major","majorID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -448,6 +456,7 @@ class FormModel {
 	}
 	
 	public function minor($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "minor","minorID = :id","","*",$bind );
 		foreach($q as $r) {
@@ -502,6 +511,7 @@ class FormModel {
     }
     
     public function ccd($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "ccd","ccdID = :id","","*",$bind );
     	foreach($q as $r) {
@@ -554,6 +564,7 @@ class FormModel {
     }
     
     public function cip($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "cip","cipID = :id","","*",$bind );
         foreach($q as $r) {
@@ -606,6 +617,7 @@ class FormModel {
     }
     
     public function location($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "location","locationID = :id","","*",$bind );
         foreach($q as $r) {
@@ -658,6 +670,7 @@ class FormModel {
     }
     
     public function build($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "building","buildingID = :id","","*",$bind );
         foreach($q as $r) {
@@ -725,6 +738,7 @@ class FormModel {
     }
     
     public function room($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "room","roomID = :id","","*",$bind );
         foreach($q as $r) {
@@ -777,6 +791,7 @@ class FormModel {
     }
     
     public function specialization($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "specialization","specID = :id","","*",$bind );
         foreach($q as $r) {
@@ -831,6 +846,7 @@ class FormModel {
     }
     
     public function year($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "class_year","yearID = :id","","*",$bind );
         foreach($q as $r) {
@@ -883,6 +899,7 @@ class FormModel {
     }
     
     public function subj($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "subject","subjectID = :id","","*",$bind );
         foreach($q as $r) {
@@ -919,6 +936,7 @@ class FormModel {
     }
     
     public function schoolList() {
+        $array = [];
         //$q = DB::inst()->query( "SELECT * FROM school ORDER BY schoolID" );
         $q = DB::inst()->query( "SELECT 
                         a.schoolID,
@@ -954,6 +972,7 @@ class FormModel {
     }
     
     public function school($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "school","schoolID = :id","","*",$bind );
         foreach($q as $r) {
@@ -1008,6 +1027,7 @@ class FormModel {
     }
     
     public function inst($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "institution","institutionID = :id","","*",$bind );
         foreach($q as $r) {

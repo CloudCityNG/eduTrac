@@ -50,7 +50,7 @@ class IndexModel {
 	}
 	
 	public function runLogin($data) {
-	    session_start();		
+        $array = [];
 		$uname = $data['uname'];
 		$pass = $data['password'];
         $bind = array( ":uname" => $uname );
@@ -69,12 +69,10 @@ class IndexModel {
 				/* Now we can set our login cookies. */
 				setcookie("et_cookname", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
       			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-                $_SESSION['id'] = $r['personID'];
    			} else {				
    				/* Now we can set our login cookies. */
    				setcookie("et_cookname", $auth, time()+86400, "/", $this->_auth->cookieDomain());
       			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
-      			$_SESSION['id'] = $r['personID'];
    			}
 			redirect( BASE_URL . 'dashboard/' );
 		} else {

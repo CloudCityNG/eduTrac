@@ -46,14 +46,14 @@ require( SYS_PATH . 'Config/helper.php' );
  * they will be written to the database.
  */
 if (DEVELOPMENT_ENVIRONMENT == TRUE) {
-	error_reporting(E_ALL);
+    error_reporting(E_ALL & ~E_NOTICE);
 	ini_set('display_errors','On');
 } else {
-	error_reporting(E_ALL);
+	error_reporting(E_ALL & ~E_NOTICE );
 	ini_set('display_errors','Off');
 	ini_set('log_errors', 'On');
 	ini_set('error_log', BASE_PATH . 'tmp' . DS . 'logs' . DS . 'error.' . date('m-d-Y') . '.txt');
-    set_error_handler('logError',E_ALL);
+    set_error_handler('logError',E_ALL & ~E_NOTICE);
 }
 
 

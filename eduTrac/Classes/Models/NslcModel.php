@@ -42,6 +42,7 @@ class NslcModel {
     }
     
     public function setup() {
+        $array = [];
         $q = DB::inst()->query( "SELECT * FROM nslc_setup" );
         if($q->rowCount() > 0) {
             while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
@@ -105,6 +106,7 @@ class NslcModel {
 	}
     
     public function nslc() {
+        $array = [];
         $q = DB::inst()->query( "SELECT 
                     a.stuID,
                     a.LastUpdate,
@@ -159,6 +161,7 @@ class NslcModel {
     }
     
     public function correct($id) {
+        $array = [];
         $bind = array( ":stuID" => $id );
         $q = DB::inst()->select( "nslc_hold_file","stuID = :stuID","","*",$bind );
         foreach($q as $r) {
@@ -168,6 +171,7 @@ class NslcModel {
     }
     
     public function search() {
+        $array = [];
         $id = isPostSet('nslc');
         $bind = array( ":id" => "%$id%" );
         $q = DB::inst()->select( "nslc_hold_file","stuID LIKE :id","","*",$bind );

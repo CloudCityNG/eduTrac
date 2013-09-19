@@ -29,16 +29,21 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Hooks;
 class StudentModel {
     
     private $_stuProg;
+    private $_auth;
 	
 	public function __construct() {
 	    $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
 	}
 	
 	public function search() {
+        $array = [];
 		$stu = isPostSet('student');
+        $bind = [ ":stu" => "%$stu%" ];
         $q = DB::inst()->query( "SELECT 
                         a.stuID,
                         b.lname,
@@ -54,13 +59,14 @@ class StudentModel {
                     ON 
                         a.stuID = c.gradID 
                     WHERE 
-                        (CONCAT(fname,' ',lname) LIKE '%".$stu."%' 
+                        (CONCAT(fname,' ',lname) LIKE :stu 
                     OR 
-                        CONCAT(lname,' ',fname) LIKE '%".$stu."%' 
+                        CONCAT(lname,' ',fname) LIKE :stu 
                     OR 
-                        CONCAT(lname,', ',fname) LIKE '%".$stu."%') 
+                        CONCAT(lname,', ',fname) LIKE :stu) 
                     OR 
-                        a.stuID LIKE '%".$stu."%'"
+                        a.stuID LIKE :stu",
+                    $bind
         );
         
         foreach($q as $r) {
@@ -69,7 +75,8 @@ class StudentModel {
         return $array;
 	}
     
-    public function runStudent($data) {        
+    public function runStudent($data) {
+        $date = date("Y-m-d");
         $bind1 = array( 
             "stuID" => $data['stuID'],"advisorID" => $data['advisorID'],"catYearID" => $data['catYearID'],
             "antGradDate" => $data['antGradDate'],"acadLevelCode" => $data['acadLevelCode'],
@@ -86,7 +93,14 @@ class StudentModel {
         $ID = DB::inst()->lastInsertId('stuID');
         $q2 = DB::inst()->insert( "stu_program", $bind2 );
         
-        if(!$q1 && !$q2) {
+        $bind3 = [ 
+                "stuID" => $data['stuID'],"acadProgID" => $data['progID'],
+                "acadLevelCode" => $data['acadLevelCode'],"addDate" => $date 
+                ];
+                
+        $q2 = DB::inst()->insert( "stu_acad_level", $bind3 );
+        
+        if(!$q1 && !$q2 && !$q3) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
             redirect( BASE_URL . 'student/view/' . $ID . '/' . bm() );
@@ -106,9 +120,40 @@ class StudentModel {
         redirect( BASE_URL . 'student/view/' . $data['stuID'] . '/' . bm() );
     }
     
-    public function getPerson($id) {
+    public function getAppl($id) {
+        $array = [];
         $bind = array( ":id" => $id );
-        $q = DB::inst()->select( "person","personID = :id","","*",$bind );
+        $q = DB::inst()->query( "SELECT 
+                    a.acadProgID,
+                    a.acadProgCode,
+                    a.acadProgTitle,
+                    a.acadLevelCode,
+                    b.majorName,
+                    c.locationName,
+                    d.schoolName,
+                    e.personID 
+                FROM 
+                    acad_program a 
+                LEFT JOIN 
+                    major b 
+                ON 
+                    a.majorID = b.majorID 
+                LEFT JOIN 
+                    location c 
+                ON 
+                    a.locationID = c.locationID 
+                LEFT JOIN 
+                    school d 
+                ON 
+                    a.schoolID = d.schoolID 
+                LEFT JOIN 
+                    application e 
+                ON 
+                    a.acadProgID = e.acadProgID 
+                WHERE 
+                    e.personID = :id",
+                $bind 
+        );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -116,6 +161,7 @@ class StudentModel {
     }
     
     public function getStudent($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "student","stuID = :id","","*",$bind );
         foreach($q as $r) {
@@ -125,6 +171,7 @@ class StudentModel {
     }
     
     public function student($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 stuID,
@@ -145,7 +192,19 @@ class StudentModel {
         return $array;
     }
     
+    public function admit($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        
+        $q = DB::inst()->select( "application","personID = :id","","admitStatus",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
     public function address($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT * 
             FROM 
@@ -166,6 +225,7 @@ class StudentModel {
     }
     
     public function prog($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                     a.stuProgID,
@@ -197,6 +257,7 @@ class StudentModel {
     }
     
     public function stuProg($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                     a.acadProgCode,
@@ -230,29 +291,36 @@ class StudentModel {
     }
     
     public function acadCred($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                         a.id,
                         a.stuID,
                         a.courseCredits,
                         a.ceu,
-                        a.grade,
                         a.status,
-                        b.courseSecCode,
-                        b.secShortTitle,
-                        c.termCode 
+                        b.grade,
+                        c.courseSecCode,
+                        c.secShortTitle,
+                        d.termCode 
                     FROM 
                         stu_course_sec a 
                     LEFT JOIN 
-                        course_sec b 
+                        stu_acad_cred b 
                     ON 
                         a.courseSecID = b.courseSecID 
                     LEFT JOIN 
-                        term c 
+                        course_sec c 
                     ON 
-                        a.termID = c.termID 
+                        a.courseSecID = c.courseSecID 
+                    LEFT JOIN 
+                        term d 
+                    ON 
+                        a.termID = d.termID 
                     WHERE 
-                        a.stuID = :id",
+                        a.stuID = :id 
+                    AND 
+                        a.termID = b.termID",
                     $bind 
         );
         foreach($q as $r) {
@@ -262,9 +330,11 @@ class StudentModel {
     }
     
     public function viewAcadCred($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                         a.courseSecID,
+                        a.termID,
                         a.sectionNumber,
                         a.secShortTitle,
                         a.startDate,
@@ -279,7 +349,7 @@ class StudentModel {
                         d.status,
                         d.statusDate,
                         d.statusTime,
-                        d.grade 
+                        e.grade 
                     FROM 
                         course_sec a 
                     LEFT JOIN 
@@ -294,10 +364,95 @@ class StudentModel {
                         stu_course_sec d 
                     ON 
                         a.courseSecID = d.courseSecID 
+                    LEFT JOIN 
+                        stu_acad_cred e 
+                    ON 
+                        a.courseSecID = e.courseSecID 
                     WHERE 
-                        d.id = :id",
+                        d.id = :id 
+                    AND 
+                        a.termID = e.termID",
                     $bind 
         );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function courseSec() {
+        $array = [];
+        $bind = [ ":term" => Hooks::get_option('current_term_id') ];
+        $q = DB::inst()->query( "SELECT 
+                    a.courseSecID,
+                    a.courseSecCode,
+                    a.secShortTitle,
+                    a.dotw,
+                    a.startTime,
+                    a.endTime,
+                    a.minCredit,
+                    a.termID,
+                    a.minCredit,
+                    b.locationName 
+                FROM 
+                    course_sec a 
+                LEFT JOIN 
+                    location b 
+                ON 
+                    a.locationID = b.locationID 
+                WHERE 
+                    a.currStatus = 'A' 
+                AND 
+                    a.stuReg = '1' 
+                AND 
+                    a.termID = :term",
+                $bind 
+        );
+                    
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function schedule() {
+        $array = [];
+        $bind = [ 
+                ":term" => Hooks::get_option('current_term_id'),
+                ":stuID" => $this->_auth->getPersonField('personID')
+                ];
+                
+        $q = DB::inst()->query( "SELECT 
+                    a.courseSecCode,
+                    a.secShortTitle,
+                    a.startTime,
+                    a.endTime,
+                    a.dotw,
+                    a.facID,
+                    b.buildingName,
+                    c.roomNumber,
+                    d.stuID 
+                FROM 
+                    course_sec a 
+                LEFT JOIN 
+                    building b 
+                ON 
+                    a.buildingID = b.buildingID 
+                LEFT JOIN 
+                    room c 
+                ON 
+                    a.roomID = c.roomID 
+                LEFT JOIN 
+                    stu_course_sec d 
+                ON 
+                    a.courseSecID = d.courseSecID 
+                WHERE 
+                    a.termID = :term 
+                AND 
+                    d.stuID = :stuID",
+                $bind
+        );
+        
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -380,13 +535,55 @@ class StudentModel {
     }
     
     public function runAcadCred($data) {
-        $update = array( "status" => $data['status'],"statusDate" => $data['statusDate'],
-                        "statusTime" => $data['statusTime'],"grade" => $data['grade'] 
+        $update1 = array( "status" => $data['status'],"statusDate" => $data['statusDate'],
+                        "statusTime" => $data['statusTime']
         );
         
-        $bind = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
-        $q = DB::inst()->update( "stu_course_sec", $update, "id = :id AND stuID = :stuID", $bind );
+        $bind1 = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
+        $q1 = DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );
+        
+        $update2 = [ "grade" => $data['grade'] ];
+        $bind2 = [ 
+                ":stuID" => $data['stuID'], ":courseSecID" => $data['courseSecID'],
+                ":termID" => $data['termID']
+                ];
+        $q2 = DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2 );
+        
         redirect( BASE_URL . 'student/view_academic_credits/' . $data['id'] . '/' . bm() );
+    }
+    
+    public function runRegister($data) {
+        $size = count($data['courseSecID']);
+        $i = 0;
+        while($i < $size) {
+            $date = date("Y-m-d");
+            $time = date("h:m A");
+            $bind1 = [ 
+                    "stuID" => $this->_auth->getPersonField('personID'),
+                    "courseSecID" => $data['courseSecID'][$i],"termID" => $data['termID'][$i],
+                    "courseCredits" => $data['courseCredits'][$i],"status" => 'N',
+                    "statusDate" => $date,"statusTime" => $time,
+                    "addedBy" => $this->_auth->getPersonField('personID')
+                    ];
+                    
+            $q1 = DB::inst()->insert( "stu_course_sec", $bind1 );
+            
+            $bind2 = [ 
+                    "stuID" => $this->_auth->getPersonField('personID'),
+                    "courseSecID" => $data['courseSecID'][$i],"termID" => $data['termID'][$i],
+                    "attCred" => $data['courseCredits'][$i],
+                    "acadLevelCode" => $this->_stuProg->getAcadLevelCode($this->_auth->getPersonField('personID'))
+                    ];
+                    
+            $q2 = DB::inst()->insert( "stu_acad_cred", $bind2 );
+            ++$i;
+        }
+        
+        if(!$q1 && !$q2) {
+            redirect( BASE_URL . 'error/course_registration/' );
+        } else {
+            redirect( BASE_URL . 'success/course_registration/' );
+        }
     }
     
 	public function __destruct() {

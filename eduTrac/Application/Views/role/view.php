@@ -88,11 +88,11 @@ $eRole = new ACL();
         								echo '<tr><td>'._h($v['Name']).'</td>'."\n";
 										
 										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_1\" value=\"1\"";
-                						if ($rPerms[_h($v['Key'])]['value'] === true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
+                						if (isset($rPerms[_h($v['Key'])]['value']) === true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
                 						echo " /></td>\n";
 										 
 										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_0\" value=\"0\"";
-                						if ($rPerms[_h($v['Key'])]['value'] != true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
+                						if (isset($rPerms[_h($v['Key'])]['value']) != true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
                 						echo " /></td>\n";
 										
 										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_X\" value=\"X\"";

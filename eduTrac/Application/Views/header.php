@@ -29,7 +29,6 @@
 
 ob_start();
 ob_implicit_flush(0);
-session_start();
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Cookies;
 $auth = new Cookies;
@@ -151,8 +150,9 @@ $auth = new Cookies;
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons settings"><i></i><?php _e( _t( 'Settings' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>setting/<?=bm();?>"><?php _e( _t( 'General' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>reservation/<?=bm();?>"><?php _e( _t( 'Reservation' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>reservation/category/<?=bm();?>"><?php _e( _t( 'Reservation Categories' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>cron/<?=bm();?>"><?php _e( _t( 'Cron Jobs' ) ); ?></a></li>
+                                <!-- <li class=""><a href="<?=BASE_URL;?>reservation/<?=bm();?>"><?php _e( _t( 'Reservation' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>reservation/category/<?=bm();?>"><?php _e( _t( 'Reservation Categories' ) ); ?></a></li> -->
                             </ul>
                         </li>
 						
@@ -176,7 +176,6 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>form/building/<?=bm();?>"><?php _e( _t( '(BLDG) - Building' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>form/room/<?=bm();?>"><?php _e( _t( '(ROOM) - Room' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>form/school/<?=bm();?>"><?php _e( _t( '(SCH) - School' ) ); ?></a></li>
-                                <!-- <li class=""><a href="<?=BASE_URL;?>form/institution/<?=bm();?>"><?php _e( _t( '(INST) - Institution' ) ); ?></a></li> -->
                             </ul>
                         </li>
                         
@@ -189,14 +188,6 @@ $auth = new Cookies;
                         </li>
                         
                         <li<?=ae('access_sql_interface_screen');?>><a href="<?=BASE_URL;?>sql/<?=bm();?>" class="glyphicons database_plus"><i></i><?php _e( _t( 'SQL Interface' ) ); ?></a></li>
-						
-						<!-- <li class="dropdown submenu">
-                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons building"><i></i><?php _e( _t( 'Facility' ) ); ?></a>
-                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
-                                <li class=""><a href="<?=BASE_URL;?>program/<?=bm();?>"><?php _e( _t( '(PROG) - Program' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>program/add/<?=bm();?>"><?php _e( _t( '(APRG) - New Program' ) ); ?></a></li>
-                            </ul>
-                        </li> -->
 						
 						<li<?=ae('access_acad_prog_screen');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons cargo"><i></i><?php _e( _t( 'Acad Program' ) ); ?></a>
@@ -219,18 +210,19 @@ $auth = new Cookies;
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>section/<?=bm();?>"><?php _e( _t( '(SECT) - Section' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>section/register/<?=bm();?>"><?php _e( _t( '(RGN) - Register' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( '(GRDE) - Grading' ) ); ?></a></li>
                             </ul>
                         </li>
                         
-                        <!-- <li class="dropdown submenu">
-                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons settings"><i></i><?php _e( _t( 'Institutions' ) ); ?></a>
+                        <li<?=ae('access_institutions_screen');?> class="dropdown submenu">
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons building"><i></i><?php _e( _t( 'Institution' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
-                                <li class=""><a href="<?=BASE_URL;?>course/<?=bm();?>"><?php _e( _t( '(CRSE) - Institution' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>course/add/<?=bm();?>"><?php _e( _t( '(ACRS) - New Course' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>institution/<?=bm();?>"><?php _e( _t( '(INST) - Institution' ) ); ?></a></li>
+                                <li<?=ae('add_institution');?> class=""><a href="<?=BASE_URL;?>institution/add/<?=bm();?>"><?php _e( _t( '(AINST) - New Institution' ) ); ?></a></li>
                             </ul>
                         </li>
 						
-						<li class="dropdown submenu">
+						<!-- <li class="dropdown submenu">
 							<a data-toggle="dropdown" class="dropdown-toggle glyphicons e-mail"><i></i><?php _e( _t( 'Email' ) ); ?></a>
 							<ul class="dropdown-menu submenu-show submenu-hide pull-right">
 								<li class=""><a href="<?=BASE_URL;?>admin/manage_email_templates/<?=bm();?>"><?php _e( _t( 'Email Templates' ) ); ?></a></li>
@@ -257,6 +249,10 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>person/add/<?=bm();?>"><?php _e( _t( '(APER) Add Person' ) ); ?></a></li>
                             </ul>
                         </li>
+                        
+                        <li<?=ae('access_student_portal');?> class=""><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons globe"><i></i><?php _e( _t( 'Student Portal' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_application_screen');?> class=""><a href="<?=BASE_URL;?>application/<?=bm();?>" class="glyphicons show_big_thumbnails"><i></i><?php _e( _t( '(APPL) Application' ) ); ?></a></li>
                         
                         <li<?=ae('access_faculty_screen');?> class=""><a href="<?=BASE_URL;?>faculty/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(FAC) Faculty' ) ); ?></a></li>
                         
@@ -290,10 +286,10 @@ $auth = new Cookies;
 					<ul class="dropdown-menu pull-right">
 						<li class="profile">
 							<span>
-								<span class="heading"><?php _e( _t( 'Profile' ) ); ?> <a href="#" class="pull-right"><?php _e( _t( 'edit' ) ); ?></a></span>
+								<span class="heading"><?php _e( _t( 'Profile' ) ); ?> <a href="<?=BASE_URL;?>profile/" class="pull-right"><?php _e( _t( 'edit' ) ); ?></a></span>
 								<span class="avatar"><?=get_user_avatar($auth->getPersonField('email'),'48');?></span>
 								<span class="details">
-									<a href="#"><?=$auth->getPersonField('fname').' '.$auth->getPersonField('lname');?></a>
+									<a href="<?=BASE_URL;?>profile/"><?=$auth->getPersonField('fname').' '.$auth->getPersonField('lname');?></a>
 									<?=$auth->getPersonField('email');?>
 								</span>
 								<span class="clearfix"></span>

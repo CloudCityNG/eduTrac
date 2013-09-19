@@ -47,8 +47,8 @@
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>student/" method="post">
-							  	<input type="text" name="student" class="input-xxlarge" placeholder="Search by student id or name . . . " /> 
+							<form class="form-search center" action="<?=BASE_URL;?>student/<?=bm();?>" method="post">
+							  	<input type="text" name="student" class="input-xxlarge" placeholder="Search student . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>
@@ -83,7 +83,7 @@
                     <td class="center"><?=_h($v['fname']);?></td>
                     <td class="center">
                     	<a href="<?=BASE_URL;?>student/view/<?=_h($v['stuID']);?>/<?=bm();?>" title="View Student" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                    	<a href="<?=BASE_URL;?>student/academic_credits/<?=_h($v['stuID']);?>/<?=bm();?>" title="View Academic Credits" class="btn btn-circle"><i class="icon-coins"></i></a>
+                    	<a href="<?=BASE_URL;?>student/academic_credits/<?=_h($v['stuID']);?>/<?=bm();?>" title="View Academic Credits" class="btn btn-circle"><i class="icon-usd"></i></a>
                     </td>
                 </tr>
 				<?php } endif; ?>

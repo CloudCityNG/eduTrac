@@ -420,6 +420,47 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     /**
+     * Grading scale: shows general list of letter grades and
+     * if $grade is not NULL, shows the grade
+     * for a particular student course section record
+     * 
+     * @since 1.0.0
+     * @param string $grade
+     * @return string Returns the stu_course_sec grade if selected is true.
+     */
+    function grading_scale($grade = NULL) {
+        $select = '<select style="width:25%;" name="grade[]" required>
+                <option value="">&nbsp;</option>
+                <option value="' . _t('A') . '"'.selected( $grade, _t('A'), false ).'>' . _t('A') . '</option>
+                <option value="' . _t('B') . '"'.selected( $grade, _t('B'), false ).'>' . _t('B') . '</option>
+                <option value="' . _t('C') . '"'.selected( $grade, _t('C'), false ).'>' . _t('C') . '</option>
+                <option value="' . _t('D') . '"'.selected( $grade, _t('D'), false ).'>' . _t('D') . '</option>
+                <option value="' . _t('F') . '"'.selected( $grade, _t('F'), false ).'>' . _t('F') . '</option>
+                </select>';
+        return Hooks::apply_filter('grading_scale', $select, $grade);
+    }
+    
+    /**
+     * Admit status: shows general list of admission statuses and
+     * if $status is not NULL, shows the admit status
+     * for a particular applicant.
+     * 
+     * @since 1.0.0
+     * @param string $status
+     * @return string Returns the application admit status if selected is true.
+     */
+    function admit_status_select($status = NULL) {
+        $select = '<select style="width:25%;" name="admitStatus" id="select2_18">
+                <option value="">&nbsp;</option>
+                <option value="' . _t('FF') . '"'.selected( $status, _t('FF'), false ).'>' . _t('FF First Time Freshman') . '</option>
+                <option value="' . _t('TR') . '"'.selected( $status, _t('TR'), false ).'>' . _t('TR Transfer') . '</option>
+                <option value="' . _t('RA') . '"'.selected( $status, _t('RA'), false ).'>' . _t('RA Readmit') . '</option>
+                <option value="' . _t('NA') . '"'.selected( $status, _t('NA'), false ).'>' . _t('NA Non-Applicable') . '</option>
+                </select>';
+        return Hooks::apply_filter('admit_status', $select, $status);
+    }
+    
+    /**
      * Checks against certain keywords when the SQL 
      * terminal and saved query screens are used. Helps 
      * against database manipulation and SQL injection.
@@ -438,7 +479,7 @@ use \eduTrac\Classes\Libraries\Cookies;
             "upgrade","update","html","script","css",
             "x=x","x = x","everything","anyone","everyone",
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
-            "X=X","X = X","union","'='"
+            "X=X","X = X","union","'='","XSS"
         ];
         return $array;
     }
@@ -526,6 +567,30 @@ use \eduTrac\Classes\Libraries\Cookies;
             $array[] = $r;
         }
         return _h($r['lname']).', '._h($r['fname']);
+    }
+    
+    function hasAppl($id) {
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "application","personID = :id","","*",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return _h($r['personID']);
+    }
+    
+    function getStuSec($csID) {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $id = $auth->getPersonField('personID');
+        $q = DB::inst()->query( "SELECT * FROM stu_course_sec WHERE stuID = '$id' AND courseSecID = '$csID'" );
+        if($q->rowCount() > 0) {
+            return ' style="display:none;';
+        }
+    }
+    
+    function isRegistrationOpen() {
+        if(Hooks::get_option('open_registration') == 0) {
+            return ' style="display:none;';
+        }
     }
     
     /**
@@ -883,7 +948,8 @@ use \eduTrac\Classes\Libraries\Cookies;
 	}
     
     function show_update_message() {
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $auth = new Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         if($acl->userHasRole(8)) {
             if(CURRENT_ET_VERSION < getCurrentVersion(0)) {
                 $alert = 
@@ -895,11 +961,11 @@ use \eduTrac\Classes\Libraries\Cookies;
 					<!-- // Alert END -->';
             }
         }
-		return Hooks::apply_filter( 'update_message', $alert, $upgrade[$array] );
 	}
     
     function redirect_upgrade_db() {
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $auth = new Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         if($acl->userHasRole(8)) {
             if(CURRENT_ET_VERSION == getCurrentVersion(0)) {
                 if(Hooks::get_option('dbversion') < upgradeDB(0)) {

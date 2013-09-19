@@ -36,6 +36,7 @@ class ErrorModel {
 	}
     
     public function logs() {
+        $array = [];
         $q = DB::inst()->query( "SELECT * FROM error" );
         
         if($q->rowCount() > 0) {

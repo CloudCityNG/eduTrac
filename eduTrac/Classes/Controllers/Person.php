@@ -210,7 +210,6 @@ class Person extends \eduTrac\Classes\Core\Controller {
         if(!hasPermission('access_user_permission_screen')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['personID'] = isPostSet('personID');
-        
         $this->model->runRolePerm($data);       
     }
     
@@ -318,9 +317,7 @@ class Person extends \eduTrac\Classes\Core\Controller {
     }
     
     public function search() {
-        $data = [];
-        $data['person'] = isPostSet('person');
-        $this->model->search($data);
+        $this->model->search();
     }
 	
 }

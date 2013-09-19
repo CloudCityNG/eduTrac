@@ -59,7 +59,6 @@ class ACL {
     private $_db;
 	
 	public function __construct($personID = '') {
-	    session_start();
 		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
         $this->_db = new \eduTrac\Classes\Core\DB;
 		
@@ -67,7 +66,7 @@ class ACL {
             $this->personID = floatval($personID);  
         } else {  
             //$this->personID = floatval($this->_auth->getPersonField('personID'));
-            $this->personID = floatval($_SESSION['id']); 
+            $this->personID = floatval($this->_auth->getPersonField('personID')); 
         }  
         $this->userRoles = $this->getUserRoles('ids');  
         $this->buildACL();

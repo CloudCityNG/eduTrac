@@ -99,6 +99,36 @@ class Cron extends \eduTrac\Classes\Core\Controller {
     
     public function activityLog() {
         $this->_log->purgeLog();
-    }    
-        
+    }
+    
+    public function runStuTerms() {
+        $this->model->runStuTerms();
+    }
+    
+    public function runStuLoad() {
+        $this->model->runStuLoad();
+    }
+    
+    public function updateStuTerms() {
+        $this->model->updateStuTerms();
+    }
+    
+    public function updateStuLoad() {
+        $this->model->updateStuLoad();
+    }
+    
+    public function runEditCron() {
+        $data = [];
+        $data['id'] = isPostSet('id');
+        $data['name'] = isPostSet('name');
+        $data['scriptpath'] = isPostSet('scriptpath');
+        $data['minutes'] = isPostSet('minutes');
+        $data['hours'] = isPostSet('hours');
+        $data['days'] = isPostSet('days');
+        $data['weeks'] = isPostSet('weeks');
+        $data['time_last_fired'] = isPostSet('time_last_fired');
+        $data['run_only_once'] = isPostSet('run_only_once');
+        $this->model->runEditCron($data);
+    }
+    
 }

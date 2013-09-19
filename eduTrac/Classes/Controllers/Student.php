@@ -67,7 +67,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
                                 'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
                                 'theme/scripts/demo/form_elements.js'
                                 );
-        $this->view->student = $this->model->getPerson($id);
+        $this->view->student = $this->model->getAppl($id);
         if(empty($this->view->student)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -89,6 +89,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
                                 );
         $this->view->student = $this->model->student($id);
         $this->view->address = $this->model->address($id);
+        $this->view->admit = $this->model->admit($id);
         $this->view->prog = $this->model->prog($id);
         
         if(empty($this->view->student)) {
@@ -188,6 +189,52 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $this->view->render('student/view_academic_credits');
     }
     
+    public function courses() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array('Course Sections');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js'
+                                );
+        $this->view->courseSec = $this->model->courseSec();
+		$this->view->render('student/courses');
+    }
+    
+    public function portal() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+		$this->view->staticTitle = array('Student Portal');
+		$this->view->render('student/portal');
+	}
+    
+    public function schedule() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array('Class Schedule');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js'
+                                );
+        $this->view->schedule = $this->model->schedule();
+		$this->view->render('student/schedule');
+	}
+    
     public function runStudent() {
         if(!hasPermission('create_stu_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
@@ -246,6 +293,8 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['statusTime'] = isPostSet('statusTime');
         $data['id'] = isPostSet('id');
         $data['stuID'] = isPostSet('stuID');
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $data['termID'] = isPostSet('termID');
         $this->model->runAcadCred($data);
     }
     
@@ -254,6 +303,15 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data = array();
         $data['progID'] = isPostSet('progID');
         $this->model->runProgLookup($data);
+    }
+    
+    public function runRegister() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = [];
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $data['termID'] = isPostSet('termID');
+        $data['courseCredits'] = isPostSet('courseCredits');
+        $this->model->runRegister($data);
     }
     
     public function search() {

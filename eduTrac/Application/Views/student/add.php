@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
 							<div class="controls">
 								<select style="width:100%;" name="progID" id="select2_11" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('acad_program', '', 'acadProgID', 'acadProgCode', 'acadProgTitle'); ?>
+                            		<?php table_dropdown('acad_program', '', 'acadProgID', 'acadProgCode', 'acadProgTitle', _h($this->student[0]['acadProgID'])); ?>
                             	</select>
 							</div>
 						</div>
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Program Title' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" id="acadProgTitle" readonly class="span6" required />
+                                <input type="text" id="acadProgTitle" readonly class="span6" value="<?=_h($this->student[0]['acadProgTitle']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -116,7 +116,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Major' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" id="majorName" readonly class="span6" required />
+                                <input type="text" id="majorName" readonly class="span6" value="<?=_h($this->student[0]['majorName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -125,7 +125,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Location' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" id="locationName" readonly class="span6" required />
+                                <input type="text" id="locationName" readonly class="span6" value="<?=_h($this->student[0]['locationName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -134,7 +134,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" id="schoolName" readonly class="span6" />
+                                <input type="text" id="schoolName" readonly class="span6" value="<?=_h($this->student[0]['schoolName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -161,7 +161,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select();?>
+                                <?=acad_level_select($this->student[0]['acadLevelCode']);?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -230,6 +230,7 @@ jQuery(document).ready(function() {
 				<div class="form-actions">
 				    <input name="stuID" type="hidden" value="<?=_h($this->student[0]['personID']);?>" />
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

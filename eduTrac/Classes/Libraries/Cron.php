@@ -1,6 +1,7 @@
 <?php namespace eduTrac\Classes\Libraries;
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Hooks;
 /**
  * Cron Class
  *  
@@ -39,16 +40,18 @@ class Cron {
     
     public function run($id) {
         $q = DB::inst()->query("UPDATE cronjob SET currently_running = '1' WHERE id = '$id'");
-        register_shutdown_function('Clear', $id); // registed incase execution times out before Stopped called
+        register_shutdown_function(array($this, 'Clear'), $id); // registered incase execution times out before Stopped called
         return $q;
     }
     
     public function stop($id) {
         $q = DB::inst()->query("UPDATE cronjob SET currently_running = '0' WHERE id = '$id'");
-        $now = time();
-        $this->output = substr(htmlentities($this->output), 0, 1200);// truncate output to defined length     
-        $sql = DB::inst()->query( "INSERT INTO cronlog (`date_added`,`script`, `output`, `execution_time`)
-                VALUES ('$now', '$this->script','$this->output','$this->executionTime')" );
+        if(Hooks::get_option('enable_cron_log') == 1) {
+            $now = time();
+            $this->output = substr(htmlentities($this->output), 0, 1200);// truncate output to defined length     
+            $sql = DB::inst()->query( "INSERT INTO cronlog (`date_added`,`script`, `output`, `execution_time`)
+                    VALUES ('$now', '$this->script','$this->output','$this->executionTime')" );
+        }
     }
     
     public function fireScript($script, $id, $buffer_output = 1) {
@@ -101,7 +104,7 @@ class Cron {
            curl_setopt($ch, CURLOPT_USERPWD,$user.":".$pass);
            $buffer = curl_exec($ch);
            curl_close($ch);
-        } elseif ( $fp = @fsockopen($host, $port, $errno, $errstr, 30) ) {
+        } elseif ( $fp = fsockopen($host, $port, $errno, $errstr, 30) ) {
            $header = "POST $path HTTP/1.0\r\nHost: $host\r\nReferer: $referer\r\n"
          ."Content-Type: application/x-www-form-urlencoded\r\n"
          ."User-Agent: $useragent\r\n"
@@ -111,7 +114,7 @@ class Cron {
            fputs($fp, $header);
            fputs($fp, $query);
            if ($fp) while (!feof($fp)) $buffer.= fgets($fp, 8192);
-           @fclose($fp);
+           fclose($fp);
           }
         return $buffer;
     }

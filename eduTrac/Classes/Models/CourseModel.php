@@ -39,7 +39,8 @@ class CourseModel {
 	}
 	
 	public function search() {
-		$crse = isGetSet('crse');
+        $array = [];
+		$crse = isPostSet('crse');
         $bind = array( ":crse" => "%$crse%" );
         $q = DB::inst()->select( "course",
                     "courseCode LIKE :crse",
@@ -85,6 +86,7 @@ class CourseModel {
     }
     
     public function runEditCourse($data) {
+        $array = [];
         $this->_subj->Load_from_key($data['subjectID']);
         $bind = array( ":id" => $data['courseID'] );
         $sql = DB::inst()->select( "course","courseID = :id","","currStatus",$bind );
@@ -127,6 +129,7 @@ class CourseModel {
     }
     
     public function crse($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.courseID,a.courseNumber,a.courseCode,a.subjectID,a.deptID,a.courseDesc,a.minCredit,
@@ -155,6 +158,7 @@ class CourseModel {
     }
     
     public function crseList() {
+        $array = [];
         $q = DB::inst()->query( "SELECT courseCode FROM course" );
         if($q->rowCount() > 0) {
             while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
@@ -165,6 +169,7 @@ class CourseModel {
     }
     
     public function addntl($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 courseID,preReq,allowAudit,allowWaitlist,minEnroll,seatCap 

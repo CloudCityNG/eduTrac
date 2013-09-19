@@ -45,7 +45,7 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
 		<div class="widget-body">
 		
 			<!-- Table -->
-			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-primary">
+			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
 			
 				<!-- Table heading -->
 				<thead>
@@ -85,17 +85,7 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
                         ?>
                     </td>
                     <td class="center">
-                    	<a href="<?=BASE_URL;?>cron/edit/<?=_h((int)$value['id']);?>/<?=bm();?>" title="View Cron Job" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <a href="#myModal<?=_h((int)$value['id']);?>" data-toggle="modal" class="btn btn-danger"><i class="icon-trash"></i></a>
-                        <div class="modal hide fade" id="myModal<?=_h((int)$value['id']);?>">
-							<div class="modal-body">
-								<p><?="Are you sure you want to delete the cron job: " . _h($value['name']);?>?</p>
-							</div>
-							<div class="modal-footer">
-								<a href="<?=BASE_URL;?>cron/deleteCron/<?=_h((int)$value['id']);?>" class="btn btn-default"><?php _e( _t( 'Delete' ) ); ?></a>
-								<a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-							</div>
-						</div>
+                    	<a href="<?=BASE_URL;?>cron/view/<?=_h($value['id']);?>/<?=bm();?>" title="View Cron Job" class="btn btn-circle"><i class="icon-eye-open"></i></a>
                     </td>
                 </tr>
                 <?php } endif; ?>

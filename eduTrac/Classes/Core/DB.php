@@ -123,7 +123,7 @@ class DB {
 	public function __construct() {
 		try {
     		$this->db = new \PDO("$this->dsnPrefix:host=$this->dbhost;dbname=$this->dbname", $this->dbuser, $this->dbpass);
-            $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+            //$this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 			$this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$this->db->query('SET NAMES utf8');
             $this->db->query('SET CHARACTER SET utf8'); 
@@ -276,7 +276,7 @@ class DB {
                 $this->result = $this->db->query($sql);
                 return $this->result;
             }
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->error = $e->getMessage();
             return $this->error;
         }

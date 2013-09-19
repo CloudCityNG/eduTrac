@@ -295,6 +295,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                 <div class="form-actions">
                     <input type="hidden" name="acadProgID" value="<?=_h($this->prog[0]['acadProgID']);?>" class="span10" />
                     <button type="submit"<?=apids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>program/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
                 </div>
                 <!-- // Form actions END -->
                 

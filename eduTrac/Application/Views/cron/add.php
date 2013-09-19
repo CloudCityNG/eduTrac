@@ -62,15 +62,15 @@
 					
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label" for="ccdKey"><font color="red">*</font> <?php _e( _t( 'Script to Run' ) ); ?></label>
-							<div class="controls"><input class="span12" id="ccdKey" name="ccdKey" type="text" required /></div>
+							<label class="control-label" for="scriptpath"><font color="red">*</font> <?php _e( _t( 'Script to Run' ) ); ?></label>
+							<div class="controls"><input class="span12" id="scriptpath" name="scriptpath" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label" for="ccdName"><font color="red">*</font> <?php _e( _t( 'Job Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="ccdName" name="ccdName" type="text" required /></div>
+							<label class="control-label" for="name"><font color="red">*</font> <?php _e( _t( 'Job Name' ) ); ?></label>
+							<div class="controls"><input class="span12" id="name" name="name" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -78,7 +78,7 @@
                         <div class="control-group">
                             <label class="control-label" for="minutes"><?php _e( _t( 'Minutes' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:15%" name="minutes" onchange="disable_others()" value="0">
+                                <select style="width:15%" name="minutes" id="select2_9" onchange="disable_others()" value="0">
                                     <option selected value="-1">0</option>
                                     <option value="1">1 </option>
                                     <option value="2">2 </option>
@@ -148,7 +148,7 @@
                         <div class="control-group">
                             <label class="control-label" for="hours"><?php _e( _t( 'Hourly' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:15%" name="hours" onchange="disable_others()" value="0">
+                                <select style="width:15%" name="hours" id="select2_10" onchange="disable_others()" value="0">
                                     <option selected value="-1">0</option>
                                     <option value="1">1 </option>
                                     <option value="2">2 </option>
@@ -182,7 +182,7 @@
                         <div class="control-group">
                             <label class="control-label" for="days"><?php _e( _t( 'Daily' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:15%" name="days" onchange="disable_others()">
+                                <select style="width:15%" name="days" id="select2_11" onchange="disable_others()">
                                     <option selected value="-1">0</option>
                                     <option value="1">1 </option>
                                     <option value="2">2 </option>
@@ -199,7 +199,7 @@
                         <div class="control-group">
                             <label class="control-label" for="weeks"><?php _e( _t( 'Weekly' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:15%" name="weeks" onchange="disable_others()">
+                                <select style="width:15%" name="weeks" id="select2_12" onchange="disable_others()">
                                     <option selected value="-1">0</option>
                                     <option value="1">1 </option>
                                     <option value="2">2 </option>
@@ -260,9 +260,9 @@
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="ccdName"><font color="red">*</font> <?php _e( _t( 'How Often?' ) ); ?></label>
+                            <label class="control-label" for="run_only_once"><font color="red">*</font> <?php _e( _t( 'How Often?' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:50%" name="" id="select2_9" required>
+                                <select style="width:50%" name="run_only_once" id="select2_13" required>
                                     <option value="0"><?php _e( _t( 'Until I Delete It' ) ); ?></option>
                                     <option value="1"><?php _e( _t( 'Only Once, Then Delete The Job' ) ); ?></option>
                                 </select>

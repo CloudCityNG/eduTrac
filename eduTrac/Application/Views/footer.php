@@ -30,7 +30,7 @@
 		<div id="footer" class="hidden-print">
 			
 			<!--  Copyright Line -->
-			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <a href="http://edutrac.org">eduTrac</a> <?php footer(); ?></div>
+			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <?php footer(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
 			<!--  End Copyright Line -->
 	
 		</div>
@@ -125,7 +125,7 @@
         }
     }
 	?>
-<!-- <a href="<?=BASE_URL;?>" title="cronJob"><img src="<?=BASE_URL;?>cron/fireCron/?image=1" style="border:0;" /></a> -->
+<img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" /></a>
 </body>
 </html>
 <?php print_gzipped_page(); ?>

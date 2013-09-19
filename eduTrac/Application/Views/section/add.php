@@ -130,7 +130,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_11" required>
+                                <select style="width:100%;" name="deptID" id="select2_11" readonly="readonly" required>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $deptID); ?>
                                 </select>

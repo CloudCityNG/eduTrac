@@ -74,15 +74,15 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 								
 								echo '<td class="center"><select name="perm_' . _h($v['ID']) . '">';
 								echo '<option value="1"';
-									if ($permACL->hasPermission(_h($v['Key'])) && $rPerms[_h($v['Key'])]['inheritted'] != true) { echo ' selected="selected"'; }
+									if ($permACL->hasPermission(_h($v['Key'])) && isset($rPerms[_h($v['Key'])]['inheritted']) != true) { echo ' selected="selected"'; }
 										echo '>Allow</option>';
 										echo '<option value="0"';
-									if ($rPerms[_h($v['Key'])]['value'] === false && $rPerms[_h($v['Key'])]['inheritted'] != true) { echo ' selected="selected"'; }
+									if (isset($rPerms[_h($v['Key'])]['value']) === false && isset($rPerms[_h($v['Key'])]['inheritted']) != true) { echo ' selected="selected"'; }
 										echo '>Deny</option>';
 										echo '<option value="x"';
 									if ($rPerms[_h($v['Key'])]['inheritted'] == true || !array_key_exists(_h($v['Key']),$rPerms)) {
 										echo ' selected="selected"';
-										if ($rPerms[_h($v['Key'])]['value'] === true ) {
+										if (isset($rPerms[_h($v['Key'])]['value']) === true ) {
 											$iVal = '(Allow)';
 										} else {
 											$iVal = '(Deny)';

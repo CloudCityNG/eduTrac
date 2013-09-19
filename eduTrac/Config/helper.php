@@ -29,4 +29,4 @@
 
 
 $apphelp = new eduTrac\Classes\Core\Extension();
-$apphelp->helper(array('actions','gettext','default','system','auth'));
+$apphelp->helper(array('actions','gettext','default','system','auth','stuload'));

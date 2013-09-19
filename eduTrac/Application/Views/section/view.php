@@ -29,7 +29,7 @@
 
 $sec = new \eduTrac\Classes\DBObjects\Course;
 $sec->Load_from_key($this->sec[0]['courseID']);
-$list = '"'.implode('","', _h($sec->getpreReq())).'"';
+$list = '"'.implode('","', _h($sec->getPreReq())).'"';
 ?>
 
 <script type="text/javascript">
@@ -280,10 +280,10 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Offering Info' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" disabled value="" class="span1 center" />
-                                <!-- <a href="<?=BASE_URL;?>section/soff_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
+                                <input type="text" disabled value="X" class="span1 center" />
+                                <a href="<?=BASE_URL;?>section/offering_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
                                     <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
-                                </a> -->
+                                </a>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -317,6 +317,7 @@ jQuery(document).ready(function() {
 				<div class="form-actions">
 				    <input type="hidden" name="courseSecID" value="<?=_h($this->sec[0]['courseSecID']);?>" />
 					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

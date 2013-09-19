@@ -26,8 +26,6 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-
-$facID = str_replace('0','',$this->student[0]['advisorID']);
 ?>
 
 <ul class="breadcrumb">
@@ -136,7 +134,7 @@ $facID = str_replace('0','',$this->student[0]['advisorID']);
                         <div class="control-group">
                             <label class="control-label" for="statusDate"><?php _e( _t( 'Admit Status' ) ); ?></label>
                             <div class="controls">
-                                <input class="span5 center" type="text" readonly value="" />
+                                <input class="span5 center" type="text" readonly value="<?=_h($this->admit[0]['admitStatus']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -154,7 +152,7 @@ $facID = str_replace('0','',$this->student[0]['advisorID']);
                             <div class="controls">
                                 <select style="width:100%;" name="advisorID"<?=sio();?> id="select2_14" required>
                                     <option value="">&nbsp;</option>
-                                    <?php facID_dropdown($facID); ?>
+                                    <?php facID_dropdown($this->student[0]['advisorID']); ?>
                                 </select>
                             </div>
                         </div>

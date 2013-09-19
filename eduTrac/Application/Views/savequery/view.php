@@ -34,7 +34,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 	<li><? _e( _t( 'You are here' ) ); ?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <? _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>savequery/<?=bm();?>" class="glyphicons dashboard"><i></i> <? _e( _t( 'Saved Queries' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>savequery/<?=bm();?>" class="glyphicons database_plus"><i></i> <? _e( _t( 'Saved Queries' ) ); ?></a></li>
     <li class="divider"></li>
 	<li><? _e( _t( 'View Saved Query' ) ); ?></li>
 </ul>
@@ -109,6 +109,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 					<input type="hidden" name="personID" value="<?=$auth->getPersonField('personID');?>" />
 					<input type="hidden" name="savedQueryID" value="<?=_h($this->query[0]['savedQueryID']);?>" />
 					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><? _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>savequery/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

@@ -43,6 +43,7 @@ class ProgramModel {
 	}
 	
 	public function search() {
+        $array = [];
         $post = isPostSet('prog');
         $bind = array( ":post" => "%$post%" );
         $q = DB::inst()->query( "SELECT acadProgID,acadProgCode,acadProgTitle,currStatus,startDate,endDate 
@@ -77,6 +78,7 @@ class ProgramModel {
     }
     
     public function prog($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.acadProgID,a.acadProgCode,a.acadProgTitle,a.programDesc,a.currStatus,
@@ -143,6 +145,7 @@ class ProgramModel {
     }
     
     public function runEditProg($data) {
+        $array = [];
         $bind = array( ":acadProgID" => $data['acadProgID'] );
         $sql = DB::inst()->select( "acad_program","acadProgID = :acadProgID","","currStatus",$bind );
         foreach($sql as $r) {

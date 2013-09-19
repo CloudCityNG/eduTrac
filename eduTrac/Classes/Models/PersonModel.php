@@ -38,8 +38,9 @@ class PersonModel {
 		$this->_auth = new Cookies;
 	}
     
-    public function search($data) {
-        $person = $data['person'];
+    public function search() {
+        $array = [];
+        $person = isPostSet('person');
         $bind = [ ":person" => "%$person%" ];
             
         $q = DB::inst()->query( "SELECT personID,fname,lname,uname 
@@ -66,16 +67,10 @@ class PersonModel {
             $array[] = $r;
         }
         return $array;
-        
-        /*if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
-        }*/
     }
     
     public function person($id) {
+        $array = [];
         $bind = array( ":personID" => $id );
         $q = DB::inst()->select( "person", "personID = :personID", "", "*", $bind );
         
@@ -86,6 +81,7 @@ class PersonModel {
     }
     
     public function addAddr($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT * 
                 FROM 
@@ -106,6 +102,7 @@ class PersonModel {
     }
     
     public function addr($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT * 
                 FROM 
@@ -132,6 +129,7 @@ class PersonModel {
     }
     
     public function addrSum($id) {
+        $array = [];
         $bind = array( ":personID" => $id );        
         $q = DB::inst()->query( "SELECT * 
                 FROM 
@@ -153,6 +151,7 @@ class PersonModel {
     }
     
     public function editAddr($id) {
+        $array = [];
         $bind = array( ":addressID" => $id );
         $q = DB::inst()->query( "SELECT * 
                 FROM 
@@ -175,6 +174,7 @@ class PersonModel {
     }
     
     public function rolePerm($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "person","personID = :id","","personID",$bind );
         foreach($q as $r) {

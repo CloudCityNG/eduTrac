@@ -49,7 +49,7 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>person/" method="post">
+							<form class="form-search center" action="<?=BASE_URL;?>person/<?=bm();?>" method="post" autocomplete="off">
 							  	<input type="text" name="person" class="input-xxlarge" placeholder="Search by person id or name . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
@@ -87,15 +87,15 @@ $person = new \eduTrac\Classes\DBObjects\Person;
                     	<a href="<?=BASE_URL;?>person/view/<?=_h($v['personID']);?>/<?=bm();?>" title="View Person" class="btn btn-circle"><i class="icon-eye-open"></i></a>
                     	
                     	<?php if($person->isFacID() != $v['personID']) { ?>
-                    	<a href="<?=BASE_URL;?>faculty/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Faculty Record" class="btn btn-circle"><i class="icon-user"></i></a>
+                    	<a<?=ae('create_fac_record');?> href="<?=BASE_URL;?>faculty/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Faculty Record" class="btn btn-circle"><i class="icon-user"></i></a>
+                    	<?php } ?>
+                        
+                        <?php if(hasAppl($v['personID']) != $v['personID']) { ?>
+                        <a<?=ae('create_application');?> href="<?=BASE_URL;?>application/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Application" class="btn btn-circle"><i class="icon-tasks"></i></a>
                     	<?php } ?>
                     	
-                    	<?php if($person->isStuID() != $v['personID']) { ?>
-                    	<a href="<?=BASE_URL;?>student/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Student Record" class="btn btn-circle"><i class="icon-user"></i></a>
-                    	<?php } ?>
-                    	
-                    	<a href="<?=BASE_URL;?>person/role/<?=_h($v['personID']);?>/<?=bm();?>" title="Edit Person Role" class="btn btn-circle"><i class="icon-key"></i></a>
-                    	<a href="<?=BASE_URL;?>person/perms/<?=_h($v['personID']);?>/<?=bm();?>" title="Edit Person Permissions" class="btn btn-circle"><i class="icon-lock"></i></a>
+                    	<a<?=ae('access_user_role_screen');?> href="<?=BASE_URL;?>person/role/<?=_h($v['personID']);?>/<?=bm();?>" title="Edit Person Role" class="btn btn-circle"><i class="icon-key"></i></a>
+                    	<a<?=ae('access_user_permission_screen');?> href="<?=BASE_URL;?>person/perms/<?=_h($v['personID']);?>/<?=bm();?>" title="Edit Person Permissions" class="btn btn-circle"><i class="icon-lock"></i></a>
                     </td>
                 </tr>
 				<?php } endif; ?>

@@ -493,7 +493,7 @@
 		'configs'      =>  array(
 		  array(
 			'maskname'     =>  'constants.php',
-			'savetofolder' =>  'tinyPHP/Config/'),
+			'savetofolder' =>  'eduTrac/Config/'),
 		  array(
 			'maskname'     =>  'broken.index.php',
 			'savetofolder' =>  ''),
@@ -790,7 +790,7 @@
 		// messages, just a demonstration on special keywords
         'company' => '7 Media Web Solutions, LLC', 
         'product' => 'eduTrac',
-        'version' => '1.0.0-ALPHA4',
+        'version' => '1.0.0-BETA1',
 
 		// These keywords are used with Timezone and Language steps
 		'timezone' => '0',

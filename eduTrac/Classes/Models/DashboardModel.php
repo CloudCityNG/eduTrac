@@ -43,6 +43,7 @@ class DashboardModel {
 	}
 	
 	public function search($data) {
+        $array = [];
 		$acro = $data['screen'];
 		$screen = explode(" ", $acro);
         $bind = array( ":code" => $screen[0] );
@@ -52,7 +53,7 @@ class DashboardModel {
         }
         
 		if(!$r['relativeURL']) {
-			redirect( BASE_URL . 'error/screen_error?code=' . $screen[0] );
+			redirect( BASE_URL . 'error/screen_error?code=' . _h($screen[0]) );
 		} else {
 			redirect( BASE_URL . $r['relativeURL'] );
 		}
@@ -66,7 +67,6 @@ class DashboardModel {
 	 * 
 	 */
 	public function logout() {
-	    session_start();
 		$uname = $this->_auth->getPersonField('uname');
         $update = array( "auth_token" => 'NULL' );
         $bind = array( ":uname" => $uname );
@@ -75,7 +75,6 @@ class DashboardModel {
 		
 		setcookie("et_cookname", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
       	setcookie("et_cookid", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-        unset($_SESSION['id']);
 		/* Purge log entries that are greater than 30 days old. */
 		//$this->_log->purgeLog();
 		/* Purges system error logs greater than 30 days old. */

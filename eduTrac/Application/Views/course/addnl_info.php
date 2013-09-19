@@ -141,6 +141,7 @@ $(function() {
 				<div class="form-actions">
 					<input type="hidden" name="courseID" value="<?=_h($this->addnl[0]['courseID']);?>" class="span10" />
 					<button type="submit"<?=cids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>course/view/<?=_h($this->addnl[0]['courseID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

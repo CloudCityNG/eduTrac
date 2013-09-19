@@ -35,7 +35,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>program/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?php _e( _t( 'Search Program' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>program/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Program' ) ); ?></a></li>
 	<li class="divider"></li>
 	<li><?php _e( _t( 'Create Program' ) ); ?></li>
 </ul>

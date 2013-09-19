@@ -104,7 +104,8 @@
                 <!-- Form actions -->
                 <div class="form-actions">
                     <form action="<?=BASE_URL;?>person/addr_form/<?=_h($this->person[0]['personID']);?>/<?=bm();?>">
-                        <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Add' ) ); ?></button>
+                        <button type="submit"<?=aids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Add' ) ); ?></button>
+                        <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>person/view/<?=_h($this->person[0]['personID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
                     </form>
                 </div>
                 <!-- // Form actions END -->

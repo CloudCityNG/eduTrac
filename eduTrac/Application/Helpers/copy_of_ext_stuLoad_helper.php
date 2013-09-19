@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Room Scheduling Helper
+ * Student Load Helper
  *  
  * PHP 5.4+
  *

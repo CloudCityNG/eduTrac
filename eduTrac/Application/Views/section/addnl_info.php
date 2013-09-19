@@ -131,6 +131,7 @@
 				<div class="form-actions">
 					<input type="hidden" name="courseSecID" value="<?=_h($this->addnl[0]['courseSecID']);?>" class="span10" />
 					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/view/<?=_h($this->addnl[0]['courseSecID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

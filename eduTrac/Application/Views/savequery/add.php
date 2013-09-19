@@ -106,6 +106,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				<div class="form-actions">
 					<input type="hidden" name="personID" value="<?=$auth->getPersonField('personID');?>" />
 					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><? _e( _t( 'Save' ) ); ?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>savequery/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

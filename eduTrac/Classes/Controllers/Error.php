@@ -82,6 +82,11 @@ class Error extends \eduTrac\Classes\Core\Controller {
         $this->view->staticTitle = array('Delete Record Error');
         $this->view->render('error/delete_record');
     }
+    
+    public function update_record() {
+        $this->view->staticTitle = array('Update Record Error');
+        $this->view->render('error/update_record');
+    }
 	
 	public function save_query() {
 		$this->view->staticTitle = array('Save Query');
@@ -96,6 +101,11 @@ class Error extends \eduTrac\Classes\Core\Controller {
     public function nslc_extraction() {
         $this->view->staticTitle = array('NSLC Extraction Error');
         $this->view->render('error/nslc_extraction');
+    }
+    
+    public function course_registration() {
+        $this->view->staticTitle = array('Course Registration Error');
+        $this->view->render('error/course_registration');
     }
     
     public function save_data() {

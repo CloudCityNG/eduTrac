@@ -34,7 +34,9 @@ class FacultyModel {
 	public function __construct() {}
 	
 	public function search() {
+        $array = [];
 		$fac = isPostSet('faculty');
+        $bind = [ ":fac" => "%$fac%" ];
         $q = DB::inst()->query( "SELECT 
                         a.facID,
                         b.lname,
@@ -46,13 +48,14 @@ class FacultyModel {
                     ON 
                         a.facID = b.personID 
                     WHERE 
-                        (CONCAT(fname,' ',lname) LIKE '%".$fac."%' 
+                        (CONCAT(fname,' ',lname) LIKE :fac 
                     OR 
-                        CONCAT(lname,' ',fname) LIKE '%".$fac."%' 
+                        CONCAT(lname,' ',fname) LIKE :fac 
                     OR 
-                        CONCAT(lname,', ',fname) LIKE '%".$fac."%') 
+                        CONCAT(lname,', ',fname) LIKE :fac) 
                     OR 
-                        a.facID LIKE '%".$fac."%'"
+                        a.facID LIKE :fac",
+                    $bind
         );
         
         foreach($q as $r) {
@@ -62,6 +65,7 @@ class FacultyModel {
 	}
     
     public function person($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "person","personID = :id","","personID",$bind );
         foreach($q as $r) {
@@ -102,6 +106,7 @@ class FacultyModel {
     }
     
     public function faculty($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "faculty","facID = :id","","*",$bind );
         

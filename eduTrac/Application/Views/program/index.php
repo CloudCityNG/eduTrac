@@ -49,7 +49,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
 							<form class="form-search center" action="<?=BASE_URL;?>program/<?=bm();?>" method="post">
-							  	<input type="text" name="prog" class="input-xxlarge" placeholder="Search by Department of Program Code . . . " />
+							  	<input type="text" name="prog" class="input-xxlarge" placeholder="Search by Department or Program Code . . . " />
 							  	<!-- <button type="submit" class="btn btn-inverse">Search</button> -->
 							</form>
 						</div>

@@ -32,7 +32,7 @@ use \eduTrac\Classes\Core\DB;
  	
  	function hasPermission($perm) {
     	$auth = new \eduTrac\Classes\Libraries\Cookies;
-		$acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+		$acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
 		
 		if($acl->hasPermission($perm) || $acl->userHasRole(8)) {
 			return true;
@@ -43,7 +43,7 @@ use \eduTrac\Classes\Core\DB;
     
     function ae($perm) {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if(!$acl->hasPermission($perm) && !$acl->userHasRole(8)) {
             return ' style="display:none"';
@@ -55,7 +55,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function gio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -67,7 +67,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function gids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -79,7 +79,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function cio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -91,7 +91,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function cids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -103,7 +103,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function csio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -115,7 +115,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function csids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -127,7 +127,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function apio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -139,7 +139,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function apids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -151,7 +151,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function aio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -163,7 +163,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function aids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -175,7 +175,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function fio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -187,7 +187,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function fids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -199,7 +199,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function sio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -211,7 +211,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function sids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
@@ -223,7 +223,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function pio() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
@@ -235,7 +235,7 @@ use \eduTrac\Classes\Core\DB;
      */
     function pids() {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($_SESSION['id']);
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
         if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';

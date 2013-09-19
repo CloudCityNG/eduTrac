@@ -29,17 +29,21 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Hooks;
 class SectionModel {
     
     private $_sec;
     private $_auth;
+    private $_stuProg;
 	
 	public function __construct() {
 	    $this->_sec = new \eduTrac\Classes\DBObjects\CourseSec;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
 	}
 	
 	public function search() {
+        $array = [];
 	    $sec = isPostSet('sec');
 	    $bind = array(":sec" => "%$sec%");
         $q = DB::inst()->query( "SELECT 
@@ -66,6 +70,7 @@ class SectionModel {
 	}
     
     public function crse($id) {
+        $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "course", "courseID = :id", "", "courseID,courseCode", $bind );
         foreach($q as $r) {
@@ -134,7 +139,33 @@ class SectionModel {
         redirect( BASE_URL . 'section/addnl_info/' . $data['courseSecID'] . '/' . bm() );
     }
     
+    public function runSOFF($data) {
+        $dotw = '';
+      	// Combine the days of the week to be entered into the database //
+  		$days = $data['dotw'];
+  		for($i = 0; $i < sizeof($days); $i++) {
+   			$dotw .= $days[$i];
+  		}
+        
+        $update = [
+                    "buildingID" => $data['buildingID'],"roomID" => $data['roomID'],
+                    "dotw" => $dotw,"startTime" => $data['startTime'],
+                    "endTime" => $data['endTime'],"stuReg" => $data['stuReg'] 
+                  ];
+                  
+        $bind = [ ":id" => $data['courseSecID'] ];
+        
+        $q = DB::inst()->update("course_sec",$update,"courseSecID = :id",$bind);
+        
+        if(!$q) {
+            redirect( BASE_URL . 'error/update_record/' );
+        } else {
+            redirect( BASE_URL . 'section/offering_info/' . $data['courseSecID'] . '/' . bm() );
+        }
+    }
+    
     public function section($id) {
+        $array = [];
         $bind  = array( ":id" => $id );
         $q = DB::inst()->select( "course_sec","courseSecID = :id","","*",$bind );
         foreach($q as $r) {
@@ -144,6 +175,7 @@ class SectionModel {
     }
     
     public function crseList() {
+        $array = [];
         $q = DB::inst()->query( "SELECT courseCode FROM course" );
         if($q->rowCount() > 0) {
             while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
@@ -154,20 +186,46 @@ class SectionModel {
     }
     
     public function addntl($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
         $q = DB::inst()->query( "SELECT 
                 courseID,preReq,allowAudit,allowWaitlist,minEnroll,seatCap 
             FROM 
                 course 
             WHERE 
-                courseID = '$id'" 
+                courseID = :id",
+            $bind
         );
         
-        if($q->rowCount() > 0) {
-            while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-                $array[] = $r;
-            }
-            return $array;
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return $array;
+    }
+    
+    public function soff($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                    courseSecID,
+                    courseSecCode,
+                    buildingID,
+                    roomID,
+                    dotw,
+                    startTime,
+                    endTime,
+                    stuReg 
+                FROM 
+                    course_sec 
+                WHERE 
+                    courseSecID = :id",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
     }
     
     /*public function deleteCourse($id) {
@@ -230,17 +288,128 @@ class SectionModel {
         $this->_sec->Load_from_key($data['courseSecID']);
         $date = date("Y-m-d");
         $time = date("h:m A");
-        $bind = array( "stuID" => $data['stuID'],"courseSecID" => $this->_sec->getCourseSecID(),
+        $bind1 = array( "stuID" => $data['stuID'],"courseSecID" => $this->_sec->getCourseSecID(),
                        "termID" => $this->_sec->getTermID(),"courseCredits" => $this->_sec->getMinCredit(),
                        "ceu" => $this->_sec->getCEU(),"status" => "A","statusDate" => $date,
                        "statusTime" => $time,"addedBy" => $this->_auth->getPersonField('personID') );
        
-       $q = DB::inst()->insert( "stu_course_sec", $bind );
-       if(!$q) {
+        $q1 = DB::inst()->insert( "stu_course_sec", $bind1 );
+       
+        $bind2 = [ 
+                "stuID" => $data['stuID'],
+                "courseSecID" => $this->_sec->getCourseSecID(),"termID" => $this->_sec->getTermID(),
+                "attCred" => $this->_sec->getMinCredit(),
+                "acadLevelCode" => $this->_stuProg->getAcadLevelCode($data['stuID'])
+                ];
+                    
+        $q2 = DB::inst()->insert( "stu_acad_cred", $bind2 );
+       
+        if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
-       } else {
+        } else {
            redirect( BASE_URL . 'success/save_data/' );
-       }
+        }
+    }
+    
+    public function courseSec() {
+        $array = [];
+        $id = Hooks::get_option('current_term_id');
+        $facID = $this->_auth->getPersonField('personID');
+        $bind = [ ":termID" => $id, ":facID" => $facID ];
+        $q = DB::inst()->query( "SELECT 
+                    a.courseSecID,
+                    a.courseSecCode,
+                    a.secShortTitle,
+                    b.termName 
+                FROM 
+                    course_sec a 
+                LEFT JOIN 
+                    term b 
+                ON 
+                    a.termID = b.termID 
+                WHERE 
+                    a.termID = :termID 
+                AND 
+                    a.facID = :facID",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function grades($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                a.stuID,
+                a.courseSecID,
+                a.termID,
+                b.grade,
+                c.courseSecCode,
+                d.termCode 
+            FROM 
+                stu_course_sec a 
+            LEFT JOIN 
+                stu_acad_cred b
+            ON 
+                a.courseSecID = b.courseSecID 
+            LEFT JOIN 
+                course_sec c 
+            ON 
+                a.courseSecID = c.courseSecID 
+            LEFT JOIN 
+                term d 
+            ON 
+                a.termID = d.termID 
+            WHERE 
+                a.courseSecID = :id 
+            AND 
+                a.stuID = b.stuID 
+            AND 
+                a.termID = b.termID 
+            AND 
+                a.status = 'A' 
+            OR 
+                a.status = 'N'",
+            $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function runGrades($data) {
+        $size = count($data['stuID']);
+        $i = 0;
+            while($i < $size) {
+                $update = [ "grade" => $data['grade'][$i] ];
+                
+                $bind = [ 
+                        ":stuID" => $data['stuID'][$i],":courseSecID" => $data['courseSecID'],
+                        ":termID" => $data['termID']
+                        ];
+                        
+                $q = DB::inst()->update( "stu_acad_cred",
+                                $update,
+                                "stuID = :stuID 
+                            AND 
+                                courseSecID = :courseSecID 
+                            AND 
+                                termID = :termID",
+                            $bind 
+                );
+            ++$i;
+            }
+        
+        if(!$q) {
+            redirect( BASE_URL . 'error/update_record/' );
+        } else {
+            redirect( BASE_URL . 'section/grading/' . $data['courseSecID'] . '/' . bm() );
+        }
     }
     
 	public function __destruct() {

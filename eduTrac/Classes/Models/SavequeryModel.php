@@ -69,6 +69,7 @@ class SavequeryModel {
     }
     
     public function queryList() {
+        $array = [];
         $bind = array(":user" => $this->_auth->getPersonField('personID'));
         $q = DB::inst()->select( "saved_query","personID = :user","savedQueryID","*",$bind );
         foreach($q as $k => $v) {
@@ -78,6 +79,7 @@ class SavequeryModel {
     }
     
     public function query($id) {
+        $array = [];
         $bind = array( ":id" => $id, ":user" => $this->_auth->getPersonField('personID') );
         $q = DB::inst()->query( "SELECT * FROM saved_query WHERE savedQueryID = :id AND personID = :user LIMIT 1", $bind );
         foreach($q as $k => $v) {

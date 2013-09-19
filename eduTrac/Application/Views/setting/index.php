@@ -110,14 +110,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             </div>
                         </div>
                         <!-- // Group END -->
-						
-					</div>
-					<!-- // Column END -->
-					
-					<!-- Column -->
-					<div class="span6">
-						
-						<!-- Group -->
+                        
+                        <!-- Group -->
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Enable Benchmark' ) ); ?></label>
                             <div class="controls">
@@ -128,6 +122,12 @@ use \eduTrac\Classes\Libraries\Hooks;
                             </div>
                         </div>
                         <!-- // Group END -->
+						
+					</div>
+					<!-- // Column END -->
+					
+					<!-- Column -->
+					<div class="span6">
                         
                         <!-- Group -->
                         <div class="control-group">
@@ -158,14 +158,26 @@ use \eduTrac\Classes\Libraries\Hooks;
 							</div>
 						</div>
 						<!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Open Registration' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:25%"  name="open_registration" id="select2_13">
+                                    <option value="1"<?=selected( Hooks::get_option( 'open_registration' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( Hooks::get_option( 'open_registration' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
 						
 						<!-- Group -->
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Current Term' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:25%"  name="current_term_code" id="select2_13">
+                                <select style="width:100%"  name="current_term_id" id="select2_14">
                                     <option value="">&nbsp;</option>
-                                    <?php term_dropdown(_h(Hooks::get_option('current_term_code'))); ?>
+                                    <?php table_dropdown('term','','termID','termCode','termName',_h(Hooks::get_option('current_term_id'))); ?>
                                 </select>
                             </div>
                         </div>

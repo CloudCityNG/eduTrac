@@ -34,6 +34,7 @@ class AudittrailModel {
 	public function index() {}
     
     public function logList() {
+        $array = [];
         $q = DB::inst()->query( "SELECT * FROM activity_log ORDER BY created_at DESC" );
         
         if($q->rowCount() > 0) {
