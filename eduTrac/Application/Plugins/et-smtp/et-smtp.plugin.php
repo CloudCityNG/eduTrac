@@ -113,9 +113,9 @@ $email = new \eduTrac\Classes\Libraries\Email;
 		<div class="widget widget-heading-simple widget-body-gray">
 		
 			<!-- Widget heading -->
-			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
-			</div>
+			<!--<div class="widget-head">
+				<h4 class="heading"></h4>
+			</div>-->
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
