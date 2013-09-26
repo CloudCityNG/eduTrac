@@ -125,7 +125,7 @@
         }
     }
 	?>
-<img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" /></a>
+<img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" />
 </body>
 </html>
 <?php print_gzipped_page(); ?>

@@ -94,7 +94,12 @@ class Cron extends \eduTrac\Classes\Core\Controller {
     }
     
     public function fireCron() {
-       $this->view->render('cron/fire_cron'); 
+        if ( isGetSet('image') ) {
+        header("Content-Type: image/gif");
+        header("Content-Length: 49");
+        echo pack('H*', '47494638396101000100910000000000ffffffffffff00000021f90405140002002c00000000010001000002025401003b');
+        }
+        $this->view->render('cron/fire_cron'); 
     }
     
     public function activityLog() {
@@ -109,12 +114,40 @@ class Cron extends \eduTrac\Classes\Core\Controller {
         $this->model->runStuLoad();
     }
     
+    public function runEmailHold() {
+        $this->model->runEmailHold();
+    }
+    
+    public function runEmailQueue() {
+        $this->model->runEmailQueue();
+    }
+    
+    public function runGraduation() {
+        $this->model->runGraduation();
+    }
+    
+    public function runTermGPA() {
+        $this->model->runTermGPA();
+    }
+    
+    public function updateTermGPA() {
+        $this->model->updateTermGPA();
+    }
+    
     public function updateStuTerms() {
         $this->model->updateStuTerms();
     }
     
     public function updateStuLoad() {
         $this->model->updateStuLoad();
+    }
+    
+    public function purgeEmailHold() {
+        $this->model->purgeEmailHold();
+    }
+    
+    public function purgeEmailQueue() {
+        $this->model->purgeEmailQueue();
     }
     
     public function runEditCron() {

@@ -121,34 +121,35 @@ class Cron {
     
     public function schedule() {
         $timeWindow =  time() + 3600;
-        $q = DB::inst()->query( "select * from cronjob WHERE fire_time <= '$timeWindow'" );
-        $r = $q->fetch(\PDO::FETCH_OBJ);
-        $scripts_to_run = array();
-        if ($q->rowCount()) {
-        $i = 0;
-        while ($i < $q->rowCount()) {
-          $id = $r ? $r->id : $i;
-          $scriptpath = $r ? $r->scriptpath : $i;
-          $time_interval = $r ? $r->time_interval : $i;
-          $fire_time = $r ? $r->fire_time : $i;
-          $time_last_fired = $r ? $r->time_last_fired : $i;
-          $run_only_once = $r ? $r->run_only_once : $i;
-          $fire_time_new = $fire_time + $time_interval;
-          $scripts_to_run[$i]["script"]="$scriptpath";
-          $scripts_to_run[$i]["id"]=$id;
-          DB::inst()->query("UPDATE cronjob
-                            SET
-                             fire_time = '$fire_time_new',
-                             time_last_fired = '$fire_time'
-                            WHERE id = '$id'");
-          if($run_only_once) DB::inst()->query("DELETE from cronjob WHERE id = '$id' ");
-          $i++;
-         }
+        $q = DB::inst()->query( "SELECT * FROM cronjob WHERE fire_time <= '$timeWindow'" );
+        foreach($q as $r) {
+            $scripts_to_run = array();
+            if ($q->rowCount()) {
+                $i = 0;
+                while ($i < $q->rowCount()) {
+                  $id = $r ? $r['id'] : $i;
+                  $scriptpath = $r ? $r['scriptpath'] : $i;
+                  $time_interval = $r ? $r['time_interval'] : $i;
+                  $fire_time = $r ? $r['fire_time'] : $i;
+                  $time_last_fired = $r ? $r['time_last_fired'] : $i;
+                  $run_only_once = $r ? $r['run_only_once'] : $i;
+                  $fire_time_new = $fire_time + $time_interval;
+                  $scripts_to_run[$i]["script"] = "$scriptpath";
+                  $scripts_to_run[$i]["id"] = $id;
+                  DB::inst()->query("UPDATE cronjob
+                                    SET
+                                     fire_time = '$fire_time_new',
+                                     time_last_fired = '$fire_time'
+                                    WHERE id = '$id'");
+                  if($run_only_once) DB::inst()->query("DELETE from cronjob WHERE id = '$id' ");
+                  $i++;
+                }
+            }
+            // run the scheduled scripts
+            $log_date="";
+            $log_output="";
+            for ($i = 0; $i < count($scripts_to_run); $i++) $this->fireScript($scripts_to_run[$i]['script'],$scripts_to_run[$i]['id']);
         }
-        // run the scheduled scripts
-        $log_date="";
-        $log_output="";
-        for ($i = 0; $i < count($scripts_to_run); $i++) $this->fireScript($scripts_to_run[$i]['script'],$scripts_to_run[$i]['id']);
     }
     
     public function Clear($id) {

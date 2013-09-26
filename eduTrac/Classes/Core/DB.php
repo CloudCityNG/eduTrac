@@ -361,7 +361,7 @@ class DB {
      */
     public function delete($table,$where = NULL,$bind = NULL) {
         if($where == NULL) {
-            $sql = 'DELETE '.$table;
+            $sql = 'DELETE * FROM '.$table;
         } else {
             $sql = "DELETE FROM " . $table . " WHERE " . $where . ";";
             $this->init($sql, $bind);

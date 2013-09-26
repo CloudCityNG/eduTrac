@@ -48,7 +48,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>course/<?=bm();?>" method="post">
+							<form class="form-search center" action="<?=BASE_URL;?>course/<?=bm();?>" method="get" autocomplete="off">
 							  	<input type="text" name="crse" class="input-xxlarge" placeholder="Search by Subject or Course Code . . . " />
 							</form>
 						</div>
@@ -59,7 +59,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 			
 			<div class="break"></div>
 			
-			<?php if(isPostSet('crse')) { ?>
+			<?php if(isGetSet('crse')) { ?>
 			<!-- Table -->
 			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
 			

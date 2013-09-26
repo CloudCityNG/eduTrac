@@ -209,6 +209,26 @@ class Student extends \eduTrac\Classes\Core\Controller {
 		$this->view->render('student/courses');
     }
     
+    public function grades() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array('My Grades');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js'
+                                );
+        $this->view->grades = $this->model->grades();
+		$this->view->render('student/grades');
+    }
+    
     public function portal() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
 		$this->view->staticTitle = array('Student Portal');
@@ -234,6 +254,53 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $this->view->schedule = $this->model->schedule();
 		$this->view->render('student/schedule');
 	}
+	
+	public function graduation() {
+	    if(!hasPermission('graduate_students')) { redirect( BASE_URL . 'dashboard/' ); }
+		$this->view->staticTitle = array('Graduate Student(s)');
+		$this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                'theme/scripts/demo/timepicker.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+		$this->view->render('student/graduation');
+	}
+	
+	public function tran() {
+	    if(!hasPermission('access_tran_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+		$this->view->staticTitle = array('Generate Transcript(s)');
+		$this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                'theme/scripts/demo/timepicker.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+		$this->view->render('student/tran');
+	}
+	
+	public function generate() {
+	    $this->view->staticTitle = array('Transcript');
+	    $this->view->stuInfo = $this->model->tranStuInfo();
+	    $this->view->courses = $this->model->tranCourse();
+        $this->view->render('bh',true);
+        $this->view->render('student/generate',true);
+        $this->view->render('bf',true);
+    }
     
     public function runStudent() {
         if(!hasPermission('create_stu_record')) { redirect( BASE_URL . 'dashboard/' ); }
@@ -247,6 +314,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['approvedBy'] = isPostSet('approvedBy');
         $data['progID'] = isPostSet('progID');
         $data['startDate'] = isPostSet('startDate');
+        $data['status'] = isPostSet('status');
         $this->model->runStudent($data);
     }
     
@@ -257,7 +325,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['advisorID'] = isPostSet('advisorID');
         $data['acadLevelCode'] = isPostSet('acadLevelCode');
         $data['catYearID'] = isPostSet('catYearID');
-        $data['antGradDate'] = isPostSet('antGradDate');
+        $data['status'] = isPostSet('status');
         $this->model->runEditStudent($data);
     }
      
@@ -269,6 +337,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['startDate'] = isPostSet('startDate');
         $data['endDate'] = isPostSet('endDate');
         $data['progID'] = isPostSet('progID');
+        $data['antGradDate'] = isPostSet('antGradDate');
         $data['approvedBy'] = isPostSet('approvedBy');
         $this->model->runStuProg($data);
     }
@@ -281,6 +350,8 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['startDate'] = isPostSet('startDate');
         $data['endDate'] = isPostSet('endDate');
         $data['stuProgID'] = isPostSet('stuProgID');
+        $data['antGradDate'] = isPostSet('antGradDate');
+        $data['eligible_to_graduate'] = isPostSet('eligible_to_graduate');
         $this->model->runEditStuProg($data);
     }
     
@@ -312,6 +383,14 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['termID'] = isPostSet('termID');
         $data['courseCredits'] = isPostSet('courseCredits');
         $this->model->runRegister($data);
+    }
+    
+    public function runGraduation() {
+        $data = [];
+        $data['studentID'] = isPostSet('studentID');
+        $data['queryID'] = isPostSet('queryID');
+        $data['gradDate'] = isPostSet('gradDate');
+        $this->model->runGraduation($data);
     }
     
     public function search() {

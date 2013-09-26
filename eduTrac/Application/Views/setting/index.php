@@ -82,8 +82,8 @@ use \eduTrac\Classes\Libraries\Hooks;
 							<label class="control-label"><?php _e( _t( 'Enable SSL' ) ); ?></label>
 							<div class="controls">
 								<select style="width:25%" name="enable_ssl" id="select2_9">
-                            		<option value="1"<?=selected( Hooks::get_option( 'enable_ssl' ), '1', false ); ?>><?php _e( _t( "Yes" ) ); ?></option>
-                            		<option value="0"<?=selected( Hooks::get_option( 'enable_ssl' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                            		<option value="1"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '1', false ); ?>><?php _e( _t( "Yes" ) ); ?></option>
+                            		<option value="0"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                             	</select>
 							</div>
 						</div>
@@ -104,8 +104,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Maintenance Mode' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="maintenance_mode" id="select2_10">
-                                    <option value="1"<?=selected( Hooks::get_option( 'maintenance_mode' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'maintenance_mode' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -116,8 +116,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Enable Benchmark' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="enable_benchmark" id="select2_11">
-                                    <option value="1"<?=selected( Hooks::get_option( 'enable_benchmark' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'enable_benchmark' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'enable_benchmark' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'enable_benchmark' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -134,8 +134,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Enable Cron Log' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%" name="enable_cron_log" id="select2_12">
-                                    <option value="1"<?=selected( Hooks::get_option( 'enable_cron_log' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'enable_cron_log' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'enable_cron_log' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'enable_cron_log' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -164,8 +164,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Open Registration' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="open_registration" id="select2_13">
-                                    <option value="1"<?=selected( Hooks::get_option( 'open_registration' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'open_registration' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'open_registration' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'open_registration' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -198,6 +198,17 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<!-- // Row END -->
 			
 				<hr class="separator" />
+				
+				<div class="separator line bottom"></div>
+								
+				<!-- Group -->
+				<div class="control-group row-fluid">
+					<label class="control-label"><?php _e( _t( 'Reset Password Text' ) ); ?></label>
+					<div class="controls">
+						<textarea id="mustHaveId" class="wysihtml5 span12" name="reset_password_text" rows="20"><?=_h(Hooks::get_option('reset_password_text'));?></textarea>
+					</div>
+				</div>
+				<!-- // Group END -->
 				
 				<!-- Form actions -->
 				<div class="form-actions">

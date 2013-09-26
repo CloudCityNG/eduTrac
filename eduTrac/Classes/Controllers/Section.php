@@ -327,6 +327,7 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['courseSecID'] = isPostSet('courseSecID');
         $data['termID'] = isPostSet('termID');
         $data['grade'] = isPostSet('grade');
+        $data['cmplCredit'] = isPostSet('cmplCredit');
         $this->model->runGrades($data);
     }
     

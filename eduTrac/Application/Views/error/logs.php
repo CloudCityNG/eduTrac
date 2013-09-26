@@ -33,7 +33,7 @@ $log = new Log;
 
 <ul class="breadcrumb">
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
 	<li><?php _e( _t( 'Error Log' ) ); ?></li>
 </ul>

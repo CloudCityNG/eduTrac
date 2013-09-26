@@ -356,18 +356,18 @@ function add()
 <script language="JavaScript"><!--
 with (document.cron)
 {
- id.value="<?=$this->cron[0]['id'];?>";
- name.value="<?=$this->cron[0]['name'];?>";
- scriptpath.value="<?=$this->cron[0]['scriptpath'];?>";
- minutes.value=<?=$minutes;?>;
- hours.value=<?=$hours;?>;
- days.value=<?=$days;?>;
- weeks.value=<?=$weeks;?>;
- time_last_fired.value=<?=$this->cron[0]['time_last_fired'];?>;
- original_minutes=<?=$minutes;?>;
- original_hours=<?=$hours;?>;
- original_days=<?=$days;?>;
- original_weeks=<?=$weeks;?>;
- run_only_once.value=<?=$this->cron[0]['run_only_once'];?>;
+ id.value="<?=_h($this->cron[0]['id']);?>";
+ name.value="<?=_h($this->cron[0]['name']);?>";
+ scriptpath.value="<?=_h($this->cron[0]['scriptpath']);?>";
+ minutes.value=<?=_h($minutes);?>;
+ hours.value=<?=_h($hours);?>;
+ days.value=<?=_h($days);?>;
+ weeks.value=<?=_h($weeks);?>;
+ time_last_fired.value=<?=_h($this->cron[0]['time_last_fired']);?>;
+ original_minutes=<?=_h($minutes);?>;
+ original_hours=<?=_h($hours);?>;
+ original_days=<?=_h($days);?>;
+ original_weeks=<?=_h($weeks);?>;
+ run_only_once.value=<?=_h($this->cron[0]['run_only_once']);?>;
 }
 // --></script>

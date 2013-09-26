@@ -493,7 +493,7 @@
 		'configs'      =>  array(
 		  array(
 			'maskname'     =>  'constants.php',
-			'savetofolder' =>  'eduTrac/Config/'),
+			'savetofolder' =>  'tinyPHP/Config/'),
 		  array(
 			'maskname'     =>  'broken.index.php',
 			'savetofolder' =>  ''),
@@ -790,7 +790,7 @@
 		// messages, just a demonstration on special keywords
         'company' => '7 Media Web Solutions, LLC', 
         'product' => 'eduTrac',
-        'version' => '1.0.0-BETA1',
+        'version' => '1.0.0-BETA2',
 
 		// These keywords are used with Timezone and Language steps
 		'timezone' => '0',
@@ -798,7 +798,7 @@
 
 		// Want to show the todays date
 		// in welcome/outro message?
-		'datenow'  => date('Y-m-d h:m:s'),
+		'datenow'  => date('Y-m-d H:m:s'),
 		), 
     );
    

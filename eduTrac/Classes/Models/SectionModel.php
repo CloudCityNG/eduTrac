@@ -347,33 +347,24 @@ class SectionModel {
                 a.stuID,
                 a.courseSecID,
                 a.termID,
-                b.grade,
-                c.courseSecCode,
-                d.termCode 
+                a.grade,
+                b.courseSecCode,
+                b.minCredit,
+                c.termCode 
             FROM 
-                stu_course_sec a 
+                stu_acad_cred a 
             LEFT JOIN 
-                stu_acad_cred b
+                course_sec b 
             ON 
                 a.courseSecID = b.courseSecID 
             LEFT JOIN 
-                course_sec c 
+                term c 
             ON 
-                a.courseSecID = c.courseSecID 
-            LEFT JOIN 
-                term d 
-            ON 
-                a.termID = d.termID 
+                a.termID = c.termID 
             WHERE 
                 a.courseSecID = :id 
             AND 
-                a.stuID = b.stuID 
-            AND 
-                a.termID = b.termID 
-            AND 
-                a.status = 'A' 
-            OR 
-                a.status = 'N'",
+                a.termID = b.termID",
             $bind 
         );
         foreach($q as $r) {
@@ -386,7 +377,10 @@ class SectionModel {
         $size = count($data['stuID']);
         $i = 0;
             while($i < $size) {
-                $update = [ "grade" => $data['grade'][$i] ];
+                $update = [ 
+                            "grade" => $data['grade'][$i],"compCred" => $data['cmplCredit'],
+                            "gradePoints" => calculateGradePoints($data['grade'][$i])
+                        ];
                 
                 $bind = [ 
                         ":stuID" => $data['stuID'][$i],":courseSecID" => $data['courseSecID'],

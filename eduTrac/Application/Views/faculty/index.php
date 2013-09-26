@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
+ *
  * Faculty Search View
  *  
- * PHP 5.4+
+ * PHP 5
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * @copyright (c) 2013 7 Media Web Solutions, LLC
+ * Copyright (C) 2013 Joshua Parker
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
- * @link        http://www.7mediaws.org/
- * @since       1.0.0
- * @package     eduTrac
- * @author      Joshua Parker <josh@7mediaws.org>
+ * @since eduTrac(tm) v 1.0
+ * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 ?>
 
@@ -47,8 +45,8 @@
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>faculty/" method="post">
-							  	<input type="text" name="faculty" class="input-xxlarge" placeholder="Search faculty . . . " /> 
+							<form class="form-search center" action="<?=BASE_URL;?>faculty/" method="post" autocomplete="off">
+							  	<input type="text" name="faculty" class="input-xxlarge" placeholder="Search by student id or name . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>

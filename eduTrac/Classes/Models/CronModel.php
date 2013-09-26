@@ -31,8 +31,12 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
 class CronModel {
+    
+    private $_email;
 	
-	public function index() {}
+	public function __construct() {
+	    $this->_email = new \eduTrac\Classes\Libraries\PHPMailer;
+	}
     
     public function cronList() {
         $q = DB::inst()->query( "SELECT * FROM cronjob ORDER BY id" );
@@ -124,6 +128,131 @@ class CronModel {
                             VALUES('$stuID','$termID','$load','$level')");
             }
         }
+    }
+    
+    public function runEmailHold() {
+        $array1 = [];
+        $array2 = [];
+        $dt = date( "Y-m-d h:m:s" );
+        /** 
+         * SELECT all records from the email_hold table 
+         * and join with the saved_query table to retrieve 
+         * the savedQuery for $q2.
+         */ 
+        $q1 = DB::inst()->query( "SELECT 
+                        a.*,
+                        b.savedQuery 
+                    FROM 
+                        email_hold a 
+                    LEFT JOIN 
+                        saved_query b 
+                    ON 
+                        a.queryID = b.savedQueryID 
+                    WHERE 
+                        a.processed = '0'" 
+        );
+        foreach($q1 as $r1) {
+            $array1[] = $r1;
+        }
+        
+        /**
+         * Use the savedQuery from $q1 to retrieve results 
+         * to input into the email_queue table for processing.
+         */
+        $query = $r1['savedQuery'];
+        $q2 = DB::inst()->query( _h("$query") );
+        
+        $bind1 = [ ":holdID" => _h($r1['id']) ];
+        $q3 = DB::inst()->select( "email_queue","holdID = :holdID AND sent = '0'","","*",$bind1 );
+        
+        if(count($r1['fromEmail']) > 0) {
+            if(count($q3) <= 0) {
+                foreach($q2 as $r2) {
+                    $body = $r1['body'];
+                    $body = str_replace('#uname#',_h($r2['uname']),$body);
+                    $body = str_replace('#email#',_h($r2['email']),$body);
+                    $body = str_replace('#fname#',_h($r2['fname']),$body);
+                    $body = str_replace('#lname#',_h($r2['lname']),$body);
+                    $body = str_replace('#personID#',_h($r2['personID']),$body);
+                    
+                    $bind2 = [ 
+                                "personID" => _h($r1['personID']),
+                                "uname" => _h($r2['uname']),
+                                "lname" => _h($r2['lname']),
+                                "email" => _h($r2['email']),
+                                "fname" => _h($r2['fname']),
+                                "fromName" => _h($r1['fromName']),
+                                "fromEmail" => _h($r1['fromEmail']),
+                                "subject" => _h($r1['subject']),
+                                "holdID" => _h($r1['id']),
+                                "body" => $body 
+                             ];
+                    $q4 = DB::inst()->insert("email_queue",$bind2);
+                }
+            }
+        }
+        if($q4) {
+            $update = [ "processed" => '1',"dateTime" => $dt ];
+            DB::inst()->update("email_hold",$update,"id = :holdID AND processed = '0'",$bind1);
+        }
+    }
+    
+    public function runEmailQueue() {
+        $q = DB::inst()->select('email_queue','sent = "0"');
+        $sDate = date('Y-m-d');
+        foreach($q as $k => $r) {
+            if(Hooks::has_action('etMailer_init','et_smtp')) {
+                $this->_email->IsSMTP();
+                $this->_email->Mailer = "SMTP";
+                $this->_email->Host = _h(Hooks::get_option('et_smtp_host'));
+                $this->_email->SMTPSecure = _h(Hooks::get_option('et_smtp_smtpsecure'));
+                $this->_email->Port = _h(Hooks::get_option('et_smtp_port'));
+                $this->_email->SMTPAuth = (_h(Hooks::get_option("et_smtp_smtpauth")) == "yes") ? TRUE : FALSE;
+                    if($this->_email->SMTPAuth) {
+                        $this->_email->Username = _h(Hooks::get_option('et_smtp_username'));
+                        $this->_email->Password = _h(Hooks::get_option('et_smtp_password'));
+                    }
+                    $this->_email->AddAddress($r['email']);
+					$this->_email->From = $r['fromEmail'];
+					$this->_email->FromName = $r['fromName'];
+					$this->_email->Sender = $this->_email->From; //Return-Path
+	                $this->_email->AddReplyTo($this->_email->From,$this->_email->FromName); //Reply-To
+					$this->_email->IsHTML(true);
+					$this->_email->Subject = $r['subject'];
+					$this->_email->Body = $r['body'];
+					$this->_email->Send();
+					$this->_email->ClearAddresses();
+					$this->_email->ClearAttachments();
+			} else {
+				$this->_email->AddAddress($r['email']);
+				$this->_email->From = $r['fromEmail'];
+				$this->_email->FromName = $r['fromName'];
+				$this->_email->Sender = $this->_email->From; //Return-Path
+                $this->_email->AddReplyTo($this->_email->From,$this->_email->FromName); //Reply-To
+				$this->_email->IsHTML(true);
+				$this->_email->Subject = $r['subject'];
+				$this->_email->Body = $r['body'];
+				$this->_email->Send();
+				$this->_email->ClearAddresses();
+				$this->_email->ClearAttachments();
+            }
+            $update = [ "sent" => '1',"sentDate" => $sDate ];
+            $bind = [ ":id" => $r['id'] ];
+            DB::inst()->update("email_queue",$update,"id = :id AND sent = '0'",$bind);
+        }
+    }
+    
+    public function purgeEmailHold() {
+        $today = date('Y-m-d');
+        //$current_date = strtotime($today);
+        /* 5 days after processing date */
+        //$expire = date("Y-m-d",$current_date+=432000);
+        $bind = [ ":expire" => $today ];
+        $q = DB::inst()->delete( 'email_hold','processed = "1" AND DATE_ADD(dateTime, INTERVAL 5 DAY) <= :expire', $bind );
+    }
+    
+    public function purgeEmailQueue() {
+        $q = DB::inst()->delete('email_queue','sent = "1"');
     }
     
     public function updateStuTerms() {
@@ -237,6 +366,144 @@ class CronModel {
         $q = DB::inst()->update( "cronjob",$update,"id = :id",$bind );
         
         redirect( BASE_URL . 'cron/view/' . $data['id'] . '/' . bm() );
+    }
+    
+    public function runGraduation() {
+        $array1 = [];
+        $array2 = [];
+        $date = date("Y-m-d");
+        $q1 = DB::inst()->query( "SELECT 
+                    a.id,
+                    a.queryID,
+                    a.gradDate,
+                    b.savedQuery 
+                FROM 
+                    graduation_hold a 
+                LEFT JOIN 
+                    saved_query b 
+                ON 
+                    a.queryID = b.savedQueryID" 
+        );
+        foreach($q1 as $r1) {
+            $array1[] = $r1;
+        }
+        
+        /**
+         * If the above query has at least one row, 
+         * then process the savedQuery.
+         */ 
+        if($q1->rowCount() > 0) {
+            $query = $r1['savedQuery'];
+            $q2 = DB::inst()->query( "$query" );
+        }
+        
+        /**
+         * If the savedQuery above is successful, 
+         * then graduate the students from the query.
+         */ 
+        if($q2) {
+            foreach($q2 as $r2) {
+                $update = [ 
+                            "graduationDate" => $r1['gradDate'],
+                            "currStatus" => 'G', "statusDate" => $date,"endDate" => $date
+                          ];
+                $bind = [ ":stuID" => $r2['stuID'] ];
+                DB::inst()->update( "stu_program",$update,"stuID = :stuID",$bind );
+            }
+        }
+        /* Delete records from graduation_hold after above queries have been processed. */
+        DB::inst()->query( "TRUNCATE graduation_hold" );
+    }
+    
+    public function runTermGPA() {
+        $q1 = DB::inst()->query( "SELECT 
+                        stuID,
+                        termID,
+                        acadLevelCode,
+                        SUM(attCred),
+                        SUM(compCred),
+                        SUM(gradePoints) 
+                    FROM 
+                        stu_acad_cred 
+                    WHERE 
+                        grade != 'NULL' 
+                    GROUP BY 
+                        stuID,termID,acadLevelCode" 
+        );
+        foreach($q1 as $r1) {
+            $array[] = $r1;
+        }
+        
+        $bind1 = [ 
+                    ":stuID" => $r1['stuID'],":termID" => $r1['termID'],
+                    ":acadLevelCode" => $r1['acadLevelCode']
+                    ];
+        
+        $q2 = DB::inst()->query( "SELECT 
+                        * 
+                    FROM 
+                        stu_term_gpa 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termID = :termID 
+                    AND 
+                        acadLevelCode = :acadLevelCode",
+                    $bind1
+        );
+        
+        if(count($q1) > 0) {
+            if(count($q2) <= 0) {
+                $points = $r1['SUM(compCred)']*$r1['SUM(gradePoints)'];
+                $GPA = $points/$r1['SUM(compCred)'];
+                $bind2 = [ 
+                        "stuID" => $r1['stuID'],"termID" => $r1['termID'],
+                        "acadLevelCode" => $r1['acadLevelCode'],"attCred" => $r1['SUM(attCred)'],
+                        "compCred" => $r1['SUM(compCred)'],"gradePoints" => $r1['SUM(gradePoints)'],
+                        "termGPA" => $GPA
+                        ];
+                
+                $q3 = DB::inst()->insert( "stu_term_gpa", $bind2 );
+            }
+        }
+    }
+    
+    public function updateTermGPA() {
+        $array = [];
+        $q1 = DB::inst()->query( "SELECT 
+                    a.stuID,
+                    a.termID,
+                    a.acadLevelCode,
+                    a.gradePoints AS termGPAPoints,
+                    SUM(b.attCred),
+                    SUM(b.compCred),
+                    SUM(b.gradePoints) AS termGradePoints 
+                FROM 
+                    stu_term_gpa a 
+                LEFT JOIN 
+                    stu_acad_cred b 
+                ON 
+                    a.stuID = b.stuID 
+                WHERE 
+                    a.termID = b.termID 
+                AND 
+                    a.acadLevelCode = b.acadLevelCode" 
+        );
+        foreach($q1 as $r1) {
+            $array[] = $r1;
+        }
+        if($r1['termGPAPoints'] != $r1['termGradePoints']) {
+            $points = $r1['SUM(compCred)']*$r1['termGradePoints'];
+            $GPA = $points/$r1['SUM(compCred)'];
+            $update = [ 
+                        "attCred" => $r1['SUM(attCred)'],
+                        "compCred" => $r1['SUM(compCred)'],
+                        "gradePoints" => $r1['termGradePoints'],
+                        "termGPA" => $GPA
+                    ];
+            $bind = [ ":stuID" => $r1['stuID'],":termID" => $r1['termID'],":level" => $r1['acadLevelCode'] ];
+            $q2 = DB::inst()->update( 'stu_term_gpa',$update,'stuID = :stuID AND termID = :termID AND acadLevelCode = :level',$bind );
+        }
     }
     
     public function __destruct() {

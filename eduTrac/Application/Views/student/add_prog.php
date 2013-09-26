@@ -26,6 +26,7 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+$antGradDate = "05/".date("y",strtotime("+4 years"));
 ?>
 
 <script type="text/javascript">
@@ -106,6 +107,15 @@ jQuery(document).ready(function() {
                             <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
                                 <?=stu_prog_status_select();?>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Grad Date' ) ); ?></label>
+                            <div class="controls">
+                                <input type="text" name="antGradDate" class="span2 center" id="antGradDate" value="<?=$antGradDate;?>" readonly required />
                             </div>
                         </div>
                         <!-- // Group END -->

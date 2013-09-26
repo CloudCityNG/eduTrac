@@ -83,7 +83,7 @@
                         <!-- // Group END -->
                         
                     </div>
-                    <!-- // Column END -->
+                    <!-- // Column END -->,
                     
                     <!-- Column -->
                     <div class="span2">
@@ -199,9 +199,15 @@
                         
                         <!-- Group -->
                         <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <label class="control-label" for="antGradDate"><?php _e( _t( 'Anticipated Grad Date' ) ); ?></label>
-                                <input class="span3 center" type="text" name="antGradDate"<?=sio();?> value="<?=_h($this->student[0]['antGradDate']);?>" required />
+                                <select style="width:100%;" name="status"<?=sio();?> id="select2_15" required>
+                                    <option value="">&nbsp;</option>
+                                    <option value="A"<?=selected('A',_h($this->student[0]['status']),false);?>><?php _e( _t( 'A Active' ) ); ?></option>
+                                    <option value="H"<?=selected('H',_h($this->student[0]['status']),false);?>><?php _e( _t( 'H Hiatus' ) ); ?></option>
+                                    <option value="L"<?=selected('L',_h($this->student[0]['status']),false);?>><?php _e( _t( 'L Leave of Absence' ) ); ?></option>
+                                    <option value="W"<?=selected('W',_h($this->student[0]['status']),false);?>><?php _e( _t( 'W Withdrawn' ) ); ?></option>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->

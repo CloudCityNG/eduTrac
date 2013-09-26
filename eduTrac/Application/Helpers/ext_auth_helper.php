@@ -93,7 +93,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -105,7 +105,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('course_sec_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -117,7 +117,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('course_sec_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -129,7 +129,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('acad_prog_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -141,7 +141,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('acad_prog_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -153,7 +153,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('address_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -165,7 +165,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('address_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -177,7 +177,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('faculty_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -189,7 +189,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('faculty_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -201,7 +201,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('student_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -213,7 +213,31 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('student_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' style="display:none;"';
+        }
+    }
+    
+    /**
+     * Staff Inquiry only.
+     */
+    function staio() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('student_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' readonly="readonly"';
+        }
+    }
+    
+    /**
+     * Staff disable submit buttons.
+     */
+    function staids() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('student_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
@@ -225,7 +249,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('course_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('person_inquiry_only') && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }
@@ -237,7 +261,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if($acl->hasPermission('general_inquiry_only') && !$acl->userHasRole(8)) {
+        if($acl->hasPermission('person_inquiry_only') && !$acl->userHasRole(8)) {
             return ' style="display:none;"';
         }
     }
