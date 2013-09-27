@@ -1991,10 +1991,6 @@ ALTER TABLE `institution_attended` ADD FOREIGN KEY (`personID`) REFERENCES `pers
 
 ALTER TABLE `person` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
-ALTER TABLE `person_roles` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
-
-ALTER TABLE `person_perms` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
-
 ALTER TABLE `saved_query` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `staff` ADD FOREIGN KEY (`staffID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
