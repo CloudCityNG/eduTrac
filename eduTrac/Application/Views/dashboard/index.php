@@ -49,7 +49,7 @@ $cache = new \eduTrac\Classes\Libraries\Cache('3600', BASE_PATH . 'tmp/cache/', 
 				</div>
 				<div class="widget-body">
                     <?php  $rss = new \DOMDocument();
-                    $rss->load('http://www.7mediaws.org/feed/');
+                    $rss->load('http://feeds.feedburner.com/7mws/');
                     $feed = array();
                     foreach ($rss->getElementsByTagName('item') as $node) {
                     $item = array (
