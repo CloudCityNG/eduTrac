@@ -48,7 +48,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>course/<?=bm();?>" method="post">
+							<form class="form-search center" action="<?=BASE_URL;?>course/<?=bm();?>" method="post" autocomplete="off">
 							  	<input type="text" name="crse" class="input-xxlarge" placeholder="Search by Subject or Course Code . . . " />
 							</form>
 						</div>

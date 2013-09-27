@@ -79,7 +79,8 @@ class FacultyModel {
             "facID" => $data['facID'],"buildingID" => $data['buildingID'],
             "officeID" => $data['officeID'],"office_phone" => $data['office_phone'],
             "deptID" => $data['deptID'],"addDate" => $data['addDate'],
-            "approvedBy" => $data['approvedBy']
+            "approvedBy" => $data['approvedBy'],"status" => $data['status'],
+            "schoolID" => $data['schoolID']
         );
         
         $q = DB::inst()->insert( "faculty", $bind );
@@ -96,7 +97,8 @@ class FacultyModel {
         $update = array( 
             "buildingID" => $data['buildingID'],
             "officeID" => $data['officeID'],"office_phone" => $data['office_phone'],
-            "deptID" => $data['deptID']
+            "deptID" => $data['deptID'],"status" => $data['status'],
+            "schoolID" => $data['schoolID']
         );
         
         $bind = array( ":facID" => $data['facID'] );
@@ -109,6 +111,32 @@ class FacultyModel {
         $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->select( "faculty","facID = :id","","*",$bind );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function facAddr($id) {
+        $array = [];
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->query( "SELECT 
+                        * 
+                    FROM 
+                        address a 
+                    LEFT JOIN 
+                        faculty b 
+                    ON 
+                        a.personID = b.facID 
+                    WHERE 
+                        a.addressType = 'P' 
+                    AND 
+                        a.addressStatus = 'C' 
+                    AND 
+                        a.personID = :id",
+                    $bind 
+        );
         
         foreach($q as $r) {
             $array[] = $r;

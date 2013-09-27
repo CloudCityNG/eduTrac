@@ -26,6 +26,7 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+use \eduTrac\Classes\Libraries\Hooks;
 ?>
 		<div id="footer" class="hidden-print">
 			
@@ -125,7 +126,11 @@
         }
     }
 	?>
-<img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" /></a>
+
+<?php if(Hooks::get_option('enable_cron_jobs') == 1) { ?>
+<img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" />
+<?php } ?>
+
 </body>
 </html>
 <?php print_gzipped_page(); ?>

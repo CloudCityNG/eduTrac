@@ -95,8 +95,8 @@ $auth = new Cookies;
 	<!--[if gt IE 8]><!--><link media="screen" href="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/pageguide/css/pageguide.css" rel="stylesheet" /><!--<![endif]-->
 	
 	<!-- JQuery -->
-    <script src="http://7mws.s3.amazonaws.com/jquery-1.10.1.min.js"></script>
-    <script src="http://7mws.s3.amazonaws.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	
 	<?php
 	if (isset($this->css)) {
@@ -139,7 +139,7 @@ $auth = new Cookies;
 					<a href="" data-toggle="dropdown" class="glyphicons electrical_plug"><i></i>Plugins <span class="caret"></span></a>
 					<ul class="dropdown-menu pull-left">
 						<li<?=ae('access_plugin_screen');?>><a href="<?=BASE_URL;?>plugins/<?=bm();?>" class="glyphicons cogwheel"><i></i><?php _e( _t( 'Plugins' ) ); ?></a></li>
-                        <?php Hooks::list_plugin_admin_pages();?>
+						<?php Hooks::list_plugin_admin_pages();?>
 						<!-- // Components Submenu Regular Items END -->
 					</ul>
 				</li>
@@ -223,13 +223,15 @@ $auth = new Cookies;
                             </ul>
                         </li>
 						
-						<!-- <li class="dropdown submenu">
-							<a data-toggle="dropdown" class="dropdown-toggle glyphicons e-mail"><i></i><?php _e( _t( 'Email' ) ); ?></a>
-							<ul class="dropdown-menu submenu-show submenu-hide pull-right">
-								<li class=""><a href="<?=BASE_URL;?>admin/manage_email_templates/<?=bm();?>"><?php _e( _t( 'Email Templates' ) ); ?></a></li>
-								<li class=""><a href="<?=BASE_URL;?>admin/mailer/<?=bm();?>"><?php _e( _t( 'Mailer' ) ); ?></a></li>
-							</ul>
-						</li> -->
+						<li<?=ae('edit_settings');?> class="dropdown submenu">
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons e-mail"><i></i><?php _e( _t( 'Communication Mgmt' ) ); ?></a>
+                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
+                                <li class=""><a href="<?=BASE_URL;?>mailer/<?=bm();?>"><?php _e( _t( 'Email Templates' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>mailer/add/<?=bm();?>"><?php _e( _t( 'Add Email Template' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>mailer/schedule/<?=bm();?>"><?php _e( _t( 'Schedule Email' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>mailer/queue/<?=bm();?>"><?php _e( _t( 'Email Queue' ) ); ?></a></li>
+                            </ul>
+                        </li>
 						
 						<li<?=ae('access_nslc');?> class="dropdown submenu">
 							<a data-toggle="dropdown" class="dropdown-toggle glyphicons hdd"><i></i><?php _e( _t( 'NSLC' ) ); ?></a>
@@ -257,7 +259,16 @@ $auth = new Cookies;
                         
                         <li<?=ae('access_faculty_screen');?> class=""><a href="<?=BASE_URL;?>faculty/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(FAC) Faculty' ) ); ?></a></li>
                         
-                        <li<?=ae('access_student_screen');?> class=""><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(SPRO) Student' ) ); ?></a></li>
+                        <li<?=ae('access_staff_screen');?> class=""><a href="<?=BASE_URL;?>staff/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(STAF) Staff' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_student_screen');?> class="dropdown submenu">
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons user"><i></i><?php _e( _t( 'Student' ) ); ?></a>
+                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
+                                <li<?=ae('access_student_screen');?> class=""><a href="<?=BASE_URL;?>student/<?=bm();?>"><?php _e( _t( '(SPRO) Student Profile' ) ); ?></a></li>
+                                <li<?=ae('graduate_students');?> class=""><a href="<?=BASE_URL;?>student/graduation/<?=bm();?>"><?php _e( _t( 'Graduate Student(s)' ) ); ?></a></li>
+                                <li<?=ae('generate_transcript');?> class=""><a href="<?=BASE_URL;?>student/tran/<?=bm();?>"><?php _e( _t( 'Generate Transcript' ) ); ?></a></li>
+                            </ul>
+                        </li>
 						
 						<li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>" class="glyphicons keys"><i></i><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
 						

@@ -80,7 +80,7 @@ class Cookies {
 		
         $sql = DB::inst()->select( "person","uname = :data","","*",$bind );
         foreach($sql as $r) {
-            return $r[$field];
+            return _h($r[$field]);
         }
 	}
 	
@@ -106,8 +106,10 @@ class Cookies {
             $array[] = $r;
         }
 		
-		if($r['uname'] == $vars['data']) {
-			return true;
+		if(count($sql) > 0) {
+    		if(_h($r['uname']) == $vars['data']) {
+    			return true;
+    		}
 		}
 	}
 	

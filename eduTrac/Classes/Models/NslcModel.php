@@ -114,9 +114,9 @@ class NslcModel {
                 FROM 
                     stu_term a 
                 LEFT JOIN 
-                    stu_load b 
+                    stu_term_load b 
                 ON 
-                    a.stuTermID = b.stuTermID 
+                    a.termID = b.termID 
                 LEFT JOIN 
                     nslc_hold_file c 
                 ON 

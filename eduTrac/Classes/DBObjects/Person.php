@@ -1,6 +1,5 @@
 <?php namespace eduTrac\Classes\DBObjects;
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
-use \eduTrac\Classes\Core\DB;
 /**
  * Person DBObject Class
  *  
@@ -29,6 +28,7 @@ use \eduTrac\Classes\Core\DB;
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
+use \eduTrac\Classes\Core\DB;
 class Person {
 
 	private $_personID; //int(8) unsigned zerofill
@@ -143,6 +143,13 @@ class Person {
         $q = DB::inst()->query( "SELECT facID FROM faculty" );
         while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
             return $r['facID'];
+        }
+    }
+    
+    public function isStaffID() {
+        $q = DB::inst()->query( "SELECT staffID FROM staff" );
+        while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
+            return $r['staffID'];
         }
     }
     

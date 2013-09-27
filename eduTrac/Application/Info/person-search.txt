@@ -1,4 +1,4 @@
-You can search a person by using on of the following formats/criteria:
+You can search a person by using one of the following formats/criteria:
 <ul>
     <li>FirstName LastName</li>
     <li>LastName FirstName</li>

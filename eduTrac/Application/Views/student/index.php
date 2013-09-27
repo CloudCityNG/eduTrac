@@ -47,7 +47,7 @@
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>student/<?=bm();?>" method="post">
+							<form class="form-search center" action="<?=BASE_URL;?>student/<?=bm();?>" method="post" autocomplete="off">
 							  	<input type="text" name="student" class="input-xxlarge" placeholder="Search student . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>

@@ -37,7 +37,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<div class="widget-body">
 				
 					<!-- Form -->
-					<form method="post" action="<?=BASE_URL;?>index/runLogin/">
+					<form method="post" action="<?=BASE_URL;?>index/runLogin/" autocomplete="off">
 						<label><?php _e( _t( 'Username' ) ); ?></label>
 						<input type="text" class="input-block-level" name="uname" placeholder="Your Username" required /> 
 						<label><?php _e( _t( 'Password' ) ); ?></label>
@@ -59,7 +59,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 			<!-- // Box END -->
 			
 			<div class="innerT center">
-				<p>Having troubles? <a href="<?=Hooks::get_option('help_desk');?>">Get Help</a></p>
+				<p>Having troubles? <a href="<?=_h(Hooks::get_option('help_desk'));?>">Get Help</a></p>
 			</div>
 			
 		</div>

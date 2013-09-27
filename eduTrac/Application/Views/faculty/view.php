@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
+ *
  * Add Faculty View
  *  
- * PHP 5.4+
+ * PHP 5
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * @copyright (c) 2013 7 Media Web Solutions, LLC
+ * Copyright (C) 2013 Joshua Parker
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
- * @link        http://www.7mediaws.org/
- * @since       1.0.0
- * @package     eduTrac
- * @author      Joshua Parker <josh@7mediaws.org>
+ * @since eduTrac(tm) v 1.0
+ * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
 $facID = new \eduTrac\Classes\DBObjects\Person;
@@ -56,6 +54,30 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
+			    
+			    <!-- Row -->
+				<div class="row-fluid">
+					<!-- Column -->
+					<div class="span12">
+					    
+					    <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label" for="address"><?php _e( _t( 'Address' ) ); ?></label>
+                            <div class="controls">
+                                <input class="span3" type="text" readonly value="<?=_h($this->facAddr[0]['address1']);?> <?=_h($this->facAddr[0]['address2']);?>" />
+                                <input class="span3" type="text" readonly value="<?=_h($this->facAddr[0]['city']);?>" />
+                                <input class="span3" type="text" readonly value="<?=_h($this->facAddr[0]['state']);?>" />
+                                <input class="span3" type="text" readonly value="<?=_h($this->facAddr[0]['zip']);?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                    </div>
+                    <!-- End Column -->
+                </div>
+                <!-- End Row -->
+                
+                <hr class="separator" />
 			
 				<!-- Row -->
 				<div class="row-fluid">
@@ -66,7 +88,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Building' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%;" name="buildingID" id="select2_11"<?=fio();?> required>
+                                <select style="width:100%;" name="buildingID"<?=fio();?> id="select2_11" required>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('building','','buildingID','buildingCode','buildingName',_h($this->faculty[0]['buildingID'])); ?>
                                 </select>
@@ -78,7 +100,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Office' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%;" name="officeID" id="select2_12"<?=fio();?>>
+                                <select style="width:100%;" name="officeID"<?=fio();?> id="select2_12">
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('room','','roomID','roomCode','roomNumber',_h($this->faculty[0]['officeID'])); ?>
                                 </select>
@@ -94,6 +116,18 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                             </div>
                         </div>
                         <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:100%;" name="schoolID" id="select2_15">
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('school','','schoolID','schoolCode','schoolName',_h($this->faculty[0]['schoolID'])); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
 						
 					</div>
 					<!-- // Column END -->
@@ -105,10 +139,32 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_13"<?=fio();?> requied>
+                                <select style="width:100%;" name="deptID"<?=fio();?> id="select2_14" requied>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('department','','deptID','deptCode','deptName',_h($this->faculty[0]['deptID'])); ?>
                                 </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:100%;" name="status" id="select2_13" required>
+                                    <option value="">&nbsp;</option>
+                                    <option value="A"<?=selected('A',_h($this->faculty[0]['status']),false);?>><?php _e( _t( 'A Active' ) ); ?></option>
+                                    <option value="I"<?=selected('I',_h($this->faculty[0]['status']),false);?>><?php _e( _t( 'I Inactive' ) ); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Email' ) ); ?></label>
+                            <div class="controls">
+                                <input type="text" readonly class="span6" value="<?=_h($this->facAddr[0]['email1']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->

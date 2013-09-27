@@ -66,5 +66,15 @@ class Success extends \eduTrac\Classes\Core\Controller {
         $this->view->staticTitle = array('Delete Record Success');
         $this->view->render('success/delete_record');
     }
+    
+    public function update_record() {
+        $this->view->staticTitle = array('Update Record Success');
+        $this->view->render('success/update_record');
+    }
+    
+    public function reset_password() {
+        $this->view->staticTitle = array('Reset Password Success');
+        $this->view->render('success/reset_password');
+    }
 
 }

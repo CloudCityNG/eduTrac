@@ -47,7 +47,7 @@
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>institution/" method="post">
+							<form class="form-search center" action="<?=BASE_URL;?>institution/" method="post" autocomplete="off">
 							  	<input type="text" name="inst" class="input-xxlarge" placeholder="Search Institution . . . " />
 							</form>
 						</div>

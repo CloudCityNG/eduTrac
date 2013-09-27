@@ -230,7 +230,6 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['ceu'] = isPostSet('ceu');
         $data['courseLevelCode'] = isPostSet('courseLevelCode');
         $data['acadLevelCode'] = isPostSet('acadLevelCode');
-        $data['secShortTitle'] = isPostSet('secShortTitle');
         $data['currStatus'] = isPostSet('currStatus');
         $data['statusDate'] = isPostSet('statusDate');
         $data['approvedDate'] = isPostSet('approvedDate');
@@ -254,7 +253,6 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['ceu'] = isPostSet('ceu');
         $data['courseLevelCode'] = isPostSet('courseLevelCode');
         $data['acadLevelCode'] = isPostSet('acadLevelCode');
-        $data['secShortTitle'] = isPostSet('secShortTitle');
         $data['currStatus'] = isPostSet('currStatus');
         $data['statusDate'] = isPostSet('statusDate');
         $data['courseSecID'] = isPostSet('courseSecID');
@@ -327,6 +325,7 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['courseSecID'] = isPostSet('courseSecID');
         $data['termID'] = isPostSet('termID');
         $data['grade'] = isPostSet('grade');
+        $data['cmplCredit'] = isPostSet('cmplCredit');
         $this->model->runGrades($data);
     }
     

@@ -79,14 +79,15 @@ class StudentModel {
         $date = date("Y-m-d");
         $bind1 = array( 
             "stuID" => $data['stuID'],"advisorID" => $data['advisorID'],"catYearID" => $data['catYearID'],
-            "antGradDate" => $data['antGradDate'],"acadLevelCode" => $data['acadLevelCode'],
+            "acadLevelCode" => $data['acadLevelCode'],"status" => $data['status'],
             "addDate" => $data['addDate'],"approvedBy" => $data['approvedBy']
         );
         
         $bind2 = array( 
             "stuID" => $data['stuID'],"progID" => $data['progID'],
             "currStatus" => "A","statusDate" => $data['addDate'],
-            "startDate" => $data['startDate'],"approvedBy" => $data['approvedBy']
+            "startDate" => $data['startDate'],"approvedBy" => $data['approvedBy'],
+            "antGradDate" => $data['antGradDate'],
         );
         
         $q1 = DB::inst()->insert( "student", $bind1 );
@@ -111,7 +112,7 @@ class StudentModel {
     public function runEditStudent($data) {
         $update = array( 
             "advisorID" => $data['advisorID'],"catYearID" => $data['catYearID'],
-            "antGradDate" => $data['antGradDate'],"acadLevelCode" => $data['acadLevelCode']
+            "acadLevelCode" => $data['acadLevelCode'],"status" => $data['status']
         );
         
         $bind = array( ":stuID" => $data['stuID'] );
@@ -177,8 +178,8 @@ class StudentModel {
                 stuID,
                 advisorID,
                 catYearID,
-                antGradDate,
-                acadLevelCode 
+                acadLevelCode,
+                status 
             FROM 
                 student 
             WHERE 
@@ -262,6 +263,9 @@ class StudentModel {
         $q = DB::inst()->query( "SELECT 
                     a.acadProgCode,
                     b.stuProgID,
+                    b.eligible_to_graduate,
+                    b.graduationDate,
+                    b.antGradDate,
                     b.stuID,
                     b.currStatus,
                     b.statusDate,
@@ -334,11 +338,11 @@ class StudentModel {
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                         a.courseSecID,
-                        a.termID,
                         a.sectionNumber,
                         a.secShortTitle,
                         a.startDate,
                         a.endDate,
+                        a.termID,
                         b.courseID,
                         b.courseCode,
                         b.acadLevelCode,
@@ -459,6 +463,35 @@ class StudentModel {
         return $array;
     }
     
+    public function grades() {
+        $array = [];
+        $bind = [ ":stuID" => $this->_auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.stuID,
+                        a.grade,
+                        b.courseSecCode,
+                        b.secShortTitle,
+                        c.termCode 
+                    FROM 
+                        stu_acad_cred a 
+                    LEFT JOIN 
+                        course_sec b 
+                    ON 
+                        a.courseSecID = b.courseSecID 
+                    LEFT JOIN 
+                        term c 
+                    ON 
+                        a.termID = c.termID 
+                    WHERE 
+                        a.stuID = :stuID",
+                    $bind
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
     public function runProgLookup($data) {
         $bind = array(":id" => $data['progID']);
         $q = DB::inst()->query( "SELECT 
@@ -504,7 +537,7 @@ class StudentModel {
         $bind = array( "stuID" => $data['stuID'],"progID" => $data['progID'],
                        "currStatus" => $data['currStatus'],"statusDate" => $data['startDate'],
                        "startDate" => $data['startDate'],"endDate" => $data['endDate'],
-                       "approvedBy" => $data['approvedBy'] 
+                       "approvedBy" => $data['approvedBy'],"antGradDate" => $data['antGradDate']
         );
         
         $q = DB::inst()->insert( "stu_program", $bind );
@@ -517,7 +550,8 @@ class StudentModel {
         $date = date("Y-m-d");
         
         $update1 = array( "currStatus" => $data['currStatus'],"startDate" => $data['startDate'],
-                        "endDate" => $data['endDate'] 
+                        "endDate" => $data['endDate'],"eligible_to_graduate" => $data['eligible_to_graduate'],
+                        "antGradDate" => $data['antGradDate']
         );
         
         $update2 = array( "statusDate" => $date );
@@ -542,13 +576,14 @@ class StudentModel {
         $bind1 = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
         $q1 = DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );
         
-        $update2 = [ "grade" => $data['grade'] ];
+        
+        $update2 = [ "gradePoints" => calculateGradePoints($data['grade']),"grade" => $data['grade']  ];
         $bind2 = [ 
                 ":stuID" => $data['stuID'], ":courseSecID" => $data['courseSecID'],
                 ":termID" => $data['termID']
                 ];
-        $q2 = DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2 );
-        
+        $q = DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2);
+                
         redirect( BASE_URL . 'student/view_academic_credits/' . $data['id'] . '/' . bm() );
     }
     
@@ -584,6 +619,117 @@ class StudentModel {
         } else {
             redirect( BASE_URL . 'success/course_registration/' );
         }
+    }
+    
+    public function runGraduation($data) {
+        if(!empty($data['studentID'])) {
+            $date = date("Y-m-d");
+            $update = [ 
+                        "statusDate" => $date,"endDate" => $date,"currStatus" => 'G',
+                        "graduationDate" => $data['gradDate']
+                      ];
+            $bind = [ ":stuID" => $data['studentID'],":etg" => '1' ];
+            $q = DB::inst()->update("stu_program",$update,"stuID = :stuID AND eligible_to_graduate = :etg",$bind);
+            if(!$q) {
+                redirect( BASE_URL . 'error/update_record/' );
+            } else {
+                redirect( BASE_URL . 'success/update_record/' );
+            }
+        } else {
+            $bind = [ "queryID" => $data['queryID'],"gradDate" => $data['gradDate'] ];
+            $q = DB::inst()->insert( "graduation_hold", $bind );
+            if(!$q) {
+                redirect( BASE_URL . 'error/save_data/' );
+            } else {
+                redirect( BASE_URL . 'success/save_data/' );
+            }
+        }
+    }
+    
+    public function tranStuInfo() {
+        $array = [];
+        $stuID = isGetSet('studentID');
+        $tranType = isGetSet('acadLevelCode');
+        $bind = [ ":stuID" => $stuID,":acadLevelCode" => $tranType ];
+        $q = DB::inst()->query( "SELECT 
+                        CASE a.acadLevelCode 
+                        WHEN 'UG' THEN 'Undergraduate' 
+                        WHEN 'GR' THEN 'Graduate' 
+                        ELSE 'Continuing Education' 
+                        END AS 'Level',
+                        a.stuID,
+                        b.address1,
+                        b.address2,
+                        b.city,
+                        b.state,
+                        b.zip,
+                        c.ssn,
+                        c.dob 
+                    FROM 
+                        stu_acad_cred a 
+                    LEFT JOIN 
+                        address b 
+                    ON 
+                        a.stuID = b.personID 
+                    LEFT JOIN 
+                        person c 
+                    ON 
+                        a.stuID = c.personID 
+                    WHERE 
+                        a.stuID = :stuID 
+                    AND
+                       a.acadLevelCode = :acadLevelCode 
+                    AND 
+                        b.addressStatus = 'C' 
+                    AND 
+                        b.addressType = 'P'",
+                    $bind
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+
+        return $array;    }
+    
+    public function tranCourse() {
+        $array = [];
+        $stuID = isGetSet('studentID');
+        $tranType = isGetSet('acadLevelCode');
+        $bind = [ ":stuID" => $stuID, ":acadLevelCode" => $tranType ];
+        $q = DB::inst()->query( "SELECT 
+                        a.compCred AS acadCompCred,
+                        a.attCred AS acadAttCred,
+                        a.grade,
+                        a.gradePoints AS acadGradePoints,
+                        b.secShortTitle,
+                        b.courseSecCode,
+                        b.startDate,
+                        b.endDate,
+                        c.attCred AS termAttCred,
+                        c.compCred AS termCompCred,
+                        c.gradePoints AS termGradePoints,
+                        c.termGPA 
+                    FROM 
+                        stu_acad_cred a 
+                    LEFT JOIN 
+                        course_sec b 
+                    ON 
+                        a.courseSecID = b.courseSecID 
+                    LEFT JOIN 
+                        stu_term_gpa c
+                    ON 
+                        a.termID = c.termID 
+                    WHERE 
+                        a.stuID = :stuID 
+                    AND 
+                        a.acadLevelCode = :acadLevelCode",
+                    $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
     }
     
 	public function __destruct() {

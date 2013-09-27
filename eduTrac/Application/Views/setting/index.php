@@ -82,8 +82,8 @@ use \eduTrac\Classes\Libraries\Hooks;
 							<label class="control-label"><?php _e( _t( 'Enable SSL' ) ); ?></label>
 							<div class="controls">
 								<select style="width:25%" name="enable_ssl" id="select2_9">
-                            		<option value="1"<?=selected( Hooks::get_option( 'enable_ssl' ), '1', false ); ?>><?php _e( _t( "Yes" ) ); ?></option>
-                            		<option value="0"<?=selected( Hooks::get_option( 'enable_ssl' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                            		<option value="1"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '1', false ); ?>><?php _e( _t( "Yes" ) ); ?></option>
+                            		<option value="0"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                             	</select>
 							</div>
 						</div>
@@ -104,8 +104,8 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Maintenance Mode' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="maintenance_mode" id="select2_10">
-                                    <option value="1"<?=selected( Hooks::get_option( 'maintenance_mode' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'maintenance_mode' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -116,9 +116,22 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label"><?php _e( _t( 'Enable Benchmark' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="enable_benchmark" id="select2_11">
-                                    <option value="1"<?=selected( Hooks::get_option( 'enable_benchmark' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'enable_benchmark' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'enable_benchmark' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'enable_benchmark' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Enable Cron Jobs' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:25%" name="enable_cron_jobs" id="select2_12">
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'enable_cron_jobs' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'enable_cron_jobs' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                </select>
+                                <a href="#myModalECJ" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -133,9 +146,9 @@ use \eduTrac\Classes\Libraries\Hooks;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Enable Cron Log' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:25%" name="enable_cron_log" id="select2_12">
-                                    <option value="1"<?=selected( Hooks::get_option( 'enable_cron_log' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'enable_cron_log' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                <select style="width:25%" name="enable_cron_log" id="select2_13">
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'enable_cron_log' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'enable_cron_log' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -163,9 +176,9 @@ use \eduTrac\Classes\Libraries\Hooks;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Open Registration' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:25%"  name="open_registration" id="select2_13">
-                                    <option value="1"<?=selected( Hooks::get_option( 'open_registration' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'open_registration' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                <select style="width:25%"  name="open_registration" id="select2_14">
+                                    <option value="1"<?=selected( _h(Hooks::get_option( 'open_registration' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
+                                    <option value="0"<?=selected( _h(Hooks::get_option( 'open_registration' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -175,7 +188,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Current Term' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%"  name="current_term_id" id="select2_14">
+                                <select style="width:100%"  name="current_term_id" id="select2_15">
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('term','','termID','termCode','termName',_h(Hooks::get_option('current_term_id'))); ?>
                                 </select>
@@ -199,6 +212,17 @@ use \eduTrac\Classes\Libraries\Hooks;
 			
 				<hr class="separator" />
 				
+				<div class="separator line bottom"></div>
+								
+				<!-- Group -->
+				<div class="control-group row-fluid">
+					<label class="control-label"><?php _e( _t( 'Reset Password Text' ) ); ?></label>
+					<div class="controls">
+						<textarea id="mustHaveId" class="wysihtml5 span12" name="reset_password_text" rows="20"><?=_h(Hooks::get_option('reset_password_text'));?></textarea>
+					</div>
+				</div>
+				<!-- // Group END -->
+				
 				<!-- Form actions -->
 				<div class="form-actions">
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
@@ -215,6 +239,15 @@ use \eduTrac\Classes\Libraries\Hooks;
 	<div class="modal hide fade" id="myModal">
         <div class="modal-body">
             <?=file_get_contents( APP_PATH . 'Info/setting-hold.txt' );?>
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+        </div>
+    </div>
+    
+    <div class="modal hide fade" id="myModalECJ">
+        <div class="modal-body">
+            <p><?=_t('This option should be set to no until you have configured each <a href="'.BASE_URL.'cron/">cron job</a>. If this is set to yes before that, your error logs will be huge.');?></p>
         </div>
         <div class="modal-footer">
             <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>

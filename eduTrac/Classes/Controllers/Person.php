@@ -316,6 +316,10 @@ class Person extends \eduTrac\Classes\Core\Controller {
         $this->model->runUsernameCheck($data);
     }
     
+    public function resetPassword($id) {
+        $this->model->resetPassword($id);
+    }
+    
     public function search() {
         $this->model->search();
     }

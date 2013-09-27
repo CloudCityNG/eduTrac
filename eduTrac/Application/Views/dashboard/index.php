@@ -83,7 +83,7 @@ $cache = new \eduTrac\Classes\Libraries\Cache('3600', BASE_PATH . 'tmp/cache/', 
 					
 				<!-- Widget Heading -->
 				<div class="widget-head">
-					<h4 class="heading glyphicons hospital_h"><i></i>Support</h4>
+					<h4 class="heading glyphicons life_preserver"><i></i>Support</h4>
 				</div>
 				<!-- // Widget Heading END -->
 				

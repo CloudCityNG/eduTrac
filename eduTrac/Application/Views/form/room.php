@@ -63,7 +63,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         <div class="control-group">
                             <label class="control-label" for="buildingCode"><font color="red">*</font> <?php _e( _t( 'Building' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%" name="buildinID" id="select2_10" required>
+                                <select style="width:100%" name="buildingID" id="select2_10" required>
                                     <option value="">&nbsp;</option>
                                     <?=table_dropdown('building', '', 'buildingID', 'buildingCode', 'buildingName');?>
                                 </select>

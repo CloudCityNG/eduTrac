@@ -1,7 +1,7 @@
 INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `email`,`personType`,`approvedBy`) 
 VALUES (NULL, '{admin_username}', '{admin_password}', '{admin_realname}', '{admin_email}','STA','1');
 
-INSERT INTO `et_option` VALUES(1, 'dbversion', '00005');
+INSERT INTO `et_option` VALUES(1, 'dbversion', '00006');
 
 INSERT INTO `et_option` VALUES(2, 'system_email', '{admin_email}');
 
@@ -45,6 +45,10 @@ INSERT INTO `et_option` VALUES(21, 'open_registration', '1');
 
 INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');
 
+INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);
+
+INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
+
 INSERT INTO `person_roles` VALUES(1, 1, 8, '{datenow}');
 
 INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);
@@ -56,3 +60,19 @@ INSERT INTO `cronjob` VALUES(3, '{siteurl}cron/runStuLoad/', 'Create Student Loa
 INSERT INTO `cronjob` VALUES(4, '{siteurl}cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);
 
 INSERT INTO `cronjob` VALUES(5, '{siteurl}cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(6, '{siteurl}cron/runEmailHold/', 'Process Email Hold Table', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(7, '{siteurl}cron/runEmailQueue/', 'Process Email Queue', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(8, '{siteurl}cron/purgeEmailHold/', 'Purge Email Hold', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(9, '{siteurl}cron/purgeEmailQueue/', 'Purge Email Queue', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(10, '{siteurl}cron/runGraduation/', 'Process Graduation', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(11, '{siteurl}cron/runTermGPA/', 'Create Student Term GPA Record', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(12, '{siteurl}cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(13, '{siteurl}cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);

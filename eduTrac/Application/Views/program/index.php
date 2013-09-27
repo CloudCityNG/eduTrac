@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
+ *
  * Manage Courses View
  *  
- * PHP 5.4+
+ * PHP 5
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * @copyright (c) 2013 7 Media Web Solutions, LLC
+ * Copyright (C) 2013 Joshua Parker
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
- * @link        http://www.7mediaws.org/
- * @since       1.0.0
- * @package     eduTrac
- * @author      Joshua Parker <josh@7mediaws.org>
+ * @since eduTrac(tm) v 1.0
+ * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 use \eduTrac\Classes\Libraries\Hooks;
 ?>
@@ -48,8 +46,8 @@ use \eduTrac\Classes\Libraries\Hooks;
 					<div class="widget-body">
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>program/<?=bm();?>" method="post">
-							  	<input type="text" name="prog" class="input-xxlarge" placeholder="Search by Department or Program Code . . . " />
+							<form class="form-search center" action="<?=BASE_URL;?>program/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="prog" class="input-xxlarge" placeholder="Search by Department of Program Code . . . " />
 							  	<!-- <button type="submit" class="btn btn-inverse">Search</button> -->
 							</form>
 						</div>

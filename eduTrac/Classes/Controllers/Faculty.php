@@ -1,12 +1,12 @@
 <?php namespace eduTrac\Classes\Controllers;
-if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
+ *
  * Faculty Controller
  *  
  * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * @copyright (c) 2013 7 Media Web Solutions, LLC
+ * Copyright (C) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,11 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * @link        http://www.7mediaws.org/
  * @since       1.0.0
  * @package     eduTrac
+ * @subpackage  Controller
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 class Faculty extends \eduTrac\Classes\Core\Controller {
 
@@ -85,6 +88,7 @@ class Faculty extends \eduTrac\Classes\Core\Controller {
                                 'theme/scripts/demo/form_elements.js'
                                 );
         $this->view->faculty = $this->model->faculty($id);
+        $this->view->facAddr = $this->model->facAddr($id);
         
         if(empty($this->view->faculty)) {
             redirect( BASE_URL . 'error/invalidRecord/' );
@@ -97,12 +101,14 @@ class Faculty extends \eduTrac\Classes\Core\Controller {
         if(!hasPermission('create_fac_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['facID'] = isPostSet('facID');
+        $data['schoolID'] = isPostSet('schoolID');
         $data['buildingID'] = isPostSet('buildingID');
         $data['officeID'] = isPostSet('officeID');
         $data['office_phone'] = isPostSet('office_phone');
         $data['deptID'] = isPostSet('deptID');
         $data['addDate'] = isPostSet('addDate');
         $data['approvedBy'] = isPostSet('approvedBy');
+        $data['status'] = isPostSet('status');
         $this->model->runFaculty($data);
     }
     
@@ -110,10 +116,12 @@ class Faculty extends \eduTrac\Classes\Core\Controller {
         if(!hasPermission('create_fac_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['facID'] = isPostSet('facID');
+        $data['schoolID'] = isPostSet('schoolID');
         $data['buildingID'] = isPostSet('buildingID');
         $data['officeID'] = isPostSet('officeID');
         $data['office_phone'] = isPostSet('office_phone');
         $data['deptID'] = isPostSet('deptID');
+        $data['status'] = isPostSet('status');
         $this->model->runEditFaculty($data);
     }
     

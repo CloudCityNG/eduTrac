@@ -29,7 +29,7 @@
 
 use \eduTrac\Classes\Libraries\PDF\Cezpdf;
 
-class Creport extends Cezpdf{
+class Creport extends Cezpdf {
     function Creport($p,$o){
         $this->__construct($p, $o,'none',array());
         $this->isUnicode = true;

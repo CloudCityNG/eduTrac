@@ -89,6 +89,10 @@ $person = new \eduTrac\Classes\DBObjects\Person;
                     	<?php if($person->isFacID() != $v['personID']) { ?>
                     	<a<?=ae('create_fac_record');?> href="<?=BASE_URL;?>faculty/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Faculty Record" class="btn btn-circle"><i class="icon-user"></i></a>
                     	<?php } ?>
+                    	
+                    	<?php if($person->isStaffID() != $v['personID']) { ?>
+                        <a<?=ae('create_staff_record');?> href="<?=BASE_URL;?>staff/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Staff Record" class="btn btn-circle"><i class="icon-user"></i></a>
+                    	<?php } ?>
                         
                         <?php if(hasAppl($v['personID']) != $v['personID']) { ?>
                         <a<?=ae('create_application');?> href="<?=BASE_URL;?>application/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Application" class="btn btn-circle"><i class="icon-tasks"></i></a>

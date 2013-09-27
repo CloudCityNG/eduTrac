@@ -211,7 +211,7 @@ class FormModel {
 	/* Begin department */
 	public function runDept($data) {
 		$bind = array( 
-			"deptCode" => $data['deptCode'],"deptType" => $data['deptType'],
+			"deptCode" => $data['deptCode'],"deptTypeCode" => $data['deptTypeCode'],
 			"deptName" => $data['deptName'],"deptDesc" => $data['deptDesc']
 			);
 			
@@ -230,7 +230,7 @@ class FormModel {
 	
 	public function runEditDept($data) {
 		$update = array( 
-            "deptCode" => $data['deptCode'],"deptType" => $data['deptType'],
+            "deptCode" => $data['deptCode'],"deptTypeCode" => $data['deptTypeCode'],
             "deptName" => $data['deptName'],"deptDesc" => $data['deptDesc']
             );
 			

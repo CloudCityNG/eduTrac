@@ -65,7 +65,7 @@
 						<div class="control-group">
 							<label class="control-label"><?php _e( _t( 'Program' ) ); ?></label>
 							<div class="controls">
-								<input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['acadProgCode']);?>" required />
+								<input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['acadProgCode']);?>" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -74,7 +74,16 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['schoolCode'].' '.$this->stuProg[0]['schoolName']);?>" required />
+                                <input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['schoolCode'].' '.$this->stuProg[0]['schoolName']);?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Ant Grad Date' ) ); ?></label>
+                            <div class="controls">
+                                <input type="text" name="antGradDate" class="span2 center" value="<?=_h($this->stuProg[0]['antGradDate']);?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -83,23 +92,49 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <?=stu_prog_status_select($this->stuProg[0]['currStatus']);?>
+                                <?=stu_prog_status_select(_h($this->stuProg[0]['currStatus']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
+                        
+                        <!-- Group -->
+						<div class="control-group"<?php if(_h($this->stuProg[0]['currStatus']) == 'G') { echo ' style="display:none"'; } ?>>
+						    <label class="control-label"><?php _e( _t( 'Eligible to Graduate?' ) ); ?></label>
+							<div class="controls widget-body uniformjs">
+    							<label class="checkbox">
+									<input type="checkbox" class="checkbox" name="eligible_to_graduate" value="1"<?=checked('1',_h($this->stuProg[0]['eligible_to_graduate']),false);?> />
+									<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
+								</label>
+							</div>
+						</div>
+						<!-- // Group END -->
 						
 					</div>
 					<!-- // Column END -->
 					
 					<!-- Column -->
 					<div class="span6">
+					    
+					    <?php if(_h($this->stuProg[0]['currStatus']) == 'G') { ?>
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Graduation Date' ) ); ?></label>
+                            <div class="controls">
+                                <div class="input-append date" id="datetimepicker6">
+                                    <input id="graduationDate" class="center" name="graduationDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['graduationDate']);?>" />
+                                    <span class="add-on"><i class="icon-th"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						<?php } ?>
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Start Date' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
                             <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="startDate" type="text" value="<?=_h($this->stuProg[0]['startDate']);?>" required/>
+                                <div class="input-append date" id="datetimepicker7">
+                                    <input id="startDate" class="center" name="startDate" type="text" value="<?=_h($this->stuProg[0]['startDate']);?>" required/>
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
                             </div>
@@ -110,11 +145,11 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
                             <div class="controls">
-                                <div class="input-append date" id="datetimepicker7">
+                                <div class="input-append date" id="datetimepicker8">
                                     <?php if($this->stuProg[0]['endDate'] == NULL || $this->stuProg[0]['endDate'] == '0000-00-00') { ?>
                                     <input id="endDate" name="endDate"<?=sio();?> type="text" />
                                     <?php } else { ?>
-                                    <input id="endDate" name="endDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['endDate']);?>" />
+                                    <input id="endDate" class="center" name="endDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['endDate']);?>" />
                                     <?php } ?>
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
@@ -126,7 +161,7 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" readonly class="span6" value="<?=_h(get_name($this->stuProg[0]['approvedBy']));?>" required />
+                                <input type="text" readonly class="span6" value="<?=_h(get_name($this->stuProg[0]['approvedBy']));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -150,6 +185,15 @@
 				
 			</div>
 		</div>
+		
+		<div class="modal hide fade" id="myModal">
+            <div class="modal-body">
+                <p><?=_t('Select the checkbox if the student is eligible to graduate from this particular program.');?></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            </div>
+        </div>
 		<!-- // Widget END -->
 		
 	</form>

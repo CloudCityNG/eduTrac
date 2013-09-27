@@ -192,6 +192,21 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:100%;" name="status"<?=sio();?> id="select2_15" required>
+                                    <option value="">&nbsp;</option>
+                                    <option value="A"><?php _e( _t( 'A Active' ) ); ?></option>
+                                    <option value="H"><?php _e( _t( 'H Hiatus' ) ); ?></option>
+                                    <option value="L"><?php _e( _t( 'L Leave of Absence' ) ); ?></option>
+                                    <option value="W"><?php _e( _t( 'W Withdrawn' ) ); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Grad Date' ) ); ?></label>
                             <div class="controls">
                                 <input type="text" name="antGradDate" class="span2 center" id="antGradDate" value="<?=$antGradDate;?>" readonly required />

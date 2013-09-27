@@ -87,6 +87,9 @@
     			
 			<!-- Form actions -->
 			<div class="form-actions">
+			    <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
+			    <input type="hidden" name="cmplCredit" value="<?=_h($v['minCredit']);?>" />
+			    <?php } endif; ?>
 				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
 			</div>
 			<!-- // Form actions END -->

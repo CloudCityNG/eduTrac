@@ -129,24 +129,24 @@ $email = new \eduTrac\Classes\Libraries\Email;
                     
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('From Email:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_from" type="text" value="<?=Hooks::get_option('et_smtp_from');?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_from" type="text" value="<?=_h(Hooks::get_option('et_smtp_from'));?>" /></div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('From Name:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_fromname" type="text" value="<?=Hooks::get_option('et_smtp_fromname');?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_fromname" type="text" value="<?=_h(Hooks::get_option('et_smtp_fromname'));?>" /></div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('Host:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_host" type="text" value="<?=Hooks::get_option('et_smtp_host');?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_host" type="text" value="<?=_h(Hooks::get_option('et_smtp_host'));?>" /></div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('SMTP Secure:'); ?></label> 
-                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value=""<?=checked( Hooks::get_option( 'et_smtp_smtpsecure' ), '', false );?> /> None</div>
-                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value="ssl"<?=checked( Hooks::get_option( 'et_smtp_smtpsecure' ), 'ssl', false );?> /> SSL</div>
-                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value="tls"<?=checked( Hooks::get_option( 'et_smtp_smtpsecure' ), 'tls', false );?> /> TLS</div>
+                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value=""<?=checked( _h(Hooks::get_option( 'et_smtp_smtpsecure' )), '', false );?> /> None</div>
+                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value="ssl"<?=checked( _h(Hooks::get_option( 'et_smtp_smtpsecure' )), 'ssl', false );?> /> SSL</div>
+                			<div class="controls"><input id='input01' name="et_smtp_smtpsecure" type="radio" value="tls"<?=checked( _h(Hooks::get_option( 'et_smtp_smtpsecure' )), 'tls', false );?> /> TLS</div>
                 		</div>
                         
                     </div>
@@ -156,23 +156,23 @@ $email = new \eduTrac\Classes\Libraries\Email;
                         
                         <div class='control-group'>
                     		<label class='control-label' for='input01'><?=_t('Port:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_port" type="text" value="<?=Hooks::get_option('et_smtp_port'); ?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_port" type="text" value="<?=_h(Hooks::get_option('et_smtp_port')); ?>" /></div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('SMTP Authentication:'); ?></label> 
-                			<div class="controls"><input id='input01' name="et_smtp_smtpauth" type="radio" value="no"<?=checked( Hooks::get_option( 'et_smtp_smtpauth' ), 'no', false );?> /> No</div>
-                			<div class="controls"><input id='input01' name="et_smtp_smtpauth" type="radio" value="yes"<?=checked( Hooks::get_option( 'et_smtp_smtpauth' ), 'yes', false );?> /> Yes</div>
+                			<div class="controls"><input id='input01' name="et_smtp_smtpauth" type="radio" value="no"<?=checked( _h(Hooks::get_option( 'et_smtp_smtpauth' )), 'no', false );?> /> No</div>
+                			<div class="controls"><input id='input01' name="et_smtp_smtpauth" type="radio" value="yes"<?=checked( _h(Hooks::get_option( 'et_smtp_smtpauth' )), 'yes', false );?> /> Yes</div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('Username:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_username" type="text" value="<?=Hooks::get_option('et_smtp_username');?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_username" type="text" value="<?=_h(Hooks::get_option('et_smtp_username'));?>" /></div>
                 		</div>
                 		
                 		<div class='control-group'>
                 			<label class='control-label' for='input01'><?=_t('Password:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="et_smtp_password" type="password" value="<?=Hooks::get_option('et_smtp_password');?>" /></div>
+                			<div class="controls"><input id='input01' class="span10" name="et_smtp_password" type="password" value="<?=_h(Hooks::get_option('et_smtp_password'));?>" /></div>
                 		</div>
                     
                     </div>
@@ -253,17 +253,17 @@ $email = new \eduTrac\Classes\Libraries\Email;
 
 function et_smtp($etMailer) {
 	$etMailer->Mailer = "SMTP";
-	$etMailer->From = Hooks::get_option("et_smtp_from");
-	$etMailer->FromName = Hooks::get_option("et_smtp_fromname");
+	$etMailer->From = _h(Hooks::get_option("et_smtp_from"));
+	$etMailer->FromName = _h(Hooks::get_option("et_smtp_fromname"));
 	$etMailer->Sender = $etMailer->From; //Return-Path
 	$etMailer->AddReplyTo($etMailer->From,$etMailer->FromName); //Reply-To
-	$etMailer->Host = Hooks::get_option("et_smtp_host");
-	$etMailer->SMTPSecure = Hooks::get_option("et_smtp_smtpsecure");
-	$etMailer->Port = Hooks::get_option("et_smtp_port");
-	$etMailer->SMTPAuth = (Hooks::get_option("et_smtp_smtpauth") == "yes") ? TRUE : FALSE;
+	$etMailer->Host = _h(Hooks::get_option("et_smtp_host"));
+	$etMailer->SMTPSecure = _h(Hooks::get_option("et_smtp_smtpsecure"));
+	$etMailer->Port = _h(Hooks::get_option("et_smtp_port"));
+	$etMailer->SMTPAuth = (_h(Hooks::get_option("et_smtp_smtpauth")) == "yes") ? TRUE : FALSE;
 	if($etMailer->SMTPAuth) {
-		$etMailer->Username = Hooks::get_option("et_smtp_username");
-		$etMailer->Password = Hooks::get_option("et_smtp_password");
+		$etMailer->Username = _h(Hooks::get_option("et_smtp_username"));
+		$etMailer->Password = _h(Hooks::get_option("et_smtp_password"));
 	}
 }
 Hooks::add_action('etMailer_init','et_smtp');

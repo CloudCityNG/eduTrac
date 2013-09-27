@@ -93,7 +93,7 @@ class SavequeryModel {
         $q = DB::inst()->query( "DELETE FROM saved_query WHERE savedQueryID = :savedQueryID AND personID = :user", $bind );
         
         if($q) {
-            redirect( BASE_URL . 'save_query/' . bm() );
+            redirect( BASE_URL . 'savequery/' . bm() );
         } else {
             redirect( BASE_URL . 'error/delete_record/');
         }

@@ -63,6 +63,36 @@ use \eduTrac\Classes\Libraries\Cookies;
             echo '<option value="'._h($v['savedQueryID']).'">'._h($v['savedQueryName']).'</option>';
         }
     }
+    
+    function emailTemplates() {
+        $auth = new Cookies;
+        $bind = [ ":id" => $auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+                    a.etID,
+                    a.email_key,
+                    a.email_name,
+                    a.email_value,
+                    a.deptID 
+                FROM 
+                    email_template a 
+                LEFT JOIN 
+                    staff b 
+                ON 
+                    a.deptID = b.deptID 
+                LEFT JOIN 
+                    faculty c
+                ON 
+                    a.deptID = c.deptID 
+                WHERE 
+                    b.staffID = :id 
+                OR 
+                    c.facID = :id",
+                $bind 
+        );
+        foreach($q as $k => $v) {
+            echo '<option value="'._h($v['etID']).'">'._h($v['email_name']).'</option>';
+        }
+    }
 	
 	/**
 	 * Term dropdown: shows general list of terms and
@@ -76,7 +106,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	function term_dropdown($termCode = NULL) {
         $q = DB::inst()->select( "term","","termID","termCode,termName" );
 		foreach( $q as $k => $v ) {
-	      	echo '<option value="'.$v['termCode'].'"'.selected( $termCode, _h($v['termCode']), false ).'>'._h($v['termName']).'</option>' . "\n";
+	      	echo '<option value="'._h($v['termCode']).'"'.selected( $termCode, _h($v['termCode']), false ).'>'._h($v['termName']).'</option>' . "\n";
 		}
 	}
 	
@@ -92,7 +122,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	function semester_dropdown($semID = NULL) {
         $q = DB::inst()->select( "semester","","acadYearCode","semesterID,semCode,semName" );
 		foreach( $q as $k => $v ) {
-	      	echo '<option value="'.$v['semesterID'].'"'.selected( $semID, _h($v['semesterID']), false ).'>'._h($v['semCode']).' '._h($v['semName']).'</option>' . "\n";
+	      	echo '<option value="'._h($v['semesterID']).'"'.selected( $semID, _h($v['semesterID']), false ).'>'._h($v['semCode']).' '._h($v['semName']).'</option>' . "\n";
 		}
 	}
 	
@@ -109,7 +139,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         $q = DB::inst()->select( "subject","","subjectID","subjectID,subjCode,subjName" );
 		
 		foreach( $q as $k => $v ) {
-	      	echo '<option value="'.$v['subjectID'].'"'.selected( $subjectID, _h($v['subjectID']), false ).'>'._h($v['subjCode']).' '._h($v['subjName']).'</option>' . "\n";
+	      	echo '<option value="'._h($v['subjectID']).'"'.selected( $subjectID, _h($v['subjectID']), false ).'>'._h($v['subjCode']).' '._h($v['subjName']).'</option>' . "\n";
 		}
 	}
     
@@ -126,7 +156,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         $q = DB::inst()->select( "faculty","","facID","facID" );
         
         foreach( $q as $k => $v ) {
-            echo '<option value="'.$v['facID'].'"'.selected( $facID, _h($v['facID']), false ).'>'._h(get_name($v['facID'])).'</option>' . "\n";
+            echo '<option value="'._h($v['facID']).'"'.selected( $facID, _h($v['facID']), false ).'>'.get_name(_h($v['facID'])).'</option>' . "\n";
         }
     }
     
@@ -147,7 +177,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         $q = DB::inst()->select( $table,$where,$id,"$id,$code,$name" );
         
         foreach( $q as $k => $v ) {
-            echo '<option value="'.$v[$id].'"'.selected( $activeID, _h($v[$id]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
+            echo '<option value="'._h($v[$id]).'"'.selected( $activeID, _h($v[$id]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
         }
     }
     
@@ -179,7 +209,8 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record key if selected is true.
      */
     function dept_type_select($typeCode = NULL) {
-        $select = '<select style="width:50%;" name="deptType" id="select2_22" required>
+        $select = '<select style="width:50%;" name="deptTypeCode" id="select2_22" required>
+            <option value="">&nbsp;</option>
             <option value="admin"'.selected( $typeCode, 'admin', false ).'>Administrative</option>
             <option value="acad"'.selected( $typeCode, 'acad', false ).'>Academic</option>
             </select>';
@@ -365,7 +396,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record status if selected is true.
      */
     function stu_prog_status_select($status = NULL) {
-        $select = '<select style="width:60%;" name="currStatus" id="select2_9"' . gs($status) . ' required>
+        $select = '<select style="width:60%;" name="currStatus" id="select2_9" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Active') . '</option>
                 <option value="' . _t('P') . '"'.selected( $status, _t('P'), false ).'>' . _t('P Potential') . '</option>
@@ -436,6 +467,8 @@ use \eduTrac\Classes\Libraries\Cookies;
                 <option value="' . _t('C') . '"'.selected( $grade, _t('C'), false ).'>' . _t('C') . '</option>
                 <option value="' . _t('D') . '"'.selected( $grade, _t('D'), false ).'>' . _t('D') . '</option>
                 <option value="' . _t('F') . '"'.selected( $grade, _t('F'), false ).'>' . _t('F') . '</option>
+                <option value="' . _t('W') . '"'.selected( $grade, _t('W'), false ).'>' . _t('W') . '</option>
+                <option value="' . _t('I') . '"'.selected( $grade, _t('I'), false ).'>' . _t('I') . '</option>
                 </select>';
         return Hooks::apply_filter('grading_scale', $select, $grade);
     }
@@ -479,7 +512,8 @@ use \eduTrac\Classes\Libraries\Cookies;
             "upgrade","update","html","script","css",
             "x=x","x = x","everything","anyone","everyone",
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
-            "X=X","X = X","union","'='","XSS"
+            "X=X","X = X","union","'='","XSS","mysql_error",
+            "die","password","auth_token","alert","img","src"
         ];
         return $array;
     }
@@ -597,21 +631,36 @@ use \eduTrac\Classes\Libraries\Cookies;
      * Graduated Status: if the status on a student's program 
 	 * is "G", then the status and status dates are disabled.
 	 * 
-	 * @since 1.0
+	 * @since 1.0.0
      * @param string
 	 * @return mixed
 	 */
     function gs($s) {
         if($s == 'G') {
-            return ' disabled';
+            return ' readonly="readonly"';
         }
+    }
+    
+    function calculateGradePoints($letterGrade) {
+        if($letterGrade == 'A') {
+            $gradePoints = 4;
+        } elseif ($letterGrade == 'B') {
+            $gradePoints = 3;                                                                         
+        } elseif ($letterGrade == 'C')  {
+            $gradePoints = 2;                                                                        
+        } elseif ($letterGrade == 'D')  {
+            $gradePoints = 1;                                                                           
+        } else {
+            $gradePoints = 0;                                                                          
+        }
+        return $gradePoints;
     }
 	
 	/**
 	 * Save Query: shows a list of saved queries 
 	 * for a particular user.
 	 * 
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @return mixed
 	 */
 	function save_query_dropdown() {
@@ -805,8 +854,8 @@ use \eduTrac\Classes\Libraries\Cookies;
 	}*/
 	
 	function get_user_avatar($email, $size = 100) {
-		$avatarsize = getimagesize("http://www.gravatar.com/avatar.php?gravatar_id=".md5($email).'?s=200');
-		$avatar = '<img src="http://www.gravatar.com/avatar.php?gravatar_id=' . md5($email).'?s=200' . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $size) . ' />';
+		$avatarsize = getimagesize("http://www.gravatar.com/avatar/".md5($email).'?s=200');
+		$avatar = '<img src="http://www.gravatar.com/avatar/' . md5($email).'?s=200' . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $size) . ' />';
 		return Hooks::apply_filter('user_avatar', $avatar, $email, $size);
 	}
 	
