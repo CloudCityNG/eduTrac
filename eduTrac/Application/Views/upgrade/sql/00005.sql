@@ -79,6 +79,14 @@ DROP TABLE IF EXISTS `acad_cred`;
 
 ALTER TABLE `student` DROP COLUMN `antGradDate`;
 
+ALTER TABLE `staff` CHANGE `schoolID` `schoolID` int(11) unsigned zerofill NOT NULL;
+
+ALTER TABLE `staff` CHANGE `buildingID` `buildingID` int(11) unsigned zerofill NOT NULL;
+
+ALTER TABLE `staff` CHANGE `officeID` `officeID` int(11) unsigned zerofill NOT NULL;
+
+ALTER TABLE `staff` CHANGE `deptID` `deptID` int(11) unsigned zerofill NOT NULL;
+
 ALTER TABLE `stu_acad_cred` ADD COLUMN `gradePoints` double(4,2) NOT NULL DEFAULT '0.00' AFTER `compCred`;
 
 ALTER TABLE `course_sec` CHANGE `secShortTitle` `secShortTitle` varchar(60) NOT NULL;
