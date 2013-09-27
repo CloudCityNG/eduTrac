@@ -40,7 +40,7 @@ class ProfileModel {
 	public function index() {}
     
     public function runProfile($data) {
-        $update = [ 
+        $update1 = [ 
                 "fname" => $data['fname'],"lname" => $data['lname'],
                 "mname" => $data['mname'],"email" => $data['email'],
                 "ssn" => $data['ssn'],"dob" => $data['dob']
@@ -48,7 +48,12 @@ class ProfileModel {
                 
         $bind = [ ":personID" => $this->_auth->getPersonField('personID') ];
         
-        $q = DB::inst()->update("person",$update,"personID = :personID",$bind);
+        $q = DB::inst()->update("person",$update1,"personID = :personID",$bind);
+        
+        if(!empty($data['password'])) {
+            $update2 = ["password" => et_hash_password($data['password'])];
+            DB::inst()->update("person",$update2,"personID = :personID",$bind);
+        }
         redirect( BASE_URL . 'profile/' );
     }
     

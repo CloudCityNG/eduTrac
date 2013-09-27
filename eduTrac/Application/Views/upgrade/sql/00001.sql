@@ -12,7 +12,7 @@ ALTER TABLE course CHANGE `subjCode` `subjectID` int(11) unsigned zerofill NOT N
 
 ALTER TABLE course CHANGE `deptCode` `deptID` int(11) unsigned zerofill NOT NULL;
 
-ALTER TABLE course CHANGE `courseNumber` `courseNumber` int(6) unsigned zerofill NOT NULL;
+ALTER TABLE course CHANGE `courseNumber` `courseNumber` int(6) NOT NULL;
 
 ALTER TABLE course CHANGE `courseCode` `courseCode` varchar(12) NOT NULL;
 

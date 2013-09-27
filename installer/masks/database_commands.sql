@@ -1975,8 +1975,6 @@ ALTER TABLE `application` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`per
 
 ALTER TABLE `course` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
-ALTER TABLE `course_sec` ADD FOREIGN KEY (`facID`) REFERENCES `faculty` (`facID`) ON UPDATE CASCADE;
-
 ALTER TABLE `course_sec` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `faculty` ADD FOREIGN KEY (`facID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;

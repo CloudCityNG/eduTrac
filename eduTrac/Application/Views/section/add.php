@@ -129,7 +129,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_11" readonly="readonly" required>
+                                <select style="width:100%;" name="deptID" id="select2_11" required>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $crse->getDeptID()); ?>
                                 </select>
@@ -159,7 +159,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
                             <div class="controls">
-                                <?=course_level_select($crse->getCourseLevelCode(),' readonly="readonly"');?>
+                                <?=course_level_select($crse->getCourseLevelCode());?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -168,7 +168,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select($crse->getAcadLevelCode(),' readonly="readonly"');?>
+                                <?=acad_level_select($crse->getAcadLevelCode());?>
                             </div>
                         </div>
                         <!-- // Group END -->

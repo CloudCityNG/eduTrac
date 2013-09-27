@@ -303,7 +303,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	public function runDept() {
 		$data = array();
 		$data['deptCode'] = isPostSet('deptCode');
-        $data['deptType'] = isPostSet('deptType');
+        $data['deptTypeCode'] = isPostSet('deptTypeCode');
 		$data['deptName'] = isPostSet('deptName');
 		$data['deptDesc'] = isPostSet('deptDesc');
 		$this->model->runDept($data);
@@ -312,7 +312,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	public function runEditDept() {
 		$data = array();
 		$data['deptCode'] = isPostSet('deptCode');
-        $data['deptType'] = isPostSet('deptType');
+        $data['deptTypeCode'] = isPostSet('deptTypeCode');
 		$data['deptName'] = isPostSet('deptName');
 		$data['deptDesc'] = isPostSet('deptDesc');
 		$data['deptID'] = isPostSet('deptID');

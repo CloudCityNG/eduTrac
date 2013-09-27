@@ -86,6 +86,15 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 						</div>
 						<!-- // Group END -->
 						
+						<!-- Group -->
+            			<div class="control-group">
+							<label class="control-label"><?php _e( _t( 'Reset Password' ) ); ?></label>
+							<div class="controls">
+								<input type="password" name="password" class="span10" />
+							</div>
+						</div>
+						<!-- // Group END -->
+						
 					</div>
 					<!-- // Column END -->
 					

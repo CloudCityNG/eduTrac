@@ -209,7 +209,8 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record key if selected is true.
      */
     function dept_type_select($typeCode = NULL) {
-        $select = '<select style="width:50%;" name="deptType" id="select2_22" required>
+        $select = '<select style="width:50%;" name="deptTypeCode" id="select2_22" required>
+            <option value="">&nbsp;</option>
             <option value="admin"'.selected( $typeCode, 'admin', false ).'>Administrative</option>
             <option value="acad"'.selected( $typeCode, 'acad', false ).'>Academic</option>
             </select>';

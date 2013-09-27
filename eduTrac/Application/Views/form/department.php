@@ -68,7 +68,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="deptType"><font color="red">*</font> <?php _e( _t( 'Department Type' ) ); ?></label>
+                            <label class="control-label" for="deptTypeCode"><font color="red">*</font> <?php _e( _t( 'Department Type' ) ); ?></label>
                             <div class="controls">
                                 <?=dept_type_select();?>
                             </div>

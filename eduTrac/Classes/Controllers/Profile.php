@@ -57,6 +57,7 @@ class Profile extends \eduTrac\Classes\Core\Controller {
         $data['email'] = isPostSet('email');
         $data['ssn'] = isPostSet('ssn');
         $data['dob'] = isPostSet('dob');
+        $data['password'] = isPostSet('password');
         $this->model->runProfile($data);
     }
     

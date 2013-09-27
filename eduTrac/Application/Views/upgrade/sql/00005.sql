@@ -83,6 +83,8 @@ ALTER TABLE `stu_acad_cred` ADD COLUMN `gradePoints` double(4,2) NOT NULL DEFAUL
 
 ALTER TABLE `course_sec` CHANGE `secShortTitle` `secShortTitle` varchar(60) NOT NULL;
 
+ALTER TABLE `course_sec` DROP FOREIGN KEY `course_sec_ibfk_2`;
+
 ALTER TABLE `student` ADD COLUMN `status` enum('A','H','L','W') NOT NULL DEFAULT 'A' AFTER `acadLevelCode`;
 
 CREATE INDEX status ON student (status);
@@ -123,6 +125,10 @@ INSERT INTO `cronjob` VALUES('', 'cron/runTermGPA/', 'Create Student Term GPA Re
 
 INSERT INTO `cronjob` VALUES('', 'cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);
 
-INSERT INTO `et_option` VALUES('', 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fullname#<br>USERNAME:&nbsp; #username#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
+INSERT INTO `cronjob` VALUES('', 'cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);
+
+INSERT INTO `et_option` VALUES('', 'enable_cron_jobs', 0);
+
+INSERT INTO `et_option` VALUES('', 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
 
 UPDATE `et_option` SET option_value = '00006' WHERE option_name = 'dbversion';

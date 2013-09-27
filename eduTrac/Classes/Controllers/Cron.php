@@ -150,6 +150,10 @@ class Cron extends \eduTrac\Classes\Core\Controller {
         $this->model->purgeEmailQueue();
     }
     
+    public function purgeErrorLog() {
+        $this->model->purgeErrorLog();
+    }
+    
     public function runEditCron() {
         $data = [];
         $data['id'] = isPostSet('id');

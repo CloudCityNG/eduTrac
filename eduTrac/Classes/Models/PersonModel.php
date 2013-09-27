@@ -33,9 +33,13 @@ use \eduTrac\Classes\Libraries\Logs;
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Cookies;
 class PersonModel {
+    
+    private $_auth;
+    private $_email;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
+		$this->_email = new \eduTrac\Classes\Libraries\Email;
 	}
     
     public function search() {
@@ -224,8 +228,66 @@ class PersonModel {
         redirect($_SERVER['HTTP_REFERER']);
     }
     
+    public function resetPassword($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q1 = DB::inst()->select( "person","personID = :id","","uname,email,fname,lname,dob,ssn",$bind );
+        foreach($q1 as $r1) {
+            $array[] = $r1;
+        }
+        
+        $dob = str_replace('-','',$r1['dob']);
+        
+        if($r1['ssn'] > 0) {
+            $pass = $r1['ssn'];
+        } elseif($data['dob'] != '0000-00-00') {
+            $pass = $dob;
+        } else {
+            $pass = 'myaccount';
+        }
+        
+        $from = Hooks::get_option('site_title');
+        $fromEmail = Hooks::get_option('system_email');
+        $url = BASE_URL;
+        $helpDesk = Hooks::get_option('help_desk');
+        $body = Hooks::get_option('reset_password_text');
+        $body = str_replace('#url#',$url,$body);
+        $body = str_replace('#helpdesk#',$helpDesk,$body);
+        $body = str_replace('#adminemail#',$fromEmail,$body);
+        $body = str_replace('#uname#',_h($r1['uname']),$body);
+        $body = str_replace('#email#',_h($r1['email']),$body);
+        $body = str_replace('#fname#',_h($r1['fname']),$body);
+        $body = str_replace('#lname#',_h($r1['lname']),$body);
+        $body = str_replace('#password#',$pass,$body);
+        
+        $headers  = "From: $from <auto-reply@$host>\r\n";
+		$headers .= "X-Mailer: PHP/" . phpversion();
+		$headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        
+        $password = et_hash_password($pass);
+        $update = [ "password" => $password ];
+        $q2 = DB::inst()->update( "person",$update,"personID = :id",$bind );
+        
+        if(!$q2) {
+            redirect( BASE_URL . 'error/reset_password/' );
+        } else {
+            $this->_email->et_mail($r1['email'],"Reset Password",$body,$headers);
+            redirect( BASE_URL . 'success/reset_password/' );
+        }
+    }
+    
     public function runPerson($data) {
-        $password = et_hash_password((int)$data['ssn']);
+        $dob = str_replace('-','',$data['dob']);
+        
+        if($data['ssn'] > 0 ) {
+            $password = et_hash_password((int)$data['ssn']);
+        } elseif(!empty($data['dob'])) {
+            $password = et_hash_password((int)$dob);
+        } else {
+            $password = et_hash_password('myaccount');
+        }
+        
         $date = date("Y-m-d");
         $bind1 = array( 
                     "uname" => $data['uname'],"personType" => $data['personType'],
@@ -242,7 +304,7 @@ class PersonModel {
                     
         $bind2 = array( 
                     "personID" => $ID, "address1" => $data['address1'],"address2" => $data['address2'],
-                    "city" => $data['city'],"state" => $data['state'],"addressType" => "H",
+                    "city" => $data['city'],"state" => $data['state'],"addressType" => "P",
                     "zip" => $data['zip'],"country" => $data['country'],
                     "startDate" => $date,"addressStatus" => "C",
                     "addDate" => $date,"addedBy" => $this->_auth->getPersonField('personID'),"phone1" => $data['phone'],

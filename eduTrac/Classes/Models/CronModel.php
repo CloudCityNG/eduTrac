@@ -452,7 +452,7 @@ class CronModel {
                     $bind1
         );
         
-        if(count($q1) > 0) {
+        if(count($r1['stuID']) > 0) {
             if(count($q2) <= 0) {
                 $points = $r1['SUM(compCred)']*$r1['SUM(gradePoints)'];
                 $GPA = $points/$r1['SUM(compCred)'];
@@ -504,6 +504,12 @@ class CronModel {
             $bind = [ ":stuID" => $r1['stuID'],":termID" => $r1['termID'],":level" => $r1['acadLevelCode'] ];
             $q2 = DB::inst()->update( 'stu_term_gpa',$update,'stuID = :stuID AND termID = :termID AND acadLevelCode = :level',$bind );
         }
+    }
+    
+    public function purgeErrorLog() {
+        $today = date('Y-m-d');
+        $bind = [ ":expire" => $today ];
+        $q = DB::inst()->delete( 'error','DATE_ADD(addDate, INTERVAL 5 DAY) <= :expire', $bind );
     }
     
     public function __destruct() {

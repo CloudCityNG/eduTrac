@@ -118,6 +118,11 @@ class Error extends \eduTrac\Classes\Core\Controller {
         $this->view->render('error/edit_data');
     }
     
+    public function reset_password() {
+        $this->view->staticTitle = array('Reset Password Error');
+        $this->view->render('error/reset_password');
+    }
+    
     public function deleteLog($id) {
         $this->model->deleteLog($id);
     }
