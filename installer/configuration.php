@@ -493,7 +493,7 @@
 		'configs'      =>  array(
 		  array(
 			'maskname'     =>  'constants.php',
-			'savetofolder' =>  'tinyPHP/Config/'),
+			'savetofolder' =>  'eduTrac/Config/'),
 		  array(
 			'maskname'     =>  'broken.index.php',
 			'savetofolder' =>  ''),
