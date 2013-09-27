@@ -178,7 +178,6 @@ class StudentModel {
                 stuID,
                 advisorID,
                 catYearID,
-                antGradDate,
                 acadLevelCode,
                 status 
             FROM 
