@@ -42,8 +42,6 @@
 	<div class="widget widget-heading-simple widget-body-gray">
 		<div class="widget-body">
 			
-			<div class="break"></div>
-			
 			<!-- Table -->
 			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
 			

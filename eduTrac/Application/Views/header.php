@@ -211,6 +211,7 @@ $auth = new Cookies;
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>section/<?=bm();?>"><?php _e( _t( '(SECT) - Section' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>section/register/<?=bm();?>"><?php _e( _t( '(RGN) - Register' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>section/batch_register/<?=bm();?>"><?php _e( _t( '(BRGN) - Batch Register' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( '(GRDE) - Grading' ) ); ?></a></li>
                             </ul>
                         </li>

@@ -170,6 +170,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data['reportingTerm'] = isPostSet('reportingTerm');
         $data['termStartDate'] = isPostSet('termStartDate');
         $data['termEndDate'] = isPostSet('termEndDate');
+        $data['dropAddEndDate'] = isPostSet('dropAddEndDate');
         $data['active'] = isPostSet('active');
 		$this->model->runTerm($data);
 	}
@@ -182,6 +183,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data['reportingTerm'] = isPostSet('reportingTerm');
 		$data['termStartDate'] = isPostSet('termStartDate');
 		$data['termEndDate'] = isPostSet('termEndDate');
+        $data['dropAddEndDate'] = isPostSet('dropAddEndDate');
 		$data['active'] = isPostSet('active');
 		$data['termID'] = isPostSet('termID');
 		$this->model->runEditTerm($data);

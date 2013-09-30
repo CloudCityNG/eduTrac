@@ -1632,6 +1632,12 @@ INSERT INTO `screen` VALUES(42, 'AINST', 'New Institution', 'institution/add/');
 
 INSERT INTO `screen` VALUES(43, 'APPL', 'Application', 'application/');
 
+INSERT INTO `screen` VALUES(44, 'BRGN', 'Batch Course Registration', 'section/batch_register/');
+
+INSERT INTO `screen` VALUES(45, 'STAF', 'Staff', 'staff/');
+
+INSERT INTO `screen` VALUES(46, 'TRAN', 'Transcript', 'student/tran/');
+
 CREATE TABLE IF NOT EXISTS `semester` (
   `semesterID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `acadYearID` int(11) unsigned zerofill NOT NULL,
@@ -1955,6 +1961,7 @@ CREATE TABLE IF NOT EXISTS `term` (
   `termCode` varchar(11) NOT NULL,
   `termName` varchar(10) NOT NULL DEFAULT '',
   `reportingTerm` varchar(5) NOT NULL,
+  `dropAddEndDate` date NOT NULL DEFAULT '0000-00-00'
   `termStartDate` date NOT NULL DEFAULT '0000-00-00',
   `termEndDate` date NOT NULL DEFAULT '0000-00-00',
   `active` enum('1','0') NOT NULL DEFAULT '1',

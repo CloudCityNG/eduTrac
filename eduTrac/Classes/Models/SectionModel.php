@@ -47,20 +47,26 @@ class SectionModel {
 	    $sec = isPostSet('sec');
 	    $bind = array(":sec" => "%$sec%");
         $q = DB::inst()->query( "SELECT 
-                    a.courseSecCode,
-                    a.secShortTitle,
-                    a.currStatus,
-                    a.courseSecID,
-                    b.termCode 
-                FROM 
-                    course_sec a 
-                LEFT JOIN 
-                    term b 
-                ON 
-                    a.termID = b.termID 
-                WHERE 
-                    courseSecCode LIKE :sec",
-                $bind
+                    CASE a.currStatus 
+                    WHEN 'A' THEN 'Active' 
+                    WHEN 'I' THEN 'Inactive' 
+                    WHEN 'P' THEN 'Pending' 
+                    WHEN 'C' THEN 'Cancelled' 
+                    ELSE 'Obsolete'
+                    END AS 'Status', 
+                        a.courseSecCode,
+                        a.secShortTitle,
+                        a.courseSecID,
+                        b.termCode 
+                    FROM 
+                        course_sec a 
+                    LEFT JOIN 
+                        term b 
+                    ON 
+                        a.termID = b.termID 
+                    WHERE 
+                        courseSecCode LIKE :sec",
+                    $bind 
         );
         
         foreach($q as $r) {
@@ -106,23 +112,49 @@ class SectionModel {
     
     public function runEditSection($data) {
         $date = date("Y-m-d");
+        $time = date("h:m A");
         $this->_sec->Load_from_key($data['courseSecID']);
-        $bind = array( ":courseSecID" => $data['courseSecID'] );
+        $bind = [ ":courseSecID" => $data['courseSecID'] ];
         
         $update1 = array( 
             "locationID" => $data['locationID'],"termID" => $data['termID'],"secShortTitle" => $data['secShortTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptID" => $data['deptID'],
             "minCredit" => $data['minCredit'],
-            "ceu" => $data['ceu'],"courseLevelCode" => $data['courseLevelCode'],"acadLevelCode" => $data['acadLevelCode'],
-            "currStatus" => $data['currStatus']
+            "ceu" => $data['ceu'],"courseLevelCode" => $data['courseLevelCode'],"acadLevelCode" => $data['acadLevelCode']
         );
-        
-        $update2 = array( "statusDate" => $date );
         
         $q = DB::inst()->update( "course_sec", $update1, "courseSecID = :courseSecID", $bind );
         
+        $update2 = array( "status" => $data['currStatus'],"statusDate" => $date,"statusTime" => $time );
+        $update3 = array( "currStatus" => $data['currStatus'], "statusDate" => $date );
+        
         if($this->_sec->getcurrStatus() != $data['currStatus']) {
-            DB::inst()->update( "course_sec", $update2, "courseSecID = :courseSecID", $bind );
+            /**
+             * If the posted status is 'C' and today's date is less than the 
+             * primary term start date, then delete all student course sec as well as 
+             * student acad cred records.
+             */
+            if($data['currStatus'] == 'C' && $date < $r['termStartDate']) {
+                DB::inst()->update( "course_sec", $update3, "courseSecID = :courseSecID", $bind );
+                DB::inst()->delete('stu_course_sec','courseSecID = :courseSecID',$bind);
+                DB::inst()->delete('stu_acad_cred','courseSecID = :courseSecID',$bind);
+            }
+            /**
+             * If posted status is 'C' and today's date is greater than equal to the 
+             * primary term start date, then update student course sec records with 
+             * a 'C' status and delete student acad cred records.
+             */
+            elseif($data['currStatus'] == 'C' && $date >= $r['termStartDate']) {
+                DB::inst()->update( "course_sec", $update3, "courseSecID = :courseSecID", $bind );
+                DB::inst()->update('stu_course_sec',$update2,'courseSecID = :courseSecID',$bind);
+                DB::inst()->delete('stu_acad_cred','courseSecID = :courseSecID',$bind);
+            }
+            /**
+             * If the status is different from 'C', update the status and status date.
+             */
+            else {
+                DB::inst()->update( "course_sec", $update3, "courseSecID = :courseSecID", $bind );
+            }
         }
         redirect( BASE_URL . 'section/view/' . $data['courseSecID'] . '/' . bm() );
     }
@@ -304,6 +336,43 @@ class SectionModel {
                     
         $q2 = DB::inst()->insert( "stu_acad_cred", $bind2 );
        
+        if(!$q1 && !$q2) {
+           redirect( BASE_URL . 'error/save_data/' );
+        } else {
+           redirect( BASE_URL . 'success/save_data/' );
+        }
+    }
+
+    public function runBatchReg($data) {
+        $this->_sec->Load_from_key($data['courseSecID']);
+        $date = date("Y-m-d");
+        $time = date("h:m A");
+        
+        $bind = [ ":id" => $data['queryID'] ];
+        $sql1 = DB::inst()->select("saved_query","savedQueryID = :id","","savedQuery",$bind);
+        foreach($sql1 as $row1) {
+            $query = $row1['savedQuery'];
+        }
+        
+        $sql2 = DB::inst()->query("$query");
+        
+        foreach($sql2 as $row2) {
+            $bind1 = array( "stuID" => $row2['stuID'],"courseSecID" => $this->_sec->getCourseSecID(),
+                           "termID" => $this->_sec->getTermID(),"courseCredits" => $this->_sec->getMinCredit(),
+                           "ceu" => $this->_sec->getCEU(),"status" => "A","statusDate" => $date,
+                           "statusTime" => $time,"addedBy" => $this->_auth->getPersonField('personID') );
+           
+            $q1 = DB::inst()->insert( "stu_course_sec", $bind1 );
+           
+            $bind2 = [ 
+                    "stuID" => $row2['stuID'],
+                    "courseSecID" => $this->_sec->getCourseSecID(),"termID" => $this->_sec->getTermID(),
+                    "attCred" => $this->_sec->getMinCredit(),
+                    "acadLevelCode" => $this->_stuProg->getAcadLevelCode($row2['stuID'])
+                    ];
+                        
+            $q2 = DB::inst()->insert( "stu_acad_cred", $bind2 );
+        }
         if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
         } else {

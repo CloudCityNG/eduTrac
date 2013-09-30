@@ -316,8 +316,8 @@ $(function()
 			"CLYR - Class Year Form","APRG - Add Acad Program","ACRS - Add Course","SECT - Course Section",
 			"RGN - Course Registration","NSCP - NSLC Purge","NSCS - NSLC Setup","NSCX - NSLC Extraction",
 			"NSCE - NSLC Verification","NSCC - NSLC Correction","NSCT - NSLC File","NAE - Name & Address",
-			"APER - Add Person","SPRO - Student Profile","FAC - Faculty Profile","INST - Institution",
-            "AINST - New Institution","APPL - Application"],
+			"APER - Add Person","SPRO - Student Profile","FAC - Faculty Profile",
+			"TRAN - Generate Transcript"],
 			items: 4,
 			minLength: 2		
 		});
