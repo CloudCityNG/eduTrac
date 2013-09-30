@@ -10,7 +10,7 @@ use \eduTrac\Classes\Libraries\PDF\Cezpdf;
      
      foreach($this->courses as $k => $v) {
          $array1[] = array(_h($v['courseSecCode']),_h($v['secShortTitle']),_h($v['grade']),_h($v['acadAttCred']),_h($v['acadCompCred']),_h($v['acadGradePoints']),_h($v['startDate']).' - '._h($v['endDate']) );
-         $array2 = array('Term Totals: ','','',$v['termAttCred'],$v['termCompCred'],$v['termGradePoints'],"GPA = ".$v['termGPA']);
+         $array2 = array('Term Totals: ',_h($v['termCode']),'',$v['termAttCred'],$v['termCompCred'],$v['termGradePoints'],"GPA = ".$v['termGPA']);
      }
      
      $rows2 = $array1;

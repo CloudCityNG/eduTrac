@@ -1,7 +1,7 @@
 INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `email`,`personType`,`approvedBy`) 
 VALUES (NULL, '{admin_username}', '{admin_password}', '{admin_realname}', '{admin_email}','STA','1');
 
-INSERT INTO `et_option` VALUES(1, 'dbversion', '00007');
+INSERT INTO `et_option` VALUES(1, 'dbversion', '00008');
 
 INSERT INTO `et_option` VALUES(2, 'system_email', '{admin_email}');
 
@@ -76,3 +76,7 @@ INSERT INTO `cronjob` VALUES(11, '{siteurl}cron/runTermGPA/', 'Create Student Te
 INSERT INTO `cronjob` VALUES(12, '{siteurl}cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);
 
 INSERT INTO `cronjob` VALUES(13, '{siteurl}cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(14, '{siteurl}cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);
+
+INSERT INTO `cronjob` VALUES(15, '{siteurl}cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);

@@ -74,8 +74,8 @@
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="termCode"><?php _e( _t( 'Term Code' ) ); ?></label>
-                            <div class="controls"><input class="span12"<?=gio();?> name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" /></div>
+                            <label class="control-label" for="termCode"><font color="red">*</font> <?php _e( _t( 'Term Code' ) ); ?></label>
+                            <div class="controls"><input class="span12"<?=gio();?> name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
 					
@@ -104,7 +104,7 @@
                             <label class="control-label" for="termStartDate"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
                             <div class="controls">
                                 <div class="input-append date" id="datetimepicker6">
-                                    <input id="termStartDate"<?=gio();?> name="termStartDate" type="text" value="<?=_h($this->term[0]['termStartDate']);?>" />
+                                    <input id="termStartDate"<?=gio();?> name="termStartDate" type="text" value="<?=_h($this->term[0]['termStartDate']);?>" required />
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
                             </div>
@@ -116,12 +116,24 @@
 							<label class="control-label" for="termEndDate"><font color="red">*</font> <?php _e( _t( 'End Date' ) ); ?></label>
 							<div class="controls">
 								<div class="input-append date" id="datetimepicker7">
-						    		<input id="termEndDate"<?=gio();?> name="termEndDate" type="text" value="<?=_h($this->term[0]['termEndDate']);?>" />
+						    		<input id="termEndDate"<?=gio();?> name="termEndDate" type="text" value="<?=_h($this->term[0]['termEndDate']);?>" required />
 				    				<span class="add-on"><i class="icon-th"></i></span>
 								</div>
 							</div>
 						</div>
 						<!-- // Group END -->
+						
+						<!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label" for="dropAddEndDate"><font color="red">*</font> <?php _e( _t( 'Drop/Add End Date' ) ); ?></label>
+                            <div class="controls">
+                                <div class="input-append date" id="datetimepicker8">
+                                    <input id="dropAddEndDate" name="dropAddEndDate" type="text" value="<?=_h($this->term[0]['dropAddEndDate']);?>" required />
+                                    <span class="add-on"><i class="icon-th"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="control-group">

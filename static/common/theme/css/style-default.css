@@ -8180,4 +8180,22 @@ html.rtl.front .navbar.main .secondary ul.topnav:first-of-type {
   position: absolute;
   display: block;
 }
+.success {
+    background-color:#FFFFCC;
+    float:left;
+    font-size:.85em;
+    text-align:center;
+    vertical-align: top;
+    padding:10px 0 10px 0;
+    margin-top:8px;
+    margin-bottom:8px;
+    width:100%;
+    border:1px solid #FFEA92;
+    clear:both;
+    color:#333;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+}
 /* End Custom CSS */

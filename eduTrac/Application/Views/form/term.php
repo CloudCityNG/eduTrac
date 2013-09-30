@@ -103,7 +103,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label" for="termStartDate"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
                             <div class="controls">
                                 <div class="input-append date" id="datetimepicker6">
-                                    <input id="termStartDate" name="termStartDate" type="text" />
+                                    <input id="termStartDate" name="termStartDate" type="text" required />
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
                             </div>
@@ -115,7 +115,19 @@ use \eduTrac\Classes\Libraries\Hooks;
                             <label class="control-label" for="termEndDate"><font color="red">*</font> <?php _e( _t( 'End Date' ) ); ?></label>
                             <div class="controls">
                                 <div class="input-append date" id="datetimepicker7">
-                                    <input id="termEndDate" name="termEndDate" type="text" />
+                                    <input id="termEndDate" name="termEndDate" type="text" required />
+                                    <span class="add-on"><i class="icon-th"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label" for="dropAddEndDate"><font color="red">*</font> <?php _e( _t( 'Drop/Add End Date' ) ); ?></label>
+                            <div class="controls">
+                                <div class="input-append date" id="datetimepicker8">
+                                    <input id="dropAddEndDate" name="dropAddEndDate" type="text" required />
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
                             </div>
