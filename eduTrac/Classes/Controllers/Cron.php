@@ -154,6 +154,14 @@ class Cron extends \eduTrac\Classes\Core\Controller {
         $this->model->purgeErrorLog();
     }
     
+    public function purgeSavedQuery() {
+        $this->model->purgeSavedQuery();
+    }
+    
+    public function purgeCronLogs() {
+        $this->model->purgeCronLogs();
+    }
+    
     public function runEditCron() {
         $data = [];
         $data['id'] = isPostSet('id');

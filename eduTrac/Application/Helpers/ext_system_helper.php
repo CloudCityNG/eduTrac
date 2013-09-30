@@ -291,6 +291,7 @@ use \eduTrac\Classes\Libraries\Cookies;
     	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
     	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
     			<option value="P"'.selected( $status, 'P', false ).'>P Pending</option>
+    			<option value="C"'.selected( $status, 'C', false ).'>C Cancel</option>
     			<option value="O"'.selected( $status, 'O', false ).'>O Obsolete</option>
 		        </select>';
         return Hooks::apply_filter('status', $select, $status);
@@ -1003,13 +1004,24 @@ use \eduTrac\Classes\Libraries\Cookies;
             if(CURRENT_ET_VERSION < getCurrentVersion(0)) {
                 $alert = 
                     '<!-- Alert -->
-    				<div class="alert alert-success center">
+    				<div class="success">
 						<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac update. 
-                        <a href="http://www.7mediaws.org/"><font color="orange">Click here</font></a> to download it.' ).'
+                        <a href="http://www.7mediaws.org/client/">Click here</a> to download it. Also feel free to check out
+                        the <a href="#myModal" data-toggle="modal">changelog</a>.' ).'
 					</div>
-					<!-- // Alert END -->';
+					<!-- // Alert END -->
+					
+					<div class="modal hide fade" id="myModal">
+                        <div class="modal-body">'.
+                            file_get_contents( "http://api.7mediaws.org/upgrades/changelog.txt" )
+                        .'</div>
+                        <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn btn-primary">'._t( 'Cancel' ).'</a>
+                        </div>
+                    </div>';
             }
         }
+        return $alert;
 	}
     
     function redirect_upgrade_db() {

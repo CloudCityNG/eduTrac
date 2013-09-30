@@ -83,7 +83,7 @@
                         <!-- // Group END -->
                         
                     </div>
-                    <!-- // Column END -->,
+                    <!-- // Column END -->
                     
                     <!-- Column -->
                     <div class="span2">

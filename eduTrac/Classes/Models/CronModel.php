@@ -212,7 +212,7 @@ class CronModel {
                         $this->_email->Username = _h(Hooks::get_option('et_smtp_username'));
                         $this->_email->Password = _h(Hooks::get_option('et_smtp_password'));
                     }
-                    $this->_email->AddAddress($r['email']);
+                    $this->_email->AddAddress($r['email'],$r['lname'].', '.$r['fname']);
 					$this->_email->From = $r['fromEmail'];
 					$this->_email->FromName = $r['fromName'];
 					$this->_email->Sender = $this->_email->From; //Return-Path
@@ -224,7 +224,7 @@ class CronModel {
 					$this->_email->ClearAddresses();
 					$this->_email->ClearAttachments();
 			} else {
-				$this->_email->AddAddress($r['email']);
+				$this->_email->AddAddress($r['email'],$r['lname'].', '.$r['fname']);
 				$this->_email->From = $r['fromEmail'];
 				$this->_email->FromName = $r['fromName'];
 				$this->_email->Sender = $this->_email->From; //Return-Path
@@ -510,6 +510,16 @@ class CronModel {
         $today = date('Y-m-d');
         $bind = [ ":expire" => $today ];
         $q = DB::inst()->delete( 'error','DATE_ADD(addDate, INTERVAL 5 DAY) <= :expire', $bind );
+    }
+    
+    public function purgeSavedQuery() {
+        $today = date('Y-m-d');
+        $bind = [ ":expire" => $today, ":purge" => '1' ];
+        $q = DB::inst()->delete( 'saved_query','DATE_ADD(createdDate, INTERVAL 30 DAY) <= :expire AND purgeQuery = :purge', $bind );
+    }
+    
+    public function purgeCronLogs() {
+        $q = DB::inst()->query( "TRUNCATE cronlog" );
     }
     
     public function __destruct() {

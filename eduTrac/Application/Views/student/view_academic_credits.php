@@ -98,7 +98,7 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Subject' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" readonly value="" class="span10" required />
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['subjCode']);?>" class="span10" required />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -107,7 +107,7 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Department' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" readonly value="" class="span10" required />
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['deptCode']);?>" class="span10" required />
                             </div>
                         </div>
                         <!-- // Group END -->

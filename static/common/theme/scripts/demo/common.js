@@ -317,7 +317,7 @@ $(function()
 			"RGN - Course Registration","NSCP - NSLC Purge","NSCS - NSLC Setup","NSCX - NSLC Extraction",
 			"NSCE - NSLC Verification","NSCC - NSLC Correction","NSCT - NSLC File","NAE - Name & Address",
 			"APER - Add Person","SPRO - Student Profile","FAC - Faculty Profile","INST - Institution",
-            "AINST - New Institution","APPL - Application"],
+            "AINST - New Institution","APPL - Application","BRGN - Batch Registration","STAF - Staff Profile"],
 			items: 4,
 			minLength: 2		
 		});

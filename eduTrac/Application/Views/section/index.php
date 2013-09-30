@@ -84,15 +84,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                     <td class="center"><?=_h($v['courseSecID']);?></td>
                     <td class="center"><?=_h($v['courseSecCode']);?></td>
                     <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center">
-                    	<?php if(_h($v['currStatus']) == 'P') {
-                    		echo 'Pending';
-                    	} elseif(_h($v['currStatus']) == 'A') {
-                    		echo 'Active';
-                    	} else {
-                    		echo 'Obsolete';
-                    	}; ?>
-                    </td>
+                    <td class="center"><?=_h($v['Status']);?></td>
                     <td class="center"><?=_h($v['termCode']);?></td>
                     <?php Hooks::do_action('search_course_sec_td'); ?>
                     <td class="center">

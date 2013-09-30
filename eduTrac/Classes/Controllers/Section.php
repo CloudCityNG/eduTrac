@@ -162,6 +162,25 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $this->view->render('section/register');
     }
     
+    public function batch_register() {
+        if(!hasPermission('register_students')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('Batch Course Registration');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                'theme/scripts/demo/timepicker.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+        $this->view->render('section/batch_register');
+    }
+    
     public function courses() {
         if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
 		$this->view->staticTitle = array('Course Section Grading');
@@ -316,6 +335,14 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['stuID'] = isPostSet('stuID');
         $data['courseSecID'] = isPostSet('courseSecID');
         $this->model->runReg($data);
+    }
+    
+    public function runBatchReg() {
+        if(!hasPermission('register_students')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = [];
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $data['queryID'] = isPostSet('queryID');
+        $this->model->runBatchReg($data);
     }
     
     public function runGrades() {

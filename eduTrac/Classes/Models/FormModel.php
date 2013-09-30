@@ -101,7 +101,7 @@ class FormModel {
 		      "semesterID" => $data['semesterID'],"termCode" => $data['termCode'],
 		      "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
 		      "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
-		      "active" => $data['active'] 
+		      "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
         );
 		
 		$q = DB::inst()->insert( "term", $bind );
@@ -135,7 +135,7 @@ class FormModel {
               "semesterID" => $data['semesterID'],"termCode" => $data['termCode'],
               "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
               "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
-              "active" => $data['active'] 
+              "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
         );
         
 	    $bind = array(":termID" => $data['termID']);
@@ -144,8 +144,13 @@ class FormModel {
 	}
 	
 	public function term($id) {
-		$q = DB::inst()->query( "SELECT * FROM term WHERE termID = '$id'");
-		return $q->fetchAll(\PDO::FETCH_ASSOC);
+	    $array = [];
+	    $bind = [ ":id" => $id ];
+	    $q = DB::inst()->select("term","termID = :id","","*",$bind);
+		foreach($q as $r) {
+		    $array[] = $r;
+		}
+        return $array;
 	}
 	
 	public function deleteTerm($id) {

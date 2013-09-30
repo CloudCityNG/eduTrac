@@ -353,7 +353,9 @@ class StudentModel {
                         d.status,
                         d.statusDate,
                         d.statusTime,
-                        e.grade 
+                        e.grade,
+                        f.deptCode,
+                        g.subjCode 
                     FROM 
                         course_sec a 
                     LEFT JOIN 
@@ -372,6 +374,14 @@ class StudentModel {
                         stu_acad_cred e 
                     ON 
                         a.courseSecID = e.courseSecID 
+                    LEFT JOIN 
+                        department f 
+                    ON 
+                        a.deptID = f.deptID 
+                    LEFT JOIN 
+                        subject g 
+                    ON 
+                        b.subjectID = g.subjectID 
                     WHERE 
                         d.id = :id 
                     AND 
@@ -569,20 +579,64 @@ class StudentModel {
     }
     
     public function runAcadCred($data) {
-        $update1 = array( "status" => $data['status'],"statusDate" => $data['statusDate'],
+        $date = date("Y-m-d");
+        $time = date("h:m A");
+        
+        $update1 = [ "status" => $data['status'],"statusDate" => $data['statusDate'],
                         "statusTime" => $data['statusTime']
-        );
+        ];
+        $update2 = [ "gradePoints" => calculateGradePoints($data['grade']),"grade" => $data['grade']  ];
+        $update3 = array( "status" => $data['status'],"statusDate" => $date,"statusTime" => $time );
+        $update4 = array( "grade" => 'W', "compCred" => '0.0' );
         
         $bind1 = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
-        $q1 = DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );
-        
-        
-        $update2 = [ "gradePoints" => calculateGradePoints($data['grade']),"grade" => $data['grade']  ];
         $bind2 = [ 
                 ":stuID" => $data['stuID'], ":courseSecID" => $data['courseSecID'],
                 ":termID" => $data['termID']
-                ];
-        $q = DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2);
+                ]; 
+        $bind3 = [ ":termID" => Hooks::get_option('current_term_id') ];
+        
+        $sql = DB::inst()->select( "term","termID = :termID","","termStartDate,dropAddEndDate",$bind3 );
+        foreach($sql as $r) {
+            $array[] = $r;
+        }
+        
+        /**
+         * If the posted status is 'W' or 'D' and today's date is less than the 
+         * primary term start date, then delete all student course sec as well as 
+         * student acad cred records.
+         */
+        if(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date < $r['termStartDate']) {
+            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        }
+        /**
+         * If posted status is 'W' or 'D' and today's date is greater than equal to the 
+         * primary term start date, and today's date is less than the term's drop/add 
+         * end date, then delete all student course sec as well as student acad cred 
+         * records.
+         */
+        elseif(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date >= $r['termStartDate'] && $date < $r['dropAddEndDate']) {
+            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        }
+        /**
+         * If posted status is 'W' or 'D' and today's date is greater than equal to the 
+         * primary term start date, and today's date is greater than the term's drop/add 
+         * end date, then update student course sec record with a 'W' status and update  
+         * student acad record with a 'W' grade and 0.0 completed credits.
+         */
+        elseif(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date >= $r['termStartDate'] && $date > $r['dropAddEndDate']) {
+            DB::inst()->update('stu_course_sec',$update3,'stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+            DB::inst()->update('stu_acad_cred',$update4,'stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        }
+        /**
+         * If the status is different from 'W', update the status and status date.
+         */
+        else {
+            DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );  
+            DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2);
+        }
                 
         redirect( BASE_URL . 'student/view_academic_credits/' . $data['id'] . '/' . bm() );
     }
@@ -708,7 +762,9 @@ class StudentModel {
                         c.attCred AS termAttCred,
                         c.compCred AS termCompCred,
                         c.gradePoints AS termGradePoints,
-                        c.termGPA 
+                        c.termID,
+                        c.termGPA,
+                        d.termCode 
                     FROM 
                         stu_acad_cred a 
                     LEFT JOIN 
@@ -719,10 +775,16 @@ class StudentModel {
                         stu_term_gpa c
                     ON 
                         a.termID = c.termID 
+                    LEFT JOIN 
+                        term d 
+                    ON 
+                        a.termID = d.termID 
                     WHERE 
                         a.stuID = :stuID 
                     AND 
-                        a.acadLevelCode = :acadLevelCode",
+                        a.acadLevelCode = :acadLevelCode 
+                    GROUP BY 
+                        c.termID",
                     $bind
         );
         
