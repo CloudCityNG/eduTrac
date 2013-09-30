@@ -1,0 +1,2952 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eduTrac\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-30 14:39-0500\n"
+"PO-Revision-Date: 2013-09-30 14:40-0500\n"
+"Last-Translator: Joshua Parker <josh@7mediaws.org>\n"
+"Language-Team: 7 Media Web Solutions, LLC <email@7mediaws.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:358
+msgid "LEC"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:358
+msgid "LEC Lecture"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:359
+msgid "LAB"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:359
+msgid "LAB Lab"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:360
+msgid "SEM"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:360
+msgid "SEM Seminar"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:361
+msgid "LL"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:361
+msgid "LL Lecture + Lab"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:362
+msgid "LS"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:362
+msgid "LS Lecture + Seminar"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:363
+msgid "SL"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:363
+msgid "SL Seminar + Lab"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:364
+msgid "LLS"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:364
+msgid "LLS Lecture + Lab + Seminar"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:381
+#: eduTrac/Application/Helpers/ext_system_helper.php:402
+#: eduTrac/Application/Helpers/ext_system_helper.php:466
+msgid "A"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:381
+msgid "A Add"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:382
+msgid "N"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:382
+msgid "N New"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:383
+#: eduTrac/Application/Helpers/ext_system_helper.php:469
+msgid "D"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:383
+msgid "D Drop"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:384
+#: eduTrac/Application/Helpers/ext_system_helper.php:404
+#: eduTrac/Application/Helpers/ext_system_helper.php:471
+msgid "W"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:384
+#: eduTrac/Application/Helpers/ext_system_helper.php:404
+msgid "W Withdrawn"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:385
+#: eduTrac/Application/Helpers/ext_system_helper.php:405
+#: eduTrac/Application/Helpers/ext_system_helper.php:468
+msgid "C"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:385
+msgid "C Cancelled"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:402
+msgid "A Active"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:403
+msgid "P"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:403
+msgid "P Potential"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:405
+msgid "C Changed Mind"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:406
+msgid "G"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:406
+msgid "G Graduated"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:423
+#: eduTrac/Application/Helpers/ext_system_helper.php:472
+msgid "I"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:423
+msgid "I Institutional"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:424
+#: eduTrac/Application/Helpers/ext_system_helper.php:490
+msgid "TR"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:424
+#: eduTrac/Application/Helpers/ext_system_helper.php:490
+msgid "TR Transfer"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:425
+msgid "AP"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:425
+msgid "AP Advanced Placement"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:426
+msgid "X"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:426
+msgid "X Exempt"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:427
+msgid "T"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:427
+msgid "T Test"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:444
+msgid "FR"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:444
+msgid "FR Freshman"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:445
+msgid "SO"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:445
+msgid "SO Sophomore"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:446
+msgid "JR"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:446
+msgid "JR Junior"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:447
+msgid "SR"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:447
+msgid "SR Senior"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:448
+msgid "GR"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:448
+msgid "GR Grad Student"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:449
+msgid "PhD"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:449
+msgid "PhD PhD Student"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:467
+msgid "B"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:470
+msgid "F"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:489
+msgid "FF"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:489
+msgid "FF First Time Freshman"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:491
+msgid "RA"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:491
+msgid "RA Readmit"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:492
+msgid "NA"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:492
+msgid "NA Non-Applicable"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:1008
+msgid "Update!"
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:1008
+msgid ""
+"Hey admin, there is a new eduTrac update. \r\n"
+"                        <a href=\"http://www.7mediaws.org/client/\">Click here</a> to download it. Also feel free to check out\r\n"
+"                        the <a href=\"#myModal\" data-toggle=\"modal\">changelog</a>."
+msgstr ""
+
+#: eduTrac/Application/Helpers/ext_system_helper.php:1019
+msgid "Cancel"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:101
+msgid "You are here"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:102
+msgid "Dashboard"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:104
+msgid "Plugins"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:106
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:109
+msgid "eduTrac SMTP Settings"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:131
+msgid "From Email:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:136
+msgid "From Name:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:141
+msgid "Host:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:146
+msgid "SMTP Secure:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:158
+msgid "Port:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:163
+msgid "SMTP Authentication:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:169
+msgid "Username:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:174
+msgid "Password:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:188
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:233
+msgid "Submit"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:204
+msgid "Send Test Email"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:206
+msgid "To:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:211
+msgid "Subject:"
+msgstr ""
+
+#: eduTrac/Application/Plugins/et-smtp/et-smtp.plugin.php:216
+msgid "Message:"
+msgstr ""
+
+#: eduTrac/Application/Views/footer.php:34
+msgid "&copy; 2013"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:147
+msgid "Screens"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:151
+msgid "Settings"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:153
+msgid "General"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:154
+#: eduTrac/Application/Views/cron/add.php:35
+#: eduTrac/Application/Views/cron/index.php:37
+#: eduTrac/Application/Views/cron/index.php:40
+#: eduTrac/Application/Views/cron/view.php:47
+msgid "Cron Jobs"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:155
+msgid "Reservation"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:156
+msgid "Reservation Categories"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:161
+msgid "Forms"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:163
+msgid "(SEM) - Semester"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:164
+msgid "(TERM) - Term"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:165
+msgid "(AYR) - Academic Year"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:166
+msgid "(DEPT) - Department"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:167
+msgid "(SUBJ) - Subject"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:168
+msgid "(CRL) - Credit Load"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:169
+msgid "(CLYR) - Class Year"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:170
+msgid "(DEG) - Degree"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:171
+msgid "(MAJR) - Major"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:172
+msgid "(MINR) - Minor"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:173
+msgid "(CCD) - CCD"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:174
+msgid "(SPEC) - Specialization"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:175
+msgid "(CIP) - CIP"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:176
+msgid "(LOC) - Location"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:177
+msgid "(BLDG) - Building"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:178
+msgid "(ROOM) - Room"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:179
+msgid "(SCH) - School"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:184
+msgid "Saved Query"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:186
+msgid "Queries"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:187
+msgid "Create Query"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:191
+msgid "SQL Interface"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:194
+msgid "Acad Program"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:196
+msgid "(PROG) - Program"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:197
+msgid "(APRG) - New Program"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:202
+msgid "Course"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:204
+msgid "(CRSE) - Course"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:205
+msgid "(ACRS) - New Course"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:210
+msgid "Course Section"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:212
+msgid "(SECT) - Section"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:213
+msgid "(RGN) - Register"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:214
+msgid "(BRGN) - Batch Register"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:215
+msgid "(GRDE) - Grading"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:220
+#: eduTrac/Application/Views/application/add.php:152
+#: eduTrac/Application/Views/application/view.php:152
+msgid "Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:222
+msgid "(INST) - Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:223
+msgid "(AINST) - New Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:228
+msgid "Communication Mgmt"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:230
+msgid "Email Templates"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:231
+msgid "Add Email Template"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:232
+msgid "Schedule Email"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:233
+msgid "Email Queue"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:238
+msgid "NSLC"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:240
+msgid "(NSCP) Purge"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:241
+msgid "(NSCS) Setup"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:242
+msgid "(NSCX) Extraction"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:243
+msgid "(NSCE) Verification"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:244
+msgid "(NSCC) Correction"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:245
+msgid "(NSCT) NSLC File"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:250
+msgid "Person"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:252
+msgid "(NAE) Search"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:253
+msgid "(APER) Add Person"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:257
+msgid "Student Portal"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:259
+msgid "(APPL) Application"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:261
+msgid "(FAC) Faculty"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:263
+msgid "(STAF) Staff"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:266
+msgid "Student"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:268
+msgid "(SPRO) Student Profile"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:269
+msgid "Graduate Student(s)"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:270
+msgid "Generate Transcript"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:274
+msgid "(MPRM) Manage Perm"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:276
+msgid "(MRLE) Manage Role"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:278
+msgid "Error Log"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:280
+#: eduTrac/Application/Views/audittrail/index.php:35
+#: eduTrac/Application/Views/audittrail/index.php:38
+msgid "Audit Trail"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:302
+msgid "Profile"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:302
+msgid "edit"
+msgstr ""
+
+#: eduTrac/Application/Views/header.php:313
+msgid "Sign Out"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:35
+#: eduTrac/Application/Views/application/index.php:39
+#: eduTrac/Application/Views/application/view.php:35
+msgid "Search Application"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:37
+#: eduTrac/Application/Views/application/view.php:37
+msgid "Create Application"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:40
+#: eduTrac/Application/Views/application/view.php:40
+msgid "ID: "
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:51
+#: eduTrac/Application/Views/application/view.php:51
+#: eduTrac/Application/Views/course/add.php:54
+#: eduTrac/Application/Views/course/addnl_info.php:63
+#: eduTrac/Application/Views/course/view.php:51
+#: eduTrac/Application/Views/cron/add.php:51
+#: eduTrac/Application/Views/cron/view.php:63
+msgid "Indicates field is required"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:64
+#: eduTrac/Application/Views/application/view.php:64
+msgid "Address"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:76
+#: eduTrac/Application/Views/application/view.php:76
+msgid "Academic Program"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:88
+#: eduTrac/Application/Views/application/index.php:72
+#: eduTrac/Application/Views/application/view.php:88
+msgid "Start Term"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:100
+#: eduTrac/Application/Views/application/view.php:100
+msgid "Admit Status"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:109
+#: eduTrac/Application/Views/application/view.php:109
+msgid "PSAT Verbal/Math"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:119
+#: eduTrac/Application/Views/application/view.php:119
+msgid "SAT Verbal/Math"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:129
+#: eduTrac/Application/Views/application/view.php:129
+msgid "ACT English/Math"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:147
+#: eduTrac/Application/Views/application/view.php:147
+msgid "Insitution Attended"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:153
+#: eduTrac/Application/Views/application/view.php:153
+msgid "Attended From Date"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:154
+#: eduTrac/Application/Views/application/view.php:154
+msgid "Attended To Date"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:155
+#: eduTrac/Application/Views/application/view.php:155
+msgid "GPA"
+msgstr ""
+
+#: eduTrac/Application/Views/application/add.php:199
+#: eduTrac/Application/Views/application/view.php:204
+#: eduTrac/Application/Views/course/add.php:229
+#: eduTrac/Application/Views/course/addnl_info.php:143
+#: eduTrac/Application/Views/course/view.php:254
+#: eduTrac/Application/Views/cron/add.php:285
+#: eduTrac/Application/Views/cron/view.php:297
+msgid "Save"
+msgstr ""
+
+#: eduTrac/Application/Views/application/index.php:36
+msgid "Application"
+msgstr ""
+
+#: eduTrac/Application/Views/application/index.php:70
+msgid "Person ID"
+msgstr ""
+
+#: eduTrac/Application/Views/application/index.php:71
+msgid "Name"
+msgstr ""
+
+#: eduTrac/Application/Views/application/index.php:73
+#: eduTrac/Application/Views/course/index.php:74
+msgid "Actions"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:51
+#: eduTrac/Application/Views/cron/index.php:57
+msgid "Action"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:52
+msgid "Process"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:53
+msgid "Record"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:54
+msgid "Username"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:55
+msgid "Action Date"
+msgstr ""
+
+#: eduTrac/Application/Views/audittrail/index.php:56
+msgid "Expire Date"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:38
+#: eduTrac/Application/Views/course/addnl_info.php:45
+#: eduTrac/Application/Views/course/index.php:39
+#: eduTrac/Application/Views/course/view.php:35
+msgid "Search Course"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:40
+msgid "Create Course"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:43
+msgid "Add Course"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:67
+#: eduTrac/Application/Views/course/view.php:64
+msgid "Department"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:79
+#: eduTrac/Application/Views/course/view.php:76
+msgid "Subject"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:91
+#: eduTrac/Application/Views/course/view.php:97
+msgid "Course Level"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:100
+#: eduTrac/Application/Views/course/index.php:70
+#: eduTrac/Application/Views/course/view.php:106
+msgid "Short Title"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:109
+#: eduTrac/Application/Views/course/view.php:115
+msgid "Long Title"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:118
+#: eduTrac/Application/Views/course/view.php:88
+msgid "Course Number"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:127
+#: eduTrac/Application/Views/course/index.php:72
+#: eduTrac/Application/Views/course/view.php:124
+msgid "Effective Date"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:139
+#: eduTrac/Application/Views/course/index.php:73
+#: eduTrac/Application/Views/course/view.php:136
+msgid "End Date"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:157
+#: eduTrac/Application/Views/course/view.php:154
+msgid "Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:166
+#: eduTrac/Application/Views/course/view.php:163
+msgid "Academic Level"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:175
+#: eduTrac/Application/Views/course/index.php:71
+#: eduTrac/Application/Views/course/view.php:172
+msgid "Status"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:184
+#: eduTrac/Application/Views/course/view.php:181
+msgid "Status Date"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:193
+#: eduTrac/Application/Views/course/view.php:190
+msgid "Approval Person"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:202
+#: eduTrac/Application/Views/course/view.php:199
+msgid "Approval Date"
+msgstr ""
+
+#: eduTrac/Application/Views/course/add.php:220
+#: eduTrac/Application/Views/course/view.php:244
+msgid "Course Description"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:49
+#: eduTrac/Application/Views/course/view.php:37
+msgid "View Course"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:52
+msgid "Additional Course Info:"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:76
+msgid "Prerequisites"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:85
+msgid "Allow Audit"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:89
+#: eduTrac/Application/Views/course/addnl_info.php:102
+msgid "Yes"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:90
+#: eduTrac/Application/Views/course/addnl_info.php:103
+msgid "No"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:98
+msgid "Allow Waitlist"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:117
+msgid "Minimum Enrollment"
+msgstr ""
+
+#: eduTrac/Application/Views/course/addnl_info.php:126
+msgid "Seating Capacity"
+msgstr ""
+
+#: eduTrac/Application/Views/course/index.php:36
+msgid "Courses"
+msgstr ""
+
+#: eduTrac/Application/Views/course/index.php:69
+msgid "Course Code"
+msgstr ""
+
+#: eduTrac/Application/Views/course/view.php:40
+msgid "Course:"
+msgstr ""
+
+#: eduTrac/Application/Views/course/view.php:208
+msgid "Last Update"
+msgstr ""
+
+#: eduTrac/Application/Views/course/view.php:217
+msgid "Additional Info"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:37
+#: eduTrac/Application/Views/cron/add.php:40
+msgid "Add Cron Job"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:65
+#: eduTrac/Application/Views/cron/view.php:77
+msgid "Script to Run"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:72
+#: eduTrac/Application/Views/cron/index.php:53
+#: eduTrac/Application/Views/cron/view.php:84
+msgid "Job Name"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:79
+#: eduTrac/Application/Views/cron/view.php:91
+msgid "Minutes"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:149
+#: eduTrac/Application/Views/cron/view.php:161
+msgid "Hourly"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:183
+#: eduTrac/Application/Views/cron/view.php:195
+msgid "Daily"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:200
+#: eduTrac/Application/Views/cron/view.php:212
+msgid "Weekly"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:263
+#: eduTrac/Application/Views/cron/view.php:275
+msgid "How Often?"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:266
+#: eduTrac/Application/Views/cron/view.php:279
+msgid "Until I Delete It"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/add.php:267
+#: eduTrac/Application/Views/cron/view.php:280
+msgid "Only Once, Then Delete The Job"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/index.php:54
+msgid "Last Fired"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/index.php:55
+msgid "Next Execution"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/index.php:56
+msgid "Interval"
+msgstr ""
+
+#: eduTrac/Application/Views/cron/view.php:49
+#: eduTrac/Application/Views/cron/view.php:52
+msgid "View Cron Job"
+msgstr ""
+
+#: eduTrac/Application/Views/dashboard/index.php:92
+msgid "Community Support Site"
+msgstr ""
+
+#: eduTrac/Application/Views/error/course_registration.php:43
+#: eduTrac/Application/Views/error/delete_record.php:43
+#: eduTrac/Application/Views/error/edit_data.php:43
+#: eduTrac/Application/Views/error/invalid_record.php:43
+#: eduTrac/Application/Views/error/nslc_extraction.php:43
+#: eduTrac/Application/Views/error/nslc_purge.php:43
+#: eduTrac/Application/Views/error/reset_password.php:43
+#: eduTrac/Application/Views/error/save_data.php:43
+#: eduTrac/Application/Views/error/save_query.php:43
+#: eduTrac/Application/Views/error/screen_error.php:31
+#: eduTrac/Application/Views/error/sql.php:31
+#: eduTrac/Application/Views/error/update_record.php:43
+msgid "Error!"
+msgstr ""
+
+#: eduTrac/Application/Views/error/course_registration.php:43
+msgid "The system was unable to register you for the requested course section. Please <a onclick=\"history.go(-1);\"><font color=\"orange\">go back</font></a> and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/delete_record.php:43
+msgid "Sorry but the system could not delete the record you requested. Please go back and try again. If the issue persists, contact the system administrator."
+msgstr ""
+
+#: eduTrac/Application/Views/error/edit_data.php:43
+msgid "The system was unable to write your update to the database. Please go back, try again, or contact your system administrator if the problem persists."
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:39
+msgid "Ouch!"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:39
+msgid "404 error"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:47
+msgid "It seems the page you are looking for is not here anymore. The page might have moved to another address or just removed by our staff."
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:55
+msgid "Is this a serious error?"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:55
+msgid "Let us know"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:58
+msgid "Go back to"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:61
+msgid "Browse through our"
+msgstr ""
+
+#: eduTrac/Application/Views/error/index.php:61
+msgid "Support Center"
+msgstr ""
+
+#: eduTrac/Application/Views/error/invalid_record.php:43
+msgid "The record your are looking for does not exist. Please try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/logs.php:54
+msgid "Error Type"
+msgstr ""
+
+#: eduTrac/Application/Views/error/logs.php:55
+msgid "String"
+msgstr ""
+
+#: eduTrac/Application/Views/error/logs.php:56
+msgid "File"
+msgstr ""
+
+#: eduTrac/Application/Views/error/logs.php:57
+msgid "Line Number"
+msgstr ""
+
+#: eduTrac/Application/Views/error/logs.php:58
+msgid "Delete"
+msgstr ""
+
+#: eduTrac/Application/Views/error/nslc_extraction.php:43
+msgid "There was an error with trying to extract your data. Either you need to run the Purge screen or check your saved query for errors."
+msgstr ""
+
+#: eduTrac/Application/Views/error/nslc_purge.php:43
+msgid "Sorry, was unable to purge the current NSLC date. Please go back and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/reset_password.php:43
+msgid "There was an error with trying to reset the password. Please go back and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/save_data.php:43
+msgid "The system was unable to write your entry to the database. This error usually occurs when there were no changes made to a record, and you clicked the save button. If this is not the case, please go back, try again, or contact your system administrator if the problem persists."
+msgstr ""
+
+#: eduTrac/Application/Views/error/save_query.php:43
+msgid "You save list could not be written to the database. Please go back and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/screen_error.php:31
+msgid "The screen "
+msgstr ""
+
+#: eduTrac/Application/Views/error/sql.php:31
+msgid "You are restricted from using certain keywords and characters in your select queries. Please go back back and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/error/update_record.php:43
+msgid "Sorry but the system was unable to update the requested record. Please go back and try again."
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:35
+#: eduTrac/Application/Views/faculty/index.php:36
+#: eduTrac/Application/Views/faculty/view.php:36
+msgid "Search Faculty"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:37
+#: eduTrac/Application/Views/faculty/add.php:40
+msgid "Add Faculty"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:64
+#: eduTrac/Application/Views/faculty/index.php:33
+msgid "Faculty"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:73
+#: eduTrac/Application/Views/faculty/view.php:89
+#: eduTrac/Application/Views/form/building.php:36
+#: eduTrac/Application/Views/form/building.php:39
+#: eduTrac/Application/Views/form/room.php:64
+#: eduTrac/Application/Views/form/room.php:134
+msgid "Building"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:85
+#: eduTrac/Application/Views/faculty/view.php:101
+msgid "Office"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:97
+#: eduTrac/Application/Views/faculty/view.php:113
+msgid "Office Phone"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:112
+#: eduTrac/Application/Views/faculty/view.php:122
+msgid "School"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:141
+#: eduTrac/Application/Views/faculty/view.php:157
+msgid "I Inactive"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/add.php:149
+#: eduTrac/Application/Views/faculty/view.php:174
+msgid "Approved By"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/index.php:67
+msgid "ID"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/index.php:68
+msgid "Last Name"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/index.php:69
+msgid "First Name"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/view.php:38
+msgid "View Faculty"
+msgstr ""
+
+#: eduTrac/Application/Views/faculty/view.php:165
+msgid "Email"
+msgstr ""
+
+#: eduTrac/Application/Views/form/acad_year.php:36
+#: eduTrac/Application/Views/form/acad_year.php:39
+#: eduTrac/Application/Views/form/acad_year.php:110
+msgid "Academic Year"
+msgstr ""
+
+#: eduTrac/Application/Views/form/acad_year.php:50
+#: eduTrac/Application/Views/form/class_year.php:50
+#: eduTrac/Application/Views/form/institution.php:50
+msgid "Indicates field is required."
+msgstr ""
+
+#: eduTrac/Application/Views/form/acad_year.php:64
+#: eduTrac/Application/Views/form/acad_year.php:71
+msgid "Acad Year"
+msgstr ""
+
+#: eduTrac/Application/Views/form/acad_year.php:109
+msgid "Academic Year Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/building.php:64
+#: eduTrac/Application/Views/form/building.php:107
+msgid "Building Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/building.php:71
+#: eduTrac/Application/Views/form/building.php:108
+msgid "Building Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/ccd.php:36
+#: eduTrac/Application/Views/form/ccd.php:39
+msgid "CCD"
+msgstr ""
+
+#: eduTrac/Application/Views/form/ccd.php:64
+#: eduTrac/Application/Views/form/ccd.php:109
+msgid "CCD Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/ccd.php:71
+#: eduTrac/Application/Views/form/ccd.php:110
+msgid "CCD Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/cip.php:36
+#: eduTrac/Application/Views/form/cip.php:39
+msgid "CIP"
+msgstr ""
+
+#: eduTrac/Application/Views/form/cip.php:64
+#: eduTrac/Application/Views/form/cip.php:107
+msgid "CIP Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/cip.php:71
+#: eduTrac/Application/Views/form/cip.php:108
+msgid "CIP Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/class_year.php:36
+#: eduTrac/Application/Views/form/class_year.php:39
+#: eduTrac/Application/Views/form/class_year.php:73
+#: eduTrac/Application/Views/form/class_year.php:133
+msgid "Class Year"
+msgstr ""
+
+#: eduTrac/Application/Views/form/class_year.php:88
+#: eduTrac/Application/Views/form/class_year.php:134
+msgid "Minimum Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/form/class_year.php:95
+#: eduTrac/Application/Views/form/class_year.php:135
+msgid "Maximum Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:36
+#: eduTrac/Application/Views/form/credit_load.php:39
+msgid "Credit Load"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:64
+msgid "Cred Load Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:71
+msgid "Cred Load Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:78
+msgid "Cred Load Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:116
+msgid "Credit Load Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:117
+msgid "Credit Load Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/credit_load.php:118
+msgid "Credit Load Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/form/degree.php:36
+#: eduTrac/Application/Views/form/degree.php:39
+msgid "Degree"
+msgstr ""
+
+#: eduTrac/Application/Views/form/degree.php:64
+#: eduTrac/Application/Views/form/degree.php:107
+msgid "Degree Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/degree.php:71
+#: eduTrac/Application/Views/form/degree.php:108
+msgid "Degree Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/department.php:64
+#: eduTrac/Application/Views/form/department.php:125
+msgid "Department Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/department.php:71
+msgid "Department Type"
+msgstr ""
+
+#: eduTrac/Application/Views/form/department.php:80
+#: eduTrac/Application/Views/form/department.php:126
+msgid "Department Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/department.php:87
+msgid "Short Description"
+msgstr ""
+
+#: eduTrac/Application/Views/form/department.php:127
+msgid "Department Description"
+msgstr ""
+
+#: eduTrac/Application/Views/form/institution.php:64
+#: eduTrac/Application/Views/form/institution.php:135
+msgid "FICE Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/institution.php:71
+msgid "Institution Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/institution.php:84
+msgid "City"
+msgstr ""
+
+#: eduTrac/Application/Views/form/institution.php:91
+msgid "State/Province"
+msgstr ""
+
+#: eduTrac/Application/Views/form/location.php:36
+#: eduTrac/Application/Views/form/location.php:39
+msgid "Location"
+msgstr ""
+
+#: eduTrac/Application/Views/form/location.php:64
+#: eduTrac/Application/Views/form/location.php:109
+msgid "Location Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/location.php:71
+#: eduTrac/Application/Views/form/location.php:110
+msgid "Location Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/major.php:36
+#: eduTrac/Application/Views/form/major.php:39
+msgid "Major"
+msgstr ""
+
+#: eduTrac/Application/Views/form/major.php:64
+#: eduTrac/Application/Views/form/major.php:109
+msgid "Major Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/major.php:71
+#: eduTrac/Application/Views/form/major.php:110
+msgid "Major Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/minor.php:36
+#: eduTrac/Application/Views/form/minor.php:39
+msgid "Minor"
+msgstr ""
+
+#: eduTrac/Application/Views/form/minor.php:64
+#: eduTrac/Application/Views/form/minor.php:109
+msgid "Minor Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/minor.php:71
+#: eduTrac/Application/Views/form/minor.php:110
+msgid "Minor Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/room.php:36
+#: eduTrac/Application/Views/form/room.php:39
+msgid "Room"
+msgstr ""
+
+#: eduTrac/Application/Views/form/room.php:76
+msgid "Room Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/room.php:89
+#: eduTrac/Application/Views/form/room.php:135
+msgid "Room Number"
+msgstr ""
+
+#: eduTrac/Application/Views/form/school.php:36
+#: eduTrac/Application/Views/form/school.php:39
+#: eduTrac/Application/Views/form/semester.php:36
+#: eduTrac/Application/Views/form/semester.php:39
+#: eduTrac/Application/Views/form/semester.php:83
+#: eduTrac/Application/Views/form/semester.php:165
+#: eduTrac/Application/Views/form/term.php:64
+#: eduTrac/Application/Views/form/term.php:182
+msgid "Semester"
+msgstr ""
+
+#: eduTrac/Application/Views/form/school.php:71
+#: eduTrac/Application/Views/form/school.php:130
+msgid "School Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/school.php:78
+#: eduTrac/Application/Views/form/school.php:129
+msgid "School Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/semester.php:76
+msgid "Semester Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/semester.php:96
+#: eduTrac/Application/Views/form/semester.php:166
+#: eduTrac/Application/Views/form/term.php:103
+#: eduTrac/Application/Views/form/term.php:183
+msgid "Start Date"
+msgstr ""
+
+#: eduTrac/Application/Views/form/semester.php:120
+#: eduTrac/Application/Views/form/term.php:139
+msgid "Active"
+msgstr ""
+
+#: eduTrac/Application/Views/form/specialization.php:36
+#: eduTrac/Application/Views/form/specialization.php:39
+msgid "Specialization"
+msgstr ""
+
+#: eduTrac/Application/Views/form/specialization.php:64
+#: eduTrac/Application/Views/form/specialization.php:109
+msgid "Specialization Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/specialization.php:71
+#: eduTrac/Application/Views/form/specialization.php:110
+msgid "Specialization Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/subject.php:64
+#: eduTrac/Application/Views/form/subject.php:109
+msgid "Subject Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/subject.php:71
+#: eduTrac/Application/Views/form/subject.php:110
+msgid "Subject Name"
+msgstr ""
+
+#: eduTrac/Application/Views/form/term.php:36
+#: eduTrac/Application/Views/form/term.php:39
+#: eduTrac/Application/Views/form/term.php:83
+#: eduTrac/Application/Views/form/term.php:181
+msgid "Term"
+msgstr ""
+
+#: eduTrac/Application/Views/form/term.php:76
+msgid "Term Code"
+msgstr ""
+
+#: eduTrac/Application/Views/form/term.php:90
+msgid "Reporting Term"
+msgstr ""
+
+#: eduTrac/Application/Views/form/term.php:127
+msgid "Drop/Add End Date"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_acad_year.php:37
+#: eduTrac/Application/Views/form/view_acad_year.php:40
+msgid "View Academic Year"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_building.php:37
+msgid "View Building"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_building.php:40
+#: eduTrac/Application/Views/form/view_ccd.php:40
+#: eduTrac/Application/Views/form/view_cip.php:40
+#: eduTrac/Application/Views/form/view_location.php:40
+#: eduTrac/Application/Views/form/view_major.php:40
+msgid "Viewing "
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_ccd.php:37
+msgid "View CCD"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_cip.php:37
+msgid "View CIP"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_class_year.php:37
+#: eduTrac/Application/Views/form/view_class_year.php:40
+msgid "View Class Year"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_credit_load.php:37
+#: eduTrac/Application/Views/form/view_credit_load.php:40
+msgid "View Credit Load"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_degree.php:37
+#: eduTrac/Application/Views/form/view_degree.php:40
+msgid "View Degree"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_department.php:37
+msgid "View Department"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_department.php:40
+msgid "View Deparment"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_department.php:104
+msgid "Update"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_institution.php:37
+#: eduTrac/Application/Views/form/view_institution.php:40
+msgid "View Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_location.php:37
+msgid "View Location"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_major.php:37
+msgid "View Major"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_minor.php:37
+msgid "View Minor"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_room.php:37
+msgid "View Room"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_school.php:37
+#: eduTrac/Application/Views/form/view_school.php:40
+msgid "View School"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_semester.php:37
+#: eduTrac/Application/Views/form/view_semester.php:40
+msgid "View Semester"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_specialization.php:35
+msgid "Specialization List"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_specialization.php:37
+msgid "View Specialization"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_subject.php:37
+msgid "View Subject"
+msgstr ""
+
+#: eduTrac/Application/Views/form/view_term.php:37
+#: eduTrac/Application/Views/form/view_term.php:40
+msgid "View Term"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:32
+msgid "eduTrac"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:43
+msgid "Password"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:48
+msgid "Remember me"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:51
+msgid "Sign in"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:62
+msgid "Having troubles?"
+msgstr ""
+
+#: eduTrac/Application/Views/index/index.php:62
+msgid "Get Help"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:35
+#: eduTrac/Application/Views/institution/view.php:35
+msgid "Search Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:37
+#: eduTrac/Application/Views/institution/add.php:40
+msgid "Add Institution"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:72
+#: eduTrac/Application/Views/institution/view.php:72
+msgid "Type"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:76
+msgid "High School"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:77
+msgid "College"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:78
+msgid "University"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/add.php:106
+#: eduTrac/Application/Views/institution/view.php:106
+msgid "State"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/index.php:69
+msgid "Institution Type"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/view.php:76
+msgid "HS High School"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/view.php:77
+msgid "COL College"
+msgstr ""
+
+#: eduTrac/Application/Views/institution/view.php:78
+msgid "UNIV University"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/add.php:65
+msgid "Placeholders"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/add.php:71
+#: eduTrac/Application/Views/mailer/index.php:51
+msgid "Email Key"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/add.php:78
+msgid "Email Name"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/add.php:86
+msgid "Template"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/index.php:52
+msgid "Title"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/queue.php:54
+msgid "Query"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/queue.php:55
+msgid "Processed"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/queue.php:72
+msgid "Are you sure you want to delete \""
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/schedule.php:66
+msgid "Email Subject"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/schedule.php:73
+msgid "From Name"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/schedule.php:80
+msgid "From Email"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/schedule.php:93
+msgid "Email Template"
+msgstr ""
+
+#: eduTrac/Application/Views/mailer/view.php:37
+#: eduTrac/Application/Views/mailer/view.php:40
+msgid "View Email Template"
+msgstr ""
+
+#: eduTrac/Application/Views/minor/index.php:35
+msgid "Minors"
+msgstr ""
+
+#: eduTrac/Application/Views/minor/index.php:38
+msgid "Manage Minors"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/correction.php:35
+msgid "NSLC Hold File Record"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/correction.php:95
+#: eduTrac/Application/Views/person/add.php:204
+msgid "Country"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/correction.php:104
+msgid "SSN"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/extraction.php:37
+#: eduTrac/Application/Views/nslc/extraction.php:40
+msgid "NSLC Extraction"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/extraction.php:62
+msgid ""
+"Once you've submitted your saved query, the next screen you come to will be the Verification screen. If data is in the hold file table, \n"
+"\t\t\t\t\t\tyou will receive an error. You must first purge this table of old data before you can continue with the extraction."
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/index.php:35
+#: eduTrac/Application/Views/nslc/index.php:38
+msgid "NSLC File Search"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/purge.php:35
+#: eduTrac/Application/Views/nslc/purge.php:38
+msgid "NSLC Purge"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/purge.php:64
+msgid "If you are running a new branch process, click the Submit button to purge the old data."
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/setup.php:54
+#: eduTrac/Application/Views/nslc/setup.php:57
+msgid "NSLC Setup"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/setup.php:82
+msgid "Branch"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/setup.php:110
+msgid "Term Start Date"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/setup.php:119
+msgid "Term End Date"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/verification.php:35
+#: eduTrac/Application/Views/nslc/verification.php:38
+msgid "NSLC Verification"
+msgstr ""
+
+#: eduTrac/Application/Views/nslc/verification.php:60
+msgid "Click the submit button below to run the verification process. A new window/tab will open with a report."
+msgstr ""
+
+#: eduTrac/Application/Views/permission/add.php:35
+#: eduTrac/Application/Views/permission/index.php:42
+#: eduTrac/Application/Views/permission/view.php:38
+msgid "Manage Permissions"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/add.php:37
+#: eduTrac/Application/Views/permission/add.php:40
+msgid "Add Permission"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/add.php:72
+#: eduTrac/Application/Views/permission/index.php:56
+#: eduTrac/Application/Views/permission/view.php:75
+msgid "Key"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/index.php:39
+msgid "Permissions"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/index.php:58
+msgid "Edit"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/index.php:92
+msgid "New Permision"
+msgstr ""
+
+#: eduTrac/Application/Views/permission/view.php:40
+#: eduTrac/Application/Views/permission/view.php:43
+msgid "View Permission"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:69
+#: eduTrac/Application/Views/person/add.php:72
+msgid "Name & Address"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:107
+msgid "Person Type"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:117
+msgid "Prefix"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:121
+msgid "Ms."
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:122
+msgid "Miss."
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:123
+msgid "Mrs."
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:124
+msgid "Mr."
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:150
+msgid "Middle Initial"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:159
+msgid "Address1"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:168
+msgid "Address2"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:195
+msgid "Zip Code"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:219
+msgid "Phone"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:228
+msgid "Primary/Preferred Email"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:237
+msgid "Social Security #"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:246
+msgid "Veteran?"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:258
+msgid "Ethnicity?"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:267
+msgid "Date of Birth"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:279
+msgid "Gender"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:283
+msgid "Male"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:284
+msgid "Female"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:292
+msgid "Emergency Contact"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:301
+msgid "Emergency Contact Phone"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:310
+msgid "Approved Date"
+msgstr ""
+
+#: eduTrac/Application/Views/person/add.php:335
+msgid ""
+"After adding a new person, you will need to apply a role to that person in order for him or her to have access \n"
+"                        to any screen(s). If you do not have access to assign a person a role, make sure to contact your system administrator as soon as \n"
+"                        the new person is added"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:38
+#: eduTrac/Application/Views/person/addr_sum.php:35
+#: eduTrac/Application/Views/person/edit_addr.php:35
+#: eduTrac/Application/Views/person/index.php:40
+#: eduTrac/Application/Views/person/perms.php:38
+#: eduTrac/Application/Views/person/role.php:38
+#: eduTrac/Application/Views/person/view.php:38
+msgid "Search Person"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:42
+#: eduTrac/Application/Views/person/addr_sum.php:39
+#: eduTrac/Application/Views/person/edit_addr.php:39
+msgid "Address Summary"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:44
+#: eduTrac/Application/Views/person/edit_addr.php:41
+msgid "Edit Address"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:158
+#: eduTrac/Application/Views/person/edit_addr.php:155
+msgid "Address Type"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:200
+#: eduTrac/Application/Views/person/edit_addr.php:201
+msgid "Add Date"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:209
+#: eduTrac/Application/Views/person/edit_addr.php:210
+msgid "Added By"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:246
+#: eduTrac/Application/Views/person/addr_form.php:299
+#: eduTrac/Application/Views/person/edit_addr.php:247
+#: eduTrac/Application/Views/person/edit_addr.php:300
+msgid "Extension"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:265
+#: eduTrac/Application/Views/person/addr_form.php:318
+#: eduTrac/Application/Views/person/edit_addr.php:266
+#: eduTrac/Application/Views/person/edit_addr.php:319
+msgid "Business"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:266
+#: eduTrac/Application/Views/person/addr_form.php:319
+#: eduTrac/Application/Views/person/edit_addr.php:267
+#: eduTrac/Application/Views/person/edit_addr.php:320
+msgid "Cellular"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:267
+#: eduTrac/Application/Views/person/addr_form.php:320
+#: eduTrac/Application/Views/person/edit_addr.php:268
+#: eduTrac/Application/Views/person/edit_addr.php:321
+msgid "Home"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:341
+#: eduTrac/Application/Views/person/edit_addr.php:342
+msgid "Primary Email"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_form.php:359
+#: eduTrac/Application/Views/person/edit_addr.php:360
+msgid "Secondary Email"
+msgstr ""
+
+#: eduTrac/Application/Views/person/addr_sum.php:107
+msgid "Add"
+msgstr ""
+
+#: eduTrac/Application/Views/person/perms.php:40
+msgid "Manage Person Permissions"
+msgstr ""
+
+#: eduTrac/Application/Views/person/perms.php:43
+msgid "Manage Permissions for -"
+msgstr ""
+
+#: eduTrac/Application/Views/person/perms.php:60
+#: eduTrac/Application/Views/role/add.php:74
+msgid "Permission"
+msgstr ""
+
+#: eduTrac/Application/Views/person/role.php:40
+msgid "Manage Person Role"
+msgstr ""
+
+#: eduTrac/Application/Views/person/role.php:43
+msgid "Manage Role for -"
+msgstr ""
+
+#: eduTrac/Application/Views/person/role.php:60
+msgid "Role"
+msgstr ""
+
+#: eduTrac/Application/Views/person/role.php:61
+msgid "Member"
+msgstr ""
+
+#: eduTrac/Application/Views/person/role.php:62
+msgid "Not Member"
+msgstr ""
+
+#: eduTrac/Application/Views/person/view.php:40
+msgid "View Person"
+msgstr ""
+
+#: eduTrac/Application/Views/person/view.php:43
+msgid "Person:"
+msgstr ""
+
+#: eduTrac/Application/Views/person/view.php:316
+#: eduTrac/Application/Views/profile/index.php:91
+msgid "Reset Password"
+msgstr ""
+
+#: eduTrac/Application/Views/plugins/index.php:52
+msgid "Plugin"
+msgstr ""
+
+#: eduTrac/Application/Views/plugins/index.php:53
+msgid "Description"
+msgstr ""
+
+#: eduTrac/Application/Views/profile/index.php:37
+msgid "User Profile"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:38
+#: eduTrac/Application/Views/program/index.php:37
+#: eduTrac/Application/Views/program/view.php:38
+msgid "Search Program"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:40
+msgid "Create Program"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:43
+msgid "Add Academic Program"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:67
+#: eduTrac/Application/Views/program/index.php:68
+#: eduTrac/Application/Views/program/view.php:67
+msgid "Program Code"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:130
+#: eduTrac/Application/Views/program/view.php:130
+msgid "Dept/Div"
+msgstr ""
+
+#: eduTrac/Application/Views/program/add.php:154
+#: eduTrac/Application/Views/program/view.php:154
+msgid "Effective Catalog Year"
+msgstr ""
+
+#: eduTrac/Application/Views/program/index.php:34
+msgid "Programs"
+msgstr ""
+
+#: eduTrac/Application/Views/program/index.php:69
+msgid "Program Title"
+msgstr ""
+
+#: eduTrac/Application/Views/program/view.php:40
+msgid "View Program"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/category.php:63
+msgid "Category Name"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/category.php:76
+#: eduTrac/Application/Views/reservation/category.php:128
+msgid "Text Color"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/category.php:89
+#: eduTrac/Application/Views/reservation/category.php:129
+msgid "Background Color"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/category.php:127
+msgid "Category"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:37
+#: eduTrac/Application/Views/reservation/index.php:40
+msgid "Room Reservation Settings"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:64
+msgid "Hour Display"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:67
+msgid "12 Hour Display"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:68
+msgid "24 Hour Display"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:77
+msgid "Query Size"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:87
+msgid "Week Start"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:90
+msgid "Monday"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:91
+msgid "Sunday"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:100
+msgid "Start Time"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:112
+msgid "End Time"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:130
+msgid "Bullets"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:143
+msgid "Enable Email"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:156
+msgid "Email From"
+msgstr ""
+
+#: eduTrac/Application/Views/reservation/index.php:166
+msgid "Reply To Email"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:39
+msgid "Manage Roles"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:41
+#: eduTrac/Application/Views/role/add.php:44
+msgid "Add Role"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:63
+msgid "Role Name"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:75
+msgid "Allow"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:76
+msgid "Deny"
+msgstr ""
+
+#: eduTrac/Application/Views/role/add.php:77
+msgid "Ignore"
+msgstr ""
+
+#: eduTrac/Application/Views/role/index.php:94
+msgid "New Role"
+msgstr ""
+
+#: eduTrac/Application/Views/role/view.php:41
+#: eduTrac/Application/Views/role/view.php:44
+msgid "Edit Role"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/add.php:37
+#: eduTrac/Application/Views/savequery/add.php:40
+msgid "Save Query"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/add.php:65
+#: eduTrac/Application/Views/savequery/view.php:67
+msgid "Save Query Name"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/add.php:83
+#: eduTrac/Application/Views/savequery/view.php:85
+msgid "Auto Purge"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/add.php:124
+#: eduTrac/Application/Views/savequery/view.php:127
+msgid "If enabled, saved queries get purged every 30 days. If you use your saved query on a regular basis, you should set this option to no."
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/index.php:51
+msgid "Saved Query Name"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/index.php:52
+msgid "Creation Date"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/view.php:37
+msgid "Saved Queries"
+msgstr ""
+
+#: eduTrac/Application/Views/savequery/view.php:39
+#: eduTrac/Application/Views/savequery/view.php:42
+msgid "View Saved Query"
+msgstr ""
+
+#: eduTrac/Application/Views/section/add.php:63
+#: eduTrac/Application/Views/section/addnl_info.php:35
+#: eduTrac/Application/Views/section/courses.php:38
+#: eduTrac/Application/Views/section/index.php:39
+#: eduTrac/Application/Views/section/offering_info.php:35
+#: eduTrac/Application/Views/section/view.php:64
+msgid "Search Section"
+msgstr ""
+
+#: eduTrac/Application/Views/section/add.php:65
+#: eduTrac/Application/Views/section/add.php:68
+msgid "Create Section"
+msgstr ""
+
+#: eduTrac/Application/Views/section/add.php:92
+#: eduTrac/Application/Views/section/view.php:69
+#: eduTrac/Application/Views/section/view.php:93
+msgid "Section"
+msgstr ""
+
+#: eduTrac/Application/Views/section/add.php:113
+#: eduTrac/Application/Views/section/view.php:114
+msgid "Section Start/End"
+msgstr ""
+
+#: eduTrac/Application/Views/section/add.php:151
+#: eduTrac/Application/Views/section/view.php:152
+msgid "CEU's"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:39
+#: eduTrac/Application/Views/section/view.php:66
+msgid "View Section"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:42
+msgid "Additional Section Info:"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:66
+msgid "Instructor"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:78
+msgid "Section Type"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:82
+msgid "ONL Online"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:83
+msgid "HB Hybrid"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:84
+msgid "ONC On-Campus"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:92
+msgid "Instructor Method"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:107
+msgid "Contact Hours"
+msgstr ""
+
+#: eduTrac/Application/Views/section/addnl_info.php:116
+msgid "Instructor Load"
+msgstr ""
+
+#: eduTrac/Application/Views/section/batch_register.php:54
+#: eduTrac/Application/Views/section/batch_register.php:57
+msgid "Batch Registration"
+msgstr ""
+
+#: eduTrac/Application/Views/section/batch_register.php:79
+msgid ""
+"Use the batch registration process if you need to register a group of students into a particular course section. \n"
+"                                This screen comes in handy when you need to create a saved query from a course section you need to cancel. \n"
+"                                The best way is to create your saved query by selecting the student id's in the old course section with an 'A' \n"
+"                                or 'N' status. Register them into the new course section and then cancel the old course section."
+msgstr ""
+
+#: eduTrac/Application/Views/section/batch_register.php:98
+#: eduTrac/Application/Views/section/courses.php:51
+#: eduTrac/Application/Views/section/index.php:69
+#: eduTrac/Application/Views/section/register.php:114
+msgid "Course Sec ID"
+msgstr ""
+
+#: eduTrac/Application/Views/section/batch_register.php:145
+msgid "You can find the id of a course section by visiting the <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/section/courses.php:35
+#: eduTrac/Application/Views/section/index.php:36
+msgid "Sections"
+msgstr ""
+
+#: eduTrac/Application/Views/section/courses.php:52
+#: eduTrac/Application/Views/section/index.php:70
+msgid "Section Code"
+msgstr ""
+
+#: eduTrac/Application/Views/section/grading.php:35
+#: eduTrac/Application/Views/section/grading.php:38
+msgid "Grading"
+msgstr ""
+
+#: eduTrac/Application/Views/section/grading.php:55
+#: eduTrac/Application/Views/section/register.php:98
+#: eduTrac/Application/Views/section/roster.php:53
+msgid "Student ID"
+msgstr ""
+
+#: eduTrac/Application/Views/section/grading.php:56
+msgid "Grade"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:39
+#: eduTrac/Application/Views/section/view.php:281
+msgid "Offering Info"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:42
+msgid "Offering Info:"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:78
+msgid "Class Room"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:90
+msgid "Meeting Days"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:102
+msgid "Tuesday"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:106
+msgid "Wednesday"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:110
+msgid "Thursday"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:114
+msgid "Friday"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:118
+msgid "Saturday"
+msgstr ""
+
+#: eduTrac/Application/Views/section/offering_info.php:154
+msgid "Register Online"
+msgstr ""
+
+#: eduTrac/Application/Views/section/register.php:71
+#: eduTrac/Application/Views/section/register.php:74
+msgid "Course Registration"
+msgstr ""
+
+#: eduTrac/Application/Views/section/register.php:135
+msgid "Register"
+msgstr ""
+
+#: eduTrac/Application/Views/section/roster.php:35
+msgid "My Courses"
+msgstr ""
+
+#: eduTrac/Application/Views/section/roster.php:37
+#: eduTrac/Application/Views/section/roster.php:40
+msgid "Course Section Roster"
+msgstr ""
+
+#: eduTrac/Application/Views/section/roster.php:54
+msgid "Student Name"
+msgstr ""
+
+#: eduTrac/Application/Views/section/roster.php:57
+msgid "Academic Credit Status"
+msgstr ""
+
+#: eduTrac/Application/Views/section/view.php:299
+msgid "Billing Info"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:37
+#: eduTrac/Application/Views/setting/index.php:40
+msgid "System Settings"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:64
+msgid "Site Title"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:73
+msgid "System Email"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:82
+msgid "Enable SSL"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:94
+msgid "Hold File Location"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:104
+msgid "Maintenance Mode"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:116
+msgid "Enable Benchmark"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:128
+msgid "Enable Cron Jobs"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:147
+msgid "Enable Cron Log"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:159
+msgid "Cookie TTL"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:168
+msgid "Cookie Path"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:177
+msgid "Open Registration"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:189
+msgid "Current Term"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:201
+msgid "Help Desk"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:219
+msgid "Reset Password Text"
+msgstr ""
+
+#: eduTrac/Application/Views/setting/index.php:250
+msgid "This option should be set to no until you have configured each <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/sql/index.php:118
+msgid "Successly Executed - "
+msgstr ""
+
+#: eduTrac/Application/Views/sql/index.php:123
+msgid "Query is : "
+msgstr ""
+
+#: eduTrac/Application/Views/staff/add.php:37
+#: eduTrac/Application/Views/staff/index.php:38
+#: eduTrac/Application/Views/staff/view.php:32
+msgid "Search Staff"
+msgstr ""
+
+#: eduTrac/Application/Views/staff/add.php:39
+#: eduTrac/Application/Views/staff/add.php:42
+msgid "Add Staff"
+msgstr ""
+
+#: eduTrac/Application/Views/staff/add.php:66
+#: eduTrac/Application/Views/staff/index.php:35
+msgid "Staff"
+msgstr ""
+
+#: eduTrac/Application/Views/staff/view.php:34
+msgid "View Staff"
+msgstr ""
+
+#: eduTrac/Application/Views/student/academic_credits.php:35
+#: eduTrac/Application/Views/student/add.php:58
+#: eduTrac/Application/Views/student/add_prog.php:55
+#: eduTrac/Application/Views/student/index.php:38
+#: eduTrac/Application/Views/student/view.php:35
+msgid "Search Student"
+msgstr ""
+
+#: eduTrac/Application/Views/student/academic_credits.php:39
+msgid "Academic Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/student/academic_credits.php:55
+msgid "Course Sec Name"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:60
+#: eduTrac/Application/Views/student/add.php:63
+msgid "Add Student"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:96
+#: eduTrac/Application/Views/student/add_prog.php:86
+msgid "Program"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:144
+msgid "Prog Start Date"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:171
+#: eduTrac/Application/Views/student/view.php:184
+msgid "Catalog Year"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:183
+#: eduTrac/Application/Views/student/view.php:151
+msgid "Advisor"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:200
+#: eduTrac/Application/Views/student/view.php:207
+msgid "H Hiatus"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:201
+#: eduTrac/Application/Views/student/view.php:208
+msgid "L Leave of Absence"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add.php:210
+#: eduTrac/Application/Views/student/add_prog.php:116
+msgid "Grad Date"
+msgstr ""
+
+#: eduTrac/Application/Views/student/add_prog.php:59
+msgid "Add Student Program"
+msgstr ""
+
+#: eduTrac/Application/Views/student/courses.php:40
+msgid "Search Courses"
+msgstr ""
+
+#: eduTrac/Application/Views/student/courses.php:57
+msgid "Course Sec Code"
+msgstr ""
+
+#: eduTrac/Application/Views/student/courses.php:59
+msgid "Meeting Day(s)"
+msgstr ""
+
+#: eduTrac/Application/Views/student/courses.php:60
+#: eduTrac/Application/Views/student/schedule.php:58
+msgid "Time"
+msgstr ""
+
+#: eduTrac/Application/Views/student/grades.php:37
+#: eduTrac/Application/Views/student/grades.php:40
+msgid "My Grades"
+msgstr ""
+
+#: eduTrac/Application/Views/student/graduation.php:83
+msgid "Graduation Date"
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:45
+msgid "Hello Student!"
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:46
+msgid "Welcome to the student portal. From here, you can view and print your class schedule, view grades, request transcripts, and register for courses."
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:55
+msgid "Menu"
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:59
+msgid "Class Schedule"
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:60
+msgid "Grades"
+msgstr ""
+
+#: eduTrac/Application/Views/student/portal.php:61
+msgid "Request Transcript"
+msgstr ""
+
+#: eduTrac/Application/Views/student/schedule.php:37
+#: eduTrac/Application/Views/student/schedule.php:40
+msgid "Schedule"
+msgstr ""
+
+#: eduTrac/Application/Views/student/schedule.php:57
+msgid "Day(s) of the Week"
+msgstr ""
+
+#: eduTrac/Application/Views/student/tran.php:35
+#: eduTrac/Application/Views/student/tran.php:38
+msgid "Transcript"
+msgstr ""
+
+#: eduTrac/Application/Views/student/tran.php:71
+msgid "Transcript Type"
+msgstr ""
+
+#: eduTrac/Application/Views/student/tran.php:80
+msgid "Print Size"
+msgstr ""
+
+#: eduTrac/Application/Views/student/tran.php:84
+msgid "Letter"
+msgstr ""
+
+#: eduTrac/Application/Views/student/tran.php:85
+msgid "Legal"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view.php:37
+msgid "View Student"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_academic_credits.php:41
+msgid "View Academic Credits"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_academic_credits.php:62
+msgid "Course ID"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_academic_credits.php:72
+msgid "Course Name"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_academic_credits.php:150
+msgid "Reporting term"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_academic_credits.php:189
+msgid "Status Time"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_prog.php:39
+msgid "Edit Student Program"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_prog.php:84
+msgid "Ant Grad Date"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_prog.php:102
+msgid "Eligible to Graduate?"
+msgstr ""
+
+#: eduTrac/Application/Views/student/view_prog.php:191
+msgid "Select the checkbox if the student is eligible to graduate from this particular program."
+msgstr ""
+
+#: eduTrac/Application/Views/success/course_registration.php:43
+#: eduTrac/Application/Views/success/delete_acad_year.php:43
+#: eduTrac/Application/Views/success/delete_course.php:43
+#: eduTrac/Application/Views/success/delete_credit_load.php:43
+#: eduTrac/Application/Views/success/delete_degree.php:43
+#: eduTrac/Application/Views/success/delete_dept.php:43
+#: eduTrac/Application/Views/success/delete_major.php:43
+#: eduTrac/Application/Views/success/delete_minor.php:43
+#: eduTrac/Application/Views/success/delete_record.php:43
+#: eduTrac/Application/Views/success/nslc_purge.php:43
+#: eduTrac/Application/Views/success/reset_password.php:43
+#: eduTrac/Application/Views/success/save_data.php:43
+#: eduTrac/Application/Views/success/save_query.php:43
+#: eduTrac/Application/Views/success/update_record.php:43
+msgid "Success!"
+msgstr ""
+
+#: eduTrac/Application/Views/success/course_registration.php:43
+msgid "Your were succesfully registered into the requested course section. If you would like to register for another, <a onclick=\"history.go(-1);\"><font color=\"orange\">go back</font></a> to the registration screen."
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_acad_year.php:43
+msgid "The academic year was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_course.php:43
+msgid "The course was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_credit_load.php:43
+msgid "The credit Load was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_degree.php:43
+msgid "The degree was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_dept.php:43
+msgid "The department was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_major.php:43
+msgid "The major was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_minor.php:43
+msgid "The minor was deleted successfully. <a href=\""
+msgstr ""
+
+#: eduTrac/Application/Views/success/delete_record.php:43
+msgid "The record was deleted successfully. Use the navigation above to navigate to a new screen."
+msgstr ""
+
+#: eduTrac/Application/Views/success/nslc_purge.php:43
+msgid "Records were purged successfully. You may continue with the NSLC process."
+msgstr ""
+
+#: eduTrac/Application/Views/success/reset_password.php:43
+msgid "The password for the requested user has been reset. They should also receive an email address with their new password as well."
+msgstr ""
+
+#: eduTrac/Application/Views/success/save_data.php:43
+msgid "The data was saved successfully to the database."
+msgstr ""
+
+#: eduTrac/Application/Views/success/save_query.php:43
+msgid "The save list "
+msgstr ""
+
+#: eduTrac/Application/Views/success/update_record.php:43
+msgid "The requested record was updated successfully."
+msgstr ""
+
+#: eduTrac/Application/Views/upgrade/index.php:48
+msgid "Warning!"
+msgstr ""
+
+#: eduTrac/Application/Views/upgrade/index.php:48
+msgid ""
+"Hey admin, your database is out of date and currently at \n"
+"                        version "
+msgstr ""
+
+#: eduTrac/Application/Views/upgrade/index.php:65
+msgid ""
+"Hey admin, you database is currently up to date. There is nothing else here to see. \n"
+"                        <a href=\""
+msgstr ""
+
+#: eduTrac/Classes/Controllers/Help.php:38
+msgid "This is the help page."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:36
+msgid "Your message has been sent and someone will contact you as soon as possible."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:37
+msgid "Sorry, all fields must be filled in before you can submit the form."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:38
+msgid "Sorry, your topic could not be posted. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:39
+msgid "You forgot to choose a message to delete. Go back and try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:40
+msgid "Sorry, your reply could not be updated."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:41
+msgid "Message successfully sent!"
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:42
+msgid "Error, couldn't send PM. Maybe wrong user."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:43
+msgid "Message successfully deleted!"
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:44
+msgid "Error, couldn't delete PM!"
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:45
+msgid "Your new member has been added and was sent an email with new account details."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:46
+msgid "Sorry, the new user could not be added. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:47
+msgid "Your news posting has been deleted. Go back to your the main news page."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:48
+msgid "You forgot to choose a news posting to delete.  Go back to the main news page and try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:49
+msgid "The user has been updated successfully."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:50
+msgid "The user was not updated, please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:51
+msgid "News item updated successfully."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:52
+msgid "An error occurred. Please check your post and try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:53
+msgid "The file you are trying to upload is not a .zip file. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:54
+msgid "Your plugin was uploaded and installed properly."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:55
+msgid "There was a problem uploading your plugin. Please try again or check the plugin package."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:56
+msgid "The re-install was successful."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:57
+msgid "There was an error with the re-install. It is better that you download the full version and overwrite the files on your server manually."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:58
+msgid "Your system was upgraded to the latest version."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:59
+msgid "There was an error upgrading to the latest version. It is better that you download the full version and overwrite the files on your server manually."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:60
+msgid "Sorry, your user type was not added. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:61
+msgid "There was an error uploading the file, please try again!"
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:62
+msgid "File name is not valid or the file was more than "
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:63
+msgid "You profile was updated successfully."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:64
+msgid "Your profile could not be updated. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:65
+msgid "Your password has been updated."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:66
+msgid "Sorry, your password cannot be blank."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:67
+msgid "The project has been added."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:68
+msgid "Project name, description, type, and email must be filled out before submitting the form."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:69
+msgid "Your project has been updated."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:70
+msgid "Your project was unable to be updated. Please try again."
+msgstr ""
+
+#: eduTrac/Classes/Libraries/Messages.php:71
+msgid "Your username or password was entered incorreclty. Please go back and try again."
+msgstr ""
+
