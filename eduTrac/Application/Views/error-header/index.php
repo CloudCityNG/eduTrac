@@ -49,27 +49,27 @@ use \eduTrac\Classes\Libraries\Hooks;
 	<link rel="shortcut icon" href="<?=BASE_URL;?>favicon.ico" type="image/x-icon">
 	
 	<!-- Bootstrap -->
-	<link href="<?php echo BASE_URL; ?>static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo BASE_URL; ?>static/common/bootstrap/css/responsive.css" rel="stylesheet" type="text/css" />
+	<link href="<?=BASE_URL;?>static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<?=BASE_URL;?>static/common/bootstrap/css/responsive.css" rel="stylesheet" type="text/css" />
 	
 	<!-- Glyphicons Font Icons -->
-	<link href="<?php echo BASE_URL; ?>static/common/theme/fonts/glyphicons/css/glyphicons.css" rel="stylesheet" />
+	<link href="<?=BASE_URL;?>static/common/theme/fonts/glyphicons/css/glyphicons.css" rel="stylesheet" />
 	
-	<link rel="stylesheet" href="<?php echo BASE_URL; ?>static/common/theme/fonts/font-awesome/css/font-awesome.min.css">
-	<!--[if IE 7]><link rel="stylesheet" href="<?php echo BASE_URL; ?>static/common/theme/fonts/font-awesome/css/font-awesome-ie7.min.css"><![endif]-->
+	<link rel="stylesheet" href="<?=BASE_URL;?>static/common/theme/fonts/font-awesome/css/font-awesome.min.css">
+	<!--[if IE 7]><link rel="stylesheet" href="<?=BASE_URL;?>static/common/theme/fonts/font-awesome/css/font-awesome-ie7.min.css"><![endif]-->
 	
 	<!-- Uniform Pretty Checkboxes -->
-	<link href="<?php echo BASE_URL; ?>static/common/theme/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css" rel="stylesheet" />
+	<link href="<?=BASE_URL;?>static/common/theme/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css" rel="stylesheet" />
 	
 	<!-- PrettyPhoto -->
-    <link href="<?php echo BASE_URL; ?>static/common/theme/scripts/plugins/gallery/prettyphoto/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="<?=BASE_URL;?>static/common/theme/scripts/plugins/gallery/prettyphoto/css/prettyPhoto.css" rel="stylesheet" />
 	
 	<!-- Main Theme Stylesheet :: CSS -->
-	<link href="<?php echo BASE_URL; ?>static/common/theme/css/style-default.css?1371788393" rel="stylesheet" type="text/css" />
+	<link href="<?=BASE_URL;?>static/common/theme/css/style-default.css?1371788393" rel="stylesheet" type="text/css" />
 	
 	
 	<!-- LESS.js Library -->
-	<script src="<?php echo BASE_URL; ?>static/common/theme/scripts/plugins/system/less.min.js"></script>
+	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/less.min.js"></script>
 </head>
 <body class="login ">
 	

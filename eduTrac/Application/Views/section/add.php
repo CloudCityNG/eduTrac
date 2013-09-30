@@ -131,7 +131,7 @@ $(function(){
                             <div class="controls">
                                 <select style="width:100%;" name="deptID" id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', $crse->getDeptID()); ?>
+                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', _h($crse->getDeptID())); ?>
                                 </select>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="minCredit" readonly="readonly" class="span4" value="<?=$crse->getMinCredit();?>" required/>
+                                <input type="text" name="minCredit" readonly="readonly" class="span4" value="<?=_h($crse->getMinCredit());?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -159,7 +159,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
                             <div class="controls">
-                                <?=course_level_select($crse->getCourseLevelCode());?>
+                                <?=course_level_select(_h($crse->getCourseLevelCode()));?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -168,7 +168,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select($crse->getAcadLevelCode());?>
+                                <?=acad_level_select(_h($crse->getAcadLevelCode()));?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -177,7 +177,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Title' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="secShortTitle" readonly="readonly" class="span10" value="<?=$crse->getCourseShortTitle();?>" required/>
+                                <input type="text" name="secShortTitle" readonly="readonly" class="span10" value="<?=_h($crse->getCourseShortTitle());?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -247,8 +247,8 @@ $(function(){
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-				    <input type="hidden" name="courseID" value="<?=$v['courseID'];?>" />
-				    <input type="hidden" name="courseCode" value="<?=$v['courseCode'];?>" />
+				    <input type="hidden" name="courseID" value="<?=_h($v['courseID']);?>" />
+				    <input type="hidden" name="courseCode" value="<?=_h($v['courseCode']);?>" />
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->

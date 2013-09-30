@@ -40,7 +40,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 <div class="innerLR">
 
 	<!-- Form -->
-	<form class="form-horizontal margin-none" action="<?php echo BASE_URL; ?>form/runAcadYear/" id="validateSubmitForm" method="post" autocomplete="off">
+	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>form/runAcadYear/" id="validateSubmitForm" method="post" autocomplete="off">
 		
 		<!-- Widget -->
 		<div class="widget widget-heading-simple widget-body-gray">

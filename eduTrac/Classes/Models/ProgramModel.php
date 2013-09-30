@@ -46,8 +46,23 @@ class ProgramModel {
         $array = [];
         $post = isPostSet('prog');
         $bind = array( ":post" => "%$post%" );
-        $q = DB::inst()->query( "SELECT acadProgID,acadProgCode,acadProgTitle,currStatus,startDate,endDate 
-            FROM acad_program WHERE acadProgCode LIKE :post", $bind
+        $q = DB::inst()->query( "SELECT 
+                    CASE currStatus 
+                    WHEN 'A' THEN 'Active' 
+                    WHEN 'I' THEN 'Inactive' 
+                    WHEN 'P' THEN 'Pending' 
+                    ELSE 'Obsolete' 
+                    END AS 'Status', 
+                    acadProgID,
+                    acadProgCode,
+                    acadProgTitle,
+                    startDate,
+                    endDate 
+                FROM 
+                    acad_program 
+                WHERE 
+                    acadProgCode LIKE :post",
+                $bind 
         );
         foreach($q as $r) {
             $array[] = $r;

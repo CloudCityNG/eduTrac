@@ -63,7 +63,7 @@
 						<!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="ficeCode"><?php _e( _t( 'FICE Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode"<?=gio();?> type="text" value="<?=$this->inst[0]['ficeCode'];?>" /></div>
+                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode"<?=gio();?> type="text" value="<?=_h($this->inst[0]['ficeCode']);?>" /></div>
                         </div>
                         <!-- // Group END -->
 						
@@ -73,9 +73,9 @@
                             <div class="controls">
                                 <select style="width:35%" name="instType"<?=gio();?> id="select2_9">
                                     <option value="">&nbsp;</option>
-                                    <option value="HS"<?=selected('HS',$this->inst[0]['instType'],false);?>><?php _e( _t( 'HS High School' ) ); ?></option>
-                                    <option value="COL"<?=selected('COL',$this->inst[0]['instType'],false);?>><?php _e( _t( 'COL College' ) ); ?></option>
-                                    <option value="UNIV"<?=selected('UNIV',$this->inst[0]['instType'],false);?>><?php _e( _t( 'UNIV University' ) ); ?></option>
+                                    <option value="HS"<?=selected('HS',_h($this->inst[0]['instType']),false);?>><?php _e( _t( 'HS High School' ) ); ?></option>
+                                    <option value="COL"<?=selected('COL',_h($this->inst[0]['instType']),false);?>><?php _e( _t( 'COL College' ) ); ?></option>
+                                    <option value="UNIV"<?=selected('UNIV',_h($this->inst[0]['instType']),false);?>><?php _e( _t( 'UNIV University' ) ); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="instName"><font color="red">*</font> <?php _e( _t( 'Institution Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="instName" name="instName"<?=gio();?> type="text" value="<?=$this->inst[0]['instName'];?>" required /></div>
+							<div class="controls"><input class="span12" id="instName" name="instName"<?=gio();?> type="text" value="<?=_h($this->inst[0]['instName']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -97,14 +97,14 @@
 					    <!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="city"><?php _e( _t( 'City' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="city" name="city"<?=gio();?> type="text" value="<?=$this->inst[0]['city'];?>" /></div>
+                            <div class="controls"><input class="span12" id="city" name="city"<?=gio();?> type="text" value="<?=_h($this->inst[0]['city']);?>" /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
                         <div class="control-group">
                             <label class="control-label" for="state"><?php _e( _t( 'State' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="state" name="state"<?=gio();?> type="text" value="<?=$this->inst[0]['state'];?>" /></div>
+                            <div class="controls"><input class="span12" id="state" name="state"<?=gio();?> type="text" value="<?=_h($this->inst[0]['state']);?>" /></div>
                         </div>
                         <!-- // Group END -->
 						
@@ -118,7 +118,7 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-                    <input name="institutionID" type="hidden" value="<?=$this->inst[0]['institutionID'];?>" />
+                    <input name="institutionID" type="hidden" value="<?=_h($this->inst[0]['institutionID']);?>" />
 					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
                     <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>institution/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>

@@ -81,7 +81,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 						<div class="control-group">
 							<label class="control-label"><?php _e( _t( 'Enable SSL' ) ); ?></label>
 							<div class="controls">
-								<select style="width:25%" name="enable_ssl" id="select2_9">
+								<select style="width:25%" name="enable_ssl" id="select2_9" disabled="disabled">
                             		<option value="1"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '1', false ); ?>><?php _e( _t( "Yes" ) ); ?></option>
                             		<option value="0"<?=selected( _h(Hooks::get_option( 'enable_ssl' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                             	</select>
@@ -103,7 +103,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Maintenance Mode' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:25%"  name="maintenance_mode" id="select2_10">
+                                <select style="width:25%"  name="maintenance_mode" id="select2_10" disabled="disabled">
                                     <option value="1"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
                                     <option value="0"<?=selected( _h(Hooks::get_option( 'maintenance_mode' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
                                 </select>

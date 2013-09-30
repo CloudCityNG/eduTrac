@@ -178,8 +178,8 @@
 				    <input type="hidden" name="stuProgID" value="<?=_h($this->stuProg[0]['stuProgID']);?>" />
 				    <input type="hidden" name="stuID" value="<?=_h($this->stuProg[0]['stuID']);?>" />
 					<button type="submit"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-					<button type="button"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_plus" onclick="window.location='<?=BASE_URL;?>student/add_prog/<?=$this->stuProg[0]['stuID'];?>/<?=bm();?>'"><i></i><?php _e( _t( 'Add' ) ); ?></button>
-					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=$this->stuProg[0]['stuID'];?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="button"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_plus" onclick="window.location='<?=BASE_URL;?>student/add_prog/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Add' ) ); ?></button>
+					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				

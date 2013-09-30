@@ -67,7 +67,7 @@
 							<div class="controls">
 							    <select style="width:50%;" name="facID" id="select2_10"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
-                            	   <?php facID_dropdown($this->addnl[0]['facID']); ?>
+                            	   <?php facID_dropdown(_h($this->addnl[0]['facID'])); ?>
                             	</select>
 							</div>
 						</div>
@@ -91,7 +91,7 @@
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Instructor Method' ) ); ?></label>
                             <div class="controls">
-                                <?=instructor_method($this->addnl[0]['instructorMethod']);?>
+                                <?=instructor_method(_h($this->addnl[0]['instructorMethod']));?>
                            </div>
                         </div>
                         <!-- // Group END -->
