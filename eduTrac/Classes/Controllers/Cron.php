@@ -130,6 +130,10 @@ class Cron extends \eduTrac\Classes\Core\Controller {
         $this->model->runTermGPA();
     }
     
+    public function runDBBackup() {
+        $this->model->runDBBackup();
+    }
+    
     public function updateTermGPA() {
         $this->model->updateTermGPA();
     }

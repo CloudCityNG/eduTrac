@@ -67,7 +67,7 @@
 							<div class="controls">
 							    <select style="width:50%;" name="buildingID" id="select2_9"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
-                            	   <?php table_dropdown('building','','buildingID','buildingCode','buildingName',$this->soff[0]['buildingID']); ?>
+                            	   <?php table_dropdown('building','','buildingID','buildingCode','buildingName',_h($this->soff[0]['buildingID'])); ?>
                             	</select>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 							<div class="controls">
 							    <select style="width:50%;" name="roomID" id="select2_10"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
-                            	    <?php table_dropdown('room','','roomID','roomCode','roomNumber',$this->soff[0]['roomID']); ?>
+                            	    <?php table_dropdown('room','','roomID','roomCode','roomNumber',_h($this->soff[0]['roomID'])); ?>
                             	</select>
 							</div>
 						</div>
@@ -90,31 +90,31 @@
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Meeting Days' ) ); ?></label>
 							<div class="controls widget-body uniformjs">
     							<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="Su" <?php if(preg_match("/Su/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="Su" <?php if(preg_match("/Su/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Sunday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="M" <?php if(preg_match("/M/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="M" <?php if(preg_match("/M/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Monday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="T" <?php if(preg_match("/T/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="T" <?php if(preg_match("/T/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Tuesday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="W" <?php if(preg_match("/W/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="W" <?php if(preg_match("/W/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Wednesday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="Th" <?php if(preg_match("/Th/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="Th" <?php if(preg_match("/Th/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Thursday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="F" <?php if(preg_match("/F/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="F" <?php if(preg_match("/F/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Friday' ) ); ?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="S" <?php if(preg_match("/S/", $this->soff[0]['dotw'])) { echo 'checked="checked"'; } ?> />
+									<input type="checkbox" class="checkbox" name="dotw[]" value="S" <?php if(preg_match("/S/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
 									<?php _e( _t( 'Saturday' ) ); ?>
 								</label>
 							</div>
@@ -155,8 +155,8 @@
                             <div class="controls">
                                 <select style="width:35%" name="stuReg"<?=csio();?> id="select2_11" required>
                                     <option value="">&nbsp;</option>
-                                    <option value="1"<?=selected('1',$this->soff[0]['stuReg'],false);?>><?php _e( _t( 'Yes' ) ); ?></option>
-                                    <option value="0"<?=selected('0',$this->soff[0]['stuReg'],false);?>><?php _e( _t( 'No' ) ); ?></option>
+                                    <option value="1"<?=selected('1',_h($this->soff[0]['stuReg']),false);?>><?php _e( _t( 'Yes' ) ); ?></option>
+                                    <option value="0"<?=selected('0',_h($this->soff[0]['stuReg']),false);?>><?php _e( _t( 'No' ) ); ?></option>
                                 </select>
                            </div>
                         </div>

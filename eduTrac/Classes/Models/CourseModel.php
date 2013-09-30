@@ -45,10 +45,15 @@ class CourseModel {
         $q = DB::inst()->select( "course",
                     "courseCode LIKE :crse",
                     "courseID",
-                    "courseID,
+                    "CASE currStatus 
+                    WHEN 'A' THEN 'Active' 
+                    WHEN 'I' THEN 'Inactive' 
+                    WHEN 'P' THEN 'Pending' 
+                    ELSE 'Obsolete' 
+                    END AS 'Status',
+                    courseID,
                     courseCode,
                     courseShortTitle,
-                    currStatus,
                     startDate,
                     endDate",
                     $bind 

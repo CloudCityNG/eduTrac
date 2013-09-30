@@ -30,9 +30,9 @@
 
 <ul class="breadcrumb">
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>mailer" class="glyphicons e-mail"><i></i> <?php _e( _t( 'Email Templates' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>mailer/<?=bm();?>" class="glyphicons e-mail"><i></i> <?php _e( _t( 'Email Templates' ) ); ?></a></li>
 	<li class="divider"></li>
 	<li><?php _e( _t( 'View Email Template' ) ); ?></li>
 </ul>
@@ -69,14 +69,14 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="email_key"><font color="red">*</font> <?php _e( _t( 'Email Key' ) ); ?></label>
-							<div class="controls"><input class="span12" id="email_key" name="email_key" type="text" value="<?=$this->emailTemp[0]['email_key'];?>" required/></div>
+							<div class="controls"><input class="span12" id="email_key" name="email_key" type="text" value="<?=_h($this->emailTemp[0]['email_key']);?>" required/></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="email_name"><font color="red">*</font> <?php _e( _t( 'Email Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="email_name" name="email_name" type="text" value="<?=$this->emailTemp[0]['email_name'];?>" required/></div>
+							<div class="controls"><input class="span12" id="email_name" name="email_name" type="text" value="<?=_h($this->emailTemp[0]['email_name']);?>" required/></div>
 						</div>
 						<!-- // Group END -->
 					
@@ -85,7 +85,7 @@
 							<div class="control-group">
 								<label class="control-label" for="email_value"><font color="red">*</font> <?php _e( _t( 'Template' ) ); ?></label>
 								<div class="controls">
-									<textarea id="id1" class="wysihtml5 span12" rows="20" name="email_value" required><?=$this->emailTemp[0]['email_value'];?></textarea>
+									<textarea id="id1" class="wysihtml5 span12" rows="20" name="email_value" required><?=_h($this->emailTemp[0]['email_value']);?></textarea>
 								</div>
 							</div>
 						</div>
@@ -94,7 +94,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="semester"><?php _e( _t( 'Last Update' ) ); ?></label>
-							<div class="controls"><input class="span12" type="text" disabled value="<?=date('D, M d, o @ h:i A',strtotime($this->emailTemp[0]['LastUpdate']));?>" /></div>
+							<div class="controls"><input class="span12" type="text" disabled value="<?=date('D, M d, o @ h:i A',strtotime(_h($this->emailTemp[0]['LastUpdate'])));?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -108,8 +108,8 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<input name="etID" type="hidden" value="<?=$this->emailTemp[0]['etID'];?>" />
-					<input name="deptID" type="hidden" value="<?=$this->emailTemp[0]['deptID'];?>" />
+					<input name="etID" type="hidden" value="<?=_h($this->emailTemp[0]['etID']);?>" />
+					<input name="deptID" type="hidden" value="<?=_h($this->emailTemp[0]['deptID']);?>" />
 					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
 					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>mailer/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
 				</div>
