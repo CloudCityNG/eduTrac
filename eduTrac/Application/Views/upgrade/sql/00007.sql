@@ -4,6 +4,8 @@ INSERT INTO `screen` VALUES('', 'BRGN', 'Batch Course Registration', 'section/ba
 
 INSERT INTO `screen` VALUES('', 'STAF', 'Staff', 'staff/');
 
+INSERT INTO `screen` VALUES('', 'TRAN', 'Transcript', 'student/tran/');
+
 INSERT INTO `cronjob` VALUES('', 'cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);
 
 INSERT INTO `cronjob` VALUES('', 'cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);

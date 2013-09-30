@@ -1636,6 +1636,8 @@ INSERT INTO `screen` VALUES(44, 'BRGN', 'Batch Course Registration', 'section/ba
 
 INSERT INTO `screen` VALUES(45, 'STAF', 'Staff', 'staff/');
 
+INSERT INTO `screen` VALUES(46, 'TRAN', 'Transcript', 'student/tran/');
+
 CREATE TABLE IF NOT EXISTS `semester` (
   `semesterID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `acadYearID` int(11) unsigned zerofill NOT NULL,
