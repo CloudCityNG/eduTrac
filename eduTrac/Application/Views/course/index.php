@@ -82,15 +82,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <tr class="gradeX">
                     <td class="center"><?=_h($v['courseCode']);?></td>
                     <td class="center"><?=_h($v['courseShortTitle']);?></td>
-                    <td class="center">
-                    	<?php if(_h($v['currStatus']) == 'P') {
-                    		echo 'Pending';
-                    	} elseif(_h($v['currStatus']) == 'A') {
-                    		echo 'Active';
-                    	} else {
-                    		echo 'Obsolete';
-                    	}; ?>
-                    </td>
+                    <td class="center"><?=_h($v['Status']);?></td>
                     <td class="center"><?=_h($v['startDate']);?></td>
                     <td class="center"><?=_h($v['endDate']);?></td>
                     <td class="center">

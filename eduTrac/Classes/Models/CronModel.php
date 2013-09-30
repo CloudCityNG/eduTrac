@@ -468,6 +468,24 @@ class CronModel {
         }
     }
     
+    public function runDBBackup() {
+        $dbhost = DB_HOST;
+        $dbuser = DB_USER;
+        $dbpass = DB_PASS;
+        $dbname = DB_NAME;
+        $backupFile = Hooks::get_option('hold_file_loc') . $dbname . '-' . date("Y-m-d-H-i-s") . '.gz';
+        $command = "mysqldump --opt -h $dbhost -u $dbuser -p$dbpass $dbname | gzip > $backupFile";
+        system($command);
+        
+        $files = glob(Hooks::get_option('hold_file_loc')."*.gz");
+        foreach($files as $file) {
+            if(is_file($file)
+            && time() - filemtime($file) >= 20*24*3600) { // 20 days
+                unlink($file);
+            }
+        }
+    }
+    
     public function updateTermGPA() {
         $array = [];
         $q1 = DB::inst()->query( "SELECT 

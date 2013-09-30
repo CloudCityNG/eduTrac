@@ -152,7 +152,7 @@
                             <div class="controls">
                                 <select style="width:100%;" name="advisorID"<?=sio();?> id="select2_14" required>
                                     <option value="">&nbsp;</option>
-                                    <?php facID_dropdown($this->student[0]['advisorID']); ?>
+                                    <?php facID_dropdown(_h($this->student[0]['advisorID'])); ?>
                                 </select>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select($this->student[0]['acadLevelCode']);?>
+                                <?=acad_level_select(_h($this->student[0]['acadLevelCode']));?>
                             </div>
                         </div>
                         <!-- // Group END -->

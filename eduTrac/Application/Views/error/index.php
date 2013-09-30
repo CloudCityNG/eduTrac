@@ -36,7 +36,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 
 	<!-- Box -->
 	<div class="hero-unit well">
-		<h1 class="padding-none">Ouch! <span>404 error</span></h1>
+		<h1 class="padding-none"><?=_t('Ouch!');?> <span><?=_t('404 error');?></span></h1>
 		<hr class="separator" />
 		<!-- Row -->
 		<div class="row-fluid">
@@ -44,7 +44,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 			<!-- Column -->
 			<div class="span6">
 				<div class="center">
-					<p>It seems the page you are looking for is not here anymore. The page might have moved to another address or just removed by our staff.</p>
+					<p><?=_t('It seems the page you are looking for is not here anymore. The page might have moved to another address or just removed by our staff.');?></p>
 				</div>
 			</div>
 			<!-- // Column END -->
@@ -52,13 +52,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 			<!-- Column -->
 			<div class="span6">
 				<div class="center">
-					<p>Is this a serious error? <a href="<?=Hooks::get_option('help_desk');?>">Let us know</a></p>
+					<p><?=_t('Is this a serious error?');?> <a href="<?=Hooks::get_option('help_desk');?>"><?=_t('Let us know');?></a></p>
 					<div class="row-fluid">
 						<div class="span6">
-							<a href="<?=BASE_URL;?>dashboard/" class="btn btn-icon-stacked btn-block btn-success glyphicons user_add"><i></i><span>Go back to</span><span class="strong">Dashboard</span></a>
+							<a href="<?=BASE_URL;?>dashboard/" class="btn btn-icon-stacked btn-block btn-success glyphicons user_add"><i></i><span><?=_t('Go back to');?></span><span class="strong"><?=_t('Dashboard');?></span></a>
 						</div>
 						<div class="span6">
-							<a href="<?=Hooks::get_option('help_desk');?>" class="btn btn-icon-stacked btn-block btn-danger glyphicons circle_question_mark"><i></i><span>Browse through our</span><span class="strong">Support Center</span></a>
+							<a href="<?=Hooks::get_option('help_desk');?>" class="btn btn-icon-stacked btn-block btn-danger glyphicons circle_question_mark"><i></i><span><?=_t('Browse through our');?></span><span class="strong"><?=_t('Support Center');?></span></a>
 						</div>
 					</div>
 				</div>

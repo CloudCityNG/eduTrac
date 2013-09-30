@@ -293,7 +293,7 @@ else $weeks=-1;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-                    <input type="hidden" name="id" value="<?=$this->cron[0]['id'];?>" />
+                    <input type="hidden" name="id" value="<?=_h((int)$this->cron[0]['id']);?>" />
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="add()"><i></i><?php _e( _t( 'Save' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
