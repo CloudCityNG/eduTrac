@@ -30,8 +30,12 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 class StaffModel {
+    
+    private $_log;
 	
-	public function __construct() {}
+	public function __construct() {
+	    $this->_log = new \eduTrac\Classes\Libraries\Log;
+	}
 	
 	public function search() {
         $array = [];
@@ -88,6 +92,7 @@ class StaffModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Staff',get_name($data['staffID']));
             redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
         }
     
@@ -104,6 +109,7 @@ class StaffModel {
         $bind = array( ":staffID" => $data['staffID'] );
         
         $q = DB::inst()->update( "staff", $update, "staffID = :staffID", $bind );
+        $this->_log->setLog('Update Record','Staff',get_name($data['staffID']));
         redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
     }
     

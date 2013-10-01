@@ -30,8 +30,12 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 class InstitutionModel {
+    
+    private $_log;
 	
-	public function index() {}
+	public function __construct() {
+	    $this->_log = new \eduTrac\Classes\Libraries\Log;
+	}
     
     public function search() {
         $array = [];
@@ -73,6 +77,7 @@ class InstitutionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data' );
         } else {
+            $this->_log->setLog('New Record','Institution',$data['instName']);
             redirect( BASE_URL . 'institution/view/' . $ID . '/' . bm() );
         }
     }
@@ -91,6 +96,7 @@ class InstitutionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data' );
         } else {
+            $this->_log->setLog('Update Record','Institution',$data['instName']);
             redirect( BASE_URL . 'institution/view/' . $data['institutionID'] . '/' . bm() );
         }
     }

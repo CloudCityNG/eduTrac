@@ -32,9 +32,11 @@ use \eduTrac\Classes\Core\DB;
 class SavequeryModel {
     
     private $_auth;
+    private $_log;
     
     public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
     }
 	
 	public function index() {}
@@ -51,6 +53,7 @@ class SavequeryModel {
 		if(!$q) {
 			redirect( BASE_URL . 'error/save_query' );
 		} else {
+		    $this->_log->setLog('New Record','Saved Query',$data['savedQueryName']);
 			redirect( BASE_URL . 'savequery/' . bm() );
 		}
 	}
@@ -64,7 +67,8 @@ class SavequeryModel {
         $bind = [ ":savedQueryID" => $data['savedQueryID'],":personID" => $data['personID'] ];
         
         $q = DB::inst()->update( "saved_query",$update,"savedQueryID = :savedQueryID AND personID = :personID",$bind );
-                
+        
+        $this->_log->setLog('Update Record','Saved Query',$data['savedQueryName']);   
         redirect( BASE_URL . 'savequery/view/' . $data['savedQueryID'] . '/' . bm() );
     }
     

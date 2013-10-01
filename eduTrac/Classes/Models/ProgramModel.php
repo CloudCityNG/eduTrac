@@ -88,6 +88,7 @@ class ProgramModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Academic Program',$data['acadProgTitle']);
             redirect( BASE_URL . 'program/view/' . $ID . bm() );
         }
     }
@@ -184,7 +185,7 @@ class ProgramModel {
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "acad_program", $update2, "acadProgID = :acadProgID", $bind );
         }
-        $this->_log->writeLog("Update","Academic Program",$data['acadProgTitle']);
+        $this->_log->setLog('Update Record','Academic Program',$data['acadProgTitle']);
         redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . bm() );
     }
     
