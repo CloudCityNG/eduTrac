@@ -293,6 +293,7 @@ class Person extends \eduTrac\Classes\Core\Controller {
     public function runEditPerson() {
         if(!hasPermission('add_person')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
+        $data['personType'] = isPostSet('personType');
         $data['prefix'] = isPostSet('prefix');
         $data['fname'] = isPostSet('fname');
         $data['lname'] = isPostSet('lname');

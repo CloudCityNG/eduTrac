@@ -366,7 +366,8 @@ class PersonModel {
                     "mname" => $data['mname'],"email" => $data['email'],"ssn" => (int)$data['ssn'],
                     "dob" => $data['dob'],"veteran" => $data['veteran'],"ethnicity" => $data['ethnicity'],
                     "gender" => $data['gender'],"emergency_contact" => $data['emergency_contact'],
-                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'] 
+                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'],
+                    "personType" => $data['personType']
                     );
                     
         $update2 = array( "email1" => $data['email'] );

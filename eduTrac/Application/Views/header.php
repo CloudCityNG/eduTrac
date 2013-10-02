@@ -281,12 +281,14 @@ $auth = new Cookies;
                         
 					</ul>
 				</li>
+				<?php if($auth->getPersonField('personType') != 'STU') { ?>
 				<li class="search open">
 					<form autocomplete="off" class="dropdown dd-1" method="post" action="<?=BASE_URL;?>dashboard/search/">
-						<input type="text" name="screen" value="" placeholder="Type for suggestions .." data-toggle="aScreen" />
+						<input type="text" name="screen" value="" placeholder="Type for suggestions ..." data-toggle="aScreen" />
 						<button type="button" class="glyphicons search"><i></i></button>
 					</form>
 				</li>
+				<?php } ?>
 			</ul>
 			<!-- // Top Menu END -->
 						
