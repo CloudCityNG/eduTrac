@@ -121,7 +121,10 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'State' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="state"<?=aio();?> class="span2" value="<?=_h($this->addr[0]['state']);?>" required /><br />(i.e. enter SC for South Carolina)
+                                <select name="state" style="width:50%" id="select2_13" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('state','','code','code','name',_h($this->addr[0]['state'])); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -145,7 +148,10 @@
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Country' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="country" class="span2" value="<?=_h($this->addr[0]['country']);?>" /><br />(i.e. enter US for United States)
+                                <select name="country" style="width:80%" id="select2_14">
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('country','','iso2','iso2','short_name',_h($this->addr[0]['country'])); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->

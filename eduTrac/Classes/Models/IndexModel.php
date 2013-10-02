@@ -59,7 +59,33 @@ class IndexModel {
 		$mac = hash_hmac("sha512", $cookie, $this->_enc);
 		$auth = $cookie . '&digest=' . urlencode($mac);
 		
-        $q = DB::inst()->select( "person","uname = :uname","","personID,password",$bind );
+        $q = DB::inst()->query( "SELECT 
+                        a.personID,
+                        a.password 
+                    FROM 
+                        person a 
+                    LEFT JOIN 
+                        faculty b 
+                    ON 
+                        a.personID = b.facID 
+                    LEFT JOIN 
+                        staff c 
+                    ON 
+                        a.personID = c.staffID 
+                    LEFT JOIN 
+                        student d 
+                    ON 
+                        a.personID = d.stuID 
+                    WHERE 
+                        (a.uname = :uname 
+                    AND 
+                        (b.status = 'A' 
+                    OR 
+                        c.status = 'A' 
+                    OR 
+                        d.status = 'A'))",
+                    $bind 
+        );
         foreach($q as $r) {
             $array[] = $r;
         }
