@@ -247,7 +247,7 @@ use \eduTrac\Classes\Libraries\Hooks;
     
     <div class="modal hide fade" id="myModalECJ">
         <div class="modal-body">
-            <p><?=_t('This option should be set to no until you have configured each <a href="'.BASE_URL.'cron/">cron job</a>. If this is set to yes before that, your error logs will be huge.');?></p>
+            <p><?=_t('This option should be set to "No" until you have configured each <a href="'.BASE_URL.'cron/">cron job</a>. If this is set to "Yes" before that, your error logs will be huge.');?></p>
         </div>
         <div class="modal-footer">
             <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>

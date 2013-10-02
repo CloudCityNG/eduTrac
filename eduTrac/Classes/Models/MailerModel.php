@@ -35,11 +35,13 @@ class MailerModel {
     private $_auth;
     private $_sql;
     private $_email;
+    private $_log;
     
     public function __construct() {
         $this->_auth = new Cookies;
         $this->_sql = new \eduTrac\Classes\DBObjects\SavedQuery;
         $this->_email = new \eduTrac\Classes\DBObjects\EmailTemplate;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
     }
     
     public function cmgmtList() {
@@ -154,6 +156,7 @@ class MailerModel {
         if(!$q){ 
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Email Template',$data['email_name']);
             redirect( BASE_URL . 'mailer/view/' . $ID . '/' . bm() );
         }
     }
@@ -170,6 +173,7 @@ class MailerModel {
         if(!$q) {
             redirect( BASE_URL . 'error/update_record/' );
         } else {
+            $this->_log->setLog('Update','Email Template',$data['email_name']);
             redirect( BASE_URL . 'mailer/view/' . $data['etID'] . '/' . bm() );
         }
     }
@@ -186,6 +190,7 @@ class MailerModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Email Queue',$data['subject']);
             redirect( BASE_URL . 'mailer/queue/' . bm() );
         }
     }

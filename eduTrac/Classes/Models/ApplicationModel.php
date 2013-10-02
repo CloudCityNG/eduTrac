@@ -32,9 +32,11 @@ use \eduTrac\Classes\Core\DB;
 class ApplicationModel {
     
     private $_auth;
+    private $_log;
 	
 	public function __construct() {
-        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;   
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies; 
+        $this->_log = new \eduTrac\Classes\Libraries\Log;  
 	}
     
     public function search() {
@@ -101,7 +103,7 @@ class ApplicationModel {
     public function appl($id) {
         $array = [];
         $bind = [ ":id" => $id ];
-        $q = DB::inst()->select( "application","applID = :id","","*",$bind );
+        $q = DB::inst()->select( "application","applID = :id","expires_at","*",$bind );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -178,6 +180,7 @@ class ApplicationModel {
         if(!$q2) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Application',get_name($data['personID']));
             redirect( BASE_URL . 'application/view/' . $ID . '/' . bm() );
         }
     }
@@ -205,7 +208,7 @@ class ApplicationModel {
             $q2 = DB::inst()->update("institution_attended",$update2,"instAttID = :instAttID AND personID = :personID",$bind2);
             ++$i;
         }
-        
+        $this->_log->setLog('Update Record','Application',get_name($data['personID']));
         redirect( BASE_URL . 'application/view/' . $data['applID'] . '/' . bm() );
     }
     

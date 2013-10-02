@@ -180,6 +180,14 @@ $auth = new Cookies;
                             </ul>
                         </li>
                         
+                        <li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>" class="glyphicons keys"><i></i><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_role_screen');?> class=""><a href="<?=BASE_URL;?>role/<?=bm();?>" class="glyphicons rotation_lock"><i></i><?php _e( _t( '(MRLE) Manage Role' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_error_log_screen');?>><a href="<?=BASE_URL;?>error/logs/<?=bm();?>" class="glyphicons file"><i></i><?php _e( _t( 'Error Log' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_audit_trail_screen');?>><a href="<?=BASE_URL;?>audittrail/<?=bm();?>" class="glyphicons road"><i></i><?php _e( _t( 'Audit Trail' ) ); ?></a></li>
+                        
                         <li<?=ae('access_save_query_screens');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons database_plus"><i></i><?php _e( _t( 'Saved Query' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
@@ -254,8 +262,6 @@ $auth = new Cookies;
                             </ul>
                         </li>
                         
-                        <li<?=ae('access_student_portal');?> class=""><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons globe"><i></i><?php _e( _t( 'Student Portal' ) ); ?></a></li>
-                        
                         <li<?=ae('access_application_screen');?> class=""><a href="<?=BASE_URL;?>application/<?=bm();?>" class="glyphicons show_big_thumbnails"><i></i><?php _e( _t( '(APPL) Application' ) ); ?></a></li>
                         
                         <li<?=ae('access_faculty_screen');?> class=""><a href="<?=BASE_URL;?>faculty/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(FAC) Faculty' ) ); ?></a></li>
@@ -270,22 +276,19 @@ $auth = new Cookies;
                                 <li<?=ae('generate_transcript');?> class=""><a href="<?=BASE_URL;?>student/tran/<?=bm();?>"><?php _e( _t( 'Generate Transcript' ) ); ?></a></li>
                             </ul>
                         </li>
-						
-						<li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>" class="glyphicons keys"><i></i><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
-						
-                        <li<?=ae('access_role_screen');?> class=""><a href="<?=BASE_URL;?>role/<?=bm();?>" class="glyphicons rotation_lock"><i></i><?php _e( _t( '(MRLE) Manage Role' ) ); ?></a></li>
                         
-                        <li<?=ae('access_error_log_screen');?>><a href="<?=BASE_URL;?>error/logs/<?=bm();?>" class="glyphicons file"><i></i><?php _e( _t( 'Error Log' ) ); ?></a></li>
+                        <li<?=ae('access_student_portal');?> class=""><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons globe"><i></i><?php _e( _t( 'Student Portal' ) ); ?></a></li>
                         
-						<li<?=ae('access_audit_trail_screen');?>><a href="<?=BASE_URL;?>audittrail/<?=bm();?>" class="glyphicons road"><i></i><?php _e( _t( 'Audit Trail' ) ); ?></a></li>
 					</ul>
 				</li>
+				<?php if($auth->getPersonField('personType') != 'STU') { ?>
 				<li class="search open">
 					<form autocomplete="off" class="dropdown dd-1" method="post" action="<?=BASE_URL;?>dashboard/search/">
-						<input type="text" name="screen" value="" placeholder="Type for suggestions .." data-toggle="aScreen" />
+						<input type="text" name="screen" value="" placeholder="Type for suggestions ..." data-toggle="aScreen" />
 						<button type="button" class="glyphicons search"><i></i></button>
 					</form>
 				</li>
+				<?php } ?>
 			</ul>
 			<!-- // Top Menu END -->
 						

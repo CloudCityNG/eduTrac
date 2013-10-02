@@ -29,17 +29,18 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
-use \eduTrac\Classes\Libraries\Logs;
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Cookies;
 class PersonModel {
     
     private $_auth;
     private $_email;
+    private $_log;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
 		$this->_email = new \eduTrac\Classes\Libraries\Email;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
 	}
     
     public function search() {
@@ -201,8 +202,6 @@ class PersonModel {
                             } else {
                                 $strSQL = sprintf("REPLACE INTO `person_roles` SET `personID` = %u, `roleID` = %u, `addDate` = '%s'",$personID,$roleID,date ("Y-m-d H:i:s"));
                             }
-                            /* Write to logs */
-                            //Logs::writeLog('Modified','Roles',$personID,$this->_auth->getPersonField('uname'));
                             DB::inst()->query($strSQL);
                         }
                     }
@@ -217,8 +216,6 @@ class PersonModel {
                             } else {
                                 $strSQL = sprintf("REPLACE INTO `person_perms` SET `personID` = %u, `permID` = %u, `value` = %u, `addDate` = '%s'",$personID,$permID,$v,date ("Y-m-d H:i:s"));
                             }
-                            /* Write to logs */
-                            //Logs::writeLog('Modified','Permissions',$personID,$this->_auth->getPersonField('uname'));
                             DB::inst()->query($strSQL);
                         }
                     }
@@ -273,6 +270,7 @@ class PersonModel {
             redirect( BASE_URL . 'error/reset_password/' );
         } else {
             $this->_email->et_mail($r1['email'],"Reset Password",$body,$headers);
+            $this->_log->setLog('Update Record','Reset Password',get_name($id));
             redirect( BASE_URL . 'success/reset_password/' );
         }
     }
@@ -316,6 +314,7 @@ class PersonModel {
         if(!$q1) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Person',get_name($ID));
             redirect( BASE_URL . 'person/view/' . $ID . '/' . bm() );
         }
     }
@@ -338,6 +337,7 @@ class PersonModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Address',get_name($data['personID']));
             redirect( BASE_URL . 'person/addr_sum/' . $data['personID'] . bm() );
         }
     }
@@ -356,6 +356,7 @@ class PersonModel {
                     
         $bind = array( ":addressID" => $data['addressID'] );
         $q = DB::inst()->update( "address", $update, "addressID = :addressID", $bind );
+        $this->_log->setLog('Update Record','Address',$data['addressID']);
         redirect( BASE_URL . 'person/edit_addr/' . $data['addressID'] . bm() );
     }
     
@@ -365,7 +366,8 @@ class PersonModel {
                     "mname" => $data['mname'],"email" => $data['email'],"ssn" => (int)$data['ssn'],
                     "dob" => $data['dob'],"veteran" => $data['veteran'],"ethnicity" => $data['ethnicity'],
                     "gender" => $data['gender'],"emergency_contact" => $data['emergency_contact'],
-                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'] 
+                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'],
+                    "personType" => $data['personType']
                     );
                     
         $update2 = array( "email1" => $data['email'] );
@@ -376,6 +378,7 @@ class PersonModel {
         if($q) {
             DB::inst()->update( "address", $update2, "personID = :personID", $bind );
         }
+        $this->_log->setLog('Update Record','Person',get_name($data['personID']));
         redirect( BASE_URL . 'person/view/' . $data['personID'] . bm() );
     }
 	

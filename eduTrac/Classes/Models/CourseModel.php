@@ -33,9 +33,11 @@ use \eduTrac\Classes\DBObjects\Subject;
 class CourseModel {
     
     private $_subj;
+    private $_log;
 	
 	public function __construct() {
         $this->_subj = new Subject;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
 	}
 	
 	public function search() {
@@ -85,6 +87,7 @@ class CourseModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Course',$data['courseShortTitle']);
             redirect( BASE_URL . 'course/view/' . $ID . '/' . bm() );
         }
     
@@ -118,6 +121,7 @@ class CourseModel {
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "course", $update2, "courseID = :courseID", $bind );
         }
+        $this->_log->setLog('Update Record','Course',$data['courseShortTitle']);
         redirect( BASE_URL . 'course/view/' . $data['courseID'] . '/' . bm() );
     }
     

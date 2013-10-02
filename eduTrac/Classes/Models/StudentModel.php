@@ -34,10 +34,12 @@ class StudentModel {
     
     private $_stuProg;
     private $_auth;
+    private $_log;
 	
 	public function __construct() {
 	    $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
 	}
 	
 	public function search() {
@@ -104,6 +106,7 @@ class StudentModel {
         if(!$q1 && !$q2 && !$q3) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+            $this->_log->setLog('New Record','Student',get_name($data['stuID']));
             redirect( BASE_URL . 'student/view/' . $ID . '/' . bm() );
         }
     
@@ -118,6 +121,7 @@ class StudentModel {
         $bind = array( ":stuID" => $data['stuID'] );
         
         $q = DB::inst()->update( "student", $update, "stuID = :stuID", $bind );
+        $this->_log->setLog('Update Record','Student',get_name($data['stuID']));
         redirect( BASE_URL . 'student/view/' . $data['stuID'] . '/' . bm() );
     }
     
@@ -551,6 +555,7 @@ class StudentModel {
         );
         
         $q = DB::inst()->insert( "stu_program", $bind );
+        $this->_log->setLog('New Record','Student Academic Program',get_name($data['stuID']));
         redirect( BASE_URL . 'student/view/' . $data['stuID'] . '/' . bm() );
     }
     
@@ -574,6 +579,7 @@ class StudentModel {
             }
             redirect( BASE_URL . 'student/view_prog/' . $data['stuProgID'] . '/' . bm() );
         } else {
+            $this->_log->setLog('Update Record','Student Academic Program',get_name($data['stuID']));
             redirect( BASE_URL . 'error/save_data/' );
         }
     }
@@ -637,7 +643,7 @@ class StudentModel {
             DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );  
             DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2);
         }
-                
+        $this->_log->setLog('Update Record','Academic Credits',get_name($data['stuID']));    
         redirect( BASE_URL . 'student/view_academic_credits/' . $data['id'] . '/' . bm() );
     }
     
@@ -695,6 +701,7 @@ class StudentModel {
             if(!$q) {
                 redirect( BASE_URL . 'error/save_data/' );
             } else {
+                $this->_log->setLog('Update Record','Graduation',get_name($data['stuID']));
                 redirect( BASE_URL . 'success/save_data/' );
             }
         }

@@ -124,7 +124,10 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'State' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="state" class="span2" required /><br />(i.e. enter SC for South Carolina)
+                                <select name="state" style="width:50%" id="select2_13" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('state','','code','code','name'); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -148,7 +151,10 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Country' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="country" class="span2" /><br />(i.e. enter US for United States)
+                                <select name="country" style="width:80%" id="select2_14">
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('country','','iso2','iso2','short_name'); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
