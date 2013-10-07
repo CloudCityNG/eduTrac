@@ -1,7 +1,7 @@
 <?php namespace eduTrac\Classes\Controllers;
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Dashboard Controller
+ * Event Controller
  *  
  * PHP 5.4+
  *
@@ -23,67 +23,55 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       1.0.1
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-class Dashboard extends \eduTrac\Classes\Core\Controller {
+class Event extends \eduTrac\Classes\Core\Controller {
 	
-	private $_auth;
+    private $_log;
 
 	public function __construct() {
 		parent::__construct();
-		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
-        if(!$this->_auth->isUserLoggedIn()) { redirect( BASE_URL ); }
+        $this->_log = new \eduTrac\Classes\Libraries\Log();
+        if(!hasPermission('access_cronjob_screen')) { redirect( BASE_URL . 'dashboard/' ); }
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('Dashboard');
+		$this->view->staticTitle = array('Events');
+		$this->view->css = array( 
+								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+								);
+								
+		$this->view->js = array( 
+								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+								'theme/scripts/demo/tables.js'
+								);
+        $this->view->cronList = $this->model->cronList();
+		$this->view->render('event/index');
+	}
+    
+    public function add() {
+        $this->view->staticTitle = array('Add Event');
         $this->view->css = array( 
-                                'theme/scripts/plugins/calendars/fullcalendar/fullcalendar/fullcalendar.css',
                                 'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
                                 );
-                                
         $this->view->js = array( 
-                                'theme/scripts/plugins/calendars/fullcalendar/fullcalendar/fullcalendar.js',
                                 'theme/scripts/plugins/forms/select2/select2.js',
                                 'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
                                 'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
                                 'theme/scripts/demo/form_elements.js'
                                 );
-		$this->view->render('dashboard/index');
-	}
-    
-    public function getEvents() {
-        $this->model->getEvents();
+        $this->view->render('event/add');
     }
-	
-	public function search() {
-		$data = array();
-		$data['screen'] = isPostSet('screen');
-		
-		$this->model->search($data);		
-	}
     
-    public function runEvent() {
-        $data = [];
-        $data['title'] = isPostSet('title');
-        $data['description'] = isPostSet('description');
-        $data['roomID'] = isPostSet('roomID');
-        $data['startDate'] = isPostSet('startDate');
-        $data['startTime'] = isPostSet('startTime');
-        $data['endTime'] = isPostSet('endTime');
-        $data['repeats'] = isPostSet('repeats');
-        $data['repeatFreq'] = isPostSet('repeatFreq');
-        $this->model->runEvent($data);
-    }
-	
-	public function logout() {
-		$this->model->logout();
-	}
-	
+    
+    
 }

@@ -81,6 +81,103 @@ class DashboardModel {
 		//Logs::purgeErrLog();
 		redirect( BASE_URL );
 	}
+    
+    public function getEvents() {
+        $events = [];
+        $q = DB::inst()->query( "SELECT 
+                        a.*,
+                        b.roomCode,
+                        c.buildingCode 
+                    FROM 
+                        event_meta a 
+                    LEFT JOIN 
+                        room b 
+                    ON 
+                        a.roomID = b.roomID 
+                    LEFT JOIN 
+                        building c 
+                    ON 
+                        b.buildingID = c.buildingID" 
+        );
+        while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
+            $eventArray['eMID'] = $r['eventMetaID'];
+            $eventArray['eID'] = $r['eventID'];
+            $eventArray['buildingCode'] = $r['buildingCode'];
+            $eventArray['roomCode'] = $r['roomCode'];
+            $eventArray['title'] = $r['title'];
+            $eventArray['description'] = $r['description'];
+            $eventArray['start'] = $r['start'];
+            $eventArray['end'] = $r['end'];
+            $events[] = $eventArray;
+        }
+        echo json_encode($events);
+    }
+    
+    public function runEvent($data) {
+        $title = $data['title'];
+        $text = $data['description'];
+        $pID = $this->_auth->getPersonField('personID');
+        $roomID = $data['roomID'];
+        $sDate = $data['startDate'];
+        $weekday = date('N',strtotime($sDate));
+        $sTime = $data['startTime'];
+        $eTime = $data['endTime'];
+        $start = $sDate . " " . $sTime;
+        $end = $sDate . " " . $eTime;
+        $repeats = $data['repeats'];
+        $repeatFreq = $data['repeatFreq'];
+                
+        if(empty($repeats)) {
+            $repeat = 0;
+            $freq = 0;
+            $bind1 = [ 
+                    "title" => $title,"description" => $text,
+                    "roomID" => $roomID,"personID" => $pID,
+                    "weekday" => $weekday,"startDate" => $sDate,
+                    "startTime" => $sTime,"endTime" => $eTime,
+                    "repeats" => $repeat,"repeatFreq" => $freq 
+            ];
+            
+            $q = DB::inst()->insert( 'event', $bind1 );
+            $ID = DB::inst()->lastInsertId('eventID');
+            
+            $bind2 = [ 
+                    "eventID" => $ID,"title" => $title,"description" => $text,
+                    "roomID" => $roomID,"personID" => $pID,
+                    "start" => $start,"end" => $end
+            ];
+            
+            $q = DB::inst()->insert( 'event_meta', $bind2 );
+        } else {
+            $until = (14/$repeatFreq);
+            if ($repeatFreq == 1){
+                $weekday = 0;
+            }
+            
+            $bind3 = [ 
+                    "title" => $title,"description" => $text,
+                    "roomID" => $roomID,"personID" => $pID,
+                    "weekday" => $weekday,"startDate" => $sDate,
+                    "startTime" => $sTime,"endTime" => $eTime,
+                    "repeats" => $repeats,"repeatFreq" => $repeatFreq 
+            ];
+            $q = DB::inst()->insert( 'event', $bind3 );
+            $ID = DB::inst()->lastInsertId('eventID');
+            
+            for($x = 0; $x < $until; $x++) {
+                $bind4 = [ 
+                    "eventID" => $ID,"title" => $title,"description" => $text,
+                    "roomID" => $roomID,"personID" => $pID,
+                    "start" => $start,"end" => $end
+                ];
+            $q = DB::inst()->insert( 'event_meta', $bind4 );
+            $sDate = strtotime($start . '+' . $repeatFreq . 'DAYS');
+            $eDate = strtotime($end . '+' . $repeatFreq . 'DAYS');
+            $start = date("Y-m-d H:i", $sDate);
+            $end = date("Y-m-d H:i", $eDate);
+            }
+        }
+    }
 	
 	public function __destruct() {
 		DB::inst()->close();
