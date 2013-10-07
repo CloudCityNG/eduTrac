@@ -259,5 +259,17 @@ $(function()
     });
     $('#timepicker11').timepicker();
     $('#timepicker12').timepicker();
+    $('#timepicker13').timepicker({
+        minuteStep: 5,
+        showSeconds: true,
+        showMeridian: false,
+        modalBackdrop: true
+    });
+    $('#timepicker14').timepicker({
+        minuteStep: 5,
+        showSeconds: true,
+        showMeridian: false,
+        modalBackdrop: true
+    });
 	
 });
