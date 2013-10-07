@@ -103,7 +103,7 @@ class ApplicationModel {
     public function appl($id) {
         $array = [];
         $bind = [ ":id" => $id ];
-        $q = DB::inst()->select( "application","applID = :id","expires_at","*",$bind );
+        $q = DB::inst()->select( "application","applID = :id","applID","*",$bind );
         foreach($q as $r) {
             $array[] = $r;
         }

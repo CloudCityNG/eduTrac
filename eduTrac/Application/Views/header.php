@@ -148,10 +148,14 @@ $auth = new Cookies;
 					<ul class="dropdown-menu pull-left">
                         
                         <li<?=ae('edit_settings');?> class="dropdown submenu">
-                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons settings"><i></i><?php _e( _t( 'Settings' ) ); ?></a>
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons settings"><i></i><?php _e( _t( 'Administrative' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
-                                <li class=""><a href="<?=BASE_URL;?>setting/<?=bm();?>"><?php _e( _t( 'General' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>setting/<?=bm();?>"><?php _e( _t( 'General Settings' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>cron/<?=bm();?>"><?php _e( _t( 'Cron Jobs' ) ); ?></a></li>
+                                <li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>"><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
+                                <li<?=ae('access_role_screen');?> class=""><a href="<?=BASE_URL;?>role/<?=bm();?>"><?php _e( _t( '(MRLE) Manage Role' ) ); ?></a></li>
+                                <li<?=ae('access_error_log_screen');?>><a href="<?=BASE_URL;?>error/logs/<?=bm();?>"><?php _e( _t( 'Error Log' ) ); ?></a></li>
+                                <li<?=ae('access_audit_trail_screen');?>><a href="<?=BASE_URL;?>audittrail/<?=bm();?>"><?php _e( _t( 'Audit Trail' ) ); ?></a></li>
                                 <!-- <li class=""><a href="<?=BASE_URL;?>reservation/<?=bm();?>"><?php _e( _t( 'Reservation' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>reservation/category/<?=bm();?>"><?php _e( _t( 'Reservation Categories' ) ); ?></a></li> -->
                             </ul>
@@ -179,14 +183,6 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>form/school/<?=bm();?>"><?php _e( _t( '(SCH) - School' ) ); ?></a></li>
                             </ul>
                         </li>
-                        
-                        <li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>" class="glyphicons keys"><i></i><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
-                        
-                        <li<?=ae('access_role_screen');?> class=""><a href="<?=BASE_URL;?>role/<?=bm();?>" class="glyphicons rotation_lock"><i></i><?php _e( _t( '(MRLE) Manage Role' ) ); ?></a></li>
-                        
-                        <li<?=ae('access_error_log_screen');?>><a href="<?=BASE_URL;?>error/logs/<?=bm();?>" class="glyphicons file"><i></i><?php _e( _t( 'Error Log' ) ); ?></a></li>
-                        
-                        <li<?=ae('access_audit_trail_screen');?>><a href="<?=BASE_URL;?>audittrail/<?=bm();?>" class="glyphicons road"><i></i><?php _e( _t( 'Audit Trail' ) ); ?></a></li>
                         
                         <li<?=ae('access_save_query_screens');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons database_plus"><i></i><?php _e( _t( 'Saved Query' ) ); ?></a>

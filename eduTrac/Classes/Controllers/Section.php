@@ -125,7 +125,7 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $this->view->css = array( 
                                 'theme/scripts/plugins/forms/select2/select2.css',
                                 'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
                                 );
         $this->view->js = array( 
                                 'theme/scripts/plugins/forms/select2/select2.js',
