@@ -75,7 +75,7 @@ class Faculty extends \eduTrac\Classes\Core\Controller {
     }
     
     public function view($id) {
-        if(!hasPermission('create_fac_record')) { redirect( BASE_URL . 'dashboard/' ); }
+        if(!hasPermission('access_faculty_screen')) { redirect( BASE_URL . 'dashboard/' ); }
         $this->view->staticTitle = array('View Faculty');
         $this->view->css = array( 
                                 'theme/scripts/plugins/forms/select2/select2.css',
