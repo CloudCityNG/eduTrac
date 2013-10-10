@@ -248,6 +248,9 @@ use \eduTrac\Classes\Libraries\Cookies;
         $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18"'.$readonly.' required>
             <option value="">&nbsp;</option>
             <option value="NA"'.selected( $levelCode, 'NA', false ).'>N/A Not Applicable</option>
+            <option value="ES"'.selected( $levelCode, 'ES', false ).'>ES Elementary School</option>
+            <option value="MS"'.selected( $levelCode, 'MS', false ).'>MS Middle School</option>
+            <option value="HS"'.selected( $levelCode, 'HS', false ).'>HS High School</option>
             <option value="CE"'.selected( $levelCode, 'CE', false ).'>CE Continuing Education</option>
             <option value="UG"'.selected( $levelCode, 'UG', false ).'>UG Undergraduate</option>
             <option value="GR"'.selected( $levelCode, 'GR', false ).'>GR Graduate</option>
@@ -445,6 +448,7 @@ use \eduTrac\Classes\Libraries\Cookies;
                 <option value="' . _t('SO') . '"'.selected( $year, _t('SO'), false ).'>' . _t('SO Sophomore') . '</option>
                 <option value="' . _t('JR') . '"'.selected( $year, _t('JR'), false ).'>' . _t('JR Junior') . '</option>
                 <option value="' . _t('SR') . '"'.selected( $year, _t('SR'), false ).'>' . _t('SR Senior') . '</option>
+                <option value="' . _t('UG') . '"'.selected( $year, _t('UG'), false ).'>' . _t('UG Undergraduate Student') . '</option>
                 <option value="' . _t('GR') . '"'.selected( $year, _t('GR'), false ).'>' . _t('GR Grad Student') . '</option>
                 <option value="' . _t('PhD') . '"'.selected( $year, _t('PhD'), false ).'>' . _t('PhD PhD Student') . '</option>
                 </select>';

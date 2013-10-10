@@ -76,5 +76,10 @@ class Success extends \eduTrac\Classes\Core\Controller {
         $this->view->staticTitle = array('Reset Password Success');
         $this->view->render('success/reset_password');
     }
+    
+    public function progress_report() {
+        $this->view->staticTitle = array('Sent Progress Report Successfully');
+        $this->view->render('success/progress_report');
+    }
 
 }

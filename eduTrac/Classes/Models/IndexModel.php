@@ -76,6 +76,10 @@ class IndexModel {
                         student d 
                     ON 
                         a.personID = d.stuID 
+                    LEFT JOIN 
+                        parent e 
+                    ON 
+                        a.personID = e.parentID 
                     WHERE 
                         (a.uname = :uname 
                     AND 
@@ -83,7 +87,9 @@ class IndexModel {
                     OR 
                         c.status = 'A' 
                     OR 
-                        d.status = 'A'))",
+                        d.status = 'A' 
+                    OR 
+                        e.status = 'A'))",
                     $bind 
         );
         foreach($q as $r) {
