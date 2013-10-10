@@ -198,7 +198,7 @@ $auth = new Cookies;
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons cargo"><i></i><?php _e( _t( 'Acad Program' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>program/<?=bm();?>"><?php _e( _t( '(PROG) - Program' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>program/add/<?=bm();?>"><?php _e( _t( '(APRG) - New Program' ) ); ?></a></li>
+                                <li<?=ae('add_acad_prog');?> class=""><a href="<?=BASE_URL;?>program/add/<?=bm();?>"><?php _e( _t( '(APRG) - New Program' ) ); ?></a></li>
                             </ul>
                         </li>
 						
@@ -206,7 +206,7 @@ $auth = new Cookies;
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons keynote"><i></i><?php _e( _t( 'Course' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>course/<?=bm();?>"><?php _e( _t( '(CRSE) - Course' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>course/add/<?=bm();?>"><?php _e( _t( '(ACRS) - New Course' ) ); ?></a></li>
+                                <li<?=ae('add_course');?> class=""><a href="<?=BASE_URL;?>course/add/<?=bm();?>"><?php _e( _t( '(ACRS) - New Course' ) ); ?></a></li>
                             </ul>
                         </li>
                         
@@ -214,9 +214,9 @@ $auth = new Cookies;
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons book"><i></i><?php _e( _t( 'Course Section' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>section/<?=bm();?>"><?php _e( _t( '(SECT) - Section' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>section/register/<?=bm();?>"><?php _e( _t( '(RGN) - Register' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>section/batch_register/<?=bm();?>"><?php _e( _t( '(BRGN) - Batch Register' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( '(GRDE) - Grading' ) ); ?></a></li>
+                                <li<?=ae('register_students');?> class=""><a href="<?=BASE_URL;?>section/register/<?=bm();?>"><?php _e( _t( '(RGN) - Register' ) ); ?></a></li>
+                                <li<?=ae('register_students');?> class=""><a href="<?=BASE_URL;?>section/batch_register/<?=bm();?>"><?php _e( _t( '(BRGN) - Batch Register' ) ); ?></a></li>
+                                <li<?=ae('access_grading_screen');?> class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( '(GRDE) - Grading' ) ); ?></a></li>
                             </ul>
                         </li>
                         
@@ -254,7 +254,7 @@ $auth = new Cookies;
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons user"><i></i><?php _e( _t( 'Person' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
                                 <li class=""><a href="<?=BASE_URL;?>person/<?=bm();?>"><?php _e( _t( '(NAE) Search' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>person/add/<?=bm();?>"><?php _e( _t( '(APER) Add Person' ) ); ?></a></li>
+                                <li<?=ae('add_person');?> class=""><a href="<?=BASE_URL;?>person/add/<?=bm();?>"><?php _e( _t( '(APER) Add Person' ) ); ?></a></li>
                             </ul>
                         </li>
                         
@@ -263,6 +263,14 @@ $auth = new Cookies;
                         <li<?=ae('access_faculty_screen');?> class=""><a href="<?=BASE_URL;?>faculty/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(FAC) Faculty' ) ); ?></a></li>
                         
                         <li<?=ae('access_staff_screen');?> class=""><a href="<?=BASE_URL;?>staff/<?=bm();?>" class="glyphicons user"><i></i><?php _e( _t( '(STAF) Staff' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_parent_screen');?> class="dropdown submenu">
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons user"><i></i><?php _e( _t( 'Parent' ) ); ?></a>
+                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
+                                <li class=""><a href="<?=BASE_URL;?>parents/<?=bm();?>"><?php _e( _t( 'Search' ) ); ?></a></li>
+                                <li<?=ae('create_par_record');?> class=""><a href="<?=BASE_URL;?>parents/connect/<?=bm();?>"><?php _e( _t( 'Parent/Child Connect' ) ); ?></a></li>
+                            </ul>
+                        </li>
                         
                         <li<?=ae('access_student_screen');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons user"><i></i><?php _e( _t( 'Student' ) ); ?></a>
@@ -274,6 +282,8 @@ $auth = new Cookies;
                         </li>
                         
                         <li<?=ae('access_student_portal');?> class=""><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons globe"><i></i><?php _e( _t( 'Student Portal' ) ); ?></a></li>
+                        
+                        <li<?=ae('access_parent_portal');?> class=""><a href="<?=BASE_URL;?>parents/portal/<?=bm();?>" class="glyphicons parents"><i></i><?php _e( _t( 'Parent Portal' ) ); ?></a></li>
                         
 					</ul>
 				</li>

@@ -138,10 +138,10 @@ $("#add-event").dialog({
         <?php endif; echo $cache->getCache(); ?>
         
         <!-- Widget -->
-        <div class="widget">
-            <!--<div class="widget-head">
+        <div class="widget" style="display:none;">
+            <div class="widget-head">
                 <h4 class="heading glyphicons calendar"><i></i><?php _e( _t( 'Calendar' ) ); ?></h4>
-            </div>-->
+            </div>
             
             <div id="add-event" title="Add New Event" style="display:none;">
                 <form class="form-horizontal margin-none" action="" id="validateSubmitForm" method="post" autocomplete="off">
@@ -238,9 +238,9 @@ $("#add-event").dialog({
                 </form>
             </div>
         
-            <!--<div class="widget-body">
+            <div class="widget-body">
                 <div id="calendar"></div>
-            </div>-->
+            </div>
         </div>
         <!-- // Widget END -->
 		

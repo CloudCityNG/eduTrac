@@ -231,6 +231,22 @@ class Section extends \eduTrac\Classes\Core\Controller {
 		$this->view->render('section/grading');
 	}
     
+    public function progress() {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('Create Progress Report');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+        $this->view->render('section/progress');
+    }
+    
     public function runSection() {
         if(!hasPermission('add_course_sec')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
@@ -316,7 +332,6 @@ class Section extends \eduTrac\Classes\Core\Controller {
     }
     
     public function runStuLookup() {
-        if(!hasPermission('add_course_sec')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['stuID'] = isPostSet('stuID');
         $this->model->runStuLookup($data);
@@ -354,6 +369,20 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['grade'] = isPostSet('grade');
         $data['cmplCredit'] = isPostSet('cmplCredit');
         $this->model->runGrades($data);
+    }
+    
+    public function runProgress() {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = [];
+        $data['stuID'] = isPostSet('stuID');
+        $data['grade'] = isPostSet('grade');
+        $data['subject'] = isPostSet('subject');
+        $data['courseTitle'] = isPostSet('courseTitle');
+        $data['semester'] = isPostSet('semester');
+        $data['behavior'] = isPostSet('behavior');
+        $data['assignments'] = isPostSet('assignments');
+        $data['notes'] = isPostSet('notes');
+        $this->model->runProgress($data);
     }
     
     public function deleteCourse($id) {
