@@ -971,20 +971,22 @@ CREATE TABLE IF NOT EXISTS `nslc_setup` (
 INSERT INTO `nslc_setup` VALUES(00000000001, '00', '13/FA', '2013-09-01', '2013-12-18');
 
 CREATE TABLE IF NOT EXISTS `parent` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `parentID` int(8) unsigned zerofill NOT NULL,
-  `parentKey` varchar(255) NOT NULL,
+  `status` enum('A','I') NOT NULL DEFAULT 'A',
   `addDate` datetime NOT NULL,
-  `addedBy` int(8) NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `addedBy` int(8) unsigned zerofill NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `parentID` (`parentID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `parent_student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_key` varchar(60) NOT NULL DEFAULT '',
-  `student_id` varchar(11) NOT NULL,
-  `student_school` varchar(16) NOT NULL DEFAULT '',
-  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS `parent_child` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `parentID` int(8) unsigned zerofill NOT NULL,
+  `childID` int(8) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `parent_student_index` (`parentID`,`childID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `permission` (
@@ -1211,6 +1213,21 @@ CREATE TABLE IF NOT EXISTS `plugin` (
   `location` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `progress_report` (
+  `prID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `facID` int(11) unsigned zerofill NOT NULL,
+  `grade` varchar(30) NOT NULL,
+  `subject` varchar(30) NOT NULL,
+  `semester` varchar(30) NOT NULL,
+  `behavior` varchar(180) NOT NULL,
+  `assignments` varchar(180) NOT NULL,
+  `notes` text NOT NULL,
+  `courseTitle` varchar(180) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`prID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `reservation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -265,3 +265,27 @@ use \eduTrac\Classes\Core\DB;
             return ' style="display:none;"';
         }
     }
+    
+    /**
+     * Parent Inquiry only.
+     */
+    function paio() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('parent_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' readonly="readonly"';
+        }
+    }
+    
+    /**
+     * Parent disable submit buttons.
+     */
+    function paids() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('parent_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' style="display:none;"';
+        }
+    }

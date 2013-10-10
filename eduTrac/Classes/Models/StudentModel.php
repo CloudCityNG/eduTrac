@@ -56,10 +56,6 @@ class StudentModel {
                         person b 
                     ON 
                         a.stuID = b.personID 
-                    LEFT JOIN 
-                        graduate c 
-                    ON 
-                        a.stuID = c.gradID 
                     WHERE 
                         (CONCAT(fname,' ',lname) LIKE :stu 
                     OR 

@@ -36,12 +36,14 @@ class SectionModel {
     private $_auth;
     private $_stuProg;
     private $_log;
+    private $_email;
 	
 	public function __construct() {
 	    $this->_sec = new \eduTrac\Classes\DBObjects\CourseSec;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
         $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_email = new \eduTrac\Classes\Libraries\Email;
 	}
 	
 	public function search() {
@@ -479,6 +481,42 @@ class SectionModel {
         } else {
             $this->_log->setLog('Update Record','Grades',$data['courseSecID']);
             redirect( BASE_URL . 'section/grading/' . $data['courseSecID'] . '/' . bm() );
+        }
+    }
+    
+    public function runProgress($data) {
+        $bind1 = [ ":id" => $data['stuID'] ];
+        $sql = DB::inst()->query( "SELECT 
+                        a.email 
+                    FROM 
+                        person a 
+                    LEFT JOIN 
+                        parent_child b 
+                    ON 
+                        a.personID = b.parentID 
+                    WHERE 
+                        b.childID = :id",
+                    $bind1 
+        );
+        foreach($sql as $r) {
+            $array[] = $r;
+        }
+        
+        $date = date("Y-m-d");
+        $bind = [ 
+                "stuID" => $data['stuID'],"facID" => $this->_auth->getPersonField('personID'),
+                "grade" => $data['grade'],"subject" => $data['subject'],"semester" => $data['semester'],
+                "behavior" => $data['behavior'],"assignments" => $data['assignments'],
+                "notes" => $data['notes'],"courseTitle" => $data['courseTitle'],
+                "date" => $date 
+                ];
+                
+        $q = DB::inst()->insert( "progress_report", $bind );
+        if(!$q) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            $this->_email->et_progress_report($r['email'], $this->_auth->getPersonField('personID'), BASE_URL);
+            redirect( BASE_URL . 'success/progress_report/' );
         }
     }
     

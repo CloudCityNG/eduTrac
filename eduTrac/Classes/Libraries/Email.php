@@ -142,26 +142,31 @@ class Email {
 			return true;
 	 }
 	
-	public function et_reset_pass($email, $pass, $host) {
+	public function et_progress_report($email, $id, $host) {
+	    $name = get_name($id);
+        $site = Hooks::get_option('site_title');
 		$message = 
-		"Below is the new password you requested ...\n
+		"You have a new progress report from your child's teacher: $name \n
 		
-		Password: $pass \n
+		Log into your account to view this new progress report. \n
 		
-		Thank You
+		$host \n
 		
-		Administrator
-		$host
+		Thank You \n
+		
+		Administrator \n
 		______________________________________________________
 		THIS IS AN AUTOMATED RESPONSE. 
 		***DO NOT RESPOND TO THIS EMAIL****
 		";
 
-		$headers  = "From: \"".Hooks::get_option('system_name')." Reset Password\" <auto-reply@$host>\r\n";
+		$headers  = "From: $site <auto-reply@$host>\r\n";
 		$headers .= "X-Mailer: PHP/" . phpversion();
+        $headers .= "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 	
-		$this->et_mail($email,"Reset Password",$message,$headers);
-		return Hooks::apply_filter('reset_pass',$message,$headers);
+		$this->et_mail($email,"Progress Report",$message,$headers);
+		return Hooks::apply_filter('progress_report',$message,$headers);
 	}
   
 }
