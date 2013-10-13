@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Add Parent/Child Connection View
+ * Create Invoice View
  *  
  * PHP 5.4+
  *
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.2
+ * @since       1.0.3
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,27 +30,10 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-    jQuery('#parentID').live('change', function(event) {
+    jQuery('#stuID').live('change', function(event) {
         $.ajax({
             type    : 'POST',
-            url     : '<?=BASE_URL;?>parents/runParLookup/',
-            dataType: 'json',
-            data    : $('#validateSubmitForm').serialize(),
-            cache: false,
-            success: function( data ) {
-                   for(var id in data) {        
-                          $(id).val( data[id] );
-                   }
-            }
-        });
-    });
-});
-
-jQuery(document).ready(function() {
-    jQuery('#childID').live('change', function(event) {
-        $.ajax({
-            type    : 'POST',
-            url     : '<?=BASE_URL;?>parents/runChildLookup/',
+            url     : '<?=BASE_URL;?>financial/runStuLookup/',
             dataType: 'json',
             data    : $('#validateSubmitForm').serialize(),
             cache: false,
@@ -68,14 +51,14 @@ jQuery(document).ready(function() {
     <li><?php _e( _t( 'You are here' ) ); ?></li>
     <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'Parent/Child Connection' ) ); ?></li>
+    <li><?php _e( _t( 'Create Invoice' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Parent/Child Connection' ) ); ?></h3>
+<h3><?php _e( _t( 'Create Invoice' ) ); ?></h3>
 <div class="innerLR">
 
     <!-- Form -->
-    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>parents/runConnection/" id="validateSubmitForm" method="post" autocomplete="off">
+    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>financial/runInvoice/" id="validateSubmitForm" method="post" autocomplete="off">
         
         <!-- Widget -->
         <div class="widget widget-heading-simple widget-body-gray">
@@ -95,10 +78,10 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Parent ID' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Student ID' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="parentID" id="parentID" class="span12" required />
-                                <input type="text" id="parentName" readonly="readonly" class="span12 center" />
+                                <input type="text" name="stuID" id="stuID" class="span12" required />
+                                <input type="text" id="stuName" readonly="readonly" class="span12 center" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -111,16 +94,43 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Child ID' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="childID" id="childID" class="span12" required />
-                                <input type="text" id="childName" readonly="readonly" class="span12 center" />
+                                <select style="width:50%" name="termID" id="select2_9" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('term','active = "1"','termID','termCode','termName'); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                     </div>
                     <!-- // Column END -->
+                    
+                </div>
+                <!-- // Row END -->
+                
+                <hr class="separator" />
+                
+                <!-- Row -->
+                <div class="row-fluid">
+                    <!-- Column -->
+                    <div class="span6">
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Fees' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:100%" multiple id="pre-selected-options" class="multiselect" name="feeID[]" required>
+                                    <?php table_dropdown('billing_table','status = "A"','ID','amount','name'); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                    </div>
+                    <!-- // Column END -->
+                    
                 </div>
                 <!-- // Row END -->
                 
@@ -128,7 +138,7 @@ jQuery(document).ready(function() {
                 
                 <!-- Form actions -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Connect' ) ); ?></button>
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
                 </div>
                 <!-- // Form actions END -->
                 

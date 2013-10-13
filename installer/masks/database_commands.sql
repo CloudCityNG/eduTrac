@@ -1978,7 +1978,7 @@ CREATE TABLE IF NOT EXISTS `term` (
   `termCode` varchar(11) NOT NULL,
   `termName` varchar(10) NOT NULL DEFAULT '',
   `reportingTerm` varchar(5) NOT NULL,
-  `dropAddEndDate` date NOT NULL DEFAULT '0000-00-00'
+  `dropAddEndDate` date NOT NULL DEFAULT '0000-00-00',
   `termStartDate` date NOT NULL DEFAULT '0000-00-00',
   `termEndDate` date NOT NULL DEFAULT '0000-00-00',
   `active` enum('1','0') NOT NULL DEFAULT '1',
