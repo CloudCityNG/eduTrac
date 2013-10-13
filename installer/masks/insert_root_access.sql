@@ -1,5 +1,4 @@
-INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `email`,`personType`,`approvedBy`) 
-VALUES (NULL, '{admin_username}', '{admin_password}', '{admin_realname}', '{admin_email}','STA','1');
+INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `email`,`personType`,`approvedBy`) VALUES (NULL, '{admin_username}', '{admin_password}', '{admin_realname}', '{admin_email}', 'STA', '1');
 
 INSERT INTO `et_option` VALUES(1, 'dbversion', '00010');
 
@@ -51,6 +50,8 @@ INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password R
 
 INSERT INTO `person_roles` VALUES(1, 1, 8, '{datenow}');
 
+INSERT INTO `staff` VALUES(1, '1', '', '', '', '', '', 'A', '{datenow}', '1', '');
+
 INSERT INTO `cronjob` VALUES(1, '{siteurl}cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);
 
 INSERT INTO `cronjob` VALUES(2, '{siteurl}cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);
@@ -81,4 +82,4 @@ INSERT INTO `cronjob` VALUES(14, '{siteurl}cron/purgeSavedQuery/', 'Purge Saved 
 
 INSERT INTO `cronjob` VALUES(15, '{siteurl}cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);
 
-INSERT INTO `cronjob` VALUES(16, '{siteurl}cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0));
+INSERT INTO `cronjob` VALUES(16, '{siteurl}cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0);
