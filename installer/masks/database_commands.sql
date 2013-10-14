@@ -108,6 +108,23 @@ CREATE TABLE IF NOT EXISTS `attend` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `bill` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
+  `dateTime` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `billing_table` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) NOT NULL,
+  `amount` double(6,2) NOT NULL DEFAULT '0.00',
+  `status` enum('A','I') NOT NULL DEFAULT 'A',
+  `addDate` date NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `building` (
   `buildingID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `buildingCode` varchar(11) NOT NULL,
@@ -719,6 +736,9 @@ CREATE TABLE IF NOT EXISTS `course_sec` (
   `instructorLoad` double(4,1) NOT NULL DEFAULT '0.0',
   `contactHours` double(4,1) NOT NULL DEFAULT '0.0',
   `stuReg` enum('1','0') NOT NULL DEFAULT '1',
+  `courseFee` double(6,2) NOT NULL DEFAULT '0.00',
+  `labFee` double(6,2) NOT NULL DEFAULT '0.00',
+  `materialFee` double(6,2) NOT NULL DEFAULT '0.00',
   `secType` enum('ONL','HB','ONC') NOT NULL DEFAULT 'ONC',
   `currStatus` varchar(1) NOT NULL,
   `statusDate` date NOT NULL,
@@ -989,6 +1009,48 @@ CREATE TABLE IF NOT EXISTS `parent_child` (
   UNIQUE KEY `parent_student_index` (`parentID`,`childID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `payment` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
+  `amount` double(6,2) NOT NULL DEFAULT '0.00',
+  `checkNum` varchar(8) DEFAULT NULL,
+  `paymentTypeID` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `dateTime` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `payment_type` (
+  `ptID` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) NOT NULL,
+  PRIMARY KEY (`ptID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+INSERT INTO `payment_type` VALUES(1, 'Cash');
+
+INSERT INTO `payment_type` VALUES(2, 'Check');
+
+INSERT INTO `payment_type` VALUES(3, 'Credit Card');
+
+INSERT INTO `payment_type` VALUES(4, 'Paypal');
+
+INSERT INTO `payment_type` VALUES(5, 'Wire Transfer');
+
+INSERT INTO `payment_type` VALUES(6, 'Money Order');
+
+INSERT INTO `payment_type` VALUES(7, 'Student Load');
+
+INSERT INTO `payment_type` VALUES(8, 'Grant');
+
+INSERT INTO `payment_type` VALUES(9, 'Financial Aid');
+
+INSERT INTO `payment_type` VALUES(10, 'Scholarship');
+
+INSERT INTO `payment_type` VALUES(11, 'Waiver');
+
+INSERT INTO `payment_type` VALUES(12, 'Other');
+
 CREATE TABLE IF NOT EXISTS `permission` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `permKey` varchar(30) NOT NULL,
@@ -1161,6 +1223,10 @@ INSERT INTO `permission` VALUES(00000000000000000210, 'graduate_students', 'Grad
 
 INSERT INTO `permission` VALUES(00000000000000000211, 'generate_transcripts', 'Generate Transcripts');
 
+INSERT INTO `permission` VALUES(00000000000000000212, 'access_student_accounts', 'Access Student Accounts');
+
+INSERT INTO `permission` VALUES(00000000000000000213, 'student_account_inquiry_only', 'Student Account Inquiry Only');
+
 CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uname` varchar(80) NOT NULL,
@@ -1227,6 +1293,16 @@ CREATE TABLE IF NOT EXISTS `progress_report` (
   `courseTitle` varchar(180) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`prID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `refund` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `termID` int(11) unsigned zerofill NOT NULL,
+  `amount` double(6,2) NOT NULL DEFAULT '0.00',
+  `comment` text NOT NULL,
+  `dateTime` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `reservation` (
@@ -1846,6 +1922,15 @@ CREATE TABLE IF NOT EXISTS `student` (
   KEY `status` (`status`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `student_fee` (
+  `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `billID` int(11) unsigned zerofill NOT NULL,
+  `feeID` int(11) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `student_fee_index` (`stuID`,`billID`,`feeID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `stu_acad_cred` (
   `stuAcadCredID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
@@ -1997,6 +2082,8 @@ ALTER TABLE `application` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`pers
 
 ALTER TABLE `application` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
+ALTER TABLE `bill` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
+
 ALTER TABLE `course` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `course_sec` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
@@ -2013,7 +2100,11 @@ ALTER TABLE `institution_attended` ADD FOREIGN KEY (`instID`) REFERENCES `instit
 
 ALTER TABLE `institution_attended` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
+ALTER TABLE `payment` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
+
 ALTER TABLE `person` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `refund` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
 
 ALTER TABLE `saved_query` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
@@ -2026,6 +2117,8 @@ ALTER TABLE `student` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`)
 ALTER TABLE `student` ADD FOREIGN KEY (`advisorID`) REFERENCES `faculty` (`facID`) ON UPDATE CASCADE;
 
 ALTER TABLE `student` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `student_fee` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
 
 ALTER TABLE `stu_program` ADD FOREIGN KEY (`stuID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 

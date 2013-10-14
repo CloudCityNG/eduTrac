@@ -143,6 +143,30 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $this->view->render('section/offering_info');
     }
     
+    public function billing_info($id) {
+        if(!hasPermission('add_crse_sec_bill')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('Course Section Billing Info');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+        $this->view->binfo = $this->model->binfo($id);
+        
+        if(empty($this->view->binfo)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        
+        $this->view->render('section/billing_info');
+    }
+    
     public function register() {
         if(!hasPermission('register_students')) { redirect( BASE_URL . 'dashboard/' ); }
         $this->view->staticTitle = array('Course Registration');
@@ -317,6 +341,16 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['stuReg'] = isPostSet('stuReg');
         $data['courseSecID'] = isPostSet('courseSecID');
         $this->model->runSOFF($data);
+    }
+    
+    public function runBINFO() {
+        if(!hasPermission('add_crse_sec_bill')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = array();
+        $data['courseFee'] = isPostSet('courseFee');
+        $data['labFee'] = isPostSet('labFee');
+        $data['materialFee'] = isPostSet('materialFee');
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $this->model->runBINFO($data);
     }
     
     public function search() {

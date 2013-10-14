@@ -188,7 +188,7 @@ class SectionModel {
         $update = [
                     "buildingID" => $data['buildingID'],"roomID" => $data['roomID'],
                     "dotw" => $dotw,"startTime" => $data['startTime'],
-                    "endTime" => $data['endTime'],"stuReg" => $data['stuReg'] 
+                    "endTime" => $data['endTime'],"stuReg" => $data['stuReg']
                   ];
                   
         $bind = [ ":id" => $data['courseSecID'] ];
@@ -199,6 +199,24 @@ class SectionModel {
             redirect( BASE_URL . 'error/update_record/' );
         } else {
             redirect( BASE_URL . 'section/offering_info/' . $data['courseSecID'] . '/' . bm() );
+        }
+    }
+    
+    public function runBINFO($data) {
+        
+        $update = [
+                    "courseFee" => $data['courseFee'],"labFee" => $data['labFee'],
+                    "materialFee" => $data['materialFee']
+                  ];
+                  
+        $bind = [ ":id" => $data['courseSecID'] ];
+        
+        $q = DB::inst()->update("course_sec",$update,"courseSecID = :id",$bind);
+        
+        if(!$q) {
+            redirect( BASE_URL . 'error/update_record/' );
+        } else {
+            redirect( BASE_URL . 'section/billing_info/' . $data['courseSecID'] . '/' . bm() );
         }
     }
     
@@ -253,6 +271,28 @@ class SectionModel {
                     startTime,
                     endTime,
                     stuReg 
+                FROM 
+                    course_sec 
+                WHERE 
+                    courseSecID = :id",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function binfo($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                    courseSecID,
+                    courseSecCode,
+                    courseFee,
+                    labFee,
+                    materialFee 
                 FROM 
                     course_sec 
                 WHERE 

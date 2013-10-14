@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * View Invoice View
+ * Add Payment View
  *  
  * PHP 5.4+
  *
@@ -22,105 +22,66 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#stuID').live('change', function(event) {
+        $.ajax({
+            type    : 'POST',
+            url     : '<?=BASE_URL;?>financial/runStuLookup/',
+            dataType: 'json',
+            data    : $('#validateSubmitForm').serialize(),
+            cache: false,
+            success: function( data ) {
+                   for(var id in data) {        
+                          $(id).val( data[id] );
+                   }
+            }
+        });
+    });
+});
+</script>
+
 <ul class="breadcrumb">
     <li><?php _e( _t( 'You are here' ) ); ?></li>
     <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>financial/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Invoice' ) ); ?></a></li>
-    <li class="divider"></li>
-    <li><?php _e( _t( 'View Invoice' ) ); ?></li>
+    <li><?php _e( _t( 'Add Payment' ) ); ?></li>
 </ul>
 
-<h3><?=get_name(_h($this->address[0]['personID']));?></h3>
+<h3><?php _e( _t( 'Add Payment' ) ); ?></h3>
 <div class="innerLR">
 
     <!-- Form -->
-    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>financial/runEditInvoice/" id="validateSubmitForm" method="post" autocomplete="off">
+    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>financial/runPayment/" id="validateSubmitForm" method="post" autocomplete="off">
         
         <!-- Widget -->
         <div class="widget widget-heading-simple widget-body-gray">
+        
+            <!-- Widget heading -->
+            <div class="widget-head">
+                <h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+            </div>
+            <!-- // Widget heading END -->
             
             <div class="widget-body">
             
                 <!-- Row -->
                 <div class="row-fluid">
-                    
                     <!-- Column -->
-                    <div class="span12">
+                    <div class="span6">
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="address"><?php _e( _t( 'Address' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Student ID' ) ); ?></label>
                             <div class="controls">
-                                <input class="span3" type="text" readonly value="<?=_h($this->address[0]['address1']);?> <?=_h($this->address[0]['address2']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->address[0]['city']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->address[0]['state']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->address[0]['zip']);?>" />
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                    </div>
-                    <!-- // Column END -->
-                    
-                    <div class="break"></div>
-                    
-                    <!-- Column -->
-                    <div class="span5">
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="address"><?php _e( _t( 'Term' ) ); ?></label>
-                            <div class="controls">
-                                <input class="span3" type="text" readonly value="<?=_h($this->invoice[0]['termName']);?>" />
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <?php if($this->invoice != '') : foreach($this->invoice as $k => $v) { ?>
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?=_h($v['name']);?></label>
-                            <div class="controls">
-                                <input type="text" class="span10" readonly value="$<?=_h($v['amount']);?>" />
-                                <input type="hidden" name="ID" value="<?=_h($v['FeeID']);?>" />
-                                <a<?=gids();?> href="#myModal<?=_h($v['FeeID']);?>" data-toggle="modal" title="Delete Fee" class="btn btn-danger"><i class="icon-trash"></i></a>
-                                <div class="modal hide fade" id="myModal<?=_h($v['FeeID']);?>">
-                                    <div class="modal-body">
-                                        <?=_t( 'Are you sure what to delete the '.$v['name'].'?' );?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="<?=BASE_URL;?>financial/deleteFee/<?=_h($v['FeeID']);?>" class="btn btn-circle"><?php _e( _t( 'Delete' ) ); ?></a>
-                                        <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <?php } endif; ?>
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Beginning Balance' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" class="span3" readonly value="<?=_h($this->beginBalance[0]);?>" />
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Ending Balance' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" class="span3" readonly value="<?=_h($this->endBalance[0]);?>" />
+                                <input type="text"<?=saio();?> name="stuID" id="stuID" class="span12" required />
+                                <input type="text" id="stuName" readonly="readonly" class="span12 center" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -129,21 +90,77 @@
                     <!-- // Column END -->
                     
                     <!-- Column -->
-                    <div class="span5">
-                        
-                        <?php if($this->payment != '') : foreach($this->payment as $k => $v) { ?>
+                    <div class="span6">
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Payments' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" class="span6" readonly value="$<?=_h($v['amount']);?>" />
-                                <input type="text" class="span6" readonly value="<?=_h($v['paymentType']);?>" />
+                                <select style="width:50%" name="termID"<?=saio();?> id="select2_9" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('term','active = "1"','termID','termCode','termName'); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
-                        <?php } endif; ?>
+                    </div>
+                    <!-- // Column END -->
+                    
+                </div>
+                <!-- // Row END -->
+                
+                <hr class="separator" />
+                
+                <!-- Row -->
+                <div class="row-fluid">
+                    <!-- Column -->
+                    <div class="span6">
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Payment' ) ); ?></label>
+                            <div class="controls">
+                                <input type="text"<?=saio();?> name="amount" id="amount" class="span5" required />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Payment Type' ) ); ?></label>
+                            <div class="controls">
+                                <select style="width:40%" id="select2_10"<?=saio();?> name="paymentTypeID" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php payment_type_dropdown(); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Check Number' ) ); ?></label>
+                            <div class="controls">
+                                <input type="text"<?=saio();?> name="checkNum" id="checkNum" class="span5" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                    </div>
+                    <!-- // Column END -->
+                    
+                    <!-- Column -->
+                    <div class="span6">
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Comment' ) ); ?></label>
+                            <div class="controls">
+                                <textarea name="comment"<?=saio();?> style="width:240px;" cols="15" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
                         
                     </div>
                     <!-- // Column END -->
@@ -155,7 +172,7 @@
                 
                 <!-- Form actions -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+                    <button type="submit"<?=saids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
                 </div>
                 <!-- // Form actions END -->
                 

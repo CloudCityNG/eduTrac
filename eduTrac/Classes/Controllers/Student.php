@@ -254,6 +254,54 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $this->view->schedule = $this->model->schedule();
 		$this->view->render('student/schedule');
 	}
+    
+    public function bill() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('My Bills');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js'
+                                );
+        $this->view->myBill = $this->model->myBill();
+        $this->view->render('student/bill');
+    }
+    
+    public function view_bill($id) {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('View My Bill');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+        $this->view->bill = $this->model->bill($id);
+        $this->view->beginBalance = $this->model->beginBalance($id);
+        $this->view->courseFees = $this->model->courseFees($id);
+        $this->view->sumRefund = $this->model->sumRefund($id);
+        $this->view->sumPayments = $this->model->sumPayments($id);
+        $this->view->refund = $this->model->refund($id);
+        $this->view->payment = $this->model->payment($id);
+        
+        if(empty($this->view->bill)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        
+        $this->view->render('student/view_bill');
+    }
 	
 	public function graduation() {
 	    if(!hasPermission('graduate_students')) { redirect( BASE_URL . 'dashboard/' ); }

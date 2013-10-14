@@ -219,6 +219,30 @@ use \eduTrac\Classes\Core\DB;
     }
     
     /**
+     * Student Account Inquiry only.
+     */
+    function saio() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('student_account_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' readonly="readonly"';
+        }
+    }
+    
+    /**
+     * Student Account disable submit buttons.
+     */
+    function saids() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if($acl->hasPermission('student_account_inquiry_only') && !$acl->userHasRole(8)) {
+            return ' style="display:none;"';
+        }
+    }
+    
+    /**
      * Staff Inquiry only.
      */
     function staio() {
