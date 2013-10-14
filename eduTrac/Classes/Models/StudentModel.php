@@ -502,6 +502,239 @@ class StudentModel {
         return $array;
     }
     
+    public function myBill() {
+        $array = [];
+        $bind = [ ":stuID" => $this->_auth->getPersonField('personID') ];
+        
+        $q = DB::inst()->query( "SELECT a.ID,a.stuID,a.termID,b.termCode 
+                FROM 
+                    bill a 
+                LEFT JOIN 
+                    term b 
+                ON 
+                    a.termID = b.termID  
+                WHERE 
+                    a.stuID = :stuID 
+                GROUP BY 
+                    a.stuID,a.termID",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function bill($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.ID AS 'FeeID',
+                        a.stuID,
+                        b.name,
+                        b.amount,
+                        c.dateTime,
+                        d.termName 
+                    FROM 
+                        student_fee a 
+                    LEFT JOIN 
+                        billing_table b 
+                    ON 
+                        a.feeID = b.ID 
+                    LEFT JOIN 
+                        bill c 
+                    ON 
+                        a.stuID = c.stuID 
+                    LEFT JOIN 
+                        term d 
+                    ON 
+                        c.termID = d.termID 
+                    WHERE 
+                        c.stuID = :stuID 
+                    AND 
+                        c.termID = :termID 
+                    AND 
+                        a.billID = c.ID",
+                    $bind 
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function beginBalance($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        $q = DB::inst()->query( "SELECT 
+                        SUM(b.amount) 
+                    FROM 
+                        student_fee a 
+                    LEFT JOIN 
+                        billing_table b 
+                    ON 
+                        a.feeID = b.ID 
+                    LEFT JOIN 
+                        bill c 
+                    ON 
+                        a.billID = c.ID 
+                    WHERE 
+                        a.stuID = c.stuID 
+                    AND 
+                        c.stuID = :stuID 
+                    AND 
+                        c.termID = :termID 
+                    GROUP BY 
+                        c.stuID,c.termID",
+                    $bind 
+        );
+        foreach($q as $r) {
+            $array[] = money_format('-%n', $r['SUM(b.amount)']);
+        }
+        
+        return $array;
+    }
+    
+    public function courseFees($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        
+        $q = DB::inst()->query( "SELECT 
+                        SUM(a.courseFee) AS 'CourseFee',
+                        SUM(a.labFee) AS 'LabFee',
+                        SUM(a.materialFee) AS 'MaterialFee' 
+                    FROM 
+                        course_sec a 
+                    LEFT JOIN 
+                        stu_acad_cred b 
+                    ON 
+                        a.termID = b.termID 
+                    WHERE 
+                        b.stuID = :stuID 
+                    AND 
+                        b.termID = :termID 
+                    GROUP BY 
+                        b.stuID,b.termID",
+                    $bind 
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function sumPayments($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        
+        $q = DB::inst()->query( "SELECT 
+                        SUM(amount) 
+                    FROM 
+                        payment 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termID = :termID 
+                    GROUP BY 
+                        stuID,termID",
+                    $bind 
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r['SUM(amount)'];
+        }
+        
+        return $array;
+    }
+    
+    public function sumRefund($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        
+        $q = DB::inst()->query( "SELECT 
+                        SUM(amount) 
+                    FROM 
+                        refund 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termID = :termID 
+                    GROUP BY 
+                        stuID,termID",
+                    $bind 
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r['SUM(amount)'];
+        }
+        
+        return $array;
+    }
+    
+    public function payment($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.ID AS 'paymentID',
+                        a.amount,
+                        a.comment,
+                        a.dateTime,
+                        c.type 
+                    FROM 
+                        payment a 
+                    LEFT JOIN 
+                        bill b 
+                    ON 
+                        a.stuID = b.stuID 
+                    LEFT JOIN 
+                        payment_type c 
+                    ON 
+                        a.paymentTypeID = c.ptID 
+                    WHERE 
+                        a.termID = b.termID 
+                    AND 
+                        a.stuID = :stuID 
+                    AND 
+                        a.termID = :termID",
+                    $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function refund($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.ID AS 'refundID',
+                        a.amount,
+                        a.comment,
+                        a.dateTime 
+                    FROM 
+                        refund a 
+                    LEFT JOIN 
+                        bill b 
+                    ON 
+                        a.stuID = b.stuID 
+                    WHERE 
+                        a.termID = b.termID 
+                    AND 
+                        a.stuID = :stuID 
+                    AND 
+                        a.termID = :termID",
+                    $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
     public function runProgLookup($data) {
         $bind = array(":id" => $data['progID']);
         $q = DB::inst()->query( "SELECT 

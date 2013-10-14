@@ -299,7 +299,7 @@ jQuery(document).ready(function() {
                             <label class="control-label"><?php _e( _t( 'Billing Info' ) ); ?></label>
                             <div class="controls">
                                 <input type="text" disabled value="X" class="span1 center" />
-                                <a href="#">
+                                <a href="<?=BASE_URL;?>section/billing_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
                                     <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
                                 </a>
                             </div>

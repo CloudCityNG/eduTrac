@@ -281,6 +281,17 @@ $auth = new Cookies;
                             </ul>
                         </li>
                         
+                        <li<?=ae('access_student_accounts');?> class="dropdown submenu">
+                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons blog"><i></i><?php _e( _t( 'Student Accounts' ) ); ?></a>
+                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
+                                <li class=""><a href="<?=BASE_URL;?>financial/billing_table/<?=bm();?>"><?php _e( _t( 'Billing Tables' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>financial/<?=bm();?>"><?php _e( _t( 'Search Bill' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>financial/create_bill/<?=bm();?>"><?php _e( _t( 'Create Bill/Add Fees' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>financial/add_payment/<?=bm();?>"><?php _e( _t( 'Add Payment' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>financial/issue_refund/<?=bm();?>"><?php _e( _t( 'Issue a Refund' ) ); ?></a></li>
+                            </ul>
+                        </li>
+                        
                         <li<?=ae('access_student_portal');?> class=""><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons globe"><i></i><?php _e( _t( 'Student Portal' ) ); ?></a></li>
                         
                         <li<?=ae('access_parent_portal');?> class=""><a href="<?=BASE_URL;?>parents/portal/<?=bm();?>" class="glyphicons parents"><i></i><?php _e( _t( 'Parent Portal' ) ); ?></a></li>
