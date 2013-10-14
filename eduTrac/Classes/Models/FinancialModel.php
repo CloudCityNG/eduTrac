@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -41,12 +41,12 @@ class FinancialModel {
     
     public function search() {
         $array = [];
-        $post = isPostSet('invoice');
-        $bind = [ ":invoice" => "%$post%" ];
+        $post = isPostSet('bill');
+        $bind = [ ":bill" => "%$post%" ];
         
         $q = DB::inst()->query( "SELECT a.ID,a.stuID,a.termID,b.termCode,c.fname,c.lname,c.uname 
                 FROM 
-                    invoice a 
+                    bill a 
                 LEFT JOIN 
                     term b 
                 ON 
@@ -56,19 +56,19 @@ class FinancialModel {
                 ON 
                     a.stuID = c.personID 
                 WHERE 
-                    (CONCAT(c.fname,' ',c.lname) LIKE :invoice
+                    (CONCAT(c.fname,' ',c.lname) LIKE :bill
                 OR 
-                    CONCAT(c.lname,' ',c.fname) LIKE :invoice 
+                    CONCAT(c.lname,' ',c.fname) LIKE :bill 
                 OR 
-                    CONCAT(c.lname,', ',c.fname) LIKE :invoice) 
+                    CONCAT(c.lname,', ',c.fname) LIKE :bill) 
                 OR 
-                    c.fname LIKE :invoice 
+                    c.fname LIKE :bill 
                 OR 
-                    c.lname LIKE :invoice 
+                    c.lname LIKE :bill 
                 OR 
-                    c.uname LIKE :invoice 
+                    c.uname LIKE :bill 
                 OR 
-                    a.stuID LIKE :invoice 
+                    a.stuID LIKE :bill 
                 GROUP BY 
                     a.stuID,a.termID",
                 $bind
@@ -78,8 +78,6 @@ class FinancialModel {
             $array[] = $r;
         }
         return $array;
-        
-        redirect( BASE_URL . 'application/' );
     }
     
     public function billingTable() {
@@ -107,7 +105,7 @@ class FinancialModel {
         return $array;
     }
     
-    public function invoice($id) {
+    public function bill($id) {
         $array = [];
         $bind = [ ":id" => $id,":termID" => isGetSet('termID') ];
         $q = DB::inst()->query( "SELECT 
@@ -115,6 +113,7 @@ class FinancialModel {
                         a.stuID,
                         b.name,
                         b.amount,
+                        c.dateTime,
                         d.termName 
                     FROM 
                         student_fee a 
@@ -123,7 +122,7 @@ class FinancialModel {
                     ON 
                         a.feeID = b.ID 
                     LEFT JOIN 
-                        invoice c 
+                        bill c 
                     ON 
                         a.stuID = c.stuID 
                     LEFT JOIN 
@@ -135,7 +134,7 @@ class FinancialModel {
                     AND 
                         c.termID = :termID 
                     AND 
-                        a.invoiceID = c.ID",
+                        a.billID = c.ID",
                     $bind 
         );
         
@@ -178,9 +177,9 @@ class FinancialModel {
                     ON 
                         a.feeID = b.ID 
                     LEFT JOIN 
-                        invoice c 
+                        bill c 
                     ON 
-                        a.invoiceID = c.ID 
+                        a.billID = c.ID 
                     WHERE 
                         a.stuID = c.stuID 
                     AND 
@@ -198,37 +197,43 @@ class FinancialModel {
         return $array;
     }
     
-    public function endBalance($id) {
-        $array1 = [];
-        $array2 = [];
+    public function courseFees($id) {
+        $array = [];
         $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
-        $q1 = DB::inst()->query( "SELECT 
-                        SUM(b.amount) 
+        
+        $q = DB::inst()->query( "SELECT 
+                        SUM(a.courseFee) AS 'CourseFee',
+                        SUM(a.labFee) AS 'LabFee',
+                        SUM(a.materialFee) AS 'MaterialFee' 
                     FROM 
-                        student_fee a 
+                        course_sec a 
                     LEFT JOIN 
-                        billing_table b 
+                        stu_acad_cred b 
                     ON 
-                        a.feeID = b.ID 
-                    LEFT JOIN 
-                        invoice c 
-                    ON 
-                        a.invoiceID = c.ID 
+                        a.termID = b.termID 
                     WHERE 
-                        a.stuID = c.stuID 
+                        a.termID = b.termID 
                     AND 
-                        c.stuID = :stuID 
+                        b.stuID = :stuID 
                     AND 
-                        c.termID = :termID 
+                        b.termID = :termID 
                     GROUP BY 
-                        c.stuID,c.termID",
+                        b.stuID,b.termID",
                     $bind 
         );
-        foreach($q1 as $r1) {
-            $array1[] = money_format('-%n', $r1['SUM(b.amount)']);
+        
+        foreach($q as $r) {
+            $array[] = $r;
         }
         
-        $q2 = DB::inst()->query( "SELECT 
+        return $array;
+    }
+    
+    public function sumPayments($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        
+        $q = DB::inst()->query( "SELECT 
                         SUM(amount) 
                     FROM 
                         payment 
@@ -240,29 +245,83 @@ class FinancialModel {
                         stuID,termID",
                     $bind 
         );
-        foreach($q2 as $r2) {
-            $array2[] = $r2['SUM(amount)'];
+        
+        foreach($q as $r) {
+            $array[] = $r['SUM(amount)'];
         }
         
-        $balance = $array1 + $array2;
+        return $array;
+    }
+    
+    public function sumRefund($id) {
+        $array = [];
+        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
         
-        if(count($q2) <= 0) {
-            return $array1;
-        } else {
-            return $balance;
+        $q = DB::inst()->query( "SELECT 
+                        SUM(amount) 
+                    FROM 
+                        refund 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termID = :termID 
+                    GROUP BY 
+                        stuID,termID",
+                    $bind 
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r['SUM(amount)'];
         }
+        
+        return $array;
     }
     
     public function payment($id) {
         $array = [];
         $bind = [ ":id" => $id,":termID" => isGetSet('termID') ];
         $q = DB::inst()->query( "SELECT 
+                        a.ID AS 'paymentID',
                         a.amount,
-                        a.paymentType 
+                        a.comment,
+                        a.dateTime,
+                        c.type 
                     FROM 
                         payment a 
                     LEFT JOIN 
-                        invoice b 
+                        bill b 
+                    ON 
+                        a.stuID = b.stuID 
+                    LEFT JOIN 
+                        payment_type c 
+                    ON 
+                        a.paymentTypeID = c.ptID 
+                    WHERE 
+                        a.termID = b.termID 
+                    AND 
+                        a.stuID = :id 
+                    AND 
+                        a.termID = :termID",
+                    $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function refund($id) {
+        $array = [];
+        $bind = [ ":id" => $id,":termID" => isGetSet('termID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.ID AS 'refundID',
+                        a.amount,
+                        a.comment,
+                        a.dateTime 
+                    FROM 
+                        refund a 
+                    LEFT JOIN 
+                        bill b 
                     ON 
                         a.stuID = b.stuID 
                     WHERE 
@@ -318,33 +377,33 @@ class FinancialModel {
         echo json_encode($json);
     }
     
-    public function runInvoice($data) {
+    public function runBill($data) {
         $array = [];
         /**
-         * Check to see if an invoice was already created for the particular student 
+         * Check to see if a bill was already created for the particular student 
          * for the requested term.
          */
         $bind1 = [ ":stuID" => $data['stuID'],":termID" => $data['termID'] ];
-        $q1 = DB::inst()->select( "invoice","stuID = :stuID AND termID = :termID","","*",$bind1 );
+        $q1 = DB::inst()->select( "bill","stuID = :stuID AND termID = :termID","","*",$bind1 );
         foreach($q1 as $r) {
             $array[] = $r;
         }
         
         /**
-         * If the above records return 0, then create a new invoice and enter an array 
+         * If the above records return 0, then create a new bill and enter an array 
          * of fees for the student into the student_fee table.
          */
         if(count($q1) <= 0) {
             $bind2 = [ "stuID" => $data['stuID'],"termID" => $data['termID'],
                        "dateTime" => date('Y-m-d h:m:s') 
                      ];
-            $q2 = DB::inst()->insert( "invoice", $bind2 );
+            $q2 = DB::inst()->insert( "bill", $bind2 );
             $ID = DB::inst()->lastInsertId('ID');
             
             $size = count($data['feeID']);
             $i = 0;
             while($i < $size) {
-                $bind3 = [ "stuID" => $data['stuID'],"invoiceID" => $ID,
+                $bind3 = [ "stuID" => $data['stuID'],"billID" => $ID,
                            "feeID" => $data['feeID'][$i] 
                          ];
                 $q3 = DB::inst()->insert( "student_fee", $bind3 );
@@ -353,14 +412,14 @@ class FinancialModel {
         }
         
         /**
-         * If an invoice already exists for a student for the requested term, 
-         * then new fees will be added to the invoice.
+         * If a bill already exists for a student for the requested term, 
+         * then new fees will be added to the bill.
          */
         else {
             $size = count($data['feeID']);
             $i = 0;
             while($i < $size) {
-                $bind3 = [ "stuID" => $data['stuID'],"invoiceID" => $r['ID'],
+                $bind3 = [ "stuID" => $data['stuID'],"billID" => $r['ID'],
                            "feeID" => $data['feeID'][$i] 
                          ];
                 $q3 = DB::inst()->insert( "student_fee", $bind3 );
@@ -371,13 +430,64 @@ class FinancialModel {
         if(!$q3) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            redirect( BASE_URL . 'financial/view_invoice/' . $data['stuID'] . '&termID=' . $data['termID'] );
+            redirect( BASE_URL . 'financial/view_bill/' . $data['stuID'] . '&termID=' . $data['termID'] );
+        }
+    }
+    
+    public function runPayment($data) {
+        $date = date('Y-m-d h:m:s');
+        
+        if(empty($data['checkNum'])) {
+            $check = NULL;
+        } else {
+            $check = $data['checkNum'];
+        }
+        
+        $bind = [ 
+                "stuID" => $data['stuID'],"termID" => $data['termID'],
+                "amount" => $data['amount'],"checkNum" => $check,
+                "paymentTypeID" => $data['paymentTypeID'],"comment" => $data['comment'],
+                "dateTime" => $date
+                ];
+        $q = DB::inst()->insert( "payment", $bind );
+        if(!$q) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            redirect( BASE_URL . 'success/save_data/' );
+        }
+    }
+    
+    public function runRefund($data) {
+        $date = date('Y-m-d h:m:s');
+        
+        $bind = [ 
+                "stuID" => $data['stuID'],"termID" => $data['termID'],
+                "amount" => $data['amount'],"comment" => $data['comment'],
+                "dateTime" => $date
+                ];
+        $q = DB::inst()->insert( "refund", $bind );
+        if(!$q) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            redirect( BASE_URL . 'success/save_data/' );
         }
     }
     
     public function deleteFee($id) {
         $bind = [ ":id" => $id ];
         DB::inst()->delete( "student_fee", "ID = :id", $bind );
+        redirect( $_SERVER['HTTP_REFERER'] );
+    }
+    
+    public function deletePayment($id) {
+        $bind = [ ":id" => $id ];
+        DB::inst()->delete( "payment", "ID = :id", $bind );
+        redirect( $_SERVER['HTTP_REFERER'] );
+    }
+    
+    public function deleteRefund($id) {
+        $bind = [ ":id" => $id ];
+        DB::inst()->delete( "refund", "ID = :id", $bind );
         redirect( $_SERVER['HTTP_REFERER'] );
     }
     

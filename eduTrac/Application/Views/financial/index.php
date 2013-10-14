@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,10 +32,10 @@
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Invoice' ) ); ?></li>
+	<li><?php _e( _t( 'Bill' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Invoice' ) ); ?></h3>
+<h3><?php _e( _t( 'Search Bill' ) ); ?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -48,7 +48,7 @@
 						
 						<div class="widget widget-heading-simple widget-body-simple text-right">
 							<form class="form-search center" action="<?=BASE_URL;?>financial/<?=bm();?>" method="post" autocomplete="off">
-							  	<input type="text" name="invoice" class="input-xxlarge" placeholder="Search invoice . . . " /> 
+							  	<input type="text" name="bill" class="input-xxlarge" placeholder="Search bill . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>
@@ -59,14 +59,14 @@
 			
 			<div class="break"></div>
 			
-			<?php if(isPostSet('invoice')) { ?>
+			<?php if(isPostSet('bill')) { ?>
 			<!-- Table -->
 			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
 			
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Invoice ID' ) ); ?></th>
+						<th class="center"><?php _e( _t( 'Bill ID' ) ); ?></th>
 						<th class="center"><?php _e( _t( 'Last Name' ) ); ?></th>
 						<th class="center"><?php _e( _t( 'First Name' ) ); ?></th>
 						<th class="center"><?php _e( _t( 'Term' ) ); ?></th>
@@ -84,7 +84,7 @@
                     <td class="center"><?=_h($v['fname']);?></td>
                     <td class="center"><?=_h($v['termCode']);?></td>
                     <td class="center">
-                    	<a href="<?=BASE_URL;?>financial/view_invoice/<?=_h($v['stuID']);?>&termID=<?=_h($v['termID']);?>" title="View Invoice" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    	<a href="<?=BASE_URL;?>financial/view_bill/<?=_h($v['stuID']);?>&termID=<?=_h($v['termID']);?>" title="View Bill" class="btn btn-circle"><i class="icon-eye-open"></i></a>
                     </td>
                 </tr>
 				<?php } endif; ?>

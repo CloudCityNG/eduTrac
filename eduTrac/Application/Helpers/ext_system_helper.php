@@ -161,6 +161,23 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     /**
+     * Payment type dropdown: shows general list of payment types and
+     * if $typeID is not NULL, shows the payment type attached 
+     * to a particular record.
+     * 
+     * @since 1.0.3
+     * @param string $typeID - optional
+     * @return string Returns the record id if selected is true.
+     */
+    function payment_type_dropdown($typeID = NULL) {
+        $q = DB::inst()->select( "payment_type" );
+        
+        foreach( $q as $k => $v ) {
+            echo '<option value="'._h($v['ptID']).'"'.selected( $typeID, _h($v['ptID']), false ).'>'._h($v['type']).'</option>' . "\n";
+        }
+    }
+    
+    /**
      * Table dropdown: pulls dropdown list from specified table
      * if $tableID is not NULL, shows the record attached 
      * to a particular record.

@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -61,7 +61,7 @@
 						<!-- Group -->
 						<div class="control-group">
 							<label class="control-label" for="name"><font color="red">*</font> <?php _e( _t( 'Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="name" name="name" type="text" required /></div>
+							<div class="controls"><input class="span12"<?=saio();?> id="name" name="name" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -71,7 +71,7 @@
 							<div class="controls">
 							    <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
-                                        <input class="span12" id="appendedPrependedInput" name="amount" type="text" placeholder="100,000" required />
+                                        <input class="span12"<?=saio();?> id="appendedPrependedInput" name="amount" type="text" placeholder="100,000" required />
                                     <span class="add-on">.00</span>
                                 </div>
 						    </div>
@@ -82,7 +82,7 @@
                         <div class="control-group">
                             <label class="control-label" for="status"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:30%" name="status" id="select2_9" required>
+                                <select style="width:30%" name="status"<?=saio();?> id="select2_9" required>
                                     <option value="">&nbsp;</option>
                                     <option value="A"><?php _e( _t( 'Active' ) ); ?></option>
                                     <option value="I"><?php _e( _t( 'Inactive' ) ); ?></option>
@@ -101,7 +101,7 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit"<?=saids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -140,7 +140,7 @@
                     <td class="center">$<?=_h($value['amount']);?></td>
                     <td class="center"><?=_h($value['Status']);?></td>
                     <td class="center">
-                        <a href="#myModal<?=_h($value['ID']);?>" data-toggle="modal" title="View" class="btn btn-circle"><i class="icon-edit"></i></a>
+                        <a href="#myModal<?=_h($value['ID']);?>" data-toggle="modal" title="View Fee" class="btn btn-circle"><i class="icon-eye-open"></i></a>
                     </td>
                 </tr>
                 <?php } endif; ?>
@@ -163,7 +163,7 @@
                     <!-- Group -->
                     <div class="control-group">
                         <label class="control-label" for="name"><font color="red">*</font> <?php _e( _t( 'Name' ) ); ?></label>
-                        <div class="controls"><input class="span3" id="name" name="name" type="text" value="<?=_h($value['name']);?>" required /></div>
+                        <div class="controls"><input class="span3"<?=saio();?> id="name" name="name" type="text" value="<?=_h($value['name']);?>" required /></div>
                     </div>
                     <!-- // Group END -->
                     
@@ -173,7 +173,7 @@
                         <div class="controls">
                             <div class="input-prepend input-append">
                                 <span class="add-on">$</span>
-                                    <input class="span3" id="appendedPrependedInput" name="amount" type="text" value="<?=str_replace('.00','',_h($value['amount']));?>" required />
+                                    <input class="span3"<?=saio();?> id="appendedPrependedInput" name="amount" type="text" value="<?=str_replace('.00','',_h($value['amount']));?>" required />
                                 <span class="add-on">.00</span>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="control-group">
                         <label class="control-label" for="status"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
                         <div class="controls">
-                            <select style="width:30%" name="status" required>
+                            <select style="width:30%" name="status"<?=saio();?> required>
                                 <option value="">&nbsp;</option>
                                 <option value="A"<?=selected('A',_h($value['status']),false);?>><?php _e( _t( 'Active' ) ); ?></option>
                                 <option value="I"<?=selected('I',_h($value['status']),false);?>><?php _e( _t( 'Inactive' ) ); ?></option>
@@ -196,7 +196,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="update" value="1" />
                     <input type="hidden" name="ID" value="<?=_h($value['ID']);?>" />
-                    <button type="submit" class="btn btn-circle"><?php _e( _t( 'Update' ) ); ?></button>
+                    <button type="submit"<?=saids();?> class="btn btn-circle"><?php _e( _t( 'Update' ) ); ?></button>
                     <button data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></button>
                 </div>
             </div>

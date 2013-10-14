@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,11 +32,11 @@ class Financial extends \eduTrac\Classes\Core\Controller {
 
 	public function __construct() {
 		parent::__construct();
-        if(!hasPermission('access_financial')) { redirect( BASE_URL . 'dashboard/' ); }
+        if(!hasPermission('access_student_accounts')) { redirect( BASE_URL . 'dashboard/' ); }
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('Search Invoice');
+		$this->view->staticTitle = array('Search Bill');
 		$this->view->css = array( 
 								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
 								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
@@ -78,7 +78,7 @@ class Financial extends \eduTrac\Classes\Core\Controller {
         $this->view->render('financial/billing_table');
     }
     
-    public function create_invoice() {
+    public function create_bill() {
         $this->view->staticTitle = array('Add Fees');
         $this->view->css = array( 
                                 'theme/scripts/plugins/forms/select2/select2.css',
@@ -90,11 +90,11 @@ class Financial extends \eduTrac\Classes\Core\Controller {
                                 'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
                                 'theme/scripts/demo/form_elements.js'
                                 );        
-        $this->view->render('financial/create_invoice');
+        $this->view->render('financial/create_bill');
     }
     
-    public function view_invoice($id) {
-        $this->view->staticTitle = array('View Invoice');
+    public function view_bill($id) {
+        $this->view->staticTitle = array('View Bill');
         $this->view->css = array( 
                                 'theme/scripts/plugins/forms/select2/select2.css',
                                 'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
@@ -105,17 +105,50 @@ class Financial extends \eduTrac\Classes\Core\Controller {
                                 'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
                                 'theme/scripts/demo/form_elements.js'
                                 );
-        $this->view->invoice = $this->model->invoice($id);
+        $this->view->bill = $this->model->bill($id);
         $this->view->address = $this->model->address($id);
         $this->view->beginBalance = $this->model->beginBalance($id);
-        $this->view->endBalance = $this->model->endBalance($id);
+        $this->view->courseFees = $this->model->courseFees($id);
+        $this->view->sumRefund = $this->model->sumRefund($id);
+        $this->view->sumPayments = $this->model->sumPayments($id);
+        $this->view->refund = $this->model->refund($id);
         $this->view->payment = $this->model->payment($id);
         
-        if(empty($this->view->invoice)) {
+        if(empty($this->view->bill)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
         
-        $this->view->render('financial/view_invoice');
+        $this->view->render('financial/view_bill');
+    }
+    
+    public function add_payment() {
+        $this->view->staticTitle = array('Add Payment');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );        
+        $this->view->render('financial/add_payment');
+    }
+    
+    public function issue_refund() {
+        $this->view->staticTitle = array('Issue Refund');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );        
+        $this->view->render('financial/issue_refund');
     }
     
     public function runBillTable() {
@@ -143,12 +176,32 @@ class Financial extends \eduTrac\Classes\Core\Controller {
         $this->model->runStuLookup($data);
     }
     
-    public function runInvoice() {
+    public function runBill() {
         $data = [];
         $data['stuID'] = isPostSet('stuID');
         $data['termID'] = isPostSet('termID');
         $data['feeID'] = isPostSet('feeID');
-        $this->model->runInvoice($data);
+        $this->model->runBill($data);
+    }
+    
+    public function runPayment() {
+        $data = [];
+        $data['stuID'] = isPostSet('stuID');
+        $data['termID'] = isPostSet('termID');
+        $data['amount'] = isPostSet('amount');
+        $data['paymentTypeID'] = isPostSet('paymentTypeID');
+        $data['checkNum'] = isPostSet('checkNum');
+        $data['comment'] = isPostSet('comment');
+        $this->model->runPayment($data);
+    }
+    
+    public function runRefund() {
+        $data = [];
+        $data['stuID'] = isPostSet('stuID');
+        $data['termID'] = isPostSet('termID');
+        $data['amount'] = isPostSet('amount');
+        $data['comment'] = isPostSet('comment');
+        $this->model->runRefund($data);
     }
     
     public function search() {
@@ -157,6 +210,14 @@ class Financial extends \eduTrac\Classes\Core\Controller {
     
     public function deleteFee($id) {
         $this->model->deleteFee($id);
+    }
+    
+    public function deletePayment($id) {
+        $this->model->deletePayment($id);
+    }
+    
+    public function deleteRefund($id) {
+        $this->model->deleteRefund($id);
     }
         
 }

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Create Invoice View
+ * Create Bill View
  *  
  * PHP 5.4+
  *
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.3
+ * @since       1.0.4
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -51,14 +51,14 @@ jQuery(document).ready(function() {
     <li><?php _e( _t( 'You are here' ) ); ?></li>
     <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'Create Invoice' ) ); ?></li>
+    <li><?php _e( _t( 'Create Bill' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Create Invoice' ) ); ?></h3>
+<h3><?php _e( _t( 'Create Bill' ) ); ?></h3>
 <div class="innerLR">
 
     <!-- Form -->
-    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>financial/runInvoice/" id="validateSubmitForm" method="post" autocomplete="off">
+    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>financial/runBill/" id="validateSubmitForm" method="post" autocomplete="off">
         
         <!-- Widget -->
         <div class="widget widget-heading-simple widget-body-gray">
@@ -80,7 +80,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Student ID' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="stuID" id="stuID" class="span12" required />
+                                <input type="text"<?=saio();?> name="stuID" id="stuID" class="span12" required />
                                 <input type="text" id="stuName" readonly="readonly" class="span12 center" />
                             </div>
                         </div>
@@ -96,7 +96,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:50%" name="termID" id="select2_9" required>
+                                <select style="width:50%" name="termID"<?=saio();?> id="select2_9" required>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('term','active = "1"','termID','termCode','termName'); ?>
                                 </select>
@@ -121,7 +121,7 @@ jQuery(document).ready(function() {
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Fees' ) ); ?></label>
                             <div class="controls">
-                                <select style="width:100%" multiple id="pre-selected-options" class="multiselect" name="feeID[]" required>
+                                <select style="width:100%" multiple id="pre-selected-options"<?=saio();?> class="multiselect" name="feeID[]" required>
                                     <?php table_dropdown('billing_table','status = "A"','ID','amount','name'); ?>
                                 </select>
                             </div>
@@ -138,7 +138,7 @@ jQuery(document).ready(function() {
                 
                 <!-- Form actions -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+                    <button type="submit"<?=saids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
                 </div>
                 <!-- // Form actions END -->
                 
