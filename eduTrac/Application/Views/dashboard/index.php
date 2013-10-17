@@ -110,10 +110,10 @@ $("#add-event").dialog({
 					<h4 class="heading glyphicons cardio"><i></i><?php _e( _t( 'Latest 7 Media News' ) ); ?></h4>
 				</div>
 				<div class="widget-body">
-                    <?php  $rss = new \DOMDocument();
-                    $rss->load('http://feeds.feedburner.com/7mws/');
+                    <?php  $rss1 = new \DOMDocument();
+                    $rss1->load('http://xml.feedcat.net/7MediaBlog/');
                     $feed = array();
-                    foreach ($rss->getElementsByTagName('item') as $node) {
+                    foreach ($rss1->getElementsByTagName('item') as $node) {
                     $item = array (
                     'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
                     'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
@@ -122,7 +122,30 @@ $("#add-event").dialog({
                     );
                     array_push($feed, $item);
                     }
-                    $limit = 2;
+                    $limit = 1;
+                    for($x=0;$x<$limit;$x++) {
+                    $title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
+                    $link = $feed[$x]['link'];
+                    $description = $feed[$x]['desc'];
+                    $date = date('l F d, Y', strtotime($feed[$x]['date']));
+                    echo '<p><strong><a href="'.$link.'" title="'.$title.'">'.$title.'</a></strong><br />';
+                    echo '<small><em>Posted on '.$date.'</em></small></p>';
+                    echo '<p>'.$description.'</p>';
+                    } ?>
+                    
+                    <?php  $rss2 = new \DOMDocument();
+                    $rss2->load('http://xml.feedcat.net/7mws/');
+                    $feed = array();
+                    foreach ($rss2->getElementsByTagName('item') as $node) {
+                    $item = array (
+                    'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+                    'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
+                    'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
+                    'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
+                    );
+                    array_push($feed, $item);
+                    }
+                    $limit = 1;
                     for($x=0;$x<$limit;$x++) {
                     $title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
                     $link = $feed[$x]['link'];

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Course Section Grading View
+ * Course Section Attendance Report View
  *  
  * PHP 5.4+
  *
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       1.0.5
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -34,18 +34,49 @@
 	<li class="divider"></li>
 	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?php _e( _t( 'My Course Sections' ) ); ?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Grading' ) ); ?></li>
+    <li><a href="<?=BASE_URL;?>section/attendance/<?=$this->report[0]['courseSecID'];?>/<?=bm();?>" class="glyphicons charts"><i></i> <?=_h($this->report[0]['courseSecCode']);?> <?php _e( _t( 'Attendance' ) ); ?></a></li>
+    <li class="divider"></li>
+	<li><?php _e( _t( 'Attendance Report' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Grading' ) ); ?></h3>
+<h3><?php _e( _t( 'Attendance Report' ) ); ?></h3>
 <div class="innerLR">
-
-    <!-- Form -->
-    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>section/runGrades/" id="validateSubmitForm" method="post" autocomplete="off">
 
 	<!-- Widget -->
 	<div class="widget widget-heading-simple widget-body-gray">
 		<div class="widget-body">
+		    
+		    <!-- Row -->
+                <div class="row-fluid">
+                    <!-- Column -->
+                    <div class="span6">
+		    
+            		    <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Course Section' ) ); ?></label>
+                            <div class="controls">
+                                <input class="center" id="date" readonly type="text" value="<?=_h($this->report[0]['termCode']).'-'._h($this->report[0]['courseSecCode']);?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                    </div>
+                    
+                    <!-- Column -->
+                    <div class="span6">
+                        
+                        <!-- Group -->
+                        <div class="control-group">
+                            <label class="control-label"><?php _e( _t( 'Student' ) ); ?></label>
+                            <div class="controls">
+                                <input class="center" id="date" readonly type="text" value="<?=get_name(_h($this->report[0]['stuID']));?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                    </div>
+                </div>
+            <!-- //Row End -->
 			
 			<!-- Table -->
 			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
@@ -53,29 +84,21 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-                        <th class="center"><?php _e( _t( 'Course Section' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Student ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Grade' ) ); ?></th>
-                        <th style="display:none;">&nbsp;</th>
+						<th class="center"><?php _e( _t( 'Date' ) ); ?></th>
+						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
 				
 				<!-- Table body -->
 				<tbody>
-                <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
+                <?php if($this->report != '') : foreach($this->report as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['termCode'].'-'.$v['courseSecCode']);?></td>
                     <td class="center">
-                        <?=get_name(_h($v['stuID']));?>
-                        <input type="hidden" name="stuID[]" value="<?=_h($v['stuID']);?>" />
+                        <?=date('D, M d, o',strtotime($v['date']));?>
                     </td>
                     <td class="center">
-                        <?=grading_scale(_h($v['grade']));?>
-                    </td>
-                    <td style="display:none;">
-                        <input type="hidden" name="courseSecID" value="<?=_h($v['courseSecID']);?>" />
-                        <input type="hidden" name="termID" value="<?=_h($v['termID']);?>" />
+                        <?=_h($v['Status']);?>
                     </td>
                 </tr>
                 <?php } endif; ?>
@@ -86,22 +109,10 @@
 			<!-- // Table END -->
             
             <hr class="separator" />
-    			
-			<!-- Form actions -->
-			<div class="form-actions">
-			    <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
-			    <input type="hidden" name="cmplCredit" value="<?=_h($v['minCredit']);?>" />
-			    <?php } endif; ?>
-				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
-			</div>
-			<!-- // Form actions END -->
 			
 		</div>
 	</div>
 	<!-- // Widget END -->
-    
-    </form>
-    <!-- // Form END -->
 	
 </div>	
 	

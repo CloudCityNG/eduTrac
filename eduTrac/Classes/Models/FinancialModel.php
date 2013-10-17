@@ -212,13 +212,11 @@ class FinancialModel {
                     ON 
                         a.termID = b.termID 
                     WHERE 
-                        a.termID = b.termID 
-                    AND 
                         b.stuID = :stuID 
                     AND 
                         b.termID = :termID 
                     GROUP BY 
-                        b.stuID,b.termID",
+                        b.stuID,b.termID,b.courseSecID",
                     $bind 
         );
         
@@ -395,7 +393,7 @@ class FinancialModel {
          */
         if(count($q1) <= 0) {
             $bind2 = [ "stuID" => $data['stuID'],"termID" => $data['termID'],
-                       "dateTime" => date('Y-m-d h:m:s') 
+                       "dateTime" => date('Y-m-d H:i:s') 
                      ];
             $q2 = DB::inst()->insert( "bill", $bind2 );
             $ID = DB::inst()->lastInsertId('ID');
@@ -435,7 +433,7 @@ class FinancialModel {
     }
     
     public function runPayment($data) {
-        $date = date('Y-m-d h:m:s');
+        $date = date('Y-m-d H:i:s');
         
         if(empty($data['checkNum'])) {
             $check = NULL;
@@ -458,7 +456,7 @@ class FinancialModel {
     }
     
     public function runRefund($data) {
-        $date = date('Y-m-d h:m:s');
+        $date = date('Y-m-d H:i:s');
         
         $bind = [ 
                 "stuID" => $data['stuID'],"termID" => $data['termID'],

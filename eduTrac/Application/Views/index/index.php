@@ -60,6 +60,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 			
 			<div class="innerT center">
 				<p><?=_t('Having troubles?');?> <a href="<?=_h(Hooks::get_option('help_desk'));?>"><?=_t('Get Help');?></a></p>
+				<p><?=_t('Powered by');?> <a href="http://www.7mediaws.org/">eduTrac-<?php version(); ?></a> &copy; 2013</p>
 			</div>
 			
 		</div>
