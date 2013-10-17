@@ -207,7 +207,7 @@ class Section extends \eduTrac\Classes\Core\Controller {
     
     public function courses() {
         if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Course Section Grading');
+		$this->view->staticTitle = array('My Course Sections');
 		$this->view->css = array( 
 								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
 								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
@@ -230,6 +230,56 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $this->view->courseSec = $this->model->courseSec();
 		$this->view->render('section/courses');
 	}
+    
+    public function attendance($id) {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('Attendance');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );
+        $this->view->attendance = $this->model->attendance($id);
+        $this->view->render('section/attendance');
+    }
+    
+    public function attendance_report($id) {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array('Attendance Report');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+                                );
+                                
+        $this->view->js = array( 
+                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+                                'theme/scripts/demo/tables.js',
+                                );
+        $this->view->report = $this->model->attendanceReport($id);
+        
+        if(empty($this->view->report)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        $this->view->render('section/attendance_report');
+    }
     
     public function grading($id) {
         if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
@@ -392,6 +442,17 @@ class Section extends \eduTrac\Classes\Core\Controller {
         $data['courseSecID'] = isPostSet('courseSecID');
         $data['queryID'] = isPostSet('queryID');
         $this->model->runBatchReg($data);
+    }
+    
+    public function runAttendance() {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = array();
+        $data['stuID'] = isPostSet('stuID');
+        $data['courseSecID'] = isPostSet('courseSecID');
+        $data['courseSecCode'] = isPostSet('courseSecCode');
+        $data['status'] = isPostSet('status');
+        $data['date'] = isPostSet('date');
+        $this->model->runAttendance($data);
     }
     
     public function runGrades() {

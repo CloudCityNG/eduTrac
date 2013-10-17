@@ -430,9 +430,8 @@ class SectionModel {
     
     public function courseSec() {
         $array = [];
-        $id = Hooks::get_option('current_term_id');
         $facID = $this->_auth->getPersonField('personID');
-        $bind = [ ":termID" => $id, ":facID" => $facID ];
+        $bind = [ ":facID" => $facID ];
         $q = DB::inst()->query( "SELECT 
                     a.courseSecID,
                     a.courseSecCode,
@@ -445,12 +444,128 @@ class SectionModel {
                 ON 
                     a.termID = b.termID 
                 WHERE 
-                    a.termID = :termID 
-                AND 
-                    a.facID = :facID",
+                    a.facID = :facID 
+                GROUP BY 
+                    a.termID",
                 $bind
         );
         
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function attendance($id) {
+        /**
+         * Checks to see if attendance data for current date is present.
+         */
+        $array1 = [];
+        $date = date('Y-m-d');
+        $bind1 = [ ":id" => $id, ":date" => $date ];
+        $bind2 = [ ":id" => $id ];
+        $q1 = DB::inst()->query( "SELECT 
+                    * 
+                FROM 
+                    attendance 
+                WHERE 
+                    courseSecID = :id 
+                AND 
+                    date = :date",
+                $bind1 
+        );
+        
+        /**
+         * If there is no attendance data for the current date, then create default date 
+         * to be updated by professor/teacher/faculty.
+         */
+        if($q1 == NULL) {
+            $q2 = DB::inst()->select( "stu_acad_cred","courseSecID = :id","","*",$bind2);
+            foreach($q2 as $r2) {
+                $array1 = $r2;
+            }
+            
+            if($q2 != NULL) {
+                $bind2 = [ "courseSecID" => $id,"stuID" => $r2['stuID'],"date" => $date,"status" => 'A' ];
+                $size = count($r2['stuID']);
+                $i = 0;
+                while($i < $size) {
+                   $q = DB::inst()->insert( "attendance", $bind2 );
+                    ++$i;
+                }
+            }
+        }
+        
+        /**
+         * Display the current day's attendance data.
+         */
+        $array = [];
+        $facID = $this->_auth->getPersonField('personID');
+        $bind = [ ":facID" => $facID, ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                    a.*,
+                    b.courseSecCode,
+                    c.termCode 
+                FROM 
+                    attendance a 
+                LEFT JOIN 
+                    course_sec b 
+                ON 
+                    a.courseSecID = b.courseSecID 
+                LEFT JOIN 
+                    term c 
+                ON 
+                    b.termID = c.termID 
+                WHERE 
+                    b.facID = :facID 
+                AND 
+                    a.courseSecID = :id",
+                $bind
+        );
+        
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function attendanceReport($id) {
+        $array = [];
+        $bind = [ ":id" => $id,":stuID" => isGetSet('stuID') ];
+        $q = DB::inst()->query( "SELECT 
+                    CASE 
+                        a.status 
+                    WHEN 
+                        'A' 
+                    THEN 
+                        'Absent' 
+                    ELSE 
+                        'Present' 
+                    END AS 
+                        'Status',
+                        a.stuID,
+                        a.date,
+                        a.courseSecID,
+                        b.courseSecCode,
+                        c.termCode 
+                    FROM 
+                        attendance a 
+                    LEFT JOIN 
+                        course_sec b 
+                    ON 
+                        a.courseSecID = b.courseSecID 
+                    LEFT JOIN 
+                        term c 
+                    ON 
+                        b.termID = c.termID 
+                    WHERE 
+                        a.courseSecID = :id 
+                    AND 
+                        a.stuID = :stuID 
+                    ORDER BY 
+                        a.date",
+                    $bind 
+        );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -521,6 +636,37 @@ class SectionModel {
         } else {
             $this->_log->setLog('Update Record','Grades',$data['courseSecID']);
             redirect( BASE_URL . 'section/grading/' . $data['courseSecID'] . '/' . bm() );
+        }
+    }
+
+    public function runAttendance($data) {
+        $size = count($data['stuID']);
+        $i = 0;
+            while($i < $size) {
+                $update = [ "status" => $data['status'][$i] ];
+                
+                $bind = [ 
+                        ":stuID" => $data['stuID'][$i],":courseSecID" => $data['courseSecID'],
+                        ":date" => $data['date']
+                        ];
+                        
+                $q = DB::inst()->update( "attendance",
+                                $update,
+                                "stuID = :stuID 
+                            AND 
+                                courseSecID = :courseSecID 
+                            AND 
+                                date = :date",
+                            $bind 
+                );
+            ++$i;
+            }
+        
+        if(!$q) {
+            redirect( BASE_URL . 'error/update_record/' );
+        } else {
+            $this->_log->setLog('Update Record','Course Section Attendance',$data['courseSecCode']);
+            redirect( BASE_URL . 'section/attendance/' . $data['courseSecID'] . '/' . bm() );
         }
     }
     

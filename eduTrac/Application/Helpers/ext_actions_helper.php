@@ -32,7 +32,7 @@
 	/**
 	* Includes and loads all activated plugins.
 	*
-	* @since 1.0
+	* @since 1.0.0
 	*/
 	Hooks::load_activated_plugins();
 	
@@ -40,7 +40,7 @@
 	* An action called to add the plugin's link
 	* to the menu structure.
 	*
-	* @since 1.0
+	* @since 1.0.0
 	* @uses do_action() Calls 'admin_menu' hook.
 	*/
 	Hooks::do_action('admin_menu');
@@ -57,5 +57,9 @@
 		Hooks::do_action('footer');
 	}
     
+    function version() {
+        Hooks::do_action('version');
+    }
+    
     Hooks::add_action( 'head',          'head_version_meta',            5       );
-    Hooks::add_action( 'footer',        'foot_version',                 5       );
+    Hooks::add_action( 'version',       'foot_version',                 5       );
