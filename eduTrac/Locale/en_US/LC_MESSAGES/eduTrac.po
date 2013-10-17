@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eduTrac\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:04-0500\n"
-"PO-Revision-Date: 2013-10-15 18:04-0500\n"
+"POT-Creation-Date: 2013-10-17 18:13-0500\n"
+"PO-Revision-Date: 2013-10-17 18:13-0500\n"
 "Last-Translator: Joshua Parker <josh@7mediaws.org>\n"
 "Language-Team: 7 Media Web Solutions, LLC <email@7mediaws.org>\n"
 "MIME-Version: 1.0\n"
@@ -313,7 +313,7 @@ msgid "Dashboard"
 msgstr ""
 
 #: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:104
-#: ../../../Application/Views/header.php:141
+#: ../../../Application/Views/header.php:144
 msgid "Plugins"
 msgstr ""
 
@@ -379,335 +379,335 @@ msgstr ""
 msgid "&copy; 2013"
 msgstr ""
 
-#: ../../../Application/Views/header.php:147
+#: ../../../Application/Views/header.php:150
 msgid "Screens"
 msgstr ""
 
-#: ../../../Application/Views/header.php:151
+#: ../../../Application/Views/header.php:154
 msgid "Administrative"
 msgstr ""
 
-#: ../../../Application/Views/header.php:153
+#: ../../../Application/Views/header.php:156
 msgid "General Settings"
 msgstr ""
 
-#: ../../../Application/Views/header.php:154
+#: ../../../Application/Views/header.php:157
 msgid "Cron Jobs"
 msgstr ""
 
-#: ../../../Application/Views/header.php:155
+#: ../../../Application/Views/header.php:158
 msgid "(MPRM) Manage Perm"
 msgstr ""
 
-#: ../../../Application/Views/header.php:156
+#: ../../../Application/Views/header.php:159
 msgid "(MRLE) Manage Role"
 msgstr ""
 
-#: ../../../Application/Views/header.php:157
+#: ../../../Application/Views/header.php:160
 msgid "Error Log"
 msgstr ""
 
-#: ../../../Application/Views/header.php:158
+#: ../../../Application/Views/header.php:161
 #: ../../../Application/Views/audittrail/index.php:35
 #: ../../../Application/Views/audittrail/index.php:38
 msgid "Audit Trail"
 msgstr ""
 
-#: ../../../Application/Views/header.php:159
+#: ../../../Application/Views/header.php:162
 msgid "Reservation"
 msgstr ""
 
-#: ../../../Application/Views/header.php:160
+#: ../../../Application/Views/header.php:163
 msgid "Reservation Categories"
 msgstr ""
 
-#: ../../../Application/Views/header.php:165
+#: ../../../Application/Views/header.php:168
 msgid "Forms"
 msgstr ""
 
-#: ../../../Application/Views/header.php:167
+#: ../../../Application/Views/header.php:170
 msgid "(SEM) - Semester"
 msgstr ""
 
-#: ../../../Application/Views/header.php:168
+#: ../../../Application/Views/header.php:171
 msgid "(TERM) - Term"
 msgstr ""
 
-#: ../../../Application/Views/header.php:169
+#: ../../../Application/Views/header.php:172
 msgid "(AYR) - Academic Year"
 msgstr ""
 
-#: ../../../Application/Views/header.php:170
+#: ../../../Application/Views/header.php:173
 msgid "(DEPT) - Department"
 msgstr ""
 
-#: ../../../Application/Views/header.php:171
+#: ../../../Application/Views/header.php:174
 msgid "(SUBJ) - Subject"
 msgstr ""
 
-#: ../../../Application/Views/header.php:172
+#: ../../../Application/Views/header.php:175
 msgid "(CRL) - Credit Load"
 msgstr ""
 
-#: ../../../Application/Views/header.php:173
+#: ../../../Application/Views/header.php:176
 msgid "(CLYR) - Class Year"
 msgstr ""
 
-#: ../../../Application/Views/header.php:174
+#: ../../../Application/Views/header.php:177
 msgid "(DEG) - Degree"
 msgstr ""
 
-#: ../../../Application/Views/header.php:175
+#: ../../../Application/Views/header.php:178
 msgid "(MAJR) - Major"
 msgstr ""
 
-#: ../../../Application/Views/header.php:176
+#: ../../../Application/Views/header.php:179
 msgid "(MINR) - Minor"
 msgstr ""
 
-#: ../../../Application/Views/header.php:177
+#: ../../../Application/Views/header.php:180
 msgid "(CCD) - CCD"
 msgstr ""
 
-#: ../../../Application/Views/header.php:178
+#: ../../../Application/Views/header.php:181
 msgid "(SPEC) - Specialization"
 msgstr ""
 
-#: ../../../Application/Views/header.php:179
+#: ../../../Application/Views/header.php:182
 msgid "(CIP) - CIP"
 msgstr ""
 
-#: ../../../Application/Views/header.php:180
+#: ../../../Application/Views/header.php:183
 msgid "(LOC) - Location"
 msgstr ""
 
-#: ../../../Application/Views/header.php:181
+#: ../../../Application/Views/header.php:184
 msgid "(BLDG) - Building"
 msgstr ""
 
-#: ../../../Application/Views/header.php:182
+#: ../../../Application/Views/header.php:185
 msgid "(ROOM) - Room"
 msgstr ""
 
-#: ../../../Application/Views/header.php:183
+#: ../../../Application/Views/header.php:186
 msgid "(SCH) - School"
 msgstr ""
 
-#: ../../../Application/Views/header.php:188
+#: ../../../Application/Views/header.php:191
 msgid "Saved Query"
 msgstr ""
 
-#: ../../../Application/Views/header.php:190
+#: ../../../Application/Views/header.php:193
 msgid "Queries"
 msgstr ""
 
-#: ../../../Application/Views/header.php:191
+#: ../../../Application/Views/header.php:194
 msgid "Create Query"
 msgstr ""
 
-#: ../../../Application/Views/header.php:195
+#: ../../../Application/Views/header.php:198
 msgid "SQL Interface"
 msgstr ""
 
-#: ../../../Application/Views/header.php:198
+#: ../../../Application/Views/header.php:201
 msgid "Acad Program"
 msgstr ""
 
-#: ../../../Application/Views/header.php:200
+#: ../../../Application/Views/header.php:203
 msgid "(PROG) - Program"
 msgstr ""
 
-#: ../../../Application/Views/header.php:201
+#: ../../../Application/Views/header.php:204
 msgid "(APRG) - New Program"
 msgstr ""
 
-#: ../../../Application/Views/header.php:206
+#: ../../../Application/Views/header.php:209
 msgid "Course"
 msgstr ""
 
-#: ../../../Application/Views/header.php:208
+#: ../../../Application/Views/header.php:211
 msgid "(CRSE) - Course"
 msgstr ""
 
-#: ../../../Application/Views/header.php:209
+#: ../../../Application/Views/header.php:212
 msgid "(ACRS) - New Course"
 msgstr ""
 
-#: ../../../Application/Views/header.php:214
+#: ../../../Application/Views/header.php:217
 msgid "Course Section"
 msgstr ""
 
-#: ../../../Application/Views/header.php:216
+#: ../../../Application/Views/header.php:219
 msgid "(SECT) - Section"
 msgstr ""
 
-#: ../../../Application/Views/header.php:217
+#: ../../../Application/Views/header.php:220
 msgid "(RGN) - Register"
 msgstr ""
 
-#: ../../../Application/Views/header.php:218
+#: ../../../Application/Views/header.php:221
 msgid "(BRGN) - Batch Register"
 msgstr ""
 
-#: ../../../Application/Views/header.php:219
-msgid "(GRDE) - Grading"
+#: ../../../Application/Views/header.php:222
+msgid "My Course Sections"
 msgstr ""
 
-#: ../../../Application/Views/header.php:224
+#: ../../../Application/Views/header.php:227
 #: ../../../Application/Views/application/add.php:152
 #: ../../../Application/Views/application/view.php:152
 msgid "Institution"
 msgstr ""
 
-#: ../../../Application/Views/header.php:226
+#: ../../../Application/Views/header.php:229
 msgid "(INST) - Institution"
 msgstr ""
 
-#: ../../../Application/Views/header.php:227
+#: ../../../Application/Views/header.php:230
 msgid "(AINST) - New Institution"
 msgstr ""
 
-#: ../../../Application/Views/header.php:232
+#: ../../../Application/Views/header.php:235
 msgid "Communication Mgmt"
 msgstr ""
 
-#: ../../../Application/Views/header.php:234
+#: ../../../Application/Views/header.php:237
 msgid "Email Templates"
 msgstr ""
 
-#: ../../../Application/Views/header.php:235
+#: ../../../Application/Views/header.php:238
 msgid "Add Email Template"
 msgstr ""
 
-#: ../../../Application/Views/header.php:236
+#: ../../../Application/Views/header.php:239
 msgid "Schedule Email"
 msgstr ""
 
-#: ../../../Application/Views/header.php:237
+#: ../../../Application/Views/header.php:240
 msgid "Email Queue"
 msgstr ""
 
-#: ../../../Application/Views/header.php:242
+#: ../../../Application/Views/header.php:245
 msgid "NSLC"
 msgstr ""
 
-#: ../../../Application/Views/header.php:244
+#: ../../../Application/Views/header.php:247
 msgid "(NSCP) Purge"
 msgstr ""
 
-#: ../../../Application/Views/header.php:245
+#: ../../../Application/Views/header.php:248
 msgid "(NSCS) Setup"
 msgstr ""
 
-#: ../../../Application/Views/header.php:246
+#: ../../../Application/Views/header.php:249
 msgid "(NSCX) Extraction"
 msgstr ""
 
-#: ../../../Application/Views/header.php:247
+#: ../../../Application/Views/header.php:250
 msgid "(NSCE) Verification"
 msgstr ""
 
-#: ../../../Application/Views/header.php:248
+#: ../../../Application/Views/header.php:251
 msgid "(NSCC) Correction"
 msgstr ""
 
-#: ../../../Application/Views/header.php:249
+#: ../../../Application/Views/header.php:252
 msgid "(NSCT) NSLC File"
 msgstr ""
 
-#: ../../../Application/Views/header.php:254
+#: ../../../Application/Views/header.php:257
 msgid "Person"
 msgstr ""
 
-#: ../../../Application/Views/header.php:256
+#: ../../../Application/Views/header.php:259
 msgid "(NAE) Search"
 msgstr ""
 
-#: ../../../Application/Views/header.php:257
+#: ../../../Application/Views/header.php:260
 msgid "(APER) Add Person"
 msgstr ""
 
-#: ../../../Application/Views/header.php:261
+#: ../../../Application/Views/header.php:264
 msgid "(APPL) Application"
 msgstr ""
 
-#: ../../../Application/Views/header.php:263
+#: ../../../Application/Views/header.php:266
 msgid "(FAC) Faculty"
 msgstr ""
 
-#: ../../../Application/Views/header.php:265
+#: ../../../Application/Views/header.php:268
 msgid "(STAF) Staff"
 msgstr ""
 
-#: ../../../Application/Views/header.php:268
+#: ../../../Application/Views/header.php:271
 msgid "Parent"
 msgstr ""
 
-#: ../../../Application/Views/header.php:270
+#: ../../../Application/Views/header.php:273
 msgid "Search"
 msgstr ""
 
-#: ../../../Application/Views/header.php:271
+#: ../../../Application/Views/header.php:274
 msgid "Parent/Child Connect"
 msgstr ""
 
-#: ../../../Application/Views/header.php:276
+#: ../../../Application/Views/header.php:279
 msgid "Student"
 msgstr ""
 
-#: ../../../Application/Views/header.php:278
+#: ../../../Application/Views/header.php:281
 msgid "(SPRO) Student Profile"
 msgstr ""
 
-#: ../../../Application/Views/header.php:279
+#: ../../../Application/Views/header.php:282
 msgid "Graduate Student(s)"
 msgstr ""
 
-#: ../../../Application/Views/header.php:280
+#: ../../../Application/Views/header.php:283
 msgid "Generate Transcript"
 msgstr ""
 
-#: ../../../Application/Views/header.php:285
+#: ../../../Application/Views/header.php:288
 msgid "Student Accounts"
 msgstr ""
 
-#: ../../../Application/Views/header.php:287
+#: ../../../Application/Views/header.php:290
 msgid "Billing Tables"
 msgstr ""
 
-#: ../../../Application/Views/header.php:288
+#: ../../../Application/Views/header.php:291
 msgid "Search Bill"
 msgstr ""
 
-#: ../../../Application/Views/header.php:289
+#: ../../../Application/Views/header.php:292
 msgid "Create Bill/Add Fees"
 msgstr ""
 
-#: ../../../Application/Views/header.php:290
+#: ../../../Application/Views/header.php:293
 msgid "Add Payment"
 msgstr ""
 
-#: ../../../Application/Views/header.php:291
+#: ../../../Application/Views/header.php:294
 msgid "Issue a Refund"
 msgstr ""
 
-#: ../../../Application/Views/header.php:295
+#: ../../../Application/Views/header.php:298
 msgid "Student Portal"
 msgstr ""
 
-#: ../../../Application/Views/header.php:297
+#: ../../../Application/Views/header.php:300
 msgid "Parent Portal"
 msgstr ""
 
-#: ../../../Application/Views/header.php:322
+#: ../../../Application/Views/header.php:329
 msgid "Profile"
 msgstr ""
 
-#: ../../../Application/Views/header.php:322
+#: ../../../Application/Views/header.php:329
 msgid "edit"
 msgstr ""
 
-#: ../../../Application/Views/header.php:333
+#: ../../../Application/Views/header.php:340
 msgid "Sign Out"
 msgstr ""
 
@@ -1019,7 +1019,7 @@ msgstr ""
 
 #: ../../../Application/Views/cron/add.php:200
 #: ../../../Application/Views/cron/view.php:212
-#: ../../../Application/Views/dashboard/index.php:231
+#: ../../../Application/Views/dashboard/index.php:254
 msgid "Weekly"
 msgstr ""
 
@@ -1059,59 +1059,59 @@ msgstr ""
 msgid "Latest 7 Media News"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:143
+#: ../../../Application/Views/dashboard/index.php:166
 msgid "Calendar"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:150
+#: ../../../Application/Views/dashboard/index.php:173
 msgid "Event Name"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:159
+#: ../../../Application/Views/dashboard/index.php:182
 msgid "Description"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:168
+#: ../../../Application/Views/dashboard/index.php:191
 msgid "Room"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:180
+#: ../../../Application/Views/dashboard/index.php:203
 msgid "Date"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:192
+#: ../../../Application/Views/dashboard/index.php:215
 msgid "Start Time"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:204
+#: ../../../Application/Views/dashboard/index.php:227
 msgid "End Time"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:216
+#: ../../../Application/Views/dashboard/index.php:239
 msgid "Repeat?"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:225
+#: ../../../Application/Views/dashboard/index.php:248
 msgid "Repeat Occurrence"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:228
+#: ../../../Application/Views/dashboard/index.php:251
 msgid "Every Day"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:234
+#: ../../../Application/Views/dashboard/index.php:257
 msgid "Every Two Weeks"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:255
+#: ../../../Application/Views/dashboard/index.php:278
 msgid "Support"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:262
+#: ../../../Application/Views/dashboard/index.php:285
 msgid "Community Support Site"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:263
+#: ../../../Application/Views/dashboard/index.php:286
 msgid "eduTrac Satisfaction Survey"
 msgstr ""
 
@@ -1363,6 +1363,11 @@ msgstr ""
 
 #: ../../../Application/Views/financial/index.php:69
 msgid "Bill ID"
+msgstr ""
+
+#: ../../../Application/Views/financial/issue_refund.php:54
+#: ../../../Application/Views/financial/issue_refund.php:57
+msgid "Issue Refund"
 msgstr ""
 
 #: ../../../Application/Views/financial/issue_refund.php:122
@@ -1822,6 +1827,10 @@ msgstr ""
 
 #: ../../../Application/Views/index/index.php:62
 msgid "Get Help"
+msgstr ""
+
+#: ../../../Application/Views/index/index.php:63
+msgid "Powered by"
 msgstr ""
 
 #: ../../../Application/Views/institution/add.php:35
@@ -2647,6 +2656,37 @@ msgstr ""
 msgid "Instructor Load"
 msgstr ""
 
+#: ../../../Application/Views/section/attendance.php:37
+#: ../../../Application/Views/section/attendance_report.php:37
+msgid "Attendance"
+msgstr ""
+
+#: ../../../Application/Views/section/attendance.php:40
+msgid "Attendance for "
+msgstr ""
+
+#: ../../../Application/Views/section/attendance.php:52
+msgid "Today's Date"
+msgstr ""
+
+#: ../../../Application/Views/section/attendance.php:67
+#: ../../../Application/Views/section/roster.php:54
+msgid "Student Name"
+msgstr ""
+
+#: ../../../Application/Views/section/attendance.php:88
+msgid "Absent"
+msgstr ""
+
+#: ../../../Application/Views/section/attendance.php:89
+msgid "Present"
+msgstr ""
+
+#: ../../../Application/Views/section/attendance_report.php:39
+#: ../../../Application/Views/section/attendance_report.php:42
+msgid "Attendance Report"
+msgstr ""
+
 #: ../../../Application/Views/section/batch_register.php:54
 #: ../../../Application/Views/section/batch_register.php:57
 msgid "Batch Registration"
@@ -2693,8 +2733,7 @@ msgid "Course Materials Fee"
 msgstr ""
 
 #: ../../../Application/Views/section/courses.php:35
-#: ../../../Application/Views/section/index.php:36
-msgid "Sections"
+msgid "Course Sections"
 msgstr ""
 
 #: ../../../Application/Views/section/courses.php:52
@@ -2702,9 +2741,13 @@ msgstr ""
 msgid "Section Code"
 msgstr ""
 
-#: ../../../Application/Views/section/grading.php:35
-#: ../../../Application/Views/section/grading.php:38
+#: ../../../Application/Views/section/grading.php:37
+#: ../../../Application/Views/section/grading.php:40
 msgid "Grading"
+msgstr ""
+
+#: ../../../Application/Views/section/index.php:36
+msgid "Sections"
 msgstr ""
 
 #: ../../../Application/Views/section/offering_info.php:39
@@ -2769,10 +2812,6 @@ msgstr ""
 #: ../../../Application/Views/section/roster.php:37
 #: ../../../Application/Views/section/roster.php:40
 msgid "Course Section Roster"
-msgstr ""
-
-#: ../../../Application/Views/section/roster.php:54
-msgid "Student Name"
 msgstr ""
 
 #: ../../../Application/Views/section/roster.php:57
@@ -2854,7 +2893,6 @@ msgstr ""
 
 #: ../../../Application/Views/staff/add.php:37
 #: ../../../Application/Views/staff/index.php:38
-#: ../../../Application/Views/staff/view.php:32
 msgid "Search Staff"
 msgstr ""
 
@@ -2873,10 +2911,16 @@ msgid "View Staff"
 msgstr ""
 
 #: ../../../Application/Views/student/academic_credits.php:35
+#: ../../../Application/Views/student/add.php:58
+#: ../../../Application/Views/student/add_prog.php:55
+#: ../../../Application/Views/student/index.php:38
+#: ../../../Application/Views/student/view.php:35
+#: ../../../Application/Views/student/view_academic_credits.php:35
 msgid "Search Student"
 msgstr ""
 
 #: ../../../Application/Views/student/academic_credits.php:39
+#: ../../../Application/Views/student/view_academic_credits.php:39
 msgid "Academic Credits"
 msgstr ""
 
@@ -2891,7 +2935,6 @@ msgstr ""
 
 #: ../../../Application/Views/student/add.php:96
 #: ../../../Application/Views/student/add_prog.php:86
-#: ../../../Application/Views/student/view_prog.php:66
 msgid "Program"
 msgstr ""
 
@@ -2961,7 +3004,6 @@ msgid "My Grades"
 msgstr ""
 
 #: ../../../Application/Views/student/graduation.php:83
-#: ../../../Application/Views/student/view_prog.php:121
 msgid "Graduation Date"
 msgstr ""
 
@@ -3064,6 +3106,20 @@ msgid "Select the checkbox if the student is eligible to graduate from this part
 msgstr ""
 
 #: ../../../Application/Views/success/course_registration.php:43
+#: ../../../Application/Views/success/delete_acad_year.php:43
+#: ../../../Application/Views/success/delete_course.php:43
+#: ../../../Application/Views/success/delete_credit_load.php:43
+#: ../../../Application/Views/success/delete_degree.php:43
+#: ../../../Application/Views/success/delete_dept.php:43
+#: ../../../Application/Views/success/delete_major.php:43
+#: ../../../Application/Views/success/delete_minor.php:43
+#: ../../../Application/Views/success/delete_record.php:43
+#: ../../../Application/Views/success/nslc_purge.php:43
+#: ../../../Application/Views/success/progress_report.php:43
+#: ../../../Application/Views/success/reset_password.php:43
+#: ../../../Application/Views/success/save_data.php:43
+#: ../../../Application/Views/success/save_query.php:43
+#: ../../../Application/Views/success/update_record.php:43
 msgid "Success!"
 msgstr ""
 
