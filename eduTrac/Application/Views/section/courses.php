@@ -32,10 +32,10 @@
 	<li><?php _e( _t( 'You are here' ) ); ?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Sections' ) ); ?></li>
+	<li><?php _e( _t( 'Course Sections' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Section' ) ); ?></h3>
+<h3><?php _e( _t( 'My Course Sections' ) ); ?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -66,7 +66,8 @@
                     <td class="center"><?=_h($v['secShortTitle']);?></td>
                     <td class="center"><?=_h($v['termName']);?></td>
                     <td class="center">
-                    	<a href="<?=BASE_URL;?>section/grading/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="View Grading Section" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    	<a href="<?=BASE_URL;?>section/grading/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="Grade Section" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                        <a href="<?=BASE_URL;?>section/attendance/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="Take Attendance" class="btn btn-circle"><i class="icon-bar-chart"></i></a>
                     </td>
                 </tr>
                 <?php } endif; ?>

@@ -145,16 +145,16 @@ function _get_reader($domain=null, $category=5, $enable_cache=true) {
         foreach ($locale_names as $locale) {
           $full_path = $bound_path . $locale . "/" . $subpath;
           if (file_exists($full_path)) {
-            $input = new FileReader($full_path);
+            $input = new \eduTrac\Classes\Libraries\FileReader($full_path);
             break;
           }
         }
 
         if (!array_key_exists($domain, $text_domains)) {
           // Initialize an empty domain object.
-          $text_domains[$domain] = new domain();
+          $text_domains[$domain] = new \eduTrac\Classes\Libraries\Domain();
         }
-        $text_domains[$domain]->l10n = new gettext_reader($input,
+        $text_domains[$domain]->l10n = new \eduTrac\Classes\Libraries\GettextReader($input,
                                                           $enable_cache);
     }
     return $text_domains[$domain]->l10n;
@@ -267,7 +267,7 @@ function _bindtextdomain($domain, $path) {
     }
     if (!array_key_exists($domain, $text_domains)) {
       // Initialize an empty domain object.
-      $text_domains[$domain] = new Domain();
+      $text_domains[$domain] = new \eduTrac\Classes\Libraries\Domain();
     }
     $text_domains[$domain]->path = $path;
 }

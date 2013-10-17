@@ -616,7 +616,7 @@ class StudentModel {
                     AND 
                         b.termID = :termID 
                     GROUP BY 
-                        b.stuID,b.termID",
+                        b.stuID,b.termID,b.courseSecID",
                     $bind 
         );
         

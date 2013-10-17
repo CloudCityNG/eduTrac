@@ -79,6 +79,9 @@ $auth = new Cookies;
 	<link href="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" />
 	
 	<!-- MiniColors ColorPicker Plugin -->
+    <link href="<?=BASE_URL;?>static/common/theme/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css" rel="stylesheet" />
+	
+	<!-- MiniColors ColorPicker Plugin -->
 	<link href="<?=BASE_URL;?>static/common/theme/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css" rel="stylesheet" />
 	
 	<!-- Notyfy Notifications Plugin -->
@@ -216,7 +219,7 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>section/<?=bm();?>"><?php _e( _t( '(SECT) - Section' ) ); ?></a></li>
                                 <li<?=ae('register_students');?> class=""><a href="<?=BASE_URL;?>section/register/<?=bm();?>"><?php _e( _t( '(RGN) - Register' ) ); ?></a></li>
                                 <li<?=ae('register_students');?> class=""><a href="<?=BASE_URL;?>section/batch_register/<?=bm();?>"><?php _e( _t( '(BRGN) - Batch Register' ) ); ?></a></li>
-                                <li<?=ae('access_grading_screen');?> class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( '(GRDE) - Grading' ) ); ?></a></li>
+                                <li<?=ae('access_grading_screen');?> class=""><a href="<?=BASE_URL;?>section/courses/<?=bm();?>"><?php _e( _t( 'My Course Sections' ) ); ?></a></li>
                             </ul>
                         </li>
                         
@@ -312,6 +315,10 @@ $auth = new Cookies;
 						
 			<!-- Top Menu Right -->
 			<ul class="topnav pull-right hidden-phone">
+			    
+			    <!-- Themer -->
+                <!-- <li><a href="#themer" data-toggle="collapse" class="glyphicons eyedropper single-icon"><i></i></a></li> -->
+                <!-- // Themer END -->
 			
 				<!-- Profile / Logout menu -->
 				<li class="account dropdown dd-1">

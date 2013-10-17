@@ -31,7 +31,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 		<div id="footer" class="hidden-print">
 			
 			<!--  Copyright Line -->
-			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <?php footer(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
+			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <?php version(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
 			<!--  End Copyright Line -->
 	
 		</div>
@@ -39,6 +39,24 @@ use \eduTrac\Classes\Libraries\Hooks;
 		
 	</div>
 	<!-- // Main Container Fluid END -->
+	
+<!-- Themer -->
+<div id="themer" class="collapse">
+    <div class="wrapper">
+        <span class="close2">&times; close</span>
+        <h4>Themer <span>color options</span></h4>
+        <ul>
+            <li>Theme: <select id="themer-theme" class="pull-right"></select><div class="clearfix"></div></li>
+            <li>Primary Color: <input type="text" data-type="minicolors" data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left" id="themer-primary-cp" /><div class="clearfix"></div></li>
+            <li>
+                <span class="link" id="themer-custom-reset">reset theme</span>
+                <span class="pull-right"><label>advanced <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- // Themer END -->
+
 	
 	<!-- Code Beautify -->
 	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/js-beautify/beautify.js"></script>
@@ -115,6 +133,20 @@ use \eduTrac\Classes\Libraries\Hooks;
 	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/mousetrap.js"></script>
 	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/shortcut.js"></script>
 	
+	<!-- Colors -->
+    <script>
+    var primaryColor = '#4a8bc2',
+        dangerColor = '#b55151',
+        successColor = '#609450',
+        warningColor = '#ab7a4b',
+        inverseColor = '#45484d';
+    </script>
+    
+    <!-- Themer -->
+    <script>
+    var themerPrimaryColor = primaryColor;
+    </script>
+    <script src="<?=BASE_URL;?>static/common/theme/scripts/demo/themer.js"></script>	
 	
 	<!-- Google JSAPI -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -131,6 +163,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 <img src="<?=BASE_URL;?>cron/fireCron/?image=1" width="1px" height="1px" style="border:0;" />
 <?php } ?>
 
+<?php footer(); ?>
 </body>
 </html>
 <?php print_gzipped_page(); ?>

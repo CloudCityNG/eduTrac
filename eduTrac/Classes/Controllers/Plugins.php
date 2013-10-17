@@ -33,6 +33,7 @@ class Plugins extends \eduTrac\Classes\Core\Controller {
 
     public function __construct() {
 		parent::__construct();
+		if(!hasPermission('access_plugin_screen')) { redirect( BASE_URL . 'dashboard/' ); }
 	}
 	
 	public function index() {
@@ -54,6 +55,7 @@ class Plugins extends \eduTrac\Classes\Core\Controller {
 	}
     
     public function options() {
+    	if(!hasPermission('access_plugin_admin_page')) { redirect( BASE_URL . 'dashboard/' ); }
         $this->view->staticTitle = array('Plugin Option Page');
     	$this->view->css = array( 
     							'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Course Section Grading View
+ * Course Section Attendance View
  *  
  * PHP 5.4+
  *
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       1.0.5
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -34,18 +34,28 @@
 	<li class="divider"></li>
 	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?php _e( _t( 'My Course Sections' ) ); ?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Grading' ) ); ?></li>
+	<li><?php _e( _t( 'Attendance' ) ); ?></li>
 </ul>
 
-<h3><?php _e( _t( 'Grading' ) ); ?></h3>
+<h3><?php _e( _t( 'Attendance for ' ) ); ?><?=_h($this->attendance[0]['termCode']);?>-<?=_h($this->attendance[0]['courseSecCode']);?></h3>
 <div class="innerLR">
 
     <!-- Form -->
-    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>section/runGrades/" id="validateSubmitForm" method="post" autocomplete="off">
+    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>section/runAttendance/" id="validateSubmitForm" method="post" autocomplete="off">
 
 	<!-- Widget -->
 	<div class="widget widget-heading-simple widget-body-gray">
 		<div class="widget-body">
+		    
+		    <!-- Group -->
+            <div class="control-group">
+                <label class="control-label"><?php _e( _t( 'Today\'s Date' ) ); ?></label>
+                <div class="controls">
+                    <input class="center" id="date" readonly type="text" value="<?=date('D, M d, o');?>" />
+                    <input name="date" type="hidden" value="<?=date('Y-m-d');?>" />
+                </div>
+            </div>
+            <!-- // Group END -->
 			
 			<!-- Table -->
 			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
@@ -53,9 +63,9 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-                        <th class="center"><?php _e( _t( 'Course Section' ) ); ?></th>
 						<th class="center"><?php _e( _t( 'Student ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Grade' ) ); ?></th>
+						<th class="center"><?php _e( _t( 'Student Name' ) ); ?></th>
+						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
                         <th style="display:none;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -63,19 +73,25 @@
 				
 				<!-- Table body -->
 				<tbody>
-                <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
+                <?php if($this->attendance != '') : foreach($this->attendance as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['termCode'].'-'.$v['courseSecCode']);?></td>
                     <td class="center">
-                        <?=get_name(_h($v['stuID']));?>
+                        <?=_h($v['stuID']);?>
                         <input type="hidden" name="stuID[]" value="<?=_h($v['stuID']);?>" />
                     </td>
                     <td class="center">
-                        <?=grading_scale(_h($v['grade']));?>
+                        <a href="<?=BASE_URL;?>section/attendance_report/<?=_h($v['courseSecID']);?>&stuID=<?=_h($v['stuID']);?>"><?=get_name(_h($v['stuID']));?></a>
+                    </td>
+                    <td class="center">
+                        <select style="width:35%" name="status[]" required>
+                            <option value="">&nbsp;</option>
+                            <option value="A"<?=selected('A',_h($v['status'],false));?>><?php _e( _t( 'Absent' ) ); ?></option>
+                            <option value="P"<?=selected('P',_h($v['status'],false));?>><?php _e( _t( 'Present' ) ); ?></option>
+                        </select>
                     </td>
                     <td style="display:none;">
                         <input type="hidden" name="courseSecID" value="<?=_h($v['courseSecID']);?>" />
-                        <input type="hidden" name="termID" value="<?=_h($v['termID']);?>" />
+                        <input type="hidden" name="courseSecCode" value="<?=_h($this->attendance[0]['courseSecCode']);?>" />
                     </td>
                 </tr>
                 <?php } endif; ?>
@@ -89,9 +105,6 @@
     			
 			<!-- Form actions -->
 			<div class="form-actions">
-			    <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
-			    <input type="hidden" name="cmplCredit" value="<?=_h($v['minCredit']);?>" />
-			    <?php } endif; ?>
 				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
 			</div>
 			<!-- // Form actions END -->

@@ -97,16 +97,17 @@ CREATE TABLE IF NOT EXISTS `application` (
   KEY `addedBy` (`addedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `attend` (
+CREATE TABLE IF NOT EXISTS `attendance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sid` varchar(11) NOT NULL,
-  `cc` varchar(30) NOT NULL DEFAULT '',
-  `schoolid` varchar(16) NOT NULL DEFAULT '',
-  `adate` date DEFAULT NULL,
-  `acode` varchar(15) DEFAULT NULL,
+  `courseSecID` int(11) unsigned zerofill NOT NULL,
+  `stuID` int(8) unsigned zerofill NOT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `attendance_index` (`courseSecID`,`stuID`,`date`),
+  KEY `stuID` (`stuID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `bill` (
   `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -2081,6 +2082,8 @@ ALTER TABLE `application` ADD FOREIGN KEY (`startTerm`) REFERENCES `term` (`term
 ALTER TABLE `application` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `application` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `attendance` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
 
 ALTER TABLE `bill` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
 
