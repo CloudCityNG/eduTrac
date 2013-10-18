@@ -564,6 +564,8 @@ class SectionModel {
                         a.courseSecID = :id 
                     AND 
                         a.stuID = :stuID 
+                    AND 
+                        a.status <> 'NULL'
                     ORDER BY 
                         a.date",
                     $bind 
