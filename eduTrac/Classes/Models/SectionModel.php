@@ -486,7 +486,7 @@ class SectionModel {
             }
             
             if($q2 != NULL) {
-                $bind2 = [ "courseSecID" => $id,"stuID" => $r2['stuID'],"date" => $date,"status" => 'A' ];
+                $bind2 = [ "courseSecID" => $id,"stuID" => $r2['stuID'],"date" => $date ];
                 $size = count($r2['stuID']);
                 $i = 0;
                 while($i < $size) {
@@ -501,7 +501,7 @@ class SectionModel {
          */
         $array = [];
         $facID = $this->_auth->getPersonField('personID');
-        $bind = [ ":facID" => $facID, ":id" => $id ];
+        $bind = [ ":facID" => $facID, ":id" => $id, ":date" => $date ];
         $q = DB::inst()->query( "SELECT 
                     a.*,
                     b.courseSecCode,
@@ -519,7 +519,9 @@ class SectionModel {
                 WHERE 
                     b.facID = :facID 
                 AND 
-                    a.courseSecID = :id",
+                    a.courseSecID = :id 
+                AND 
+                    a.date = :date",
                 $bind
         );
         

@@ -227,7 +227,21 @@ $user->Load_from_key($this->person[0]['personID']);
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Ethnicity?' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="ethnicity"<?=pio();?> class="span6" value="<?=_h($this->person[0]['ethnicity']);?>" />
+                                <select name="ethnicity"<?=pio();?> style="width:50%" id="select2_12">
+                                    <option value="">&nbsp;</option>
+                                    <option value="White, Non-Hispanic"<?=selected('White, Non-Hispanic',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'White, Non-Hispanic' ) ); ?></option>
+                                    <option value="Black, Non-Hispanic"<?=selected('Black, Non-Hispanic',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Black, Non-Hispanic' ) ); ?></option>
+                                    <option value="Hispanic"<?=selected('Hispanic',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Hispanic' ) ); ?></option>
+                                    <option value="Native American"<?=selected('Native American',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Native American' ) ); ?></option>
+                                    <option value="Native Alaskan"<?=selected('Native Alaskan',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Native Alaskan' ) ); ?></option>
+                                    <option value="Pacific Islander"<?=selected('Pacific Islander',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Pacific Islander' ) ); ?></option>
+                                    <option value="Asian"<?=selected('Asian',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Asian' ) ); ?></option>
+                                    <option value="Indian"<?=selected('Indian',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Indian' ) ); ?></option>
+                                    <option value="Middle Eastern"<?=selected('Middle Eastern',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Middle Eastern' ) ); ?></option>
+                                    <option value="African"<?=selected('African',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'African' ) ); ?></option>
+                                    <option value="Mixed Race"<?=selected('Mixed Race',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Mixed Rase' ) ); ?></option>
+                                    <option value="Other"<?=selected('Other',_h($this->person[0]['ethnicity']),false);?>><?php _e( _t( 'Other' ) ); ?></option>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -248,7 +262,7 @@ $user->Load_from_key($this->person[0]['personID']);
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Gender' ) ); ?></label>
                             <div class="controls">
-                                <select name="gender" style="width:25%" id="select2_12"<?=pio();?>>
+                                <select name="gender" style="width:25%" id="select2_15"<?=pio();?>>
                                     <option value="">&nbsp;</option>
                                     <option value="M"<?php if($this->person[0]['gender'] == 'M') { echo ' selected="selected"'; }?>><?php _e( _t( 'Male' ) ); ?></option>
                                     <option value="F"<?php if($this->person[0]['gender'] == 'F') { echo ' selected="selected"'; }?>><?php _e( _t( 'Female' ) ); ?></option>
