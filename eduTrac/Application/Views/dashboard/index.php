@@ -111,7 +111,7 @@ $("#add-event").dialog({
 				</div>
 				<div class="widget-body">
                     <?php  $rss1 = new \DOMDocument();
-                    $rss1->load('http://xml.feedcat.net/7MediaBlog/');
+                    $rss1->load('http://feeds.feedburner.com/7mediaws/Blog/');
                     $feed = array();
                     foreach ($rss1->getElementsByTagName('item') as $node) {
                     $item = array (
@@ -134,7 +134,7 @@ $("#add-event").dialog({
                     } ?>
                     
                     <?php  $rss2 = new \DOMDocument();
-                    $rss2->load('http://xml.feedcat.net/7mws/');
+                    $rss2->load('http://feeds.feedburner.com/7mws/');
                     $feed = array();
                     foreach ($rss2->getElementsByTagName('item') as $node) {
                     $item = array (
