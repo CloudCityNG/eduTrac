@@ -263,7 +263,21 @@ if(response == 1) {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Ethnicity?' ) ); ?></label>
                             <div class="controls">
-                                <input type="text" name="ethnicity" class="span6" />
+                                <select name="ethnicity" style="width:50%" id="select2_12">
+                                    <option value="">&nbsp;</option>
+                                    <option value="White, Non-Hispanic"><?php _e( _t( 'White, Non-Hispanic' ) ); ?></option>
+                                    <option value="Black, Non-Hispanic"><?php _e( _t( 'Black, Non-Hispanic' ) ); ?></option>
+                                    <option value="Hispanic"><?php _e( _t( 'Hispanic' ) ); ?></option>
+                                    <option value="Native American"><?php _e( _t( 'Native American' ) ); ?></option>
+                                    <option value="Native Alaskan"><?php _e( _t( 'Native Alaskan' ) ); ?></option>
+                                    <option value="Pacific Islander"><?php _e( _t( 'Pacific Islander' ) ); ?></option>
+                                    <option value="Asian"><?php _e( _t( 'Asian' ) ); ?></option>
+                                    <option value="Indian"><?php _e( _t( 'Indian' ) ); ?></option>
+                                    <option value="Middle Eastern"><?php _e( _t( 'Middle Eastern' ) ); ?></option>
+                                    <option value="African"><?php _e( _t( 'African' ) ); ?></option>
+                                    <option value="Mixed Race"><?php _e( _t( 'Mixed Rase' ) ); ?></option>
+                                    <option value="Other"><?php _e( _t( 'Other' ) ); ?></option>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -284,7 +298,7 @@ if(response == 1) {
                         <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Gender' ) ); ?></label>
                             <div class="controls">
-                                <select name="gender" style="width:25%" id="select2_12">
+                                <select name="gender" style="width:25%" id="select2_15">
                                     <option value="">&nbsp;</option>
                                     <option value="M"><?php _e( _t( 'Male' ) ); ?></option>
                                     <option value="F"><?php _e( _t( 'Female' ) ); ?></option>
