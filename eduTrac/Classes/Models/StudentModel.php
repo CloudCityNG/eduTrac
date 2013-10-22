@@ -35,11 +35,13 @@ class StudentModel {
     private $_stuProg;
     private $_auth;
     private $_log;
+    private $_acadProg;
 	
 	public function __construct() {
 	    $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_acadProg = new \eduTrac\Classes\DBObjects\AcadProgram;
 	}
 	
 	public function search() {
@@ -739,6 +741,7 @@ class StudentModel {
         $bind = array(":id" => $data['progID']);
         $q = DB::inst()->query( "SELECT 
                     a.acadProgTitle,
+                    a.acadLevelCode,
                     b.majorName,
                     c.locationName,
                     d.schoolCode,
@@ -770,20 +773,35 @@ class StudentModel {
         foreach($q as $k => $v) {
             $json = array( 
                         '#acadProgTitle' => $v['acadProgTitle'],'#locationName' => $v['locationName'],
-                        "#majorName" => $v['majorName'],"#schoolName" => $v['schoolID'].' '.$v['schoolName'] 
+                        "#majorName" => $v['majorName'],"#schoolName" => $v['schoolID'].' '.$v['schoolName'],
+                        "#acadLevelCode" => $v['acadLevelCode'] 
                         );
         }
         echo json_encode($json);
     }
     
     public function runStuProg($data) {
-        $bind = array( "stuID" => $data['stuID'],"progID" => $data['progID'],
+        $this->_acadProg->Load_from_key($data['progID']);
+        $date = date('Y-m-d');
+        $bind1 = array( "stuID" => $data['stuID'],"progID" => $data['progID'],
                        "currStatus" => $data['currStatus'],"statusDate" => $data['startDate'],
                        "startDate" => $data['startDate'],"endDate" => $data['endDate'],
                        "approvedBy" => $data['approvedBy'],"antGradDate" => $data['antGradDate']
         );
         
-        $q = DB::inst()->insert( "stu_program", $bind );
+        $bind2 = [ ":stuID" => $data['stuID'],":acadProgID" => $data['progID'] ];
+        
+        $bind3 = [ 
+                "stuID" => $data['stuID'],"acadProgID" => $data['progID'],
+                "acadLevelCode" => $this->_acadProg->getAcadLevelCode(),"addDate" => $date 
+                ];
+        
+        $q1 = DB::inst()->insert( "stu_program", $bind1 );
+        $q2 = DB::inst()->select( "stu_acad_level","stuID = :stuID AND acadProgID = :acadProgID","","*",$bind2 );
+        if(count($q2) <= 0) {
+            $q3 = DB::inst()->insert( "stu_acad_level", $bind3 );
+        }
+        
         $this->_log->setLog('New Record','Student Academic Program',get_name($data['stuID']));
         redirect( BASE_URL . 'student/view/' . $data['stuID'] . '/' . bm() );
     }
