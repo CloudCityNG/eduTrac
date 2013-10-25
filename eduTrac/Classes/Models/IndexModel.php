@@ -30,7 +30,6 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
-use \eduTrac\Classes\Libraries\Logs;
 use \eduTrac\Classes\Libraries\Cookies;
 class IndexModel {
 	
@@ -39,11 +38,13 @@ class IndexModel {
 	private $_auth;
 	private $_val;
 	private $_email;
+    private $_log;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
 		$this->_val = new \eduTrac\Classes\Core\Val();
 		$this->_email = new \eduTrac\Classes\Libraries\Email();
+        $this->_log = new \eduTrac\Classes\Libraries\Log();
 		
 		$this->_enc = rand(22,999999*1000000);
 		$this->_salt = substr(hash('sha512',$this->_enc),0,22);
@@ -106,6 +107,7 @@ class IndexModel {
    				setcookie("et_cookname", $auth, time()+86400, "/", $this->_auth->cookieDomain());
       			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
    			}
+   			$this->_log->setLog('Login','Authentication',get_name($r['personID']),$data['uname']);
 			redirect( BASE_URL . 'dashboard/' );
 		} else {
 			redirect( BASE_URL );

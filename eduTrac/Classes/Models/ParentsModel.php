@@ -34,10 +34,12 @@ class ParentsModel {
     
     private $_auth;
     private $_log;
+    private $_uname;
 	
 	public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
 	public function search() {
@@ -83,7 +85,7 @@ class ParentsModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Parent',get_name($id));
+            $this->_log->setLog('New Record','Parent',get_name($id),$this->_uname);
             redirect( BASE_URL . 'parents/view/' . $id . '/' . bm() );
         }
     
@@ -97,7 +99,7 @@ class ParentsModel {
         $bind = array( ":parentID" => $data['parentID'] );
         
         $q = DB::inst()->update( "parent", $update, "parentID = :parentID", $bind );
-        $this->_log->setLog('Update Record','Parent',get_name($data['parentID']));
+        $this->_log->setLog('Update Record','Parent',get_name($data['parentID']),$this->_uname);
         redirect( BASE_URL . 'parents/view/' . $data['parentID'] . '/' . bm() );
     }
     
@@ -322,7 +324,7 @@ class ParentsModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data' );
         } else {
-            $this->_log->setLog('New Record','Parent/Child Connection',get_name($data['parentID']).' & '.get_name($data['childID']));
+            $this->_log->setLog('New Record','Parent/Child Connection',get_name($data['parentID']).' & '.get_name($data['childID']),$this->_uname);
             redirect( BASE_URL . 'success/save_data' );
         }
     }

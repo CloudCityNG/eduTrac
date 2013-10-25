@@ -32,9 +32,13 @@ use \eduTrac\Classes\Core\DB;
 class InstitutionModel {
     
     private $_log;
+    private $_auth;
+    private $_uname;
 	
 	public function __construct() {
 	    $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
     
     public function search() {
@@ -77,7 +81,7 @@ class InstitutionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data' );
         } else {
-            $this->_log->setLog('New Record','Institution',$data['instName']);
+            $this->_log->setLog('New Record','Institution',$data['instName'],$this->_uname);
             redirect( BASE_URL . 'institution/view/' . $ID . '/' . bm() );
         }
     }
@@ -96,7 +100,7 @@ class InstitutionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data' );
         } else {
-            $this->_log->setLog('Update Record','Institution',$data['instName']);
+            $this->_log->setLog('Update Record','Institution',$data['instName'],$this->_uname);
             redirect( BASE_URL . 'institution/view/' . $data['institutionID'] . '/' . bm() );
         }
     }

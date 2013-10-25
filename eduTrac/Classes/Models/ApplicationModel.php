@@ -33,10 +33,12 @@ class ApplicationModel {
     
     private $_auth;
     private $_log;
+    private $_uname;
 	
 	public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies; 
         $this->_log = new \eduTrac\Classes\Libraries\Log;  
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
     
     public function search() {
@@ -180,7 +182,7 @@ class ApplicationModel {
         if(!$q2) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Application',get_name($data['personID']));
+            $this->_log->setLog('New Record','Application',get_name($data['personID']),$this->_uname);
             redirect( BASE_URL . 'application/view/' . $ID . '/' . bm() );
         }
     }
@@ -208,7 +210,7 @@ class ApplicationModel {
             $q2 = DB::inst()->update("institution_attended",$update2,"instAttID = :instAttID AND personID = :personID",$bind2);
             ++$i;
         }
-        $this->_log->setLog('Update Record','Application',get_name($data['personID']));
+        $this->_log->setLog('Update Record','Application',get_name($data['personID']),$this->_uname);
         redirect( BASE_URL . 'application/view/' . $data['applID'] . '/' . bm() );
     }
     
