@@ -36,11 +36,13 @@ class PersonModel {
     private $_auth;
     private $_email;
     private $_log;
+    private $_uname;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
 		$this->_email = new \eduTrac\Classes\Libraries\Email;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
     
     public function search() {
@@ -270,7 +272,7 @@ class PersonModel {
             redirect( BASE_URL . 'error/reset_password/' );
         } else {
             $this->_email->et_mail($r1['email'],"Reset Password",$body,$headers);
-            $this->_log->setLog('Update Record','Reset Password',get_name($id));
+            $this->_log->setLog('Update Record','Reset Password',get_name($id),$this->_uname);
             redirect( BASE_URL . 'success/reset_password/' );
         }
     }
@@ -314,7 +316,7 @@ class PersonModel {
         if(!$q1) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Person',get_name($ID));
+            $this->_log->setLog('New Record','Person',get_name($ID),$this->_uname);
             redirect( BASE_URL . 'person/view/' . $ID . '/' . bm() );
         }
     }
@@ -337,7 +339,7 @@ class PersonModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Address',get_name($data['personID']));
+            $this->_log->setLog('New Record','Address',get_name($data['personID']),$this->_uname);
             redirect( BASE_URL . 'person/addr_sum/' . $data['personID'] . bm() );
         }
     }
@@ -356,7 +358,7 @@ class PersonModel {
                     
         $bind = array( ":addressID" => $data['addressID'] );
         $q = DB::inst()->update( "address", $update, "addressID = :addressID", $bind );
-        $this->_log->setLog('Update Record','Address',$data['addressID']);
+        $this->_log->setLog('Update Record','Address',$data['addressID'],$this->_uname);
         redirect( BASE_URL . 'person/edit_addr/' . $data['addressID'] . bm() );
     }
     
@@ -378,7 +380,7 @@ class PersonModel {
         if($q) {
             DB::inst()->update( "address", $update2, "personID = :personID", $bind );
         }
-        $this->_log->setLog('Update Record','Person',get_name($data['personID']));
+        $this->_log->setLog('Update Record','Person',get_name($data['personID']),$this->_uname);
         redirect( BASE_URL . 'person/view/' . $data['personID'] . bm() );
     }
 	

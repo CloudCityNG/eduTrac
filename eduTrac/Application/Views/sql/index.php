@@ -27,6 +27,8 @@
 
 use \eduTrac\Classes\Core\DB;
 $log = new \eduTrac\Classes\Libraries\Log;
+$auth = new \eduTrac\Classes\Libraries\Cookies;
+$uname = $auth->getPersonField('uname');
 
 $type = isPostSet('type');
 $qtext = isPostSet('qtext');
@@ -112,7 +114,7 @@ $qtext = str_replace("\\","",$qtext);
 				
 					$qtext2 = str_replace("\\", " ", $qtext);
                     /* Write to activity log table. */
-                    $log->setLog("Query", "SQL Interface", $qtext2 );
+                    $log->setLog("Query", "SQL Interface", $qtext2, $uname );
 				
 						if($result = DB::inst()->query("$qtext2"))
 							_e( _t( "Successly Executed - " ) );

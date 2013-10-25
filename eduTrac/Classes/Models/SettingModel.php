@@ -34,9 +34,13 @@ use \eduTrac\Classes\Libraries\Log;
 class SettingModel {
     
     private $_log;
+    private $_auth;
+    private $_uname;
     
     public function __construct() {
         $this->_log = new Log;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_uname = $this->_auth->getPersonField('uname');
     }
 	
 	public function index() {}
@@ -51,7 +55,7 @@ class SettingModel {
         // Update more options here
         Hooks::do_action( 'update_options' );
         /* Write to logs */
-        $this->_log->setLog('Update','Settings','System Settings');
+        $this->_log->setLog('Update','Settings','System Settings',$this->_uname);
         redirect( BASE_URL . 'setting/' . bm() );
     }
     

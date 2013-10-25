@@ -33,10 +33,12 @@ class FinancialModel {
     
     private $_auth;
     private $_log;
+    private $_uname;
 	
 	public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies; 
-        $this->_log = new \eduTrac\Classes\Libraries\Log;  
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_uname = $this->_auth->getPersonField('uname'); 
 	}
     
     public function search() {
@@ -346,7 +348,7 @@ class FinancialModel {
                     
             $q = DB::inst()->update("billing_table",$update,"ID = :ID",$bind);
             
-            $this->_log->setLog('Update Record','Billing Table',$data['name']);
+            $this->_log->setLog('Update Record','Billing Table',$data['name'],$this->_uname);
             redirect( BASE_URL . 'financial/billing_table/' . bm() );
         } else {
             $date = date("Y-m-d");
@@ -360,7 +362,7 @@ class FinancialModel {
             if(!$q) {
                 redirect( BASE_URL . 'error/save_data/' );
             } else {
-                $this->_log->setLog('New Record','Billing Table',$data['name']);
+                $this->_log->setLog('New Record','Billing Table',$data['name'],$this->_uname);
                 redirect( BASE_URL . 'financial/billing_table/' . bm() );
             }
         }

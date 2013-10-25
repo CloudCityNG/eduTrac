@@ -33,10 +33,12 @@ class SavequeryModel {
     
     private $_auth;
     private $_log;
+    private $_uname;
     
     public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_uname = $this->_auth->getPersonField('uname');
     }
 	
 	public function index() {}
@@ -53,7 +55,7 @@ class SavequeryModel {
 		if(!$q) {
 			redirect( BASE_URL . 'error/save_query' );
 		} else {
-		    $this->_log->setLog('New Record','Saved Query',$data['savedQueryName']);
+		    $this->_log->setLog('New Record','Saved Query',$data['savedQueryName'],$this->_uname);
 			redirect( BASE_URL . 'savequery/' . bm() );
 		}
 	}
@@ -68,7 +70,7 @@ class SavequeryModel {
         
         $q = DB::inst()->update( "saved_query",$update,"savedQueryID = :savedQueryID AND personID = :personID",$bind );
         
-        $this->_log->setLog('Update Record','Saved Query',$data['savedQueryName']);   
+        $this->_log->setLog('Update Record','Saved Query',$data['savedQueryName'],$this->_uname);   
         redirect( BASE_URL . 'savequery/view/' . $data['savedQueryID'] . '/' . bm() );
     }
     
