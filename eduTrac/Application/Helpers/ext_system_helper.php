@@ -1026,9 +1026,9 @@ use \eduTrac\Classes\Libraries\Cookies;
                 $alert = 
                     '<!-- Alert -->
     				<div class="success">
-						<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac update. 
-                        <a href="http://www.7mediaws.org/client/">Click here</a> to download it. Also feel free to check out
-                        the <a href="#myModal" data-toggle="modal">changelog</a>.' ).'
+						<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac update.' ).'
+                        <a href="http://www.7mediaws.org/client/">'._t( ' Click here' ).'</a> '._t( 'to download it. Also feel free to check out
+                        the').' <a href="#myModal" data-toggle="modal">'._t( 'changelog' ).'</a>.
 					</div>
 					<!-- // Alert END -->
 					
