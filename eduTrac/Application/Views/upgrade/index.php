@@ -46,8 +46,8 @@ $file = BASE_PATH . 'eduTrac/Application/Views/upgrade/sql/'.Hooks::get_option('
 					<!-- Alert -->
 					<div class="alert alert-primary center">
 						<strong><?php _e( _t( 'Warning!' ) ); ?></strong> <?php _e( _t( 'Hey admin, your database is out of date and currently at 
-                        version ' . Hooks::get_option('dbversion') . ' Click the button below to upgrade your database. 
-                        When the upgrade is complete, <a href="'.BASE_URL.'dashboard/"><font color="orange">click here</font></a> to return to the dashboard. 
+                        version ') . Hooks::get_option('dbversion') . _t('. Click the button below to upgrade your database. 
+                        When the upgrade is complete,'). '<a href="'.BASE_URL.'dashboard/"><font color="orange">'._t( 'click here').'</font></a>'. _t( 'to return to the dashboard. 
                         If you are behind on a few versions, you may be redirected to this page again until the system is fully up to date.' ) ); ?>
 					</div>
 					<!-- // Alert END -->
