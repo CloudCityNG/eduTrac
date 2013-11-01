@@ -36,10 +36,12 @@ class ProgramModel {
 	
 	private $_auth;
     private $_log;
+    private $_uname;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
         $this->_log = new Log;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
 	public function search() {
@@ -88,7 +90,7 @@ class ProgramModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Academic Program',$data['acadProgTitle']);
+            $this->_log->setLog('New Record','Academic Program',$data['acadProgTitle'],$this->_uname);
             redirect( BASE_URL . 'program/view/' . $ID . bm() );
         }
     }
@@ -185,7 +187,7 @@ class ProgramModel {
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "acad_program", $update2, "acadProgID = :acadProgID", $bind );
         }
-        $this->_log->setLog('Update Record','Academic Program',$data['acadProgTitle']);
+        $this->_log->setLog('Update Record','Academic Program',$data['acadProgTitle'],$this->_uname);
         redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . bm() );
     }
     

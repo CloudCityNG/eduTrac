@@ -32,9 +32,13 @@ use \eduTrac\Classes\Core\DB;
 class StaffModel {
     
     private $_log;
+    private $_auth;
+    private $_uname;
 	
 	public function __construct() {
 	    $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
 	public function search() {
@@ -92,7 +96,7 @@ class StaffModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Staff',get_name($data['staffID']));
+            $this->_log->setLog('New Record','Staff',get_name($data['staffID']),$this->_uname);
             redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
         }
     
@@ -109,7 +113,7 @@ class StaffModel {
         $bind = array( ":staffID" => $data['staffID'] );
         
         $q = DB::inst()->update( "staff", $update, "staffID = :staffID", $bind );
-        $this->_log->setLog('Update Record','Staff',get_name($data['staffID']));
+        $this->_log->setLog('Update Record','Staff',get_name($data['staffID']),$this->_uname);
         redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
     }
     

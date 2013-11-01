@@ -283,6 +283,7 @@ $("#add-event").dialog({
 					<div class="controls-group center" data-gridalicious="false" data-type="slide" data-images="false">
 				        <ul style="list-style:none;margin:0;">
 						  <li><a href="http://community.7mediaws.org/projects/edutrac/" class="glyphicons group"><i></i> <?php _e( _t( 'Community Support Site' ) ); ?></a></li>
+						  <li><a href="http://edutrac.org/" class="glyphicons circle_info"><i></i> <?php _e( _t( 'Online Documentation' ) ); ?></a></li>
 					      <li><a href="http://edutrac.org/survey/index.php/survey/index" class="glyphicons check"><i></i> <?php _e( _t( 'eduTrac Satisfaction Survey' ) ); ?></a></li>
 					    </ul>
 					</div>

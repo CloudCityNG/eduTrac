@@ -59,15 +59,15 @@ if (DEVELOPMENT_ENVIRONMENT == TRUE) {
 
 /** Internationalization settings */
 $locale = (isset($_GET['lang']))? $_GET['lang'] : DEFAULT_LOCALE;
+putenv('LC_MESSAGES='.$locale);
 
 /* gettext setup */
 T_setlocale(LC_MESSAGES, $locale);
 
 /** Set the text domain as 'eduTrac' */
 $domain = 'eduTrac';
-bindtextdomain($domain, LOCALE_DIR);
+T_bindtextdomain($domain, LOCALE_DIR);
 
 /** bind_textdomain_codeset is supported only in PHP 4.2.0+ */
-if (function_exists('bind_textdomain_codeset')) 
-  bind_textdomain_codeset($domain, ENCODING);
-textdomain($domain);
+T_bind_textdomain_codeset($domain, ENCODING);
+T_textdomain($domain);

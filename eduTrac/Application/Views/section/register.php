@@ -145,7 +145,7 @@ jQuery(document).ready(function() {
     
     <div class="modal hide fade" id="myModal">
         <div class="modal-body">
-            <p>You can find the id of a course section by visiting the <a href="<?=BASE_URL;?>section/">search</a> screen for sections. The id is the first column in the table from the search result.</p>
+            <p><?=_t('You can find the id of a course section by visiting the');?> <a href="<?=BASE_URL;?>section/"><?=_t('search');?></a> <?=_t('screen for sections. The id is the first column in the table from the search result.');?></p>
         </div>
         <div class="modal-footer">
             <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>

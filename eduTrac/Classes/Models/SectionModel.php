@@ -37,6 +37,7 @@ class SectionModel {
     private $_stuProg;
     private $_log;
     private $_email;
+    private $_uname;
 	
 	public function __construct() {
 	    $this->_sec = new \eduTrac\Classes\DBObjects\CourseSec;
@@ -44,6 +45,7 @@ class SectionModel {
         $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
         $this->_email = new \eduTrac\Classes\Libraries\Email;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
 	public function search() {
@@ -109,7 +111,7 @@ class SectionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Course Section',$data['secShortTitle']);
+            $this->_log->setLog('New Record','Course Section',$data['secShortTitle'],$this->_uname);
             redirect( BASE_URL . 'section/view/' . $ID . '/' . bm() );
         }
     
@@ -161,7 +163,7 @@ class SectionModel {
                 DB::inst()->update( "course_sec", $update3, "courseSecID = :courseSecID", $bind );
             }
         }
-        $this->_log->setLog('Update Record','Course Section',$data['secShortTitle']);
+        $this->_log->setLog('Update Record','Course Section',$data['secShortTitle'],$this->_uname);
         redirect( BASE_URL . 'section/view/' . $data['courseSecID'] . '/' . bm() );
     }
     
@@ -385,7 +387,7 @@ class SectionModel {
         if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
         } else {
-           $this->_log->setLog('New Record','Course Registration',$data['courseSecID']);
+           $this->_log->setLog('New Record','Course Registration',$data['courseSecID'],$this->_uname);
            redirect( BASE_URL . 'success/save_data/' );
         }
     }
@@ -423,7 +425,7 @@ class SectionModel {
         if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
         } else {
-           $this->_log->setLog('New Record','Batch Course Registration',$data['courseSecID']);
+           $this->_log->setLog('New Record','Batch Course Registration',$data['courseSecID'],$this->_uname);
            redirect( BASE_URL . 'success/save_data/' );
         }
     }
@@ -638,7 +640,7 @@ class SectionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/update_record/' );
         } else {
-            $this->_log->setLog('Update Record','Grades',$data['courseSecID']);
+            $this->_log->setLog('Update Record','Grades',$data['courseSecID'],$this->_uname);
             redirect( BASE_URL . 'section/grading/' . $data['courseSecID'] . '/' . bm() );
         }
     }
@@ -669,7 +671,7 @@ class SectionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/update_record/' );
         } else {
-            $this->_log->setLog('Update Record','Course Section Attendance',$data['courseSecCode']);
+            $this->_log->setLog('Update Record','Course Section Attendance',$data['courseSecCode'],$this->_uname);
             redirect( BASE_URL . 'section/attendance/' . $data['courseSecID'] . '/' . bm() );
         }
     }

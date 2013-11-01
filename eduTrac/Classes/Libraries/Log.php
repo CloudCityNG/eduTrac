@@ -33,62 +33,61 @@ use \eduTrac\Classes\Libraries\Cookies;
 class Log {
     
     private $_auth;
-	
+    
     public function __construct() {
         $this->_auth = new Cookies;
     }
-	
-	/**
-	 * Writes a log to the log table in the database.
-	 * 
-	 * @since 1.0
-	 */
-	public function writeLog($action,$process,$record) {
-	    $create = date("Y-m-d");
+    
+    /**
+     * Writes a log to the log table in the database.
+     * 
+     * @since 1.0
+     */
+    public function writeLog($action,$process,$record,$uname) {
+        $create = date("Y-m-d");
         $current_date = strtotime($create);
-        $uname = $this->_auth->getPersonField('uname');
         /* 10 days after creation date */
         $expire = date("Y-m-d",$current_date+=864000);
         
-	    $bind = array( 
-	                   "action" => $action, "process" => $process, "record" => $record,
-	                   "uname" => $uname, "created_at" => $create, "expires_at" => $expire 
+        $bind = array( 
+                       "action" => $action, "process" => $process, "record" => $record,
+                       "uname" => $uname, "created_at" => $create, "expires_at" => $expire 
         );
         
         $q = DB::inst()->insert( "activity_log", $bind );
-	}
-	
-	/**
-	 * Purges audit trail logs that are older than 30 days old.
-	 * 
-	 * @since 1.0
-	 */
-	public function purgeLog() {
-	    $date = date('Y-m-d h:i:s', time());
-		$q = DB::inst()->query( "SELECT * FROM activity_log" );
-		$r = $q->fetch(\PDO::FETCH_ASSOC);
-		
-		DB::inst()->query( "DELETE FROM activity_log WHERE '".$r['expires_at']."' <= '".$date."'" );
-	}
-	
-	/**
-	 * Purges system error logs that are older than 30 days old.
-	 * 
-	 * @since 1.0
-	 */
-	public function purgeErrLog() {
-		if($handle = opendir(BASE_PATH . 'tmp/logs/')) {
-			while(false !== ($file = readdir($handle))) {
-				$filelastmodified = filemtime($file);
-				if((time() - $filelastmodified) > 30*24*3600 && is_file($file)) {
-					if(preg_match('/\.txt$/i', $file)) {
-						unlink($file);
-					}
-				}
-			}
-		}
-		closedir($handle);
-	}
+    }
+    
+    /**
+     * Purges audit trail logs that are older than 30 days old.
+     * 
+     * @since 1.0
+     */
+    public function purgeLog() {
+        $date = date('Y-m-d h:i:s', time());
+        $q = DB::inst()->query( "SELECT * FROM activity_log" );
+        $r = $q->fetch(\PDO::FETCH_ASSOC);
+        
+        DB::inst()->query( "DELETE FROM activity_log WHERE '".$r['expires_at']."' <= '".$date."'" );
+    }
+    
+    /**
+     * Purges system error logs that are older than 30 days old.
+     * 
+     * @since 1.0
+     */
+    public function purgeErrLog() {
+        if($handle = opendir(BASE_PATH . 'tmp/logs/')) {
+            while(false !== ($file = readdir($handle))) {
+                $filelastmodified = filemtime($file);
+                if((time() - $filelastmodified) > 30*24*3600 && is_file($file)) {
+                    if(preg_match('/\.txt$/i', $file)) {
+                        unlink($file);
+                    }
+                }
+            }
+        }
+        closedir($handle);
+    }
     
     public function logError($type,$string,$file,$line) {
         $date = new \DateTime();
@@ -122,8 +121,8 @@ class Log {
         return $values[$value];
     }
     
-    public function setLog($action,$process,$record) {
-        return $this->writeLog($action, $process, $record);
+    public function setLog($action,$process,$record,$uname) {
+        return $this->writeLog($action, $process, $record, $uname);
     }
     
     public function setError($type,$string,$file,$line) {

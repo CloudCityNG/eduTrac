@@ -34,10 +34,14 @@ class CourseModel {
     
     private $_subj;
     private $_log;
+    private $_auth;
+    private $_uname;
 	
 	public function __construct() {
         $this->_subj = new Subject;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
 	public function search() {
@@ -87,7 +91,7 @@ class CourseModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
-            $this->_log->setLog('New Record','Course',$data['courseShortTitle']);
+            $this->_log->setLog('New Record','Course',$data['courseShortTitle'],$this->_uname);
             redirect( BASE_URL . 'course/view/' . $ID . '/' . bm() );
         }
     
@@ -121,7 +125,7 @@ class CourseModel {
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "course", $update2, "courseID = :courseID", $bind );
         }
-        $this->_log->setLog('Update Record','Course',$data['courseShortTitle']);
+        $this->_log->setLog('Update Record','Course',$data['courseShortTitle'],$this->_uname);
         redirect( BASE_URL . 'course/view/' . $data['courseID'] . '/' . bm() );
     }
     
