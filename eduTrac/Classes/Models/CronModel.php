@@ -54,7 +54,9 @@ class CronModel {
     }
     
     public function runStuTerms() {
-        $datetime = date( 'Y-m-d H:i:s' );
+        /**
+         * Select all records from the stu_acad_cred table.
+         */
         $q1 = DB::inst()->query( "SELECT 
                     stuID,
                     courseSecID,
@@ -66,67 +68,56 @@ class CronModel {
                 GROUP BY 
                     stuID,termID,acadLevelCode"
         );
-        $r1 = $q1->fetch(\PDO::FETCH_ASSOC);
-        
-        $stuID = $r1['stuID'];$termID = $r1['termID'];
-        $credits = $r1['SUM(attCred)'];$level = $r1['acadLevelCode'];
-        
-        $q2 = DB::inst()->query( "SELECT 
-                    * 
-                FROM 
-                    stu_term 
-                WHERE 
-                    stuID = '$stuID' 
-                AND 
-                    termID = '$termID' 
-                AND 
-                    acadLevelCode = '$level'" 
-        );
         
         if($q1->rowCount() > 0) {
-            if($q2->rowCount() <= 0) {
-                $q3 = DB::inst()->query( "INSERT INTO stu_term 
-                            (stuID,termID,termCredits,acadLevelCode,addDateTime) 
-                            VALUES('$stuID','$termID','$credits','$level','$datetime')");
-            }
+            /**
+             * If a student ID exists in the stu_acad_cred table, 
+             * but does not exist in the stu_term table, then insert 
+             * that new record into the stu_term table.
+             */
+			$q3 = DB::inst()->query(  
+				"INSERT IGNORE INTO stu_term (stuID,termID,termCredits,acadLevelCode) 
+				SELECT stuID,termID,SUM(attCred),acadLevelCode FROM stu_acad_cred 
+				GROUP BY stuID,termID,acadLevelCode"
+			);
         }
     }
     
     public function runStuLoad() {
+        $array1 = [];
+        $array2 = [];
         $q1 = DB::inst()->query( "SELECT 
                     stuID,
                     termID,
                     acadLevelCode,
                     termCredits 
                 FROM 
-                    stu_term 
-                GROUP BY 
-                    stuID,termID,acadLevelCode" 
+                    stu_term" 
         );
-        $r1 = $q1->fetch(\PDO::FETCH_ASSOC);
-                
-        $stuID = $r1['stuID'];$termID = $r1['termID'];
-        $load = getStuLoad($r1['termCredits']);
-        $level = $r1['acadLevelCode'];
+        foreach($q1 as $r1) {
+        	$array1[] = $r1;
+        }
         
         $q2 = DB::inst()->query( "SELECT 
-                    * 
+                    stuID,
+                    termID,
+                    acadLevelCode 
                 FROM 
-                    stu_term_load 
-                WHERE 
-                    stuID = '$stuID' 
-                AND 
-                    termID = '$termID' 
-                AND 
-                    acadLevelCode = '$level'" 
+                    stu_term_load"
         );
+        foreach($q2 as $r2) {
+            $array2[] = $r2;
+        }
         
-        if($q1->rowCount() > 0) {
-            if($q2->rowCount() <= 0) {
-                $q3 = DB::inst()->query( "INSERT INTO stu_term_load 
-                            (stuID,termID,stuLoad,acadLevelCode) 
-                            VALUES('$stuID','$termID','$load','$level')");
-            }
+        $bind = [ "stuID" => _h($r1['stuID']),"termID" => _h($r1['termID']),
+                   "stuLoad" => getStuLoad(_h($r1['termCredits'])), "acadLevelCode" => _h($r1['acadLevelCode']) 
+               	 ];
+        
+    	$size = count($q1);
+		$i = 0;
+        while($i < $size) {
+            $q3 = DB::inst()->insert("stu_term_load",$bind);
+			++$i;
         }
     }
     
@@ -416,6 +407,8 @@ class CronModel {
     }
     
     public function runTermGPA() {
+    	$array1 = [];
+		$array2 = [];
         $q1 = DB::inst()->query( "SELECT 
                         stuID,
                         termID,
@@ -426,44 +419,35 @@ class CronModel {
                     FROM 
                         stu_acad_cred 
                     WHERE 
-                        grade != 'NULL' 
-                    GROUP BY 
-                        stuID,termID,acadLevelCode" 
+                        grade != 'NULL'" 
         );
         foreach($q1 as $r1) {
-            $array[] = $r1;
+            $array1[] = $r1;
         }
-        
-        $bind1 = [ 
-                    ":stuID" => $r1['stuID'],":termID" => $r1['termID'],
-                    ":acadLevelCode" => $r1['acadLevelCode']
-                    ];
         
         $q2 = DB::inst()->query( "SELECT 
                         * 
                     FROM 
-                        stu_term_gpa 
-                    WHERE 
-                        stuID = :stuID 
-                    AND 
-                        termID = :termID 
-                    AND 
-                        acadLevelCode = :acadLevelCode",
-                    $bind1
+                        stu_term_gpa"
         );
+        foreach($q2 as $r2) {
+            $array2[] = $r2;
+        }
         
-        if(count($r1['stuID']) > 0) {
-            if(count($q2) <= 0) {
-                $points = $r1['SUM(compCred)']*$r1['SUM(gradePoints)'];
-                $GPA = $points/$r1['SUM(compCred)'];
-                $bind2 = [ 
-                        "stuID" => $r1['stuID'],"termID" => $r1['termID'],
-                        "acadLevelCode" => $r1['acadLevelCode'],"attCred" => $r1['SUM(attCred)'],
-                        "compCred" => $r1['SUM(compCred)'],"gradePoints" => $r1['SUM(gradePoints)'],
-                        "termGPA" => $GPA
-                        ];
-                
-                $q3 = DB::inst()->insert( "stu_term_gpa", $bind2 );
+        if(count($q1) > 0) {
+        	$size = count($q1);
+        	$i = 0;
+        	while($i < $size) {
+                //$points = $r1['SUM(compCred)'][$i]*$r1['SUM(gradePoints)'][$i];
+                //$GPA = $points/$r1['SUM(compCred)'][$i];
+                $q3 = DB::inst()->query(  
+					"INSERT IGNORE INTO stu_term_gpa (stuID,termID,acadLevelCode,attCred,compCred,gradePoints,termGPA) 
+					SELECT stuID,termID,acadLevelCode,SUM(attCred),SUM(compCred),SUM(gradePoints),SUM(compCred*gradePoints)/SUM(compCred) 
+					FROM stu_acad_cred 
+					WHERE grade <> 'NULL' 
+					GROUP BY stuID,termID,acadLevelCode"
+				);
+				++$i;
             }
         }
     }
@@ -474,8 +458,10 @@ class CronModel {
         $dbpass = DB_PASS;
         $dbname = DB_NAME;
         $backupFile = Hooks::get_option('hold_file_loc') . $dbname . '-' . date("Y-m-d-H-i-s") . '.gz';
-        $command = "mysqldump --opt -h $dbhost -u $dbuser -p$dbpass $dbname | gzip > $backupFile";
-        system($command);
+		if(!file_exists($backupFile)) {
+	        $command = "mysqldump --opt -h $dbhost -u $dbuser -p$dbpass $dbname | gzip > $backupFile";
+	        system($command);
+		}
         
         $files = glob(Hooks::get_option('hold_file_loc')."*.gz");
         foreach($files as $file) {
@@ -492,10 +478,11 @@ class CronModel {
                     a.stuID,
                     a.termID,
                     a.acadLevelCode,
-                    a.gradePoints AS termGPAPoints,
-                    SUM(b.attCred),
-                    SUM(b.compCred),
-                    SUM(b.gradePoints) AS termGradePoints 
+                    a.gradePoints AS GradePoints,
+                    SUM(b.attCred) AS Attempted,
+                    SUM(b.compCred) AS Completed,
+                    SUM(b.gradePoints) AS termGradePoints,
+                    SUM(b.compCred*b.gradePoints) AS Points 
                 FROM 
                     stu_term_gpa a 
                 LEFT JOIN 
@@ -505,17 +492,19 @@ class CronModel {
                 WHERE 
                     a.termID = b.termID 
                 AND 
-                    a.acadLevelCode = b.acadLevelCode" 
+                    a.acadLevelCode = b.acadLevelCode 
+                GROUP BY 
+                	a.stuID,a.termID,a.acadLevelCode" 
         );
         foreach($q1 as $r1) {
             $array[] = $r1;
         }
-        if($r1['termGPAPoints'] != $r1['termGradePoints']) {
-            $points = $r1['SUM(compCred)']*$r1['termGradePoints'];
-            $GPA = $points/$r1['SUM(compCred)'];
+        if($r1['GradePoints'] != $r1['termGradePoints']) {
+            //$points = $r1['Completed']*$r1['termGradePoints'];
+            $GPA = $r1['Points']/$r1['Completed'];
             $update = [ 
-                        "attCred" => $r1['SUM(attCred)'],
-                        "compCred" => $r1['SUM(compCred)'],
+                        "attCred" => $r1['Attempted'],
+                        "compCred" => $r1['Completed'],
                         "gradePoints" => $r1['termGradePoints'],
                         "termGPA" => $GPA
                     ];

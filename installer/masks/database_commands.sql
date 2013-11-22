@@ -2011,20 +2011,17 @@ CREATE TABLE IF NOT EXISTS `stu_program` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `stu_term` (
-  `stuTermID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `termID` int(11) unsigned zerofill NOT NULL,
   `termCredits` double(6,1) NOT NULL DEFAULT '0.0',
   `addDateTime` datetime NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuTermID`),
   UNIQUE KEY `stuTerm` (`stuID`,`termID`,`acadLevelCode`),
   KEY `termID` (`termID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `stu_term_gpa` (
-  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `termID` int(11) unsigned zerofill NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
@@ -2033,17 +2030,15 @@ CREATE TABLE IF NOT EXISTS `stu_term_gpa` (
   `gradePoints` double(4,1) NOT NULL DEFAULT '0.0',
   `termGPA` double(4,2) NOT NULL DEFAULT '0.00',
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  UNIQUE KEY `stu_term_gpa_unique` (`stuID`,`termID`,`acadLevelCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `stu_term_load` (
-  `stuLoadID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `stuID` int(8) unsigned zerofill NOT NULL,
   `termID` int(11) unsigned zerofill NOT NULL,
   `stuLoad` varchar(2) NOT NULL,
   `acadLevelCode` varchar(4) NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`stuLoadID`),
   UNIQUE KEY `stuTermLoad` (`stuID`,`termID`,`acadLevelCode`),
   KEY `student_load` (`stuLoad`),
   KEY `termID` (`termID`)
