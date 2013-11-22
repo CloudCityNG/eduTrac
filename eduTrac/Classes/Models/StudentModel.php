@@ -328,7 +328,11 @@ class StudentModel {
                     WHERE 
                         a.stuID = :id 
                     AND 
-                        a.termID = b.termID",
+                    	a.stuID = b.stuID 
+                    AND 
+                        a.termID = b.termID 
+                    GROUP BY 
+                    	a.stuID,a.courseSecID,a.termID",
                     $bind 
         );
         foreach($q as $r) {
@@ -389,7 +393,9 @@ class StudentModel {
                     WHERE 
                         d.id = :id 
                     AND 
-                        a.termID = e.termID",
+                        a.termID = e.termID 
+                    AND 
+                    	d.stuID = e.stuID",
                     $bind 
         );
         foreach($q as $r) {
