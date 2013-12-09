@@ -261,8 +261,8 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @param string $levelCode
      * @return string Returns the record key if selected is true.
      */
-    function acad_level_select($levelCode = NULL, $readonly = null) {
-        $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18"'.$readonly.' required>
+    function acad_level_select($levelCode = null, $readonly = null, $required = null) {
+        $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18"'.$readonly.' '.$required.'>
             <option value="">&nbsp;</option>
             <option value="NA"'.selected( $levelCode, 'NA', false ).'>N/A Not Applicable</option>
             <option value="ES"'.selected( $levelCode, 'ES', false ).'>ES Elementary School</option>

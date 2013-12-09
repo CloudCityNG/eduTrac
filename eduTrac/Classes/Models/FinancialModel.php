@@ -434,6 +434,262 @@ class FinancialModel {
         }
     }
     
+    public function runBatch($data) {
+        if(empty($data['population'])) {
+            redirect( BASE_URL . 'error/population/' );
+            exit();
+        }
+        
+        if($data['stu_program'] && $data['major'] || $data['stu_program'] && $data['acadLevelCode'] || $data['major'] && $data['acadLevelCode']) {
+            redirect( BASE_URL . 'error/population/' );
+            exit();
+        }
+        
+        $array = [];
+        
+        if($data['stu_program']) {
+            $bind1 = [ ":prog" => $data['stu_program'],":termID" => $data['termID'] ];
+            /**
+             * Check to see if a bill was already created for the particular student 
+             * population for the requested term.
+             */
+            $q1 = DB::inst()->query( "SELECT 
+                            a.stuID 
+                        FROM 
+                            stu_program a 
+                        INNER JOIN 
+                            bill b 
+                        ON 
+                            (a.stuID = b.stuID) 
+                        WHERE 
+                            a.progID = :prog 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            b.termID <> :termID 
+                        GROUP BY 
+                            b.stuID,b.termID",
+                        $bind1
+            );
+            foreach($q1 as $r1) {
+                $array[] = $r1;
+            }
+            
+            /**
+             * Retrieve a list of students based on particular population 
+             * who already have a bill for the term in question.
+             */
+            $q2 = DB::inst()->query( "SELECT 
+                            a.stuID, b.ID 
+                        FROM 
+                            stu_program AS a, bill AS b 
+                        WHERE 
+                            a.progID = :prog 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            a.stuID = b.stuID 
+                        AND 
+                            b.termID = :termID",
+                        $bind1
+            );
+            foreach($q2 as $r2) {
+                $array[] = $r2;
+            }
+        }
+        
+        if($data['major']) {
+            $bind1 = [ ":major" => $data['major'],":termID" => $data['termID'] ];
+            /**
+             * Check to see if a bill was already created for the particular student 
+             * population for the requested term.
+             */
+            $q1 = DB::inst()->query( "SELECT 
+                            a.stuID 
+                        FROM 
+                            stu_program a 
+                        INNER JOIN 
+                            bill b 
+                        ON 
+                            (a.stuID = b.stuID) 
+                        LEFT JOIN 
+                            acad_program c
+                        ON 
+                            a.progID = c.acadProgID  
+                        WHERE 
+                            c.majorID = :major 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            b.termID <> :termID 
+                        GROUP BY 
+                            b.stuID,b.termID",
+                        $bind1
+            );
+            foreach($q1 as $r1) {
+                $array[] = $r1;
+            }
+            
+            /**
+             * Retrieve a list of students based on particular population 
+             * who already have a bill for the term in question.
+             */
+            $q2 = DB::inst()->query( "SELECT 
+                            a.stuID,
+                            b.ID 
+                        FROM 
+                            stu_program a 
+                        LEFT JOIN 
+                            bill b 
+                        ON 
+                            a.stuID = b.stuID 
+                        LEFT JOIN 
+                            acad_program c
+                        ON 
+                            a.progID = c.acadProgID  
+                        WHERE 
+                            c.majorID = :major 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            b.termID = :termID",
+                        $bind1
+            );
+            foreach($q2 as $r2) {
+                $array[] = $r2;
+            }
+        }
+        
+        if($data['acadLevelCode']) {
+            $bind1 = [ ":level" => $data['acadLevelCode'],":termID" => $data['termID'] ];
+            /**
+             * Check to see if a bill was already created for the particular student 
+             * population for the requested term.
+             */
+            $q1 = DB::inst()->query( "SELECT 
+                            a.stuID 
+                        FROM 
+                            stu_program a 
+                        INNER JOIN 
+                            bill b 
+                        ON 
+                            (a.stuID = b.stuID) 
+                        LEFT JOIN 
+                            stu_acad_level c 
+                        ON 
+                            a.progID = c.acadProgID 
+                        WHERE 
+                            c.acadLevelCode = :level 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            b.termID <> :termID 
+                        GROUP BY 
+                            b.stuID,b.termID",
+                        $bind1
+            );
+            foreach($q1 as $r1) {
+                $array[] = $r1;
+            }
+            
+            /**
+             * Retrieve a list of students based on particular population 
+             * who already have a bill for the term in question.
+             */
+            $q2 = DB::inst()->query( "SELECT 
+                            a.stuID,
+                            b.ID 
+                        FROM 
+                            stu_program a 
+                        LEFT JOIN 
+                            bill b 
+                        ON 
+                            a.stuID = b.stuID 
+                        LEFT JOIN 
+                            stu_acad_level c
+                        ON 
+                            a.progID = c.acadProgID  
+                        WHERE 
+                            c.acadLevelCode = :level 
+                        AND 
+                            a.currStatus = 'A' 
+                        AND 
+                            a.endDate = '0000-00-00' 
+                        AND 
+                            b.termID = :termID",
+                        $bind1
+            );
+            foreach($q2 as $r2) {
+                $array[] = $r2;
+            }
+        }
+        
+        /**
+         * If a bill for a population of students does not exist, 
+         * then create a new bill and enter an array 
+         * of fees for the student into the student_fee table.
+         */
+        if(count($q1 > 0)) {
+            $stuCount = count($q1);
+            $t = 0;
+            while($t < $stuCount) {
+                $bind2 = [ "stuID" => $r1['stuID'],"termID" => $data['termID'],
+                           "dateTime" => date('Y-m-d H:i:s') 
+                         ];
+                $q3 = DB::inst()->insert( "bill", $bind2 );
+                $ID = DB::inst()->lastInsertId('ID');
+                
+                $size = count($data['feeID']);
+                $i = 0;
+                while($i < $size) {
+                    $bind3 = [ "stuID" => $r1['stuID'],"billID" => $ID,
+                               "feeID" => $data['feeID'][$i] 
+                             ];
+                    $q4 = DB::inst()->insert( "student_fee", $bind3 );
+                ++$i;
+                }
+            ++$t;
+            }
+        }
+        
+        /**
+         * If a bill already exists for a student population for the requested term, 
+         * then new fees will be added to the bill.
+         */
+        if(count($q2 > 0)) {
+            $stuCount = count($q2);
+            $t = 0;
+            while($t < $stuCount) {
+                $size = count($data['feeID']);
+                $i = 0;
+                while($i < $size) {
+                    $bind4 = [ "stuID" => $r2['stuID'],"billID" => $r2['ID'],
+                               "feeID" => $data['feeID'][$i] 
+                             ];
+                    $q5 = DB::inst()->insert( "student_fee", $bind4 );
+                ++$i;
+                }
+            ++$t;
+            }
+        }
+        
+        if(!$q3) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            redirect( BASE_URL . 'success/save_data/' );
+        }
+    }
+    
     public function runPayment($data) {
         $date = date('Y-m-d H:i:s');
         

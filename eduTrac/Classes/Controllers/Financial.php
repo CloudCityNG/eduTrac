@@ -93,6 +93,21 @@ class Financial extends \eduTrac\Classes\Core\Controller {
         $this->view->render('financial/create_bill');
     }
     
+    public function batch() {
+        $this->view->staticTitle = array('Add Batch Fees');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );        
+        $this->view->render('financial/batch');
+    }
+    
     public function view_bill($id) {
         $this->view->staticTitle = array('View Bill');
         $this->view->css = array( 
@@ -182,6 +197,17 @@ class Financial extends \eduTrac\Classes\Core\Controller {
         $data['termID'] = isPostSet('termID');
         $data['feeID'] = isPostSet('feeID');
         $this->model->runBill($data);
+    }
+    
+    public function runBatch() {
+        $data = [];
+        $data['population'] = isPostSet('population');
+        $data['stu_program'] = isPostSet('stu_program');
+        $data['major'] = isPostSet('major');
+        $data['acadLevelCode'] = isPostSet('acadLevelCode');
+        $data['termID'] = isPostSet('termID');
+        $data['feeID'] = isPostSet('feeID');
+        $this->model->runBatch($data);
     }
     
     public function runPayment() {
