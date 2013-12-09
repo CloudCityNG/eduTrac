@@ -168,7 +168,7 @@ $(function(){
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select(_h($crse->getAcadLevelCode()));?>
+                                <?=acad_level_select(_h($crse->getAcadLevelCode()),null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
