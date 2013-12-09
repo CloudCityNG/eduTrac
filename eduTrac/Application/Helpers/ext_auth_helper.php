@@ -49,6 +49,15 @@ use \eduTrac\Classes\Core\DB;
             return ' style="display:none"';
         }
     }
+	
+	function rep($perm) {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if(!$acl->hasPermission($perm) && !$acl->userHasRole(8)) {
+            return ' readonly="readonly"';
+        }
+    }
     
     /**
      * General Inquiry only on Forms.

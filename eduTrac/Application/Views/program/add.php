@@ -255,7 +255,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                         <div class="control-group">
                             <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
                             <div class="controls">
-                                <?=acad_level_select();?>
+                                <?=acad_level_select(null,null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->

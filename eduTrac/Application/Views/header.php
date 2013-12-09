@@ -163,6 +163,8 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>reservation/category/<?=bm();?>"><?php _e( _t( 'Reservation Categories' ) ); ?></a></li> -->
                             </ul>
                         </li>
+                        
+                        <li<?=ae('import_data');?> class=""><a href="<?=BASE_URL;?>import/<?=bm();?>" class="glyphicons file_import"><i></i><?php _e( _t( 'Importer' ) ); ?></a></li>
 						
 						<li<?=ae('access_forms');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons notes_2"><i></i><?php _e( _t( 'Forms' ) ); ?></a>
@@ -290,6 +292,7 @@ $auth = new Cookies;
                                 <li class=""><a href="<?=BASE_URL;?>financial/billing_table/<?=bm();?>"><?php _e( _t( 'Billing Tables' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>financial/<?=bm();?>"><?php _e( _t( 'Search Bill' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>financial/create_bill/<?=bm();?>"><?php _e( _t( 'Create Bill/Add Fees' ) ); ?></a></li>
+                                <li class=""><a href="<?=BASE_URL;?>financial/batch/<?=bm();?>"><?php _e( _t( 'Batch Fees' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>financial/add_payment/<?=bm();?>"><?php _e( _t( 'Add Payment' ) ); ?></a></li>
                                 <li class=""><a href="<?=BASE_URL;?>financial/issue_refund/<?=bm();?>"><?php _e( _t( 'Issue a Refund' ) ); ?></a></li>
                             </ul>

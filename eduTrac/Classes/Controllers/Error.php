@@ -63,6 +63,16 @@ class Error extends \eduTrac\Classes\Core\Controller {
 		$this->view->render('error-footer/index',true);
 	}
     
+    public function population() {
+        $this->view->staticTitle = array('Missing Population');
+        $this->view->render('error/population');
+    }
+    
+    public function import() {
+        $this->view->staticTitle = array('Importer Error');
+        $this->view->render('error/import');
+    }
+    
     public function invalid_record() {
         $this->view->staticTitle = array('Invalid Record');
         $this->view->render('error/invalid_record');

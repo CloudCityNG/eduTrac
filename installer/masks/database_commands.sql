@@ -1228,6 +1228,8 @@ INSERT INTO `permission` VALUES(00000000000000000212, 'access_student_accounts',
 
 INSERT INTO `permission` VALUES(00000000000000000213, 'student_account_inquiry_only', 'Student Account Inquiry Only');
 
+INSERT INTO `permission` VALUES(00000000000000000214, 'restrict_edit_profile', 'Restrict Edit Profile');
+
 CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uname` varchar(80) NOT NULL,

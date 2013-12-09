@@ -63,7 +63,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 						<div class="control-group">
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'First Name' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="fname" value="<?=_h($auth->getPersonField('fname'));?>" class="span10" required />
+								<input type="text"<?=rep('restrict_edit_profile');?> name="fname" value="<?=_h($auth->getPersonField('fname'));?>" class="span10" required />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -72,7 +72,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 						<div class="control-group">
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Last Name' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="lname" value="<?=_h($auth->getPersonField('lname'));?>" class="span10" required />
+								<input type="text"<?=rep('restrict_edit_profile');?> name="lname" value="<?=_h($auth->getPersonField('lname'));?>" class="span10" required />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -81,7 +81,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
     					<div class="control-group">
 							<label class="control-label"><?php _e( _t( 'Middle Initial' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="mname" value="<?=_h($auth->getPersonField('mname'));?>" class="span10" />
+								<input type="text"<?=rep('restrict_edit_profile');?> name="mname" value="<?=_h($auth->getPersonField('mname'));?>" class="span10" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -105,7 +105,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
             			<div class="control-group">
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Email' ) ); ?></label>
 							<div class="controls">
-								<input type="email" name="email" value="<?=_h($auth->getPersonField('email'));?>" class="span10" required />
+								<input type="email"<?=rep('restrict_edit_profile');?> name="email" value="<?=_h($auth->getPersonField('email'));?>" class="span10" required />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -114,7 +114,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
         				<div class="control-group">
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'SSN' ) ); ?></label>
 							<div class="controls">
-								<input type="text" name="ssn" value="<?=_h($auth->getPersonField('ssn'));?>" class="span10" required />
+								<input type="text"<?=rep('restrict_edit_profile');?> name="ssn" value="<?=_h($auth->getPersonField('ssn'));?>" class="span10" required />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -124,8 +124,8 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Date of Birth' ) ); ?></label>
                             <div class="controls">
     							<div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="dob" type="text" value="<?=_h($auth->getPersonField('dob'));?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                                    <input id="startDate" name="dob" type="text"<?=rep('restrict_edit_profile');?> value="<?=_h($auth->getPersonField('dob'));?>" required />
+                                    <span class="add-on"<?=ae('restrict_edit_profile');?>><i class="icon-th"></i></span>
                                 </div>
                             </div>
 						</div>
@@ -140,7 +140,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
 				</div>
 				<!-- // Form actions END -->
 				
