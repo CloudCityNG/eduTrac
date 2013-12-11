@@ -92,7 +92,7 @@
 	/* ===================================================[ SHOWING MASK CONTENTS ]=================================================== */
 
 	// If the name of the mask matches the settings for the selected step
-	if ( isset($_GET['showmask']) && (isset($sett['configs']) || (isset($sett['maskname']) && $_GET['showmask'] == $sett['maskname'])))		 
+	if ( isset($_GET['showmask']) && (isset($sett['maskname']) && $_GET['showmask'] == $sett['maskname']))		 
 	{
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -542,10 +542,7 @@
 		{
 			if(is_array($sett['configs']))
 			{
-				foreach($sett['configs'] as $conf)
-				{
-					ShowMaskState($conf['maskname']);
-				}
+				die();
 			}
 			else
 				$page->ErrorBox("The config item <b><tt>configs</tt></b> is not an array!");
