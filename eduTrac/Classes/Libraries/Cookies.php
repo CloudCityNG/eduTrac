@@ -50,7 +50,7 @@ class Cookies {
 	/**
 	 * Cookie ID
 	 *
-	 * @since 1.0.o
+	 * @since 1.0.0
 	 * @return bool Returns true if set
 	 * 
 	 */ 
@@ -92,7 +92,7 @@ class Cookies {
 	 * 
 	 */
 	public function verifyPerson() {
-		$vars = array();
+		$vars = [];
 		parse_str($this->getCookieName(), $vars);
 		
 		if(!isset($vars['data'])) {

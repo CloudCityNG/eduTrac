@@ -29,6 +29,38 @@
 $cache = new \eduTrac\Classes\Libraries\Cache('3600', BASE_PATH . 'tmp/cache/', 'rss');
 ?>
 
+<style type="text/css">
+    .nube { 
+    position:absolute;
+    left:0;
+    top:0;
+    max-width:600px;min-width:300px;
+    border:1px solid #DCA;
+    background:#fffAF0;
+    padding:1em;
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-box-shadow: 5px 5px 8px #CCC;
+    -webkit-box-shadow: 5px 5px 8px #CCC;
+    box-shadow: 5px 5px 8px #CCC;
+    color:#111;
+    outline:none;
+    font-size:1.2em;
+    line-height:16px;
+    text-shadow:none !important;
+    word-wrap:break-word;
+    }
+    .nube:hover {
+        z-index:20;
+        outline:none;
+        text-decoration:none;
+    }
+    .fc-event-skin {
+        cursor:pointer;
+    }
+</style>
+
 <script type="text/javascript">
 $(document).ready(function() { 
     var date = new Date();
@@ -36,6 +68,22 @@ $(document).ready(function() {
     var m = date.getMonth();
     var y = date.getFullYear();
     var calendar = $('#calendar').fullCalendar({
+        eventMouseover: function( event, jsEvent, view ) { 
+            var item = $(this);
+            if(item.find('.nube').length == 0){
+                var info = '<span class="nube"><h5>'+event.title+'</h5><p><strong>Start:</strong> '+event.start+' <br /><strong>End:</strong> '+event.end+' <br /> '+event.description+'</p></span>';
+                item.append(info);
+            }
+            if(parseInt(item.css('top')) <= 200){
+                item.find('.nube').css({'top': 20,'bottom':'auto'});
+                item.parent().find('.fc-event').addClass('z0');
+            }
+            item.find('.nube').stop(true,true).fadeIn();
+        },
+        eventMouseout: function( event, jsEvent, view ) { 
+            var item = $(this);
+            item.find('.nube').stop(true,true).fadeOut();
+        },
     //configure options for the calendar
        header: {
           left: 'prev,next today',
@@ -44,21 +92,21 @@ $(document).ready(function() {
        },
        selectable: true,
        selectHelper: true,
-       select: function() {
+       /*select: function() {
             $('#add-event').dialog('open');
-       },
+       },*/
 
 
        // this is where you specify where to pull the events from.
 
        events: "<?=BASE_URL;?>dashboard/getEvents/",
-       editable: true,
+       editable: false,
        defaultView: 'month',
        allDayDefault: false,
        //etc etc
    });
    
-$("#add-event").dialog({
+/*$("#add-event").dialog({
     autoOpen: false,
     height: 'auto',
     width: 'auto',
@@ -73,7 +121,7 @@ $("#add-event").dialog({
         "Save Event": function() {
             $.ajax({
                 type:"POST",
-                url: "<?=BASE_URL;?>dashboard/runEvent/",
+                url: "dashboard/runEvent/",
                 data: $('#validateSubmitForm').serialize(),
                 success: function(){
                     calendar.fullCalendar('refetchEvents');
@@ -86,7 +134,7 @@ $("#add-event").dialog({
             $(this).dialog("close");
         }
     },
-});
+});*/
    
 });
 </script>

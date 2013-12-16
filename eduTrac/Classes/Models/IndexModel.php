@@ -54,7 +54,7 @@ class IndexModel {
         $array = [];
 		$uname = $data['uname'];
 		$pass = $data['password'];
-        $bind = array( ":uname" => $uname );
+        $bind = [ ":uname" => $uname ];
 		
 		$cookie = sprintf("data=%s&auth=%s", urlencode($uname), urlencode(et_hash_cookie($uname.$pass)));
 		$mac = hash_hmac("sha512", $cookie, $this->_enc);
