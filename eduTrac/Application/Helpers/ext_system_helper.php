@@ -742,139 +742,6 @@ use \eduTrac\Classes\Libraries\Cookies;
 	    }
 	}
 	
-	/*function course_grid($cid,$sid) {
-		$query1 = DB::inst()->select( TP. "school", "*", "school_id = '$sid'", null );
-		
-		while($numperiods = $query1->fetch(\PDO::FETCH_ASSOC)) {
-			
-			 for($i=1; $i<=$numperiods['numperiods']; $i++) {
-			  // Clear re-used variables for the new row //
-			  $tablerow = "";
-			  $sunday = "<td>";
-			  $monday = "<td>";
-			  $tuesday = "<td>";
-			  $wednesday = "<td>";
-			  $thursday = "<td>";
-			  $friday = "<td>";
-			  $saturday = "<td>";
-			
-			  print("<tr class=\"gradeX\"> <td>$i</td>");
-			  
-			  $query2 = DB::inst()->query("SELECT coursename, facultyid, semesterid, sectionnum, roomnum, periodnum, dotw FROM "."course WHERE periodnum = '$i' AND courseid = '$cid'");
-			
-			  while( $class = $query2->fetch(\PDO::FETCH_ASSOC) ) {
-			   $days = preg_split('//', $class[6], -1, PREG_SPLIT_NO_EMPTY);
-			
-			   for($j=0; $j<count($days); $j++) {
-				switch($days[$j]) {
-				case 'N':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $sunday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			
-			   if($sunday != "<td>")
-			 $sunday .= "<br /><br />";
-			   else
-				 $sunday .= "<br />";
-				   break;
-			 case 'M':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $monday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			
-			   if($monday != "<td>")
-			 $monday .= "<br /><br />";
-			   else
-				 $monday .= "<br />";
-				   break;
-			 case 'T':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $tuesday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			   if($tuesday != "<td>")
-			 $tuesday .= "<br /><br />";
-			   else
-				 $tuesday .= "<br />";
-			
-				   break;
-			 case 'W':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $wednesday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			   if($wednesday != "<td>")
-			 $wednesday .= "<br /><br />";
-			   else
-				 $wednesday .= "<br />";
-				   break;
-			 case 'H':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $thursday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			   if($thursday != "<td>")
-			 $thursday .= "<br /><br />";
-			   else
-				 $thursday .= "<br />";
-				   break;
-			 case 'F':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $friday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			   if($friday != "<td>")
-			 $friday .= "<br /><br />";
-			   else
-				 $friday .= "<br />";
-					   break;
-			case 'S':
-			   $q = DB::inst()->query("SELECT fname, lname FROM "."faculty WHERE facid = '" . clean($class[1]) . "'");
-			   $teacher = $q->fetch(\PDO::FETCH_ASSOC);
-			
-			   $saturday .= "<b>$class[0]</b><br />
-			   Section: $class[3]<br />
-			   Room: $class[4]<br />
-			   Teacher: $teacher[0] $teacher[1]";
-			
-			   if($saturday != "<td>")
-			 $saturday .= "<br /><br />";
-			   else
-				 $saturday .= "<br />";
-					   break;
-				}
-			   }
-			  }
-			
-			  $tablerow = $sunday . "&nbsp;</td>" . $monday . "&nbsp;</td>" . $tuesday . "&nbsp;</td>" . $wednesday . "&nbsp;</td>" . $thursday . "&nbsp;</td>" . $friday . "&nbsp;</td>" . $saturday . "&nbsp;</td>";
-			
-			  print($tablerow);
-			
-			  print("</tr>");
-			 }
-		 }
-	}*/
-	
 	function get_user_avatar($email, $size = 100) {
 		$avatarsize = getimagesize("http://www.gravatar.com/avatar/".md5($email).'?s=200');
 		$avatar = '<img src="http://www.gravatar.com/avatar/' . md5($email).'?s=200' . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $size) . ' />';
@@ -1022,7 +889,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         $auth = new Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         if($acl->userHasRole(8)) {
-            if(CURRENT_ET_VERSION < getCurrentVersion(0)) {
+            if(CURRENT_VERSION < getCurrentVersion(0)) {
                 $alert = 
                     '<!-- Alert -->
     				<div class="success">
@@ -1049,7 +916,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         $auth = new Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         if($acl->userHasRole(8)) {
-            if(CURRENT_ET_VERSION == getCurrentVersion(0)) {
+            if(CURRENT_VERSION == getCurrentVersion(0)) {
                 if(Hooks::get_option('dbversion') < upgradeDB(0)) {
                     redirect(BASE_URL . 'upgrade/');
                 }
@@ -1077,11 +944,11 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     function head_version_meta() {
-        echo "<meta name='generator' content='eduTrac " . CURRENT_ET_VERSION . "'>\n";
+        echo "<meta name='generator' content='eduTrac " . CURRENT_VERSION . "'>\n";
     }
     
     function foot_version() {
-        echo "v". CURRENT_ET_VERSION;
+        echo "v". CURRENT_VERSION;
     }
 	
 	function et_hash_password($password) {
