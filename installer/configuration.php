@@ -790,7 +790,7 @@
 		// messages, just a demonstration on special keywords
         'company' => '7 Media Web Solutions, LLC', 
         'product' => 'eduTrac',
-        'version' => '1.1.3-Beta-20131215',
+        'version' => '1.1.3-Beta-20131226',
 
 		// These keywords are used with Timezone and Language steps
 		'timezone' => '0',

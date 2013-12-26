@@ -1,7 +1,10 @@
 error_log
+installer.lock
+robots.txt
 *.zip
 .DS_Store
 *.diff
 *.patch
 *.cache
+*.csv
 tmp/logs/*.txt
