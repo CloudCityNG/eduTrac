@@ -180,16 +180,18 @@ class Hooks {
 	 * @return mixed
 	*/
 	public static function load_activated_plugins() {
-		$q = DB::inst()->query("SELECT * FROM plugin");
-		
-		foreach($q as $k => $v) {
-			$pluginFile = $v['location'];
-			$plugin = str_replace('.plugin.php', '', $pluginFile);
+		if(file_exists(SYS_PATH . 'Config/installer.lock')) {
+			$q = DB::inst()->query("SELECT * FROM plugin");
 			
-			if(!file_exists(PLUGINS_DIR . $plugin . '/' . $pluginFile)) {
-				require_once(PLUGINS_DIR . $pluginFile);
-			} else {
-				require_once(PLUGINS_DIR . $plugin . '/' . $pluginFile);
+			foreach($q as $k => $v) {
+				$pluginFile = $v['location'];
+				$plugin = str_replace('.plugin.php', '', $pluginFile);
+				
+				if(!file_exists(PLUGINS_DIR . $plugin . '/' . $pluginFile)) {
+					require_once(PLUGINS_DIR . $pluginFile);
+				} else {
+					require_once(PLUGINS_DIR . $plugin . '/' . $pluginFile);
+				}
 			}
 		}
 	}	
@@ -641,11 +643,12 @@ class Hooks {
 	
 	// Read an option from et. Return value or $default if not found
 	public static function get_option( $option_name, $default = false ) {
+	    if(file_exists(SYS_PATH . 'Config/installer.lock')) {
 		// Allow plugins to short-circuit options
 		$pre = self::apply_filter( 'pre_option_'.$option_name, false );
 		if ( false !== $pre )
 			return $pre;
-
+        
 		if ( !isset( DB::inst()->option[$option_name] ) ) {
 			$results = DB::inst()->query( "SELECT `option_value` FROM `et_option` WHERE `option_name` = '$option_name'" );
             $r = $results->fetch(\PDO::FETCH_BOTH);
@@ -658,6 +661,8 @@ class Hooks {
 		}
 
 		return self::apply_filter( 'get_option_'.$option_name, DB::inst()->option[$option_name] );
+        
+        }
 	}
 	
 	// Update (add if doesn't exist) an option to et

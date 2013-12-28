@@ -29,33 +29,39 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\Session;
-class Install extends \eduTrac\Classes\Controllers {
+class Install extends \eduTrac\Classes\Core\Controller {
     
     public function __construct() {
         parent::__construct();
         # Did we run it again?
-        if(file_exists(BASE_PATH . 'eduTrac/Config/constants.php') && file_exists(BASE_PATH . 'eduTrac/Config/installer.lock'))
+        if(file_exists(SYS_PATH . 'Config/installer.lock'))
         {
             redirect( BASE_URL );
+        }
+        
+        if(isGetSet('step') === null) {
+            redirect('/install/?step=1');
         }
     }
     
     public function index() {
         $this->view->staticTitle = array('eduTrac Installer');
+		$this->view->errors = $this->model->errors;
         $this->view->render('bh',true);
         $this->view->render('install/index',true);
         $this->view->render('bf',true);
     }
     
     public function runInstall() {
-        if(isGetSet('step2')) {
+        if(isGetSet('step') == 2) {
             Session::set('dbhost',isPostSet('dbhost'));
             Session::set('dbuser',isPostSet('dbuser'));
             Session::set('dbpass',isPostSet('dbpass'));
             Session::set('dbname',isPostSet('dbname'));
+			$this->model->runInstall();
         }
         
-        if(isGetSet('step3')) {
+        if(isGetSet('step') == 3) {
             Session::set('sitetitle',isPostSet('sitetitle'));
             Session::set('siteurl',isPostSet('siteurl'));
             Session::set('uname',isPostSet('uname'));
@@ -66,7 +72,7 @@ class Install extends \eduTrac\Classes\Controllers {
             $this->model->runInstall();
         }
         
-        if(isGetSet('step4')) {
+        if(isGetSet('step') == 4) {
             $this->model->runInstallFinish();
         }
     }

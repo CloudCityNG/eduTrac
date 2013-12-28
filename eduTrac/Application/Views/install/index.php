@@ -26,54 +26,26 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-
-    sleep(2);
-    // Create array that we can return using json
-    $data = array();
-    
-    // Default response is false
-    // Please do not remove
-    $data['response'] = false;
-    $data['step'] = false;
-    
-    $siteurl = 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
-    $siteurl = str_replace('index.php','',$siteurl);
-    
-    
-    if($_GET['step'] == 2){
-        
-        if(isset($_POST['dbname']) && isset($_POST['dbuser']) && isset($_POST['dbpass']) && isset($_POST['dbhost'])) {
-            
-            $dbhost = $_POST['dbhost'];
-            $dbname = $_POST['dbname'];
-        
-            $connect = new \PDO("mysql:host=$dbhost;dbname=$dbname", $_POST['dbuser'], $_POST['dbpass']);
-            
-            if(!$connect){ 
-                $data['message'] = 'Error establishing a database connection';
-            }else{
-                $data['response'] = true;
-            }   
-        }
-    }
-    
-    if($_GET['step'] == 3 OR $_GET['step'] == 4 OR $_GET['step'] == 5){
-        $data['response'] = true;
-    }
-    
-    echo json_encode($data);
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?=_t('eduTrac Installer');?></title>
+<title>eduTrac Installer</title>
 
-<script type="text/javascript" src="<?=BASE_URL;?>static/assets/js/jquery.js"></script> 
-<script type="text/javascript" src="<?=BASE_URL;?>static/assets/js/validate.js"></script> 
-<script type="text/javascript" src="<?=BASE_URL;?>static/assets/js/hoverIntent.js"></script>
-<link href="<?=BASE_URL;?>static/assets/css/wizardPro.css" rel="stylesheet" type="text/css" />
+<!-- JQuery -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
+<script type="text/javascript" src="<?=$siteurl;?>static/assets/js/validate.js"></script> 
+<script type="text/javascript" src="<?=$siteurl;?>static/assets/js/hoverIntent.js"></script>
+<script type="text/javascript" src="<?=$siteurl;?>static/assets/js/wizardPro.min.js"></script>
+<link href="<?=$siteurl;?>static/assets/css/wizardPro.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#wizard").wizardPro();
+	});
+</script>
 
 
 </head>
@@ -81,12 +53,7 @@
 
 <div id="container">
     
-    <div class="purchase">
-        <h2><?=_t('eduTrac Installer');?></h2>
-    </div>
-    
-    <h2><?=_t('Installation Wizard');?></h2>
-    <p><?=_t('This is how the WordPress wizard would look like using WizardPro.');?> <br /> <?=_t('This is just an example, no data is saved.');?></p>
+    <h2>eduTrac Installation Wizard</h2>
     
     <div id="wizard" class="wizard-default-style js">
         <ul class="steps">
@@ -156,18 +123,24 @@
 
                     <p>On the right side you should enter your database connection details. 
                     If you're not sure about these, contact your host. </p>
-                    
-                    <p style="color:red;"><strong>Change "root1" into "root" to continue</strong></p>
                 </div>
                 
                 <div class="column_two">
-                    
-                    <form class="defaultRequest" method="post" action="<?=BASE_URL;?>install/runInstall/?step=2">
+                	<?php
+                		if (isset($this->errors)) {
+					
+					        foreach ($this->errors as $error) {
+					            echo '<div class="errormsg">'.$error.'</div>';
+					        }
+					
+					    }
+					?>
+                    <form action="<?=$siteurl;?>install/?step=2" class="defaultRequest" method="post">
                         <fieldset>
                             <p><label><a href="#help-dbname" class="show_helper"><span>(?)</span> Database Name</a></label>
                             <input type="text" name="dbname" class="required" /></p>
                             
-                            <p><label>User Name</label>
+                            <p><label>Username</label>
                             <input type="text" name="dbuser" class="required" /></p>
                             
                             <p><label>Password</label>
@@ -222,7 +195,7 @@
                 
                 <div class="column_two">
                     
-                    <form class="defaultRequest" method="post" action="<?=BASE_URL;?>install/runInstall/?step=3">
+                    <form action="<?=$siteurl;?>install/?step=3" class="defaultRequest" method="post">
                         <fieldset>
                             <p><label>Site Title</label>
                             <input type="text" name="sitetitle" class="required" /></p>
@@ -264,7 +237,7 @@
                     <h3>Success!</h3>
                     
                     <p>eduTrac has been installed. Click the button below in order to flush the installer and be redirected to the login page.</p>
-                    <form class="defaultRequest" method="post" action="<?=BASE_URL;?>install/runInstall/?step=4">
+                    <form action="<?=$siteurl;?>install/?step=4" class="defaultRequest" method="post">
                         <input type="hidden" name="install_finish" value="1" />
                         <p><button type="submit"><span>Log In</span></button></p>
                     </form>
@@ -276,7 +249,7 @@
         </div>
         
         <div class="no_javascript">
-            <img src="assets/img/warning.png" alt="Javascript Required" />
+            <img src="<?=$siteurl;?>static/assets/img/warning.png" alt="Javascript Required" />
             <p>Javascript is required in order to use this wizard. <br />
             <a href="https://www.google.com/support/adsense/bin/answer.py?answer=12654">How to enable javascript</a>
             -
