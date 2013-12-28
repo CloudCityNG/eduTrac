@@ -28,7 +28,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-class util
+class Util
 {
 	
 	/**

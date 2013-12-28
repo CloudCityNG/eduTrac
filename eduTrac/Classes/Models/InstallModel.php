@@ -41,9 +41,12 @@ class InstallModel {
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
     private $_version = '1.1.3-Beta-20131226';
+	public $errors = array();
     
-    public function __construct() {
-        $this->_now = date('Y-m-d h:m:s');
+    public function __construct() {}
+    
+    public function runInstall() {
+    	$this->_now = date('Y-m-d h:m:s');
         $this->_dbhost = Session::get('dbhost');
         $this->_dbuser = Session::get('dbuser');
         $this->_dbpass = Session::get('dbpass');
@@ -57,12 +60,21 @@ class InstallModel {
             $this->_error = 'ERROR: ' . $e->getMessage();
             echo $this->_error;
         }
-    }
-    
-    public function runInstall() {
-        $q = file_get_contents(BASE_PATH . 'eduTrac/Application/Views/install/data/install.sql');
+		
+		if(isGetSet('step') == 2) {
+			if(!$this->_connect) {
+				$this->errors[] = 'Unable to establish database connection.';
+				redirect('/install/?step=2');
+				exit();
+			} else {
+        		$q = file_get_contents(SYS_PATH . 'Application/Views/install/data/install.sql');
+				$this->_connect->exec($q);
+				redirect('/install/?step=3');
+				exit();
+			}
+		}
         
-        if($this->_connect->exec($q)) {
+		if(isGetSet('step') == 3) {
             $sql = [];
             
             $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedBy`) 
@@ -171,14 +183,15 @@ class InstallModel {
                 $this->_connect->prepare($query);
                 $this->_connect->execute();
             }
+			//redirect( '/install/?step=4' );
         }
+			redirect( '/install/?step=4' );
         
-        //redirect( BASE_URL . 'install/runInstall/?step=4' );
     }
     
     public function runInstallFinish() {
-        copy(BASE_PATH . 'eduTrac/Application/Views/install/data/constants.sample.php',BASE_PATH . 'eduTrac/Config/constants.php');
-        $file = BASE_PATH . 'eduTrac/Config/constants.php';
+        copy(SYS_PATH . 'Application/Views/install/data/constants.sample.php',SYS_PATH . 'Config/constants.php');
+        $file = SYS_PATH . 'Config/constants.php';
         $config = file_get_contents($file);
         
         $config = str_replace('{product}', $this->_product, $config);
@@ -203,7 +216,7 @@ class InstallModel {
         Session::destroy();
         
         # Lock the installer and redirect user to login screen
-        $path = BASE_PATH . 'eduTrac/Config/installer.lock';
+        $path = SYS_PATH . 'Config/installer.lock';
         file_put_contents($path, "installer lock file");
     }
     

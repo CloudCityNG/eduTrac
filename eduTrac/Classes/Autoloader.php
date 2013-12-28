@@ -159,7 +159,7 @@ class Autoloader
 		}
 
 		// no matches
-		//throw new \Exception("Unable to load $class.");
+		throw new \Exception("Unable to load $class.");
 	}
 
 }
