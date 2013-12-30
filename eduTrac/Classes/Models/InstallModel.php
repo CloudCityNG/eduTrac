@@ -59,7 +59,7 @@ class InstallModel {
             $this->_connect->prepare('SET CHARACTER SET utf8');
         } catch(\PDOException $e) {
             $this->_error = 'ERROR: ' . $e->getMessage();
-            error_log($this->_error);
+            return $this->_error;
         }
     }
 	
@@ -69,7 +69,7 @@ class InstallModel {
 		 * If it takes longer than two minutes, then 
 		 * something is wrong.
 		 */
-		set_time_limit(120);
+		set_time_limit(0);
 		
 		if(!$this->_connect) {
 			$_SESSION['error_message'][] = 'Unable to establish database connection.';
@@ -81,8 +81,8 @@ class InstallModel {
 			
         $sql = [];
         
-        $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedBy`) 
-                  VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '1');";
+        $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) 
+                  VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
                   
         $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00014');";
         
@@ -130,22 +130,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', 'eduTrac Password Reset
-                    Password & Login Information
-                    
-                    You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.  To log into the eduTrac system, please visit #url# and login with your username and password.
-                    
-                    FULL NAME:  #fname# #lname#
-                    USERNAME:  #uname#
-                    PASSWORD:  #password#
-                    
-                    If you need further assistance, please read the documentation at #helpdesk#.
-                    
-                    KEEP THIS IN A SAFE AND SECURE LOCATION.
-                    
-                    Thank You,
-                    eduTrac Web Team
-                    ');";
+        $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');";
         
         $sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
         
