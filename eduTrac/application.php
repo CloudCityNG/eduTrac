@@ -27,6 +27,10 @@
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
+if(file_exists(SYS_PATH . 'Config/.installer.lock')) {
+    require(SYS_PATH . 'Config/constants.php');
+}
+
 /**
  * Autoloader for classes.
  */
@@ -38,23 +42,17 @@ $loader->register();
  * Helper configuration to load default and custom
  * helper functions.
  */
-require( SYS_PATH . 'Config/helper.php' );
+\eduTrac\Classes\Libraries\Util::_require( SYS_PATH . 'Config/helper.php' );
 
 /** 
- * Checks if the environment is set to development. If so,
- * then error will be displayed in the browser. If not, then
- * they will be written to the database.
+ * Errors are written to a log file as 
+ * well as the database.
  */
-if (DEVELOPMENT_ENVIRONMENT == TRUE) {
-    error_reporting(E_ALL & ~E_NOTICE);
-	ini_set('display_errors','On');
-} else {
-	error_reporting(E_ALL & ~E_NOTICE );
-	ini_set('display_errors','Off');
-	ini_set('log_errors', 'On');
-	ini_set('error_log', BASE_PATH . 'tmp' . DS . 'logs' . DS . 'error.' . date('m-d-Y') . '.txt');
-    set_error_handler('logError',E_ALL & ~E_NOTICE);
-}
+error_reporting(E_ALL & ~E_NOTICE );
+ini_set('display_errors','Off');
+ini_set('log_errors', 'On');
+ini_set('error_log', BASE_PATH . 'tmp' . DS . 'logs' . DS . 'error.' . date('m-d-Y') . '.txt');
+set_error_handler('logError',E_ALL & ~E_NOTICE);
 
 
 /** Internationalization settings */

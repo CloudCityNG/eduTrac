@@ -35,6 +35,12 @@ class Index extends \eduTrac\Classes\Core\Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
+        
+        if(!file_exists(SYS_PATH . 'Config/.installer.lock')) {
+        	$installurl = 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+			$installurl = str_replace('index.php','',$installurl);
+            redirect($installurl . 'install/?step=1');
+        }
 	}
 	
 	public function index() {

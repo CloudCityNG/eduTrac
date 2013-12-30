@@ -269,19 +269,6 @@ else $weeks=-1;
                             </div>
                         </div>
                         <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="run_only_once"><font color="red">*</font> <?php _e( _t( 'How Often?' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:50%" name="run_only_once" id="select2_13" required>
-                                    <option value="">&nbsp;</option>
-                                    <option value="0" selected="selected"><?php _e( _t( 'Until I Delete It' ) ); ?></option>
-                                    <option value="1"><?php _e( _t( 'Only Once, Then Delete The Job' ) ); ?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
 						
 					</div>
 					<!-- // Column END -->
@@ -293,6 +280,7 @@ else $weeks=-1;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
+					<input type="hidden" name="run_only_once" value="0" />
                     <input type="hidden" name="id" value="<?=_h((int)$this->cron[0]['id']);?>" />
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="add()"><i></i><?php _e( _t( 'Save' ) ); ?></button>
 				</div>

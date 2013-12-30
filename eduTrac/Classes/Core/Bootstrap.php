@@ -45,7 +45,7 @@ class Bootstrap {
 
 		$file = SYS_PATH . 'Classes' . DS . 'Controllers' . DS . ucfirst($url[0]) . '.php';
 		if (file_exists($file)) {
-			require $file;
+			require($file);
 		} else {
 			$this->error();
 		}
