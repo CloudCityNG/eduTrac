@@ -1,4 +1,5 @@
-<?php namespace PHPBenchmark;
+<?php namespace eduTrac\Classes\Libraries\PHPBenchmark;
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
  * Benchmarking Monitor Class
  *  

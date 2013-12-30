@@ -1,4 +1,5 @@
-<?php namespace PHPBenchmark;
+<?php namespace eduTrac\Classes\Libraries\PHPBenchmark;
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
  * Benchmarking Class Funciton
  *  
@@ -34,7 +35,7 @@
  * @author Victor Jonsson (http://victorjonsson.se)
  * @license MIT
  */
-class FunctionComparison extends AbstractFunctionComparison {
+class FunctionComparison extends \eduTrac\Classes\Libraries\PHPBenchmark\AbstractFunctionComparison {
 
     /**
      * @var \Closure
@@ -182,7 +183,7 @@ class FunctionComparison extends AbstractFunctionComparison {
         foreach( glob($path.'/*.php') as $file ) {
             require_once $file;
             $class = pathinfo($file, PATHINFO_FILENAME);
-            if( class_exists($class, false) && is_subclass_of($class, '\\PHPBenchmark\\AbstractFunctionComparison') )
+            if( class_exists($class, false) && is_subclass_of($class, '\\eduTrac\\Classes\\Libraries\\PHPBenchmark\\AbstractFunctionComparison') )
                 $tests[] = new $class();
         }
 

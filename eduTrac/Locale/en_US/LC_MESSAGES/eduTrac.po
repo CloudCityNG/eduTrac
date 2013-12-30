@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eduTrac\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 00:49-0500\n"
-"PO-Revision-Date: 2013-12-09 00:49-0500\n"
-"Last-Translator: Joshua Parker <josh@7mediaws.org>\n"
+"POT-Creation-Date: 2013-12-30 00:03-0500\n"
+"PO-Revision-Date: 2013-12-30 00:03-0500\n"
+"Last-Translator: Joshua Parker <josh@joshparker.us>\n"
 "Language-Team: 7 Media Web Solutions, LLC <email@7mediaws.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,29 +278,29 @@ msgstr ""
 msgid "NA Non-Applicable"
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1029
+#: ../../../Application/Helpers/ext_system_helper.php:896
 msgid "Update!"
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1029
+#: ../../../Application/Helpers/ext_system_helper.php:896
 msgid "Hey admin, there is a new eduTrac update."
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1030
+#: ../../../Application/Helpers/ext_system_helper.php:897
 msgid " Click here"
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1030
+#: ../../../Application/Helpers/ext_system_helper.php:897
 msgid ""
 "to download it. Also feel free to check out\r\n"
 "                        the"
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1031
+#: ../../../Application/Helpers/ext_system_helper.php:898
 msgid "changelog"
 msgstr ""
 
-#: ../../../Application/Helpers/ext_system_helper.php:1040
+#: ../../../Application/Helpers/ext_system_helper.php:907
 #: ../../../Application/Views/application/add.php:200
 #: ../../../Application/Views/application/index.php:111
 #: ../../../Application/Views/application/view.php:205
@@ -312,6 +312,7 @@ msgstr ""
 #: ../../../Application/Views/application/index.php:33
 #: ../../../Application/Views/application/view.php:32
 #: ../../../Application/Views/audittrail/index.php:32
+#: ../../../Application/Views/course/add.php:35
 msgid "You are here"
 msgstr ""
 
@@ -320,6 +321,7 @@ msgstr ""
 #: ../../../Application/Views/application/index.php:34
 #: ../../../Application/Views/application/view.php:33
 #: ../../../Application/Views/audittrail/index.php:33
+#: ../../../Application/Views/course/add.php:36
 msgid "Dashboard"
 msgstr ""
 
@@ -748,6 +750,7 @@ msgstr ""
 
 #: ../../../Application/Views/application/add.php:51
 #: ../../../Application/Views/application/view.php:51
+#: ../../../Application/Views/course/add.php:54
 msgid "Indicates field is required"
 msgstr ""
 
@@ -809,6 +812,7 @@ msgstr ""
 
 #: ../../../Application/Views/application/add.php:199
 #: ../../../Application/Views/application/view.php:204
+#: ../../../Application/Views/course/add.php:229
 msgid "Save"
 msgstr ""
 
@@ -853,9 +857,6 @@ msgid "Expire Date"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:38
-#: ../../../Application/Views/course/addnl_info.php:45
-#: ../../../Application/Views/course/index.php:39
-#: ../../../Application/Views/course/view.php:35
 msgid "Search Course"
 msgstr ""
 
@@ -868,81 +869,62 @@ msgid "Add Course"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:67
-#: ../../../Application/Views/course/view.php:64
 msgid "Department"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:79
-#: ../../../Application/Views/course/view.php:76
 msgid "Subject"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:91
-#: ../../../Application/Views/course/view.php:97
 msgid "Course Level"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:100
-#: ../../../Application/Views/course/index.php:70
-#: ../../../Application/Views/course/view.php:106
 msgid "Short Title"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:109
-#: ../../../Application/Views/course/view.php:115
 msgid "Long Title"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:118
-#: ../../../Application/Views/course/view.php:88
 msgid "Course Number"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:127
-#: ../../../Application/Views/course/index.php:72
-#: ../../../Application/Views/course/view.php:124
 msgid "Effective Date"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:139
-#: ../../../Application/Views/course/index.php:73
-#: ../../../Application/Views/course/view.php:136
 msgid "End Date"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:157
-#: ../../../Application/Views/course/view.php:154
 msgid "Credits"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:166
-#: ../../../Application/Views/course/view.php:163
 msgid "Academic Level"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:175
-#: ../../../Application/Views/course/index.php:71
-#: ../../../Application/Views/course/view.php:172
 msgid "Status"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:184
-#: ../../../Application/Views/course/view.php:181
 msgid "Status Date"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:193
-#: ../../../Application/Views/course/view.php:190
 msgid "Approval Person"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:202
-#: ../../../Application/Views/course/view.php:199
 msgid "Approval Date"
 msgstr ""
 
 #: ../../../Application/Views/course/add.php:220
-#: ../../../Application/Views/course/view.php:244
 msgid "Course Description"
 msgstr ""
 
@@ -1038,22 +1020,19 @@ msgstr ""
 
 #: ../../../Application/Views/cron/add.php:200
 #: ../../../Application/Views/cron/view.php:212
-#: ../../../Application/Views/dashboard/index.php:254
+#: ../../../Application/Views/dashboard/index.php:302
 msgid "Weekly"
 msgstr ""
 
 #: ../../../Application/Views/cron/add.php:263
-#: ../../../Application/Views/cron/view.php:275
 msgid "How Often?"
 msgstr ""
 
 #: ../../../Application/Views/cron/add.php:266
-#: ../../../Application/Views/cron/view.php:279
 msgid "Until I Delete It"
 msgstr ""
 
 #: ../../../Application/Views/cron/add.php:267
-#: ../../../Application/Views/cron/view.php:280
 msgid "Only Once, Then Delete The Job"
 msgstr ""
 
@@ -1074,67 +1053,67 @@ msgstr ""
 msgid "View Cron Job"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:110
+#: ../../../Application/Views/dashboard/index.php:158
 msgid "Latest 7 Media News"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:166
+#: ../../../Application/Views/dashboard/index.php:214
 msgid "Calendar"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:173
+#: ../../../Application/Views/dashboard/index.php:221
 msgid "Event Name"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:182
+#: ../../../Application/Views/dashboard/index.php:230
 msgid "Description"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:191
+#: ../../../Application/Views/dashboard/index.php:239
 msgid "Room"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:203
+#: ../../../Application/Views/dashboard/index.php:251
 msgid "Date"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:215
+#: ../../../Application/Views/dashboard/index.php:263
 msgid "Start Time"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:227
+#: ../../../Application/Views/dashboard/index.php:275
 msgid "End Time"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:239
+#: ../../../Application/Views/dashboard/index.php:287
 msgid "Repeat?"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:248
+#: ../../../Application/Views/dashboard/index.php:296
 msgid "Repeat Occurrence"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:251
+#: ../../../Application/Views/dashboard/index.php:299
 msgid "Every Day"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:257
+#: ../../../Application/Views/dashboard/index.php:305
 msgid "Every Two Weeks"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:278
+#: ../../../Application/Views/dashboard/index.php:326
 msgid "Support"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:285
+#: ../../../Application/Views/dashboard/index.php:333
 msgid "Community Support Site"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:286
+#: ../../../Application/Views/dashboard/index.php:334
 msgid "Online Documentation"
 msgstr ""
 
-#: ../../../Application/Views/dashboard/index.php:287
+#: ../../../Application/Views/dashboard/index.php:335
 msgid "eduTrac Satisfaction Survey"
 msgstr ""
 
@@ -1143,6 +1122,7 @@ msgstr ""
 #: ../../../Application/Views/error/edit_data.php:43
 #: ../../../Application/Views/error/import.php:43
 #: ../../../Application/Views/error/invalid_record.php:43
+#: ../../../Application/Views/error/nslc_extraction.php:43
 msgid "Error!"
 msgstr ""
 
@@ -1737,6 +1717,7 @@ msgstr ""
 #: ../../../Application/Views/form/view_building.php:40
 #: ../../../Application/Views/form/view_ccd.php:40
 #: ../../../Application/Views/form/view_cip.php:40
+#: ../../../Application/Views/form/view_location.php:40
 msgid "Viewing "
 msgstr ""
 
@@ -1877,6 +1858,9 @@ msgid "eduTrac"
 msgstr ""
 
 #: ../../../Application/Views/index/index.php:43
+#: ../../../Application/Views/install/index.php:126
+#: ../../../Application/Views/install/index.php:162
+#: ../../../Application/Views/install/index.php:196
 msgid "Password"
 msgstr ""
 
@@ -1898,6 +1882,151 @@ msgstr ""
 
 #: ../../../Application/Views/index/index.php:63
 msgid "Powered by"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:39
+msgid "eduTrac Installer"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:58
+msgid "eduTrac Installation Wizard"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:68
+msgid "Step 1 - Introduction"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:70
+msgid ""
+"Welcome to eduTrac. \n"
+"                    Before getting started, we need some information on the database. \n"
+"                    You will need to know the following items before proceeding."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:75
+msgid "Database name"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:76
+msgid "Database username"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:77
+msgid "Database password"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:78
+msgid "Database host"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:81
+msgid ""
+"If for any reason this automatic file creation doesn't work, don't worry. \n"
+"                    All this does is fill in the database information to a configuration file. \n"
+"                    You may also simply open eduTrac/Config/contants-sample.php in a text editor, fill in your information, \n"
+"                    and save it as constants.php."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:86
+msgid ""
+"In all likelihood, these items were supplied to you by your Web Host. \n"
+"                    If you do not have this information, then you will need to contact them before you can continue. \n"
+"                    If you're all ready..."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:89
+#: ../../../Application/Views/install/index.php:135
+msgid "Next Step"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:103
+#: ../../../Application/Views/install/index.php:120
+msgid "Database Name"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:104
+msgid "The name of the database you want to run eduTrac in."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:110
+msgid "Step 2 - Database Information"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:112
+msgid ""
+"On the right side you should enter your database connection details. \n"
+"                    If you're not sure about these, contact your host."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:129
+msgid "Database Host"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:153
+msgid ""
+"Usernames can have only alphanumeric characters, spaces, \n"
+"                        underscores, hyphens, periods and the @ symbol."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:163
+msgid "A password will be automatically generated for you if you leave this blank."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:164
+msgid ""
+"Hint: The password should be at least seven characters long.\n"
+"                        To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &amp; )."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:171
+msgid "Step 3 - Website Information"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:172
+msgid ""
+"Welcome to the eduTrac installation process! \n"
+"                    Fill in the information below and you’ll be on your way to \n"
+"                    using the most user friendly college management system."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:181
+msgid "Site Title"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:184
+msgid "Site URL"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:199
+msgid "Your E-mail"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:205
+msgid "Install DB Tables"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:220
+msgid "Success!"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:222
+msgid "eduTrac has been installed. Click the button below in order to flush the installer and be redirected to the login page."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:224
+msgid "Finish Installer"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:236
+msgid "Javascript is required in order to use this installer."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:237
+msgid "How to enable javascript"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:239
+msgid "Upgrade Browser"
 msgstr ""
 
 #: ../../../Application/Views/institution/add.php:35
@@ -2938,10 +3067,6 @@ msgstr ""
 msgid "System Settings"
 msgstr ""
 
-#: ../../../Application/Views/setting/index.php:64
-msgid "Site Title"
-msgstr ""
-
 #: ../../../Application/Views/setting/index.php:73
 msgid "System Email"
 msgstr ""
@@ -3214,22 +3339,6 @@ msgstr ""
 
 #: ../../../Application/Views/student/view_prog.php:191
 msgid "Select the checkbox if the student is eligible to graduate from this particular program."
-msgstr ""
-
-#: ../../../Application/Views/success/course_registration.php:43
-#: ../../../Application/Views/success/delete_acad_year.php:43
-#: ../../../Application/Views/success/delete_course.php:43
-#: ../../../Application/Views/success/delete_credit_load.php:43
-#: ../../../Application/Views/success/delete_degree.php:43
-#: ../../../Application/Views/success/delete_dept.php:43
-#: ../../../Application/Views/success/delete_major.php:43
-#: ../../../Application/Views/success/delete_minor.php:43
-#: ../../../Application/Views/success/delete_record.php:43
-#: ../../../Application/Views/success/nslc_purge.php:43
-#: ../../../Application/Views/success/progress_report.php:43
-#: ../../../Application/Views/success/reset_password.php:43
-#: ../../../Application/Views/success/save_data.php:43
-msgid "Success!"
 msgstr ""
 
 #: ../../../Application/Views/success/course_registration.php:43

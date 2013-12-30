@@ -36,9 +36,9 @@ defined( 'LOCALE_DIR' ) 		or define( 'LOCALE_DIR', SYS_PATH . 'Locale' );
 defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH.'DropIns/' );
 defined( 'DEFAULT_LOCALE' )		or define( 'DEFAULT_LOCALE', '' );
 defined( 'ENCODING' )			or define( 'ENCODING', 'UTF-8' );
-defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '1.1.3-Beta-20131229' );
+defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '1.1.3-Beta-20131230' );
 require( SYS_PATH . 'application.php' );
-\eduTrac\Classes\Libraries\Util::_include( "init.php" );
+benchmark_init();
 
 foreach (glob(DROPINS .'*.php') as $file) { 
     if(file_exists($file))

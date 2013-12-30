@@ -110,7 +110,8 @@ Session::set('installurl',$installurl);
                     <h3><?=_t( 'Step 2 - Database Information' );?></h3>
 
                     <p><?=_t( 'On the right side you should enter your database connection details. 
-                    If you\'re not sure about these, contact your host.' );?></p>
+                    If you\'re not sure about these, contact your host. It will take at least 30 seconds 
+                    to a minute to install the tables. So please be patient.' );?></p>
                 </div>
                 
                 <div class="column_two">
@@ -118,16 +119,16 @@ Session::set('installurl',$installurl);
                     <form action="<?=Session::get('installurl');?>install/runInstall/" class="defaultRequest" method="post">
                         <fieldset>
                             <p><label><a href="#help-dbname" class="show_helper"><span>(?)</span> <?=_t( 'Database Name' );?></a></label>
-                            <input type="text" name="dbname" class="required" /></p>
+                            <input type="text" name="dbname" class="required input-block-level" /></p>
                             
                             <p><label><?=_t( 'Username' );?></label>
-                            <input type="text" name="dbuser" class="required" /></p>
+                            <input type="text" name="dbuser" class="required input-block-level" /></p>
                             
                             <p><label><?=_t( 'Password' );?></label>
-                            <input type="text" name="dbpass" class="required" /></p>
+                            <input type="text" name="dbpass" class="required input-block-level" /></p>
                             
                             <p><label><?=_t( 'Database Host' );?></label>
-                            <input type="text" name="dbhost" class="required" /></p>
+                            <input type="text" name="dbhost" class="required input-block-level" /></p>
                         </fieldset>
                         
                         <fieldset>
