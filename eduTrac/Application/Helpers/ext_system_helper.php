@@ -31,8 +31,20 @@ use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Log;
 use \eduTrac\Classes\Libraries\Cookies;
+	
+	/**
+     * Bookmarking initialization function.
+     * 
+     * @since 1.1.3
+     */
+	function benchmark_init() {
+		if( isGetSet('php-benchmark-test') ) {
+		    \eduTrac\Classes\Libraries\PHPBenchmark\Monitor::instance()->init( !empty($_GET['display-data']) );
+		    \eduTrac\Classes\Libraries\PHPBenchmark\Monitor::instance()->snapshot('Bootstrap finished');
+		}
+	}
  	
-    /**{
+    /**
      * When enabled, appends url string in order to give
      * benchmark statistics.
      * 

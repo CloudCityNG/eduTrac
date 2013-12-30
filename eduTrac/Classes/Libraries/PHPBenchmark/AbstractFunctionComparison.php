@@ -1,4 +1,5 @@
-<?php namespace PHPBenchmark;
+<?php namespace eduTrac\Classes\Libraries\PHPBenchmark;
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
  * Benchmark Abstract Class
  *  
@@ -99,7 +100,7 @@ abstract class AbstractFunctionComparison {
     private function runTestFunction($func_name, $desc)
     {
         $start_mem_usage = memory_get_usage();
-        $start_time = Monitor::getMicroTime();
+        $start_time = \eduTrac\Classes\Libraries\PHPBenchmark\Monitor::getMicroTime();
 
         for($i=$this->num_runs; $i>0; $i--)
             $this->$func_name();
@@ -110,7 +111,7 @@ abstract class AbstractFunctionComparison {
                 'function' => $func_name,
                 'description' => $desc,
                 'mem_usage' => round($memory/1024/1024, 4),
-                'time' => bcsub(Monitor::getMicroTime(),  $start_time, 4)
+                'time' => bcsub(\eduTrac\Classes\Libraries\PHPBenchmark\Monitor::getMicroTime(),  $start_time, 4)
             );
     }
 

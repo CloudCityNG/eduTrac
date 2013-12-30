@@ -176,7 +176,7 @@
 		* 
 		* This part will handle the default ajax posts
 		*/	
-		if(options.defaultAjaxRequest){
+		/*if(options.defaultAjaxRequest){
 			
 			$(this).find(options.formClass).submit( function(){
 				var requestUrl = $(this).attr('action');
@@ -224,7 +224,7 @@
 				return false;
 			});
 			
-		}
+		}*/
 
 		/**
 		* Block user interaction

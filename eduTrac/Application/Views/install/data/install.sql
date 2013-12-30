@@ -1040,7 +1040,7 @@ INSERT INTO `payment_type` VALUES(5, 'Wire Transfer');
 
 INSERT INTO `payment_type` VALUES(6, 'Money Order');
 
-INSERT INTO `payment_type` VALUES(7, 'Student Load');
+INSERT INTO `payment_type` VALUES(7, 'Student Loan');
 
 INSERT INTO `payment_type` VALUES(8, 'Grant');
 

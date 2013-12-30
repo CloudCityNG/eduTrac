@@ -7,8 +7,11 @@
  
 
 	body{
-		font: 14px Calibri, Tahoma, Helvetica, Arial, sans-serif;
-		background: #eaf1f5;
+		/*font: 14px Calibri, Tahoma, Helvetica, Arial, sans-serif;*/
+		font-family: 'Open Sans', sans-serif;
+		font-size: .85em;
+		background: #f0f0f0;
+		color: #555555;
 	}
 	
 	#container{
@@ -17,8 +20,6 @@
 	}
 	
 	.wizard-default-style{
-		background: #FFF;
-		border: 1px solid #cdd6db;
 		width: 960px;
 		margin: 0 auto;
 	}
@@ -60,7 +61,7 @@
 			.wizard-default-style ul.steps li{
 				float:left;
 				font-weight:bold;
-				color: #a0a8ac;
+				color: #555555;
 				background: #ebeced;
 				position:relative;
 				height: 34px;
@@ -100,6 +101,14 @@
 			overflow:hidden;
 			position: relative;
 			clear: both;
+			background: #fafafa;
+		}
+		
+		.wizard-default-style .step_content{
+			-webkit-border-radius: 5px 5px 5px 5px;
+		    -moz-border-radius: 5px 5px 5px 5px;
+		    border-radius: 5px 5px 5px 5px;
+		    border: 1px solid #dbdbdb;
 		}
 		
 			.wizard-default-style .step_content .blockuser{
@@ -124,7 +133,7 @@
 				}
 			
 			/* Error Message */
-			.wizard-default-style .step_content .errormsg{
+			.wizard-default-style .step_content .errormsg {
 				background: #ffeeee;
 				color: #9b3330;
 				padding: 5px;
@@ -139,7 +148,9 @@
 				left: 0;
 				width: 310px;
 				border-right: 1px solid #cdd6db;
-				display: none;			
+				display: none;
+				height:800px;
+				min-height:500px;		
 			}
 			
 				.wizard-default-style .step_content .helper span.arrow{
@@ -181,19 +192,19 @@
 			}	
 			
 			.wizard-default-style .step_content a.show_helper{
-				color: #353535;
+				color: #555555;
 				display: block;
 			}
 			
 				.wizard-default-style .step_content .show_helper span{
 					float: right;
 					margin-right: 10px;
-					color: #2e6c90;
+					color: #555555;
 				}
 				
 					.wizard-default-style .step_content .show_helper span:hover,
 					.wizard-default-style .step_content a.show_helper:hover span{
-						color: #1696df;
+						color: #555555;
 					}
 			
 			/* Form styling */
@@ -210,7 +221,7 @@
   						float: left;
   						width: 190px;
   						font-weight: bold;
-  						color: #353535;
+  						color: #555555;
   						padding: 2px;
 					}
 					
@@ -228,7 +239,7 @@
 					.wizard-default-style form.defaultRequest textarea{
   						font-family: Calibri, Tahoma, Helvetica, Arial, sans-serif;
   						font-size: 1em;
-  						color: #727780;
+  						color: #555555;
   						padding: 2px;
   						border: 1px solid;
   						border-color: #888e98 #ced6db #ced6db #888e98;
@@ -248,8 +259,7 @@
 					.wizard-default-style form.defaultRequest input[type="password"] {
 					  font-family: Calibri, Tahoma, Helvetica, Arial, sans-serif;
 					  font-size: 1em;
-					  border: 1px solid;
-  					  border-color: #888e98 #ced6db #ced6db #888e98;
+					  border: 1px solid #cccccc;
 					  width: 164px;
 					  color: #727780;
 					  padding: 2px;
@@ -264,7 +274,7 @@
 						.wizard-default-style form.defaultRequest input[type="text"].error,
 						.wizard-default-style form.defaultRequest input[type="password"].error{
 							border: 1px solid;
-  					 		border-color: #993333 #cc6666 #cc6666 #993333;
+  					 		border-color: #990000;
 							background: #ffeeee;
 							color: #990000;
 						}
@@ -329,5 +339,12 @@
 				color:#5e5e5e;
 				text-shadow: 0 1px #FFF;
 			}
-
-
+			
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 25px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

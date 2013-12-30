@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.3-Beta-20131229';
+    private $_version = '1.1.3-Beta-20131230';
 	public $errors = array();
 	public $siteurl;
     
@@ -81,8 +81,7 @@ class InstallModel {
 			
         $sql = [];
         
-        $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) 
-                  VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
+        $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
                   
         $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00014');";
         
