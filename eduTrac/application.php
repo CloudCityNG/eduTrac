@@ -27,7 +27,7 @@
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-if(file_exists(SYS_PATH . 'Config/installer.lock')) {
+if(file_exists(SYS_PATH . 'Config/.installer.lock')) {
     require(SYS_PATH . 'Config/constants.php');
 }
 

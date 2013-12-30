@@ -1,5 +1,7 @@
 error_log
+.installer.lock
 installer.lock
+installer.lock.old
 robots.txt
 *.zip
 .DS_Store

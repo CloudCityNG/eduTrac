@@ -40,14 +40,15 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.3-Beta-20131226';
+    private $_version = '1.1.3-Beta-20131229';
 	public $errors = array();
+	public $siteurl;
     
-    public function __construct() {}
-    
-    public function runInstall() {
+    public function __construct() {
+    	Session::init();
+		
     	$this->_now = date('Y-m-d h:m:s');
-        $this->_dbhost = Session::get('dbhost');
+		$this->_dbhost = Session::get('dbhost');
         $this->_dbuser = Session::get('dbuser');
         $this->_dbpass = Session::get('dbpass');
         $this->_dbname = Session::get('dbname');
@@ -58,139 +59,146 @@ class InstallModel {
             $this->_connect->prepare('SET CHARACTER SET utf8');
         } catch(\PDOException $e) {
             $this->_error = 'ERROR: ' . $e->getMessage();
-            echo $this->_error;
+            error_log($this->_error);
         }
+    }
+	
+	public function runInstallDB() {
+		/**
+		 * Set two minutes to install the database.
+		 * If it takes longer than two minutes, then 
+		 * something is wrong.
+		 */
+		set_time_limit(120);
 		
-		if(isGetSet('step') == 2) {
-			if(!$this->_connect) {
-				$this->errors[] = 'Unable to establish database connection.';
-				redirect('/install/?step=2');
-				exit();
-			} else {
-        		$q = file_get_contents(SYS_PATH . 'Application/Views/install/data/install.sql');
-				$this->_connect->exec($q);
-				redirect('/install/?step=3');
-				exit();
-			}
-		}
+		if(!$this->_connect) {
+			$_SESSION['error_message'][] = 'Unable to establish database connection.';
+			redirect(Session::get('installurl') . 'install/?step=2');
+			exit();
+		} else {
+			$q = file_get_contents(SYS_PATH . 'Application/Views/install/data/install.sql');
+			$this->_connect->exec($q);
+			
+        $sql = [];
         
-		if(isGetSet('step') == 3) {
-            $sql = [];
-            
-            $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedBy`) 
-                      VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '1');";
-                      
-            $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00014');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(3, 'enable_ssl', '0');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(4, 'site_title', '".Session::get('sitetitle')."');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(5, 'cookieexpire', '604800');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(6, 'cookiepath', '/');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(7, 'hold_file_loc', '/Applications/MAMP/_HOLD_/');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(8, 'enable_benchmark', '0');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(9, 'maintenance_mode', '0');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(10, 'enable_cron_log', '0');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(11, 'current_term_id', '');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(12, 'hour_display', '12');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(13, 'limit_query_size', '30');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(14, 'week_start', '0')";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(15, 'startTime', '08:00 AM');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(16, 'endTime', '05:00 PM');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(17, 'bullets_display', '0');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(18, 'enable_reserve_email', '1');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(19, 'reserve_from_email', 'test@gmail.com');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(20, 'reserve_reply_email', '');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(21, 'open_registration', '1');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);";
-            
-            $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', 'eduTrac Password Reset
-                        Password & Login Information
-                        
-                        You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.  To log into the eduTrac system, please visit #url# and login with your username and password.
-                        
-                        FULL NAME:  #fname# #lname#
-                        USERNAME:  #uname#
-                        PASSWORD:  #password#
-                        
-                        If you need further assistance, please read the documentation at #helpdesk#.
-                        
-                        KEEP THIS IN A SAFE AND SECURE LOCATION.
-                        
-                        Thank You,
-                        eduTrac Web Team
-                        ');";
-            
-            $sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
-            
-            $sql[] = "INSERT INTO `staff` VALUES(1, '1', '', '', '', '', '', 'A', '".$this->_now."', '1', '');";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(2, '".Session::get('siteurl')."cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(3, '".Session::get('siteurl')."cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(4, '".Session::get('siteurl')."cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(5, '".Session::get('siteurl')."cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(6, '".Session::get('siteurl')."cron/runEmailHold/', 'Process Email Hold Table', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(7, '".Session::get('siteurl')."cron/runEmailQueue/', 'Process Email Queue', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(8, '".Session::get('siteurl')."cron/purgeEmailHold/', 'Purge Email Hold', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(9, '".Session::get('siteurl')."cron/purgeEmailQueue/', 'Purge Email Queue', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(10, '".Session::get('siteurl')."cron/runGraduation/', 'Process Graduation', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(11, '".Session::get('siteurl')."cron/runTermGPA/', 'Create Student Term GPA Record', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(12, '".Session::get('siteurl')."cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(13, '".Session::get('siteurl')."cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(14, '".Session::get('siteurl')."cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(15, '".Session::get('siteurl')."cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);";
-            
-            $sql[] = "INSERT INTO `cronjob` VALUES(16, '".Session::get('siteurl')."cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0);";
-            
-            foreach($sql as $query) {
-                $this->_connect->prepare($query);
-                $this->_connect->execute();
-            }
-			//redirect( '/install/?step=4' );
+        $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedBy`) 
+                  VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '1');";
+                  
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00014');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(3, 'enable_ssl', '0');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(4, 'site_title', '".Session::get('sitetitle')."');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(5, 'cookieexpire', '604800');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(6, 'cookiepath', '/');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(7, 'hold_file_loc', '/Applications/MAMP/_HOLD_/');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(8, 'enable_benchmark', '0');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(9, 'maintenance_mode', '0');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(10, 'enable_cron_log', '0');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(11, 'current_term_id', '');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(12, 'hour_display', '12');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(13, 'limit_query_size', '30');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(14, 'week_start', '0')";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(15, 'startTime', '08:00 AM');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(16, 'endTime', '05:00 PM');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(17, 'bullets_display', '0');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(18, 'enable_reserve_email', '1');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(19, 'reserve_from_email', 'test@gmail.com');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(20, 'reserve_reply_email', '');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(21, 'open_registration', '1');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);";
+        
+        $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', 'eduTrac Password Reset
+                    Password & Login Information
+                    
+                    You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.  To log into the eduTrac system, please visit #url# and login with your username and password.
+                    
+                    FULL NAME:  #fname# #lname#
+                    USERNAME:  #uname#
+                    PASSWORD:  #password#
+                    
+                    If you need further assistance, please read the documentation at #helpdesk#.
+                    
+                    KEEP THIS IN A SAFE AND SECURE LOCATION.
+                    
+                    Thank You,
+                    eduTrac Web Team
+                    ');";
+        
+        $sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
+        
+        $sql[] = "INSERT INTO `staff` VALUES(1, '1', '', '', '', '', '', 'A', '".$this->_now."', '1', '');";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(2, '".Session::get('siteurl')."cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(3, '".Session::get('siteurl')."cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(4, '".Session::get('siteurl')."cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(5, '".Session::get('siteurl')."cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(6, '".Session::get('siteurl')."cron/runEmailHold/', 'Process Email Hold Table', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(7, '".Session::get('siteurl')."cron/runEmailQueue/', 'Process Email Queue', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(8, '".Session::get('siteurl')."cron/purgeEmailHold/', 'Purge Email Hold', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(9, '".Session::get('siteurl')."cron/purgeEmailQueue/', 'Purge Email Queue', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(10, '".Session::get('siteurl')."cron/runGraduation/', 'Process Graduation', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(11, '".Session::get('siteurl')."cron/runTermGPA/', 'Create Student Term GPA Record', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(12, '".Session::get('siteurl')."cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(13, '".Session::get('siteurl')."cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(14, '".Session::get('siteurl')."cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(15, '".Session::get('siteurl')."cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);";
+        
+        $sql[] = "INSERT INTO `cronjob` VALUES(16, '".Session::get('siteurl')."cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0);";
+        
+        foreach($sql as $query) {
+            $this->_connect->exec($query);
         }
-			redirect( '/install/?step=4' );
+		redirect(Session::get('installurl') . 'install/?step=4');
+		}
         
     }
     
     public function runInstallFinish() {
-        copy(SYS_PATH . 'Application/Views/install/data/constants.sample.php',SYS_PATH . 'Config/constants.php');
+    	/**
+		 * If the constants.php file does not exist, copy the 
+		 * sample file and rename it.
+		 */
+    	if(!file_exists(SYS_PATH . 'Config/constants.php')) {
+        	copy(SYS_PATH . 'Config/constants.sample.php',SYS_PATH . 'Config/constants.php');
+        }
         $file = SYS_PATH . 'Config/constants.php';
         $config = file_get_contents($file);
         
@@ -210,13 +218,12 @@ class InstallModel {
 		# Close the database connection
         if ( $this->_connect )
             $this->_connect = null;
-        return true;
-        
-        # Destroy the session
+		
+		# Destroy the session
         Session::destroy();
-        
-        # Lock the installer and redirect user to login screen
-        $path = SYS_PATH . 'Config/installer.lock';
+		
+		# Lock the installer and redirect user to login screen
+        $path = SYS_PATH . 'Config/.installer.lock';
         file_put_contents($path, "installer lock file");
     }
     

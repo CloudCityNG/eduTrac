@@ -32,49 +32,53 @@ use \eduTrac\Classes\Core\Session;
 class Install extends \eduTrac\Classes\Core\Controller {
     
     public function __construct() {
+    	Session::init();
         parent::__construct();
         # Did we run it again?
-        if(file_exists(SYS_PATH . 'Config/installer.lock'))
+        if(file_exists(SYS_PATH . 'Config/.installer.lock'))
         {
             redirect( BASE_URL );
         }
         
-        if(isGetSet('step') === null) {
-            redirect('/install/?step=1');
+        if(isGetSet('step') === null)
+        {
+            redirect(Session::get('installurl') . 'install/?step=1');
         }
     }
     
     public function index() {
         $this->view->staticTitle = array('eduTrac Installer');
-		$this->view->errors = $this->model->errors;
         $this->view->render('bh',true);
         $this->view->render('install/index',true);
         $this->view->render('bf',true);
+		/**
+		 * Reset error message to null to not confuse 
+		 * the user.
+		 */
+		Session::set('error_message', null);
     }
     
     public function runInstall() {
-        if(isGetSet('step') == 2) {
-            Session::set('dbhost',isPostSet('dbhost'));
-            Session::set('dbuser',isPostSet('dbuser'));
-            Session::set('dbpass',isPostSet('dbpass'));
-            Session::set('dbname',isPostSet('dbname'));
-			$this->model->runInstall();
-        }
-        
-        if(isGetSet('step') == 3) {
-            Session::set('sitetitle',isPostSet('sitetitle'));
-            Session::set('siteurl',isPostSet('siteurl'));
-            Session::set('uname',isPostSet('uname'));
-            Session::set('fname',isPostSet('fname'));
-            Session::set('lname',isPostSet('lname'));
-            Session::set('password',et_hash_password(isPostSet('password')));
-            Session::set('email',isPostSet('email'));
-            $this->model->runInstall();
-        }
-        
-        if(isGetSet('step') == 4) {
-            $this->model->runInstallFinish();
-        }
+        Session::set('dbhost',isPostSet('dbhost'));
+        Session::set('dbuser',isPostSet('dbuser'));
+        Session::set('dbpass',isPostSet('dbpass'));
+        Session::set('dbname',isPostSet('dbname'));
+		redirect(Session::get('installurl') . 'install/?step=3');
+    }
+	
+	public function runInstallDB() {
+        Session::set('sitetitle',isPostSet('sitetitle'));
+        Session::set('siteurl',isPostSet('siteurl'));
+        Session::set('uname',isPostSet('uname'));
+        Session::set('fname',isPostSet('fname'));
+        Session::set('lname',isPostSet('lname'));
+        Session::set('password',et_hash_password(isPostSet('password')));
+        Session::set('email',isPostSet('email'));
+        $this->model->runInstallDB();
+    }
+	
+	public function runInstallFinish() {
+        $this->model->runInstallFinish();
     }
     
 }
