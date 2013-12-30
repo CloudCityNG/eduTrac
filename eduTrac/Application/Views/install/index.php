@@ -26,10 +26,9 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-
+use \eduTrac\Classes\Core\Session;
 $installurl = 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
 $installurl = str_replace('index.php','',$installurl);
-use \eduTrac\Classes\Core\Session;
 Session::init();
 Session::set('installurl',$installurl);
 ?>

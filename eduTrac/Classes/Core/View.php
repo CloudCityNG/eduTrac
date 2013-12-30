@@ -34,12 +34,12 @@ class View {
 
 	public function render($name, $include = false) {
 		if ($include == true) {
-			\eduTrac\Classes\Libraries\Util::_require( APP_PATH . 'Views' . DS . $name . '.php' );	
+			require( APP_PATH . 'Views' . DS . $name . '.php' );	
 		}
 		else {
-			\eduTrac\Classes\Libraries\Util::_require( APP_PATH . 'Views' . DS . 'header.php' );
-			\eduTrac\Classes\Libraries\Util::_require( APP_PATH . 'Views' . DS . $name . '.php' );
-			\eduTrac\Classes\Libraries\Util::_require( APP_PATH . 'Views' . DS . 'footer.php' );	
+			require( APP_PATH . 'Views' . DS . 'header.php' );
+			require( APP_PATH . 'Views' . DS . $name . '.php' );
+			require( APP_PATH . 'Views' . DS . 'footer.php' );	
 		}
 	}
 

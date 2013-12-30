@@ -180,7 +180,7 @@ class Hooks {
 	 * @return mixed
 	*/
 	public static function load_activated_plugins() {
-		if(file_exists(SYS_PATH . 'Config/installer.lock')) {
+		if(file_exists(SYS_PATH . 'Config/.installer.lock')) {
 			$q = DB::inst()->query("SELECT * FROM plugin");
 			
 			foreach($q as $k => $v) {
@@ -643,7 +643,7 @@ class Hooks {
 	
 	// Read an option from et. Return value or $default if not found
 	public static function get_option( $option_name, $default = false ) {
-	    if(file_exists(SYS_PATH . 'Config/installer.lock')) {
+	    if(file_exists(SYS_PATH . 'Config/.installer.lock')) {
 		// Allow plugins to short-circuit options
 		$pre = self::apply_filter( 'pre_option_'.$option_name, false );
 		if ( false !== $pre )
