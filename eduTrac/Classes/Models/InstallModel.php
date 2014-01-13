@@ -40,19 +40,17 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.3';
-	public $errors = array();
-	public $siteurl;
+    private $_version = '1.1.4';
     
     public function __construct() {
     	Session::init();
-		
     	$this->_now = date('Y-m-d h:m:s');
 		$this->_dbhost = Session::get('dbhost');
         $this->_dbuser = Session::get('dbuser');
         $this->_dbpass = Session::get('dbpass');
         $this->_dbname = Session::get('dbname');
-        try {
+		
+		try {
             $this->_connect = new \PDO("mysql:host=$this->_dbhost;dbname=$this->_dbname", $this->_dbuser, $this->_dbpass);
             $this->_connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->_connect->prepare('SET NAMES utf8');
@@ -63,21 +61,37 @@ class InstallModel {
         }
     }
 	
-	public function runInstallDB() {
+	public function runCheckDB() {
+		$_SESSION['error_message'] = [];
+		if(!$this->_connect) {
+			$_SESSION['error_message'][] = _t( 'Unable to establish a database connection.' );
+			redirect(Session::get('installurl') . 'install/?step=3');
+		} else {
+			redirect(Session::get('installurl') . 'install/?step=4');
+		}
+	}
+	
+	public function runInstallData() {
+		$_SESSION['error_message'] = [];
+		if($this->_connect) {
+			set_time_limit(0);
+			$q = file_get_contents(SYS_PATH . 'Application/Views/install/data/install.sql');
+			$this->_connect->exec($q);
+			redirect(Session::get('installurl') . 'install/?step=5');
+		} else {
+			$_SESSION['error_message'][] = _t( 'Unable to establish a database connection.' );
+			redirect(Session::get('installurl') . 'install/?step=3');
+		}
+	}
+	
+	public function runInstallAdmin() {
+		if($this->_connect) {
 		/**
 		 * Set two minutes to install the database.
 		 * If it takes longer than two minutes, then 
 		 * something is wrong.
 		 */
 		set_time_limit(0);
-		
-		if(!$this->_connect) {
-			$_SESSION['error_message'][] = 'Unable to establish database connection.';
-			redirect(Session::get('installurl') . 'install/?step=2');
-			exit();
-		} else {
-			$q = file_get_contents(SYS_PATH . 'Application/Views/install/data/install.sql');
-			$this->_connect->exec($q);
 			
         $sql = [];
         
@@ -170,9 +184,8 @@ class InstallModel {
         foreach($sql as $query) {
             $this->_connect->exec($query);
         }
-		redirect(Session::get('installurl') . 'install/?step=4');
+		redirect(Session::get('installurl') . 'install/?step=6');
 		}
-        
     }
     
     public function runInstallFinish() {
