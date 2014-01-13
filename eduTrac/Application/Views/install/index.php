@@ -100,8 +100,8 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 2 - Environment Test' );?></h3>
 
-                    <p><?=_t( 'If any of the tests below come back with red errors, then you need to correct those issues, 
-                    refresh your browser to make sure all have a green \'ok\' and then proceed with the install. If you proceed 
+                    <p><?=_t( 'If your system fails any of the tests to the right, then you need to correct them, 
+                    refresh your browser to make sure all have a green \'ok\' or an orange \'warning\' and then proceed with the install. If you proceed 
                     without correcting the errors, the install may fail and/or eduTrac may not function properly.' );?></p>
                 </div>
                 
@@ -150,8 +150,7 @@ Session::set('installurl',$installurl);
                     <h3><?=_t( 'Step 3 - Database Connection' );?></h3>
 
                     <p><?=_t( 'On the right, you should enter your database connection details. 
-                    If you\'re not sure about these, contact your host. It will take at least 30 seconds 
-                    to a minute to install the tables. So please be patient.' );?></p>
+                    If you\'re not sure about these, contact your host.' );?></p>
                 </div>
                 
                 <div class="column_two">
@@ -235,7 +234,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 5 - Website Information/Admin Account' );?></h3>
                     <p><?=_t( 'Welcome to the eduTrac installation process! 
-                    Fill in the information below and you’ll be on your way to 
+                    Fill in the information to the right and you’ll be on your way to 
                     using the most user friendly college management system.' );?></p>
                 </div>
                 
@@ -284,7 +283,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Success!' );?></h3>
                     
-                    <p><?=_t( 'eduTrac has been installed. Click the button below in order to flush the installer and be redirected to the login page.' );?></p>
+                    <p><?=_t( 'eduTrac has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page.' );?></p>
                     <form action="<?=Session::get('installurl');?>install/runInstallFinish/" class="defaultRequest" method="post">
                         <p><button type="submit"><span><?=_t( 'Finish Installer' );?></span></button></p>
                     </form>
