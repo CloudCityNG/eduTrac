@@ -97,6 +97,46 @@ Session::set('installurl',$installurl);
             <!-- Wizard - Step 2 -->
             <div id="step-2" class="step two_column">
                 
+                <div class="column_one">
+                    <h3><?=_t( 'Step 2 - Environment Test' );?></h3>
+
+                    <p><?=_t( 'If any of the tests below come back with red errors, then you need to correct those issues, 
+                    refresh your browser to make sure all have a green \'ok\' and then proceed with the install. If you proceed 
+                    without correcting the errors, the install may fail and/or eduTrac may not function properly.' );?></p>
+                </div>
+                
+                <div class="column_two legend">
+					<ul>
+						<?php
+						$results = [];
+						$php_ok = validate_php($results);
+						$memory_ok = validate_memory_limit($results);
+						$extensions_ok = validate_extensions($results);
+						foreach($results as $result) {
+							print '<li class="' . $result->status . '"><span>' . $result->status . '</span> &mdash; ' . $result->message . '</li>';
+						}
+						?>
+					</ul>
+					<button class="next" onclick="window.location='<?=Session::get('installurl');?>install/?step=3'"><span><?=_t( 'Next Step' );?></span></button>
+                </div>
+      
+				<div class="column_two legend">
+					<h3><?=_t( 'Legend' );?></h3>
+					<ul>
+					  <li class="ok"><span><?=_t( 'ok' );?></span> &mdash; <?=_t( 'All OK' );?></li>
+					  <li class="warning"><span><?=_t( 'warning' );?></span> &mdash; <?=_t( 'Not a deal breaker and is only a recommendation' );?></li>
+					  <li class="error"><span><?=_t( 'error' );?></span> &mdash; <?=_t( 'eduTrac require this feature and can\'t work without it' );?></li>
+					</ul>
+				</div>
+                
+            </div>
+            <!-- </Wizard - Step 2 -->
+            <?php } ?>
+            
+            <?php if(isGetSet('step') == 3) { ?>
+            <!-- Wizard - Step 3 -->
+            <div id="step-2" class="step two_column">
+                
                 <!-- Helper -->
                 <div id="help-dbname" class="helper">
                     <div class="text">
@@ -107,16 +147,16 @@ Session::set('installurl',$installurl);
                 <!-- </Helper -->
                 
                 <div class="column_one">
-                    <h3><?=_t( 'Step 2 - Database Information' );?></h3>
+                    <h3><?=_t( 'Step 3 - Database Connection' );?></h3>
 
-                    <p><?=_t( 'On the right side you should enter your database connection details. 
+                    <p><?=_t( 'On the right, you should enter your database connection details. 
                     If you\'re not sure about these, contact your host. It will take at least 30 seconds 
                     to a minute to install the tables. So please be patient.' );?></p>
                 </div>
                 
                 <div class="column_two">
                 	<?=Session::error();?>
-                    <form action="<?=Session::get('installurl');?>install/runInstall/" class="defaultRequest" method="post">
+                    <form action="<?=Session::get('installurl');?>install/runCheckDB/" class="defaultRequest" method="post">
                         <fieldset>
                             <p><label><a href="#help-dbname" class="show_helper"><span>(?)</span> <?=_t( 'Database Name' );?></a></label>
                             <input type="text" name="dbname" class="required input-block-level" /></p>
@@ -140,11 +180,35 @@ Session::set('installurl',$installurl);
                 </div>
                 
             </div>
-            <!-- </Wizard - Step 2 -->
+            <!-- </Wizard - Step 3 -->
             <?php } ?>
             
-            <?php if(isGetSet('step') == 3) { ?>
-            <!-- Wizard - Step 3 -->
+            <?php if(isGetSet('step') == 4) { ?>
+            <!-- Wizard - Step 4 -->
+            <div id="step-2" class="step two_column">
+                
+                <div class="column_one">
+                    <h3><?=_t( 'Step 4 - Install Database Tables' );?></h3>
+
+                    <p><?=_t( 'It will take at least 30 seconds 
+                    to a minute to install the tables. So please be patient.' );?></p>
+                </div>
+                
+                <div class="column_two legend">
+					<form action="<?=Session::get('installurl');?>install/runInstallData/" class="defaultRequest" method="post">
+                        <fieldset>
+                             <p><label>&nbsp;</label>
+                             <button type="submit"><span><?=_t( 'Install Tables' );?></span></button></p>
+                        </fieldset>
+                    </form>
+				</div>
+                
+            </div>
+            <!-- </Wizard - Step 4 -->
+            <?php } ?>
+            
+            <?php if(isGetSet('step') == 5) { ?>
+            <!-- Wizard - Step 5 -->
             <div id="step-3" class="step two_column">
             
                 <!-- Helper -->
@@ -161,7 +225,7 @@ Session::set('installurl',$installurl);
                 <div id="help-password" class="helper">
                     <div class="text">
                         <h3><?=_t( 'Password' );?></h3>
-                        <p><strong><?=_t( 'A password will be automatically generated for you if you leave this blank.' );?></strong></p>
+                        <!--<p><strong><?=_t( 'A password will be automatically generated for you if you leave this blank.' );?></strong></p>-->
                         <p><?=_t( 'Hint: The password should be at least seven characters long.
                         To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^ &amp; ).' );?></p>
                     </div>
@@ -169,7 +233,7 @@ Session::set('installurl',$installurl);
                 <!-- </Helper -->
                 
                 <div class="column_one">
-                    <h3><?=_t( 'Step 3 - Website Information' );?></h3>
+                    <h3><?=_t( 'Step 5 - Website Information/Admin Account' );?></h3>
                     <p><?=_t( 'Welcome to the eduTrac installation process! 
                     Fill in the information below and you’ll be on your way to 
                     using the most user friendly college management system.' );?></p>
@@ -177,7 +241,7 @@ Session::set('installurl',$installurl);
                 
                 <div class="column_two">
                     
-                    <form action="<?=Session::get('installurl');?>install/runInstallDB/" class="defaultRequest" method="post">
+                    <form action="<?=Session::get('installurl');?>install/runInstallAdmin/" class="defaultRequest" method="post">
                         <fieldset>
                             <p><label><?=_t( 'Site Title' );?></label>
                             <input type="text" name="sitetitle" class="required" /></p>
@@ -203,18 +267,18 @@ Session::set('installurl',$installurl);
                         
                         <fieldset>
                              <p><label>&nbsp;</label>
-                             <button type="submit"><span><?=_t( 'Install DB Tables' );?></span></button></p>
+                             <button type="submit"><span><?=_t( 'Create Admin' );?></span></button></p>
                         </fieldset>
                     </form>
                     
                 </div>
                 
             </div>
-            <!-- </Wizard - Step 3 -->
+            <!-- </Wizard - Step 5-->
             <?php } ?>
             
-            <?php if(isGetSet('step') == 4) { ?>
-            <!-- Wizard - Step 4 -->
+            <?php if(isGetSet('step') == 6) { ?>
+            <!-- Wizard - Step 6 -->
             <div id="step-4" class="step one_column">
                 
                 <div class="column_one">
@@ -227,7 +291,7 @@ Session::set('installurl',$installurl);
                 </div>
                 
             </div>
-            <!-- </Wizard - Step 4 -->
+            <!-- </Wizard - Step 6 -->
             <?php } ?>
             
         </div>

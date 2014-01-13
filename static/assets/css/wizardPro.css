@@ -348,3 +348,32 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.legend ul {
+    margin: 8px 0;
+    padding: 0 0 0 33px;
+    list-style: square;
+  }
+  
+.ok span, .warning span, .error span {
+    font-weight: bolder;
+  }
+  
+  .ok span {
+    color: green;
+  }
+  
+  .warning span {
+    color: orange;
+  }
+  
+  .error span {
+    color: red;
+  }
+  span.details {
+    font-weight: normal;
+    font-size: 12px;
+    color: #999;
+    display: block;
+    padding: 5px;
+  }

@@ -165,6 +165,8 @@ $auth = new Cookies;
                         </li>
                         
                         <li<?=ae('import_data');?> class=""><a href="<?=BASE_URL;?>import/<?=bm();?>" class="glyphicons file_import"><i></i><?php _e( _t( 'Importer' ) ); ?></a></li>
+                        
+                        <li class=""><a href="<?=BASE_URL;?>support/<?=bm();?>" class="glyphicons life_preserver"><i></i><?php _e( _t( 'Online Documentation' ) ); ?></a></li>
 						
 						<li<?=ae('access_forms');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons notes_2"><i></i><?php _e( _t( 'Forms' ) ); ?></a>
