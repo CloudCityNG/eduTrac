@@ -58,24 +58,28 @@ class Install extends \eduTrac\Classes\Core\Controller {
 		Session::set('error_message', null);
     }
     
-    public function runInstall() {
+    public function runCheckDB() {
         Session::set('dbhost',isPostSet('dbhost'));
         Session::set('dbuser',isPostSet('dbuser'));
         Session::set('dbpass',isPostSet('dbpass'));
         Session::set('dbname',isPostSet('dbname'));
-		redirect(Session::get('installurl') . 'install/?step=3');
+		$this->model->runCheckDB();
     }
 	
-	public function runInstallDB() {
-        Session::set('sitetitle',isPostSet('sitetitle'));
+	public function runInstallData() {
+        $this->model->runInstallData();
+    }
+	
+	public function runInstallAdmin() {
+		Session::set('sitetitle',isPostSet('sitetitle'));
         Session::set('siteurl',isPostSet('siteurl'));
         Session::set('uname',isPostSet('uname'));
         Session::set('fname',isPostSet('fname'));
         Session::set('lname',isPostSet('lname'));
         Session::set('password',et_hash_password(isPostSet('password')));
         Session::set('email',isPostSet('email'));
-        $this->model->runInstallDB();
-    }
+		$this->model->runInstallAdmin();
+	}
 	
 	public function runInstallFinish() {
         $this->model->runInstallFinish();
