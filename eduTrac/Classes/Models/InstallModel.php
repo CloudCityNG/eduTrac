@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.4';
+    private $_version = '1.1.5-Beta-20141401';
     
     public function __construct() {
     	Session::init();
