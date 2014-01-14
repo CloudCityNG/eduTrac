@@ -3,6 +3,7 @@ error_log
 installer.lock
 installer.lock.old
 robots.txt
+robots
 *.zip
 .DS_Store
 *.diff
