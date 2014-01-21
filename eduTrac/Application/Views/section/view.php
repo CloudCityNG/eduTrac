@@ -256,7 +256,7 @@ jQuery(document).ready(function() {
 				<div class="separator line bottom"></div>
 				
 				<!-- Column -->
-                    <div class="span4">
+                    <div class="span6">
                         
                         <!-- Group -->
                         <div class="control-group">
@@ -274,7 +274,7 @@ jQuery(document).ready(function() {
                 <!-- // Column End -->
                 
                 <!-- Column -->
-                    <div class="span4">
+                    <div class="span6">
                         
                         <!-- Group -->
                         <div class="control-group">
@@ -282,24 +282,6 @@ jQuery(document).ready(function() {
                             <div class="controls">
                                 <input type="text" disabled value="X" class="span1 center" />
                                 <a href="<?=BASE_URL;?>section/offering_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
-                                    <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
-                                </a>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                    </div>
-                <!-- // Column End -->
-                
-                <!-- Column -->
-                    <div class="span4">
-                        
-                        <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Billing Info' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" disabled value="X" class="span1 center" />
-                                <a href="<?=BASE_URL;?>section/billing_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
                                     <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
                                 </a>
                             </div>
