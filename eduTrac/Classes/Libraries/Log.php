@@ -41,7 +41,7 @@ class Log {
     /**
      * Writes a log to the log table in the database.
      * 
-     * @since 1.0
+     * @since 1.0.0
      */
     public function writeLog($action,$process,$record,$uname) {
         $create = date("Y-m-d");
@@ -60,7 +60,7 @@ class Log {
     /**
      * Purges audit trail logs that are older than 30 days old.
      * 
-     * @since 1.0
+     * @since 1.0.0
      */
     public function purgeLog() {
         $date = date('Y-m-d h:i:s', time());
@@ -73,20 +73,15 @@ class Log {
     /**
      * Purges system error logs that are older than 30 days old.
      * 
-     * @since 1.0
+     * @since 1.0.0
      */
     public function purgeErrLog() {
-        if($handle = opendir(BASE_PATH . 'tmp/logs/')) {
-            while(false !== ($file = readdir($handle))) {
-                $filelastmodified = filemtime($file);
-                if((time() - $filelastmodified) > 30*24*3600 && is_file($file)) {
-                    if(preg_match('/\.txt$/i', $file)) {
-                        unlink($file);
-                    }
-                }
-            }
-        }
-        closedir($handle);
+    	foreach (glob(BASE_PATH .'tmp/logs/*.txt') as $file) {
+        $filelastmodified = filemtime($file);
+	        if((time() - $filelastmodified) > 30*24*3600 && is_file($file)) {
+                unlink($file);
+	        }
+		}
     }
     
     public function logError($type,$string,$file,$line) {

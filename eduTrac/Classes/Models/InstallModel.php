@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.4';
+    private $_version = '1.1.5';
     
     public function __construct() {
     	Session::init();
@@ -149,37 +149,27 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `staff` VALUES(1, '1', '', '', '', '', '', 'A', '".$this->_now."', '1', '');";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(2, '".Session::get('siteurl')."cron/runStuTerms/', 'Create Student Terms Record', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(2, '".Session::get('siteurl')."cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(3, '".Session::get('siteurl')."cron/runStuLoad/', 'Create Student Load Record', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(3, '".Session::get('siteurl')."cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(4, '".Session::get('siteurl')."cron/updateStuTerms/', 'Update Student Terms', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(4, '".Session::get('siteurl')."cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(5, '".Session::get('siteurl')."cron/updateStuLoad/', 'Update Student Load', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(5, '".Session::get('siteurl')."cron/runGraduation/', 'Process Graduation', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(6, '".Session::get('siteurl')."cron/runEmailHold/', 'Process Email Hold Table', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(6, '".Session::get('siteurl')."cron/runTermGPA/', 'Create Student Term GPA Record', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(7, '".Session::get('siteurl')."cron/runEmailQueue/', 'Process Email Queue', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(7, '".Session::get('siteurl')."cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(8, '".Session::get('siteurl')."cron/purgeEmailHold/', 'Purge Email Hold', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(8, '".Session::get('siteurl')."cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(9, '".Session::get('siteurl')."cron/purgeEmailQueue/', 'Purge Email Queue', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(9, '".Session::get('siteurl')."cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(10, '".Session::get('siteurl')."cron/runGraduation/', 'Process Graduation', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(10, '".Session::get('siteurl')."cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);";
         
-        $sql[] = "INSERT INTO `cronjob` VALUES(11, '".Session::get('siteurl')."cron/runTermGPA/', 'Create Student Term GPA Record', NULL, 0, 0, 0, 0);";
-        
-        $sql[] = "INSERT INTO `cronjob` VALUES(12, '".Session::get('siteurl')."cron/updateTermGPA/', 'Update Term GPA', NULL, 0, 0, 0, 0);";
-        
-        $sql[] = "INSERT INTO `cronjob` VALUES(13, '".Session::get('siteurl')."cron/purgeErrorLog/', 'Purge Error Log', NULL, 0, 0, 0, 0);";
-        
-        $sql[] = "INSERT INTO `cronjob` VALUES(14, '".Session::get('siteurl')."cron/purgeSavedQuery/', 'Purge Saved Queries', 86400, 1380595419, 0, 0, 0);";
-        
-        $sql[] = "INSERT INTO `cronjob` VALUES(15, '".Session::get('siteurl')."cron/purgeCronLogs/', 'Purge Cron Logs', 86400, 1380595404, 0, 0, 0);";
-        
-        $sql[] = "INSERT INTO `cronjob` VALUES(16, '".Session::get('siteurl')."cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0);";
+        $sql[] = "INSERT INTO `cronjob` VALUES(11, '".Session::get('siteurl')."cron/runDBBackup/', 'Backup Database', NULL, 0, 0, 0, 0);";
         
         foreach($sql as $query) {
             $this->_connect->exec($query);

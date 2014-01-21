@@ -28,6 +28,21 @@
  */
 ?>
 
+<!--<script type="text/javascript">
+$(document).ready(function() {
+
+//Remove row.
+$('#items').on('click', '.delme', function() {
+   $(this).parents('.item-row').remove();
+});
+//add row add here.
+$("#addrow").click(function() {
+$(".item-row:last").after('<tr class="item-row"><td class="center"><select style="width:350px" name="instID" id="select2_11"><option value="">&nbsp;</option><?php //table_dropdown('institution','','institutionID','ficeCode','instName'); ?></select></td><td class="center"><div class="input-append date" id="datetimepicker6"><input id="startDate" name="fromDate" type="text" /><span class="add-on"><i class="icon-th"></i></span></div></td><td class="center"><div class="input-append date" id="datetimepicker7"><input id="startDate" name="toDate" type="text" /><span class="add-on"><i class="icon-th"></i></span></div></td><td class="center"><input class="span5" type="text" name="GPA" /></td><td><a href="javascript:;" title="Remove row" class="delme btn btn-circle"><i class="icon-minus"></i></a></td></tr>');
+});	
+
+});	
+</script>-->
+
 <ul class="breadcrumb">
     <li><?php _e( _t( 'You are here') ); ?></li>
     <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
@@ -145,7 +160,7 @@
                         
                             <div class="controls">
                                 <label class="control-label" for="address"><?php _e( _t( 'Insitution Attended' ) ); ?></label>
-                                <table class="table table-bordered table-primary">
+                                <table id="items" class="table table-bordered table-primary">
                                 
                                     <thead>
                                         <tr>
@@ -153,13 +168,14 @@
                                             <th class="center"><?php _e( _t( 'Attended From Date' ) ); ?></th>
                                             <th class="center"><?php _e( _t( 'Attended To Date' ) ); ?></th>
                                             <th class="center"><?php _e( _t( 'GPA' ) ); ?></th>
+                                            <!--<th>&nbsp;</th>-->
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
+                                        <tr class="item-row">
                                             <td class="center">
-                                                <select style="width:350px" name="instID" id="select2_11">
+                                                <select style="width:350px" name="instID">
                                                     <option value="">&nbsp;</option>
                                                     <?php table_dropdown('institution','','institutionID','ficeCode','instName'); ?>
                                                 </select>
@@ -177,6 +193,7 @@
                                                 </div>
                                             </td>
                                             <td class="center"><input class="span5" type="text" name="GPA" /></td>
+                                            <!--<td><a id="addrow" href="javascript:;" title="Add a row" class="btn btn-circle"><i class="icon-plus"></i></a></td>-->
                                         </tr>
                                     </tbody>
                                     

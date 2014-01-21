@@ -113,18 +113,6 @@ use \eduTrac\Classes\Libraries\Hooks;
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Enable Benchmark' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:25%"  name="enable_benchmark" id="select2_11">
-                                    <option value="1"<?=selected( _h(Hooks::{'get_option'}( 'enable_benchmark' )), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( _h(Hooks::{'get_option'}( 'enable_benchmark' )), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="control-group">
                             <label class="control-label"><?php _e( _t( 'Enable Cron Jobs' ) ); ?></label>
                             <div class="controls">
                                 <select style="width:25%" name="enable_cron_jobs" id="select2_12">
