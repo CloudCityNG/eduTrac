@@ -36,7 +36,7 @@ defined( 'LOCALE_DIR' ) 		or define( 'LOCALE_DIR', SYS_PATH . 'Locale' );
 defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH.'DropIns/' );
 defined( 'DEFAULT_LOCALE' )		or define( 'DEFAULT_LOCALE', '' );
 defined( 'ENCODING' )			or define( 'ENCODING', 'UTF-8' );
-defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '1.1.5-Beta-20141401' );
+defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '1.1.5-Beta-20142101' );
 require( SYS_PATH . 'application.php' );
 benchmark_init();
 
