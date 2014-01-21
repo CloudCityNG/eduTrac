@@ -82,6 +82,223 @@ class FinancialModel {
         return $array;
     }
     
+    public function glAccount() {
+    	$array = [];
+    	$q = DB::inst()->query( "SELECT  
+    					a.glacctID,
+    					a.gl_acct_number,
+    					a.gl_acct_name,
+    					a.gl_acct_type,
+    					a.gl_acct_memo,
+    					b.gl_trans_debit,
+    					b.gl_trans_credit 
+					FROM 
+						gl_account a 
+					LEFT JOIN 
+						gl_transaction b 
+					ON 
+						a.glacctID = b.accountID" 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+    }
+    
+    public function jentry() {
+    	$array = [];
+    	$q = DB::inst()->query( "SELECT 
+    					a.jeID,
+    					a.gl_jentry_date,
+    					a.gl_jentry_manual_id,
+    					a.gl_jentry_title,
+    					a.gl_jentry_description,
+    					a.gl_jentry_personID,
+    					SUM(b.gl_trans_debit) as Debits 
+					FROM 
+						gl_journal_entry a 
+					LEFT JOIN 
+						gl_transaction b 
+					ON 
+						a.jeID = b.jeID 
+					GROUP BY 
+						b.jeID 
+					ORDER BY 
+						a.jeID 
+					DESC" 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+    }
+	
+	public function viewjEntry($id) {
+		$array = [];
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->query( "SELECT 
+						a.gl_trans_memo,
+						a.gl_trans_debit,
+						a.gl_trans_credit,
+						b.gl_acct_name,
+						c.* 
+					FROM 
+						gl_transaction a 
+					LEFT JOIN 
+						gl_account b 
+					ON 
+						a.accountID = b.glacctID 
+					LEFT JOIN 
+						gl_journal_entry c 
+					ON 
+						a.jeID = c.jeID 
+					WHERE 
+						c.jeID = :id 
+					ORDER BY 
+						c.jeID",
+					$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function viewjEntryTrans($id) {
+		$array = [];
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->query( "SELECT 
+						SUM(a.gl_trans_debit) AS Debit,
+						SUM(a.gl_trans_credit) AS Credit,
+						b.* 
+					FROM 
+						gl_transaction a 
+					LEFT JOIN 
+						gl_journal_entry b 
+					ON 
+						a.jeID = b.jeID 
+					WHERE 
+						b.jeID = :id 
+					GROUP BY 
+						a.jeID 
+					ORDER BY 
+						b.jeID",
+					$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function jefilter() {
+		$array = [];
+		$bind = [ ":from" => isGetSet('from'),":to" => isGetSet('to') ];
+		$q = DB::inst()->query( "SELECT 
+						a.*,
+						b.gl_trans_debit 
+					FROM 
+						gl_journal_entry a 
+					LEFT JOIN 
+						gl_transaction b 
+					ON 
+						a.jeID = b.jeID 
+					WHERE  
+						a.gl_jentry_date 
+					BETWEEN 
+						:from 
+					AND 
+						:to 
+					GROUP BY 
+						a.jeID 
+					ORDER BY 
+						a.jeID 
+					ASC",
+				$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function jefilterSum() {
+		$array = [];
+		$bind = [ ":from" => isGetSet('from'),":to" => isGetSet('to') ];
+		$q = DB::inst()->query( "SELECT 
+						a.*,
+						SUM(b.gl_trans_debit) AS Debit 
+					FROM 
+						gl_journal_entry a 
+					LEFT JOIN 
+						gl_transaction b 
+					ON 
+						a.jeID = b.jeID 
+					WHERE  
+						a.gl_jentry_date 
+					BETWEEN 
+						:from 
+					AND 
+						:to",
+				$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function glfilter() {
+		$array = [];
+		$bind = [ ":from" => isGetSet('from'),":to" => isGetSet('to') ];
+		$q = DB::inst()->query( "SELECT 
+						a.gl_acct_number,
+						a.gl_acct_name,
+						a.gl_acct_type,
+						SUM(b.gl_trans_debit) AS Debit,
+						SUM(b.gl_trans_credit) AS Credit 
+					FROM 
+						gl_account a 
+					LEFT JOIN 
+						gl_transaction b 
+					ON 
+						a.glacctID = b.accountID 
+					WHERE 
+						b.gl_trans_date 
+					BETWEEN 
+						:from 
+					AND 
+						:to  
+					GROUP BY 
+						b.accountID",
+				$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function glfilterSum() {
+		$array = [];
+		$bind = [ ":from" => isGetSet('from') ];
+		$q = DB::inst()->query( "SELECT 
+						SUM(gl_trans_debit) AS Debit,
+						SUM(gl_trans_credit) AS Credit 
+					FROM  
+						gl_transaction 
+					WHERE 
+						gl_trans_date 
+					< 
+						:from",
+				$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+    
     public function billingTable() {
         $array = [];
         $q = DB::inst()->query( "SELECT 
@@ -337,6 +554,78 @@ class FinancialModel {
         }
         return $array;
     }
+    
+    public function runGLAccount($data) {
+    	$bind = [ 'gl_acct_number' => $data['gl_acct_number'],
+    			  'gl_acct_name' => $data['gl_acct_name'],
+    			  'gl_acct_type' => $data['gl_acct_type'],
+    			  'gl_acct_memo' => $data['gl_acct_memo']
+    			 ];
+		$q = DB::inst()->insert( "gl_account", $bind );
+		if(!$q) {
+			redirect( BASE_URL . 'error/save_data/' );
+		} else {
+			redirect( BASE_URL . 'financial/account_chart/' );
+		}
+    }
+    
+    public function runEditGLAccount($data) {
+    	$update = [ 'gl_acct_number' => $data['gl_acct_number'],
+    			  'gl_acct_name' => $data['gl_acct_name'],
+    			  'gl_acct_type' => $data['gl_acct_type'],
+    			  'gl_acct_memo' => $data['gl_acct_memo']
+    			 ];
+    			 
+		 $bind = [ ':id' => $data['id'] ];
+		 
+		 $q = DB::inst()->update( "gl_account",$update,"glacctID = :id",$bind );
+		 if(!$q) {
+		 	redirect( BASE_URL . 'error/save_data' );
+		 } else {
+		 	redirect( BASE_URL . 'financial/account_chart/' );
+		 }
+    }
+	
+	public function runjEntry($data) {
+		$bind1 = [ "gl_jentry_date" => $data['gl_jentry_date'],
+					"gl_jentry_manual_id" => $data['gl_jentry_manual_id'],
+					"gl_jentry_title" => $data['gl_jentry_title'],
+					"gl_jentry_description" => $data['gl_jentry_description'],
+					"gl_jentry_personID" => $this->_auth->getPersonField('personID')
+				 ];
+		 $q1 = DB::inst()->insert( "gl_journal_entry", $bind1 );
+		 $ID = DB::inst()->lastInsertId('jeID');
+		 
+		 if($q1) {
+			 
+			 $i = 0;
+			 $size = count($data['glacctID']);
+			 while($i < $size) {
+			 	if($data['amount'][$i] < 0) { 
+				 	$credit = $data['amount'][$i];
+					$debit = 0;
+				 } else { 
+					$debit = $data['amount'][$i];
+					$credit = 0;
+				 }
+			 	$bind2 = [ "jeID" => $ID,
+			 				"accountID" => $data['glacctID'][$i],
+			 				"gl_trans_date" => $data['gl_jentry_date'],
+			 				"gl_trans_memo" => $data['gl_trans_memo'][$i],
+			 				"gl_trans_debit" => $debit,
+			 				"gl_trans_credit" => $credit 
+			 			];
+				$q2 = DB::inst()->insert( "gl_transaction", $bind2 );
+				++$i;
+			 }
+		 }
+		 
+		 if(!$q2) {
+		 	redirect( BASE_URL . 'error/save_data/' );
+		 } else {
+		 	redirect( BASE_URL . 'financial/journal_entries/' );
+		 }
+	}
     
     public function runBillTable($data) {
         if($data['update'] == 1 ) {

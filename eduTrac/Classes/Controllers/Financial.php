@@ -53,6 +53,122 @@ class Financial extends \eduTrac\Classes\Core\Controller {
         $this->view->search = $this->model->search();
 		$this->view->render('financial/index');
 	}
+	
+	public function account_chart() {
+		$this->view->staticTitle = array('Chart of Accounts');
+		$this->view->css = array( 
+								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
+								'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+								);
+								
+		$this->view->js = array( 
+								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+								'theme/scripts/demo/tables.js',
+								'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+								);
+        $this->view->glAccount = $this->model->glAccount();
+		$this->view->render('financial/account_chart');
+	}
+	
+	public function journal_entries() {
+		$this->view->staticTitle = array('General Journal Entries');
+		$this->view->css = array( 
+								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
+								);
+								
+		$this->view->js = array( 
+								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
+								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
+								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
+								'theme/scripts/demo/tables.js'
+								);
+        $this->view->jentry = $this->model->jentry();
+		$this->view->render('financial/journal_entries');
+	}
+	
+	public function add_jentry() {
+        $this->view->staticTitle = array('Add General Journal Entry');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );        
+        $this->view->render('financial/add_jentry');
+    }
+	
+	public function jentry_filter() {
+        $this->view->staticTitle = array('Filter General Journal Entries');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );       
+        $this->view->render('financial/jentry_filter');
+    }
+	
+	public function gl_filter() {
+        $this->view->staticTitle = array('Filter General Ledger');
+        $this->view->css = array( 
+                                'theme/scripts/plugins/forms/select2/select2.css',
+                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
+                                );
+        $this->view->js = array( 
+                                'theme/scripts/plugins/forms/select2/select2.js',
+                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
+                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
+                                'theme/scripts/demo/form_elements.js'
+                                );       
+        $this->view->render('financial/gl_filter');
+    }
+	
+	public function view_jentry($id) {
+		$this->view->jentry = $this->model->viewjEntry($id);
+		$this->view->jentryTrans = $this->model->viewjEntryTrans($id);
+		if(empty($this->view->jentry)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+		$this->view->render('bh',true);
+        $this->view->render('financial/view_jentry',true);
+		$this->view->render('bf',true);
+    }
+	
+	public function jentries() {
+		$this->view->jefilter = $this->model->jefilter();
+		$this->view->jefilterSum = $this->model->jefilterSum();
+		$this->view->render('bh',true);
+        $this->view->render('financial/jentries',true);
+		$this->view->render('bf',true);
+    }
+	
+	public function gl_summary() {
+		$this->view->glfilter = $this->model->glfilter();
+		$this->view->glfilterSum = $this->model->glfilterSum();
+		$this->view->render('bh',true);
+        $this->view->render('financial/gl_summary',true);
+		$this->view->render('bf',true);
+    }
     
     public function billing_table() {
         $this->view->staticTitle = array('Billing Table');
@@ -165,6 +281,37 @@ class Financial extends \eduTrac\Classes\Core\Controller {
                                 );        
         $this->view->render('financial/issue_refund');
     }
+	
+	public function runGLAccount() {
+        $data = [];
+        $data['gl_acct_number'] = isPostSet('gl_acct_number');
+        $data['gl_acct_name'] = isPostSet('gl_acct_name');
+        $data['gl_acct_type'] = isPostSet('gl_acct_type');
+        $data['gl_acct_memo'] = isPostSet('gl_acct_memo');
+        $this->model->runGLAccount($data);
+    }
+
+	public function runEditGLAccount() {
+        $data = [];
+        $data['gl_acct_number'] = isPostSet('gl_acct_number');
+        $data['gl_acct_name'] = isPostSet('gl_acct_name');
+        $data['gl_acct_type'] = isPostSet('gl_acct_type');
+        $data['gl_acct_memo'] = isPostSet('gl_acct_memo');
+		$data['id'] = isPostSet('id');
+        $this->model->runEditGLAccount($data);
+    }
+	
+	public function runjEntry() {
+		$data = [];
+		$data['gl_jentry_date'] = isPostSet('gl_jentry_date');
+		$data['gl_jentry_title'] = isPostSet('gl_jentry_title');
+		$data['gl_jentry_manual_id'] = isPostSet('gl_jentry_manual_id');
+		$data['gl_jentry_description'] = isPostSet('gl_jentry_description');
+		$data['glacctID'] = isPostSet('glacctID');
+		$data['gl_trans_memo'] = isPostSet('gl_trans_memo');
+		$data['amount'] = isPostSet('amount');
+		$this->model->runjEntry($data);
+	}
     
     public function runBillTable() {
         $data = [];

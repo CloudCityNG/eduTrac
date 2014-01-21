@@ -206,8 +206,28 @@ use \eduTrac\Classes\Libraries\Cookies;
         $q = DB::inst()->select( $table,$where,$id,"$id,$code,$name" );
         
         foreach( $q as $k => $v ) {
+        	extract($k);
             echo '<option value="'._h($v[$id]).'"'.selected( $activeID, _h($v[$id]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
         }
+    }
+    
+    /**
+     * General ledger account dropdown: pulls dropdown list from general ledger 
+	 * account table. if $activeID is not NULL, shows the record attached 
+     * to a particular record.
+     * 
+     * @since 1.1.5
+     * @param string $activeCode
+     * @return mixed
+     */
+    function gl_acct_dropdown($activeID = NULL) {
+        $q = DB::inst()->query( "SELECT * FROM gl_account" );
+        $options = "";
+        while( $row = $q->fetch(\PDO::FETCH_OBJ) ) {
+        	extract($row);
+            $options .= '<option value="'._h($row->glacctID).'"'.selected( $activeID, _h($row->glacctID), false ).'>'._h($row->gl_acct_number).' | '._h($row->gl_acct_name).'</option>';
+        }
+		echo $options;
     }
     
     /**
@@ -525,6 +545,27 @@ use \eduTrac\Classes\Libraries\Cookies;
                 <option value="' . _t('NA') . '"'.selected( $status, _t('NA'), false ).'>' . _t('NA Non-Applicable') . '</option>
                 </select>';
         return Hooks::apply_filter('admit_status', $select, $status);
+    }
+	
+	/**
+     * General Ledger type select: shows general list of general 
+	 * ledger types and if $type is not NULL, shows the general 
+	 * ledger type for a particular general ledger record.
+     * 
+     * @since 1.1.5
+     * @param string $type
+     * @return string Returns the record type if selected is true.
+     */
+    function general_ledger_type_select($type = NULL) {
+        $select = '<select style="width:40%;" name="gl_acct_type" required>
+                <option value="">&nbsp;</option>
+                <option value="'._t('Asset').'"'.selected( $type, _t('Asset'), false ).'>'._t('Asset').'</option>
+                <option value="'._t('Liability').'"'.selected( $type, _t('Liability'), false ).'>'._t('Liability').'</option>
+                <option value="'._t('Equity').'"'.selected( $type, _t('Equity'), false ).'>'._t('Equity').'</option>
+                <option value="'._t('Revenue').'"'.selected( $type, _t('Revenue'), false ).'>'._t('Revenue').'</option>
+                <option value="'._t('Expense').'"'.selected( $type, _t('Expense'), false ).'>'._t('Expense').'</option>
+                </select>';
+        return Hooks::apply_filter('general_ledger_type', $select, $type);
     }
     
     /**
