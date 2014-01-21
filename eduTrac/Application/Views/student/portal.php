@@ -56,7 +56,6 @@
 				<div class="widget-body">
 					<ul>
 						<li><a href="<?=BASE_URL;?>student/courses/"><?php _e( _t( 'Register' ) ); ?></a></li>
-						<li><a href="<?=BASE_URL;?>student/bill/"><?php _e( _t( 'My Bills' ) ); ?></a></li>
 						<li><a href="<?=BASE_URL;?>student/schedule/"><?php _e( _t( 'Class Schedule' ) ); ?></a></li>
 						<li><a href="<?=BASE_URL;?>student/grades/"><?php _e( _t( 'Grades' ) ); ?></a></li>
 						<!-- <li><a href="#"><?php _e( _t( 'Request Transcript' ) ); ?></a></li> -->

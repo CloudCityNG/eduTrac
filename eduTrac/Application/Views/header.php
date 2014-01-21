@@ -158,15 +158,10 @@ $auth = new Cookies;
                                 <li<?=ae('access_permission_screen');?> class=""><a href="<?=BASE_URL;?>permission/<?=bm();?>"><?php _e( _t( '(MPRM) Manage Perm' ) ); ?></a></li>
                                 <li<?=ae('access_role_screen');?> class=""><a href="<?=BASE_URL;?>role/<?=bm();?>"><?php _e( _t( '(MRLE) Manage Role' ) ); ?></a></li>
                                 <li<?=ae('access_error_log_screen');?>><a href="<?=BASE_URL;?>error/logs/<?=bm();?>"><?php _e( _t( 'Error Log' ) ); ?></a></li>
-                                <li<?=ae('access_audit_trail_screen');?>><a href="<?=BASE_URL;?>audittrail/<?=bm();?>"><?php _e( _t( 'Audit Trail' ) ); ?></a></li>
-                                <!-- <li class=""><a href="<?=BASE_URL;?>reservation/<?=bm();?>"><?php _e( _t( 'Reservation' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>reservation/category/<?=bm();?>"><?php _e( _t( 'Reservation Categories' ) ); ?></a></li> -->
                             </ul>
                         </li>
                         
                         <li<?=ae('import_data');?> class=""><a href="<?=BASE_URL;?>import/<?=bm();?>" class="glyphicons file_import"><i></i><?php _e( _t( 'Importer' ) ); ?></a></li>
-                        
-                        <li class=""><a href="<?=BASE_URL;?>support/<?=bm();?>" class="glyphicons life_preserver"><i></i><?php _e( _t( 'Online Documentation' ) ); ?></a></li>
 						
 						<li<?=ae('access_forms');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons notes_2"><i></i><?php _e( _t( 'Forms' ) ); ?></a>
@@ -235,28 +230,6 @@ $auth = new Cookies;
                             </ul>
                         </li>
 						
-						<li<?=ae('edit_settings');?> class="dropdown submenu">
-                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons e-mail"><i></i><?php _e( _t( 'Communication Mgmt' ) ); ?></a>
-                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
-                                <li class=""><a href="<?=BASE_URL;?>mailer/<?=bm();?>"><?php _e( _t( 'Email Templates' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>mailer/add/<?=bm();?>"><?php _e( _t( 'Add Email Template' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>mailer/schedule/<?=bm();?>"><?php _e( _t( 'Schedule Email' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>mailer/queue/<?=bm();?>"><?php _e( _t( 'Email Queue' ) ); ?></a></li>
-                            </ul>
-                        </li>
-						
-						<li<?=ae('access_nslc');?> class="dropdown submenu">
-							<a data-toggle="dropdown" class="dropdown-toggle glyphicons hdd"><i></i><?php _e( _t( 'NSLC' ) ); ?></a>
-							<ul class="dropdown-menu submenu-show submenu-hide pull-right">
-							    <li class=""><a href="<?=BASE_URL;?>nslc/purge/<?=bm();?>"><?php _e( _t( '(NSCP) Purge' ) ); ?></a></li>
-								<li class=""><a href="<?=BASE_URL;?>nslc/setup/<?=bm();?>"><?php _e( _t( '(NSCS) Setup' ) ); ?></a></li>
-								<li class=""><a href="<?=BASE_URL;?>nslc/extraction/<?=bm();?>"><?php _e( _t( '(NSCX) Extraction' ) ); ?></a></li>
-								<li class=""><a href="<?=BASE_URL;?>nslc/verification/<?=bm();?>"><?php _e( _t( '(NSCE) Verification' ) ); ?></a></li>
-								<li class=""><a href="<?=BASE_URL;?>nslc/<?=bm();?>"><?php _e( _t( '(NSCC) Correction' ) ); ?></a></li>
-								<!-- <li class=""><a href="<?=BASE_URL;?>nslc/file/<?=bm();?>"><?php _e( _t( '(NSCT) NSLC File' ) ); ?></a></li> -->
-							</ul>
-						</li>
-						
 						<li<?=ae('access_person_screen');?> class="dropdown submenu">
                             <a data-toggle="dropdown" class="dropdown-toggle glyphicons user"><i></i><?php _e( _t( 'Person' ) ); ?></a>
                             <ul class="dropdown-menu submenu-show submenu-hide pull-right">
@@ -285,18 +258,6 @@ $auth = new Cookies;
                                 <li<?=ae('access_student_screen');?> class=""><a href="<?=BASE_URL;?>student/<?=bm();?>"><?php _e( _t( '(SPRO) Student Profile' ) ); ?></a></li>
                                 <li<?=ae('graduate_students');?> class=""><a href="<?=BASE_URL;?>student/graduation/<?=bm();?>"><?php _e( _t( 'Graduate Student(s)' ) ); ?></a></li>
                                 <li<?=ae('generate_transcript');?> class=""><a href="<?=BASE_URL;?>student/tran/<?=bm();?>"><?php _e( _t( 'Generate Transcript' ) ); ?></a></li>
-                            </ul>
-                        </li>
-                        
-                        <li<?=ae('access_student_accounts');?> class="dropdown submenu">
-                            <a data-toggle="dropdown" class="dropdown-toggle glyphicons blog"><i></i><?php _e( _t( 'Student Accounts' ) ); ?></a>
-                            <ul class="dropdown-menu submenu-show submenu-hide pull-right">
-                                <li class=""><a href="<?=BASE_URL;?>financial/billing_table/<?=bm();?>"><?php _e( _t( 'Billing Tables' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>financial/<?=bm();?>"><?php _e( _t( 'Search Bill' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>financial/create_bill/<?=bm();?>"><?php _e( _t( 'Create Bill/Add Fees' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>financial/batch/<?=bm();?>"><?php _e( _t( 'Batch Fees' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>financial/add_payment/<?=bm();?>"><?php _e( _t( 'Add Payment' ) ); ?></a></li>
-                                <li class=""><a href="<?=BASE_URL;?>financial/issue_refund/<?=bm();?>"><?php _e( _t( 'Issue a Refund' ) ); ?></a></li>
                             </ul>
                         </li>
                         

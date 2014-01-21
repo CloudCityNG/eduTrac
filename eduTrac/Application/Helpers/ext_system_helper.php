@@ -173,23 +173,6 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     /**
-     * Payment type dropdown: shows general list of payment types and
-     * if $typeID is not NULL, shows the payment type attached 
-     * to a particular record.
-     * 
-     * @since 1.0.3
-     * @param string $typeID - optional
-     * @return string Returns the record id if selected is true.
-     */
-    function payment_type_dropdown($typeID = NULL) {
-        $q = DB::inst()->select( "payment_type" );
-        
-        foreach( $q as $k => $v ) {
-            echo '<option value="'._h($v['ptID']).'"'.selected( $typeID, _h($v['ptID']), false ).'>'._h($v['type']).'</option>' . "\n";
-        }
-    }
-    
-    /**
      * Table dropdown: pulls dropdown list from specified table
      * if $tableID is not NULL, shows the record attached 
      * to a particular record.
@@ -206,28 +189,8 @@ use \eduTrac\Classes\Libraries\Cookies;
         $q = DB::inst()->select( $table,$where,$id,"$id,$code,$name" );
         
         foreach( $q as $k => $v ) {
-        	extract($k);
             echo '<option value="'._h($v[$id]).'"'.selected( $activeID, _h($v[$id]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
         }
-    }
-    
-    /**
-     * General ledger account dropdown: pulls dropdown list from general ledger 
-	 * account table. if $activeID is not NULL, shows the record attached 
-     * to a particular record.
-     * 
-     * @since 1.1.5
-     * @param string $activeCode
-     * @return mixed
-     */
-    function gl_acct_dropdown($activeID = NULL) {
-        $q = DB::inst()->query( "SELECT * FROM gl_account" );
-        $options = "";
-        while( $row = $q->fetch(\PDO::FETCH_OBJ) ) {
-        	extract($row);
-            $options .= '<option value="'._h($row->glacctID).'"'.selected( $activeID, _h($row->glacctID), false ).'>'._h($row->gl_acct_number).' | '._h($row->gl_acct_name).'</option>';
-        }
-		echo $options;
     }
     
     /**
