@@ -97,7 +97,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
                   
-        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00015');";
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00016');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
         
