@@ -34,4 +34,4 @@ ALTER TABLE `gl_transaction` ADD FOREIGN KEY (`jeID`) REFERENCES `gl_journal_ent
 
 INSERT INTO `permission` VALUES('', 'access_general_ledger', 'Access General Ledger');
 
-UPDATE `et_option` SET option_value = '00015' WHERE option_name = 'dbversion';
+UPDATE `et_option` SET option_value = '00016' WHERE option_name = 'dbversion';
