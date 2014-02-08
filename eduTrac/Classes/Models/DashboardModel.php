@@ -73,8 +73,9 @@ class DashboardModel {
         
         DB::inst()->update( "person", $update, "uname = :uname", $bind );
 		
-		setcookie("et_cookname", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      	setcookie("et_cookid", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+		$this->_auth->_setcookie("ET_COOKNAME", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+      	$this->_auth->_setcookie("ET_COOKID", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+		$this->_auth->_setcookie("ET_REMEMBER", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
 		/* Purge log entries that are greater than 30 days old. */
 		//$this->_log->purgeLog();
 		/* Purges system error logs greater than 30 days old. */
