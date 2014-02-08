@@ -297,6 +297,11 @@ $auth = new Cookies;
 								<span class="details">
 									<a href="<?=BASE_URL;?>profile/"><?=$auth->getPersonField('fname').' '.$auth->getPersonField('lname');?></a>
 									<?=$auth->getPersonField('email');?>
+									<?php if(isset($_COOKIE['SWITCH_USERBACK'])) : ?>
+								    <br />
+                                    <br />
+									<a href="<?=BASE_URL;?>index/switchUserBack/<?=$_COOKIE['SWITCH_USERBACK'];?>"><?php _e( _t( 'Switch Back to' ) ); ?> <?=$_COOKIE['SWITCH_USERNAME'];?></a>
+									<?php endif; ?>
 								</span>
 								<span class="clearfix"></span>
 							</span>

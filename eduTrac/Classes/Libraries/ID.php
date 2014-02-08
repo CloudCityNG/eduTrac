@@ -38,5 +38,14 @@ class ID {
     		}
     	return $randomString;
 	}
+	
+	public static function pass($length) {
+        $characters = "ad$^SSG@448#%&Fds^@@&#FrRS{F467sS6see}"; 
+        $randomString = "";
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[mt_rand(0, strlen($characters)-1)];
+            }
+        return $randomString;
+    }
 
 }

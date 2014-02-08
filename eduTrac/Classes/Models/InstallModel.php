@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Student Information System';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.5';
+    private $_version = '1.1.6';
     
     public function __construct() {
     	Session::init();
@@ -97,7 +97,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
                   
-        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00016');";
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00017');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
         
@@ -123,7 +123,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(13, 'limit_query_size', '30');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(14, 'week_start', '0')";
+        $sql[] = "INSERT INTO `et_option` VALUES(14, 'week_start', '0');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(15, 'startTime', '08:00 AM');";
         
