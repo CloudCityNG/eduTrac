@@ -114,14 +114,6 @@ class Cron extends \eduTrac\Classes\Core\Controller {
         $this->model->runStuLoad();
     }
     
-    public function runEmailHold() {
-        $this->model->runEmailHold();
-    }
-    
-    public function runEmailQueue() {
-        $this->model->runEmailQueue();
-    }
-    
     public function runGraduation() {
         $this->model->runGraduation();
     }
@@ -144,14 +136,6 @@ class Cron extends \eduTrac\Classes\Core\Controller {
     
     public function updateStuLoad() {
         $this->model->updateStuLoad();
-    }
-    
-    public function purgeEmailHold() {
-        $this->model->purgeEmailHold();
-    }
-    
-    public function purgeEmailQueue() {
-        $this->model->purgeEmailQueue();
     }
     
     public function purgeErrorLog() {

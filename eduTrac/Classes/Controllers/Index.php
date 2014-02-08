@@ -59,4 +59,14 @@ class Index extends \eduTrac\Classes\Core\Controller {
 		$this->model->runLogin($data);
 	}
 	
+	public function switchUserTo($id) {
+        if(!$this->_auth->isUserLoggedIn()) { redirect(BASE_URL); exit(); }
+        $this->model->switchUserTo($id);
+    }
+    
+    public function switchUserBack($id) {
+        if(!$this->_auth->isUserLoggedIn()) { redirect(BASE_URL); exit(); }
+        $this->model->switchUserBack($id);
+    }
+	
 }
