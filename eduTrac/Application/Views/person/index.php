@@ -87,6 +87,10 @@ $parent = new \eduTrac\Classes\DBObjects\Parents;
                     <td class="center">
                     	<a href="<?=BASE_URL;?>person/view/<?=_h($v['personID']);?>/<?=bm();?>" title="View Person" class="btn btn-circle"><i class="icon-eye-open"></i></a>
                     	
+                    	<?php if(!isset($_COOKIE['SWITCH_USERBACK']) && _h($v['personID']) != $auth->getPersonField('personID')) : ?>
+                    	<a<?=ae('login_as_user');?> href="<?=BASE_URL;?>index/switchUserTo/<?=_h($v['personID']);?>/" title="Switch to User" class="btn btn-circle"><i class="icon-random"></i></a>
+                    	<?php endif; ?>
+                    	
                     	<?php if($person->isFacID() != $v['personID']) { ?>
                     	<a<?=ae('create_fac_record');?> href="<?=BASE_URL;?>faculty/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Faculty Record" class="btn btn-circle"><i class="icon-user"></i></a>
                     	<?php } ?>

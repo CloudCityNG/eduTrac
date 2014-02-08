@@ -100,12 +100,13 @@ class IndexModel {
 		if(et_check_password( $pass, $r['password'], $r['personID'] )) {
 			if($data['rememberme']) {				
 				/* Now we can set our login cookies. */
-				setcookie("et_cookname", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+				$this->_auth->_setcookie("ET_COOKNAME", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+      			$this->_auth->_setcookie("ET_REMEMBER", 'rememberme', time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
    			} else {				
    				/* Now we can set our login cookies. */
-   				setcookie("et_cookname", $auth, time()+86400, "/", $this->_auth->cookieDomain());
-      			setcookie("et_cookid", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
+   				$this->_auth->_setcookie("ET_COOKNAME", $auth, time()+86400, "/", $this->_auth->cookieDomain());
+      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
    			}
    			$this->_log->setLog('Login','Authentication',get_name($r['personID']),$data['uname']);
 			redirect( BASE_URL . 'dashboard/' );
@@ -114,6 +115,17 @@ class IndexModel {
 			}
 		
 	}
+	
+	public function switchUserTo($id) {
+        $this->_auth->_switchUserTo($id);
+        $this->_log->setLog('Switch Record','User Switching',get_name($id),$this->_auth->getPersonField('uname'));
+        redirect( BASE_URL . 'dashboard/' );
+    }
+    
+    public function switchUserBack($id) {
+        $this->_auth->_switchUserBack($id);
+        redirect( BASE_URL . 'dashboard/' );
+    }
     
     public function __destruct() {
         DB::inst()->close();
