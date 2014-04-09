@@ -98,6 +98,9 @@
                                     <option value="person"><?php _e( _t( 'Person' ) ); ?></option>
                                     <option value="faculty"><?php _e( _t( 'Faculty' ) ); ?></option>
                                     <option value="staff"><?php _e( _t( 'Staff' ) ); ?></option>
+                                    <option value="application"><?php _e( _t( 'Application' ) ); ?></option>
+                                    <option value="institution"><?php _e( _t( 'Institution' ) ); ?></option>
+                                    <option value="institution_attended"><?php _e( _t( 'Institution Attended' ) ); ?></option>
                                     <option value="student"><?php _e( _t( 'Student' ) ); ?></option>
                                     <option value="stu_acad_cred"><?php _e( _t( 'Student Acad Cred' ) ); ?></option>
                                     <option value="stu_acad_level"><?php _e( _t( 'Student Acad Level' ) ); ?></option>
