@@ -73,7 +73,7 @@ sed -i "s|{product}|eduTrac Student Information System|g" eduTrac/Config/constan
 
 sed -i "s|{company}|7 Media Web Solutions, LLC|g" eduTrac/Config/constants.php
 
-sed -i "s|{version}|3.0.1|g" eduTrac/Config/constants.php
+sed -i "s|{version}|1.1.7|g" eduTrac/Config/constants.php
 
 sed -i "s|{datenow}|$TODAY $HOUR|g" eduTrac/Config/constants.php
 
