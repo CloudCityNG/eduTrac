@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -146,28 +146,45 @@ class Person {
         }
     }
     
-    public function isStaffID() {
-        $q = DB::inst()->query( "SELECT staffID FROM staff" );
-        while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-            return $r['staffID'];
+    public function isStaffID($id) {
+        $array = [];
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "staff","staffID = :id","","*",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
         }
+        return _h($r['staffID']);
     }
     
     public function getFacList() {
-        $q1 = DB::inst()->query( "SELECT * FROM faculty" );
-        $r1 = $q1->fetch(\PDO::FETCH_ASSOC);
-        $facID = _h($r1['facID']);
-        $q2 = DB::inst()->select( "person","personID = '$facID'","lname","personID" );
-        foreach($q2 as $r2) {
-            $array[] = $r2;
+        $array = [];
+        $q = DB::inst()->query( "SELECT 
+                        a.staffID 
+                    FROM 
+                        staff a 
+                    LEFT JOIN 
+                        person b 
+                    ON 
+                        a.staffID = b.personID 
+                    WHERE 
+                        a.staffType = 'FAC' 
+                    ORDER BY 
+                        b.lname" 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
         }
         return $array;
     }
     
-    public function isStuID() {
-        $q = DB::inst()->query( "SELECT stuID FROM student" );
-        while($r = $q->fetch(\PDO::FETCH_ASSOC)) {
-            return $r['stuID'];
+    public function isStuID($id) {
+    	$array = [];
+		$bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT stuID FROM student WHERE stuID = :id",$bind );
+        if(count($q) > 0) {
+        	return true;
+        } else {
+        	return false;
         }
     }
 

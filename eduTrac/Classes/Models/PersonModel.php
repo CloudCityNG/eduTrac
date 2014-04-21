@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -37,6 +37,7 @@ class PersonModel {
     private $_email;
     private $_log;
     private $_uname;
+	public $message;
 	
 	public function __construct() {
 		$this->_auth = new Cookies;
@@ -359,7 +360,7 @@ class PersonModel {
         $bind = array( ":addressID" => $data['addressID'] );
         $q = DB::inst()->update( "address", $update, "addressID = :addressID", $bind );
         $this->_log->setLog('Update Record','Address',$data['addressID'],$this->_uname);
-        redirect( BASE_URL . 'person/edit_addr/' . $data['addressID'] . bm() );
+        redirect( BASE_URL . 'person/view_addr/' . $data['addressID'] . bm() );
     }
     
     public function runEditPerson($data) {
@@ -380,8 +381,14 @@ class PersonModel {
         if($q) {
             DB::inst()->update( "address", $update2, "personID = :personID", $bind );
         }
-        $this->_log->setLog('Update Record','Person',get_name($data['personID']),$this->_uname);
-        redirect( BASE_URL . 'person/view/' . $data['personID'] . bm() );
+		if(!$q) {
+			$this->message = error_update();
+			redirect( BASE_URL . 'person/view/' . $data['personID'] . '/' . bm() );
+		} else {
+			$this->message = success_update();
+	        $this->_log->setLog('Update Record','Person',get_name($data['personID']),$this->_uname);
+	        redirect( BASE_URL . 'person/view/' . $data['personID'] . '/' . bm() );
+		}
     }
 	
 	public function runUsernameCheck($data) {

@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,13 +31,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Room Reservation Settings' ) ); ?></li>
+	<li><?=_t( 'Room Reservation Settings' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Room Reservation Settings' ) ); ?></h3>
+<h3><?=_t( 'Room Reservation Settings' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,7 +48,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
@@ -61,11 +61,11 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
     					<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Hour Display' ) ); ?></label>
+							<label class="control-label"><font color="red">*</font> <?=_t( 'Hour Display' );?></label>
 							<div class="controls">
 								<select style="width:25%" name="hour_display" id="select2_9" required>
-                            		<option value="12"<?=selected( Hooks::get_option( 'hour_display' ), '12', false ); ?>><?php _e( _t( "12 Hour Display" ) ); ?></option>
-                            		<option value="24"<?=selected( Hooks::get_option( 'hour_display' ), '24', false ); ?>><?php _e( _t( "24 Hour Display" ) ); ?></option>
+                            		<option value="12"<?=selected( Hooks::get_option( 'hour_display' ), '12', false ); ?>><?=_t( "12 Hour Display" );?></option>
+                            		<option value="24"<?=selected( Hooks::get_option( 'hour_display' ), '24', false ); ?>><?=_t( "24 Hour Display" );?></option>
                             	</select>
                                 <a href="#myModalHD" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</div>
@@ -74,7 +74,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Query Size' ) ); ?></label>
+							<label class="control-label"><font color="red">*</font> <?=_t( 'Query Size' );?></label>
 							<div class="controls">
 								<input type="text" name="limit_query_size" value="<?=_h(Hooks::get_option('limit_query_size'));?>" class="span4" required />
                                 <a href="#myModalQS" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
@@ -84,11 +84,11 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Week Start' ) ); ?></label>
+							<label class="control-label"><font color="red">*</font> <?=_t( 'Week Start' );?></label>
 							<div class="controls">
 								<select style="width:25%" name="week_start" id="select2_10" required>
-                            		<option value="1"<?=selected( Hooks::get_option( 'week_start' ), '1', false ); ?>><?php _e( _t( "Monday" ) ); ?></option>
-                            		<option value="0"<?=selected( Hooks::get_option( 'week_start' ), '0', false ); ?>><?php _e( _t( "Sunday" ) ); ?></option>
+                            		<option value="1"<?=selected( Hooks::get_option( 'week_start' ), '1', false ); ?>><?=_t( "Monday" );?></option>
+                            		<option value="0"<?=selected( Hooks::get_option( 'week_start' ), '0', false ); ?>><?=_t( "Sunday" );?></option>
                             	</select>
                                 <a href="#myModalWS" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</div>
@@ -97,7 +97,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Start Time' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?=_t( 'Start Time' );?></label>
                             <div class="controls">
                                 <div class="input-append bootstrap-timepicker">
     						        <input id="timepicker1" type="text" name="startTime" class="input-small" value="<?=_h(Hooks::get_option('startTime'));?>" required/><span class="add-on"><i class="icon-time"></i></span>
@@ -109,7 +109,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'End Time' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?=_t( 'End Time' );?></label>
                             <div class="controls">
                                 <div class="input-append bootstrap-timepicker">
         					        <input id="timepicker2" type="text" name="endTime" class="input-small" value="<?=_h(Hooks::get_option('endTime'));?>" required/><span class="add-on"><i class="icon-time"></i></span>
@@ -127,11 +127,11 @@ use \eduTrac\Classes\Libraries\Hooks;
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Bullets' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?=_t( 'Bullets' );?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="bullets_display" id="select2_11" required>
-                                    <option value="1"<?=selected( Hooks::get_option( 'bullets_display' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'bullets_display' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( Hooks::get_option( 'bullets_display' ), '1', false ); ?>><?=_t( "Yes" );?></option>
+                                    <option value="0"<?=selected( Hooks::get_option( 'bullets_display' ), '0', false ); ?>><?=_t( "No" );?></option>
                                 </select>
                                 <a href="#myModalBULL" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
                             </div>
@@ -140,11 +140,11 @@ use \eduTrac\Classes\Libraries\Hooks;
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Enable Email' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?=_t( 'Enable Email' );?></label>
                             <div class="controls">
                                 <select style="width:25%"  name="enable_reserve_email" id="select2_12" required>
-                                    <option value="1"<?=selected( Hooks::get_option( 'enable_reserve_email' ), '1', false ); ?>><?php _e( _t( "Yes" ) );?></option>
-                                    <option value="0"<?=selected( Hooks::get_option( 'enable_reserve_email' ), '0', false ); ?>><?php _e( _t( "No" ) ); ?></option>
+                                    <option value="1"<?=selected( Hooks::get_option( 'enable_reserve_email' ), '1', false ); ?>><?=_t( "Yes" );?></option>
+                                    <option value="0"<?=selected( Hooks::get_option( 'enable_reserve_email' ), '0', false ); ?>><?=_t( "No" );?></option>
                                 </select>
                                 <a href="#myModalEE" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
                             </div>
@@ -153,7 +153,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Email From' ) ); ?></label>
+                            <label class="control-label"><font color="red">*</font> <?=_t( 'Email From' );?></label>
                             <div class="controls">
                                 <input type="email" name="reserve_from_email" value="<?=_h(Hooks::get_option('reserve_from_email'));?>" class="span4" required /> 
                                 <a href="#myModalFE" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
@@ -163,7 +163,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Reply To Email' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Reply To Email' );?></label>
                             <div class="controls">
                                 <input type="email" name="reserve_reply_email" value="<?=_h(Hooks::get_option('reserve_reply_email'));?>" class="span4" /> 
                                 <a href="#myModalRE" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
@@ -180,7 +180,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -196,7 +196,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-hour.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -205,7 +205,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-query.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -214,7 +214,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-week.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -223,7 +223,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-stime.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -232,7 +232,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-etime.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -241,7 +241,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-bullet.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -250,7 +250,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-email.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -259,7 +259,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-femail.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
     
@@ -268,7 +268,7 @@ use \eduTrac\Classes\Libraries\Hooks;
             <?=file_get_contents( APP_PATH . 'Info/reserve-remail.txt' );?>
         </div>
         <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
+            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
         </div>
     </div>
 	

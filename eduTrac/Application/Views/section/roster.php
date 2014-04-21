@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Course Section Roster View
+ * Student Roster View
  *  
  * PHP 5.4+
  *
@@ -22,66 +22,103 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       4.0.9
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-?>
 
-<ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
-	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'My Courses' ) ); ?></a></li>
-	<li class="divider"></li>
-	<li><?php _e( _t( 'Course Section Roster' ) ); ?></li>
-</ul>
+// create new PDF document
+$pdf = new \eduTrac\Classes\tcpdf\Tcpdf('portrait', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-<h3><?php _e( _t( 'Course Section Roster' ) ); ?></h3>
-<div class="innerLR">
+// set document information
+$pdf->SetCreator(PDF_CREATOR);
 
-	<!-- Widget -->
-	<div class="widget widget-heading-simple widget-body-gray">
-		<div class="widget-body">
-			
-			<!-- Table -->
-			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
-			
-				<!-- Table heading -->
-				<thead>
-					<tr>
-						<th class="center"><?php _e( _t( 'Student ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Student Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Academic Level' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Academic Program' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Academic Credit Status' ) ); ?></th>
-					</tr>
-				</thead>
-				<!-- // Table heading END -->
-				
-				<!-- Table body -->
-				<tbody>
-                <?php if($this->roster != '') : foreach($this->roster as $k => $v) { ?>
-                <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecID']);?></td>
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['termName']);?></td>
-                </tr>
-                <?php } endif; ?>
-				</tbody>
-				<!-- // Table body END -->
-				
-			</table>
-			<!-- // Table END -->
-			
-		</div>
-	</div>
-	<div class="separator bottom"></div>
-	<!-- // Widget END -->
-	
-</div>	
-	
-		
-		</div>
-		<!-- // Content END -->
+// set default header data
+$pdf->SetHeaderData('', '', 'Section Roster', '', '', '');
+
+// set header and footer fonts
+$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+// set default monospaced font
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+// set margins
+$pdf->SetMargins(PDF_MARGIN_LEFT, "20", PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin("12");
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+// set auto page breaks
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// ---------------------------------------------------------
+
+// set font
+$pdf->SetFont('times', '', 10);
+
+// add a page
+$pdf->AddPage();
+
+// set cell padding
+$pdf->setCellPaddings(1, 1, 1, 1);
+
+// set cell margins
+$pdf->setCellMargins(1, 1, 1, 1);
+
+// MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
+
+// set some text for student info
+$txt1 = \eduTrac\Classes\Libraries\Hooks::get_option('site_title')."<br />";
+$txt1 .= "Section: "._h($this->roster[0]['courseSecCode'])." "._h($this->roster[0]['secShortTitle'])."<br />";
+$txt1 .= "Instructor: ".get_name(_h($this->roster[0]['facID']))."<br />";
+
+// writeHTMLCell
+$pdf->writeHTMLCell(0, 0, '', '', $txt1, 0, 1, 0, true, 'L', true);
+
+$schedule = '- - - - - - - - - - - - - - - - - - - - - - - - - - Schedule - - - - - - - - - - - - - - - - - - - - - - - - - -<br />';
+$schedule .= _h($this->roster[0]['startDate']) .' '. _h($this->roster[0]['endDate']) .'&nbsp;&nbsp;&nbsp;&nbsp;'. _h($this->roster[0]['roomCode']) .'&nbsp;&nbsp;&nbsp;&nbsp;'. _h($this->roster[0]['instructorMethod']) .'&nbsp;&nbsp;&nbsp;&nbsp;'. _h($this->roster[0]['dotw']) .'&nbsp;&nbsp;&nbsp;&nbsp;'. _h($this->roster[0]['startTime']) .' ' . _h($this->roster[0]['endTime']);
+
+ // print a block of text using Write()
+$pdf->writeHTMLCell(0, 0, '', '', $schedule, 0, 1, 0, true, 'C', true);
+
+// column titles
+$table = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="table-example">';
+$table .= '<thead><tr>';
+$table .= '<th><b>'._t( 'ID' ).'</b></th>';
+$table .= '<th><b>'._t( 'Name' ).'</b></th>';
+$table .= '<th><b>'._t( 'Acad Level' ).'</b></th>';
+$table .= '<th><b>'._t( 'Acad Program' ).'</b></th>';
+$table .= '<th><b>'._t( 'Acad Credit Status' ).'</b></th>';
+$table .= '</tr></thead>';
+$table .= '<tbody>';
+foreach($this->roster as $k => $v) {
+     $table .= '<tr>';
+     $table .= '<td>'._h($v['stuID']).'</td>';
+     $table .= '<td>'.get_name(_h($v['stuID'])).'</td>';
+     $table .= '<td>'._h($v['acadLevelCode']).'</td>';
+     $table .= '<td>'._h($v['acadProgCode']).'</td>';
+     $table .= '<td>'._h($v['Status']).'</td>';
+     $table .= '</tr>';
+}
+ 
+$table .= '</tbody>';
+$table .= '</table>';
+
+$pdf->writeHTML($table, true, 0);
+
+$students = '<p>'._h($this->rosterCount[0]['StuCount']).' students currently enrolled.</p>';
+$students .= '<p>&nbsp;</p>';
+
+$pdf->writeHTML($students, true, 0);
+
+$txt3 = 'Printed on ' . date("m/d/Y @ h:i A");    
+
+ // print a block of text using Write()
+$pdf->Write($h=0, $txt3, $link='', $fill=0, $align='C', $ln=true, $stretch=0, $firstline=false, $firstblock=false, $maxh=0);
+
+// close and output PDF document
+$pdf->Output('roster.pdf', 'I');
+
+//============================================================+
+// END OF FILE
+//============================================================+

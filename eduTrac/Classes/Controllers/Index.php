@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -45,10 +45,10 @@ class Index extends \eduTrac\Classes\Core\Controller {
 	
 	public function index() {
 		if($this->_auth->isUserLoggedIn()) { redirect(BASE_URL . 'dashboard/'); }
-		$this->view->staticTitle = array('Login');
-		$this->view->render('login-header/index',true);
+		$this->view->staticTitle = array(_t('Login'));
+		$this->view->render('bh',true);
 		$this->view->render('index/index',true);
-		$this->view->render('login-footer/index',true);
+		$this->view->render('bf',true);
 	}
 	
 	public function runLogin() {
@@ -68,5 +68,9 @@ class Index extends \eduTrac\Classes\Core\Controller {
         if(!$this->_auth->isUserLoggedIn()) { redirect(BASE_URL); exit(); }
         $this->model->switchUserBack($id);
     }
+	
+	public function runLock() {
+		$this->model->runLock();
+	}
 	
 }

@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,16 +31,16 @@
 <div class="innerLR successView">
 	
 	<!-- Widget -->
-	<div class="widget widget-heading-simple widget-body-gray">
+	<div class="widget widget-heading-simple widget-body-white">
 		
 		<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 
 					<!-- Alert -->
-					<div class="alert alert-success center">
-						<strong><?php _e( _t( 'Success!' ) ); ?></strong> <?php _e( _t( 'Your were succesfully registered into the requested course section. If you would like to register for another, <a onclick="history.go(-1);"><font color="orange">go back</font></a> to the registration screen.' ) ); ?>
+					<div class="alerts alerts-success center">
+						<strong><?=_t( 'Success!' );?></strong> <?=_t( 'Your were succesfully registered into the requested course section. If you would like to register for another, ') . '<a onclick="history.go(-1);"><font color="orange">'._t('go back').'</font></a> '._t('to the registration screen.' );?>
 					</div>
 					<!-- // Alert END -->
 			

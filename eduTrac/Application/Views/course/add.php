@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,15 +32,15 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>course/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Course' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>course/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Course' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Create Course' ) ); ?></li>
+	<li><?=_t( 'Create Course' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Add Course' ) ); ?></h3>
+<h3><?=_t( 'Add Course' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -51,96 +51,90 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="deptID" id="select2_10" required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Department' );?></label>
+							<div class="col-md-8">
+								<select name="deptCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName'); ?>
+                            		<?php table_dropdown('department', 'deptTypeCode = "acad" AND deptCode <> "NULL"', 'deptCode', 'deptCode', 'deptName'); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Subject' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="subjectID" id="select2_11" required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Subject' );?></label>
+							<div class="col-md-8">
+								<select name="subjectCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-	                        		<?php subject_id_dropdown(); ?>
+	                        		<?php subject_code_dropdown(); ?>
 	                        	</select>
 	                       </div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Course Level' );?></label>
+                            <div class="col-md-8">
                                 <?=course_level_select();?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="courseShortTitle" class="span10" required/>
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Short Title' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text" name="courseShortTitle" maxlength="25" required/></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Long Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="courseLongTitle" class="span10" required/>
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Long Title' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text" name="courseLongTitle" maxlength="60" required/></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Number' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="courseNumber" class="span10" required />
-							</div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Course Number' );?></label>
+							<div class="col-md-8"><input class="form-control" type="text" name="courseNumber" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Effective Date' ) ); ?></label>
-							<div class="controls">
-								<div class="input-append date" id="datetimepicker6">
-						    		<input id="startDate" name="startDate" type="text" required />
-				    				<span class="add-on"><i class="icon-th"></i></span>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Effective Date' );?></label>
+							<div class="col-md-8">
+								<div class="input-group date col-md-8" id="datepicker6">
+						    		<input class="form-control" name="startDate" type="text" required/>
+				    				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 								</div>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
-							<div class="controls">
-								<div class="input-append date" id="datetimepicker7">
-						    		<input id="endDate" name="endDate" type="text"  />
-				    				<span class="add-on"><i class="icon-th"></i></span>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
+							<div class="col-md-8">
+								<div class="input-group date col-md-8" id="datepicker7">
+						    		<input class="form-control" name="endDate" type="text" />
+				    				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 								</div>
 							</div>
 						</div>
@@ -150,59 +144,51 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="minCredit" required/>
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Credits' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text" name="minCredit" required/></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
                                 <?=acad_level_select(null,null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-							<div class="controls">
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+							<div class="col-md-8">
 								<?=status_select();?>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
-							<div class="controls">
-						    	<input id="statusDate" name="statusDate" type="text" readonly value="<?=date("Y-m-d");?>" />
-							</div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Date' );?></label>
+							<div class="col-md-6"><input class="form-control" type="text" readonly value="<?=date("Y-m-d");?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approval Person' ) ); ?></label>
-                            <div class="controls">
-                                <input id="statusDate" name="approvedBy" type="text" readonly value="<?=$auth->getPersonField('personID');?>" />
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Person' );?></label>
+                            <div class="col-md-6"><input class="form-control" type="text" readonly value="<?=get_name($auth->getPersonField('personID'));?>" /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Approval Date' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="approvedDate" readonly value="<?=date('Y-m-d');?>" class="span10" />
-							</div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Date' );?></label>
+							<div class="col-md-6"><input class="form-control" type="text" readonly value="<?=date('Y-m-d');?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -216,17 +202,19 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				<div class="separator line bottom"></div>
 								
 				<!-- Group -->
-				<div class="control-group row-fluid">
-					<label class="control-label"><?php _e( _t( 'Course Description' ) ); ?></label>
-					<div class="controls">
-						<textarea id="mustHaveId" class="wysihtml5 span12" name="courseDesc" rows="5" required></textarea>
+				<div class="form-group">
+					<div class="widget-body">
+						<textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5" required></textarea>
 					</div>
 				</div>
 				<!-- // Group END -->
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<input type="hidden" name="statusDate" value="<?=date("Y-m-d");?>" />
+                    <input type="hidden" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" />
+                    <input type="hidden" name="approvedDate" value="<?=date("Y-m-d");?>" />
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

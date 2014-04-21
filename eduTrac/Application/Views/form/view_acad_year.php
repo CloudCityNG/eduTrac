@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/acad_year/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?php _e( _t( 'Academic Year' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/acad_year/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_t( 'Academic Year' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View Academic Year' ) ); ?></li>
+	<li><?=_t( 'View Academic Year' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'View Academic Year' ) ); ?></h3>
+<h3><?=_t( 'View Academic Year' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,29 +48,29 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span8">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="acadYearCode"><?php _e( _t( 'Acad Year' ) ); ?></label>
-							<div class="controls"><input class="span12" id="acadYearCode"<?=gio();?> name="acadYearCode" type="text" value="<?=_h($this->acadYear[0]['acadYearCode']);?>" required /> <br />example: 2012</div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="acadYearCode"><?=_t( 'Acad Year' );?></label>
+							<div class="col-md-8"><input class="form-control" id="acadYearCode"<?=gio();?> name="acadYearCode" type="text" value="<?=_h($this->acadYear[0]['acadYearCode']);?>" required /> <br />example: 2012</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="acadYearDesc"><font color="red">*</font> <?php _e( _t( 'Acad Year' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="acadYearDesc"<?=gio();?> name="acadYearDesc" type="text" value="<?=_h($this->acadYear[0]['acadYearDesc']);?>" required /> <br />example: 2012/13 Academic Year</div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="acadYearDesc"><font color="red">*</font> <?=_t( 'Acad Year' );?></label>
+                            <div class="col-md-8"><input class="form-control" id="acadYearDesc"<?=gio();?> name="acadYearDesc" type="text" value="<?=_h($this->acadYear[0]['acadYearDesc']);?>" required /> <br />example: 2012/13 Academic Year</div>
                         </div>
                         <!-- // Group END -->
 						
@@ -85,7 +85,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input id="acadYearID" name="acadYearID" type="hidden" value="<?=_h($this->acadYear[0]['acadYearID']);?>" />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

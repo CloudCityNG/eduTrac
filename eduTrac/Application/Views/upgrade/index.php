@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -40,21 +40,18 @@ $file = BASE_PATH . 'eduTrac/Application/Views/upgrade/sql/'.Hooks::get_option('
 		<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 
                     <?php if(Hooks::get_option('dbversion') < upgradeDB(0)) { ?>
 					<!-- Alert -->
 					<div class="alert alert-primary center">
-						<strong><?php _e( _t( 'Warning!' ) ); ?></strong> <?php _e( _t( 'Hey admin, your database is out of date and currently at 
-                        version ') . Hooks::get_option('dbversion') . _t('. Click the button below to upgrade your database. 
-                        When the upgrade is complete,'). '<a href="'.BASE_URL.'dashboard/"><font color="orange">'._t( 'click here').'</font></a>'. _t( 'to return to the dashboard. 
-                        If you are behind on a few versions, you may be redirected to this page again until the system is fully up to date.' ) ); ?>
+						<strong><?=_t( 'Warning!' );?></strong> <?=_t( 'Hey admin, your database is out of date and currently at version ') . Hooks::get_option('dbversion') . _t('. Click the button below to upgrade your database. When the upgrade is complete,'). '<a href="'.BASE_URL.'dashboard/"><font color="orange">'._t( 'click here').'</font></a>'. _t( 'to return to the dashboard. If you are behind on a few versions, you may be redirected to this page again until the system is fully up to date.' );?>
 					</div>
 					<!-- // Alert END -->
                     <!-- Form -->
                         <form class="form-horizontal margin-none" action="<?=BASE_URL;?>upgrade/" id="validateSubmitForm" method="post">
                             <input type="hidden" name="upgradeDB" value="1" />
-                            <button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><? _e( _t( 'Submit' ) ); ?></button>
+                            <button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
                         </form>
                     <!-- // Form END -->
                     
@@ -62,8 +59,7 @@ $file = BASE_PATH . 'eduTrac/Application/Views/upgrade/sql/'.Hooks::get_option('
                     
                     <!-- Alert -->
     				<div class="alert alert-success center">
-						<strong><?php _e( _t( 'Hey admin, you database is currently up to date. There is nothing else here to see. 
-                        <a href="'.BASE_URL.'dashboard/"><font color="orange">Click here</font></a> to return to the dashboard.' ) ); ?>
+						<strong><?=_t( 'Hey admin, you database is currently up to date. There is nothing else here to see. ').'<a href="'.BASE_URL.'dashboard/"><font color="orange">'._t('Click here').'</font></a> '._t('to return to the dashboard.' );?>
 					</div>
 					<!-- // Alert END -->
                     

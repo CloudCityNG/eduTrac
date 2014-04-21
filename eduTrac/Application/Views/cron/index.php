@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,13 +31,13 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Cron Jobs' ) ); ?></li>
+	<li><?=_t( 'Cron Jobs' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Cron Jobs' ) ); ?></h3>
+<h3><?=_t( 'Cron Jobs' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -50,11 +50,11 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Job Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Last Fired' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Next Execution' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Interval' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Action' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Job Name' );?></th>
+						<th class="text-center"><?=_t( 'Last Fired' );?></th>
+						<th class="text-center"><?=_t( 'Next Execution' );?></th>
+						<th class="text-center"><?=_t( 'Interval' );?></th>
+						<th class="text-center"><?=_t( 'Action' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -63,8 +63,8 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
 				<tbody>
 				<?php if($this->cronList != '') : foreach($this->cronList as $key => $value) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($value['name']);?></td>
-                    <td class="center">
+                    <td class="text-center"><?=_h($value['name']);?></td>
+                    <td class="text-center">
                         <?php if(_h((int)$value['time_last_fired']) == 0) {
                             echo '<font color="#FF8000">Not yet fired</font>'; 
                         } else {
@@ -72,20 +72,29 @@ $cron = new \eduTrac\Classes\Libraries\Cron;
                             echo strftime("on %b %d, %Y",_h($value['time_last_fired']));
                         } ?>
                     </td>
-                    <td class="center">
+                    <td class="text-center">
                         <?php
                             echo strftime("%H:%M:%S ",_h($value['fire_time']));
                             echo strftime("%b %d, %Y",_h($value['fire_time']));
                         ?>
                     </td>
-                    <td class="center">
+                    <td class="text-center">
                         <?php
                             $time_interval = $cron->time_unit(_h((int)$value['time_interval']));
                             echo _h((int)$time_interval[0]) . ' ' . $time_interval[1];
                         ?>
                     </td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>cron/view/<?=_h($value['id']);?>/<?=bm();?>" title="View Cron Job" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>cron/view/<?=_h($value['id']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

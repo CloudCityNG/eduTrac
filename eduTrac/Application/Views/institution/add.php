@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>institution/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Institution' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>institution/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Institution' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Add Institution' ) ); ?></li>
+	<li><?=_t( 'Add Institution' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Add Institution' ) ); ?></h3>
+<h3><?=_t( 'Add Institution' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,43 +48,43 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="ficeCode"><?php _e( _t( 'FICE Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode" type="text" /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'FICE/CEEB Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="schoolCode" type="text" required/></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="instType"><font color="red">*</font> <?php _e( _t( 'Type' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:35%" name="instType" id="select2_9">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="instType"><font color="red">*</font> <?=_t( 'Type' );?></label>
+                            <div class="col-md-8">
+                                <select name="instType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" >
                                     <option value="">&nbsp;</option>
-                                    <option value="HS"><?php _e( _t( 'High School' ) ); ?></option>
-                                    <option value="COL"><?php _e( _t( 'College' ) ); ?></option>
-                                    <option value="UNIV"><?php _e( _t( 'University' ) ); ?></option>
+                                    <option value="HS"><?=_t( 'High School' );?></option>
+                                    <option value="COL"><?=_t( 'College' );?></option>
+                                    <option value="UNIV"><?=_t( 'University' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="instName"><font color="red">*</font> <?php _e( _t( 'Institution Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="instName" name="instName" type="text" required /></div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="instName"><font color="red">*</font> <?=_t( 'Institution Name' );?></label>
+							<div class="col-md-8"><input class="form-control" id="instName" name="instName" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -92,19 +92,31 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="city"><?php _e( _t( 'City' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="city" name="city" type="text" /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="city"><?=_t( 'City' );?></label>
+                            <div class="col-md-8"><input class="form-control" id="city" name="city" type="text" /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="state"><?php _e( _t( 'State' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="state" name="state" type="text" /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="state"><?=_t( 'State' );?></label>
+                            <div class="col-md-8"><input class="form-control" id="state" name="state" type="text" /></div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Country' );?></label>
+                            <div class="col-md-8">
+                            	<select name="country" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" >
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('country','','iso2','iso2','short_name'); ?>
+                                </select>
+                        	</div>
                         </div>
                         <!-- // Group END -->
 						
@@ -118,8 +130,8 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>institution/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>institution/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

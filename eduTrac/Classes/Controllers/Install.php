@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.3
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -47,7 +47,7 @@ class Install extends \eduTrac\Classes\Core\Controller {
     }
     
     public function index() {
-        $this->view->staticTitle = array('eduTrac Installer');
+        $this->view->staticTitle = array(_t('eduTrac Installer'));
         $this->view->render('bh',true);
         $this->view->render('install/index',true);
         $this->view->render('bf',true);

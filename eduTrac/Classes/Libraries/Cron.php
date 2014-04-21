@@ -25,7 +25,7 @@ use \eduTrac\Classes\Libraries\Hooks;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -121,12 +121,13 @@ class Cron {
     
     public function schedule() {
         $timeWindow =  time() + 3600;
-        $q = DB::inst()->query( "SELECT * FROM cronjob WHERE fire_time <= '$timeWindow'" );
+		$bind = [ ":time" => $timeWindow ];
+        $q = DB::inst()->query( "SELECT * FROM cronjob WHERE fire_time <= :time AND time_interval IS NOT NULL",$bind );
         foreach($q as $r) {
             $scripts_to_run = array();
-            if ($q->rowCount()) {
+            if (count($q) > 0) {
                 $i = 0;
-                while ($i < $q->rowCount()) {
+                while ($i < count($q)) {
                   $id = $r ? $r['id'] : $i;
                   $scriptpath = $r ? $r['scriptpath'] : $i;
                   $time_interval = $r ? $r['time_interval'] : $i;

@@ -22,20 +22,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Institution' ) ); ?></li>
+	<li><?=_t( 'Institution' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Institution' ) ); ?></h3>
+<h3><?=_t( 'Institution' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -46,9 +46,9 @@
 				<div class="widget widget-heading-simple widget-body-white margin-none">
 					<div class="widget-body">
 						
-						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>institution/" method="post" autocomplete="off">
-							  	<input type="text" name="inst" class="input-xxlarge" placeholder="Search Institution . . . " />
+						<div class="widget widget-heading-simple widget-body-simple text-right form-group">
+							<form class="form-search text-center" action="<?=BASE_URL;?>institution/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="inst" class="form-control" placeholder="Search institution . . . " /> 
 							</form>
 						</div>
 						
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			
-			<div class="break"></div>
+			<div class="separator bottom"></div>
 			
 			<?php if(isPostSet('inst')) { ?>
 			<!-- Table -->
@@ -65,10 +65,10 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'FICE Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Institution Type' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Institution Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'FICE/CEEB Code' );?></th>
+						<th class="text-center"><?=_t( 'Institution Type' );?></th>
+						<th class="text-center"><?=_t( 'Institution Name' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -77,11 +77,20 @@
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['ficeCode']);?></td>
-                    <td class="center"><?=_h($v['instType']);?></td>
-                    <td class="center"><?=_h($v['instName']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>institution/view/<?=_h($v['institutionID']);?>/<?=bm();?>" title="View Institution" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    <td class="text-center"><?=_h($v['schoolCode']);?></td>
+                    <td class="text-center"><?=_h($v['instType']);?></td>
+                    <td class="text-center"><?=_h($v['instName']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>institution/view/<?=_h($v['institutionID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
 				<?php } endif; ?>

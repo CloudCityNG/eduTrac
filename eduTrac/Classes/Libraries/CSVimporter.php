@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.1
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -173,7 +173,7 @@ class CSVimporter {
      *
      * @return      array           Array of sql queries in string form to insert the csv data
      */
-    public function getSQLinsertsArray($sqlTable)
+    /*public function getSQLinsertsArray($sqlTable)
     {
         $data = $this->getCSVarray();
         $queries = [];
@@ -189,6 +189,23 @@ class CSVimporter {
             
             $queries[] = DB::inst()->query("INSERT INTO ".$sqlTable." (".$fieldStr.") VALUES (".implode(",", $placeholders).");",$bind);
             //error_log(var_export($queries,true));
+        }
+        return $queries;
+    }*/
+    
+    public function getSQLinsertsArray($sqlTable)
+    {
+        $data = $this->getCSVarray();
+        $queries = array();
+        $fieldsStr = "";
+        while(list($k, $field) = each($data))
+        {
+            if(empty($fieldStr)) $fieldStr = implode(", ", array_keys($field));
+            
+            $valueStr = "'".implode("', '", $field)."'";
+
+            $queries[] = DB::inst()->query("INSERT INTO ".$sqlTable." (".$fieldStr.") VALUES (".$valueStr.");");
+            //echo $query."<br />";
         }
         return $queries;
     }

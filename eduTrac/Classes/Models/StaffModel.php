@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -75,46 +75,112 @@ class StaffModel {
     public function person($id) {
         $array = [];
         $bind = array( ":id" => $id );
-        $q = DB::inst()->select( "person","personID = :id","","personID",$bind );
+        $q = DB::inst()->query( "SELECT 
+                        a.personID,
+                        a.personType 
+                    FROM 
+                        person a 
+                    LEFT JOIN 
+                        staff b 
+                    ON 
+                        a.personID = b.staffID 
+                    WHERE 
+                        a.personID = :id 
+                    AND 
+                        b.staffID IS NULL",
+                    $bind 
+        );
         foreach($q as $r) {
             $array[] = $r;
         }
         return $array;
     }
     
-    public function runStaff($data) {        
-        $bind = array( 
-            "staffID" => $data['staffID'],"buildingID" => $data['buildingID'],
-            "officeID" => $data['officeID'],"office_phone" => $data['office_phone'],
-            "deptID" => $data['deptID'],"addDate" => $data['addDate'],
-            "approvedBy" => $data['approvedBy'],"status" => $data['status'],
-            "schoolID" => $data['schoolID']
+    public function timesheets() {
+        $array = [];
+        $bind = [ ":id" => $this->_auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+                        a.workWeek,
+                        SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(a.endDateTime,a.startDateTime)))) AS WorkHours,
+                        b.title 
+                    FROM 
+                        timesheet a 
+                    LEFT JOIN 
+                        job b 
+                    ON 
+                        a.jobID = b.ID 
+                    WHERE 
+                        a.employeeID = :id 
+                    GROUP BY 
+                        a.workWeek",
+                    $bind 
         );
-        
-        $q = DB::inst()->insert( "staff", $bind );
-        
-        if(!$q) {
-            redirect( BASE_URL . 'error/save_data/' );
-        } else {
-            $this->_log->setLog('New Record','Staff',get_name($data['staffID']),$this->_uname);
-            redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
+        /*$q = DB::inst()->query( "SELECT 
+                        CASE a.status 
+                        WHEN 'P' THEN 'Pending' 
+                        WHEN 'R' THEN 'Rejected' 
+                        ELSE 'Approved' 
+                        END AS 'Status',
+                        a.ID,
+                        a.employeeID,
+                        a.jobID,
+                        a.workWeek,
+                        a.startDateTime,
+                        a.endDateTime,
+                        a.note,
+                        TIMEDIFF(a.endDateTime,a.startDateTime) AS WorkHours,
+                        b.title 
+                    FROM 
+                        timesheet a 
+                    LEFT JOIN 
+                        job b 
+                    ON 
+                        a.jobID = b.ID 
+                    WHERE 
+                        a.employeeID = :id 
+                    GROUP BY 
+                        a.ID 
+                    ORDER BY 
+                        a.workWeek",
+                    $bind 
+        );*/
+        foreach($q as $r) {
+            $array[] = $r;
         }
-    
+        return $array;
     }
     
-    public function runEditStaff($data) {
-        $update = array( 
-            "buildingID" => $data['buildingID'],
-            "officeID" => $data['officeID'],"office_phone" => $data['office_phone'],
-            "deptID" => $data['deptID'],"status" => $data['status'],
-            "schoolID" => $data['schoolID']
+    public function viewTimeSheet($week) {
+        $array = [];
+        $bind = [ ":week" => $week,":staffID" => $this->_auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+                        CASE status 
+                        WHEN 'P' THEN 'Pending' 
+                        WHEN 'R' THEN 'Rejected' 
+                        ELSE 'Approved' 
+                        END AS 'Status',
+                        ID,
+                        employeeID,
+                        jobID,
+                        workWeek,
+                        startDateTime,
+                        endDateTime,
+                        note,
+                        TIMEDIFF(endDateTime,startDateTime) AS WorkHours 
+                    FROM 
+                        timesheet 
+                    WHERE 
+                        workWeek = :week 
+                    AND
+                        employeeID = :staffID 
+                    GROUP BY 
+                        ID",
+                    $bind 
         );
-        
-        $bind = array( ":staffID" => $data['staffID'] );
-        
-        $q = DB::inst()->update( "staff", $update, "staffID = :staffID", $bind );
-        $this->_log->setLog('Update Record','Staff',get_name($data['staffID']),$this->_uname);
-        redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
     }
     
     public function staff($id) {
@@ -152,6 +218,65 @@ class StaffModel {
             $array[] = $r;
         }
         return $array;
+    }
+    
+    public function runStaff($data) {        
+        $bind1 = array( 
+            "staffID" => $data['staffID'],"schoolCode" => $data['schoolCode'],
+            "buildingCode" => $data['buildingCode'],"officeCode" => $data['officeCode'],
+            "office_phone" => $data['office_phone'],"deptCode" => $data['deptCode'],
+			"status" => $data['status'],"addDate" => $data['addDate'],
+			"approvedBy" => $data['approvedBy']
+        );
+        
+        $bind2 = array( 
+            "staffID" => $data['staffID'],"supervisorID" => $data['supervisorID'],
+            "jobStatusCode" => $data['jobStatusCode'],"jobID" => $data['jobID'],
+            "staffType" => $data['staffType'],"hireDate" => $data['hireDate'],
+            "startDate" => $data['startDate'],"endDate" => $data['endDate'],
+            "addDate" => $data['addDate'],"approvedBy" => $data['approvedBy']
+        );
+        
+        $q1 = DB::inst()->insert( "staff", $bind1 );
+        $q2 = DB::inst()->insert( "staff_meta", $bind2 );
+        
+        if(!$q1 && !$q2) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            $this->_log->setLog('New Record','Staff',get_name($data['staffID']),$this->_uname);
+            redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
+        }
+    
+    }
+    
+    public function runEditStaff($data) {
+        $update = array( 
+            "buildingCode" => $data['buildingCode'],
+            "officeCode" => $data['officeCode'],"office_phone" => $data['office_phone'],
+            "deptCode" => $data['deptCode'],"status" => $data['status'],
+            "schoolCode" => $data['schoolCode']
+        );
+        
+        $bind = array( ":staffID" => $data['staffID'] );
+        
+        $q = DB::inst()->update( "staff", $update, "staffID = :staffID", $bind );
+        $this->_log->setLog('Update Record','Staff',get_name($data['staffID']),$this->_uname);
+        redirect( BASE_URL . 'staff/view/' . $data['staffID'] . '/' . bm() );
+    }
+    
+    public function runTimeSheets($data) {
+        $bind = [ 
+                "employeeID" => $data['employeeID'],"jobID" => $data['jobID'],
+                "startDateTime" => $data['startDateTime'],"endDateTime" => $data['endDateTime'],
+                "note" => $data['note'],"addDate" => $data['addDate'],
+                "workWeek" => $data['workWeek'],"addedBy" => $data['addedBy'] 
+                ];
+        $q = DB::inst()->insert('timesheet',$bind);
+        if(!$q) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            redirect( BASE_URL . 'staff/view_timesheet/' . $data['workWeek'] . '/' . bm() );
+        }
     }
     
 	public function __destruct() {

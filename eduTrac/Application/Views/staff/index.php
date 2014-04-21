@@ -22,20 +22,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Staff' ) ); ?></li>
+	<li><?=_t( 'Staff' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Staff' ) ); ?></h3>
+<h3><?=_t( 'Search Staff' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -46,9 +46,9 @@
 				<div class="widget widget-heading-simple widget-body-white margin-none">
 					<div class="widget-body">
 						
-						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>staff/" method="post" autocomplete="off">
-							  	<input type="text" name="staff" class="input-xxlarge" placeholder="Search staff . . . " /> 
+						<div class="widget widget-heading-simple widget-body-simple text-right form-group">
+							<form class="form-search text-center" action="<?=BASE_URL;?>staff/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="staff" class="form-control" placeholder="Search by person ID or name . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			
-			<div class="break"></div>
+			<div class="separator bottom"></div>
 			
 			<?php if(isPostSet('staff')) { ?>
 			<!-- Table -->
@@ -66,10 +66,10 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Last Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'First Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'ID' );?></th>
+						<th class="text-center"><?=_t( 'Last Name' );?></th>
+						<th class="text-center"><?=_t( 'First Name' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -78,11 +78,20 @@
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['staffID']);?></td>
-                    <td class="center"><?=_h($v['lname']);?></td>
-                    <td class="center"><?=_h($v['fname']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>staff/view/<?=_h($v['staffID']);?>/<?=bm();?>" title="View Staff" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    <td class="text-center"><?=_h($v['staffID']);?></td>
+                    <td class="text-center"><?=_h($v['lname']);?></td>
+                    <td class="text-center"><?=_h($v['fname']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>staff/view/<?=_h($v['staffID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
 				<?php } endif; ?>
@@ -98,14 +107,30 @@
 	</div>
 	<div class="separator bottom"></div>
 	
-	<div class="modal hide fade" id="myModal">
-        <div class="modal-body">
-            <?=file_get_contents( APP_PATH . 'Info/person-search.txt' );?>
-        </div>
-        <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-        </div>
-    </div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal heading -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title"><?=_t( 'Staff Search' );?></h3>
+				</div>
+				<!-- // Modal heading END -->
+				<!-- Modal body -->
+				<div class="modal-body">
+					<?=file_get_contents( APP_PATH . 'Info/person-search.txt' );?>
+				</div>
+				<!-- // Modal body END -->
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#" class="btn btn-default" data-dismiss="modal">Close</a> 
+				</div>
+				<!-- // Modal footer END -->
+			</div>
+		</div>
+	</div>
+	<!-- // Modal END -->
 	
 	<!-- // Widget END -->
 	

@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Student' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Student' );?></a></li>
     <li class="divider"></li>
     <li><a href="<?=BASE_URL;?>student/view/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>" class="glyphicons user"><i></i> <?=get_name(_h($this->stuProg[0]['stuID']));?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Edit Student Program' ) ); ?></li>
+	<li><?=_t( 'Edit Student Program' );?></li>
 </ul>
 
-<h3><?=get_name(_h($this->stuProg[0]['stuID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->stuProg[0]['stuID']);?></h3>
+<h3><?=get_name(_h($this->stuProg[0]['stuID']));?>: <?=_h($this->stuProg[0]['stuID']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -50,59 +50,83 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Program' ) ); ?></label>
-							<div class="controls">
-								<input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['acadProgCode']);?>" />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Program' );?></label>
+							<div class="col-md-8">
+								<input type="text" readonly class="form-control" value="<?=_h($this->stuProg[0]['acadProgCode']);?>" />
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly class="span10" value="<?=_h($this->stuProg[0]['schoolCode'].' '.$this->stuProg[0]['schoolName']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'School' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" value="<?=_h($this->stuProg[0]['schoolCode'].' '.$this->stuProg[0]['schoolName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Ant Grad Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="antGradDate" class="span2 center" value="<?=_h($this->stuProg[0]['antGradDate']);?>" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Ant Grad Date' );?></label>
+                            <div class="col-md-2">
+                                <input type="text"<?=sio();?> name="antGradDate" class="form-control center" value="<?=_h($this->stuProg[0]['antGradDate']);?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
-                                <?=stu_prog_status_select(_h($this->stuProg[0]['currStatus']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Advisor' );?></label>
+                            <div class="col-md-8">
+                                <select name="advisorID"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php facID_dropdown(_h($this->stuProg[0]['advisorID'])); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-						<div class="control-group"<?php if(_h($this->stuProg[0]['currStatus']) == 'G') { echo ' style="display:none"'; } ?>>
-						    <label class="control-label"><?php _e( _t( 'Eligible to Graduate?' ) ); ?></label>
-							<div class="controls widget-body uniformjs">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" value="<?=_h($this->stuProg[0]['acadLevelCode']);?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Catalog Year' );?></label>
+                            <div class="col-md-8">
+                                <select name="catYearCode"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('acad_year', 'acadYearCode <> "NULL"', 'acadYearCode', 'acadYearCode', 'acadYearDesc',_h($this->stuProg[0]['catYearCode'])); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+						<div class="form-group"<?php if(_h($this->stuProg[0]['currStatus']) == 'G') { echo ' style="display:none"'; } ?>>
+						    <label class="col-md-3 control-label"><?=_t( 'Eligible to Graduate?' );?></label>
+							<div class="col-md-8 widget-body uniformjs">
     							<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="eligible_to_graduate" value="1"<?=checked('1',_h($this->stuProg[0]['eligible_to_graduate']),false);?> />
+									<input type="checkbox"<?=sio();?> class="checkbox" name="eligible_to_graduate" value="1"<?=checked('1',_h($this->stuProg[0]['eligible_to_graduate']),false);?> />
 									<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 								</label>
 							</div>
@@ -113,16 +137,25 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
+						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
+                                <?=stu_prog_status_select(_h($this->stuProg[0]['currStatus']));?>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
 					    
 					    <?php if(_h($this->stuProg[0]['currStatus']) == 'G') { ?>
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Graduation Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="graduationDate" class="center" name="graduationDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['graduationDate']);?>" />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Graduation Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker6">
+                                    <input class="form-control"<?=sio();?> name="graduationDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['graduationDate']);?>" />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -130,38 +163,47 @@
 						<?php } ?>
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker7">
-                                    <input id="startDate" class="center" name="startDate" type="text" value="<?=_h($this->stuProg[0]['startDate']);?>" required/>
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker7">
+                                    <input class="form-control"<?=sio();?> name="startDate" type="text" value="<?=_h($this->stuProg[0]['startDate']);?>" required/>
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker8">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker8">
                                     <?php if($this->stuProg[0]['endDate'] == NULL || $this->stuProg[0]['endDate'] == '0000-00-00') { ?>
-                                    <input id="endDate" name="endDate"<?=sio();?> type="text" />
+                                    <input class="form-control"<?=sio();?> name="endDate"<?=sio();?> type="text" />
                                     <?php } else { ?>
-                                    <input id="endDate" class="center" name="endDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['endDate']);?>" />
+                                    <input class="form-control"<?=sio();?> name="endDate"<?=sio();?> type="text" value="<?=_h($this->stuProg[0]['endDate']);?>" />
                                     <?php } ?>
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly class="span6" value="<?=_h(get_name($this->stuProg[0]['approvedBy']));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved By' );?></label>
+                            <div class="col-md-6">
+                                <input type="text" readonly class="form-control" value="<?=_h(get_name($this->stuProg[0]['approvedBy']));?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Last Update' );?></label>
+                            <div class="col-md-6">
+                                <input type="text" readonly class="form-control" value="<?=date('D, M d, o @ h:i A',strtotime(_h($this->stuProg[0]['LastUpdate'])));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -177,23 +219,39 @@
 				<div class="form-actions">
 				    <input type="hidden" name="stuProgID" value="<?=_h($this->stuProg[0]['stuProgID']);?>" />
 				    <input type="hidden" name="stuID" value="<?=_h($this->stuProg[0]['stuID']);?>" />
-					<button type="submit"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-					<button type="button"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_plus" onclick="window.location='<?=BASE_URL;?>student/add_prog/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Add' ) ); ?></button>
-					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button<?php if(_h($this->stuProg[0]['currStatus']) == 'G') { echo ' style="display:none"'; } ?> type="submit"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+					<button type="button"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_plus" onclick="window.location='<?=BASE_URL;?>student/add_prog/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?=_t( 'Add' );?></button>
+					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=_h($this->stuProg[0]['stuID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
 			</div>
 		</div>
-		
-		<div class="modal hide fade" id="myModal">
-            <div class="modal-body">
-                <p><?=_t('Select the checkbox if the student is eligible to graduate from this particular program.');?></p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-            </div>
-        </div>
+        
+        <!-- Modal -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal heading -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h3 class="modal-title"><?=_t( 'Eligible to Graduate' );?></h3>
+					</div>
+					<!-- // Modal heading END -->
+					<!-- Modal body -->
+					<div class="modal-body">
+						<p><?=_t('Select the checkbox if the student is eligible to graduate from this particular program.');?></p>
+					</div>
+					<!-- // Modal body END -->
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<a href="#" class="btn btn-default" data-dismiss="modal"><?=_t( 'Close' );?></a> 
+					</div>
+					<!-- // Modal footer END -->
+				</div>
+			</div>
+		</div>
+		<!-- // Modal END -->
 		<!-- // Widget END -->
 		
 	</form>

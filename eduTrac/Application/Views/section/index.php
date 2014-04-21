@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Sections' ) ); ?></li>
+	<li><?=_t( 'Sections' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Section' ) ); ?></h3>
+<h3><?=_t( 'Search Section' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -47,9 +47,9 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<div class="widget widget-heading-simple widget-body-white margin-none">
 					<div class="widget-body">
 						
-						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>section/<?=bm();?>" method="post" autocomplete="off">
-							  	<input type="text" name="sec" class="input-xxlarge" placeholder="Search by sections . . . " />
+						<div class="widget widget-heading-simple widget-body-simple text-right form-group">
+							<form class="form-search text-center" action="<?=BASE_URL;?>section/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="sec" class="form-control" placeholder="Search by department, subject or section code . . . " /> 
 							</form>
 						</div>
 						
@@ -57,7 +57,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				</div>
 			</div>
 			
-			<div class="break"></div>
+			<div class="separator bottom"></div>
 			
 			<?php if(isPostSet('sec')) { ?>
 			<!-- Table -->
@@ -66,13 +66,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Sec ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Section Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Short Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Term' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Course Sec ID' );?></th>
+						<th class="text-center"><?=_t( 'Section Code' );?></th>
+						<th class="text-center"><?=_t( 'Short Title' );?></th>
+						<th class="text-center"><?=_t( 'Status' );?></th>
+						<th class="text-center"><?=_t( 'Term' );?></th>
 						<?php Hooks::do_action('search_course_sec_th'); ?>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -81,15 +81,24 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecID']);?></td>
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['Status']);?></td>
-                    <td class="center"><?=_h($v['termCode']);?></td>
+                    <td class="text-center"><?=_h($v['courseSecID']);?></td>
+                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
+                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center"><?=_h($v['Status']);?></td>
+                    <td class="text-center"><?=_h($v['termCode']);?></td>
                     <?php Hooks::do_action('search_course_sec_td'); ?>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>section/view/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="View Course Section" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                    	<?php Hooks::do_action('search_course_sec_action'); ?>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>section/view/<?=_h($v['courseSecID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php Hooks::do_action('search_term_action'); ?>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
 				<?php } endif; ?>

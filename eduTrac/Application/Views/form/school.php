@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Semester' ) ); ?></li>
+	<li><?=_t( 'Semester' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Semester' ) ); ?></h3>
+<h3><?=_t( 'Semester' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -47,46 +47,46 @@ use \eduTrac\Classes\Libraries\Hooks;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span12">
+					<div class="col-md-6">
                     
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="ficeCode"><font color="red">*</font> <?php _e( _t( 'FICE Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode" type="text" /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="ficeCode"><font color="red">*</font> <?=_t( 'FICE Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="ficeCode" type="text" /></div>
                         </div>
                         <!-- // Group END -->
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="schoolName"><font color="red">*</font> <?php _e( _t( 'School Name' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="schoolName" name="schoolName" type="text" required /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="schoolName"><font color="red">*</font> <?=_t( 'School Name' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="schoolName" type="text" required /></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="schoolCode"><font color="red">*</font> <?php _e( _t( 'School Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="schoolCode" name="schoolCode" type="text" required /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="schoolCode"><font color="red">*</font> <?=_t( 'School Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="schoolCode" type="text" required /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="buildingCode"><?php _e( _t( 'Building' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="buildingID" id="select2_10">
+						<div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="buildingCode"><?=_t( 'Building' );?></label>
+							<div class="col-md-8">
+								<select name="buildingCode" class="selectpicker col-md-12 form-control" data-style="btn-info" data-size="10" data-live-search="true">
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('building', '', 'buildingID', 'buildingCode', 'buildingName'); ?>
+                            		<?php table_dropdown('building', 'buildingCode <> "NULL"', 'buildingCode', 'buildingCode', 'buildingName'); ?>
                             	</select>
 							</div>
 						</div>
@@ -102,7 +102,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -126,10 +126,10 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <!-- Table heading -->
                 <thead>
                     <tr>
-                        <th class="center"><?php _e( _t( 'School Code' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'School Name' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Building' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+                        <th class="text-center"><?=_t( 'School Code' );?></th>
+                        <th class="text-center"><?=_t( 'School Name' );?></th>
+                        <th class="text-center"><?=_t( 'Building' );?></th>
+                        <th class="text-center"><?=_t( 'Actions' );?></th>
                     </tr>
                 </thead>
                 <!-- // Table heading END -->
@@ -138,12 +138,21 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <tbody>
                 <?php if($this->schoolList != '') : foreach($this->schoolList as $key => $value) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($value['schoolCode']);?></td>
-                    <td class="center"><?=_h($value['schoolName']);?></td>
-                    <td class="center"><?=_h($value['buildingName']);?></td>
-                    <td class="center">
-                        <a href="<?=BASE_URL;?>form/view_school/<?=_h($value['schoolID']);?>/<?=bm();?>" title="View School" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <?php Hooks::do_action('search_school_action'); ?>
+                    <td class="text-center"><?=_h($value['schoolCode']);?></td>
+                    <td class="text-center"><?=_h($value['schoolName']);?></td>
+                    <td class="text-center"><?=_h($value['buildingName']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>form/view_school/<?=_h($value['schoolID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php Hooks::do_action('search_school_action'); ?>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

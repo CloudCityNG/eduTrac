@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-    <li><?php _e( _t( 'You are here') ); ?></li>
-    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+    <li><?=_t( 'You are here');?></li>
+    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>person/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Person' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>person/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Person' );?></a></li>
     <li class="divider"></li>
     <li><a href="<?=BASE_URL;?>person/view/<?=_h($this->person[0]['personID']);?>/<?=bm();?>" class="glyphicons user"><i></i> <?=get_name(_h($this->person[0]['personID']));?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'Address Summary' ) ); ?></li>
+    <li><?=_t( 'Address Summary' );?></li>
 </ul>
 
-<h3><?=get_name(_h((int)$this->person[0]['personID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->person[0]['personID']);?></h3>
+<h3><?=get_name(_h((int)$this->person[0]['personID']));?> <?=_t( "ID: " );?><?=_h($this->person[0]['personID']);?></h3>
 <div class="innerLR">
         
         <!-- Widget -->
@@ -48,27 +48,31 @@
             <div class="widget-body">
                 <?php if($this->addrSum !='') : foreach($this->addrSum as $k => $v) { ?>
                 <!-- Row -->
-                <div class="row-fluid">
+                <div class="row">
                     
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                     
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="address"><?php _e( _t( 'Address' ) ); ?></label>
-                            <div class="controls">
-                                <input class="span8" type="text" disabled value="<?=_h($v['address1']);?> <?=_h($v['address2']);?>" />
-                                <a href="<?=BASE_URL;?>person/edit_addr/<?=_h($v['addressID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="address"><?=_t( 'Address' );?> <a href="<?=BASE_URL;?>person/view_addr/<?=_h($v['addressID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" disabled value="<?=_h($v['address1']);?> <?=_h($v['address2']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <div class="controls">
-                                <input class="span3" type="text" disabled value="<?=_h($v['city']);?>" />
-                                <input class="span3" type="text" disabled value="<?=_h($v['state']);?>" />
-                                <input class="span3" type="text" disabled value="<?=_h($v['zip']);?>" />
+                        <div class="form-group">
+                        	<label class="col-md-3 control-label">&nbsp;</label>
+                            <div class="col-md-3">
+                                <input class="form-control" type="text" disabled value="<?=_h($v['city']);?>" />
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" type="text" disabled value="<?=_h($v['state']);?>" />
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" type="text" disabled value="<?=_h($v['zip']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -77,18 +81,18 @@
                     <!-- // Column END -->
                     
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="status"><?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
-                                <input class="span5" type="text" disabled value="<?=translate_addr_status(_h($v['addressStatus']));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="status"><?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" disabled value="<?=translate_addr_status(_h($v['addressStatus']));?>" />
                             </div>
                             
-                            <label class="control-label" for="type"><?php _e( _t( 'Type' ) ); ?></label>
-                            <div class="controls">
-                                <input class="span5" type="text" disabled value="<?=translate_addr_type(_h($v['addressType']));?>" />
+                            <label class="col-md-3 control-label" for="type"><?=_t( 'Type' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" disabled value="<?=translate_addr_type(_h($v['addressType']));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -104,8 +108,8 @@
                 <!-- Form actions -->
                 <div class="form-actions">
                     <form action="<?=BASE_URL;?>person/addr_form/<?=_h($this->person[0]['personID']);?>/<?=bm();?>">
-                        <button type="submit"<?=aids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Add' ) ); ?></button>
-                        <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>person/view/<?=_h($this->person[0]['personID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+                        <button type="submit"<?=aids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Add' );?></button>
+                        <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>person/view/<?=_h($this->person[0]['personID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
                     </form>
                 </div>
                 <!-- // Form actions END -->

@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -34,15 +34,16 @@ class CourseSec {
 	protected $_courseSecID;
 	protected $_sectionNumber;
 	protected $_courseSecCode;
-	protected $_buildingID;
-	protected $_roomID;
-	protected $_locationID;
+	protected $_buildingCode;
+	protected $_roomCode;
+	protected $_locationCode;
 	protected $_courseLevelCode;
 	protected $_acadLevelCode;
-	protected $_deptID;
+	protected $_deptCode;
 	protected $_facID;
-	protected $_termID;
+	protected $_termCode;
 	protected $_courseID;
+	protected $_courseCode;
 	protected $_preReqs;
 	protected $_secShortTitle;
 	protected $_termStartDate;
@@ -54,6 +55,9 @@ class CourseSec {
 	protected $_ceu;
 	protected $_creditHours;
 	protected $_stuReg;
+	protected $_courseFee;
+	protected $_labFee;
+	protected $_materialFee;
 	protected $_secType;
 	protected $_currStatus;
 	protected $_statusDate;
@@ -82,18 +86,19 @@ class CourseSec {
 		$bind = array( ":id" => $key_row );
         $q = DB::inst()->select( "course_sec", "courseSecID = :id", "", "*", $bind );
         foreach( $q as $row) {
-			$this->_courseSecID = $row["courseSecID"];
+			$this->_courseSecCode = $row["courseSecCode"];
 			$this->_sectionNumber = $row["sectionNumber"];
 			$this->_courseSecCode = $row["courseSecCode"];
-			$this->_buildingID = $row["buildingID"];
-			$this->_roomID = $row["roomID"];
-			$this->_locationID = $row["locationID"];
+			$this->_buildingCode = $row["buildingCode"];
+			$this->_roomCode = $row["roomCode"];
+			$this->_locationCode = $row["locationCode"];
 			$this->_courseLevelCode = $row["courseLevelCode"];
 			$this->_acadLevelCode = $row["acadLevelCode"];
-			$this->_deptID = $row["deptID"];
+			$this->_deptCode = $row["deptCode"];
 			$this->_facID = $row["facID"];
-			$this->_termID = $row["termID"];
+			$this->_termCode = $row["termCode"];
 			$this->_courseID = $row["courseID"];
+			$this->_courseCode = $row["courseCode"];
 			$this->_preReqs = $row["preReqs"];
 			$this->_secShortTitle = $row["secShortTitle"];
 			$this->_termStartDate = $row["termStartDate"];
@@ -105,6 +110,9 @@ class CourseSec {
 			$this->_ceu = $row["ceu"];
 			$this->_creditHours = $row["creditHours"];
 			$this->_stuReg = $row["stuReg"];
+			$this->_courseFee = $row["courseFee"];
+			$this->_labFee = $row["labFee"];
+			$this->_materialFee = $row["materialFee"];
 			$this->_secType = $row["secType"];
 			$this->_currStatus = $row["currStatus"];
 			$this->_statusDate = $row["statusDate"];
@@ -154,22 +162,22 @@ class CourseSec {
 	/**
 	 * @return buildingCode - varchar(11)
 	 */
-	public function getBuildingID(){
-		return $this->_buildingID;
+	public function getBuildingCode(){
+		return $this->_buildingCode;
 	}
 
 	/**
 	 * @return roomCode - varchar(11)
 	 */
-	public function getRoomID(){
-		return $this->_roomID;
+	public function getRoomCode(){
+		return $this->_roomCode;
 	}
 
 	/**
 	 * @return locationCode - varchar(6)
 	 */
-	public function getLocationID(){
-		return $this->_locationID;
+	public function getLocationCode(){
+		return $this->_locationCode;
 	}
 
 	/**
@@ -189,7 +197,7 @@ class CourseSec {
 	/**
 	 * @return deptCode - varchar(11)
 	 */
-	public function getDeptID(){
+	public function getDeptCode(){
 		return $this->_deptCode;
 	}
 
@@ -203,8 +211,8 @@ class CourseSec {
 	/**
 	 * @return termCode - varchar(11)
 	 */
-	public function getTermID(){
-		return $this->_termID;
+	public function getTermCode(){
+		return $this->_termCode;
 	}
 
 	/**
@@ -212,6 +220,13 @@ class CourseSec {
 	 */
 	public function getCourseID(){
 		return $this->_courseID;
+	}
+	
+	/**
+	 * @return courseCode
+	 */
+	public function getCourseCode(){
+		return $this->_courseCode;
 	}
 
 	/**
@@ -289,6 +304,18 @@ class CourseSec {
 	 */
 	public function getStuReg(){
 		return $this->_stuReg;
+	}
+	
+	public function getCourseFee(){
+		return $this->_courseFee;
+	}
+	
+	public function getLabFee(){
+		return $this->_labFee;
+	}
+	
+	public function getMaterialFee(){
+		return $this->_materialFee;
 	}
 
 	/**

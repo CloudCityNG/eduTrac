@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -52,7 +52,7 @@ class ApplicationModel {
                 LEFT JOIN 
                     term b 
                 ON 
-                    a.startTerm = b.termID 
+                    a.startTerm = b.termCode 
                 LEFT JOIN 
                     person c
                 ON 
@@ -85,7 +85,7 @@ class ApplicationModel {
     public function person($id) {
         $array = [];
         $bind = [ ":id" => $id ];
-        $q = DB::inst()->select( "person","personID = :id","","personID",$bind );
+        $q = DB::inst()->select( "person","personID = :id","","*",$bind );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -105,7 +105,24 @@ class ApplicationModel {
     public function appl($id) {
         $array = [];
         $bind = [ ":id" => $id ];
-        $q = DB::inst()->select( "application","applID = :id","applID","*",$bind );
+        $q = DB::inst()->query( "SELECT 
+        				a.*,
+        				b.fname,
+        				b.mname,
+        				b.lname,
+        				b.dob,
+        				b.email,
+        				b.gender 
+    				FROM 
+    					application a 
+					LEFT JOIN 
+						person b 
+					ON 
+						a.personID = b.personID 
+					WHERE 
+						a.applID = :id",
+					$bind 
+		);
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -156,30 +173,19 @@ class ApplicationModel {
     
     public function runApplication($data) {
         $date = date("Y-m-d");
-        $addedBy = $this->_auth->getPersonField('personID');
-        $bind1 = [ 
-                "acadProgID" => $data['acadProgID'],"startTerm" => $data['startTerm'],
+        $bind = [ 
+                "acadProgCode" => $data['acadProgCode'],"startTerm" => $data['startTerm'],
                 "PSAT_Verbal" => $data['PSAT_Verbal'],"PSAT_Math" => $data['PSAT_Math'],
                 "SAT_Verbal" => $data['SAT_Verbal'],"SAT_Math" => $data['SAT_Math'],
                 "ACT_English" => $data['ACT_English'],"ACT_Math" => $data['ACT_Math'],
-                "personID" => $data['personID'],"addDate" => $date,
-                "addedBy" => $addedBy,"admitStatus" => $data['admitStatus']
+                "personID" => $data['personID'],"addDate" => $date,"applDate" => $data['applDate'],
+                "addedBy" => $data['addedBy'],"admitStatus" => $data['admitStatus']
                 ];
                 
-        $q1 = DB::inst()->insert( "application", $bind1 );
+        $q = DB::inst()->insert( "application", $bind );
         $ID = DB::inst()->lastInsertId('applID');
         
-        if($q1) {
-            $bind2 = [ 
-                    "instID" => $data['instID'],"fromDate" => $data['fromDate'],
-                    "toDate" => $data['toDate'],"GPA" => $data['GPA'],
-                    "personID" => $data['personID'],"addDate" => $date,
-                    "addedBy" => $addedBy
-                    ];
-            $q2 = DB::inst()->insert( "institution_attended", $bind2 );
-        }
-        
-        if(!$q2) {
+        if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
             $this->_log->setLog('New Record','Application',get_name($data['personID']),$this->_uname);
@@ -190,28 +196,81 @@ class ApplicationModel {
     public function runEditApplication($data) {
         $bind1 = [ ":applID" => $data['applID'],":personID" => $data['personID'] ];
         $update1 = [ 
-                "acadProgID" => $data['acadProgID'],"startTerm" => $data['startTerm'],
+                "acadProgCode" => $data['acadProgCode'],"startTerm" => $data['startTerm'],
                 "PSAT_Verbal" => $data['PSAT_Verbal'],"PSAT_Math" => $data['PSAT_Math'],
                 "SAT_Verbal" => $data['SAT_Verbal'],"SAT_Math" => $data['SAT_Math'],
                 "ACT_English" => $data['ACT_English'],"ACT_Math" => $data['ACT_Math'],
-                "admitStatus" => $data['admitStatus']
+                "admitStatus" => $data['admitStatus'],"applDate" => $data['applDate']
                 ];
                 
         $q1 = DB::inst()->update("application",$update1,"applID = :applID AND personID = :personID",$bind1);
         
-        $size = count($data['instID']);
+        $size = count($data['schoolCode']);
         $i = 0;
         while($i < $size) {
-            $bind2 = [ ":instAttID" => $data['instAttID'][$i],":personID" => $data['personID'] ];
+            $bind2 = [ ":id" => $data['instAttID'][$i],":personID" => $data['personID'] ];
             $update2 = [ 
-                    "instID" => $data['instID'][$i],"fromDate" => $data['fromDate'][$i],
-                    "toDate" => $data['toDate'][$i],"GPA" => $data['GPA'][$i]
+                    "schoolCode" => $data['schoolCode'][$i],"fromDate" => $data['fromDate'][$i],
+	                "toDate" => $data['toDate'][$i],"GPA" => $data['GPA'][$i],
+	                "major" => $data['major'][$i],"degree_awarded" => $data['degree_awarded'][$i],
+	                "degree_conferred_date" => $data['degree_conferred_date'][$i]
                     ];
-            $q2 = DB::inst()->update("institution_attended",$update2,"instAttID = :instAttID AND personID = :personID",$bind2);
+            $q2 = DB::inst()->update("institution_attended",$update2,"instAttID = :id AND personID = :personID",$bind2);
             ++$i;
         }
         $this->_log->setLog('Update Record','Application',get_name($data['personID']),$this->_uname);
         redirect( BASE_URL . 'application/view/' . $data['applID'] . '/' . bm() );
+    }
+	
+	public function runInstAttended($data) {        
+        $bind = [ 
+                "schoolCode" => $data['schoolCode'],"fromDate" => $data['fromDate'],
+                "toDate" => $data['toDate'],"GPA" => $data['GPA'],
+                "personID" => $data['personID'],
+                "major" => $data['major'],"degree_awarded" => $data['degree_awarded'],
+                "degree_conferred_date" => $data['degree_conferred_date'],
+                "addDate" => $data['addDate'],"addedBy" => $data['addedBy']
+                ];
+        $q = DB::inst()->insert("institution_attended",$bind);
+		if(!$q) {
+			redirect( BASE_URL . 'error/save_data/' );
+		} else {
+        	$this->_log->setLog('New Record','Institution Attended',get_name($data['personID']),$this->_uname);
+        	redirect( BASE_URL . 'success/save_data/' );
+		}
+    }
+	
+	public function runApplicantLookup($data) {
+        $bind = [ ":id" => $data['personID'] ];
+		$q = DB::inst()->query( "SELECT 
+						b.personID,
+						b.fname,
+						b.lname 
+					FROM 
+						application a 
+					LEFT JOIN 
+						person b 
+					ON 
+						a.personID = b.personID 
+					WHERE 
+						a.personID = :id",
+					$bind
+		);
+        foreach($q as $k => $v) {
+            $json = [ 'input#person' => $v['lname'].', '.$v['fname'] ];
+        }
+        echo json_encode($json);
+    }
+    
+    public function deleteInstAttend($id) {
+    	$bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "DELETE FROM institution_attended WHERE instAttID = :id", $bind );
+        
+        if($q) {
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            redirect( BASE_URL . 'error/delete_record/');
+        }
     }
     
     public function __destruct() {

@@ -3,10 +3,8 @@
  *
  * Manage Courses View
  *  
- * PHP 5
- *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,20 +19,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
- * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       3.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Programs' ) ); ?></li>
+	<li><?=_t( 'Programs' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Program' ) ); ?></h3>
+<h3><?=_t( 'Search Program' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -45,10 +46,9 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<div class="widget widget-heading-simple widget-body-white margin-none">
 					<div class="widget-body">
 						
-						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>program/<?=bm();?>" method="post" autocomplete="off">
-							  	<input type="text" name="prog" class="input-xxlarge" placeholder="Search by Department of Program Code . . . " />
-							  	<!-- <button type="submit" class="btn btn-inverse">Search</button> -->
+						<div class="widget widget-heading-simple widget-body-simple text-right form-group">
+							<form class="form-search text-center" action="<?=BASE_URL;?>program/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="prog" class="form-control" placeholder="Search by department or program code . . . " /> 
 							</form>
 						</div>
 						
@@ -56,7 +56,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				</div>
 			</div>
 			
-			<div class="break"></div>
+			<div class="separator bottom"></div>
 			
 			<?php if(isPostSet('prog')) { ?>
 			<!-- Table -->
@@ -65,12 +65,12 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Program Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Program Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Effective Date' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'End Date' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Program Code' );?></th>
+						<th class="text-center"><?=_t( 'Program Title' );?></th>
+						<th class="text-center"><?=_t( 'Status' );?></th>
+						<th class="text-center"><?=_t( 'Effective Date' );?></th>
+						<th class="text-center"><?=_t( 'End Date' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -79,14 +79,22 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['acadProgCode']);?></td>
-                    <td class="center"><?=_h($v['acadProgTitle']);?></td>
-                    <td class="center"><?=_h($v['Status']);?></td>
-                    <td class="center"><?=_h($v['startDate']);?></td>
-                    <td class="center"><?=_h($v['endDate']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>program/view/<?=_h($v['acadProgID']);?>/<?=bm();?>" title="View Program" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <?php Hooks::do_action('search_acad_program_action'); ?>
+                    <td class="text-center"><?=_h($v['acadProgCode']);?></td>
+                    <td class="text-center"><?=_h($v['acadProgTitle']);?></td>
+                    <td class="text-center"><?=_h($v['Status']);?></td>
+                    <td class="text-center"><?=_h($v['startDate']);?></td>
+                    <td class="text-center"><?=_h($v['endDate']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>program/view/<?=_h($v['acadProgID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
 				<?php } endif; ?>

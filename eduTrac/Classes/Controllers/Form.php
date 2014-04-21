@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,6 +36,14 @@ class Form extends \eduTrac\Classes\Core\Controller {
 		parent::__construct();
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies();
         if(!hasPermission('access_forms')) { redirect( BASE_URL . 'dashboard/' ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
@@ -44,43 +52,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begins semester methods */
 	public function semester() {
-		$this->view->staticTitle = array('Semester');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('Semester'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->semesterList = $this->model->semesterList();
 		$this->view->render('form/semester');
 	}
 	
 	public function view_semester($id) {
-		$this->view->staticTitle = array('View Semester');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Semester'));
 		$this->view->sem = $this->model->semester($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->sem)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -90,7 +93,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	public function runSemester() {
 		$data = array();
-		$data['acadYearID'] = isPostSet('acadYearID');
+		$data['acadYearCode'] = isPostSet('acadYearCode');
         $data['semCode'] = isPostSet('semCode');
         $data['semName'] = isPostSet('semName');
 		$data['semStartDate'] = isPostSet('semStartDate');
@@ -101,7 +104,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	public function runEditSemester() {
 		$data = array();
-		$data['acadYearID'] = isPostSet('acadYearID');
+		$data['acadYearCode'] = isPostSet('acadYearCode');
 		$data['semCode'] = isPostSet('semCode');
         $data['semName'] = isPostSet('semName');
 		$data['semStartDate'] = isPostSet('semStartDate');
@@ -118,43 +121,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begins term methods */
 	public function term() {
-		$this->view->staticTitle = array('Term');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Term'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->termList = $this->model->termList();
 		$this->view->render('form/term');	
 	}
 	
 	public function view_term($id) {
-		$this->view->staticTitle = array('View Term');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Term'));
 		$this->view->term = $this->model->term($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->term)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -164,7 +162,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	public function runTerm() {
 		$data = array();
-		$data['semesterID'] = isPostSet('semesterID');
+		$data['semCode'] = isPostSet('semCode');
         $data['termCode'] = isPostSet('termCode');
         $data['termName'] = isPostSet('termName');
         $data['reportingTerm'] = isPostSet('reportingTerm');
@@ -177,7 +175,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	public function runEditTerm() {
 		$data = array();
-		$data['semesterID'] = isPostSet('semesterID');
+		$data['semCode'] = isPostSet('semCode');
         $data['termCode'] = isPostSet('termCode');
 		$data['termName'] = isPostSet('termName');
         $data['reportingTerm'] = isPostSet('reportingTerm');
@@ -196,39 +194,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begin academic year */
 	public function acad_year() {
-		$this->view->staticTitle = array('Academic Year');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Academic Year'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->acadYearList = $this->model->acadYearList();
 		$this->view->render('form/acad_year');
 	}
 	
 	public function view_acad_year($id) {
-		$this->view->staticTitle = array('View Academic Year');
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Academic Year'));
 		$this->view->acadYear = $this->model->acadYear($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->acadYear)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -258,43 +255,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begin department */
 	public function department() {
-		$this->view->staticTitle = array('Department');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Department'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->deptList = $this->model->deptList();
 		$this->view->render('form/department');
 	}
 	
 	public function view_department($id) {
-		$this->view->staticTitle = array('View Department');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Department'));
 		$this->view->dept = $this->model->dept($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->dept)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -326,105 +318,109 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	}
 	/* End department */
 	
-	/* Begin credit Load */
-	public function credit_load() {
-		$this->view->staticTitle = array('Credit Load');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+	/* Begin student load rule */
+	public function student_load_rule() {
+		$this->view->staticTitle = array(_t('Student Load Rules'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->credLoadList = $this->model->credLoadList();
-		$this->view->render('form/credit_load');
+		$this->view->render('form/student_load_rule');
 	}
 	
-	public function view_credit_load($id) {
-		$this->view->staticTitle = array('View Credit Load');
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
-		$this->view->cl = $this->model->cl($id);
-		
-		if(empty($this->view->cl)) {
+	public function view_student_load_rule($id) {
+		$this->view->staticTitle = array(_t('View Student Load Rule'));
+		$this->view->sl = $this->model->sl($id);
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
+		if(empty($this->view->sl)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
 		
-		$this->view->render('form/view_credit_load');
+		$this->view->render('form/view_student_load_rule');
 	}
 	
-	public function runCredLoad() {
+	public function runStuLoadRule() {
 		$data = array();
-		$data['credLoadCode'] = isPostSet('credLoadCode');
-		$data['credLoadName'] = isPostSet('credLoadName');
-		$data['credLoadCreds'] = isPostSet('credLoadCreds');
-		$this->model->runCredLoad($data);
+		$data['status'] = isPostSet('status');
+		$data['min_cred'] = isPostSet('min_cred');
+		$data['max_cred'] = isPostSet('max_cred');
+        $data['term'] = isPostSet('term');
+        $data['acadLevelCode'] = isPostSet('acadLevelCode');
+        $data['active'] = isPostSet('active');
+		$this->model->runStuLoadRule($data);
 	}
 	
-	public function runEditCredLoad() {
+	public function runEditStuLoadRule() {
 		$data = array();
-		$data['credLoadCode'] = isPostSet('credLoadCode');
-		$data['credLoadName'] = isPostSet('credLoadName');
-		$data['credLoadCreds'] = isPostSet('credLoadCreds');
-		$data['credLoadID'] = isPostSet('credLoadID');
-		$this->model->runEditCredLoad($data);
+		$data['status'] = isPostSet('status');
+        $data['min_cred'] = isPostSet('min_cred');
+        $data['max_cred'] = isPostSet('max_cred');
+        $data['term'] = isPostSet('term');
+        $data['acadLevelCode'] = isPostSet('acadLevelCode');
+        $data['active'] = isPostSet('active');
+        $data['slrID'] = isPostSet('slrID');
+		$this->model->runEditStuLoadRule($data);
 	}
 	
-	public function deleteCredLoad($id) {
-		$this->model->deleteCredLoad($id);
+	public function deleteStuLoadRule($id) {
+		$this->model->deleteStuLoadRule($id);
 	}
-	/* End credit load */
+	/* End student load rule */
 	
 	/* Begin degrees */
 	public function degree() {
-		$this->view->staticTitle = array('Degree');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Degree'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->degreeList = $this->model->degreeList();
 		$this->view->render('form/degree');
 	}
 	
 	public function view_degree($id) {
-		$this->view->staticTitle = array('View Degree');
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Degree'));
 		$this->view->degree = $this->model->degree($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->degree)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -454,39 +450,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begin majors */
 	public function major() {
-		$this->view->staticTitle = array('Major');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Major'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->majorList = $this->model->majorList();
 		$this->view->render('form/major');
 	}
 	
 	public function view_major($id) {
-		$this->view->staticTitle = array('View Major');
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Major'));
 		$this->view->major = $this->model->major($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->major)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -516,39 +511,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begin minors */
 	public function minor() {
-		$this->view->staticTitle = array('Minor');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Minor'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->minorList = $this->model->minorList();
 		$this->view->render('form/minor');
 	}
 	
 	public function view_minor($id) {
-		$this->view->staticTitle = array('View Minor');
-		$this->view->js = array( 
-								'theme/scripts/plugins/forms/select2/select2.js',
-								'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-								'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-								'theme/scripts/demo/form_elements.js'
-								);
+		$this->view->staticTitle = array(_t('View Minor'));
 		$this->view->minor = $this->model->minor($id);
-		
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		if(empty($this->view->minor)) {
 			redirect( BASE_URL . 'error/invalid_record/' );
 		}
@@ -578,39 +572,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
 	
 	/* Begin CCD */
     public function ccd() {
-        $this->view->staticTitle = array('CCD');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('CCD'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->ccdList = $this->model->ccdList();
         $this->view->render('form/ccd');
     }
     
     public function view_ccd($id) {
-        $this->view->staticTitle = array('View CCD');
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View CCD'));
         $this->view->ccd = $this->model->ccd($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->ccd)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -641,39 +634,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin CIP */
     public function cip() {
-        $this->view->staticTitle = array('CIP');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('CIP'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->cipList = $this->model->cipList();
         $this->view->render('form/cip');
     }
     
     public function view_cip($id) {
-        $this->view->staticTitle = array('View CIP');
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View CIP'));
         $this->view->cip = $this->model->cip($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->cip)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -703,39 +695,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Location */
     public function location() {
-        $this->view->staticTitle = array('Location');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Location'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->locList = $this->model->locList();
         $this->view->render('form/location');
     }
     
     public function view_location($id) {
-        $this->view->staticTitle = array('View Location');
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Location'));
         $this->view->location = $this->model->location($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->location)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -765,39 +756,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Building */
     public function building() {
-        $this->view->staticTitle = array('Building');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Building'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->buildList = $this->model->buildList();
         $this->view->render('form/building');
     }
     
     public function view_building($id) {
-        $this->view->staticTitle = array('View Building');
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Building'));
         $this->view->build = $this->model->build($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->build)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -809,6 +799,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data = array();
         $data['buildingCode'] = isPostSet('buildingCode');
         $data['buildingName'] = isPostSet('buildingName');
+		$data['locationCode'] = isPostSet('locationCode');
         $this->model->runBuilding($data);
     }
     
@@ -816,6 +807,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data = array();
         $data['buildingCode'] = isPostSet('buildingCode');
         $data['buildingName'] = isPostSet('buildingName');
+		$data['locationCode'] = isPostSet('locationCode');
         $data['buildingID'] = isPostSet('buildingID');
         $this->model->runEditBuilding($data);
     }
@@ -827,43 +819,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Room */
     public function room() {
-        $this->view->staticTitle = array('Add Room');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Room'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->roomList = $this->model->roomList();
         $this->view->render('form/room');
     }
     
     public function view_room($id) {
-        $this->view->staticTitle = array('View Room');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Room'));
         $this->view->room = $this->model->room($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->room)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -874,7 +861,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
     public function runRoom() {
         $data = array();
         $data['roomCode'] = isPostSet('roomCode');
-        $data['buildingID'] = isPostSet('buildingID');
+        $data['buildingCode'] = isPostSet('buildingCode');
         $data['roomNumber'] = isPostSet('roomNumber');
         $data['roomCap'] = isPostSet('roomCap');
         $this->model->runRoom($data);
@@ -883,7 +870,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
     public function runEditRoom() {
         $data = array();
         $data['roomCode'] = isPostSet('roomCode');
-        $data['buildingID'] = isPostSet('buildingID');
+        $data['buildingCode'] = isPostSet('buildingCode');
         $data['roomNumber'] = isPostSet('roomNumber');
         $data['roomCap'] = isPostSet('roomCap');
         $data['roomID'] = isPostSet('roomID');
@@ -897,43 +884,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Specialization */
     public function specialization() {
-        $this->view->staticTitle = array('Add Specialization');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Specialization'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->specList = $this->model->specList();
         $this->view->render('form/specialization');
     }
     
     public function view_specialization($id) {
-        $this->view->staticTitle = array('View Specialization');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Specialization'));
         $this->view->specialization = $this->model->specialization($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->specialization)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -963,43 +945,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Class Year */
     public function class_year() {
-        $this->view->staticTitle = array('Class Year');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Class Year'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->yearList = $this->model->yearList();
         $this->view->render('form/class_year');
     }
     
     public function view_class_year($id) {
-        $this->view->staticTitle = array('View Class Year');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Class Year'));
         $this->view->year = $this->model->year($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->year)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -1033,43 +1010,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Subject */
     public function subject() {
-        $this->view->staticTitle = array('Subject');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Subject'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->subjList = $this->model->subjList();
         $this->view->render('form/subject');
     }
     
     public function view_subject($id) {
-        $this->view->staticTitle = array('View Subject');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Subject'));
         $this->view->subj = $this->model->subj($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->subj)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -1079,15 +1051,15 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     public function runSubj() {
         $data = array();
-        $data['subjCode'] = isPostSet('subjCode');
-        $data['subjName'] = isPostSet('subjName');
+        $data['subjectCode'] = isPostSet('subjectCode');
+        $data['subjectName'] = isPostSet('subjectName');
         $this->model->runSubj($data);
     }
     
     public function runEditSubj() {
         $data = array();
-        $data['subjCode'] = isPostSet('subjCode');
-        $data['subjName'] = isPostSet('subjName');
+        $data['subjectCode'] = isPostSet('subjectCode');
+        $data['subjectName'] = isPostSet('subjectName');
         $data['subjectID'] = isPostSet('subjectID');
         $this->model->runEditSubj($data);
     }
@@ -1099,43 +1071,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Subject */
     public function school() {
-        $this->view->staticTitle = array('School');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('School'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->schoolList = $this->model->schoolList();
         $this->view->render('form/school');
     }
     
     public function view_school($id) {
-        $this->view->staticTitle = array('View School');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View School'));
         $this->view->school = $this->model->school($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->school)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -1148,7 +1115,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data['ficeCode'] = isPostSet('ficeCode');
         $data['schoolCode'] = isPostSet('schoolCode');
         $data['schoolName'] = isPostSet('schoolName');
-        $data['buildingID'] = isPostSet('buildingID');
+        $data['buildingCode'] = isPostSet('buildingCode');
         $this->model->runSchool($data);
     }
     
@@ -1158,7 +1125,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data['schoolCode'] = isPostSet('schoolCode');
         $data['schoolName'] = isPostSet('schoolName');
         $data['schoolID'] = isPostSet('schoolID');
-        $data['buildingID'] = isPostSet('buildingID');
+        $data['buildingCode'] = isPostSet('buildingCode');
         $this->model->runEditSchool($data);
     }
     
@@ -1169,43 +1136,38 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     /* Begin Institution */
     public function institution() {
-        $this->view->staticTitle = array('Institution');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Institution'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->instList = $this->model->instList();
         $this->view->render('form/institution');
     }
     
     public function view_institution($id) {
-        $this->view->staticTitle = array('View Institution');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Institution'));
         $this->view->inst = $this->model->inst($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->inst)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -1236,5 +1198,115 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $this->model->deleteInst($id);
     }
     /* End Institution */
+    
+    /* Begin Grade Scale */
+    public function grade_scale() {
+        $this->view->staticTitle = array(_t('Grade Scale'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->gradeScale = $this->model->gradeScale();
+        $this->view->render('form/grade_scale');
+    }
+    
+    public function view_grade_scale($id) {
+        $this->view->staticTitle = array(_t('View Grade'));
+        $this->view->scale = $this->model->scale($id);
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
+        if(empty($this->view->scale)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        
+        $this->view->render('form/view_grade_scale');
+    }
+    
+    public function runGradeScale() {
+        $data = array();
+        $data['grade'] = isPostSet('grade');
+        $data['percent'] = isPostSet('percent');
+        $data['points'] = isPostSet('points');
+        $data['status'] = isPostSet('status');
+		$data['description'] = isPostSet('description');
+		$data['update'] = isPostSet('update');
+		$data['ID'] = isPostSet('ID');
+        $this->model->runGradeScale($data);
+    }
+    
+    public function deleteGradeScale($id) {
+        $this->model->deleteGradeScale($id);
+    }
+    /* End Grade Scale */
+    
+    /* Begin Restriction Code */
+    public function rstr_code() {
+        $this->view->staticTitle = array(_t('Restriction Codes'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->rstrCodeList = $this->model->rstrCodeList();
+        $this->view->render('form/rstr_code');
+    }
+    
+    public function view_rstr_code($id) {
+        $this->view->staticTitle = array(_t('View Restriction Code'));
+        $this->view->rstr = $this->model->rstr($id);
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
+        if(empty($this->view->rstr)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        
+        $this->view->render('form/view_rstr_code');
+    }
+    
+    public function runRSTRCode() {
+        $data = array();
+        $data['rstrCode'] = isPostSet('rstrCode');
+        $data['description'] = isPostSet('description');
+        $data['deptCode'] = isPostSet('deptCode');
+        $data['update'] = isPostSet('update');
+        $data['rstrCodeID'] = isPostSet('rstrCodeID');
+        $this->model->runRSTRCode($data);
+    }
+    /* End Restriction Code */
 	
 }

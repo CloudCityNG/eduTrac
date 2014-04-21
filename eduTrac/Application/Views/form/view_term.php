@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>form/term/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'Term' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>form/term/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'Term' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'View Term' ) ); ?></li>
+	<li><?=_t( 'View Term' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'View Term' ) ); ?></h3>
+<h3><?=_t( 'View Term' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,48 +48,48 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semCode"><font color="red">*</font> <?php _e( _t( 'Semester' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="semesterID" id="select2_10"<?=gio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="semCode"><font color="red">*</font> <?=_t( 'Semester' );?></label>
+							<div class="col-md-8">
+								<select name="semCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?> required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown("semester", "", "semesterID", "semCode", "semName", _h($this->term[0]['semesterID'])); ?>
+                            		<?php table_dropdown("semester", 'semCode <> "NULL"', "semCode", "semCode", "semName", _h($this->term[0]['semCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="termCode"><font color="red">*</font> <?php _e( _t( 'Term Code' ) ); ?></label>
-                            <div class="controls"><input class="span12"<?=gio();?> name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" required /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="termCode"><font color="red">*</font> <?=_t( 'Term Code' );?></label>
+                            <div class="col-md-8"><input class="form-control"<?=gio();?> name="termCode" type="text" value="<?=_h($this->term[0]['termCode']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="termName"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
-							<div class="controls"><input class="span12" id="termName"<?=gio();?> name="termName" type="text" value="<?=_h($this->term[0]['termName']);?>" required /></div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="termName"><font color="red">*</font> <?=_t( 'Term' );?></label>
+							<div class="col-md-8"><input class="form-control" id="termName"<?=gio();?> name="termName" type="text" value="<?=_h($this->term[0]['termName']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="reportingTerm"><font color="red">*</font> <?php _e( _t( 'Reporting Term' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="reportingTerm"<?=gio();?> name="reportingTerm" type="text" value="<?=_h($this->term[0]['reportingTerm']);?>" required /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="reportingTerm"><font color="red">*</font> <?=_t( 'Reporting Term' );?></label>
+                            <div class="col-md-8"><input class="form-control" id="reportingTerm"<?=gio();?> name="reportingTerm" type="text" value="<?=_h($this->term[0]['reportingTerm']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
 						
@@ -97,52 +97,52 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="termStartDate"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="termStartDate"<?=gio();?> name="termStartDate" type="text" value="<?=_h($this->term[0]['termStartDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="termStartDate"><font color="red">*</font> <?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker8">
+                                    <input class="form-control"<?=gio();?> name="termStartDate" type="text" value="<?=_h($this->term[0]['termStartDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="termEndDate"><font color="red">*</font> <?php _e( _t( 'End Date' ) ); ?></label>
-							<div class="controls">
-								<div class="input-append date" id="datetimepicker7">
-						    		<input id="termEndDate"<?=gio();?> name="termEndDate" type="text" value="<?=_h($this->term[0]['termEndDate']);?>" required />
-				    				<span class="add-on"><i class="icon-th"></i></span>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="termEndDate"><font color="red">*</font> <?=_t( 'End Date' );?></label>
+							<div class="col-md-8">
+								<div class="input-group date col-md-8" id="datepicker9">
+						    		<input class="form-control"<?=gio();?> name="termEndDate" type="text" value="<?=_h($this->term[0]['termEndDate']);?>" required />
+				    				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 								</div>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="dropAddEndDate"><font color="red">*</font> <?php _e( _t( 'Drop/Add End Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker8">
-                                    <input id="dropAddEndDate" name="dropAddEndDate" type="text" value="<?=_h($this->term[0]['dropAddEndDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="dropAddEndDate"><font color="red">*</font> <?=_t( 'Drop/Add End Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker10">
+                                    <input class="form-control" name="dropAddEndDate" type="text" value="<?=_h($this->term[0]['dropAddEndDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="term"><font color="red">*</font> <?php _e( _t( 'Active' ) ); ?></label>
-							<div class="controls">
-								<select style="width:25%;" name="active" id="select2_11"<?=gio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="term"><font color="red">*</font> <?=_t( 'Active' );?></label>
+							<div class="col-md-8">
+								<select name="active" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?> required>
 									<option value="">&nbsp;</option>
-                            		<option value="1"<?php if($this->term[0]['active'] == '1') { echo 'selected="selected"'; } ?>><?php _e( _t( 'Yes' ) ); ?></option>
-                            		<option value="0"<?php if($this->term[0]['active'] == '0') { echo 'selected="selected"'; } ?>><?php _e( _t( 'No' ) ); ?></option>
+                            		<option value="1"<?php if($this->term[0]['active'] == '1') { echo 'selected="selected"'; } ?>><?=_t( 'Yes' );?></option>
+                            		<option value="0"<?php if($this->term[0]['active'] == '0') { echo 'selected="selected"'; } ?>><?=_t( 'No' );?></option>
                             	</select>
 							</div>
 						</div>
@@ -157,7 +157,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input name="termID"<?=gids();?> type="hidden" value="<?=_h($this->term[0]['termID']);?>" />
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

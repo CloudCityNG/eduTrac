@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Minor' ) ); ?></li>
+	<li><?=_t( 'Minor' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Minor' ) ); ?></h3>
+<h3><?=_t( 'Minor' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -47,29 +47,29 @@ use \eduTrac\Classes\Libraries\Hooks;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="minorCode"><font color="red">*</font> <?php _e( _t( 'Minor Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="minorCode" name="minorCode" type="text" required /></div>
+						<div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="minorCode"><font color="red">*</font> <?=_t( 'Minor Code' );?></label>
+							<div class="col-md-8"><input class="form-control" name="minorCode" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="minorName"><font color="red">*</font> <?php _e( _t( 'Minor Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="minorName" name="minorName" type="text" required /></div>
+						<div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="minorName"><font color="red">*</font> <?=_t( 'Minor Name' );?></label>
+							<div class="col-md-8"><input class="form-control" name="minorName" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -83,7 +83,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -106,9 +106,9 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <!-- Table heading -->
                 <thead>
                     <tr>
-                        <th class="center"><?php _e( _t( 'Minor Code' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Minor Name' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+                        <th class="text-center"><?=_t( 'Minor Code' );?></th>
+                        <th class="text-center"><?=_t( 'Minor Name' );?></th>
+                        <th class="text-center"><?=_t( 'Actions' );?></th>
                     </tr>
                 </thead>
                 <!-- // Table heading END -->
@@ -117,11 +117,20 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <tbody>
                 <?php if($this->minorList != '') : foreach($this->minorList as $key => $value) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($value['minorCode']);?></td>
-                    <td class="center"><?=_h($value['minorName']);?></td>
-                    <td class="center">
-                        <a href="<?=BASE_URL;?>form/view_minor/<?=_h($value['minorID']);?>/<?=bm();?>" title="View Minor" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <?php Hooks::do_action('search_minor_action'); ?>
+                    <td class="text-center"><?=_h($value['minorCode']);?></td>
+                    <td class="text-center"><?=_h($value['minorName']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>form/view_minor/<?=_h($value['minorID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php Hooks::do_action('search_minor_action'); ?>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

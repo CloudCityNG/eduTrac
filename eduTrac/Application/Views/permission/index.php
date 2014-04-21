@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,13 +33,13 @@ $perms = new ACL();
 ?>
 
 <ul class="breadcrumb">
-    <li><?php _e( _t( 'You are here') ); ?></li>
-    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+    <li><?=_t( 'You are here');?></li>
+    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'Permissions' ) ); ?></li>
+    <li><?=_t( 'Permissions' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Manage Permissions' ) ); ?></h3>
+<h3><?=_t( 'Manage Permissions' );?></h3>
 <div class="innerLR">
 
     <!-- Widget -->
@@ -52,10 +52,10 @@ $perms = new ACL();
                 <!-- Table heading -->
                 <thead>
                     <tr>
-                        <th class="center"><?php _e( _t( 'ID' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Key' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Name' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Edit' ) ); ?></th>
+                        <th class="text-center"><?=_t( 'ID' );?></th>
+                        <th class="text-center"><?=_t( 'Key' );?></th>
+                        <th class="text-center"><?=_t( 'Name' );?></th>
+                        <th class="text-center"><?=_t( 'Edit' );?></th>
                     </tr>
                 </thead>
                 <!-- // Table heading END -->
@@ -70,7 +70,7 @@ $perms = new ACL();
                             echo '<td>'._h($v['ID']).'</td>';
                             echo '<td>'._h($v['Key']).'</td>';
                             echo '<td>'._h($v['Name']).'</td>';
-                            echo '<td class="center"><a href="'.BASE_URL.'permission/view/?permID='._h($v['ID']).'" title="Edit Permission" class="btn btn-circle"><i class="icon-edit"></i></a></td>';
+                            echo '<td class="text-center"><a href="'.BASE_URL.'permission/view/?permID='._h($v['ID']).'" title="Edit Permission" class="btn btn-default"><i class="fa fa-edit"></i></a></td>';
                             echo '</tr>';
                         }
                     }
@@ -89,7 +89,7 @@ $perms = new ACL();
     
     <!-- Form actions -->
     <div class="form-actions">
-        <button type="submit" name="NewPerm" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="window.location='<?=BASE_URL;?>permission/add/<?=bm();?>'"><i></i><?php _e( _t( 'New Permision' ) ); ?></button>
+        <button type="submit" name="NewPerm" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="window.location='<?=BASE_URL;?>permission/add/<?=bm();?>'"><i></i><?=_t( 'New Permision' );?></button>
     </div>
     <!-- // Form actions END -->
     

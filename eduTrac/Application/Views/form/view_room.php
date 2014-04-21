@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/room/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'Room' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/room/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'Room' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View Room' ) ); ?></li>
+	<li><?=_t( 'View Room' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Viewing ' ) ); ?><?=_h($this->room[0]['roomNumber']);?></h3>
+<h3><?=_t( 'Viewing ' );?><?=_h($this->room[0]['roomNumber']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,34 +48,34 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="buildingCode"><font color="red">*</font> <?php _e( _t( 'Building' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%" name="buildingID" id="select2_9"<?=gio();?> required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="buildingCode"><font color="red">*</font> <?=_t( 'Building' );?></label>
+                            <div class="col-md-8">
+                                <select name="buildingCode"<?=gio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <?=table_dropdown('building', '', 'buildingID', 'buildingCode', 'buildingName', _h($this->room[0]['buildingID']) );?>
+                                    <?=table_dropdown('building', 'buildingCode <> "NULL"', 'buildingCode', 'buildingCode', 'buildingName', _h($this->room[0]['buildingCode']) );?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="roomCode"><font color="red">*</font> <?php _e( _t( 'Room Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="roomCode"<?=gio();?> name="roomCode" type="text" value="<?=_h($this->room[0]['roomCode']);?>" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="roomCode"><font color="red">*</font> <?=_t( 'Room Code' );?></label>
+							<div class="col-md-8"><input class="form-control"<?=gio();?> name="roomCode" type="text" value="<?=_h($this->room[0]['roomCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -83,19 +83,19 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="roomNumber"><font color="red">*</font> <?php _e( _t( 'Room Number' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="roomNumber"<?=gio();?> name="roomNumber" type="text" value="<?=_h($this->room[0]['roomNumber']);?>" required /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="roomNumber"><font color="red">*</font> <?=_t( 'Room Number' );?></label>
+                            <div class="col-md-8"><input class="form-control"<?=gio();?> name="roomNumber" type="text" value="<?=_h($this->room[0]['roomNumber']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="roomCap"><font color="red">*</font> <?php _e( _t( 'Seating Capacity' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="roomCap"<?=gio();?> name="roomCap" type="text" value="<?=_h($this->room[0]['roomCap']);?>" required /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="roomCap"><font color="red">*</font> <?=_t( 'Seating Capacity' );?></label>
+                            <div class="col-md-8"><input class="form-control"<?=gio();?> name="roomCap" type="text" value="<?=_h($this->room[0]['roomCap']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
                         
@@ -110,7 +110,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input name="roomID" type="hidden" value="<?=_h($this->room[0]['roomID']);?>" />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

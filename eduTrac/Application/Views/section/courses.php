@@ -22,20 +22,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Course Sections' ) ); ?></li>
+	<li><?=_t( 'Course Sections' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'My Course Sections' ) ); ?></h3>
+<h3><?=_t( 'My Course Sections' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -48,11 +48,10 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Sec ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Section Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Short Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Term' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Term' );?></th>
+						<th class="text-center"><?=_t( 'Section Code' );?></th>
+						<th class="text-center"><?=_t( 'Short Title' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -61,13 +60,21 @@
 				<tbody>
                 <?php if($this->courseSec != '') : foreach($this->courseSec as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecID']);?></td>
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['termName']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>section/grading/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="Grade Section" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <a href="<?=BASE_URL;?>section/attendance/<?=_h($v['courseSecID']);?>/<?=bm();?>" title="Take Attendance" class="btn btn-circle"><i class="icon-bar-chart"></i></a>
+                    <td class="text-center"><?=_h($v['termCode']);?></td>
+                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
+                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>section/final_grade/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>"><?=_t( 'Final Grades' );?></a></li>
+                                <li><a href="<?=BASE_URL;?>section/attendance/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>&date=<?=date("Y-m-d");?>"><?=_t( 'Attendance' );?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

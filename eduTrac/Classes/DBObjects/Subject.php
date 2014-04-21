@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,8 +32,8 @@ use \eduTrac\Classes\Core\DB;
 class Subject {
 
     private $_subjectID; //int(6) unsigned zerofill
-	private $_subjCode; //varchar(11)
-	private $_subjName; //varchar(180)
+	private $_subjectCode; //varchar(11)
+	private $_subjectName; //varchar(180)
 	private $_LastUpdate; //timestamp
 
     /**
@@ -44,11 +44,11 @@ class Subject {
      */
 	public function Load_from_key($key_row) {
         $bind = array( ":id" => $key_row );
-        $q = DB::inst()->select( "subject","subjectID = :id","subjectID","*",$bind );
+        $q = DB::inst()->select( "subject","subjectCode = :id","subjectCode","*",$bind );
 		foreach($q as $row){
 			$this->_subjectID = $row["subjectID"];
-			$this->_subjCode = $row["subjCode"];
-			$this->_subjName = $row["subjName"];
+			$this->_subjectCode = $row["subjectCode"];
+			$this->_subjectName = $row["subjectName"];
 			$this->_LastUpdate = $row["LastUpdate"];
 		}
 	}
@@ -79,15 +79,15 @@ class Subject {
 	/**
 	 * @return subjCode - varchar(11)
 	 */
-	public function getSubjCode(){
-		return $this->_subjCode;
+	public function getSubjectCode(){
+		return $this->_subjectCode;
 	}
 
 	/**
 	 * @return subjName - varchar(180)
 	 */
-	public function getSubjName(){
-		return $this->_subjName;
+	public function getSubjectName(){
+		return $this->_subjectName;
 	}
 
 	/**

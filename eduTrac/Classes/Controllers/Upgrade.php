@@ -23,22 +23,32 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 class Upgrade extends \eduTrac\Classes\Core\Controller {
     
+    private $_auth;
+    
     public function __construct() {
         parent::__construct();
+		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
+		if(!$this->_auth->isUserLoggedIn()) { redirect( BASE_URL ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
     }
     
     public function index() {
-        $this->view->staticTitle = array('Database Upgrade');
-        $this->view->render('error-header/index',true);
-        $this->view->render('upgrade/index',true);
-        $this->view->render('error-footer/index',true);
+        $this->view->staticTitle = array(_t('Database Upgrade'));
+        $this->view->render('upgrade/index');
     }
     
 }

@@ -22,23 +22,52 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+    $("tr input[type=checkbox]").click(function(){
+        var countchecked = $("tr input[type=checkbox]:checked").length;
+    
+        if(countchecked >= <?=_h(Hooks::{'get_option'}('number_of_courses'));?>) 
+        {
+            $('tr input[type=checkbox]').not(':checked').attr("disabled",true);
+        }
+        else
+        {
+            $('tr input[type=checkbox]').not(':checked').attr("disabled",false);
+        }
+    });
+});//]]>  
+
+</script>
+
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?php _e( _t( 'Student Portal' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?=_t( 'Student Portal' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Course Registration' ) ); ?></li>
+	<li><?=_t( 'Course Registration' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Courses' ) ); ?></h3>
+<h3><?=_t( 'Search Courses' );?></h3>
 <div class="innerLR">
+	
+	<?php if(_h(Hooks::{'get_option'}('reg_instructions')) != '') { ?>
+		<div class="widget widget-heading-simple widget-body-white">
+			<div class="widget-body">
+				<div class="alerts alerts-info">
+					<p><?=_h(Hooks::{'get_option'}('reg_instructions'));?></p>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
 
     <!-- Form -->
     <form class="margin-none" action="<?=BASE_URL;?>student/runRegister/" id="validateSubmitForm" method="post" autocomplete="off">
@@ -53,14 +82,15 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Sec ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Course Sec Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Meeting Day(s)' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Time' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Credits' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Location' ) ); ?></th>
-                        <th<?=isRegistrationOpen();?> class="center"><?php _e( _t( 'Register' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Term' );?></th>
+						<th class="text-center"><?=_t( 'Course Section' );?></th>
+						<th class="text-center"><?=_t( 'Title' );?></th>
+						<th class="text-center"><?=_t( 'Meeting Day(s)' );?></th>
+                        <th class="text-center"><?=_t( 'Time' );?></th>
+                        <th class="text-center"><?=_t( 'Credits' );?></th>
+                        <th class="text-center"><?=_t( 'Location' );?></th>
+                        <th class="text-center"><?=_t( 'Info' );?></th>
+                        <th<?=isRegistrationOpen();?> class="text-center"><?=_t( 'Register' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -69,17 +99,78 @@
 				<tbody>
 				<?php if($this->courseSec != '') : foreach($this->courseSec as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecID']);?></td>
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['dotw']);?></td>
-                    <td class="center"><?=_h($v['startTime'].' To '.$v['endTime']);?></td>
-                    <td class="center"><?=_h($v['minCredit']);?></td>
-                    <td class="center"><?=_h($v['locationName']);?></td>
-                    <td<?=isRegistrationOpen();?> class="center">
+                    <td class="text-center"><?=_h($v['termCode']);?></td>
+                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
+                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center"><?=_h($v['dotw']);?></td>
+                    <td class="text-center"><?=_h($v['startTime'].' To '.$v['endTime']);?></td>
+                    <td class="text-center"><?=_h($v['minCredit']);?></td>
+                    <td class="text-center"><?=_h($v['locationName']);?></td>
+                    <td>
+                    	<center><button data-toggle="modal" data-target="#info-<?=_h($v['courseSecID']);?>" class="btn btn-xs btn-purple" type="button"><i class="fa fa-info"></i></button></center>
+                    	<!-- Modal -->
+						<div class="modal fade" id="info-<?=_h($v['courseSecID']);?>">
+							
+							<div class="modal-dialog">
+								<div class="modal-content">
+						
+									<!-- Modal heading -->
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h3 class="modal-title"><?=_h($v['termCode']);?>-<?=_h($v['courseSecCode']);?> <?=_t( 'Section Info' );?></h3>
+									</div>
+									<!-- // Modal heading END -->
+									
+									<!-- Modal body -->
+									<div class="modal-body">
+										<table>
+                                    		<tr>
+                                    			<td><strong><?=_t( 'Instructor:' );?></strong></td>
+                                    			<td><?=get_name(_h($v['facID']));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td><strong><?=_t( 'Description:' );?></strong></td>
+                                    			<td><?=strip_tags($v['courseDesc'],'<p><a><em><i><b>');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td><strong><?=_t( 'Comment:' );?></strong></td>
+                                    			<td><?=_h(strip_tags($v['comment']));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td><strong><?=_t( 'Course Fee:' );?></strong></td>
+                                    			<td><?=money_format('%i',_h($v['courseFee']));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td><strong><?=_t( 'Lab Fee:' );?></strong></td>
+                                    			<td><?=money_format('%i',_h($v['labFee']));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td style="width:100px;"><strong><?=_t( 'Material Fee:' );?></strong></td>
+                                    			<td><?=money_format('%i',_h($v['materialFee']));?></td>
+                                    		</tr>
+                                    	</table>
+									</div>
+									<!-- // Modal body END -->
+									
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<a href="#" class="btn btn-default" data-dismiss="modal"><?=_t( 'Close' );?></a> 
+									</div>
+									<!-- // Modal footer END -->
+						
+								</div>
+							</div>
+							
+						</div>
+						<!-- // Modal END -->
+                    </td>
+                    <td<?=isRegistrationOpen();?> class="text-center">
                         <input type="hidden" name="courseCredits[]" value="<?=_h($v['minCredit']);?>" />
-                        <input type="hidden" name="termID[]" value="<?=_h($v['termID']);?>" />
-                        <input<?=getStuSec(_h($v['courseSecID']));?> type="checkbox" name="courseSecID[]" value="<?=_h($v['courseSecID']);?>" />
+                        <input type="hidden" name="termCode[]" value="<?=_h($v['termCode']);?>" />
+                        <?php if(_h($v['termCode']) == Hooks::get_option('registration_term')) : ?>
+                        <?php if(student_can_register()) : ?>
+                        <input<?=getStuSec(_h($v['courseSecCode']),_h($v['termCode']));?> type="checkbox" name="courseSecCode[]" value="<?=_h($v['courseSecCode']);?>" />
+                        <?php endif; endif; ?>
                     </td>
                 </tr>
 				<?php } endif; ?>
@@ -93,7 +184,7 @@
         		
 			<!-- Form actions -->
 			<div<?=isRegistrationOpen();?> class="form-actions">
-				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Register' ) ); ?></button>
+				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Register' );?></button>
 			</div>
 			<!-- // Form actions END -->
 			

@@ -1,7 +1,6 @@
 <?php namespace eduTrac\Classes\Libraries;
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 use \eduTrac\Classes\Core\DB;
-use \eduTrac\Classes\Libraries\Cookies;
 /**
  * Event Logger Library
  *  
@@ -25,7 +24,7 @@ use \eduTrac\Classes\Libraries\Cookies;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -35,7 +34,7 @@ class Log {
     private $_auth;
     
     public function __construct() {
-        $this->_auth = new Cookies;
+        $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
     }
     
     /**
@@ -44,10 +43,10 @@ class Log {
      * @since 1.0.0
      */
     public function writeLog($action,$process,$record,$uname) {
-        $create = date("Y-m-d");
+        $create = date("Y-m-d H:i:s", time());
         $current_date = strtotime($create);
         /* 10 days after creation date */
-        $expire = date("Y-m-d",$current_date+=864000);
+        $expire = date("Y-m-d H:i:s",$current_date+=864000);
         
         $bind = array( 
                        "action" => $action, "process" => $process, "record" => $record,
@@ -63,11 +62,8 @@ class Log {
      * @since 1.0.0
      */
     public function purgeLog() {
-        $date = date('Y-m-d h:i:s', time());
-        $q = DB::inst()->query( "SELECT * FROM activity_log" );
-        $r = $q->fetch(\PDO::FETCH_ASSOC);
-        
-        DB::inst()->query( "DELETE FROM activity_log WHERE '".$r['expires_at']."' <= '".$date."'" );
+        $bind = [ ":today" => date('Y-m-d H:i:s', time()) ];
+        DB::inst()->query( "DELETE FROM activity_log WHERE expires_at <= :today",$bind );
     }
     
     /**

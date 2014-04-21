@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.1
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,16 +31,16 @@
 <div class="innerLR errorView">
 	
 	<!-- Widget -->
-	<div class="widget widget-heading-simple widget-body-gray">
+	<div class="widget widget-heading-simple widget-body-white">
 		
 		<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 
 					<!-- Alert -->
-					<div class="alert alert-error center">
-						<strong><?php _e( _t( 'Error!' ) ); ?></strong> <?php _e( _t( 'Population was either null or you were trying to choose two populations at the same time. Please <a onclick="history.go(-1);"><font color="orange">go back</font></a> and try again.' ) ); ?>
+					<div class="alerts alerts-error center">
+						<strong><?=_t( 'Error!' );?></strong> <?=_t( 'Population was either null or you were trying to choose two populations at the same time. Please ') . '<a onclick="history.go(-1);"><font color="orange">'._t('go back').'</font></a> '._t('and try again.' );?>
 					</div>
 					<!-- // Alert END -->
 			

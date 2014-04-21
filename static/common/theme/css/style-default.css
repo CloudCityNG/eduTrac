@@ -523,9 +523,11 @@ body > .container-fluid.fixed .navbar.main .wrapper {
 }
 #footer {
   font-weight: 600;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  position:fixed;
+  bottom:0;
+  width:100%;
   border-bottom: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
 }
@@ -5093,11 +5095,14 @@ div.dataTables_filter label {
 .label.label-warning {
   background: #ab7a4b;
 }
-.label.label-important {
+.label.label-important,.label.label-Rejected {
   background: #bd362f;
 }
-.label.label-success {
+.label.label-success,.label.label-Approved {
   background: #609450;
+}
+.label.label-Pending {
+  background-color: #f89406;
 }
 .label.label-block {
   display: block;
@@ -8199,3 +8204,6 @@ html.rtl.front .navbar.main .secondary ul.topnav:first-of-type {
     border-style: solid;
 }
 /* End Custom CSS */
+.dropup-text {
+    text-align:left;
+}

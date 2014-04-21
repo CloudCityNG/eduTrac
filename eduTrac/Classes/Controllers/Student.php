@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,105 +32,144 @@ class Student extends \eduTrac\Classes\Core\Controller {
 
 	public function __construct() {
 		parent::__construct();
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
 	    if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Search Student');
-		$this->view->css = array( 
-								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-								);
-								
-		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-								'theme/scripts/demo/tables.js'
-								);
+		$this->view->staticTitle = array(_t('Search Student'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
 		$this->view->search = $this->model->search();
 		$this->view->render('student/index');
 	}
     
     public function add($id) {
         if(!hasPermission('create_stu_record')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Add Student');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Student'));
         $this->view->student = $this->model->getAppl($id);
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables_responsive.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables_responsive.min.css' ];
+        $this->view->js = [ 
+        					'components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.1.0',
+        					'components/modules/admin/forms/elements/fuelux-radio/fuelux-radio.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->student)) {
-            redirect( BASE_URL . 'error/invalid_record/' );
+            redirect( BASE_URL . 'student/view/' . $id . '/' );
         }
         $this->view->render('student/add');
     }
     
     public function view($id) {
         if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('View Student');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
-        $this->view->student = $this->model->student($id);
+        $this->view->staticTitle = array(_t('View Student'));
+        $this->view->prog = $this->model->prog($id);
         $this->view->address = $this->model->address($id);
         $this->view->admit = $this->model->admit($id);
-        $this->view->prog = $this->model->prog($id);
-        
-        if(empty($this->view->student)) {
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables_responsive.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables_responsive.min.css' ];
+        $this->view->js = [ 
+        					'components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.1.0',
+        					'components/modules/admin/forms/elements/fuelux-radio/fuelux-radio.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0'
+                            ];
+        if(empty($this->view->prog)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
         
         $this->view->render('student/view');
     }
     
+    public function rstr($id) {
+        if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array(_t('Student Restrictions'));
+        $this->view->student = $this->model->student($id);
+        $this->view->rstr = $this->model->rstr($id);
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables_responsive.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables_responsive.min.css' ];
+        $this->view->js = [ 
+        					'components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.1.0',
+        					'components/modules/admin/forms/elements/fuelux-radio/fuelux-radio.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0'
+                            ];
+        if(empty($this->view->student)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        $this->view->render('student/rstr');
+    }
+    
     public function add_prog($id) {
         if(!hasPermission('create_stu_record')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Add Student Program');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Student Program'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         $this->view->student = $this->model->getStudent($id);
         $this->view->render('student/add_prog');
     }
     
     public function view_prog($id) {
         if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('View Student Program');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Student Program'));
         $this->view->stuProg = $this->model->stuProg($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->stuProg)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -140,20 +179,21 @@ class Student extends \eduTrac\Classes\Core\Controller {
     
     public function academic_credits($id) {
         if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Student Academic Credits');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
+        $this->view->staticTitle = array(_t('Student Academic Credits'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->student = $this->model->student($id);
         $this->view->acadCred = $this->model->acadCred($id);
         
@@ -166,20 +206,21 @@ class Student extends \eduTrac\Classes\Core\Controller {
     
     public function view_academic_credits($id) {
         if(!hasPermission('access_student_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Student Academic Credits');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                                'theme/scripts/demo/timepicker.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Student Academic Credits'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+        					'components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.1.0',
+        					'components/modules/admin/forms/elements/fuelux-radio/fuelux-radio.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0'
+                            ];
         $this->view->viewAcadCred = $this->model->viewAcadCred($id);
         
         if(empty($this->view->viewAcadCred)) {
@@ -191,103 +232,143 @@ class Student extends \eduTrac\Classes\Core\Controller {
     
     public function courses() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-    	$this->view->staticTitle = array('Course Sections');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
+    	$this->view->staticTitle = array(_t('Course Sections'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->courseSec = $this->model->courseSec();
 		$this->view->render('student/courses');
     }
-    
-    public function grades() {
+	
+	public function grades($id) {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-    	$this->view->staticTitle = array('My Grades');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
-        $this->view->grades = $this->model->grades();
+    	$this->view->staticTitle = array(_t('Grades'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->gradesAssign = $this->model->gradesAssign($id);
+		$this->view->gradesStu = $this->model->gradesStu($id);
+		if(empty($this->view->gradesAssign)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
 		$this->view->render('student/grades');
+    }
+    
+    public function final_grades() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array(_t('Final Grades'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->finalGrades = $this->model->finalGrades();
+		$this->view->render('student/final_grades');
     }
     
     public function portal() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Student Portal');
+		$this->view->staticTitle = array(_t('Student Portal'));
 		$this->view->render('student/portal');
 	}
     
     public function schedule() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-    	$this->view->staticTitle = array('Class Schedule');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
+    	$this->view->staticTitle = array(_t('Class Schedule'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->schedule = $this->model->schedule();
 		$this->view->render('student/schedule');
 	}
     
+    public function terms() {
+        if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array(_t('Class Schedule'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->term = $this->model->term();
+        $this->view->render('student/terms');
+    }
+    
     public function bill() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('My Bills');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
+        $this->view->staticTitle = array(_t('My Bills'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->myBill = $this->model->myBill();
         $this->view->render('student/bill');
     }
     
     public function view_bill($id) {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('View My Bill');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View My Bill'));
         $this->view->bill = $this->model->bill($id);
         $this->view->beginBalance = $this->model->beginBalance($id);
         $this->view->courseFees = $this->model->courseFees($id);
@@ -305,46 +386,46 @@ class Student extends \eduTrac\Classes\Core\Controller {
 	
 	public function graduation() {
 	    if(!hasPermission('graduate_students')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Graduate Student(s)');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                                'theme/scripts/demo/timepicker.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Graduate Student(s)'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
 		$this->view->render('student/graduation');
 	}
 	
 	public function tran() {
 	    if(!hasPermission('access_tran_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Generate Transcript(s)');
-		$this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                                'theme/scripts/demo/timepicker.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Generate Transcript(s)'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables_responsive.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables_responsive.min.css' ];
+        $this->view->js = [ 
+        					'components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.1.0',
+        					'components/modules/admin/forms/elements/fuelux-radio/fuelux-radio.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0'
+                            ];
 		$this->view->render('student/tran');
 	}
 	
 	public function generate() {
-	    $this->view->staticTitle = array('Transcript');
+	    if(!hasPermission('access_tran_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+	    $this->view->staticTitle = array(_t('Transcript'));
 	    $this->view->stuInfo = $this->model->tranStuInfo();
 	    $this->view->courses = $this->model->tranCourse();
+        $this->view->tranGPA = $this->model->tranGPA();
         $this->view->render('bh',true);
         $this->view->render('student/generate',true);
         $this->view->render('bf',true);
@@ -355,12 +436,12 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data = array();
         $data['stuID'] = isPostSet('stuID');
         $data['advisorID'] = isPostSet('advisorID');
-        $data['catYearID'] = isPostSet('catYearID');
+        $data['catYearCode'] = isPostSet('catYearCode');
         $data['antGradDate'] = isPostSet('antGradDate');
         $data['acadLevelCode'] = isPostSet('acadLevelCode');
         $data['addDate'] = isPostSet('addDate');
         $data['approvedBy'] = isPostSet('approvedBy');
-        $data['progID'] = isPostSet('progID');
+        $data['acadProgCode'] = isPostSet('acadProgCode');
         $data['startDate'] = isPostSet('startDate');
         $data['status'] = isPostSet('status');
         $this->model->runStudent($data);
@@ -372,7 +453,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['stuID'] = isPostSet('stuID');
         $data['advisorID'] = isPostSet('advisorID');
         $data['acadLevelCode'] = isPostSet('acadLevelCode');
-        $data['catYearID'] = isPostSet('catYearID');
+        $data['catYearCode'] = isPostSet('catYearCode');
         $data['status'] = isPostSet('status');
         $this->model->runEditStudent($data);
     }
@@ -384,8 +465,10 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['currStatus'] = isPostSet('currStatus');
         $data['startDate'] = isPostSet('startDate');
         $data['endDate'] = isPostSet('endDate');
-        $data['progID'] = isPostSet('progID');
+        $data['acadProgCode'] = isPostSet('acadProgCode');
         $data['antGradDate'] = isPostSet('antGradDate');
+        $data['advisorID'] = isPostSet('advisorID');
+        $data['catYearCode'] = isPostSet('catYearCode');
         $data['approvedBy'] = isPostSet('approvedBy');
         $this->model->runStuProg($data);
     }
@@ -399,6 +482,8 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['endDate'] = isPostSet('endDate');
         $data['stuProgID'] = isPostSet('stuProgID');
         $data['antGradDate'] = isPostSet('antGradDate');
+        $data['advisorID'] = isPostSet('advisorID');
+        $data['catYearCode'] = isPostSet('catYearCode');
         $data['eligible_to_graduate'] = isPostSet('eligible_to_graduate');
         $this->model->runEditStuProg($data);
     }
@@ -412,24 +497,27 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['statusTime'] = isPostSet('statusTime');
         $data['id'] = isPostSet('id');
         $data['stuID'] = isPostSet('stuID');
-        $data['courseSecID'] = isPostSet('courseSecID');
-        $data['termID'] = isPostSet('termID');
+        $data['courseSecCode'] = isPostSet('courseSecCode');
+        $data['termCode'] = isPostSet('termCode');
         $this->model->runAcadCred($data);
     }
     
     public function runProgLookup() {
         if(!hasPermission('create_stu_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
-        $data['progID'] = isPostSet('progID');
+        $data['acadProgCode'] = isPostSet('acadProgCode');
         $this->model->runProgLookup($data);
     }
     
     public function runRegister() {
         if(!hasPermission('access_student_portal')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
-        $data['courseSecID'] = isPostSet('courseSecID');
-        $data['termID'] = isPostSet('termID');
+        $data['courseSecCode'] = isPostSet('courseSecCode');
+        $data['termCode'] = isPostSet('termCode');
         $data['courseCredits'] = isPostSet('courseCredits');
+		$data['courseFee'] = isPostSet('courseFee');
+		$data['labFee'] = isPostSet('labFee');
+		$data['materialFee'] = isPostSet('materialFee');
         $this->model->runRegister($data);
     }
     
@@ -439,6 +527,31 @@ class Student extends \eduTrac\Classes\Core\Controller {
         $data['queryID'] = isPostSet('queryID');
         $data['gradDate'] = isPostSet('gradDate');
         $this->model->runGraduation($data);
+    }
+    
+    public function runRSTR() {
+        $data = [];
+        $data['stuID'] = isPostSet('stuID');
+        $data['rstrCode'] = isPostSet('rstrCode');
+        $data['severity'] = isPostSet('severity');
+        $data['startDate'] = isPostSet('startDate');
+        $data['endDate'] = isPostSet('endDate');
+        $data['comment'] = isPostSet('comment');
+        $data['addDate'] = isPostSet('addDate');
+        $data['addedBy'] = isPostSet('addedBy');
+        $this->model->runRSTR($data);
+    }
+    
+    public function runEditRSTR() {
+        $data = [];
+        $data['stuID'] = isPostSet('stuID');
+        $data['rstrCode'] = isPostSet('rstrCode');
+        $data['severity'] = isPostSet('severity');
+        $data['startDate'] = isPostSet('startDate');
+        $data['endDate'] = isPostSet('endDate');
+        $data['comment'] = isPostSet('comment');
+        $data['rstrID'] = isPostSet('rstrID');
+        $this->model->runEditRSTR($data);
     }
     
     public function search() {

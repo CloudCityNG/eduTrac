@@ -22,14 +22,14 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.4
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 	
 	function validate_php(&$results) {
 		if(version_compare(PHP_VERSION, '5.4') == -1) {
-		  $results[] = new \eduTrac\Classes\Libraries\InstallValidator( _t( 'Minimum PHP version required in order to run eduTrac is PHP 5.4. Your PHP version: ' ) . PHP_VERSION, STATUS_ERROR);
+		  $results[] = new \eduTrac\Classes\Libraries\InstallValidator( _t( 'Minimum PHP version required in order to run eduTrac ERP is PHP 5.4. Your PHP version: ' ) . PHP_VERSION, STATUS_ERROR);
 		  return false;
 		} else {
 		  $results[] = new \eduTrac\Classes\Libraries\InstallValidator( _t( 'Your PHP version is ' ) . PHP_VERSION, STATUS_OK);
@@ -60,7 +60,7 @@
 		  if(extension_loaded($required_extension)) {
 		    $results[] = new \eduTrac\Classes\Libraries\InstallValidator("Required extension '$required_extension' found", STATUS_OK);
 		  } else {
-		    $results[] = new \eduTrac\Classes\Libraries\InstallValidator("Extension '$required_extension' is required in order to run activeCollab", STATUS_ERROR);
+		    $results[] = new \eduTrac\Classes\Libraries\InstallValidator("Extension '$required_extension' is required in order to run eduTrac ERP", STATUS_ERROR);
 		    $ok = false;
 		  } // if
 		} // foreach

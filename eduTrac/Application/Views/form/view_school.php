@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/school/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'School' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/school/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'School' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'View School' ) ); ?></li>
+	<li><?=_t( 'View School' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'View School' ) ); ?></h3>
+<h3><?=_t( 'View School' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,46 +48,46 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span12">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="ficeCode"><font color="red">*</font> <?php _e( _t( 'FICE Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="ficeCode" name="ficeCode" type="text" value="<?=$this->school[0]['ficeCode'];?>" /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="ficeCode"><font color="red">*</font> <?=_t( 'FICE Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="ficeCode" type="text" value="<?=$this->school[0]['ficeCode'];?>" /></div>
                         </div>
                         <!-- // Group END -->
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="schoolCode"><font color="red">*</font> <?php _e( _t( 'School Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="schoolCode"<?=gio();?> name="schoolCode" type="text" value="<?=$this->school[0]['schoolCode'];?>" required /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="schoolCode"><font color="red">*</font> <?=_t( 'School Code' );?></label>
+                            <div class="col-md-8"><input class="form-control"<?=gio();?> name="schoolCode" type="text" value="<?=$this->school[0]['schoolCode'];?>" required /></div>
                         </div>
                         <!-- // Group END -->
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="schoolName"><font color="red">*</font> <?php _e( _t( 'School Name' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="schoolName"<?=gio();?> name="schoolName" type="text" value="<?=$this->school[0]['schoolName'];?>" required /></div>
+                        <div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="schoolName"><font color="red">*</font> <?=_t( 'School Name' );?></label>
+                            <div class="col-md-8"><input class="form-control"<?=gio();?> name="schoolName" type="text" value="<?=$this->school[0]['schoolName'];?>" required /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="buildingCode"><?php _e( _t( 'Building' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="buildingID" id="select2_10"<?=gio();?>>
+						<div class="form-group">
+							<label class="col-md-3 col-md-3 control-label" for="buildingCode"><?=_t( 'Building' );?></label>
+							<div class="col-md-8">
+								<select name="buildingCode" class="selectpicker col-md-12 form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?>>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('building', '', 'buildingID', 'buildingCode', 'buildingName',$this->school[0]['buildingID']); ?>
+                            		<?php table_dropdown('building', 'buildingCode <> "NULL"', 'buildingCode', 'buildingCode', 'buildingName',$this->school[0]['buildingCode']); ?>
                             	</select>
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 				    <input name="schoolID" type="hidden" value="<?=$this->school[0]['schoolID'];?>" />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.5
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?php _e( _t( 'My Course Sections' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?=_t( 'My Course Sections' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Attendance' ) ); ?></li>
+	<li><?=_t( 'Attendance' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Attendance for ' ) ); ?><?=_h($this->attendance[0]['termCode']);?>-<?=_h($this->attendance[0]['courseSecCode']);?></h3>
+<h3><?=_t( 'Attendance for ' );?><?=_h($this->attendance[0]['termCode']);?>-<?=_h($this->attendance[0]['courseSecCode']);?></h3>
 <div class="innerLR">
 
     <!-- Form -->
@@ -48,10 +48,10 @@
 		<div class="widget-body">
 		    
 		    <!-- Group -->
-            <div class="control-group">
-                <label class="control-label"><?php _e( _t( 'Today\'s Date' ) ); ?></label>
-                <div class="controls">
-                    <input class="center" id="date" readonly type="text" value="<?=date('D, M d, o');?>" />
+            <div class="form-group">
+                <label class="col-md-1 control-label"><?=_t( 'Today\'s Date' );?></label>
+                <div class="col-md-3">
+                    <input class="form-control" id="date" readonly type="text" value="<?=date('D, M d, o');?>" />
                     <input name="date" type="hidden" value="<?=date('Y-m-d');?>" />
                 </div>
             </div>
@@ -63,9 +63,9 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Student ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Student Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Student ID' );?></th>
+						<th class="text-center"><?=_t( 'Student Name' );?></th>
+						<th class="text-center"><?=_t( 'Status' );?></th>
                         <th style="display:none;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -75,23 +75,23 @@
 				<tbody>
                 <?php if($this->attendance != '') : foreach($this->attendance as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center">
+                    <td class="text-center">
                         <?=_h($v['stuID']);?>
                         <input type="hidden" name="stuID[]" value="<?=_h($v['stuID']);?>" />
                     </td>
-                    <td class="center">
-                        <a href="<?=BASE_URL;?>section/attendance_report/<?=_h($v['courseSecID']);?>&stuID=<?=_h($v['stuID']);?>"><?=get_name(_h($v['stuID']));?></a>
+                    <td class="text-center">
+                        <a href="<?=BASE_URL;?>section/attendance_report/<?=_h($v['courseSecCode']);?>&stuID=<?=_h($v['stuID']);?>&term=<?=_h($v['termCode']);?>"><?=get_name(_h($v['stuID']));?></a>
                     </td>
-                    <td class="center">
-                        <select style="width:35%" name="status[]" required>
+                    <td class="text-center">
+                        <select name="status[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                             <option value="">&nbsp;</option>
-                            <option value="A"<?=selected('A',_h($v['status'],false));?>><?php _e( _t( 'Absent' ) ); ?></option>
-                            <option value="P"<?=selected('P',_h($v['status'],false));?>><?php _e( _t( 'Present' ) ); ?></option>
+                            <option value="A"<?=selected('A',_h($v['status'],false));?>><?=_t( 'Absent' );?></option>
+                            <option value="P"<?=selected('P',_h($v['status'],false));?>><?=_t( 'Present' );?></option>
                         </select>
                     </td>
                     <td style="display:none;">
-                        <input type="hidden" name="courseSecID" value="<?=_h($v['courseSecID']);?>" />
-                        <input type="hidden" name="courseSecCode" value="<?=_h($this->attendance[0]['courseSecCode']);?>" />
+                        <input type="hidden" name="termCode" value="<?=_h($v['termCode']);?>" />
+						<input type="hidden" name="courseSecCode" value="<?=_h($this->attendance[0]['courseSecCode']);?>" />
                     </td>
                 </tr>
                 <?php } endif; ?>
@@ -105,7 +105,7 @@
     			
 			<!-- Form actions -->
 			<div class="form-actions">
-				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 			</div>
 			<!-- // Form actions END -->
 			

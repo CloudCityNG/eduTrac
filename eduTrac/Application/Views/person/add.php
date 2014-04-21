@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -63,13 +63,13 @@ if(response == 1) {
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Name & Address' ) ); ?></li>
+	<li><?=_t( 'Name & Address' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Name & Address' ) ); ?></h3>
+<h3><?=_t( 'Name & Address' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -80,112 +80,109 @@ if(response == 1) {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Username' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="uname" name="uname" class="span10" required />
-                                <img id="tick" src="<?=BASE_URL;?>static/common/theme/images/tick.png" width="16" height="16"/>
-                                <img id="cross" src="<?=BASE_URL;?>static/common/theme/images/cross.png" width="16" height="16"/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Username' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" id="uname" name="uname" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Person Type' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Person Type' );?> <a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a></label>
+                            <div class="col-md-8">
                                 <?=person_type_select();?>
-                                <a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Prefix' ) ); ?></label>
-							<div class="controls">
-								<select name="prefix" style="width:25%" id="select2_10">
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Prefix' );?></label>
+							<div class="col-md-8">
+								<select name="prefix" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                                     <option value="">&nbsp;</option>
-                                    <option value="Ms"><?php _e( _t( 'Ms.' ) ); ?></option>
-                                    <option value="Miss"><?php _e( _t( 'Miss.' ) ); ?></option>
-                                    <option value="Mrs"><?php _e( _t( 'Mrs.' ) ); ?></option>
-                                    <option value="Mr"><?php _e( _t( 'Mr.' ) ); ?></option>
+                                    <option value="Ms"><?=_t( 'Ms.' );?></option>
+                                    <option value="Miss"><?=_t( 'Miss.' );?></option>
+                                    <option value="Mrs"><?=_t( 'Mrs.' );?></option>
+                                    <option value="Mr"><?=_t( 'Mr.' );?></option>
                                 </select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'First Name' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="fname" class="span10" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'First Name' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="fname" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Last Name' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="lname" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Last Name' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="lname" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Middle Initial' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="mname" class="span2" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Middle Initial' );?></label>
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" name="mname" />
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Address1' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="address1" class="span10" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Address1' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="address1" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Address2' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="address2" class="span5" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Address2' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="address2" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'City' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="city" class="span5" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'City' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="city" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'State' ) ); ?></label>
-                            <div class="controls">
-                                <select name="state" style="width:50%" id="select2_13" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'State' );?></label>
+                            <div class="col-md-8">
+                                <select name="state" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('state','','code','code','name'); ?>
                                 </select>
@@ -194,19 +191,19 @@ if(response == 1) {
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Zip Code' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="zip" class="span5" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Zip Code' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="zip" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Country' ) ); ?></label>
-                            <div class="controls">
-                                <select name="country" style="width:80%" id="select2_14">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Country' );?></label>
+                            <div class="col-md-8">
+                                <select name="country" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" >
                                     <option value="">&nbsp;</option>
                                     <?php table_dropdown('country','','iso2','iso2','short_name'); ?>
                                 </select>
@@ -218,127 +215,127 @@ if(response == 1) {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Phone' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="phone" class="span5" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Phone' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="phone" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Primary/Preferred Email' ) ); ?></label>
-                            <div class="controls">
-                                <input type="email" name="email" class="span5" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Preferred Email' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="email" name="email" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Social Security #' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="ssn" class="span5" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Social Security #' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="ssn" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Veteran?' ) ); ?></label>
-                            <div class="controls">
-                                <select name="veteran" style="width:25%" id="select2_11" required>
-                                    <option value="1"><?php _e( _t( 'Yes' ) ); ?></option>
-                                    <option value="0"><?php _e( _t( 'No' ) ); ?></option>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Veteran?' );?></label>
+                            <div class="col-md-8">
+                                <select name="veteran" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="1"><?=_t( 'Yes' );?></option>
+                                    <option value="0"><?=_t( 'No' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Ethnicity?' ) ); ?></label>
-                            <div class="controls">
-                                <select name="ethnicity" style="width:50%" id="select2_12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Ethnicity?' );?></label>
+                            <div class="col-md-8">
+                                <select name="ethnicity" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" >
                                     <option value="">&nbsp;</option>
-                                    <option value="White, Non-Hispanic"><?php _e( _t( 'White, Non-Hispanic' ) ); ?></option>
-                                    <option value="Black, Non-Hispanic"><?php _e( _t( 'Black, Non-Hispanic' ) ); ?></option>
-                                    <option value="Hispanic"><?php _e( _t( 'Hispanic' ) ); ?></option>
-                                    <option value="Native American"><?php _e( _t( 'Native American' ) ); ?></option>
-                                    <option value="Native Alaskan"><?php _e( _t( 'Native Alaskan' ) ); ?></option>
-                                    <option value="Pacific Islander"><?php _e( _t( 'Pacific Islander' ) ); ?></option>
-                                    <option value="Asian"><?php _e( _t( 'Asian' ) ); ?></option>
-                                    <option value="Indian"><?php _e( _t( 'Indian' ) ); ?></option>
-                                    <option value="Middle Eastern"><?php _e( _t( 'Middle Eastern' ) ); ?></option>
-                                    <option value="African"><?php _e( _t( 'African' ) ); ?></option>
-                                    <option value="Mixed Race"><?php _e( _t( 'Mixed Rase' ) ); ?></option>
-                                    <option value="Other"><?php _e( _t( 'Other' ) ); ?></option>
+                                    <option value="White, Non-Hispanic"><?=_t( 'White, Non-Hispanic' );?></option>
+                                    <option value="Black, Non-Hispanic"><?=_t( 'Black, Non-Hispanic' );?></option>
+                                    <option value="Hispanic"><?=_t( 'Hispanic' );?></option>
+                                    <option value="Native American"><?=_t( 'Native American' );?></option>
+                                    <option value="Native Alaskan"><?=_t( 'Native Alaskan' );?></option>
+                                    <option value="Pacific Islander"><?=_t( 'Pacific Islander' );?></option>
+                                    <option value="Asian"><?=_t( 'Asian' );?></option>
+                                    <option value="Indian"><?=_t( 'Indian' );?></option>
+                                    <option value="Middle Eastern"><?=_t( 'Middle Eastern' );?></option>
+                                    <option value="African"><?=_t( 'African' );?></option>
+                                    <option value="Mixed Race"><?=_t( 'Mixed Race' );?></option>
+                                    <option value="Other"><?=_t( 'Other' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Date of Birth' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="dob" name="dob" type="text" />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Date of Birth' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker6">
+                                    <input class="form-control" name="dob" type="text" />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Gender' ) ); ?></label>
-                            <div class="controls">
-                                <select name="gender" style="width:25%" id="select2_15">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Gender' );?></label>
+                            <div class="col-md-8">
+                                <select name="gender" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                                     <option value="">&nbsp;</option>
-                                    <option value="M"><?php _e( _t( 'Male' ) ); ?></option>
-                                    <option value="F"><?php _e( _t( 'Female' ) ); ?></option>
+                                    <option value="M"><?=_t( 'Male' );?></option>
+                                    <option value="F"><?=_t( 'Female' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Emergency Contact' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="emergency_contact" class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Emergency Contact' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="emergency_contact" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Emergency Contact Phone' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="emergency_contact_phone" class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Emergency Contact Phone' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="emergency_contact_phone" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="approvedDate" value="<?=date("Y-m-d");?>" readonly class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved Date' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" value="<?=date('D, M d, o',strtotime(date("Y-m-d")));?>" readonly/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" readonly class="span5" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved By' );?></label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" value="<?=get_name($auth->getPersonField('personID'));?>" readonly/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -350,20 +347,30 @@ if(response == 1) {
 			
 				<hr class="separator" />
 				
-				<div class="modal hide fade" id="myModal">
-                    <div class="modal-body">
-                        <p><?php _e( _t( 'After adding a new person, you will need to apply a role to that person in order for him or her to have access 
-                        to any screen(s). If you do not have access to assign a person a role, make sure to contact your system administrator as soon as 
-                        the new person is added' ) ); ?></p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-                    </div>
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<!-- Modal heading -->
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><?=_t( 'Person Type' );?></h3>
+							</div>
+							<!-- // Modal heading END -->
+		                    <div class="modal-body">
+		                        <?=file_get_contents( APP_PATH . 'Info/person-type.txt' );?>
+		                    </div>
+		                    <div class="modal-footer">
+		                        <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
+		                    </div>
+	                   	</div>
+                  	</div>
                 </div>
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+				    <input type="hidden" name="approvedDate" value="<?=date("Y-m-d");?>" />
+				    <input type="hidden" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" />
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

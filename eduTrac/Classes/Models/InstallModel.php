@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.3
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -38,9 +38,9 @@ class InstallModel {
     private $_dbname;
     private $_connect;
     private $_error;
-    private $_product = 'eduTrac Student Information System';
+    private $_product = 'eduTrac';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '1.1.7';
+    private $_version = '4.1.1';
     
     public function __construct() {
     	Session::init();
@@ -96,8 +96,18 @@ class InstallModel {
         $sql = [];
         
         $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
+		
+		$sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
+        
+        $sql[] = "INSERT INTO `staff` VALUES(1, '1', '00000000001', '00000000001', '00000000001', '', '00000000001', 'A', '".$this->_now."', '1', '');";
+		
+		$sql[] = "INSERT INTO `address` VALUES(00000000001, 00000001, '10 Eliot Street', '#2', 'Somerville', 'MA', '02143', 'US', 'P', '".$this->_now."', '0000-00-00', 'C', '6718997836', '', '', '', 'CEL', '', 'support@edutrac.org', '', '".$this->_now."', 00000001, '".$this->_now."');";
+		
+		$sql[] = "INSERT INTO `job` VALUES(1, 1, 'IT Support', '34.00', 40, NULL, '".$this->_now."', 00000001, '".$this->_now."');";
+		
+		$sql[] = "INSERT INTO `staff_meta` VALUES(1, 1, 1, 00000001, 00000001, 'STA', '2011-02-01', '2011-02-01', NULL, '".$this->_now."', 00000001, '".$this->_now."');";
                   
-        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00017');";
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00027');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
         
@@ -117,7 +127,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(10, 'enable_cron_log', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(11, 'current_term_id', '');";
+        $sql[] = "INSERT INTO `et_option` VALUES(11, 'current_term_code', '');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(12, 'hour_display', '12');";
         
@@ -139,15 +149,11 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(21, 'open_registration', '1');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://community.7mediaws.org/projects/edutrac/');";
+        $sql[] = "INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://www.7mediaws.org/client/');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);";
         
         $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');";
-        
-        $sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
-        
-        $sql[] = "INSERT INTO `staff` VALUES(1, '1', '', '', '', '', '', 'A', '".$this->_now."', '1', '');";
         
         $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);";
         

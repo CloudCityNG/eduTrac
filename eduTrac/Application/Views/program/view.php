@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,15 +32,15 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 ?>
 
 <ul class="breadcrumb">
-    <li><?php _e( _t( 'You are here' ) ); ?></li>
-    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+    <li><?=_t( 'You are here' );?></li>
+    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>program/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Program' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>program/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Program' );?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'View Program' ) ); ?></li>
+    <li><?=_t( 'View Program' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Academic Program' ) ); ?> <?=_h($this->prog[0]['acadProgCode']);?></h3>
+<h3><?=_h($this->prog[0]['acadProgCode']);?></h3>
 <div class="innerLR">
 
     <!-- Form -->
@@ -51,111 +51,111 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
         
             <!-- Widget heading -->
             <div class="widget-head">
-                <h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+                <h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
             </div>
             <!-- // Widget heading END -->
             
             <div class="widget-body">
             
                 <!-- Row -->
-                <div class="row-fluid">
+                <div class="row">
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Program Code' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="acadProgCode"<?=apio();?> class="span10" value="<?=_h($this->prog[0]['acadProgCode']);?>" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Program Code' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="acadProgCode"<?=apio();?> value="<?=_h($this->prog[0]['acadProgCode']);?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                     
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="acadProgTitle"<?=apio();?> class="span10" value="<?=_h($this->prog[0]['acadProgTitle']);?>" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Title' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="acadProgTitle"<?=apio();?> value="<?=_h($this->prog[0]['acadProgTitle']);?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Description' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="programDesc"<?=apio();?> class="span10" value="<?=_h($this->prog[0]['programDesc']);?>" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Short Description' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="programDesc"<?=apio();?> value="<?=_h($this->prog[0]['programDesc']);?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
                                 <?=status_select(_h($this->prog[0]['currStatus']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
-                            <div class="controls">
-                                <input id="statusDate" name="statusDate" type="text" readonly value="<?=date("D, M d, o",strtotime(_h($this->prog[0]['statusDate'])));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Date' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="statusDate" type="text" readonly value="<?=date("D, M d, o",strtotime(_h($this->prog[0]['statusDate'])));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approval Person' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->prog[0]['lname']).', '._h($this->prog[0]['fname']);?>" class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Person' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" readonly value="<?=_h($this->prog[0]['lname']).', '._h($this->prog[0]['fname']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approval Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="approvedDate" readonly value="<?=date("D, M d, o",strtotime(_h($this->prog[0]['approvedDate'])));?>" class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Date' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="approvedDate" readonly value="<?=date("D, M d, o",strtotime(_h($this->prog[0]['approvedDate'])));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Dept/Div' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_10"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department','','deptID','deptCode','deptName',_h($this->prog[0]['deptID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Department' );?></label>
+                            <div class="col-md-8">
+                                <select name="deptCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('department','deptCode <> "NULL"','deptCode','deptCode','deptName',_h($this->prog[0]['deptCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="schoolID" id="select2_11"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('school','','schoolID','schoolCode','schoolName',_h($this->prog[0]['schoolID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'School' );?></label>
+                            <div class="col-md-8">
+                                <select name="schoolCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('school','schoolCode <> "NULL"','schoolCode','schoolCode','schoolName',_h($this->prog[0]['schoolCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Effective Catalog Year' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width: 100%;" name="acadYearID" id="select2_12"<?=apio();?> required>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_year','','acadYearID','acadYearCode','acadYearDesc',_h($this->prog[0]['acadYearID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Effective Catalog Year' );?></label>
+                            <div class="col-md-8">
+                                <select name="acadYearCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?> required>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('acad_year','acadYearCode <> "NULL"','acadYearCode','acadYearCode','acadYearDesc',_h($this->prog[0]['acadYearCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -165,120 +165,120 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                     <!-- // Column END -->
                     
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                     
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Effective Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate"<?=apio();?> name="startDate" type="text" value="<?=_h($this->prog[0]['startDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Effective Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker6">
+                                    <input class="form-control"<?=apio();?> name="startDate" type="text" value="<?=_h($this->prog[0]['startDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker7">
-                                    <input id="endDate"<?=apio();?> name="endDate" type="text" value="<?=_h($this->prog[0]['endDate']);?>" />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker7">
+                                    <input class="form-control"<?=apio();?> name="endDate" type="text" value="<?=_h($this->prog[0]['endDate']);?>" />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Degree' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%" name="degreeID" id="select2_13"<?=apio();?> required>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('degree','','degreeID','degreeCode','degreeName',_h($this->prog[0]['degreeID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Degree' );?></label>
+                            <div class="col-md-8">
+                                <select name="degreeCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?> required>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('degree','degreeCode <> "NULL"','degreeCode','degreeCode','degreeName',_h($this->prog[0]['degreeCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'CCD' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width: 100%;" name="ccdID" id="select2_14"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('ccd','','ccdID','ccdCode','ccdName',_h($this->prog[0]['ccdID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'CCD' );?></label>
+                            <div class="col-md-8">
+                                <select name="ccdCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('ccd','ccdCode <> "NULL"','ccdCode','ccdCode','ccdName',_h($this->prog[0]['ccdCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Major' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width: 100%;" name="majorID" id="select2_15"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('major','','majorID','majorCode','majorName',_h($this->prog[0]['majorID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Major' );?></label>
+                            <div class="col-md-8">
+                                <select name="majorCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('major','majorCode <> "NULL"','majorCode','majorCode','majorName',_h($this->prog[0]['majorCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Minor' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width: 100%;" name="minorID" id="select2_16"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('minor','','minorID','minorCode','minorName',_h($this->prog[0]['minorID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Minor' );?></label>
+                            <div class="col-md-8">
+                                <select name="minorCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('minor','minorCode <> "NULL"','minorCode','minorCode','minorName',_h($this->prog[0]['minorCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Specialization' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width: 100%;" name="specID" id="select2_17"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('specialization', '', 'specID', 'specCode', 'specName',_h($this->prog[0]['specID'])); ?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Specialization' );?></label>
+                            <div class="col-md-8">
+                                <select name="specCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('specialization', 'specCode <> "NULL"', 'specCode', 'specCode', 'specName',_h($this->prog[0]['specCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
                                 <?=acad_level_select(_h($this->prog[0]['acadLevelCode']),null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'CIP' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="cipID" id="select2_19"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('cip','','cipID','cipCode','cipName',_h($this->prog[0]['cipID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'CIP' );?></label>
+                            <div class="col-md-8">
+                                <select name="cipCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('cip','cipCode <> "NULL"','cipCode','cipCode','cipName',_h($this->prog[0]['cipCode']));?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Location' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="locationID" id="select2_20"<?=apio();?>>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location','','locationID','locationCode','locationName',_h($this->prog[0]['locationID']));?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Location' );?></label>
+                            <div class="col-md-8">
+                                <select name="locationCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=apio();?>>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('location','locationCode <> "NULL"','locationCode','locationCode','locationName',_h($this->prog[0]['locationCode']));?>
                                 </select>
                             </div>
                         </div>
@@ -293,9 +293,9 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                 
                 <!-- Form actions -->
                 <div class="form-actions">
-                    <input type="hidden" name="acadProgID" value="<?=_h($this->prog[0]['acadProgID']);?>" class="span10" />
-                    <button type="submit"<?=apids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>program/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+                    <input type="hidden" name="acadProgID" value="<?=_h($this->prog[0]['acadProgID']);?>" />
+                    <button type="submit"<?=apids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>program/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
                 </div>
                 <!-- // Form actions END -->
                 

@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,13 +32,13 @@ $log = new Log;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Error Log' ) ); ?></li>
+	<li><?=_t( 'Error Log' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Error Log' ) ); ?></h3>
+<h3><?=_t( 'Error Log' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -51,11 +51,11 @@ $log = new Log;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Error Type' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'String' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'File' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Line Number' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Delete' ) ); ?></th>
+						<th class="center"><?=_t( 'Error Type' );?></th>
+						<th class="center"><?=_t( 'String' );?></th>
+						<th class="center"><?=_t( 'File' );?></th>
+						<th class="center"><?=_t( 'Line Number' );?></th>
+						<th class="center"><?=_t( 'Delete' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -69,7 +69,7 @@ $log = new Log;
                     <td class="center"><?=_h($v['file']);?></td>
                     <td class="center"><?=_h($v['line']);?></td>
                     <td class="center">
-                    	<a href="<?=BASE_URL;?>error/deleteLog/<?=_h($v['ID']);?>" title="Delete Log" class="btn btn-danger"><i class="icon-trash"></i></a>
+                    	<a href="<?=BASE_URL;?>error/deleteLog/<?=_h($v['ID']);?>" title="Delete Log" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
                 <?php } endif; ?>				

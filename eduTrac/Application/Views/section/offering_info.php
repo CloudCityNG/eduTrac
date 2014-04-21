@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Section' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Section' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/view/<?=_h($this->soff[0]['courseSecID']);?>/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_h($this->soff[0]['courseSecCode']);?></a></li>
+	<li><a href="<?=BASE_URL;?>section/view/<?=_h($this->soff[0]['courseSecID']);?>/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_h($this->soff[0]['termCode']);?>-<?=_h($this->soff[0]['courseSecCode']);?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Offering Info' ) ); ?></li>
+	<li><?=_t( 'Offering Info' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Offering Info:' ) ); ?> <?=_h($this->soff[0]['courseSecCode']);?></h3>
+<h3><?=_h($this->soff[0]['termCode']);?>-<?=_h($this->soff[0]['courseSecCode']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -50,72 +50,72 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-    					<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Building' ) ); ?></label>
-							<div class="controls">
-							    <select style="width:50%;" name="buildingID" id="select2_9"<?=csio();?> required>
+    					<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Building' );?></label>
+							<div class="col-md-8">
+							    <select name="buildingCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
-                            	   <?php table_dropdown('building','','buildingID','buildingCode','buildingName',_h($this->soff[0]['buildingID'])); ?>
+                            	   <?php table_dropdown('building','buildingCode <> "NULL"','buildingCode','buildingCode','buildingName',_h($this->soff[0]['buildingCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Class Room' ) ); ?></label>
-							<div class="controls">
-							    <select style="width:50%;" name="roomID" id="select2_10"<?=csio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Class Room' );?></label>
+							<div class="col-md-8">
+							    <select name="roomCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
-                            	    <?php table_dropdown('room','','roomID','roomCode','roomNumber',_h($this->soff[0]['roomID'])); ?>
+                            	    <?php table_dropdown('room','roomCode <> "NULL"','roomCode','roomCode','roomNumber',_h($this->soff[0]['roomCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Meeting Days' ) ); ?></label>
-							<div class="controls widget-body uniformjs">
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Meeting Days' );?></label>
+							<div class="col-md-8 widget-body uniformjs">
     							<label class="checkbox">
 									<input type="checkbox" class="checkbox" name="dotw[]" value="Su" <?php if(preg_match("/Su/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Sunday' ) ); ?>
+									<?=_t( 'Sunday' );?>
 								</label>
 								<label class="checkbox">
 									<input type="checkbox" class="checkbox" name="dotw[]" value="M" <?php if(preg_match("/M/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Monday' ) ); ?>
+									<?=_t( 'Monday' );?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="T" <?php if(preg_match("/T/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Tuesday' ) ); ?>
+									<input type="checkbox" class="checkbox" name="dotw[]" value="Tu" <?php if(preg_match("/Tu/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
+									<?=_t( 'Tuesday' );?>
 								</label>
 								<label class="checkbox">
 									<input type="checkbox" class="checkbox" name="dotw[]" value="W" <?php if(preg_match("/W/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Wednesday' ) ); ?>
+									<?=_t( 'Wednesday' );?>
 								</label>
 								<label class="checkbox">
 									<input type="checkbox" class="checkbox" name="dotw[]" value="Th" <?php if(preg_match("/Th/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Thursday' ) ); ?>
+									<?=_t( 'Thursday' );?>
 								</label>
 								<label class="checkbox">
 									<input type="checkbox" class="checkbox" name="dotw[]" value="F" <?php if(preg_match("/F/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Friday' ) ); ?>
+									<?=_t( 'Friday' );?>
 								</label>
 								<label class="checkbox">
-									<input type="checkbox" class="checkbox" name="dotw[]" value="S" <?php if(preg_match("/S/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
-									<?php _e( _t( 'Saturday' ) ); ?>
+									<input type="checkbox" class="checkbox" name="dotw[]" value="Sa" <?php if(preg_match("/Sa/", _h($this->soff[0]['dotw']))) { echo 'checked="checked"'; } ?> />
+									<?=_t( 'Saturday' );?>
 								</label>
 							</div>
 						</div>
@@ -125,38 +125,40 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Start Time' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append bootstrap-timepicker">
-            				        <input id="timepicker1" type="text"<?=csio();?> name="startTime" class="input-small" value="<?=_h($this->soff[0]['startTime']);?>" required/><span class="add-on"><i class="icon-time"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Start Time' );?></label>
+                            <div class="col-md-4">
+                                <div class="input-group bootstrap-timepicker">
+            				        <input id="timepicker10" type="text"<?=csio();?> name="startTime" class="form-control" value="<?=_h($this->soff[0]['startTime']);?>" required/>
+            				        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 						        </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'End Time' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append bootstrap-timepicker">
-        					        <input id="timepicker2" type="text"<?=csio();?> name="endTime" class="input-small" value="<?=_h($this->soff[0]['endTime']);?>" required/><span class="add-on"><i class="icon-time"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'End Time' );?></label>
+                            <div class="col-md-4">
+                                <div class="input-group bootstrap-timepicker">
+        					        <input id="timepicker11" type="text"<?=csio();?> name="endTime" class="form-control" value="<?=_h($this->soff[0]['endTime']);?>" required/>
+        					        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 						        </div>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Register Online' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:35%" name="stuReg"<?=csio();?> id="select2_11" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Register Online' );?></label>
+                            <div class="col-md-8">
+                                <select name="stuReg"<?=csio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <option value="1"<?=selected('1',_h($this->soff[0]['stuReg']),false);?>><?php _e( _t( 'Yes' ) ); ?></option>
-                                    <option value="0"<?=selected('0',_h($this->soff[0]['stuReg']),false);?>><?php _e( _t( 'No' ) ); ?></option>
+                                    <option value="1"<?=selected('1',_h($this->soff[0]['stuReg']),false);?>><?=_t( 'Yes' );?></option>
+                                    <option value="0"<?=selected('0',_h($this->soff[0]['stuReg']),false);?>><?=_t( 'No' );?></option>
                                 </select>
                            </div>
                         </div>
@@ -172,8 +174,8 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input type="hidden" name="courseSecID" value="<?=_h($this->soff[0]['courseSecID']);?>" />
-					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/view/<?=_h($this->soff[0]['courseSecID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/view/<?=_h($this->soff[0]['courseSecID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

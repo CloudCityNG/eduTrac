@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.1.3
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,7 +36,7 @@ Session::set('installurl',$installurl);
 <html xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?=_t( 'eduTrac Installer' );?></title>
+<title><?=_t( 'eduTrac ERP Installer' );?></title>
 
 <!-- JQuery -->
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -55,7 +55,7 @@ Session::set('installurl',$installurl);
 
 <div id="container">
     
-    <h2><?=_t( 'eduTrac Installation Wizard' );?></h2>
+    <h2><?=_t( 'eduTrac ERP Installation Wizard' );?></h2>
     
     <div id="wizard" class="wizard-default-style js">
         
@@ -67,9 +67,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 1 - Introduction' );?></h3>
                     
-                    <p><strong><?=_t( 'Welcome to eduTrac. 
-                    Before getting started, we need some information on the database. 
-                    You will need to know the following items before proceeding.' );?></strong></p>
+                    <p><strong><?=_t( 'Welcome to eduTrac ERP College Management System. Before getting started, we need some information on the database. You will need to know the following items before proceeding.' );?></strong></p>
                     
                     <ol>
                         <li><?=_t( 'Database name' );?></li>
@@ -78,14 +76,9 @@ Session::set('installurl',$installurl);
                         <li><?=_t( 'Database host' );?></li>
                     </ol>
                     
-                    <p><?=_t( 'If for any reason this automatic file creation doesn\'t work, don\'t worry. 
-                    All this does is fill in the database information to a configuration file. 
-                    You may also simply open eduTrac/Config/contants-sample.php in a text editor, fill in your information, 
-                    and save it as constants.php.' );?></p>
+                    <p><?=_t( "If for any reason this automatic file creation doesn't work, don't worry. All this does is fill in the database information to a configuration file. You may also simply open eduTrac/Config/contants-sample.php in a text editor, fill in your information, and save it as constants.php." );?></p>
                     
-                    <p><?=_t( 'In all likelihood, these items were supplied to you by your Web Host. 
-                    If you do not have this information, then you will need to contact them before you can continue. 
-                    If you\'re all ready...' );?></p>
+                    <p><?=_t( "In all likelihood, these items were supplied to you by your Web Host. If you do not have this information, then you will need to contact them before you can continue. If you're all ready..." );?></p>
                     <button class="next" onclick="window.location='<?=Session::get('installurl');?>install/?step=2'"><span><?=_t( 'Next Step' );?></span></button>
                 </div>
                 
@@ -100,9 +93,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 2 - Environment Test' );?></h3>
 
-                    <p><?=_t( 'If your system fails any of the tests to the right, then you need to correct them, 
-                    refresh your browser to make sure all have a green \'ok\' or an orange \'warning\' and then proceed with the install. If you proceed 
-                    without correcting the errors, the install may fail and/or eduTrac may not function properly.' );?></p>
+                    <p><?=_t( "If your system fails any of the tests to the right, then you need to correct them, refresh your browser to make sure all have a green 'ok' or an orange 'warning' and then proceed with the install. If you proceed without correcting the errors, the install may fail and/or eduTrac may not function properly." );?></p>
                 </div>
                 
                 <div class="column_two legend">
@@ -125,7 +116,7 @@ Session::set('installurl',$installurl);
 					<ul>
 					  <li class="ok"><span><?=_t( 'ok' );?></span> &mdash; <?=_t( 'All OK' );?></li>
 					  <li class="warning"><span><?=_t( 'warning' );?></span> &mdash; <?=_t( 'Not a deal breaker and is only a recommendation' );?></li>
-					  <li class="error"><span><?=_t( 'error' );?></span> &mdash; <?=_t( 'eduTrac require this feature and can\'t work without it' );?></li>
+					  <li class="error"><span><?=_t( 'error' );?></span> &mdash; <?=_t( "eduTrac ERP requires this feature and can't work without it" );?></li>
 					</ul>
 				</div>
                 
@@ -141,7 +132,7 @@ Session::set('installurl',$installurl);
                 <div id="help-dbname" class="helper">
                     <div class="text">
                         <h3><?=_t( 'Database Name' );?></h3>
-                        <p><?=_t( 'The name of the database you want to run eduTrac in.' );?></p>
+                        <p><?=_t( 'The name of the database you want to run eduTrac ERP in.' );?></p>
                     </div>
                 </div>
                 <!-- </Helper -->
@@ -149,8 +140,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 3 - Database Connection' );?></h3>
 
-                    <p><?=_t( 'On the right, you should enter your database connection details. 
-                    If you\'re not sure about these, contact your host.' );?></p>
+                    <p><?=_t( "On the right, you should enter your database connection details. If you're not sure about these, contact your host." );?></p>
                 </div>
                 
                 <div class="column_two">
@@ -189,8 +179,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 4 - Install Database Tables' );?></h3>
 
-                    <p><?=_t( 'It will take at least 30 seconds 
-                    to a minute to install the tables. So please be patient.' );?></p>
+                    <p><?=_t( 'It will take at least 30 seconds to a minute to install the tables. So please be patient.' );?></p>
                 </div>
                 
                 <div class="column_two legend">
@@ -214,8 +203,7 @@ Session::set('installurl',$installurl);
                 <div id="help-username" class="helper">
                     <div class="text">
                         <h3><?=_t( 'Username' );?></h3>
-                        <p><?=_t( 'Usernames can have only alphanumeric characters, spaces, 
-                        underscores, hyphens, periods and the @ symbol.' );?></p>
+                        <p><?=_t( 'Usernames can have only alphanumeric characters, spaces, underscores, hyphens, periods and the @ symbol.' );?></p>
                     </div>
                 </div>
                 <!-- </Helper -->
@@ -225,17 +213,14 @@ Session::set('installurl',$installurl);
                     <div class="text">
                         <h3><?=_t( 'Password' );?></h3>
                         <!--<p><strong><?=_t( 'A password will be automatically generated for you if you leave this blank.' );?></strong></p>-->
-                        <p><?=_t( 'Hint: The password should be at least seven characters long.
-                        To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^ &amp; ).' );?></p>
+                        <p><?=_t( 'Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^ &amp; ).' );?></p>
                     </div>
                 </div>
                 <!-- </Helper -->
                 
                 <div class="column_one">
                     <h3><?=_t( 'Step 5 - Website Information/Admin Account' );?></h3>
-                    <p><?=_t( 'Welcome to the eduTrac installation process! 
-                    Fill in the information to the right and you’ll be on your way to 
-                    using the most user friendly college management system.' );?></p>
+                    <p><?=_t( 'Welcome to the eduTrac ERP installation process! Fill in the information to the right and you’ll be on your way to using the most user friendly college management system.' );?></p>
                 </div>
                 
                 <div class="column_two">
@@ -283,7 +268,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Success!' );?></h3>
                     
-                    <p><?=_t( 'eduTrac has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page.' );?></p>
+                    <p><?=_t( 'eduTrac ERP has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page.' );?></p>
                     <form action="<?=Session::get('installurl');?>install/runInstallFinish/" class="defaultRequest" method="post">
                         <p><button type="submit"><span><?=_t( 'Finish Installer' );?></span></button></p>
                     </form>

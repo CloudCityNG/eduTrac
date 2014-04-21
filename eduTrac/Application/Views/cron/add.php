@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>cron/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'Cron Jobs' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>cron/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'Cron Jobs' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Add Cron Job' ) ); ?></li>
+	<li><?=_t( 'Add Cron Job' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Add Cron Job' ) ); ?></h3>
+<h3><?=_t( 'Add Cron Job' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,7 +48,7 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
@@ -62,21 +62,21 @@
 					
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label" for="scriptpath"><font color="red">*</font> <?php _e( _t( 'Script to Run' ) ); ?></label>
+							<label class="control-label" for="scriptpath"><font color="red">*</font> <?=_t( 'Script to Run' );?></label>
 							<div class="controls"><input class="span12" id="scriptpath" name="scriptpath" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label" for="name"><font color="red">*</font> <?php _e( _t( 'Job Name' ) ); ?></label>
+							<label class="control-label" for="name"><font color="red">*</font> <?=_t( 'Job Name' );?></label>
 							<div class="controls"><input class="span12" id="name" name="name" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="minutes"><?php _e( _t( 'Minutes' ) ); ?></label>
+                            <label class="control-label" for="minutes"><?=_t( 'Minutes' );?></label>
                             <div class="controls">
                                 <select style="width:15%" name="minutes" id="select2_9" onchange="disable_others()" value="0">
                                     <option selected value="-1">0</option>
@@ -146,7 +146,7 @@
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="hours"><?php _e( _t( 'Hourly' ) ); ?></label>
+                            <label class="control-label" for="hours"><?=_t( 'Hourly' );?></label>
                             <div class="controls">
                                 <select style="width:15%" name="hours" id="select2_10" onchange="disable_others()" value="0">
                                     <option selected value="-1">0</option>
@@ -180,7 +180,7 @@
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="days"><?php _e( _t( 'Daily' ) ); ?></label>
+                            <label class="control-label" for="days"><?=_t( 'Daily' );?></label>
                             <div class="controls">
                                 <select style="width:15%" name="days" id="select2_11" onchange="disable_others()">
                                     <option selected value="-1">0</option>
@@ -197,7 +197,7 @@
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="weeks"><?php _e( _t( 'Weekly' ) ); ?></label>
+                            <label class="control-label" for="weeks"><?=_t( 'Weekly' );?></label>
                             <div class="controls">
                                 <select style="width:15%" name="weeks" id="select2_12" onchange="disable_others()">
                                     <option selected value="-1">0</option>
@@ -260,11 +260,11 @@
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label" for="run_only_once"><font color="red">*</font> <?php _e( _t( 'How Often?' ) ); ?></label>
+                            <label class="control-label" for="run_only_once"><font color="red">*</font> <?=_t( 'How Often?' );?></label>
                             <div class="controls">
                                 <select style="width:50%" name="run_only_once" id="select2_13" required>
-                                    <option value="0"><?php _e( _t( 'Until I Delete It' ) ); ?></option>
-                                    <option value="1"><?php _e( _t( 'Only Once, Then Delete The Job' ) ); ?></option>
+                                    <option value="0"><?=_t( 'Until I Delete It' );?></option>
+                                    <option value="1"><?=_t( 'Only Once, Then Delete The Job' );?></option>
                                 </select>
                             </div>
                         </div>
@@ -282,7 +282,7 @@
 				<div class="form-actions">
 				    <input type="hidden" name="id" value="0" />
 				    <input type="hidden" name="time_last_fired" value="0" />
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="add()"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="add()"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

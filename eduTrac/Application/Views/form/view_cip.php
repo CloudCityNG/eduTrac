@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/cip/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'CIP' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/cip/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'CIP' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View CIP' ) ); ?></li>
+	<li><?=_t( 'View CIP' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Viewing ' ) ); ?><?=_h($this->cip[0]['cipName']);?></h3>
+<h3><?=_t( 'Viewing ' );?><?=_h($this->cip[0]['cipName']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,29 +48,29 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="cipCode"><font color="red">*</font> <?php _e( _t( 'CIP Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="cipCode"<?=gio();?> name="cipCode" type="text" value="<?=_h($this->cip[0]['cipCode']);?>" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="cipCode"><font color="red">*</font> <?=_t( 'CIP Code' );?></label>
+							<div class="col-md-8"><input class="form-control" id="cipCode"<?=gio();?> name="cipCode" type="text" value="<?=_h($this->cip[0]['cipCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="cipName"><font color="red">*</font> <?php _e( _t( 'CIP Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="cipName"<?=gio();?> name="cipName" type="text" value="<?=_h($this->cip[0]['cipName']);?>" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="cipName"><font color="red">*</font> <?=_t( 'CIP Name' );?></label>
+							<div class="col-md-8"><input class="form-control" id="cipName"<?=gio();?> name="cipName" type="text" value="<?=_h($this->cip[0]['cipName']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -85,7 +85,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input name="cipID" type="hidden" value="<?=_h($this->cip[0]['cipID']);?>" />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

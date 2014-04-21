@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Student Grades View
+ * Student Course Sections Grades View
  *  
  * PHP 5.4+
  *
@@ -22,52 +22,60 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.1
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?php _e( _t( 'Student Portal' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?=_t( 'Student Portal' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'My Grades' ) ); ?></li>
+    <li><a href="<?=BASE_URL;?>student/terms/<?=bm();?>" class="glyphicons flag"><i></i> <?=_t( 'Terms' );?></a></li>
+    <li class="divider"></li>
+    <li><a href="<?=BASE_URL;?>student/schedule/?term=<?=$this->gradesAssign[0]['termCode'];?>" class="glyphicons calendar"><i></i> <?=_t( 'Schedule' );?></a></li>
+    <li class="divider"></li>
+	<li><?=_t( 'Grades' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'My Grades' ) ); ?></h3>
+<h3><?=_t( 'Grades for ' );?><?=$this->gradesAssign[0]['secShortTitle'];?> (<?=$this->gradesAssign[0]['termCode'];?>-<?=$this->gradesAssign[0]['courseSecCode'];?>)</h3>
 <div class="innerLR">
 
 	<!-- Widget -->
 	<div class="widget widget-heading-simple widget-body-gray">
-		<div class="widget-body">
-        
+		<div class="widget-body innerAll inner-2x">
 			<!-- Table -->
-			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
-			
+			<table class="table table-bordered table-striped table-white">
+				
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Section' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Term' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Grade' ) ); ?></th>
+						<?php if($this->gradesAssign != '') : foreach($this->gradesAssign as $k => $v) { ?>
+						<th class="text-center">
+							<span data-toggle="tooltip" data-original-title="<?=$v['title'];?>" data-placement="top">
+								<?=$v['shortName'];?>
+							</span>
+						</th>
+						<?php } endif; ?>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
 				
 				<!-- Table body -->
 				<tbody>
-				<?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
-                <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['termCode']);?></td>
-                    <td class="center"><?=_h($v['grade']);?></td>
-                </tr>
-				<?php } endif; ?>
+					<?php if($this->gradesStu != '') : foreach($this->gradesStu as $k => $v) { ?>
+					<!-- Table row -->
+					<tr>
+						<?php if($this->gradesAssign != '') : foreach($this->gradesAssign as $key => $value) { ?>
+						<td class="text-center"><?php foreach(stuGrades($v['stuID'],$value['assignID']) as $s => $g) : echo $g['grade']; endforeach; ?></td>
+						<?php } endif; ?>
+					</tr>
+					<!-- // Table row END -->
+					<?php } endif; ?>
+					
 				</tbody>
 				<!-- // Table body END -->
 				

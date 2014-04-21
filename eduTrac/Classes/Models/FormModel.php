@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,7 +36,7 @@ class FormModel {
 	/* Begins semester methods */
 	public function runSemester($data) {			
 		$bind = array( 
-		      "acadYearID" => $data['acadYearID'],"semCode" => $data['semCode'],
+		      "acadYearCode" => $data['acadYearCode'],"semCode" => $data['semCode'],
 		      "semName" => $data['semName'],"semStartDate" => $data['semStartDate'],
 		      "semEndDate" => $data['semEndDate'],"active" => $data['active'] 
         );
@@ -49,13 +49,15 @@ class FormModel {
     public function semesterList() {
         $array = [];
         $q = DB::inst()->query( "SELECT 
-                a.semesterID, a.semName, a.semStartDate, a.semEndDate, a.active, b.acadYearID, b.acadYearCode 
+                a.semesterID, a.semName, a.semStartDate, a.semEndDate, a.active, b.acadYearCode 
             FROM 
                 semester a 
             LEFT JOIN 
                 acad_year b 
             ON 
-                a.acadYearID = b.acadYearID" 
+                a.acadYearCode = b.acadYearCode 
+            WHERE 
+            	a.semCode <> 'NULL'" 
             );
                 
         if($q->rowCount() > 0) {
@@ -68,7 +70,7 @@ class FormModel {
     
 	public function runEditSemester($data) {
 		$update = array( 
-                "acadYearID" => $data['acadYearID'],"semCode" => $data['semCode'],
+                "acadYearCode" => $data['acadYearCode'],"semCode" => $data['semCode'],
                 "semName" => $data['semName'],"semStartDate" => $data['semStartDate'],
                 "semEndDate" => $data['semEndDate'],"active" => $data['active'] 
         );
@@ -98,7 +100,7 @@ class FormModel {
 	/* Begins Term methods */
 	public function runTerm($data) {			
 		$bind = array( 
-		      "semesterID" => $data['semesterID'],"termCode" => $data['termCode'],
+		      "semCode" => $data['semCode'],"termCode" => $data['termCode'],
 		      "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
 		      "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
 		      "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
@@ -119,7 +121,9 @@ class FormModel {
             LEFT JOIN 
                 semester b 
             ON 
-                a.semesterID = b.semesterID" 
+                a.semCode = b.semCode 
+            WHERE 
+            	a.termCode <> 'NULL'" 
             );
                 
         if($q->rowCount() > 0) {
@@ -132,7 +136,7 @@ class FormModel {
 	
 	public function runEditTerm($data) {
 		$update = array( 
-              "semesterID" => $data['semesterID'],"termCode" => $data['termCode'],
+              "semCode" => $data['semCode'],"termCode" => $data['termCode'],
               "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
               "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
               "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
@@ -175,7 +179,7 @@ class FormModel {
 	}
     
     public function acadYearList() {
-        $q = DB::inst()->query( "SELECT * FROM acad_year ORDER BY acadYearID" );
+        $q = DB::inst()->query( "SELECT * FROM acad_year WHERE acadYearCode <> 'NULL' ORDER BY acadYearID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 	
@@ -229,7 +233,7 @@ class FormModel {
 	}
     
     public function deptList() {
-        $q = DB::inst()->query( "SELECT * FROM department ORDER BY deptID" );
+        $q = DB::inst()->query( "SELECT * FROM department WHERE deptCode <> 'NULL' ORDER BY deptID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 	
@@ -268,52 +272,79 @@ class FormModel {
 	}
 	/* End department */
 	
-	/* Begin credit load */
-	public function runCredLoad($data) {
+	/* Begin student load rule */
+	public function runStuLoadRule($data) {
 		$bind = array( 
-			"credLoadCode" => $data['credLoadCode'],"credLoadName" => $data['credLoadName'],
-			"credLoadCreds" => $data['credLoadCreds']
+			"status" => $data['status'],"min_cred" => $data['min_cred'],
+			"max_cred" => $data['max_cred'],"term" => $data['term'],
+			"acadLevelCode" => $data['acadLevelCode'],"active" => $data['active']
 			);
 			
-		$q = DB::inst()->insert( "credit_load", $bind );
+		$q = DB::inst()->insert( "student_load_rule", $bind );
 		
 		$ID = DB::inst()->lastInsertId();
 			
-		redirect( BASE_URL . 'form/credit_load/' . $ID  . '/' . bm() );
+		redirect( BASE_URL . 'form/student_load_rule/' . $ID  . '/' . bm() );
 	
 	}
     
     public function credLoadList() {
-        $q = DB::inst()->query( "SELECT * FROM credit_load ORDER BY credLoadID" );
-        return $q->fetchAll(\PDO::FETCH_ASSOC);
+        $array = [];
+        $q = DB::inst()->query( "SELECT 
+                    CASE 
+                        active 
+                    WHEN 
+                        '1' 
+                    THEN 
+                        'Yes' 
+                    ELSE 
+                        'No' 
+                    END AS 
+                        'State',
+                        slrID,
+                        status,
+                        min_cred,
+                        max_cred,
+                        term,
+                        acadLevelCode 
+                    FROM 
+                        student_load_rule 
+                    ORDER BY 
+                        min_cred" 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
     }
 	
-	public function runEditCredLoad($data) {
+	public function runEditStuLoadRule($data) {
 		$update = array( 
-            "credLoadCode" => $data['credLoadCode'],"credLoadName" => $data['credLoadName'],
-            "credLoadCreds" => $data['credLoadCreds']
+            "status" => $data['status'],"min_cred" => $data['min_cred'],
+            "max_cred" => $data['max_cred'],"term" => $data['term'],
+            "acadLevelCode" => $data['acadLevelCode'],"active" => $data['active']
             );
 			
-		$bind = array( ":credLoadID" => $data['credLoadID'] );
+		$bind = array( ":id" => $data['slrID'] );
 		
-		$q = DB::inst()->update( "credit_load",$update,"credLoadID = :credLoadID",$bind );
+		$q = DB::inst()->update( "student_load_rule",$update,"slrID = :id",$bind );
 				
-		redirect( BASE_URL . 'form/view_credit_load/' . $data['credLoadID'] . '/' . bm() );
+		redirect( BASE_URL . 'form/view_student_load_rule/' . $data['slrID'] . '/' . bm() );
 	}
 	
-	public function cl($id) {
+	public function sl($id) {
         $array = [];
         $bind = array( ":id" => $id );
-        $q = DB::inst()->select( "credit_load","credLoadID = :id","","*",$bind );
+        $q = DB::inst()->select( "student_load_rule","slrID = :id","","*",$bind );
 		foreach($q as $r) {
     	    $array[] = $r;   
 		}
         return $array;
 	}
 	
-	public function deleteCredLoad($id) {
+	public function deleteStuLoadRule($id) {
         $bind = array( ":id" => $id );
-		$q = DB::inst()->delete( "credit_load", "credLoadID = :id", $bind );
+		$q = DB::inst()->delete( "student_load_rule", "slrID = :id", $bind );
 		
 		if($q) {
 			redirect( BASE_URL . 'success/delete_record/' );
@@ -321,7 +352,7 @@ class FormModel {
 			redirect( BASE_URL . 'error/delete_record/');
 		}
 	}
-	/* End credit load */
+	/* End student load rule */
 	
 	/* Begin degrees */
 	public function runDegree($data) {
@@ -338,7 +369,7 @@ class FormModel {
 	}
     
     public function degreeList() {
-        $q = DB::inst()->query( "SELECT * FROM degree ORDER BY degreeID" );
+        $q = DB::inst()->query( "SELECT * FROM degree WHERE degreeCode <> 'NULL' ORDER BY degreeID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 	
@@ -391,7 +422,7 @@ class FormModel {
 	}
     
     public function majorList() {
-        $q = DB::inst()->query( "SELECT * FROM major ORDER BY majorID" );
+        $q = DB::inst()->query( "SELECT * FROM major WHERE majorCode <> 'NULL' ORDER BY majorID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 	
@@ -444,7 +475,7 @@ class FormModel {
 	}
     
     public function minorList() {
-        $q = DB::inst()->query( "SELECT * FROM minor ORDER BY minorID" );
+        $q = DB::inst()->query( "SELECT * FROM minor WHERE minorCode <> 'NULL' ORDER BY minorID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 	
@@ -499,7 +530,7 @@ class FormModel {
     }
     
     public function ccdList() {
-        $q = DB::inst()->query( "SELECT * FROM ccd ORDER BY ccdID" );
+        $q = DB::inst()->query( "SELECT * FROM ccd WHERE ccdCode <> 'NULL' ORDER BY ccdID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
@@ -552,7 +583,7 @@ class FormModel {
     }
     
     public function cipList() {
-        $q = DB::inst()->query( "SELECT * FROM cip ORDER BY cipID" );
+        $q = DB::inst()->query( "SELECT * FROM cip WHERE cipCode <> 'NULL' ORDER BY cipID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
@@ -605,7 +636,7 @@ class FormModel {
     }
     
     public function locList() {
-        $q = DB::inst()->query( "SELECT * FROM location ORDER BY locationID" );
+        $q = DB::inst()->query( "SELECT * FROM location WHERE locationCode <> 'NULL' ORDER BY locationID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
@@ -646,7 +677,8 @@ class FormModel {
     /* Begin Building */
     public function runBuilding($data) {
         $bind = array( 
-            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName']
+            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName'],
+            "locationCode" => $data['locationCode']
             );
             
         $q = DB::inst()->insert( "building", $bind );
@@ -658,13 +690,14 @@ class FormModel {
     }
     
     public function buildList() {
-        $q = DB::inst()->query( "SELECT * FROM building ORDER BY buildingID" );
+        $q = DB::inst()->query( "SELECT * FROM building WHERE buildingCode <> 'NULL' ORDER BY buildingID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
     public function runEditBuilding($data) {
         $update = array( 
-            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName']
+            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName'],
+            "locationCode" => $data['locationCode']
             );
             
         $bind = array( ":buildingID" => $data['buildingID'] );
@@ -699,7 +732,7 @@ class FormModel {
     /* Begin Room */
     public function runRoom($data) {
         $bind = array( 
-            "buildingID" => $data['buildingID'],"roomCode" => $data['roomCode'],
+            "buildingCode" => $data['buildingCode'],"roomCode" => $data['roomCode'],
             "roomNumber" => $data['roomNumber'],"roomCap" => $data['roomCap']
             );
             
@@ -723,7 +756,9 @@ class FormModel {
             LEFT JOIN 
                 building b 
             ON 
-                a.buildingID = b.buildingID" 
+                a.buildingCode = b.buildingCode 
+            WHERE 
+            	a.roomCode <> 'NULL'" 
         );
         
         return $q->fetchAll(\PDO::FETCH_ASSOC);
@@ -731,7 +766,7 @@ class FormModel {
     
     public function runEditRoom($data) {
         $update = array( 
-            "buildingID" => $data['buildingID'],"roomCode" => $data['roomCode'],
+            "buildingCode" => $data['buildingCode'],"roomCode" => $data['roomCode'],
             "roomNumber" => $data['roomNumber'],"roomCap" => $data['roomCap']
             );
             
@@ -779,7 +814,7 @@ class FormModel {
     }
     
     public function specList() {
-        $q = DB::inst()->query( "SELECT * FROM specialization ORDER BY specID" );
+        $q = DB::inst()->query( "SELECT * FROM specialization WHERE specCode <> 'NULL' ORDER BY specID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
@@ -875,7 +910,7 @@ class FormModel {
     /* Begin Subject */
     public function runSubj($data) {
         $bind = array( 
-            "subjCode" => $data['subjCode'],"subjName" => $data['subjName']
+            "subjectCode" => $data['subjectCode'],"subjectName" => $data['subjectName']
             );
             
         $q = DB::inst()->insert( "subject", $bind );
@@ -887,13 +922,13 @@ class FormModel {
     }
     
     public function subjList() {
-        $q = DB::inst()->query( "SELECT * FROM subject ORDER BY subjectID" );
+        $q = DB::inst()->query( "SELECT * FROM subject WHERE subjectCode <> 'NULL' ORDER BY subjectID" );
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
     
     public function runEditSubj($data) {
         $update = array( 
-            "subjCode" => $data['subjCode'],"subjName" => $data['subjName']
+            "subjectCode" => $data['subjectCode'],"subjectName" => $data['subjectName']
             );
             
         $bind = array( ":subjectID" => $data['subjectID'] );
@@ -929,7 +964,7 @@ class FormModel {
     public function runSchool($data) {
         $bind = array( 
             "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
-            "schoolName" => $data['schoolName'],"buildingID" => $data['buildingID']
+            "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
             );
             
         $q = DB::inst()->insert( "school", $bind );
@@ -953,7 +988,9 @@ class FormModel {
                     LEFT JOIN 
                         building b 
                     ON 
-                        a.buildingID = b.buildingID 
+                        a.buildingCode = b.buildingCode 
+                    WHERE 
+                    	a.schoolCode <> 'NULL' 
                     ORDER BY 
                         schoolID" 
         );
@@ -966,7 +1003,7 @@ class FormModel {
     public function runEditSchool($data) {
         $update = array( 
             "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
-            "schoolName" => $data['schoolName'],"buildingID" => $data['buildingID']
+            "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
             );
             
         $bind = array( ":schoolID" => $data['schoolID'] );
@@ -1052,6 +1089,132 @@ class FormModel {
         }
     }
     /* End Institution */
+    
+    /* Begin Grade Scale */
+    public function runGradeScale($data) {
+    	if(!empty($data['update']) && $data['update'] == 1) {
+    		$update = array( 
+            "grade" => $data['grade'],"percent" => $data['percent'],
+            "points" => $data['points'], "status" => $data['status'],
+            "description" => $data['description']
+            );
+            
+	        $bind = array( ":id" => $data['ID'] );
+	        
+	        $q = DB::inst()->update( "grade_scale",$update,"ID = :id",$bind );
+	        redirect( BASE_URL . 'form/view_grade_scale/' . $data['ID'] . '/' . bm() );
+		} else {
+	        $bind = array( 
+	            "grade" => $data['grade'],"percent" => $data['percent'],
+	            "points" => $data['points'], "status" => $data['status'],
+	            "description" => $data['description']
+	            );
+	            
+	        $q = DB::inst()->insert( "grade_scale", $bind );
+	        $ID = DB::inst()->lastInsertId();
+	        redirect( BASE_URL . 'form/view_grade_scale/' . $ID . '/' . bm() );
+		}
+    
+    }
+    
+    public function gradeScale() {
+    	$array = [];
+		$q = DB::inst()->query( "SELECT 
+					CASE 
+						status 
+					WHEN '1' THEN 'Active' 
+					ELSE 'Inactive' 
+					END AS 'Status',
+						ID,
+						grade,
+						percent,
+						points 
+					FROM 
+						grade_scale 
+					ORDER BY 
+						grade" 
+		);
+        foreach($q as $r) {
+        	$array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function scale($id) {
+        $array = [];
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "grade_scale","ID = :id","","*",$bind );
+        foreach($q as $r) {
+    	    $array[] = $r;   
+		}
+        return $array;
+    }
+    
+    public function deleteGradeScale($id) {
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->delete( "grade_scale", "ID = :id", $bind );
+        
+        if($q) {
+            redirect( BASE_URL . 'success/delete_record/' );
+        } else {
+            redirect( BASE_URL . 'error/delete_record/');
+        }
+    }
+    /* End Grade Scale */
+    
+    /* Begin Restriction Code */
+    public function runRSTRCode($data) {
+        if(!empty($data['update']) && $data['update'] == 1) {
+            $update = array( 
+            "rtrCode" => $data['rstrCode'],"description" => $data['description'],
+            "deptCode" => $data['deptCode']
+            );
+            
+            $bind = array( ":id" => $data['rstrCodeID'] );
+            
+            $q = DB::inst()->update( "restriction_code",$update,"rstrCodeID = :id",$bind );
+            redirect( BASE_URL . 'form/view_rstr_code/' . $data['rstrCodeID'] . '/' . bm() );
+        } else {
+            $bind = array( 
+                "rstrCode" => $data['rstrCode'],"description" => $data['description'],
+                "deptCode" => $data['deptCode']
+                );
+                
+            $q = DB::inst()->insert( "restriction_code", $bind );
+            $ID = DB::inst()->lastInsertId();
+            redirect( BASE_URL . 'form/view_rstr_code/' . $ID . '/' . bm() );
+        }
+    
+    }
+    
+    public function rstrCodeList() {
+        $array = [];
+        $q = DB::inst()->query( "SELECT 
+                    a.*,
+                    b.deptName 
+                FROM 
+                    restriction_code a 
+                LEFT JOIN 
+                    department b 
+                ON 
+                    a.deptCode = b.deptCode" 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function rstr($id) {
+        $array = [];
+        $bind = array( ":id" => $id );
+        $q = DB::inst()->select( "restriction_code","rstrCodeID = :id","","*",$bind );
+        foreach($q as $r) {
+            $array[] = $r;   
+        }
+        return $array;
+    }
+    /* End Restriction Code */
     
     public function __destruct() {
         DB::inst()->close();

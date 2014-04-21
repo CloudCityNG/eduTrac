@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -41,6 +41,21 @@ use \eduTrac\Classes\Libraries\Cookies;
 		if( isGetSet('php-benchmark-test') ) {
 		    \eduTrac\Classes\Libraries\PHPBenchmark\Monitor::instance()->init( !empty($_GET['display-data']) );
 		    \eduTrac\Classes\Libraries\PHPBenchmark\Monitor::instance()->snapshot('Bootstrap finished');
+		}
+	}
+	
+	/**
+     * Hide menu links by functions and/or by 
+	 * permissions.
+     * 
+     * @since 4.0.4
+     */
+	function hl($f,$p=NULL) {
+		if(function_exists($f)) {
+			return ' style="display:none"';
+		}
+		if($p !== NULL) {
+			return ae($p);
 		}
 	}
  	
@@ -84,21 +99,15 @@ use \eduTrac\Classes\Libraries\Cookies;
                     a.email_key,
                     a.email_name,
                     a.email_value,
-                    a.deptID 
+                    a.deptCode 
                 FROM 
                     email_template a 
                 LEFT JOIN 
                     staff b 
                 ON 
-                    a.deptID = b.deptID 
-                LEFT JOIN 
-                    faculty c
-                ON 
-                    a.deptID = c.deptID 
+                    a.deptCode = b.deptCode 
                 WHERE 
-                    b.staffID = :id 
-                OR 
-                    c.facID = :id",
+                    b.staffID = :id",
                 $bind 
         );
         foreach($q as $k => $v) {
@@ -127,31 +136,31 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * if $semesterID is not NULL, shows the semester attached 
 	 * to a particular record.
 	 * 
-	 * @since 1.0,0
+	 * @since 1.0.0
 	 * @param string $semesterID - optional
 	 * @return string Returns the record key if selected is true.
 	 */
 	function semester_dropdown($semID = NULL) {
-        $q = DB::inst()->select( "semester","","acadYearCode","semesterID,semCode,semName" );
+        $q = DB::inst()->select( "semester","","acadYearCode","semCode,semName" );
 		foreach( $q as $k => $v ) {
-	      	echo '<option value="'._h($v['semesterID']).'"'.selected( $semID, _h($v['semesterID']), false ).'>'._h($v['semCode']).' '._h($v['semName']).'</option>' . "\n";
+	      	echo '<option value="'._h($v['semesterCode']).'"'.selected( $semID, _h($v['semesterCode']), false ).'>'._h($v['semCode']).' '._h($v['semName']).'</option>' . "\n";
 		}
 	}
 	
 	/**
 	 * Subject dropdown: shows general list of subjects and
-	 * if $subjectID is not NULL, shows the subject attached 
+	 * if $subjectCode is not NULL, shows the subject attached 
 	 * to a particular record.
 	 * 
 	 * @since 1.0.0
 	 * @param string $subjectID - optional
 	 * @return string Returns the record key if selected is true.
 	 */
-	function subject_id_dropdown($subjectID = NULL) {
-        $q = DB::inst()->select( "subject","","subjectID","subjectID,subjCode,subjName" );
+	function subject_code_dropdown($subjectCode = NULL) {
+        $q = DB::inst()->select( "subject","subjectCode <> 'NULL'","subjectCode","subjectCode,subjectName" );
 		
 		foreach( $q as $k => $v ) {
-	      	echo '<option value="'._h($v['subjectID']).'"'.selected( $subjectID, _h($v['subjectID']), false ).'>'._h($v['subjCode']).' '._h($v['subjName']).'</option>' . "\n";
+	      	echo '<option value="'._h($v['subjectCode']).'"'.selected( $subjectCode, _h($v['subjectCode']), false ).'>'._h($v['subjectCode']).' '._h($v['subjectName']).'</option>' . "\n";
 		}
 	}
     
@@ -165,10 +174,27 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record id if selected is true.
      */
     function facID_dropdown($facID = NULL) {
-        $q = DB::inst()->select( "faculty","","facID","facID" );
+        $q = DB::inst()->select( "staff_meta","staffType = 'FAC'","staffID","staffID" );
         
         foreach( $q as $k => $v ) {
-            echo '<option value="'._h($v['facID']).'"'.selected( $facID, _h($v['facID']), false ).'>'.get_name(_h($v['facID'])).'</option>' . "\n";
+            echo '<option value="'._h($v['staffID']).'"'.selected( $facID, _h($v['staffID']), false ).'>'.get_name(_h($v['staffID'])).'</option>' . "\n";
+        }
+    }
+    
+    /**
+     * Payment type dropdown: shows general list of payment types and
+     * if $typeID is not NULL, shows the payment type attached 
+     * to a particular record.
+     * 
+     * @since 1.0.3
+     * @param string $typeID - optional
+     * @return string Returns the record id if selected is true.
+     */
+    function payment_type_dropdown($typeID = NULL) {
+        $q = DB::inst()->select( "payment_type" );
+        
+        foreach( $q as $k => $v ) {
+            echo '<option value="'._h($v['ptID']).'"'.selected( $typeID, _h($v['ptID']), false ).'>'._h($v['type']).'</option>' . "\n";
         }
     }
     
@@ -185,13 +211,428 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @param string $activeCode
      * @return mixed
      */
-    function table_dropdown($table, $where = NULL, $id, $code, $name, $activeID = NULL) {
-        $q = DB::inst()->select( $table,$where,$id,"$id,$code,$name" );
+    function table_dropdown($table, $where = NULL, $id, $code, $name, $activeID = NULL, $bind = NULL) {
+        $q = DB::inst()->select( $table,$where,$id,"$id,$code,$name",$bind );
         
         foreach( $q as $k => $v ) {
-            echo '<option value="'._h($v[$id]).'"'.selected( $activeID, _h($v[$id]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
+            echo '<option value="'._h($v[$code]).'"'.selected( $activeID, _h($v[$code]), false ).'>'._h($v[$code]).' '._h($v[$name]).'</option>' . "\n";
         }
     }
+    
+    function fee_table_dropdown() {
+        $q = DB::inst()->select( "billing_table","status='A'","","*" );
+		foreach( $q as $k => $v ) {
+	      	echo '<option value="'._h($v['ID']).'">'._h($v['amount']).' '._h($v['name']).'</option>' . "\n";
+		}
+	}
+	
+	/**
+	 * Date dropdown
+	 */
+	function date_dropdown($limit = 0,$name = '',$table = '',$column = '',$id = '',$field = '',$bool = '') {
+        
+        if($id != '') {
+            $bind = [ ":id" => $id ];
+            $array = [];
+            $q = DB::inst()->select($table,"$column = :id","","*",$bind);
+            foreach($q as $r) {
+                $array[] = $r;
+            }
+            $date = explode("-",$r[$field]);
+        }
+		
+		/*years*/
+        $html_output = '           <select name="'.$name.'Year"'.$bool.' class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">'."\n";
+        $html_output .= '               <option value="">&nbsp;</option>'."\n";
+            for ($year = 2000; $year <= (date("Y") - $limit); $year++) {
+                $html_output .= '               <option value="' . sprintf("%04s", $year) . '"'.selected(sprintf("%04s", $year),$date[0],false).'>' . sprintf("%04s", $year) . '</option>'."\n";
+            }
+        $html_output .= '           </select>'."\n";
+        
+        /*months*/
+        $html_output .= '           <select name="'.$name.'Month"'.$bool.' class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">'."\n";
+        $html_output .= '               <option value="">&nbsp;</option>'."\n";
+        $months = array("", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+            for ($month = 1; $month <= 12; $month++) {
+                $html_output .= '               <option value="' . sprintf("%02s", $month) . '"'.selected(sprintf("%02s", $month),$date[1],false).'>' . $months[$month] . '</option>'."\n";
+            }
+        $html_output .= '           </select>'."\n";
+        
+        /*days*/
+        $html_output .= '           <select name="'.$name.'Day"'.$bool.' class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">'."\n";
+        $html_output .= '               <option value="">&nbsp;</option>'."\n";
+            for ($day = 1; $day <= 31; $day++) {
+                $html_output .= '               <option value="' . sprintf("%02s", $day) . '"'.selected(sprintf("%02s", $day),$date[2],false).'>' . sprintf("%02s", $day) . '</option>'."\n";
+            }
+        $html_output .= '           </select>'."\n";
+        
+        return $html_output;
+    }
+    
+    /**
+     * General ledger account dropdown: pulls dropdown list from general ledger 
+	 * account table. if $activeID is not NULL, shows the record attached 
+     * to a particular record.
+     * 
+     * @since 1.1.5
+     * @param string $activeCode
+     * @return mixed
+     */
+    function gl_acct_dropdown($activeID = NULL) {
+        $q = DB::inst()->query( "SELECT * FROM gl_account" );
+        $options = "";
+        while( $row = $q->fetch(\PDO::FETCH_OBJ) ) {
+            $options .= '<option value="'._h($row->glacctID).'"'.selected( $activeID, _h($row->glacctID), false ).'>'._h($row->gl_acct_number).' | '._h($row->gl_acct_name).'</option>';
+        }
+		echo $options;
+    }
+	
+	function assignmentExist($code,$term) {
+		$bind = [ ":code" => $code, ":term" => $term ];
+		$q = DB::inst()->select( "assignment","courseSecCode = :code AND termCode = :term","","*",$bind );
+		if(count($q) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function gradebookExist($code,$term) {
+		$bind = [ ":code" => $code, ":term" => $term ];
+		$q = DB::inst()->select( "gradebook","courseSecCode = :code AND termCode = :term","","*",$bind );
+		if(count($q) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+    
+    /**
+     * @since 4.0.7
+     */
+    function getstudentload($term,$creds,$level) {
+        $t = explode("/",$term);
+        $newTerm1 = $t[0];
+        $newTerm2 = $t[1];
+        $bind = [ ":term1" => $newTerm1,":term2" => $newTerm2,":creds" => $creds,":level" => $level ];
+        $q = DB::inst()->query( "SELECT 
+                        status 
+                    FROM 
+                        student_load_rule 
+                    WHERE 
+                        term REGEXP CONCAT('[[:<:]]', :term1, '[[:>:]]') 
+                    OR 
+                        term REGEXP CONCAT('[[:<:]]', :term2, '[[:>:]]') 
+                    AND 
+                        acadLevelCode REGEXP CONCAT('[[:<:]]', :level, '[[:>:]]') 
+                    AND 
+                        :creds 
+                    BETWEEN 
+                        min_cred 
+                    AND 
+                        max_cred 
+                    AND 
+                        active = '1'",
+                    $bind 
+        );
+        /*$q = DB::inst()->query( "SELECT 
+                        status 
+                    FROM 
+                        student_load_rule 
+                    WHERE 
+                        term REGEXP '[[:<:]]".$newTerm."[[:>:]]' 
+                    AND 
+                        acadLevelCode REGEXP '[[:<:]]".$level."[[:>:]]' 
+                    AND 
+                        ".$creds." 
+                    BETWEEN 
+                        min_cred 
+                    AND 
+                        max_cred 
+                    AND 
+                        active = '1'"
+        );*/
+        foreach($q as $r) {
+            return $r['status'];
+        }
+    }
+    
+    /**
+     * @since 4.0.9
+     */
+    function room_booking($data) {
+    	$auth = new \eduTrac\Classes\Libraries\Cookies;
+    	/** 
+		 * If check_event is set, then we will 
+		 * check to make sure that the room and
+		 * time slots are available for booking.
+		 */
+    	if(!empty($data['check_event']) && $data['check_event'] == 'Check Availability') {
+	    	$roomCode = $data['roomCode'];
+	        $sDate = $data['startDate'];
+	        $endDate = $data['endDate'];
+	        $sTime = date('H:i:s',strtotime($data['startTime']));
+	        $eTime = date('H:i:s',strtotime($data['endTime']));
+	        $start = $sDate . " " . $sTime;
+	        $end = $sDate . " " . $eTime;
+	        $repeats = $data['repeats'];
+	        $repeatFreq = $data['repeatFreq'];
+	                
+	        if(empty($repeats)) {
+	            $repeat = 0;
+	            $freq = 0;
+	            $bind1 = [ 
+	                    ":room" => $roomCode,":term" => $data['termCode'],
+	                    ":start" => $sDate.' '.$sTime,":end" => $endDate.' '.$eTime,
+	                    ];
+	            
+	            $q = DB::inst()->query( "SELECT 
+	                            roomCode,
+	                            termCode,
+	                            title,
+	                            startDate,
+	                            startTime,
+	                            endTime 
+	                        FROM 
+	                            event
+	                        WHERE 
+	                            roomCode = :room 
+	                        AND 
+	                            termCode = :term 
+	                        AND 
+	                            :start 
+	                        BETWEEN 
+	                            CONCAT(startDate,' ',startTime) 
+	                        AND 
+	                            CONCAT(startDate,' ',endTime) 
+	                        OR 
+	                            :end 
+	                        BETWEEN 
+	                            CONCAT(startDate,' ',startTime) 
+	                        AND 
+	                            CONCAT(startDate,' ',endTime)",
+	                        $bind1 
+	            );
+	            if(count($q) > 0) {
+	            	echo '<div class="alert alert-danger centered">';
+		            foreach($q as $k => $v) {
+		        		echo '<font color="red">Conflict:&nbsp;&nbsp;&nbsp;&nbsp;'.$v['termCode'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$v['roomCode'].'&nbsp;&nbsp;&nbsp;&nbsp;'.
+		        		$v['title'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$v['startDate'].'&nbsp;&nbsp;&nbsp;&nbsp;'.date('h:i A',strtotime($v['startTime'])).'&nbsp;&nbsp;&nbsp;&nbsp;'.
+		        		date('h:i A',strtotime($v['endTime'])).'</font>';
+		            }
+		            echo '</div>';
+	            }
+	        } else {
+	            $startDate = new \DateTime("$sDate");
+	            $lastDate = new \DateTime("$endDate");
+	            $days = $lastDate->diff($startDate)->format("%a");
+	            $limit = $days+1;
+	            $until = ($limit/$repeatFreq);
+	            if ($repeatFreq == 1){
+	                $weekday = 0;
+	            }
+	            
+	            for($x = 0; $x < $until; $x++) {
+	                $bind2 = [ 
+	                    ":room" => $roomCode,
+	                    ":start" => $start,":end" => $end,
+	                    ];
+	            $q = DB::inst()->query( "SELECT 
+	            				* 
+	        				FROM 
+	        					event_meta 
+	    					WHERE 
+	    						roomCode = :room 
+	                        AND 
+	                            :start 
+	                        BETWEEN 
+	                            start 
+	                        AND 
+	                        	end
+	                        OR 
+	                            :end 
+	                        BETWEEN 
+	                        	start 
+	                    	AND
+	                            end 
+	                        GROUP BY 
+	                        	roomCode,start,end,title",
+	                        $bind2 
+				);
+				if(count($q) > 0) {
+					echo '<div class="alert alert-danger centered">';
+		            foreach($q as $k => $v) {
+		        		echo 'Conflict:&nbsp;&nbsp;&nbsp;&nbsp;'.$v['termCode'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$v['roomCode'].'&nbsp;&nbsp;&nbsp;&nbsp;'.
+		        		$v['title'].'&nbsp;&nbsp;&nbsp;&nbsp;'.date('F d, o h:i A',strtotime($v['start'])).'&nbsp;&nbsp;&nbsp;&nbsp;'.
+		        		date('F d, o h:i A',strtotime($v['end'])).'<br />';
+		            }
+		            echo '</div>';
+	            }
+	            $sDate = strtotime($start . '+' . $repeatFreq . 'DAYS');
+	            $eDate = strtotime($end . '+' . $repeatFreq . 'DAYS');
+	            $start = date("Y-m-d H:i", $sDate);
+	            $end = date("Y-m-d H:i", $eDate);
+	            }
+	        }
+        }
+        
+                
+        /** 
+		 * If add_event is set, then we will 
+		 * book the room and the available time slots.
+		 */
+		if(!empty($data['add_event']) && $data['add_event'] == 'Submit') {
+			$title = $data['title'];
+	        $text = $data['title'];
+	        $pID = $auth->getPersonField('personID');
+	        $roomCode = $data['roomCode'];
+	        $sDate = $data['startDate'];
+	        $endDate = $data['endDate'];
+	        $weekday = date('N',strtotime($sDate));
+	        $sTime = $data['startTime'];
+	        $eTime = $data['endTime'];
+	        $start = $sDate . " " . $sTime;
+	        $end = $sDate . " " . $eTime;
+	        $repeats = $data['repeats'];
+	        $repeatFreq = $data['repeatFreq'];
+	                
+	        if(empty($repeats)) {
+	            $repeat = 0;
+	            $freq = 0;
+	            $bind1 = [ 
+	                    "eventType" => 'Course',"personID" => $pID,
+	                    "roomCode" => $roomCode,"termCode" => $data['termCode'],
+	                    "title" => $title,"description" => $text,
+	                    "weekday" => $weekday,"startDate" => $sDate,
+	                    "startTime" => $sTime,"endTime" => $eTime,
+	                    "repeats" => $repeat,"repeatFreq" => $freq,
+	                    "status" => 'A' 
+	            ];
+	            
+	            $q = DB::inst()->insert( 'event', $bind1 );
+	            $ID = DB::inst()->lastInsertId('eventID');
+	            
+	            $bind2 = [ 
+	                    "eventID" => $ID,"roomCode" => $roomCode,
+	                    "personID" => $pID,"start" => $start,
+	                    "end" => $end,"title" => $title,
+	                    "description" => $text,
+	            ];
+	            
+	            $q = DB::inst()->insert( 'event_meta', $bind2 );
+	        } else {
+	            $startDate = new \DateTime("$sDate");
+	            $lastDate = new \DateTime("$endDate");
+	            $days = $lastDate->diff($startDate)->format("%a");
+	            $limit = $days+1;
+	            $until = ($limit/$repeatFreq);
+	            if ($repeatFreq == 1){
+	                $weekday = 0;
+	            }
+	            
+	            $bind3 = [ 
+	                    "eventType" => 'Course',"personID" => $pID,
+	                    "roomCode" => $roomCode,"termCode" => $data['termCode'],
+	                    "title" => $title,"description" => $text,
+	                    "weekday" => $weekday,"startDate" => $sDate,
+	                    "startTime" => $sTime,"endTime" => $eTime,
+	                    "repeats" => $repeats,"repeatFreq" => $repeatFreq,
+	                    "status" => 'A'
+	            ];
+	            $q = DB::inst()->insert( 'event', $bind3 );
+	            $ID = DB::inst()->lastInsertId('eventID');
+	            
+	            for($x = 0; $x < $until; $x++) {
+	                $bind4 = [ 
+	                    "eventID" => $ID,"roomCode" => $roomCode,
+	                    "personID" => $pID,"start" => $start,
+	                    "end" => $end,"title" => $title,
+	                    "description" => $text,
+	                ];
+	            $q = DB::inst()->insert( 'event_meta', $bind4 );
+	            $sDate = strtotime($start . '+' . $repeatFreq . 'DAYS');
+	            $eDate = strtotime($end . '+' . $repeatFreq . 'DAYS');
+	            $start = date("Y-m-d H:i", $sDate);
+	            $end = date("Y-m-d H:i", $eDate);
+	            }
+	        }
+		}
+    }
+    
+    function supervisor($id,$active = NULL) {
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                        staffID  
+                    FROM 
+                        staff 
+                    WHERE 
+                        staffID != :id",
+                    $bind 
+        );
+        foreach( $q as $k => $v ) {
+            echo '<option value="'._h($v['staffID']).'"'.selected( $active, _h($v['staffID']), false ).'>'.get_name(_h($v['staffID'])).'</option>' . "\n";
+        }
+    }
+    
+    function getJobID() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $bind = [ ":id" => $auth->getPersonField('personID') ];
+        $q = DB::inst()->select('staff_meta','staffID=:id AND endDate=NULL OR endDate="0000-00-00"','','jobID',$bind);
+        foreach($q as $r) {
+            return _h($r['jobID']);
+        }
+    }
+    
+    function getJobTitle() {
+        $bind = [ ":id" => getJobID() ];
+        $q = DB::inst()->query( "SELECT 
+                        a.title 
+                    FROM 
+                        job a 
+                    LEFT JOIN 
+                        staff_meta b 
+                    ON 
+                        a.ID = b.jobID 
+                    WHERE 
+                        a.ID = :id",
+                    $bind 
+        );
+        foreach($q as $r) {
+            return _h($r['title']);
+        }
+    }
+	
+	function getStaffJobTitle($id) {
+		$bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                        a.title 
+                    FROM 
+                        job a 
+                    LEFT JOIN 
+                        staff_meta b 
+                    ON 
+                        a.ID = b.jobID 
+                    WHERE 
+                        b.staffID = :id 
+                    AND 
+                    	b.hireDate = (SELECT MAX(hireDate) FROM staff_meta WHERE staffID = :id)",
+                    $bind 
+        );
+        foreach($q as $r) {
+            return _h($r['title']);
+        }
+	}
+	
+	function paypal_payment($data) {
+	    if(is_array($data)) {
+	        $bind = [ 
+	               "stuID" => $data['stuID'],"termCode" => $data['term'],
+	               "amount" => $data['amt'],"paymentTypeID" => '4',
+	               "dateTime" => date("Y-m-d h:i:s")
+	               ];
+            $q = DB::inst()->insert( "payment", $bind );
+	    }
+	}
     
     /**
      * Address type select: shows general list of address types and
@@ -203,7 +644,8 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record key if selected is true.
      */
     function address_type_select($typeCode = NULL) {
-        $select = '<select style="width:30%;" name="addressType" id="select2_10" required>
+        $select = '<select name="addressType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+            <option value="">&nbsp;</option>
             <option value="B"'.selected( $typeCode, 'B', false ).'>Business</option>
             <option value="H"'.selected( $typeCode, 'H', false ).'>Home/Mailing</option>
             <option value="P"'.selected( $typeCode, 'P', false ).'>Permanent</option>
@@ -221,10 +663,10 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record key if selected is true.
      */
     function dept_type_select($typeCode = NULL) {
-        $select = '<select style="width:50%;" name="deptTypeCode" id="select2_22" required>
+        $select = '<select name="deptTypeCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
             <option value="">&nbsp;</option>
-            <option value="admin"'.selected( $typeCode, 'admin', false ).'>Administrative</option>
-            <option value="acad"'.selected( $typeCode, 'acad', false ).'>Academic</option>
+            <option value="'._t('ADMIN').'"'.selected( $typeCode, _t('ADMIN'), false ).'>'._t( 'Administrative' ).'</option>
+            <option value="'._t('ACAD').'"'.selected( $typeCode, _t('ACAD'), false ).'>'._t( 'Academic' ).'</option>
             </select>';
         return Hooks::apply_filter('dept_type', $select, $typeCode);
     }
@@ -239,7 +681,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * @return string Returns the record status if selected is true.
 	 */
 	function address_status_select($status = NULL) {
-		$select = '<select style="width:25%;" name="addressStatus" id="select2_9" required>
+		$select = '<select name="addressStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 			<option value="">&nbsp;</option>
 	    	<option value="C"'.selected( $status, 'C', false ).'>Current</option>
 			<option value="I"'.selected( $status, 'I', false ).'>Inactive</option>
@@ -256,13 +698,10 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @param string $levelCode
      * @return string Returns the record key if selected is true.
      */
-    function acad_level_select($levelCode = null, $readonly = null, $required = null) {
-        $select = '<select style="width:100%;" name="acadLevelCode" id="select2_18"'.$readonly.' '.$required.'>
+    function acad_level_select($levelCode = null, $readonly = null, $required = '') {
+        $select = '<select name="acadLevelCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"'.$readonly.$required.'>
             <option value="">&nbsp;</option>
             <option value="NA"'.selected( $levelCode, 'NA', false ).'>N/A Not Applicable</option>
-            <option value="ES"'.selected( $levelCode, 'ES', false ).'>ES Elementary School</option>
-            <option value="MS"'.selected( $levelCode, 'MS', false ).'>MS Middle School</option>
-            <option value="HS"'.selected( $levelCode, 'HS', false ).'>HS High School</option>
             <option value="CE"'.selected( $levelCode, 'CE', false ).'>CE Continuing Education</option>
             <option value="UG"'.selected( $levelCode, 'UG', false ).'>UG Undergraduate</option>
             <option value="GR"'.selected( $levelCode, 'GR', false ).'>GR Graduate</option>
@@ -281,7 +720,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * @return string Returns the record key if selected is true.
 	 */
 	function status_select($status = NULL) {
-		$select = '<select style="width:100%;" name="currStatus" id="select2_9" required>
+		$select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
     			<option value="">&nbsp;</option>
     	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
     	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
@@ -301,7 +740,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * @return string Returns the record key if selected is true.
 	 */
 	function course_sec_status_select($status = NULL) {
-		$select = '<select style="width:100%;" name="currStatus" id="select2_9" required>
+		$select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
     			<option value="">&nbsp;</option>
     	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
     	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
@@ -322,7 +761,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record type if selected is true.
      */
     function person_type_select($type = NULL) {
-        $select = '<select style="width:30%;" name="personType" id="select2_9" required>
+        $select = '<select name="personType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="FAC"'.selected( $type, 'FAC', false ).'>FAC Faculty</option>
                 <option value="ADJ"'.selected( $type, 'ADJ', false ).'>ADJ Adjunct</option>
@@ -343,7 +782,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 	 * @return string Returns the record key if selected is true.
 	 */
 	function course_level_select($levelCode = NULL, $readonly = null) {		
-		$select = '<select style="width:100%;" name="courseLevelCode" required id="select2_21"'.$readonly.'>
+		$select = '<select name="courseLevelCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required'.$readonly.'>
 			<option value="">&nbsp;</option>
 	    	<option value="100"'.selected( $levelCode, '100', false ).'>100 Course Level</option>
 			<option value="200"'.selected( $levelCode, '200', false ).'>200 Course Level</option>
@@ -368,7 +807,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record method if selected is true.
      */
     function instructor_method($method = NULL) {
-        $select = '<select style="width:60%;" name="instructorMethod" id="select2_9" required>
+        $select = '<select name="instructorMethod" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('LEC') . '"'.selected( $method, _t('LEC'), false ).'>' . _t('LEC Lecture') . '</option>
                 <option value="' . _t('LAB') . '"'.selected( $method, _t('LAB'), false ).'>' . _t('LAB Lab') . '</option>
@@ -391,7 +830,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record status if selected is true.
      */
     function stu_course_sec_status_select($status = NULL) {
-        $select = '<select style="width:60%;" name="status" id="select2_9" required>
+        $select = '<select name="status" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Add') . '</option>
                 <option value="' . _t('N') . '"'.selected( $status, _t('N'), false ).'>' . _t('N New') . '</option>
@@ -412,7 +851,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record status if selected is true.
      */
     function stu_prog_status_select($status = NULL) {
-        $select = '<select style="width:60%;" name="currStatus" id="select2_9" required>
+        $select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Active') . '</option>
                 <option value="' . _t('P') . '"'.selected( $status, _t('P'), false ).'>' . _t('P Potential') . '</option>
@@ -433,7 +872,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record type if selected is true.
      */
     function credit_type($type = NULL) {
-        $select = '<select style="width:60%;" name="status" id="select2_9" required>
+        $select = '<select name="status" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="' . _t('I') . '"'.selected( $status, _t('I'), false ).'>' . _t('I Institutional') . '</option>
                 <option value="' . _t('TR') . '"'.selected( $status, _t('TR'), false ).'>' . _t('TR Transfer') . '</option>
@@ -454,7 +893,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record year if selected is true.
      */
     function class_year($year = NULL) {
-        $select = '<select style="width:60%;" name="classYear" id="select2_9" required>
+        $select = '<select name="classYear" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                 <option value="">&nbsp;</option>
                 <option value="' . _t('FR') . '"'.selected( $year, _t('FR'), false ).'>' . _t('FR Freshman') . '</option>
                 <option value="' . _t('SO') . '"'.selected( $year, _t('SO'), false ).'>' . _t('SO Sophomore') . '</option>
@@ -477,18 +916,34 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the stu_course_sec grade if selected is true.
      */
     function grading_scale($grade = NULL) {
-        $select = '<select style="width:25%;" name="grade[]" required>
-                <option value="">&nbsp;</option>
-                <option value="' . _t('A') . '"'.selected( $grade, _t('A'), false ).'>' . _t('A') . '</option>
-                <option value="' . _t('B') . '"'.selected( $grade, _t('B'), false ).'>' . _t('B') . '</option>
-                <option value="' . _t('C') . '"'.selected( $grade, _t('C'), false ).'>' . _t('C') . '</option>
-                <option value="' . _t('D') . '"'.selected( $grade, _t('D'), false ).'>' . _t('D') . '</option>
-                <option value="' . _t('F') . '"'.selected( $grade, _t('F'), false ).'>' . _t('F') . '</option>
-                <option value="' . _t('W') . '"'.selected( $grade, _t('W'), false ).'>' . _t('W') . '</option>
-                <option value="' . _t('I') . '"'.selected( $grade, _t('I'), false ).'>' . _t('I') . '</option>
-                </select>';
+    	$select = '<select name="grade[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>'."\n";
+		$q = DB::inst()->select( "grade_scale","status = '1'" );
+		foreach($q as $r) {
+			$select .= '<option value="' . _h($r['grade']) . '"'.selected( $grade, _h($r['grade']), false ).'>' . _h($r['grade']) . '</option>'."\n";
+		}
+        $select .= '</select>';
         return Hooks::apply_filter('grading_scale', $select, $grade);
     }
+	
+	function grades($id,$aID) {
+		$array = [];
+		$bind = [ ":id" => $id,":aID" => $aID ];
+		$q = DB::inst()->select("gradebook","stuID = :id AND assignID = :aID","","*",$bind);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+        $select = grading_scale(_h($r['grade']));
+        return Hooks::apply_filter('grades', $select);
+    }
+    
+	function stuGrades($id,$aID) {
+		$bind = [ ":id" => $id,":aID" => $aID ];
+		$q = DB::inst()->select("gradebook","stuID = :id AND assignID = :aID","","*",$bind);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
     
     /**
      * Admit status: shows general list of admission statuses and
@@ -500,7 +955,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the application admit status if selected is true.
      */
     function admit_status_select($status = NULL) {
-        $select = '<select style="width:25%;" name="admitStatus" id="select2_18">
+        $select = '<select name="admitStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                 <option value="">&nbsp;</option>
                 <option value="' . _t('FF') . '"'.selected( $status, _t('FF'), false ).'>' . _t('FF First Time Freshman') . '</option>
                 <option value="' . _t('TR') . '"'.selected( $status, _t('TR'), false ).'>' . _t('TR Transfer') . '</option>
@@ -520,7 +975,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      * @return string Returns the record type if selected is true.
      */
     function general_ledger_type_select($type = NULL) {
-        $select = '<select style="width:40%;" name="gl_acct_type" required>
+        $select = '<select name="gl_acct_type" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                 <option value="">&nbsp;</option>
                 <option value="'._t('Asset').'"'.selected( $type, _t('Asset'), false ).'>'._t('Asset').'</option>
                 <option value="'._t('Liability').'"'.selected( $type, _t('Liability'), false ).'>'._t('Liability').'</option>
@@ -541,17 +996,18 @@ use \eduTrac\Classes\Libraries\Cookies;
      */
     function forbidden_keyword() {
         $array = [ 
-            "create","delete","drop","alter","update",
+            "create","delete","drop table","alter","update",
             "insert","change","convert","modifies",
             "optimize","purge","rename","replace",
             "revoke","unlock","truncate","anything",
             "svc","write","into","--","1=1","1 = 1","\\",
-            "+","?","'x'","loop","exit","leave","undo",
+            "?","'x'","loop","exit","leave","undo",
             "upgrade","update","html","script","css",
             "x=x","x = x","everything","anyone","everyone",
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
             "X=X","X = X","union","'='","XSS","mysql_error",
-            "die","password","auth_token","alert","img","src"
+            "die","password","auth_token","alert","img","src",
+            "drop tables","drop index","drop database","drop column"
         ];
         return $array;
     }
@@ -650,18 +1106,18 @@ use \eduTrac\Classes\Libraries\Cookies;
         return _h($r['personID']);
     }
     
-    function getStuSec($csID) {
+    function getStuSec($code,$term) {
         $auth = new \eduTrac\Classes\Libraries\Cookies;
-        $id = $auth->getPersonField('personID');
-        $q = DB::inst()->query( "SELECT * FROM stu_course_sec WHERE stuID = '$id' AND courseSecID = '$csID'" );
-        if($q->rowCount() > 0) {
-            return ' style="display:none;';
+		$bind = [ ":id" => $auth->getPersonField('personID'),":code" => $code,":term" => $term ];
+        $q = DB::inst()->query( "SELECT * FROM stu_course_sec WHERE stuID = :id AND courseSecCode = :code AND termCode = :term",$bind );
+        if(count($q) > 0) {
+            return ' style="display:none;"';
         }
     }
     
     function isRegistrationOpen() {
         if(Hooks::get_option('open_registration') == 0) {
-            return ' style="display:none;';
+            return ' style="display:none;"';
         }
     }
     
@@ -679,18 +1135,12 @@ use \eduTrac\Classes\Libraries\Cookies;
         }
     }
     
-    function calculateGradePoints($letterGrade) {
-        if($letterGrade == 'A') {
-            $gradePoints = 4;
-        } elseif ($letterGrade == 'B') {
-            $gradePoints = 3;                                                                         
-        } elseif ($letterGrade == 'C')  {
-            $gradePoints = 2;                                                                        
-        } elseif ($letterGrade == 'D')  {
-            $gradePoints = 1;                                                                           
-        } else {
-            $gradePoints = 0;                                                                          
-        }
+    function calculateGradePoints($grade) {
+    	$bind = [ ":grade" => $grade ];
+		$q = DB::inst()->select( "grade_scale","grade = :grade","","points",$bind );
+		foreach($q as $r) {
+			$gradePoints = $r['points'];
+		}
         return $gradePoints;
     }
 	
@@ -707,6 +1157,20 @@ use \eduTrac\Classes\Libraries\Cookies;
 		foreach( $q as $k => $v ) {
 	      	echo '<option value="'._h($v['savedQueryID']).'">'._h($v['savedQueryName']).'</option>' . "\n";
 		}
+	}
+
+	function getAge($birthdate, $pattern = 'mysql')
+	{
+	    $patterns = array(
+	        'eu'    => 'd/m/Y',
+	        'mysql' => 'Y-m-d',
+	        'us'    => 'm/d/Y',
+	    );
+	
+	    $now      = new \DateTime();
+	    $in       = \DateTime::createFromFormat($patterns[$pattern], $birthdate);
+	    $interval = $now->diff($in);
+	    return $interval->y;
 	}
     
     /**
@@ -758,10 +1222,196 @@ use \eduTrac\Classes\Libraries\Cookies;
 	    }
 	}
 	
-	function get_user_avatar($email, $size = 100) {
-		$avatarsize = getimagesize("http://www.gravatar.com/avatar/".md5($email).'?s=200');
-		$avatar = '<img src="http://www.gravatar.com/avatar/' . md5($email).'?s=200' . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $size) . ' />';
-		return Hooks::apply_filter('user_avatar', $avatar, $email, $size);
+	function get_user_avatar($email, $s = 80, $class = '', $d = 'mm', $r = 'g', $img = false) {
+	    $url = 'http://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $email ) ) );
+        $url .= "?s=200&d=$d&r=$r";
+		$avatarsize = getimagesize($url);
+		$avatar = '<img src="' . $url . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $s) . ' class="'.$class .'" />';
+		return Hooks::apply_filter('user_avatar', $avatar, $email, $s);
+	}
+	
+	function getuserdata($id,$field) {
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->query( "SELECT 
+						a.*,
+						b.*,
+						c.short_name,
+						d.code,
+						e.* 
+					FROM 
+						person a 
+					LEFT JOIN address b ON a.personID = b.personID 
+					LEFT JOIN country c ON b.country = c.iso2 
+					LEFT JOIN state d ON b.state = d.code 
+					LEFT JOIN staff e ON a.personID = e.staffID 
+					WHERE 
+						a.personID = :id 
+					AND 
+						b.startDate = (SELECT MAX(startDate) FROM address WHERE personID = :id)",
+					$bind 
+		);
+		foreach($q as $r) {
+			return $r[$field];
+		}
+	}
+    
+    function student_can_register() {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $bind1 = [ ":term" => Hooks::get_option('registration_term'), ":stuID" => $auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+                        COUNT(courseSecCode) AS Courses 
+                    FROM 
+                        stu_course_sec 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termCode = :term 
+                    AND 
+                    	status IN('A','N') 
+                    GROUP BY 
+                        stuID,termCode",
+                    $bind1 
+        );
+        foreach($q as $r) {
+            $courses = $r['Courses'];
+        }
+        
+        $bind2 = [ ":stuID" => $auth->getPersonField('personID'), ":today" => date('Y-m-d') ];
+        $sql = DB::inst()->query( "SELECT 
+                        * 
+                    FROM 
+                        restriction 
+                    WHERE 
+                        severity = '99' 
+                    AND 
+                        stuID = :stuID 
+                    AND 
+                        endDate = '0000-00-00' 
+                    OR 
+                        endDate > :today",
+                    $bind2 
+        );
+        
+        if($courses != NULL && $courses >= Hooks::get_option('number_of_courses')) {
+            return false;
+        } elseif(count($sql) > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function has_balance($id,$term) {
+        $bind = [ ":stuID" => $id,":term" => $term ];
+        
+        $q1 = DB::inst()->query( "SELECT 
+                        SUM(b.amount) AS Bill 
+                    FROM 
+                        student_fee a 
+                    LEFT JOIN 
+                        billing_table b 
+                    ON 
+                        a.feeID = b.ID 
+                    LEFT JOIN 
+                        bill c 
+                    ON 
+                        a.billID = c.ID 
+                    WHERE 
+                        a.stuID = c.stuID 
+                    AND 
+                        c.stuID = :stuID 
+                    AND 
+                        c.termCode = :term 
+                    GROUP BY 
+                        c.stuID,c.termCode",
+                    $bind 
+        );
+        
+        foreach($q1 as $r1) {
+            $beginBalance = $r1['Bill'];
+        }
+        
+        $q2 = DB::inst()->query( "SELECT 
+                        SUM(a.courseFee) AS CourseFee,
+                        SUM(a.labFee) AS LabFee,
+                        SUM(a.materialFee) AS MaterialFee 
+                    FROM 
+                        course_sec a 
+                    LEFT JOIN 
+                        stu_acad_cred b 
+                    ON 
+                        a.termCode = b.termCode 
+                    WHERE 
+                        b.stuID = :stuID 
+                    AND 
+                        a.termCode = :term 
+                    AND 
+                        a.courseSecCode = b.courseSecCode 
+                    GROUP BY 
+                        b.stuID,b.termCode,b.courseSecCode",
+                    $bind 
+        );
+        
+        foreach($q2 as $r2) {
+            $courseFees = $r2['CourseFee']+$r2['LabFee']+$r2['MaterialFee'];
+        }
+        
+        $q3 = DB::inst()->query( "SELECT 
+                        SUM(amount) AS 'Payment' 
+                    FROM 
+                        payment 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termCode = :term 
+                    GROUP BY 
+                        stuID,termCode",
+                    $bind 
+        );
+        
+        foreach($q3 as $r3) {
+            $payment = $r3['Payment'];
+        }
+        
+        $q4 = DB::inst()->query( "SELECT 
+                        SUM(amount) AS 'Refund' 
+                    FROM 
+                        refund 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        termCode = :term 
+                    GROUP BY 
+                        stuID,termCode",
+                    $bind 
+        );
+        
+        foreach($q4 as $r4) {
+            $refund = $r4['Refund'];
+        }
+        
+        $startBalance = bcadd($beginBalance,$courseFees,2);
+        $endBalance = bcsub($payment,$startBalance,2);
+        $currentBalance = bcsub($endBalance,$refund,2);
+        
+        if($currentBalance < 0) {
+            return ' style="color:red"';
+        }
+    }
+	
+	function success_update() {
+		$message = '<div class="alert alert-success">';
+				$message .= '<strong>'._t('Success!').'</strong> '._t( 'The record was updated successfully.');
+		$message .= '</div>';
+		return $message;
+	}
+	
+	function error_update() {
+		$message = '<div class="alert alert-danger">';
+				$message .= '<strong>'._t('Error!').'</strong> '._t( 'The system was unable to update the record in the database. Please try again. If the problem persists, contact your system administrator.');
+		$message .= '</div>';
+		return $message;
 	}
 	
 	function percent($num_amount, $num_total) {
@@ -861,7 +1511,8 @@ use \eduTrac\Classes\Libraries\Cookies;
             }
         }
     
-        return false;
+        sleep(1);
+        redirect( BASE_URL . 'dashboard/' );
     }
     
     function remoteFileExists($url) {
@@ -891,50 +1542,15 @@ use \eduTrac\Classes\Libraries\Cookies;
     
     }
     
-    function getCurrentVersion($array) {
-        $version = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/version.txt'));
-        return Hooks::apply_filter( 'get_current_version', $version[$array] );
-    }
-    
-    function upgradeDB($array) {
-    	$upgrade = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/dbversion.txt'));
-		return Hooks::apply_filter( 'upgrade_db', $upgrade[$array] );
-	}
-    
-    function show_update_message() {
-        $auth = new Cookies;
-        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
-        if($acl->userHasRole(8)) {
-            if(CURRENT_VERSION < getCurrentVersion(0)) {
-                $alert = 
-                    '<!-- Alert -->
-    				<div class="success">
-						<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac update.' ).'
-                        <a href="http://www.7mediaws.org/client/">'._t( ' Click here' ).'</a> '._t( 'to download it. Also feel free to check out
-                        the').' <a href="#myModal" data-toggle="modal">'._t( 'changelog' ).'</a>.
-					</div>
-					<!-- // Alert END -->
-					
-					<div class="modal hide fade" id="myModal">
-                        <div class="modal-body">'.
-                            file_get_contents( "http://api.7mediaws.org/upgrades/changelog.txt" )
-                        .'</div>
-                        <div class="modal-footer">
-                            <a href="#" data-dismiss="modal" class="btn btn-primary">'._t( 'Cancel' ).'</a>
-                        </div>
-                    </div>';
-            }
-        }
-        return $alert;
-	}
-    
     function redirect_upgrade_db() {
         $auth = new Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         if($acl->userHasRole(8)) {
             if(CURRENT_VERSION == getCurrentVersion(0)) {
                 if(Hooks::get_option('dbversion') < upgradeDB(0)) {
-                    redirect(BASE_URL . 'upgrade/');
+                    if (basename($_SERVER["REQUEST_URI"]) != "upgrade") {
+                        redirect(BASE_URL . 'upgrade/');
+                    }
                 }
             }
         }
