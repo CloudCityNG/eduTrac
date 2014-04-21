@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -34,10 +34,10 @@ if($this->crse != '') : foreach($this->crse as $k => $v) {
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-    jQuery('#select2_10').live('change', function(event) {
+    jQuery('#term').live('change', function(event) {
         $.ajax({
             type    : 'POST',
-            url     : '<?=BASE_URL;?>section/runTermLookup/',
+            url     : '<?=BASE_URL;?>section/runSecTermLookup/',
             dataType: 'json',
             data    : $('#validateSubmitForm').serialize(),
             cache: false,
@@ -57,15 +57,15 @@ $(function(){
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Section' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Section' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Create Section' ) ); ?></li>
+	<li><?=_t( 'Create Section' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Create Section' ) ); ?> <?=$v['courseCode'];?>-<sec id="section"></sec></h3>
+<h3><?=$v['courseCode'];?>-<sec id="section"></sec></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -76,108 +76,108 @@ $(function(){
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Section' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="sectionNumber" id="sectionNumber" class="span3" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Section' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="sectionNumber" id="sectionNumber" class="form-control" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="termID" id="select2_10" required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Term' );?></label>
+							<div class="col-md-8">
+								<select name="termCode" id="term" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('term', '', 'termID', 'termCode', 'termName'); ?>
+                            		<?php table_dropdown('term', 'termCode <> "NULL"', 'termCode', 'termCode', 'termName'); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Section Start/End' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="startDate" type="text" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Section Start/End' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-6" id="datepicker6">
+                                    <input class="form-control"<?=csio();?> id="startDate" name="startDate" type="text" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                                 
-                                <div class="input-append date" id="datetimepicker7">
-                                    <input id="endDate" name="endDate" type="text" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                                <div class="input-group date col-md-6" id="datepicker7">
+                                    <input class="form-control"<?=csio();?> id="endDate" name="endDate" type="text" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_11" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Department' );?></label>
+                            <div class="col-md-8">
+                                <select name="deptCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', 'deptTypeCode = "acad"', 'deptID', 'deptCode', 'deptName', _h($crse->getDeptID())); ?>
+                                    <?php table_dropdown('department', 'deptTypeCode = "acad" AND deptCode <> "NULL"', 'deptCode', 'deptCode', 'deptName', _h($crse->getDeptCode())); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="minCredit" readonly="readonly" class="span4" value="<?=_h($crse->getMinCredit());?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Credits' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="minCredit" readonly="readonly" class="form-control" value="<?=_h($crse->getMinCredit());?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'CEU\'s' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="ceu" readonly="readonly" class="span4" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'CEU\'s' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="ceu" readonly="readonly" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Course Level' );?></label>
+                            <div class="col-md-8">
                                 <?=course_level_select(_h($crse->getCourseLevelCode()));?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
                                 <?=acad_level_select(_h($crse->getAcadLevelCode()),null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="secShortTitle" readonly="readonly" class="span10" value="<?=_h($crse->getCourseShortTitle());?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Short Title' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="secShortTitle" readonly="readonly" class="form-control" value="<?=_h($crse->getCourseShortTitle());?>" maxlength="25" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -186,52 +186,52 @@ $(function(){
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Location' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="locationID" id="select2_12" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Location' );?></label>
+                            <div class="col-md-8">
+                                <select name="locationCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location', '', 'locationID', 'locationCode', 'locationName'); ?>
+                                    <?php table_dropdown('location', 'locationCode <> "NULL"', 'locationCode', 'locationCode', 'locationName'); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
                                 <?=course_sec_status_select();?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
-                            <div class="controls">
-                                <input id="statusDate" name="statusDate" type="text" readonly="readonly" value="<?=date("Y-m-d");?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Date' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" readonly="readonly" value="<?=date("Y-m-d");?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approval Person' ) ); ?></label>
-                            <div class="controls">
-                                <input id="approvedBy" name="approvedBy" type="text" readonly="readonly" value="<?=$auth->getPersonField('personID');?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Person' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" readonly value="<?=get_name($auth->getPersonField('personID'));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Approval Date' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="approvedDate" readonly="readonly" value="<?=date('Y-m-d');?>" class="span10" />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Approval Date' );?></label>
+							<div class="col-md-8">
+								<input type="text" readonly="readonly" value="<?=date('Y-m-d');?>" class="form-control" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -249,7 +249,10 @@ $(function(){
 				<div class="form-actions">
 				    <input type="hidden" name="courseID" value="<?=_h($v['courseID']);?>" />
 				    <input type="hidden" name="courseCode" value="<?=_h($v['courseCode']);?>" />
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+				    <input type="hidden" name="statusDate" value="<?=date("Y-m-d");?>" />
+				    <input type="hidden" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" />
+				    <input type="hidden" name="approvedDate" value="<?=date('Y-m-d');?>" />
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

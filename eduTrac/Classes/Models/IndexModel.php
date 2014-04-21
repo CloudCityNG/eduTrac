@@ -23,14 +23,13 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
-use \eduTrac\Classes\Libraries\Cookies;
 class IndexModel {
 	
 	private $_salt;
@@ -41,7 +40,7 @@ class IndexModel {
     private $_log;
 	
 	public function __construct() {
-		$this->_auth = new Cookies;
+		$this->_auth = new \eduTrac\Classes\Libraries\Cookies;
 		$this->_val = new \eduTrac\Classes\Core\Val();
 		$this->_email = new \eduTrac\Classes\Libraries\Email();
         $this->_log = new \eduTrac\Classes\Libraries\Log();
@@ -51,6 +50,7 @@ class IndexModel {
 	}
 	
 	public function runLogin($data) {
+	    sleep(1);
         $array = [];
 		$uname = $data['uname'];
 		$pass = $data['password'];
@@ -66,31 +66,19 @@ class IndexModel {
                     FROM 
                         person a 
                     LEFT JOIN 
-                        faculty b 
+                        staff b 
                     ON 
-                        a.personID = b.facID 
+                        a.personID = b.staffID 
                     LEFT JOIN 
-                        staff c 
+                        student c 
                     ON 
-                        a.personID = c.staffID 
-                    LEFT JOIN 
-                        student d 
-                    ON 
-                        a.personID = d.stuID 
-                    LEFT JOIN 
-                        parent e 
-                    ON 
-                        a.personID = e.parentID 
+                        a.personID = c.stuID 
                     WHERE 
                         (a.uname = :uname 
                     AND 
                         (b.status = 'A' 
                     OR 
-                        c.status = 'A' 
-                    OR 
-                        d.status = 'A' 
-                    OR 
-                        e.status = 'A'))",
+                        c.status = 'A'))",
                     $bind 
         );
         foreach($q as $r) {
@@ -98,22 +86,23 @@ class IndexModel {
         }
 		
 		if(et_check_password( $pass, $r['password'], $r['personID'] )) {
-			if($data['rememberme']) {				
+			if($data['rememberme']) {			
 				/* Now we can set our login cookies. */
-				$this->_auth->_setcookie("ET_COOKNAME", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      			$this->_auth->_setcookie("ET_REMEMBER", 'rememberme', time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+      			$this->_auth->_setcookie("ET_COOKNAME", $auth);
+      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']));
+      			$this->_auth->_setcookie("ET_REMEMBER", 'rememberme');
+      			$return_arr["status"]=1;
    			} else {				
    				/* Now we can set our login cookies. */
-   				$this->_auth->_setcookie("ET_COOKNAME", $auth, time()+86400, "/", $this->_auth->cookieDomain());
-      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']), time()+86400, "/", $this->_auth->cookieDomain());
+				$this->_auth->_setcookie("ET_COOKNAME", $auth, time()+86400);
+      			$this->_auth->_setcookie("ET_COOKID", et_hash_cookie($r['personID']), time()+86400);
+      			$return_arr["status"]=1;
    			}
    			$this->_log->setLog('Login','Authentication',get_name($r['personID']),$data['uname']);
-			redirect( BASE_URL . 'dashboard/' );
 		} else {
-			redirect( BASE_URL );
+		    $return_arr["status"]=0;
 			}
-		
+		echo json_encode($return_arr);
 	}
 	
 	public function switchUserTo($id) {
@@ -126,6 +115,16 @@ class IndexModel {
         $this->_auth->_switchUserBack($id);
         redirect( BASE_URL . 'dashboard/' );
     }
+	
+	public function runLock() {
+		if(isset($_COOKIE['ET_REMEMBER']) && $_COOKIE['ET_REMEMBER'] == 'rememberme') {
+			$this->_auth->_setcookie("SCREENLOCK", 'screenlock');
+			redirect( BASE_URL . 'lock/' );
+		} else {
+			$this->_auth->_setcookie("SCREENLOCK", 'screenlock', time()+86400);
+			redirect( BASE_URL . 'lock/' );
+		}
+	}
     
     public function __destruct() {
         DB::inst()->close();

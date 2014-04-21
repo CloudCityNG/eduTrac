@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,15 +33,15 @@ $cRole = new ACL();
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>role/<?=bm();?>" class="glyphicons rotation_lock"><i></i> <?php _e( _t( 'Manage Roles' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>role/<?=bm();?>" class="glyphicons rotation_lock"><i></i> <?=_t( 'Manage Roles' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Add Role' ) ); ?></li>
+	<li><?=_t( 'Add Role' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Add Role' ) ); ?></h3>
+<h3><?=_t( 'Add Role' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -52,16 +52,16 @@ $cRole = new ACL();
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="roleName"><font color="red">*</font> <?php _e( _t( 'Role Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="roleName" name="roleName" type="text" required /></div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="roleName"><font color="red">*</font> <?=_t( 'Role Name' );?></label>
+							<div class="col-md-12"><input class="form-control" name="roleName" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -71,10 +71,10 @@ $cRole = new ACL();
 							<!-- Table heading -->
 							<thead>
 								<tr>
-									<th><?php _e( _t( 'Permission' ) ); ?></th>
-									<th><?php _e( _t( 'Allow' ) ); ?></th>
-									<th><?php _e( _t( 'Deny' ) ); ?></th>
-									<th><?php _e( _t( 'Ignore' ) ); ?></th>
+									<th><?=_t( 'Permission' );?></th>
+									<th><?=_t( 'Allow' );?></th>
+									<th><?=_t( 'Deny' );?></th>
+									<th><?=_t( 'Ignore' );?></th>
 								</tr>
 							</thead>
 							<!-- // Table heading END -->
@@ -87,15 +87,15 @@ $cRole = new ACL();
         							foreach ($aPerms as $k => $v) {
         								echo '<tr><td>'._h($v['Name']).'</td>';
 										
-										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_1\" value=\"1\"";
+										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_1\" value=\"1\"";
                 						if ($rPerms[_h($v['Key'])]['value'] === true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
                 						echo " /></td>";
 										 
-										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_0\" value=\"0\"";
+										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_0\" value=\"0\"";
                 						if ($rPerms[_h($v['Key'])]['value'] != true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
                 						echo " /></td>";
 										
-										echo "<td class=\"center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_X\" value=\"X\"";
+										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_X\" value=\"X\"";
                 						if (isGetSet('roleID') == '' || !array_key_exists(_h($v['Key']),$rPerms)) { echo " checked=\"checked\""; }
                 						echo " /></td></tr>"; 
 									}
@@ -111,7 +111,7 @@ $cRole = new ACL();
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input type="hidden" name="action" value="saveRole" />
-					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

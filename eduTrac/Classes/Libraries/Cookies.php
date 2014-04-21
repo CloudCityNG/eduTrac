@@ -25,7 +25,7 @@ use \eduTrac\Classes\Libraries\Hooks;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -88,7 +88,7 @@ class Cookies {
 	 * Verify Person's Username
 	 *
 	 * @since 1.0.0
-	 * @return bool Returns true if the person's uname exists in the database.
+	 * @return bool Returns true if the person's username exists in the database.
 	 * 
 	 */
 	public function verifyPerson() {
@@ -147,7 +147,7 @@ class Cookies {
      * Retrieve requested field from person table 
 	 * based on user's id.
      *
-     * @since 1.5.6
+     * @since 3.0.2
      * @return mixed
      * 
      */
@@ -162,18 +162,18 @@ class Cookies {
 	/**
      * Set the cookie
      *
-     * @since 1.5.6
+     * @since 3.0.2
      * @return mixed
      * 
      */ 
-    public function _setcookie($name,$value,$expire,$path,$domain,$secure=false,$httponly=false) {
+    public function _setcookie($name,$value,$expire=COOKIE_EXPIRE,$path=COOKIE_PATH,$domain=COOKIE_DOMAIN,$secure=false,$httponly=false) {
         setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
     }
     
     /**
      * Hash Hmac
      * 
-     * @since 1.5.6
+     * @since 3.0.2
      * @return mixed
 	 * 
      */
@@ -187,17 +187,17 @@ class Cookies {
 	/**
      * Switch to a different user
      *
-     * @since 1.5.6
+     * @since 3.0.2
      * @return mixed
      * 
      */ 
     public function _switchUserTo($id) {        
         if(isset($_COOKIE['ET_REMEMBER']) && $_COOKIE['ET_REMEMBER'] == 'rememberme') {
-            $this->_setcookie("SWITCH_USERBACK", $this->getPersonField('personID'), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERNAME", $this->getPersonField('uname'), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("SWITCH_USERBACK", $this->getPersonField('personID'));
+            $this->_setcookie("SWITCH_USERNAME", $this->getPersonField('uname'));
         } else {
-            $this->_setcookie("SWITCH_USERBACK", $this->getPersonField('personID'), time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERNAME", $this->getPersonField('uname'), time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("SWITCH_USERBACK", $this->getPersonField('personID'), time()+86400);
+            $this->_setcookie("SWITCH_USERNAME", $this->getPersonField('uname'), time()+86400);
         }
         
         $auth = $this->hashHmac($this->getUserValue($id,'uname'));
@@ -205,46 +205,46 @@ class Cookies {
         /**
          * Delete the old cookies.
          */
-        $this->_setcookie("ET_COOKNAME", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-        $this->_setcookie("ET_COOKID", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
+        $this->_setcookie("ET_COOKNAME", '', time()-COOKIE_EXPIRE);
+        $this->_setcookie("ET_COOKID", '', time()-COOKIE_EXPIRE);
         
         if(isset($_COOKIE['ET_REMEMBER']) && $_COOKIE['ET_REMEMBER'] == 'rememberme') {
-            $this->_setcookie("ET_COOKNAME", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", $auth);
+            $this->_setcookie("ET_COOKID", et_hash_cookie($id));
         } else {
-            $this->_setcookie("ET_COOKNAME", $auth, time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", $auth, time()+86400);
+            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+86400);
         }
     }
 	
      /**
      * Switch back to the original user
      *
-     * @since 1.5.6
+     * @since 3.0.2
      * @return mixed
      * 
      */ 
     public function _switchUserBack($id) {        
         if(isset($_COOKIE['ET_REMEMBER']) && $_COOKIE['ET_REMEMBER'] == 'rememberme') {
-            $this->_setcookie("ET_COOKNAME", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERBACK", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERNAME", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", '', time()-COOKIE_EXPIRE);
+            $this->_setcookie("ET_COOKID", '', time()-COOKIE_EXPIRE);
+            $this->_setcookie("SWITCH_USERBACK", '', time()-COOKIE_EXPIRE);
+            $this->_setcookie("SWITCH_USERNAME", '', time()-COOKIE_EXPIRE);
         } else {
-            $this->_setcookie("ET_COOKNAME", '', time()-86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", '', time()-86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERBACK", '', time()-86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("SWITCH_USERNAME", '', time()-86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", '', time()-86400);
+            $this->_setcookie("ET_COOKID", '', time()-86400);
+            $this->_setcookie("SWITCH_USERBACK", '', time()-86400);
+            $this->_setcookie("SWITCH_USERNAME", '', time()-86400);
         }
         
         $auth = $this->hashHmac($this->getUserValue($id,'uname'));
         
         if(isset($_COOKIE['ET_REMEMBER']) && $_COOKIE['ET_REMEMBER'] == 'rememberme') {
-            $this->_setcookie("ET_COOKNAME", $auth, time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", $auth);
+            $this->_setcookie("ET_COOKID", et_hash_cookie($id));
         } else {
-            $this->_setcookie("ET_COOKNAME", $auth, time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
-            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+86400, Hooks::get_option('cookiepath'), $this->cookieDomain());
+            $this->_setcookie("ET_COOKNAME", $auth, time()+86400);
+            $this->_setcookie("ET_COOKID", et_hash_cookie($id), time()+86400);
         }
     }
 

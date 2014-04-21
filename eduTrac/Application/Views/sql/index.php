@@ -3,10 +3,10 @@
  *
  * SQL Terminal View
  *  
- * PHP 5
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
- * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       3.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 use \eduTrac\Classes\Core\DB;
@@ -36,13 +39,13 @@ $qtext = str_replace("\\","",$qtext);
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'SQL Interface' ) ); ?></li>
+	<li><?=_t( 'SQL Interface' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'SQL Interface' ) ); ?></h3>
+<h3><?=_t( 'SQL Interface' );?></h3>
 <div class="innerLR">
 	
 	<!-- Form -->
@@ -53,25 +56,23 @@ $qtext = str_replace("\\","",$qtext);
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group row-fluid">
-							<div class="control-group">
-								<label class="control-label" for="term"><font color="red">*</font> <?php _e( _t( 'Query' ) ); ?></label>
-								<div class="controls">
-									<textarea id="mustHaveId" class="span12" rows="5" style="width:65em;" name="qtext" required><?php if(isset($qtext)) { echo $qtext; } ?></textarea>
-								</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="term"><font color="red">*</font> <?=_t( 'Query' );?></label>
+							<div class="col-md-8">
+								<textarea id="mustHaveId" class="form-control" rows="5" style="width:65em;" name="qtext" required><?php if(isset($qtext)) { echo $qtext; } ?></textarea>
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -87,7 +88,7 @@ $qtext = str_replace("\\","",$qtext);
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input type="hidden" name="type" value="query" >
-					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

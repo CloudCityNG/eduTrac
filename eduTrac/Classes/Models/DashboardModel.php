@@ -23,23 +23,21 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 use \eduTrac\Classes\Core\DB;
-use \eduTrac\Classes\Libraries\Log;
 use \eduTrac\Classes\Libraries\Hooks;
-use \eduTrac\Classes\Libraries\Cookies;
 class DashboardModel {
 	
 	private $_auth;
     private $_log;
 	
 	public function __construct() {
-		$this->_auth = new Cookies;
-        $this->_log = new Log;
+		$this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
 	}
 	
 	public function search($data) {
@@ -59,6 +57,69 @@ class DashboardModel {
 		}
 	}
 	
+	public function PROG() {
+		$array = [];
+		$q = DB::inst()->query( "SELECT 
+						COUNT(a.stuProgID) as ProgCount,
+						b.acadProgCode 
+					FROM 
+						stu_program a 
+					LEFT JOIN 
+						acad_program b 
+					ON 
+						a.acadProgCode = b.acadProgCode 
+					WHERE 
+						a.currStatus <> 'G' 
+					GROUP BY 
+						a.acadProgCode 
+					DESC 
+					LIMIT 
+						10"
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
+	public function stuDept() {
+		$array = [];
+		$q = DB::inst()->query( "SELECT 
+						SUM(a.gender='M') AS Male,
+						SUM(a.gender='F') AS Female,
+						d.deptCode 
+					FROM 
+						person a 
+					LEFT JOIN 
+						stu_program b 
+					ON 
+						a.personID = b.stuID 
+					LEFT JOIN 
+						acad_program c 
+					ON 
+						b.acadProgCode = c.acadProgCode 
+					LEFT JOIN 
+						department d 
+					ON 
+						c.deptCode = d.deptCode 
+					WHERE 
+						b.startDate = (SELECT MAX(startDate) FROM stu_program WHERE stuID = b.stuID) 
+					AND 
+						b.currStatus = 'A' 
+					AND 
+						d.deptTypeCode = 'ACAD' 
+					GROUP BY 
+						d.deptCode 
+					DESC 
+					LIMIT 
+						10"
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+	
 	/**
 	 * Logs the user out and unsets cookie and database auth_token
 	 *
@@ -73,9 +134,9 @@ class DashboardModel {
         
         DB::inst()->update( "person", $update, "uname = :uname", $bind );
 		
-		$this->_auth->_setcookie("ET_COOKNAME", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-      	$this->_auth->_setcookie("ET_COOKID", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
-		$this->_auth->_setcookie("ET_REMEMBER", '', time()-Hooks::get_option('cookieexpire'), Hooks::get_option('cookiepath'), $this->_auth->cookieDomain());
+		$this->_auth->_setcookie("ET_COOKNAME", '', time()-COOKIE_EXPIRE);
+      	$this->_auth->_setcookie("ET_COOKID", '', time()-COOKIE_EXPIRE);
+		$this->_auth->_setcookie("ET_REMEMBER", '', time()-COOKIE_EXPIRE);
 		/* Purge log entries that are greater than 30 days old. */
 		//$this->_log->purgeLog();
 		/* Purges system error logs greater than 30 days old. */

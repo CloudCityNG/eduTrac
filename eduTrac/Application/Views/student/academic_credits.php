@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Student' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Student' );?></a></li>
     <li class="divider"></li>
     <li><a href="<?=BASE_URL;?>student/view/<?=_h($this->student[0]['stuID']);?>/<?=bm();?>" class="glyphicons user"><i></i> <?=get_name(_h($this->student[0]['stuID']));?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Academic Credits' ) ); ?></li>
+	<li><?=_t( 'Academic Credits' );?></li>
 </ul>
 
-<h3><?=get_name(_h($this->student[0]['stuID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->student[0]['stuID']);?></h3>
+<h3><?=get_name(_h($this->student[0]['stuID']));?> <?=_t( "ID: " );?><?=_h($this->student[0]['stuID']);?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -52,14 +52,14 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Sec Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Credits' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'CEU\'s' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Term' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Grade' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Course Sec Name' );?></th>
+						<th class="text-center"><?=_t( 'Title' );?></th>
+						<th class="text-center"><?=_t( 'Status' );?></th>
+						<th class="text-center"><?=_t( 'Credits' );?></th>
+						<th class="text-center"><?=_t( 'CEU\'s' );?></th>
+						<th class="text-center"><?=_t( 'Term' );?></th>
+						<th class="text-center"><?=_t( 'Grade' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -68,15 +68,24 @@
 				<tbody>
 				<?php if($this->acadCred != '') : foreach($this->acadCred as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['status']);?></td>
-                    <td class="center"><?=_h($v['courseCredits']);?></td>
-                    <td class="center"><?=_h($v['ceu']);?></td>
-                    <td class="center"><?=_h($v['termCode']);?></td>
-                    <td class="center"><?=_h($v['grade']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>student/view_academic_credits/<?=_h($v['id']);?>/<?=bm();?>" title="View Academic Credits" class="btn btn-circle"><i class="icon-eye-open"></i></a>
+                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
+                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center"><?=_h($v['status']);?></td>
+                    <td class="text-center"><?=_h($v['courseCredits']);?></td>
+                    <td class="text-center"><?=_h($v['ceu']);?></td>
+                    <td class="text-center"><?=_h($v['termCode']);?></td>
+                    <td class="text-center"><?=_h($v['grade']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>student/view_academic_credits/<?=_h($v['id']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

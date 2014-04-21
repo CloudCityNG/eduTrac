@@ -22,22 +22,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-
-$auth = new \eduTrac\Classes\Libraries\Cookies;
 ?>
 
 <ul class="breadcrumb">
-	<li><? _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <? _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><? _e( _t( 'Save Query' ) ); ?></li>
+	<li><?=_t( 'Save Query' );?></li>
 </ul>
 
-<h3><? _e( _t( 'Save Query' ) ); ?></h3>
+<h3><?=_t( 'Save Query' );?></h3>
 <div class="innerLR">
 	
 	<!-- Form -->
@@ -48,40 +46,40 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <? _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <? _e( _t( 'Save Query Name' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="savedQueryName" class="span10" required/>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Save Query Name' );?></label>
+							<div class="col-md-8">
+								<input type="text" name="savedQueryName" class="form-control" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="term"><font color="red">*</font> <? _e( _t( 'Query' ) ); ?></label>
-							<div class="controls">
-								<textarea id="mustHaveId" class="span12" rows="5" style="width:65em;" name="savedQuery" required></textarea>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="term"><font color="red">*</font> <?=_t( 'Query' );?></label>
+							<div class="col-md-8">
+								<textarea id="mustHaveId" class="form-control" rows="5" style="width:65em;" name="savedQuery" required></textarea>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="term"><? _e( _t( 'Auto Purge' ) ); ?></label>
-                            <div class="controls uniformjs">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="term"><?=_t( 'Auto Purge' );?></label>
+                            <div class="col-md-8 uniformjs">
                                 <label class="radio">
                                     <input type="radio" name="purgeQuery" class="radio" value="1" />Yes
                                 </label>
@@ -105,8 +103,8 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input type="hidden" name="personID" value="<?=$auth->getPersonField('personID');?>" />
-					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><? _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>savequery/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>savequery/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -119,13 +117,24 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 	
 	<div class="separator bottom"></div>
 	
-	<div class="modal hide fade" id="myModal">
-        <div class="modal-body">
-            <p><?=_t( 'If enabled, saved queries get purged every 30 days. If you use your saved query on a regular basis, you should set this option to no.' );?></p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-        </div>
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal heading -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title"><?=_t( 'Auto Purge' );?></h3>
+				</div>
+				<!-- // Modal heading END -->
+		        <div class="modal-body">
+		            <p><?=_t( 'If enabled, saved queries get purged every 30 days. If you use your saved query on a regular basis, you should set this option to no.' );?></p>
+		        </div>
+		        <div class="modal-footer">
+		            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
+		        </div>
+	       	</div>
+      	</div>
     </div>
     
 	<!-- // Widget END -->

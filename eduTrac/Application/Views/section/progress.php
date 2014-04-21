@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.2
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -48,13 +48,13 @@ jQuery(document).ready(function() {
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Submit Progress Report' ) ); ?></li>
+	<li><?=_t( 'Submit Progress Report' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Submit Progress Report' ) ); ?></h3>
+<h3><?=_t( 'Submit Progress Report' );?></h3>
 <div class="innerLR">
     
     <!-- Form -->
@@ -73,7 +73,7 @@ jQuery(document).ready(function() {
 					    
 					    <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Student ID' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Student ID' );?></label>
                             <div class="controls">
                                 <input type="text" name="stuID" id="stuID" class="span12" required />
                                 <input type="text" id="stuName" readonly="readonly" class="span12 center" />
@@ -83,21 +83,21 @@ jQuery(document).ready(function() {
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Grade' ) ); ?></label>
+							<label class="control-label"><?=_t( 'Grade' );?></label>
 							<div class="controls"><input type="text" class="span12" name="grade" />(i.e. 9th grade, 10th grade, etc.)</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Subject' ) ); ?></label>
+							<label class="control-label"><?=_t( 'Subject' );?></label>
 							<div class="controls"><input type="text" class="span12" name="subject" /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Course Title' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Course Title' );?></label>
                             <div class="controls"><input type="text" class="span12" name="courseTitle" /></div>
                         </div>
                         <!-- // Group END -->
@@ -110,21 +110,21 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Semester' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Semester' );?></label>
                             <div class="controls"><input type="text" class="span12" name="semester" /></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Behavior' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Behavior' );?></label>
                             <div class="controls"><input type="text" class="span12" name="behavior" />(Behavior is acceptable or Behavior is not acceptable.)</div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Assignments' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Assignments' );?></label>
                             <div class="controls"><input type="text" class="span12" name="assignments" />(Assignments are up to date or Assignments are not up to date.)</div>
                         </div>
                         <!-- // Group END -->
@@ -145,7 +145,7 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Notes' ) ); ?></label>
+                            <label class="control-label"><?=_t( 'Notes' );?></label>
                             <div class="controls"><textarea id="mustHaveId" class="wysihtml5 span12" name="notes" rows="5"></textarea></div>
                         </div>
                         <!-- // Group END -->
@@ -160,7 +160,7 @@ jQuery(document).ready(function() {
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" name="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

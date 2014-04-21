@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -34,22 +34,22 @@ $list = '"'.implode('","', $courseList->crseList(_h($this->addnl[0]['courseID'])
 
 <script type="text/javascript">
 $(function() {
-    $("#select2_course").select2({tags:[<?=$list;?>]});
+    $("#select2_5").select2({tags:[<?=$list;?>]});
 });
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>course/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Course' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>course/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Course' );?></a></li>
 	<li class="divider"></li>
 	<li><a href="<?=BASE_URL;?>course/view/<?=_h($this->addnl[0]['courseID']);?>/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_h($this->addnl[0]['courseCode']);?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'View Course' ) ); ?></li>
+	<li><?=_h($this->addnl[0]['courseCode']);?></li>
 </ul>
 
-<h3><?php _e( _t( 'Additional Course Info:' ) ); ?> <?=_h($this->addnl[0]['courseCode']);?></h3>
+<h3><?=_t( 'Additional Course Info:' );?> <?=_h($this->addnl[0]['courseCode']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -60,47 +60,45 @@ $(function() {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Prerequisites' ) ); ?></label>
-							<div class="controls">
-                            	<input type="text" id="select2_course"<?=cio();?> name="preReq" value="<?=_h($this->addnl[0]['preReq']);?>" class="span10" />
-							</div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Prerequisites' );?></label>
+							<div class="col-md-8"><input id="select2_5" style="width:100%;" type="hidden"<?=cio();?> name="preReq" value="<?=_h($this->addnl[0]['preReq']);?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Allow Audit' ) ); ?></label>
-							<div class="controls">
-								<select style="width:25%;" name="allowAudit" id="select2_11"<?=cio();?> required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Allow Audit' );?></label>
+							<div class="col-md-8">
+								<select name="allowAudit" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=cio();?> required>
 									<option value="">&nbsp;</option>
-	                        		<option value="1"<?=selected(_h((int)$this->addnl[0]['allowAudit']),'1',false);?>><?php _e( _t( 'Yes' ) ); ?></option>
-	                        		<option value="0"<?=selected(_h((int)$this->addnl[0]['allowAudit']),'0',false);?>><?php _e( _t( 'No' ) ); ?></option>
+	                        		<option value="1"<?=selected(_h((int)$this->addnl[0]['allowAudit']),'1',false);?>><?=_t( 'Yes' );?></option>
+	                        		<option value="0"<?=selected(_h((int)$this->addnl[0]['allowAudit']),'0',false);?>><?=_t( 'No' );?></option>
 	                        	</select>
 	                       </div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Allow Waitlist' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:25%;" name="allowWaitlist" id="select2_12"<?=cio();?> required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Allow Waitlist' );?></label>
+                            <div class="col-md-8">
+                                <select name="allowWaitlist" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=cio();?> required>
                                     <option value="">&nbsp;</option>
-                                    <option value="1"<?=selected(_h((int)$this->addnl[0]['allowWaitlist']),'1',false);?>><?php _e( _t( 'Yes' ) ); ?></option>
-                                    <option value="0"<?=selected(_h((int)$this->addnl[0]['allowWaitlist']),'0',false);?>><?php _e( _t( 'No' ) ); ?></option>
+                                    <option value="1"<?=selected(_h((int)$this->addnl[0]['allowWaitlist']),'1',false);?>><?=_t( 'Yes' );?></option>
+                                    <option value="0"<?=selected(_h((int)$this->addnl[0]['allowWaitlist']),'0',false);?>><?=_t( 'No' );?></option>
                                 </select>
                            </div>
                         </div>
@@ -110,23 +108,19 @@ $(function() {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Minimum Enrollment' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text"<?=cio();?> name="minEnroll" value="<?=_h((int)$this->addnl[0]['minEnroll']);?>" class="span10" required />
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Minimum Enrollment' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text"<?=cio();?> name="minEnroll" value="<?=_h((int)$this->addnl[0]['minEnroll']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Seating Capacity' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text"<?=cio();?> name="seatCap" value="<?=_h((int)$this->addnl[0]['seatCap']);?>" class="span10" required />
-                            </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Seating Capacity' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text"<?=cio();?> name="seatCap" value="<?=_h((int)$this->addnl[0]['seatCap']);?>" required /></div>
                         </div>
                         <!-- // Group END -->
 						
@@ -139,9 +133,9 @@ $(function() {
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<input type="hidden" name="courseID" value="<?=_h($this->addnl[0]['courseID']);?>" class="span10" />
-					<button type="submit"<?=cids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>course/view/<?=_h($this->addnl[0]['courseID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<input type="hidden" name="courseID" value="<?=_h($this->addnl[0]['courseID']);?>" />
+					<button type="submit"<?=cids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>course/view/<?=_h($this->addnl[0]['courseID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

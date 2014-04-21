@@ -1,89 +1,195 @@
-<?php
+<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
+/**
+ * Transcript View
+ *  
+ * PHP 5.4+
+ *
+ * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       3.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
+ */
 
-use \eduTrac\Classes\Libraries\PDF\Cezpdf;
+// create new PDF document
+$pdf = new \eduTrac\Classes\tcpdf\Tcpdf('landscape', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-     //data
-     $colw = array(      90 ,    110,   50,    40,     40,  50, 90  );//column widths
-     $rows1 = array(
-         array('Course','Title','Grade','Att Cr','Cpl Cr','Grd Pts','Course Dates'),
-     );
-     
-     foreach($this->courses as $k => $v) {
-         $array1[] = array(_h($v['courseSecCode']),_h($v['secShortTitle']),_h($v['grade']),_h($v['acadAttCred']),_h($v['acadCompCred']),_h($v['acadGradePoints']),_h($v['startDate']).' - '._h($v['endDate']) );
-         $array2 = array('Term Totals: ',_h($v['termCode']),'',$v['termAttCred'],$v['termCompCred'],$v['termGradePoints'],"GPA = ".$v['termGPA']);
-     }
-     
-     $rows2 = $array1;
-     $rows3 = array(
-         $array2,
-     );
-     
-     //x is 0-600, y is 0-780 (origin is at bottom left corner)
-     $pdf = new Cezpdf(isGetSet('size'));
+// set document information
+$pdf->SetCreator(PDF_CREATOR);
 
-     $pdf->selectFont(BASE_PATH . 'eduTrac/Classes/Libraries/PDF/fonts/Helvetica.afm');
-     $pdf->setColor(0/255,0/255,0/255);
-     $pdf->addText(250,750,14,_h($this->stuInfo[0]['Level']) . " Level");
-     $pdf->addText(40,700,10,get_name(_h($this->stuInfo[0]['stuID'])));
-     $pdf->addText(40,686,10,_h($this->stuInfo[0]['address1'].' '.$this->stuInfo[0]['address2']));
-     $pdf->addText(40,674,10,_h($this->stuInfo[0]['city'].', '.$this->stuInfo[0]['state'].' '.$this->stuInfo[0]['zip'] ));
-     
-     $pdf->addText(220,700,10,"Student ID: " . _h($this->stuInfo[0]['stuID']));
-     $pdf->addText(220,686,10,"SSN: " . _h($this->stuInfo[0]['ssn']));
-     $pdf->addText(220,674,10,"DOB: " . _h($this->stuInfo[0]['dob'] ));
-     
-     /*if($this->courses != '') : foreach($this->courses as $k => $v) {
-         $pdf->ezSetMargins(200,10,10);
-         $pdf->ezText(_h($v['courseSecCode']), 10, array('left' => 30));
-         $pdf->ezText(_h($v['secShortTitle']), 10, array('left' => 110));
-         //$pdf->addText(40,580,10,_h($v['courseSecCode']));
-         //$pdf->addText(110,600,10,_h($v['secShortTitle']));
-     } endif;*/
+// set default header data
+$pdf->SetHeaderData('', '', _h($this->stuInfo[0]['Level']) . ' Transcript', '', '', '');
 
-     $pdf->setLineStyle(0.5);
-     $pdf->line(40,598,570,598);
-     $pdf->setStrokeColor(0,0,0);
+// set header and footer fonts
+$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
-     $pdf->setColor(0/255,0/255,0/255);
-     $pdf->addText(30,16,8,"<b>Printed ".date("m/d/Y"));
+// set default monospaced font
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-     $total=0;
-     $curr_x=40;
-     $curr_y=600;
-     foreach($rows1 as $r1)
-     {
-         $xoffset = $curr_x;
-         foreach($r1 as $i=>$data)
-         {
-             $pdf->setColor(0/255,0/255,0/255);
-             $pdf->addText( $xoffset, $curr_y , 10, $data );
-             $xoffset+=$colw[$i];
-         }
-         $curr_y-=20;
-     }
-     
-     foreach($rows2 as $r2)
-     {
-         $xoffset = $curr_x;
-         foreach($r2 as $i=>$data)
-         {
-             $pdf->setColor(0/255,0/255,0/255);
-             $pdf->addText( $xoffset, $curr_y , 10, $data );
-             $xoffset+=$colw[$i];
-         }
-         $curr_y-=20;
-     }
-     
-     foreach($rows3 as $r3)
-     {
-         $xoffset = $curr_x;
-         foreach($r3 as $i=>$data)
-         {
-             $pdf->setColor(0/255,0/255,0/255);
-             $pdf->addText( $xoffset, $curr_y , 10, $data );
-             $xoffset+=$colw[$i];
-         }
-         $curr_y-=20;
-     }
+// set margins
+$pdf->SetMargins(PDF_MARGIN_LEFT, "20", PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin("12");
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-     $pdf->ezStream(); 
+// set auto page breaks
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// ---------------------------------------------------------
+
+// set font
+$pdf->SetFont('times', '', 10);
+
+// add a page
+$pdf->AddPage();
+
+// set cell padding
+$pdf->setCellPaddings(1, 1, 1, 1);
+
+// set cell margins
+$pdf->setCellMargins(1, 1, 1, 1);
+
+// MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
+
+// set some text for student info
+$txt1 = get_name(_h($this->stuInfo[0]['stuID'])) . "<br />";
+$txt1 .= _h($this->stuInfo[0]['address1']) . ' ' . _h($this->stuInfo[0]['address2']) . "<br />";
+$txt1 .= _h($this->stuInfo[0]['city']) . ' ' . _h($this->stuInfo[0]['state']) . ' ' . _h($this->stuInfo[0]['zip']) . "<br />";
+
+// set some text for student info
+$txt2 = _t( 'Student ID: ' ) . _h($this->stuInfo[0]['stuID']) . "<br />";
+$txt2 .= _t( 'Social Security #: ' ) . _h($this->stuInfo[0]['ssn']) . "<br />";
+$txt2 .= _t( 'Graduation Date: ' ) . _h($this->stuInfo[0]['graduationDate']) . "<br />";
+
+// writeHTMLCell
+$pdf->writeHTMLCell(0, 0, '', '', $txt1, 0, 1, 0, true, 'L', true);
+$pdf->writeHTMLCell(0, 0, 234, 20, $txt2, 0, 1, 0, true, 'L', true);
+
+// column titles
+$table = '<table cellpadding="4" cellspacing="5" border="0" class="table table-striped" id="table-example">';
+$table .= '<thead><tr>';
+$table .= '<th><b>'._t( 'Course' ).'</b></th>';
+$table .= '<th><b>'._t( 'Course Title' ).'</b></th>';
+$table .= '<th><b>'._t( 'Grade' ).'</b></th>';
+$table .= '<th><b>'._t( 'Attempted Credits' ).'</b></th>';
+$table .= '<th><b>'._t( 'Completed Credits' ).'</b></th>';
+$table .= '<th><b>'._t( 'Grade Points' ).'</b></th>';
+$table .= '<th><b>'._t( 'Dates' ).'</b></th>';
+$table .= '</tr></thead>';
+$table .= '<tbody>';
+foreach($this->courses as $k => $v) {
+     $table .= '<tr>';
+     $table .= '<td>'._h($v['courseCode']).'</td>';
+     $table .= '<td>'._h($v['secShortTitle']).'</td>';
+     $table .= '<td>'._h($v['grade']).'</td>';
+     $table .= '<td>'._h($v['acadAttCred']).'</td>';
+     $table .= '<td>'._h($v['acadCompCred']).'</td>';
+     $table .= '<td>'._h($v['acadGradePoints']).'</td>';
+     $table .= '<td>'._h($v['startDate']).' to ' . _h($v['endDate']) . '</td>';
+     $table .= '</tr>';
+}
+
+$table .= '<tr>';
+$table .= '<td colspan="3"><b>'._t( 'Totals' ).'</b></td>';
+$table .= '<td>CRED.ATT = '._h($this->tranGPA[0]['Attempted']).'</td>';
+$table .= '<td>CRED.CPT = '._h($this->tranGPA[0]['Completed']).'</td>';
+$table .= '<td>GRADE.PTS = '._h($this->tranGPA[0]['Points']).'</td>';
+$table .= '<td>GPA = '._h($this->tranGPA[0]['GPA']).'</td>';
+$table .= '</tr>';
+ 
+$table .= '</tbody>';
+$table .= '</table>';
+
+$pdf->writeHTML($table, true, 0);
+
+$footer = "<p>*******************************************************************************************************************************************************</p>";
+$footer .= '<table cellpadding="4" cellspacing="5" border="0" class="table table-striped" id="table-example">';
+$footer .= '<thead><tr>';
+$footer .= '<th><b>'._t( 'Degree' ).'</b></th>';
+$footer .= '<th><b>'._t( 'Major' ).'</b></th>';
+$footer .= '<th><b>'._t( 'Minor' ).'</b></th>';
+$footer .= '<th><b>'._t( 'Specialization' ).'</b></th>';
+$footer .= '<th><b>'._t( 'CCD' ).'</b></th>';
+$footer .= '</tr></thead>';
+
+$footer .= '<tbody>';
+$footer .= '<tr>';
+if(_h($this->stuInfo[0]['graduationDate']) != '0000-00-00') {
+$footer .= '<td>'._h($this->stuInfo[0]['degreeCode']).' - ' . _h($this->stuInfo[0]['degreeName']) . ' Awarded on ' . _h($this->stuInfo[0]['gradudationDate']) . '</td>';
+} else {
+    $footer .= '<td>&nbsp;</td>';
+}
+
+if(_h($this->stuInfo[0]['majorCode']) != 'NULL') {
+$footer .= '<td>'._h($this->stuInfo[0]['majorCode']).' - '._h($this->stuInfo[0]['majorName']).'</td>';
+} else {
+    $footer .= '<td>&nbsp;</td>';
+}
+
+if(_h($this->stuInfo[0]['minorCode']) != 'NULL') {
+$footer .= '<td>'._h($this->stuInfo[0]['minorCode']).' - '._h($this->stuInfo[0]['minorName']).'</td>';
+} else {
+    $footer .= '<td>&nbsp;</td>';
+}
+
+if(_h($this->stuInfo[0]['specCode']) != 'NULL') {
+$footer .= '<td>'._h($this->stuInfo[0]['specCode']).' - '._h($this->stuInfo[0]['specName']).'</td>';
+} else {
+    $footer .= '<td>&nbsp;</td>';
+}
+
+if(_h($this->stuInfo[0]['ccdCode']) != 'NULL') {
+$footer .= '<td>'._h($this->stuInfo[0]['ccdCode']).' - '._h($this->stuInfo[0]['ccdName']).'</td>';
+} else {
+    $footer .= '<td>&nbsp;</td>';
+}
+
+$footer .= '</tr>';
+$footer .= '</tbody>';
+$footer .= '</table>';
+$footer .= "<p>*******************************************************************************************************************************************************</p>";
+
+
+$pdf->writeHTML($footer, true, 0);
+
+$txt3 = 'Printed on ' . date("m/d/Y @ h:i A");    
+
+ // print a block of text using Write()
+$pdf->Write($h=0, $txt3, $link='', $fill=0, $align='C', $ln=true, $stretch=0, $firstline=false, $firstblock=false, $maxh=0);
+
+// ---------------------------------------------------------
+
+/*$pdf->Button('print', 30, 10, 'Print', 'Print()', array('lineWidth'=>2, 'borderStyle'=>'beveled', 'fillColor'=>array(128, 196, 255), 'strokeColor'=>array(64, 64, 64)));
+
+// Form validation functions
+$js = <<<EOD
+function Print() {
+    print();
+}
+EOD;
+
+// Add Javascript code
+$pdf->IncludeJS($js);*/
+
+// close and output PDF document
+$pdf->Output('transcript.pdf', 'I');
+
+//============================================================+
+// END OF FILE
+//============================================================+

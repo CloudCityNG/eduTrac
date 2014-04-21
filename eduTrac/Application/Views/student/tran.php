@@ -22,20 +22,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Transcript' ) ); ?></li>
+	<li><?=_t( 'Transcript' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Transcript' ) ); ?></h3>
+<h3><?=_t( 'Transcript' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -46,44 +46,31 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Student ID' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="studentID" id="studentID" class="span12" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Student ID' );?></label>
+							<div class="col-md-8">
+								<input type="text" name="studentID" id="studentID" class="form-control" required />
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Transcript Type' ) ); ?></label>
-							<div class="controls">
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Transcript Type' );?></label>
+							<div class="col-md-8">
 						        <?=acad_level_select(null,null,'required');?>
-							</div>
-						</div>
-						<!-- // Group END -->
-						
-						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Print Size' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="size" id="select2_10" required>
-							        <option value="">&nbsp;</option>
-							        <option value="letter"><?php _e( _t( 'Letter' ) ); ?></option>
-							        <option value="legal"><?php _e( _t( 'Legal' ) ); ?></option>
-						        </select>
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -98,7 +85,7 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

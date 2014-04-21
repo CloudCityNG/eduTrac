@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,13 +33,13 @@ $roles = new ACL();
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Manage Roles' ) ); ?></li>
+	<li><?=_t( 'Manage Roles' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Manage Roles' ) ); ?></h3>
+<h3><?=_t( 'Manage Roles' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -52,9 +52,9 @@ $roles = new ACL();
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Name' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Edit' ) ); ?></th>
+						<th class="text-center"><?=_t( 'ID' );?></th>
+						<th class="text-center"><?=_t( 'Name' );?></th>
+						<th class="text-center"><?=_t( 'Edit' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -68,7 +68,7 @@ $roles = new ACL();
 							echo '<tr class="gradeX">'."\n";
 							echo '<td>'._h($v['ID']).'</td>'."\n";
 							echo '<td>'._h($v['Name']).'</td>'."\n";
-							echo '<td class="center"><a href="'.BASE_URL.'role/view/?roleID='._h($v['ID']).'" title="View Role" class="btn btn-circle"><i class="icon-edit"></i></a></td>';
+							echo '<td class="text-center"><a href="'.BASE_URL.'role/view/?roleID='._h($v['ID']).'" title="View Role" class="btn btn-default"><i class="fa fa-edit"></i></a></td>';
 							echo '</tr>';
 						}
 					}
@@ -91,7 +91,7 @@ $roles = new ACL();
 	
 	<!-- Form actions -->
 	<div class="form-actions">
-		<button type="submit" name="NewRole" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="window.location='<?=BASE_URL;?>role/add/<?=bm();?>'"><i></i><?php _e( _t( 'New Role' ) ); ?></button>
+		<button type="submit" name="NewRole" class="btn btn-icon btn-primary glyphicons circle_ok" onclick="window.location='<?=BASE_URL;?>role/add/<?=bm();?>'"><i></i><?=_t( 'New Role' );?></button>
 	</div>
 	<!-- // Form actions END -->
 	

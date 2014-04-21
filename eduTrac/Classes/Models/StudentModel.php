@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -37,6 +37,7 @@ class StudentModel {
     private $_log;
     private $_acadProg;
     private $_uname;
+    private $_email;
 	
 	public function __construct() {
 	    $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
@@ -44,6 +45,7 @@ class StudentModel {
         $this->_log = new \eduTrac\Classes\Libraries\Log;
         $this->_acadProg = new \eduTrac\Classes\DBObjects\AcadProgram;
         $this->_uname = $this->_auth->getPersonField('uname');
+        $this->_email = new \eduTrac\Classes\Libraries\Email;
 	}
 	
 	public function search() {
@@ -80,41 +82,40 @@ class StudentModel {
     public function runStudent($data) {
         $date = date("Y-m-d");
         $bind1 = array( 
-            "stuID" => $data['stuID'],"advisorID" => $data['advisorID'],"catYearID" => $data['catYearID'],
-            "acadLevelCode" => $data['acadLevelCode'],"status" => $data['status'],
+            "stuID" => $data['stuID'],"status" => $data['status'],
             "addDate" => $data['addDate'],"approvedBy" => $data['approvedBy']
         );
         
         $bind2 = array( 
-            "stuID" => $data['stuID'],"progID" => $data['progID'],
+            "stuID" => $data['stuID'],"advisorID" => $data['advisorID'],
+            "catYearCode" => $data['catYearCode'],"acadProgCode" => $data['acadProgCode'],
             "currStatus" => "A","statusDate" => $data['addDate'],
             "startDate" => $data['startDate'],"approvedBy" => $data['approvedBy'],
             "antGradDate" => $data['antGradDate'],
         );
         
         $q1 = DB::inst()->insert( "student", $bind1 );
-        $ID = DB::inst()->lastInsertId('stuID');
         $q2 = DB::inst()->insert( "stu_program", $bind2 );
         
         $bind3 = [ 
-                "stuID" => $data['stuID'],"acadProgID" => $data['progID'],
+                "stuID" => $data['stuID'],"acadProgCode" => $data['acadProgCode'],
                 "acadLevelCode" => $data['acadLevelCode'],"addDate" => $date 
                 ];
                 
-        $q2 = DB::inst()->insert( "stu_acad_level", $bind3 );
+        $q3 = DB::inst()->insert( "stu_acad_level", $bind3 );
         
         if(!$q1 && !$q2 && !$q3) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
             $this->_log->setLog('New Record','Student',get_name($data['stuID']),$this->_uname);
-            redirect( BASE_URL . 'student/view/' . $ID . '/' . bm() );
+            redirect( BASE_URL . 'student/view/' . $data['stuID'] . '/' . bm() );
         }
     
     }
     
     public function runEditStudent($data) {
         $update = array( 
-            "advisorID" => $data['advisorID'],"catYearID" => $data['catYearID'],
+            "advisorID" => $data['advisorID'],"catYearCode" => $data['catYearCode'],
             "acadLevelCode" => $data['acadLevelCode'],"status" => $data['status']
         );
         
@@ -136,27 +137,34 @@ class StudentModel {
                     b.majorName,
                     c.locationName,
                     d.schoolName,
-                    e.personID 
+                    e.personID,
+                    e.startTerm 
                 FROM 
                     acad_program a 
                 LEFT JOIN 
                     major b 
                 ON 
-                    a.majorID = b.majorID 
+                    a.majorCode = b.majorCode 
                 LEFT JOIN 
                     location c 
                 ON 
-                    a.locationID = c.locationID 
+                    a.locationCode = c.locationCode 
                 LEFT JOIN 
                     school d 
                 ON 
-                    a.schoolID = d.schoolID 
+                    a.schoolCode = d.schoolCode 
                 LEFT JOIN 
                     application e 
                 ON 
-                    a.acadProgID = e.acadProgID 
+                    a.acadProgCode = e.acadProgCode 
+                LEFT JOIN 
+                    student f 
+                ON 
+                    e.personID = f.stuID 
                 WHERE 
-                    e.personID = :id",
+                    e.personID = :id 
+                AND 
+                    f.stuID IS NULL",
                 $bind 
         );
         foreach($q as $r) {
@@ -180,9 +188,6 @@ class StudentModel {
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 stuID,
-                advisorID,
-                catYearID,
-                acadLevelCode,
                 status 
             FROM 
                 student 
@@ -191,6 +196,30 @@ class StudentModel {
             $bind
         );
         
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function rstr($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                        a.*,
+                        b.deptCode 
+                    FROM 
+                        restriction a 
+                    LEFT JOIN 
+                        restriction_code b 
+                    ON 
+                        a.rstrCode = b.rstrCode 
+                    WHERE 
+                        a.stuID = :id 
+                    ORDER BY 
+                        a.rstrID",
+                    $bind 
+        );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -235,20 +264,19 @@ class StudentModel {
         $q = DB::inst()->query( "SELECT 
                     a.stuProgID,
                     a.stuID,
-                    a.progID,
+                    a.acadProgCode,
                     a.currStatus,
                     a.statusDate,
                     a.startDate,
                     a.approvedBy,
-                    b.acadProgCode,
                     b.acadLevelCode AS progAcadLevel,
-                    b.locationID 
+                    b.locationCode 
                 FROM 
                     stu_program a 
                 LEFT JOIN 
                     acad_program b 
                 ON 
-                    a.progID = b.acadProgID 
+                    a.acadProgCode = b.acadProgCode 
                 WHERE 
                     a.stuID = :id 
                 ORDER BY 
@@ -266,28 +294,32 @@ class StudentModel {
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                     a.acadProgCode,
+                    a.schoolCode,
+                    a.acadLevelCode,
                     b.stuProgID,
                     b.eligible_to_graduate,
                     b.graduationDate,
                     b.antGradDate,
                     b.stuID,
+                    b.advisorID,
+                    b.catYearCode,
                     b.currStatus,
                     b.statusDate,
                     b.startDate,
                     b.endDate,
                     b.approvedBy,
-                    c.schoolCode,
+                    b.LastUpdate,
                     c.schoolName 
                 FROM 
                     acad_program a 
                 LEFT JOIN 
                     stu_program b 
                 ON 
-                    a.acadProgID = b.progID 
+                    a.acadProgCode = b.acadProgCode 
                 LEFT JOIN 
                     school c 
                 ON 
-                    a.schoolID = c.schoolID 
+                    a.schoolCode = c.schoolCode 
                 WHERE 
                     b.stuProgID = :id",
                 $bind 
@@ -307,32 +339,30 @@ class StudentModel {
                         a.courseCredits,
                         a.ceu,
                         a.status,
+                        a.termCode,
+                        a.courseSecCode,
                         b.grade,
-                        c.courseSecCode,
-                        c.secShortTitle,
-                        d.termCode 
+                        c.secShortTitle 
                     FROM 
                         stu_course_sec a 
                     LEFT JOIN 
                         stu_acad_cred b 
                     ON 
-                        a.courseSecID = b.courseSecID 
+                        a.courseSecCode = b.courseSecCode 
                     LEFT JOIN 
                         course_sec c 
                     ON 
-                        a.courseSecID = c.courseSecID 
-                    LEFT JOIN 
-                        term d 
-                    ON 
-                        a.termID = d.termID 
+                        a.courseSecCode = c.courseSecCode 
                     WHERE 
                         a.stuID = :id 
                     AND 
                     	a.stuID = b.stuID 
                     AND 
-                        a.termID = b.termID 
+                        a.termCode = b.termCode 
+                    AND 
+                    	a.termCode = c.termCode 
                     GROUP BY 
-                    	a.stuID,a.courseSecID,a.termID",
+                    	a.stuID,a.courseSecCode,a.termCode",
                     $bind 
         );
         foreach($q as $r) {
@@ -350,20 +380,20 @@ class StudentModel {
                         a.secShortTitle,
                         a.startDate,
                         a.endDate,
-                        a.termID,
+                        a.termCode,
+                        a.courseCode,
+                        a.deptCode,
                         b.courseID,
-                        b.courseCode,
                         b.acadLevelCode,
-                        c.termCode,
+                        b.subjectCode,
                         c.reportingTerm,
                         d.id,
                         d.stuID,
+                        d.courseSecCode,
                         d.status,
                         d.statusDate,
                         d.statusTime,
-                        e.grade,
-                        f.deptCode,
-                        g.subjCode 
+                        e.grade 
                     FROM 
                         course_sec a 
                     LEFT JOIN 
@@ -373,27 +403,21 @@ class StudentModel {
                     LEFT JOIN 
                         term c 
                     ON 
-                        a.termID = c.termID 
+                        a.termCode = c.termCode 
                     LEFT JOIN 
                         stu_course_sec d 
                     ON 
-                        a.courseSecID = d.courseSecID 
+                        a.courseSecCode = d.courseSecCode 
                     LEFT JOIN 
                         stu_acad_cred e 
                     ON 
-                        a.courseSecID = e.courseSecID 
-                    LEFT JOIN 
-                        department f 
-                    ON 
-                        a.deptID = f.deptID 
-                    LEFT JOIN 
-                        subject g 
-                    ON 
-                        b.subjectID = g.subjectID 
+                        a.courseSecCode = e.courseSecCode 
                     WHERE 
                         d.id = :id 
                     AND 
-                        a.termID = e.termID 
+                        a.termCode = d.termCode 
+                    AND 
+                    	a.termCode = e.termCode 
                     AND 
                     	d.stuID = e.stuID",
                     $bind 
@@ -406,7 +430,7 @@ class StudentModel {
     
     public function courseSec() {
         $array = [];
-        $bind = [ ":term" => Hooks::get_option('current_term_id') ];
+        $terms = Hooks::{'get_option'}('open_terms');
         $q = DB::inst()->query( "SELECT 
                     a.courseSecID,
                     a.courseSecCode,
@@ -415,24 +439,54 @@ class StudentModel {
                     a.startTime,
                     a.endTime,
                     a.minCredit,
-                    a.termID,
-                    a.minCredit,
-                    b.locationName 
+                    a.termCode,
+                    a.courseFee,
+                    a.labFee,
+                    a.materialFee,
+                    a.facID,
+                    a.comment,
+                    b.locationName,
+                    c.courseDesc 
                 FROM 
                     course_sec a 
                 LEFT JOIN 
                     location b 
                 ON 
-                    a.locationID = b.locationID 
+                    a.locationCode = b.locationCode 
+                LEFT JOIN 
+                	course c 
+            	ON 
+            		a.courseID = c.courseID 
                 WHERE 
                     a.currStatus = 'A' 
                 AND 
                     a.stuReg = '1' 
                 AND 
-                    a.termID = :term",
-                $bind 
+                    a.termCode IN (".$terms.")"
         );
-                    
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function term() {
+        $array = [];
+        $bind = [ ":stuID" => $this->_auth->getPersonField('personID') ];
+                
+        $q = DB::inst()->query( "SELECT 
+                    stuID,
+                    termCode,
+                    COUNT(termCode) AS Courses 
+                FROM 
+                    stu_acad_cred  
+                WHERE 
+                    stuID = :stuID 
+                GROUP BY 
+                    termCode",
+                $bind
+        );
+        
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -442,11 +496,12 @@ class StudentModel {
     public function schedule() {
         $array = [];
         $bind = [ 
-                ":term" => Hooks::get_option('current_term_id'),
+                ":term" => isGetSet('term'),
                 ":stuID" => $this->_auth->getPersonField('personID')
                 ];
                 
         $q = DB::inst()->query( "SELECT 
+                    a.courseSecID,
                     a.courseSecCode,
                     a.secShortTitle,
                     a.startTime,
@@ -461,19 +516,25 @@ class StudentModel {
                 LEFT JOIN 
                     building b 
                 ON 
-                    a.buildingID = b.buildingID 
+                    a.buildingCode = b.buildingCode 
                 LEFT JOIN 
                     room c 
                 ON 
-                    a.roomID = c.roomID 
+                    a.roomCode = c.roomCode 
                 LEFT JOIN 
                     stu_course_sec d 
                 ON 
-                    a.courseSecID = d.courseSecID 
+                    a.courseSecCode = d.courseSecCode 
                 WHERE 
-                    a.termID = :term 
+                    a.termCode = :term 
                 AND 
-                    d.stuID = :stuID",
+                    d.stuID = :stuID 
+                AND 
+                	d.termCode = :term 
+            	AND 
+            		d.status IN('A','N') 
+                GROUP BY 
+                    d.stuID,d.termCode,d.courseSecCode",
                 $bind
         );
         
@@ -483,27 +544,82 @@ class StudentModel {
         return $array;
     }
     
-    public function grades() {
+    public function gradesAssign($code) {
+    	$array = [];
+    	$bind = [ ":code" => $code, "term" => isGetSet('term') ];
+    	$q = DB::inst()->query( "SELECT 
+    					a.*,
+    					b.courseSecID,
+    					b.secShortTitle,
+    					c.termCode 
+					FROM  
+						assignment a 
+					LEFT JOIN 
+						course_sec b 
+					ON 
+						a.courseSecCode = b.courseSecCode 
+					LEFT JOIN 
+						term c 
+					ON 
+						b.termCode = c.termCode 
+					WHERE 
+						a.courseSecCode = :code 
+					AND 
+					   a.termCode = :term 
+					GROUP BY 
+						a.title",
+					$bind 
+		);
+    	foreach($q as $r) {
+    		$array[] = $r;
+    	}
+    	return $array;
+    }
+    
+    public function gradesStu($code) {
+		$array = [];
+		$bind = [ ":code" => $code,":user" => $this->_auth->getPersonField('personID'), "term" => isGetSet('term') ];
+		$q = DB::inst()->query( "SELECT 
+						* 
+					FROM 
+						gradebook 
+					WHERE 
+						courseSecCode = :code 
+					AND 
+						stuID = :user 
+					AND 
+					   termCode = :term 
+					GROUP BY 
+						stuID",
+					$bind 
+		);
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		return $array;
+	}
+    
+    public function finalGrades() {
         $array = [];
         $bind = [ ":stuID" => $this->_auth->getPersonField('personID') ];
         $q = DB::inst()->query( "SELECT 
                         a.stuID,
                         a.grade,
+                        a.termCode,
                         b.courseSecCode,
-                        b.secShortTitle,
-                        c.termCode 
+                        b.secShortTitle 
                     FROM 
                         stu_acad_cred a 
                     LEFT JOIN 
                         course_sec b 
                     ON 
-                        a.courseSecID = b.courseSecID 
-                    LEFT JOIN 
-                        term c 
-                    ON 
-                        a.termID = c.termID 
+                        a.courseSecCode = b.courseSecCode 
                     WHERE 
-                        a.stuID = :stuID",
+                        a.stuID = :stuID 
+                    AND 
+                    	a.termCode = b.termCode 
+                    GROUP BY 
+                    	a.termCode,a.courseSecCode",
                     $bind
         );
         foreach($q as $r) {
@@ -516,17 +632,13 @@ class StudentModel {
         $array = [];
         $bind = [ ":stuID" => $this->_auth->getPersonField('personID') ];
         
-        $q = DB::inst()->query( "SELECT a.ID,a.stuID,a.termID,b.termCode 
+        $q = DB::inst()->query( "SELECT ID,stuID,termCode 
                 FROM 
-                    bill a 
-                LEFT JOIN 
-                    term b 
-                ON 
-                    a.termID = b.termID  
+                    bill 
                 WHERE 
-                    a.stuID = :stuID 
+                    stuID = :stuID 
                 GROUP BY 
-                    a.stuID,a.termID",
+                    stuID,termCode",
                 $bind
         );
         
@@ -538,12 +650,15 @@ class StudentModel {
     
     public function bill($id) {
         $array = [];
-        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id,":termCode" => isGetSet('termCode'), ":user" => $this->_auth->getPersonField('personID') ];
         $q = DB::inst()->query( "SELECT 
                         a.ID AS 'FeeID',
                         a.stuID,
                         b.name,
                         b.amount,
+                        c.ID AS 'BillID',
+                        c.termCode,
+                        c.comment,
                         c.dateTime,
                         d.termName 
                     FROM 
@@ -559,13 +674,15 @@ class StudentModel {
                     LEFT JOIN 
                         term d 
                     ON 
-                        c.termID = d.termID 
+                        c.termCode = d.termCode 
                     WHERE 
-                        c.stuID = :stuID 
+                        a.stuID = :stuID 
                     AND 
-                        c.termID = :termID 
+                        c.termCode = :termCode 
                     AND 
-                        a.billID = c.ID",
+                        a.billID = c.ID 
+                    AND 
+                        a.stuID = :user",
                     $bind 
         );
         
@@ -577,7 +694,7 @@ class StudentModel {
     
     public function beginBalance($id) {
         $array = [];
-        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id, ":termCode" => isGetSet('termCode') ];
         $q = DB::inst()->query( "SELECT 
                         SUM(b.amount) 
                     FROM 
@@ -595,9 +712,9 @@ class StudentModel {
                     AND 
                         c.stuID = :stuID 
                     AND 
-                        c.termID = :termID 
+                        c.termCode = :termCode 
                     GROUP BY 
-                        c.stuID,c.termID",
+                        c.stuID,c.termCode",
                     $bind 
         );
         foreach($q as $r) {
@@ -609,24 +726,18 @@ class StudentModel {
     
     public function courseFees($id) {
         $array = [];
-        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id, ":termCode" => isGetSet('termCode') ];
         
         $q = DB::inst()->query( "SELECT 
-                        SUM(a.courseFee) AS 'CourseFee',
-                        SUM(a.labFee) AS 'LabFee',
-                        SUM(a.materialFee) AS 'MaterialFee' 
+                        COALESCE(SUM(courseFee+labFee+materialFee),0) AS 'CourseFees' 
                     FROM 
-                        course_sec a 
-                    LEFT JOIN 
-                        stu_acad_cred b 
-                    ON 
-                        a.termID = b.termID 
+                        stu_course_sec 
                     WHERE 
-                        b.stuID = :stuID 
+                        stuID = :stuID 
                     AND 
-                        b.termID = :termID 
-                    GROUP BY 
-                        b.stuID,b.termID,b.courseSecID",
+                        termCode = :termCode 
+                    AND 
+                    	status <> 'C'",
                     $bind 
         );
         
@@ -638,7 +749,7 @@ class StudentModel {
     
     public function sumPayments($id) {
         $array = [];
-        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id, ":termCode" => isGetSet('termCode') ];
         
         $q = DB::inst()->query( "SELECT 
                         SUM(amount) 
@@ -647,9 +758,9 @@ class StudentModel {
                     WHERE 
                         stuID = :stuID 
                     AND 
-                        termID = :termID 
+                        termCode = :termCode 
                     GROUP BY 
-                        stuID,termID",
+                        stuID,termCode",
                     $bind 
         );
         
@@ -662,7 +773,7 @@ class StudentModel {
     
     public function sumRefund($id) {
         $array = [];
-        $bind = [ ":stuID" => $id, ":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id, ":termCode" => isGetSet('termCode') ];
         
         $q = DB::inst()->query( "SELECT 
                         SUM(amount) 
@@ -671,9 +782,9 @@ class StudentModel {
                     WHERE 
                         stuID = :stuID 
                     AND 
-                        termID = :termID 
+                        termCode = :termCode 
                     GROUP BY 
-                        stuID,termID",
+                        stuID,termCode",
                     $bind 
         );
         
@@ -686,7 +797,7 @@ class StudentModel {
     
     public function payment($id) {
         $array = [];
-        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id,":termCode" => isGetSet('termCode') ];
         $q = DB::inst()->query( "SELECT 
                         a.ID AS 'paymentID',
                         a.amount,
@@ -704,11 +815,11 @@ class StudentModel {
                     ON 
                         a.paymentTypeID = c.ptID 
                     WHERE 
-                        a.termID = b.termID 
+                        a.termCode = b.termCode 
                     AND 
                         a.stuID = :stuID 
                     AND 
-                        a.termID = :termID",
+                        a.termCode = :termCode",
                     $bind 
         );
         foreach($q as $r) {
@@ -719,7 +830,7 @@ class StudentModel {
     
     public function refund($id) {
         $array = [];
-        $bind = [ ":stuID" => $id,":termID" => isGetSet('termID') ];
+        $bind = [ ":stuID" => $id,":termCode" => isGetSet('termCode') ];
         $q = DB::inst()->query( "SELECT 
                         a.ID AS 'refundID',
                         a.amount,
@@ -732,11 +843,11 @@ class StudentModel {
                     ON 
                         a.stuID = b.stuID 
                     WHERE 
-                        a.termID = b.termID 
+                        a.termCode = b.termCode 
                     AND 
                         a.stuID = :stuID 
                     AND 
-                        a.termID = :termID",
+                        a.termCode = :termCode",
                     $bind 
         );
         foreach($q as $r) {
@@ -746,30 +857,30 @@ class StudentModel {
     }
     
     public function runProgLookup($data) {
-        $bind = array(":id" => $data['progID']);
+        $bind = array(":id" => $data['acadProgCode']);
         $q = DB::inst()->query( "SELECT 
                     a.acadProgTitle,
                     a.acadLevelCode,
+                    a.schoolCode,
                     b.majorName,
                     c.locationName,
-                    d.schoolCode,
                     d.schoolName 
                 FROM 
                     acad_program a 
                 LEFT JOIN 
                     major b 
                 ON 
-                    a.majorID = b.majorID 
+                    a.majorCode = b.majorCode 
                 LEFT JOIN 
                     location c 
                 ON 
-                    a.locationID = c.locationID 
+                    a.locationCode = c.locationCode 
                 LEFT JOIN 
                     school d 
                 ON 
-                    a.schoolID = d.schoolID 
+                    a.schoolCode = d.schoolCode 
                 WHERE 
-                    a.acadProgID = :id 
+                    a.acadProgCode = :id 
                 AND 
                     a.currStatus = 'A' 
                 AND 
@@ -781,7 +892,7 @@ class StudentModel {
         foreach($q as $k => $v) {
             $json = array( 
                         '#acadProgTitle' => $v['acadProgTitle'],'#locationName' => $v['locationName'],
-                        "#majorName" => $v['majorName'],"#schoolName" => $v['schoolID'].' '.$v['schoolName'],
+                        "#majorName" => $v['majorName'],"#schoolName" => $v['schoolCode'].' '.$v['schoolName'],
                         "#acadLevelCode" => $v['acadLevelCode'] 
                         );
         }
@@ -789,23 +900,24 @@ class StudentModel {
     }
     
     public function runStuProg($data) {
-        $this->_acadProg->Load_from_key($data['progID']);
+        $this->_acadProg->Load_from_key($data['acadProgCode']);
         $date = date('Y-m-d');
-        $bind1 = array( "stuID" => $data['stuID'],"progID" => $data['progID'],
+        $bind1 = array( "stuID" => $data['stuID'],"acadProgCode" => $data['acadProgCode'],
                        "currStatus" => $data['currStatus'],"statusDate" => $data['startDate'],
                        "startDate" => $data['startDate'],"endDate" => $data['endDate'],
-                       "approvedBy" => $data['approvedBy'],"antGradDate" => $data['antGradDate']
+                       "approvedBy" => $data['approvedBy'],"antGradDate" => $data['antGradDate'],
+                       "advisorID" => $data['advisorID'],"catYearCode" => $data['catYearCode']
         );
         
-        $bind2 = [ ":stuID" => $data['stuID'],":acadProgID" => $data['progID'] ];
+        $bind2 = [ ":stuID" => $data['stuID'],":acadProgCode" => $data['acadProgCode'] ];
         
         $bind3 = [ 
-                "stuID" => $data['stuID'],"acadProgID" => $data['progID'],
+                "stuID" => $data['stuID'],"acadProgID" => $data['acadProgCode'],
                 "acadLevelCode" => $this->_acadProg->getAcadLevelCode(),"addDate" => $date 
                 ];
         
         $q1 = DB::inst()->insert( "stu_program", $bind1 );
-        $q2 = DB::inst()->select( "stu_acad_level","stuID = :stuID AND acadProgID = :acadProgID","","*",$bind2 );
+        $q2 = DB::inst()->select( "stu_acad_level","stuID = :stuID AND acadProgCode = :acadProgCode","","*",$bind2 );
         if(count($q2) <= 0) {
             $q3 = DB::inst()->insert( "stu_acad_level", $bind3 );
         }
@@ -821,7 +933,8 @@ class StudentModel {
         
         $update1 = array( "currStatus" => $data['currStatus'],"startDate" => $data['startDate'],
                         "endDate" => $data['endDate'],"eligible_to_graduate" => $data['eligible_to_graduate'],
-                        "antGradDate" => $data['antGradDate']
+                        "antGradDate" => $data['antGradDate'],"advisorID" => $data['advisorID'],
+                        "catYearCode" => $data['catYearCode']
         );
         
         $update2 = array( "statusDate" => $date );
@@ -840,6 +953,7 @@ class StudentModel {
     }
     
     public function runAcadCred($data) {
+    	$array = [];
         $date = date("Y-m-d");
         $time = date("h:m A");
         
@@ -852,12 +966,12 @@ class StudentModel {
         
         $bind1 = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
         $bind2 = [ 
-                ":stuID" => $data['stuID'], ":courseSecID" => $data['courseSecID'],
-                ":termID" => $data['termID']
+                ":stuID" => $data['stuID'], ":courseSecCode" => $data['courseSecCode'],
+                ":termCode" => $data['termCode']
                 ]; 
-        $bind3 = [ ":termID" => Hooks::get_option('current_term_id') ];
+        $bind3 = [ ":termCode" => $data['termCode'] ];
         
-        $sql = DB::inst()->select( "term","termID = :termID","","termStartDate,dropAddEndDate",$bind3 );
+        $sql = DB::inst()->select( "term","termCode = :termCode","","termStartDate,dropAddEndDate",$bind3 );
         foreach($sql as $r) {
             $array[] = $r;
         }
@@ -867,9 +981,9 @@ class StudentModel {
          * primary term start date, then delete all student course sec as well as 
          * student acad cred records.
          */
-        if(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date < $r['termStartDate']) {
-            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
-            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        if(($data['status'] == 'W' || $data['status'] == 'D') && $date < $r['termStartDate']) {
+            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
+            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
         }
         /**
          * If posted status is 'W' or 'D' and today's date is greater than equal to the 
@@ -877,9 +991,9 @@ class StudentModel {
          * end date, then delete all student course sec as well as student acad cred 
          * records.
          */
-        elseif(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date >= $r['termStartDate'] && $date < $r['dropAddEndDate']) {
-            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
-            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        elseif(($data['status'] == 'W' || $data['status'] == 'D') && $date >= $r['termStartDate'] && $date < $r['dropAddEndDate']) {
+            DB::inst()->delete('stu_course_sec','stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
+            DB::inst()->delete('stu_acad_cred','stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
         }
         /**
          * If posted status is 'W' or 'D' and today's date is greater than equal to the 
@@ -887,31 +1001,47 @@ class StudentModel {
          * end date, then update student course sec record with a 'W' status and update  
          * student acad record with a 'W' grade and 0.0 completed credits.
          */
-        elseif(($data['currStatus'] == 'W' || $data['currStatus'] == 'D') && $date >= $r['termStartDate'] && $date > $r['dropAddEndDate']) {
-            DB::inst()->update('stu_course_sec',$update3,'stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
-            DB::inst()->update('stu_acad_cred',$update4,'stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID',$bind2);
+        elseif(($data['status'] == 'W' || $data['status'] == 'D') && $date >= $r['termStartDate'] && $date > $r['dropAddEndDate']) {
+            DB::inst()->update('stu_course_sec',$update3,'stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
+            DB::inst()->update('stu_acad_cred',$update4,'stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode',$bind2);
         }
         /**
          * If the status is different from 'W', update the status and status date.
          */
         else {
             DB::inst()->update( "stu_course_sec", $update1, "id = :id AND stuID = :stuID", $bind1 );  
-            DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecID = :courseSecID AND termID = :termID",$bind2);
+            DB::inst()->update("stu_acad_cred",$update2,"stuID = :stuID AND courseSecCode = :courseSecCode AND termCode = :termCode",$bind2);
         }
         $this->_log->setLog('Update Record','Academic Credits',get_name($data['stuID']),$this->_uname);  
-        redirect( BASE_URL . 'student/view_academic_credits/' . $data['id'] . '/' . bm() );
+        redirect( BASE_URL . 'student/academic_credits/' . $data['stuID'] . '/' . bm() );
     }
     
     public function runRegister($data) {
-        $size = count($data['courseSecID']);
+        /**
+         * Checks to see how many courses the student has already registered 
+         * for the requested semester. If the student has already registered for 
+         * courses, then count them and add it to the number they are trying to 
+         * register for. If that number is greater than the number_of_courses 
+         * restriction, then redirect the student to a error page, otherwise 
+         * let the registration go through.
+         */
+        $params = [ ":stuID" => $this->_auth->getPersonField('personID'),":term" => $data['termCode'] ];
+        $q = DB::inst()->select('stu_course_sec','stuID=:stuID AND termCode=:term AND status IN("A","N")','','*',$params);
+        if(bcadd(count($q),count($data['courseSecCode'])) > Hooks::{'get_option'}('number_of_courses')) {
+            redirect( BASE_URL . 'error/registration/' );
+            exit();
+        }
+        $size = count($data['courseSecCode']);
         $i = 0;
         while($i < $size) {
             $date = date("Y-m-d");
             $time = date("h:m A");
             $bind1 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecID" => $data['courseSecID'][$i],"termID" => $data['termID'][$i],
+                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'],
                     "courseCredits" => $data['courseCredits'][$i],"status" => 'N',
+                    "courseFee" => $data['courseFee'][$i],
+                   	"labFee" => $data['labFee'][$i],"materialFee" => $data['materialFee'][$i],
                     "statusDate" => $date,"statusTime" => $time,
                     "addedBy" => $this->_auth->getPersonField('personID')
                     ];
@@ -920,7 +1050,7 @@ class StudentModel {
             
             $bind2 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecID" => $data['courseSecID'][$i],"termID" => $data['termID'][$i],
+                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'],
                     "attCred" => $data['courseCredits'][$i],
                     "acadLevelCode" => $this->_stuProg->getAcadLevelCode($this->_auth->getPersonField('personID'))
                     ];
@@ -932,6 +1062,9 @@ class StudentModel {
         if(!$q1 && !$q2) {
             redirect( BASE_URL . 'error/course_registration/' );
         } else {
+        	if(Hooks::{'get_option'}('registrar_email_address') != '') {
+            	$this->_email->course_registration(Hooks::{'get_option'}('registrar_email_address'),$this->_auth->getPersonField('personID'),$data['courseSecCode'],BASE_URL);
+            }
             redirect( BASE_URL . 'success/course_registration/' );
         }
     }
@@ -971,6 +1104,7 @@ class StudentModel {
                         CASE a.acadLevelCode 
                         WHEN 'UG' THEN 'Undergraduate' 
                         WHEN 'GR' THEN 'Graduate' 
+                        WHEN 'Phd' THEN 'Doctorate'
                         ELSE 'Continuing Education' 
                         END AS 'Level',
                         a.stuID,
@@ -980,7 +1114,18 @@ class StudentModel {
                         b.state,
                         b.zip,
                         c.ssn,
-                        c.dob 
+                        c.dob,
+                        d.graduationDate,
+                        f.degreeCode,
+                        f.degreeName,
+                        g.majorCode,
+                        g.majorName,
+                        h.minorCode,
+                        h.minorName,
+                        i.specCode,
+                        i.specName,
+                        j.ccdCode,
+                        j.ccdName 
                     FROM 
                         stu_acad_cred a 
                     LEFT JOIN 
@@ -991,6 +1136,34 @@ class StudentModel {
                         person c 
                     ON 
                         a.stuID = c.personID 
+                    LEFT JOIN 
+                    	stu_program d 
+                	ON 
+                		a.stuID = d.stuID 
+            		LEFT JOIN 
+            			acad_program e 
+        			ON 
+        				d.acadProgCode = e.acadProgCode 
+    				LEFT JOIN 
+    				    degree f 
+				    ON 
+				        e.degreeCode = f.degreeCode 
+			        LEFT JOIN 
+			            major g 
+		            ON 
+		                e.majorCode = g.majorCode 
+	                LEFT JOIN 
+	                    minor h 
+                    ON 
+                        e.minorCode = h.minorCode 
+                    LEFT JOIN 
+                        specialization i 
+                    ON 
+                        e.specCode = i.specCode 
+                    LEFT JOIN 
+                        ccd j 
+                    ON 
+                        e.ccdCode = j.ccdCode 
                     WHERE 
                         a.stuID = :stuID 
                     AND
@@ -998,14 +1171,17 @@ class StudentModel {
                     AND 
                         b.addressStatus = 'C' 
                     AND 
-                        b.addressType = 'P'",
+                        b.addressType = 'P' 
+                    AND 
+                    	e.acadLevelCode = :acadLevelCode",
                     $bind
         );
         foreach($q as $r) {
             $array[] = $r;
         }
 
-        return $array;    }
+        return $array;
+    }
     
     public function tranCourse() {
         $array = [];
@@ -1015,38 +1191,35 @@ class StudentModel {
         $q = DB::inst()->query( "SELECT 
                         a.compCred AS acadCompCred,
                         a.attCred AS acadAttCred,
+                        a.gradePoints AS acadGradePoints,
                         a.grade,
                         a.gradePoints AS acadGradePoints,
                         b.secShortTitle,
+                        b.courseCode,
                         b.courseSecCode,
                         b.startDate,
                         b.endDate,
                         c.attCred AS termAttCred,
                         c.compCred AS termCompCred,
                         c.gradePoints AS termGradePoints,
-                        c.termID,
-                        c.termGPA,
-                        d.termCode 
+                        c.termCode,
+                        c.termGPA 
                     FROM 
                         stu_acad_cred a 
                     LEFT JOIN 
                         course_sec b 
                     ON 
-                        a.courseSecID = b.courseSecID 
+                        a.courseSecCode = b.courseSecCode 
                     LEFT JOIN 
                         stu_term_gpa c
                     ON 
-                        a.termID = c.termID 
-                    LEFT JOIN 
-                        term d 
-                    ON 
-                        a.termID = d.termID 
+                        a.termCode = c.termCode 
                     WHERE 
                         a.stuID = :stuID 
                     AND 
                         a.acadLevelCode = :acadLevelCode 
                     GROUP BY 
-                        c.termID",
+                        a.courseSecCode,a.termCode",
                     $bind
         );
         
@@ -1054,6 +1227,68 @@ class StudentModel {
             $array[] = $r;
         }
         return $array;
+    }
+    
+    public function tranGPA() {
+        $array = [];
+        $stuID = isGetSet('studentID');
+        $tranType = isGetSet('acadLevelCode');
+        $bind = [ ":stuID" => $stuID, ":level" => $tranType ];
+        $q = DB::inst()->query( "SELECT 
+                        SUM(attCred) as Attempted,
+                        SUM(compCred) as Completed,
+                        SUM(gradePoints) as Points,
+                        SUM(compCred*gradePoints)/SUM(compCred) as GPA 
+                    FROM 
+                        stu_acad_cred 
+                    WHERE 
+                        stuID = :stuID 
+                    AND 
+                        acadLevelCode = :level 
+                    AND 
+                        grade IS NOT NULL 
+                    GROUP BY 
+                        stuID",
+                    $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+    
+    public function runRSTR($data) {
+        $bind = [
+                "stuID" => $data['stuID'],"rstrCode" => $data['rstrCode'],"severity" => $data['severity'],
+                "startDate" => $data['startDate'],"endDate" => $data['endDate'],
+                "comment" => $data['comment'],"addDate" => $data['addDate'],"addedBy" => $data['addedBy']
+                ];
+        $q = DB::inst()->insert('restriction',$bind);
+        if(!$q) {
+            redirect( BASE_URL . 'error/save_data/' );
+        } else {
+            /* Write to logs */
+            $this->_log->setLog('New Record','Student Restriction',get_name($data['stuID']),$this->_uname);
+            redirect( BASE_URL . 'student/rstr/' . $data['stuID'] . '/' . bm() );
+        }
+    }
+    
+    public function runEditRSTR($data) {
+        $size = count($data['rstrID']);
+        $i = 0;
+        while($i < $size) {
+            $update = [
+                    "rstrCode" => $data['rstrCode'][$i],"severity" => $data['severity'][$i],
+                    "startDate" => $data['startDate'][$i],"endDate" => $data['endDate'][$i],
+                    "comment" => $data['comment'][$i]
+                    ];
+            $bind = [ ":stuID" => $data['stuID'],":id" => $data['rstrID'][$i] ];
+            $q = DB::inst()->update('restriction',$update,'stuID=:stuID AND rstrID=:id',$bind);
+        ++$i;
+        }
+        /* Write to logs */
+        $this->_log->setLog('Update Record','Student Restriction',get_name($data['stuID']),$this->_uname);
+        redirect( BASE_URL . 'student/rstr/' . $data['stuID'] . '/' . bm() );
     }
     
 	public function __destruct() {

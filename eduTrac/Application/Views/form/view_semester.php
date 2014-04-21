@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/semester/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?php _e( _t( 'Semester' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/semester/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_t( 'Semester' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View Semester' ) ); ?></li>
+	<li><?=_t( 'View Semester' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'View Semester' ) ); ?></h3>
+<h3><?=_t( 'View Semester' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,41 +48,41 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-    					<div class="control-group">
-							<label class="control-label" for="acadYearID"><font color="red">*</font> <?php _e( _t( 'Academic Year' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="acadYearID" id="select2_10"<?=gio();?> required>
+    					<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Year' );?></label>
+							<div class="col-md-8">
+								<select name="acadYearCode" class="selectpicker col-md-12 form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?> required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown("acad_year", "", "acadYearID", "acadYearCode", "acadYearDesc", _h($this->sem[0]['acadYearID'])); ?>
+                            		<?php table_dropdown("acad_year", 'acadYearCode <> "NULL"', "acadYearCode", "acadYearCode", "acadYearDesc", _h($this->sem[0]['acadYearCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
                     
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="semCode"><font color="red">*</font> <?php _e( _t( 'Semester Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" type="text"<?=gio();?> name="semCode" value="<?=_h($this->sem[0]['semCode']);?>" /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="semCode"><font color="red">*</font> <?=_t( 'Semester Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" type="text"<?=gio();?> name="semCode" value="<?=_h($this->sem[0]['semCode']);?>" /></div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semName"><font color="red">*</font> <?php _e( _t( 'Semester' ) ); ?></label>
-							<div class="controls"><input class="span12" id="semName"<?=gio();?> name="semName" type="text" value="<?=_h($this->sem[0]['semName']);?>" /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="semName"><font color="red">*</font> <?=_t( 'Semester' );?></label>
+							<div class="col-md-8"><input class="form-control"<?=gio();?> name="semName" type="text" value="<?=_h($this->sem[0]['semName']);?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -90,40 +90,40 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="semStartDate"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startdate"<?=gio();?> name="semStartDate" type="text" value="<?=_h($this->sem[0]['semStartDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="semStartDate"><font color="red">*</font> <?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker6">
+                                    <input class="form-control" <?=gio();?> name="semStartDate" type="text" value="<?=_h($this->sem[0]['semStartDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semEndDate"><font color="red">*</font> <?php _e( _t( 'End Date' ) ); ?></label>
-							<div class="controls">
-								<div class="input-append date" id="datetimepicker8">
-						    		<input id="enddate"<?=gio();?> name="semEndDate" type="text" value="<?=_h($this->sem[0]['semEndDate']);?>" required />
-				    				<span class="add-on"><i class="icon-th"></i></span>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="semEndDate"><font color="red">*</font> <?=_t( 'End Date' );?></label>
+							<div class="col-md-8">
+								<div class="input-group date col-md-8" id="datepicker8">
+						    		<input class="form-control" <?=gio();?> name="semEndDate" type="text" value="<?=_h($this->sem[0]['semEndDate']);?>" required />
+				    				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 								</div>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semester"><font color="red">*</font> <?php _e( _t( 'Active' ) ); ?></label>
-							<div class="controls">
-								<select style="width:25%" name="active" id="select2_11"<?=gio();?> required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="semester"><font color="red">*</font> <?=_t( 'Active' );?></label>
+							<div class="col-md-8">
+								<select name="active" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?> required>
 									<option value="">&nbsp;</option>
-                            		<option value="1"<?php if($this->sem[0]['active'] == '1') { echo ' selected="selected"'; } ?>><?php _e( _t( 'Yes' ) ); ?></option>
-                            		<option value="0"<?php if($this->sem[0]['active'] == '0') { echo ' selected="selected"'; } ?>><?php _e( _t( 'No' ) ); ?></option>
+                            		<option value="1"<?php if($this->sem[0]['active'] == '1') { echo ' selected="selected"'; } ?>><?=_t( 'Yes' );?></option>
+                            		<option value="0"<?php if($this->sem[0]['active'] == '0') { echo ' selected="selected"'; } ?>><?=_t( 'No' );?></option>
                             	</select>
 							</div>
 						</div>
@@ -139,7 +139,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input id="sid" name="semesterID" type="hidden" value="<?=_h($this->sem[0]['semesterID']);?>" />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 			</div>

@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,37 +36,42 @@ class Application extends \eduTrac\Classes\Core\Controller {
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('Search Applications');
-		$this->view->css = array( 
-								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-								);
-								
-		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-								'theme/scripts/demo/tables.js'
-								);
+		$this->view->staticTitle = array(_t('Search Applications'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+        $this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->search = $this->model->search();
 		$this->view->render('application/index');
 	}
     
     public function add($id) {
         if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Add Application');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Application'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->person = $this->model->person($id);
         $this->view->address = $this->model->address($id);
         
@@ -78,17 +83,21 @@ class Application extends \eduTrac\Classes\Core\Controller {
     
     public function view($id) {
         if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('View Application');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Application'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->appl = $this->model->appl($id);
         $this->view->applAddr = $this->model->applAddr($id);
         $this->view->inst = $this->model->inst($id);
@@ -99,11 +108,28 @@ class Application extends \eduTrac\Classes\Core\Controller {
         
         $this->view->render('application/view');
     }
+	
+	public function inst_attended() {
+        if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array(_t('Institution Attended'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
+        $this->view->render('application/inst_attended');
+    }
     
     public function runApplication() {
         if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
-        $data['acadProgID'] = isPostSet('acadProgID');
+		$data['applDate'] = isPostSet('applDate');
+        $data['acadProgCode'] = isPostSet('acadProgCode');
         $data['startTerm'] = isPostSet('startTerm');
         $data['admitStatus'] = isPostSet('admitStatus');
         $data['PSAT_Verbal'] = isPostSet('PSAT_Verbal');
@@ -112,10 +138,6 @@ class Application extends \eduTrac\Classes\Core\Controller {
         $data['SAT_Math'] = isPostSet('SAT_Math');
         $data['ACT_English'] = isPostSet('ACT_English');
         $data['ACT_Math'] = isPostSet('ACT_Math');
-        $data['instID'] = isPostSet('instID');
-        $data['fromDate'] = isPostSet('fromDate');
-        $data['toDate'] = isPostSet('toDate');
-        $data['GPA'] = isPostSet('GPA');
         $data['personID'] = isPostSet('personID');
         $this->model->runApplication($data);
     }
@@ -123,7 +145,8 @@ class Application extends \eduTrac\Classes\Core\Controller {
     public function runEditApplication() {
         if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
-        $data['acadProgID'] = isPostSet('acadProgID');
+		$data['applDate'] = isPostSet('applDate');
+        $data['acadProgCode'] = isPostSet('acadProgCode');
         $data['startTerm'] = isPostSet('startTerm');
         $data['admitStatus'] = isPostSet('admitStatus');
         $data['PSAT_Verbal'] = isPostSet('PSAT_Verbal');
@@ -132,14 +155,43 @@ class Application extends \eduTrac\Classes\Core\Controller {
         $data['SAT_Math'] = isPostSet('SAT_Math');
         $data['ACT_English'] = isPostSet('ACT_English');
         $data['ACT_Math'] = isPostSet('ACT_Math');
-        $data['instID'] = isPostSet('instID');
+        $data['schoolCode'] = isPostSet('schoolCode');
         $data['fromDate'] = isPostSet('fromDate');
         $data['toDate'] = isPostSet('toDate');
+		$data['major'] = isPostSet('major');
         $data['GPA'] = isPostSet('GPA');
+		$data['degree_awarded'] = isPostSet('degree_awarded');
+        $data['degree_conferred_date'] = isPostSet('degree_conferred_date');
         $data['personID'] = isPostSet('personID');
         $data['applID'] = isPostSet('applID');
         $data['instAttID'] = isPostSet('instAttID');
         $this->model->runEditApplication($data);
+    }
+	
+	public function runInstAttended() {
+        if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
+        $data = [];
+		$data['personID'] = isPostSet('personID');
+        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['fromDate'] = isPostSet('fromDate');
+        $data['toDate'] = isPostSet('toDate');
+        $data['major'] = isPostSet('major');
+		$data['GPA'] = isPostSet('GPA');
+        $data['degree_awarded'] = isPostSet('degree_awarded');
+        $data['degree_conferred_date'] = isPostSet('degree_conferred_date');
+		$data['addDate'] = date('Y-m-d');
+		$data['addedBy'] = isPostSet('addedBy');
+        $this->model->runInstAttended($data);
+    }
+
+	public function runApplicantLookup() {
+		$data = [];
+		$data['personID'] = isPostSet('personID');
+		$this->model->runApplicantLookup($data);
+	}
+	
+	public function deleteInstAttend($id) {
+        $this->model->deleteInstAttend($id);
     }
     
     public function search() {

@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -39,19 +39,19 @@ class AcadProgram {
 	private $_statusDate; //date
 	private $_approvedBy; //int(8) unsigned zerofill
 	private $_approvedDate; //date
-	private $_deptID; //varchar(11)
-	private $_schoolID; //varchar(11)
-	private $_acadYearID; //text
+	private $_deptCode; //varchar(11)
+	private $_schoolCode; //varchar(11)
+	private $_acadYearCode; //text
 	private $_startDate; //date
 	private $_endDate; //date
-	private $_degreeID; //varchar(11)
-	private $_ccdID; //text
-	private $_majorID; //text
-	private $_minorID; //text
-	private $_specID; //text
+	private $_degreeCode; //varchar(11)
+	private $_ccdCode; //text
+	private $_majorCode; //text
+	private $_minorCode; //text
+	private $_specCode; //text
 	private $_acadLevelCode; //varchar(11)
-	private $_cipID; //varchar(11)
-	private $_locationID; //varchar(11)
+	private $_cipCode; //varchar(11)
+	private $_locationCode; //varchar(11)
 	private $_LastUpdate; //timestamp
 
     /**
@@ -63,8 +63,8 @@ class AcadProgram {
      * @return mixed one row or an array
      */
 	public function Load_from_key($key_row) {
-        $bind = array( ":id" => $key_row );
-        $q = DB::inst()->select( "acad_program","acadProgID = :id","","*",$bind );
+        $bind = array( ":code" => $key_row );
+        $q = DB::inst()->select( "acad_program","acadProgCode = :code","","*",$bind );
 		foreach($q as $row) {
 			$this->_acadProgID = $row["acadProgID"];
 			$this->_acadProgCode = $row["acadProgCode"];
@@ -74,19 +74,19 @@ class AcadProgram {
 			$this->_statusDate = $row["statusDate"];
 			$this->_approvedBy = $row["approvedBy"];
 			$this->_approvedDate = $row["approvedDate"];
-			$this->_deptID = $row["deptID"];
-			$this->_schoolID = $row["schoolID"];
-			$this->_acadYearID = $row["acadYearID"];
+			$this->_deptCode = $row["deptCode"];
+			$this->_schoolCode = $row["schoolCode"];
+			$this->_acadYearCode = $row["acadYearCode"];
 			$this->_startDate = $row["startDate"];
 			$this->_endDate = $row["endDate"];
-			$this->_degreeID = $row["degreeID"];
-			$this->_ccdID = $row["ccdID"];
-			$this->_majorID = $row["majorID"];
-			$this->_minorID = $row["minorID"];
-			$this->_specID = $row["specID"];
+			$this->_degreeCode = $row["degreeCode"];
+			$this->_ccdCode = $row["ccdCode"];
+			$this->_majorCode = $row["majorCode"];
+			$this->_minorCode = $row["minorCode"];
+			$this->_specCode = $row["specCode"];
 			$this->_acadLevelCode = $row["acadLevelCode"];
-			$this->_cipID = $row["cipID"];
-			$this->_locationID = $row["locationID"];
+			$this->_cipCode = $row["cipCode"];
+			$this->_locationCode = $row["locationCode"];
 			$this->_LastUpdate = $row["LastUpdate"];
 		}
 	}
@@ -202,8 +202,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int deptID - int(11)
 	 */
-	public function getDeptID(){
-		return $this->_deptID;
+	public function getDeptCode(){
+		return $this->_deptCode;
 	}
 
 	/**
@@ -213,8 +213,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int schoolID - int (11)
 	 */
-	public function getSchoolID(){
-		return $this->_schoolID;
+	public function getSchoolCode(){
+		return $this->_schoolCode;
 	}
 
 	/**
@@ -224,8 +224,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int acadYearID - int(11)
 	 */
-	public function getAcadYearID(){
-		return $this->_acadYearID;
+	public function getAcadYearCode(){
+		return $this->_acadYearCode;
 	}
 
 	/**
@@ -258,8 +258,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int degreeID - int(11)
 	 */
-	public function getDegreeID(){
-		return $this->_degreeID;
+	public function getDegreeCode(){
+		return $this->_degreeCode;
 	}
 
 	/**
@@ -269,8 +269,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int ccdID - int(11)
 	 */
-	public function getCCDID(){
-		return $this->_ccdID;
+	public function getCCDCode(){
+		return $this->_ccdCode;
 	}
 
 	/**
@@ -280,8 +280,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int majorID - int(11)
 	 */
-	public function getMajorID(){
-		return $this->_majorID;
+	public function getMajorCode(){
+		return $this->_majorCode;
 	}
 
 	/**
@@ -292,7 +292,7 @@ class AcadProgram {
 	 * @return int minorID - int(11)
 	 */
 	public function getMinorCode(){
-		return $this->_minorID;
+		return $this->_minorCode;
 	}
 
 	/**
@@ -302,8 +302,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int specID - int(11)
 	 */
-	public function getSpecID(){
-		return $this->_specID;
+	public function getSpecCode(){
+		return $this->_specCode;
 	}
 
 	/**
@@ -324,8 +324,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int cipID - int(11)
 	 */
-	public function getCIPID(){
-		return $this->_cipID;
+	public function getCIPCode(){
+		return $this->_cipCode;
 	}
 
 	/**
@@ -335,8 +335,8 @@ class AcadProgram {
      * @since 1.0.0
 	 * @return int locationID - int(11)
 	 */
-	public function getLocationID(){
-		return $this->_locationID;
+	public function getLocationCode(){
+		return $this->_locationCode;
 	}
 
 	/**

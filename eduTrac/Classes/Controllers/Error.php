@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,100 +36,114 @@ class Error extends \eduTrac\Classes\Core\Controller {
 		parent::__construct();
 		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
         if(!$this->_auth->isUserLoggedIn()) { redirect( BASE_URL . 'dashboard/' ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
     
     public function logs() {
-        $this->view->staticTitle = array('Error Log');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-                                'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-                                'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-                                'theme/scripts/demo/tables.js'
-                                );
+        $this->view->staticTitle = array(_t('Error Log'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
         $this->view->logs = $this->model->logs();
         $this->view->render('error/logs');
     }
 	
 	public function index() {
-		$this->view->render('error-header/index',true);
+		$this->view->render('error/header',true);
 		$this->view->render('error/index',true);
-		$this->view->render('error-footer/index',true);
+		$this->view->render('error/footer',true);
 	}
     
     public function population() {
-        $this->view->staticTitle = array('Missing Population');
+        $this->view->staticTitle = array(_t('Missing Population'));
         $this->view->render('error/population');
     }
     
     public function import() {
-        $this->view->staticTitle = array('Importer Error');
+        $this->view->staticTitle = array(_t('Importer Error'));
         $this->view->render('error/import');
     }
     
     public function invalid_record() {
-        $this->view->staticTitle = array('Invalid Record');
+        $this->view->staticTitle = array(_t('Invalid Record'));
         $this->view->render('error/invalid_record');
     }
 	
     public function sql() {
-        $this->view->staticTitle = array('SQL Restricted Keywords');
+        $this->view->staticTitle = array(_t('SQL Restricted Keywords'));
         $this->view->render('error/sql');
     }
     
 	public function screen_error() {
-		$this->view->staticTitle = array('Screen Error');
+		$this->view->staticTitle = array(_t('Screen Error'));
 		$this->view->render('error/screen_error');
 	}
     
     public function delete_record() {
-        $this->view->staticTitle = array('Delete Record Error');
+        $this->view->staticTitle = array(_t('Delete Record Error'));
         $this->view->render('error/delete_record');
     }
     
     public function update_record() {
-        $this->view->staticTitle = array('Update Record Error');
+        $this->view->staticTitle = array(_t('Update Record Error'));
         $this->view->render('error/update_record');
     }
 	
 	public function save_query() {
-		$this->view->staticTitle = array('Save Query');
+		$this->view->staticTitle = array(_t('Save Query'));
 		$this->view->render('error/save_query');
 	}
     
     public function nslc_purge() {
-        $this->view->staticTitle = array('NSLC Purge Error');
+        $this->view->staticTitle = array(_t('NSLC Purge Error'));
         $this->view->render('error/nslc_purge');
     }
     
     public function nslc_extraction() {
-        $this->view->staticTitle = array('NSLC Extraction Error');
+        $this->view->staticTitle = array(_t('NSLC Extraction Error'));
         $this->view->render('error/nslc_extraction');
     }
     
     public function course_registration() {
-        $this->view->staticTitle = array('Course Registration Error');
+        $this->view->staticTitle = array(_t('Course Registration Error'));
         $this->view->render('error/course_registration');
     }
     
+    public function registration() {
+        $this->view->staticTitle = array(_t('Registration Restriction'));
+        $this->view->render('error/registration');
+    }
+    
     public function save_data() {
-        $this->view->staticTitle = array('Save Data');
+        $this->view->staticTitle = array(_t('Save Data'));
         $this->view->render('error/save_data');
     }
     
     public function edit_data() {
-        $this->view->staticTitle = array('Edit Data');
+        $this->view->staticTitle = array(_t('Edit Data'));
         $this->view->render('error/edit_data');
     }
     
     public function reset_password() {
-        $this->view->staticTitle = array('Reset Password Error');
+        $this->view->staticTitle = array(_t('Reset Password Error'));
         $this->view->render('error/reset_password');
     }
     

@@ -22,13 +22,15 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 use \eduTrac\Classes\Libraries\Hooks;
 ?>
-		<div id="footer" class="hidden-print">
+<div class="clearfix"></div>
+
+		<div id="custom-footer" class="hidden-print">
 			
 			<!--  Copyright Line -->
 			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <?php version(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
@@ -40,121 +42,32 @@ use \eduTrac\Classes\Libraries\Hooks;
 	</div>
 	<!-- // Main Container Fluid END -->
 	
-<!-- Themer -->
-<div id="themer" class="collapse">
-    <div class="wrapper">
-        <span class="close2">&times; close</span>
-        <h4>Themer <span>color options</span></h4>
-        <ul>
-            <li>Theme: <select id="themer-theme" class="pull-right"></select><div class="clearfix"></div></li>
-            <li>Primary Color: <input type="text" data-type="minicolors" data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left" id="themer-primary-cp" /><div class="clearfix"></div></li>
-            <li>
-                <span class="link" id="themer-custom-reset">reset theme</span>
-                <span class="pull-right"><label>advanced <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- // Themer END -->
-
-	
-	<!-- Code Beautify -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/js-beautify/beautify.js"></script>
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/js-beautify/beautify-html.js"></script>
-	
 	<!-- Global -->
 	<script>
 	var basePath = '',
-		commonPath = '<?=BASE_URL;?>static/common/';
-		adminPath = '<?=BASE_URL;?>admin/';
+		commonPath = '<?=BASE_URL;?>static/assets/',
+		rootPath = '<?=BASE_URL;?>',
+		DEV = false,
+		componentsPath = '<?=BASE_URL;?>static/assets/components/';
+	
+	var primaryColor = '#4a8bc2',
+		dangerColor = '#b55151',
+		infoColor = '#74a6d0',
+		successColor = '#609450',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
 	</script>
-	
-	<!-- JQueryUI -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
-	
-	<!-- JQueryUI Touch Punch -->
-	<!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-	
-	
-	<!-- Modernizr -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/modernizr.js"></script>
-	
-	<!-- Bootstrap -->
-	<script src="<?=BASE_URL;?>static/common/bootstrap/js/bootstrap.min.js"></script>
-	
-	<!-- SlimScroll Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js"></script>
-	
-	<!-- Common Demo Script -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/common.js?1371788382"></script>
-	
-	<!-- Holder Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/holder/holder.js"></script>
-	<script>
-		Holder.add_theme("dark", {background:"#000", foreground:"#aaa", size:9});
-		Holder.add_theme("white", {background:"#fff", foreground:"#c9c9c9", size:9});
-	</script>
-	
-	<!-- Uniform Forms Plugin -->
-	<script src="<?=BASE_URL; ?>static/common/theme/scripts/plugins/forms/pixelmatrix-uniform/jquery.uniform.min.js"></script>
-
-	<!-- Bootstrap Extended -->
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootstrap-select/bootstrap-select.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/jasny-fileupload/js/bootstrap-fileupload.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootbox.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js"></script>
-	<script src="<?=BASE_URL;?>static/common/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
-	
-	<!-- Google Code Prettify -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/google-code-prettify/prettify.js"></script>
-	
-	<!-- Gritter Notifications Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/notifications/Gritter/js/jquery.gritter.min.js"></script>
-	
-	<!-- MiniColors Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/color/jquery-miniColors/jquery.miniColors.js"></script>
-	
-	<!-- DateTimePicker Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/forms/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-	<!-- Cookie Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/system/jquery.cookie.js"></script>
-	
-	<!-- Ba-Resize Plugin -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/plugins/other/jquery.ba-resize.js"></script>
-	
-	<!-- Dashboard Demo Script -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/index.js?1371788382"></script>
-	
-	<!-- Shortcut Keys -->
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/mousetrap.js"></script>
-	<script src="<?=BASE_URL;?>static/common/theme/scripts/demo/shortcut.js"></script>
-	
-	<!-- Colors -->
-    <script>
-    var primaryColor = '#4a8bc2',
-        dangerColor = '#b55151',
-        successColor = '#609450',
-        warningColor = '#ab7a4b',
-        inverseColor = '#45484d';
-    </script>
-    
-    <!-- Themer -->
-    <script>
-    var themerPrimaryColor = primaryColor;
-    </script>
-    <script src="<?=BASE_URL;?>static/common/theme/scripts/demo/themer.js"></script>	
-	
-	<!-- Google JSAPI -->
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="<?=BASE_URL;?>static/assets/components/library/bootstrap/js/bootstrap.min.js?v=v2.1.0"></script>
+<script src="<?=BASE_URL;?>static/assets/components/plugins/slimscroll/jquery.slimscroll.js?v=v2.1.0"></script>
+<script src="<?=BASE_URL;?>static/assets/components/plugins/breakpoints/breakpoints.js?v=v2.1.0"></script>
+<script src="<?=BASE_URL;?>static/assets/components/core/js/core.init.js?v=v2.1.0"></script>
 	
 	<?php
 		if (isset($this->js)) {
         foreach ($this->js as $js){
-            _e( '<script type="text/javascript" src="' . BASE_URL . 'static/common/'.$js.'"></script>' . "\n" );
+            _e( '<script type="text/javascript" src="' . BASE_URL . 'static/assets/'.$js.'"></script>' . "\n" );
         }
     }
 	?>

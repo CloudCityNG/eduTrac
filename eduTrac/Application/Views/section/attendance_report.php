@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.5
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?php _e( _t( 'My Course Sections' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?=_t( 'My Course Sections' );?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>section/attendance/<?=$this->report[0]['courseSecID'];?>/<?=bm();?>" class="glyphicons charts"><i></i> <?=_h($this->report[0]['courseSecCode']);?> <?php _e( _t( 'Attendance' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>section/attendance/<?=$this->report[0]['courseSecCode'];?>&term=<?=$this->report[0]['termCode'];?>&date=<?=$this->report[0]['date'];?>" class="glyphicons charts"><i></i> <?=$this->report[0]['termCode'];?>-<?=_h($this->report[0]['courseSecCode']);?> <?=_t( 'Attendance' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Attendance Report' ) ); ?></li>
+	<li><?=_t( 'Attendance Report' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Attendance Report' ) ); ?></h3>
+<h3><?=_t( 'Attendance Report' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -49,13 +49,13 @@
 		    <!-- Row -->
                 <div class="row-fluid">
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
 		    
             		    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Course Section' ) ); ?></label>
-                            <div class="controls">
-                                <input class="center" id="date" readonly type="text" value="<?=_h($this->report[0]['termCode']).'-'._h($this->report[0]['courseSecCode']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Course Section' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="date" readonly type="text" value="<?=_h($this->report[0]['termCode']).'-'._h($this->report[0]['courseSecCode']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -63,13 +63,13 @@
                     </div>
                     
                     <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Student' ) ); ?></label>
-                            <div class="controls">
-                                <input class="center" id="date" readonly type="text" value="<?=get_name(_h($this->report[0]['stuID']));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Student' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="date" readonly type="text" value="<?=get_name(_h($this->report[0]['stuID']));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -84,8 +84,8 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Date' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Status' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Date' );?></th>
+						<th class="text-center"><?=_t( 'Status' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -94,10 +94,10 @@
 				<tbody>
                 <?php if($this->report != '') : foreach($this->report as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center">
+                    <td class="text-center">
                         <?=date('D, M d, o',strtotime($v['date']));?>
                     </td>
-                    <td class="center">
+                    <td class="text-center">
                         <?=_h($v['Status']);?>
                     </td>
                 </tr>

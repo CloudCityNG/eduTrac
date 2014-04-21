@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,23 +33,32 @@ class Sql extends \eduTrac\Classes\Core\Controller {
 	public function __construct() {
 		parent::__construct();
 		if(!hasPermission('access_sql_interface_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('SQL Terminal');
-		$this->view->css = array( 
-								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-								);
-								
-		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-								'theme/scripts/demo/tables.js'
-								);
+		$this->view->staticTitle = array(_t('SQL Terminal'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
 		$this->view->render('sql/index');
 	}
 	

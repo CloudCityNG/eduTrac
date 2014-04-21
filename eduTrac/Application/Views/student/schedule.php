@@ -22,22 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?php _e( _t( 'Student Portal' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>student/portal/<?=bm();?>" class="glyphicons home"><i></i> <?=_t( 'Student Portal' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Schedule' ) ); ?></li>
+    <li><a href="<?=BASE_URL;?>student/terms/<?=bm();?>" class="glyphicons flag"><i></i> <?=_t( 'Terms' );?></a></li>
+    <li class="divider"></li>
+	<li><?=_t( 'Schedule' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Schedule' ) ); ?></h3>
+<h3><?=_t( 'Schedule' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -50,13 +52,13 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Course Code' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Title' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Building' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Room' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Day(s) of the Week' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Time' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Instructor' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Course Code' );?></th>
+						<th class="text-center"><?=_t( 'Title' );?></th>
+						<th class="text-center"><?=_t( 'Building' );?></th>
+                        <th class="text-center"><?=_t( 'Room' );?></th>
+                        <th class="text-center"><?=_t( 'Day(s) of the Week' );?></th>
+                        <th class="text-center"><?=_t( 'Time' );?></th>
+						<th class="text-center"><?=_t( 'Instructor' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -65,13 +67,13 @@
 				<tbody>
 				<?php if($this->schedule != '') : foreach($this->schedule as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="center"><?=_h($v['secShortTitle']);?></td>
-                    <td class="center"><?=_h($v['buildingName']);?></td>
-                    <td class="center"><?=_h($v['roomNumber']);?></td>
-                    <td class="center"><?=_h($v['dotw']);?></td>
-                    <td class="center"><?=_h($v['startTime'].' To '.$v['endTime']);?></td>
-                    <td class="center"><?=get_name(_h($v['facID']));?></td>
+                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
+                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center"><?=_h($v['buildingName']);?></td>
+                    <td class="text-center"><?=_h($v['roomNumber']);?></td>
+                    <td class="text-center"><?=_h($v['dotw']);?></td>
+                    <td class="text-center"><?=_h($v['startTime'].' To '.$v['endTime']);?></td>
+                    <td class="text-center"><?=get_name(_h($v['facID']));?></td>
                 </tr>
 				<?php } endif; ?>
 				</tbody>

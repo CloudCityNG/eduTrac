@@ -22,22 +22,25 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.1
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+$auth = new \eduTrac\Classes\Libraries\Cookies;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?php _e( _t( 'My Course Sections' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons ruller"><i></i> <?=_t( 'Course Sections' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Grading' ) ); ?></li>
+    <li><a href="<?=BASE_URL;?>section/assignments/<?=$this->grades[0]['courseSecCode'];?>&term=<?=$this->grades[0]['termCode'];?>" class="glyphicons book"><i></i> <?=$this->grades[0]['secShortTitle'];?> (<?=$this->grades[0]['termCode'];?>-<?=$this->grades[0]['courseSecCode'];?>) <?=_t( 'Assignments' );?></a></li>
+    <li class="divider"></li>
+	<li><?=_t( 'Grades' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Grading' ) ); ?></h3>
+<h3><?=$this->grades[0]['secShortTitle'];?> (<?=$this->grades[0]['termCode'];?>-<?=$this->grades[0]['courseSecCode'];?>) - <?=$this->grades[0]['title'];?></h3>
 <div class="innerLR">
 
     <!-- Form -->
@@ -48,15 +51,14 @@
 		<div class="widget-body">
 			
 			<!-- Table -->
-			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
+			<table class="table table-striped table-bordered table-condensed table-white">
 			
 				<!-- Table heading -->
 				<thead>
 					<tr>
-                        <th class="center"><?php _e( _t( 'Course Section' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Student ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Grade' ) ); ?></th>
-                        <th style="display:none;">&nbsp;</th>
+                        <th class="text-center"><?=_t( 'Student' );?></th>
+						<th class="text-center"><?=_t( 'Grade' );?></th>
+						<th style="display:none;">&nbsp;</th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -65,18 +67,11 @@
 				<tbody>
                 <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['termCode'].'-'.$v['courseSecCode']);?></td>
-                    <td class="center">
-                        <?=get_name(_h($v['stuID']));?>
-                        <input type="hidden" name="stuID[]" value="<?=_h($v['stuID']);?>" />
+                    <td class="text-center"><?=get_name(_h($v['stuID']));?></td>
+                    <td class="text-center">
+                        <?=grades(_h($v['stuID']),_h($v['assignID']));?>
                     </td>
-                    <td class="center">
-                        <?=grading_scale(_h($v['grade']));?>
-                    </td>
-                    <td style="display:none;">
-                        <input type="hidden" name="courseSecID" value="<?=_h($v['courseSecID']);?>" />
-                        <input type="hidden" name="termID" value="<?=_h($v['termID']);?>" />
-                    </td>
+                    <td style="display:none;"><input class="form-control" type="hidden" name="stuID[]" value="<?=_h($v['stuID']);?>" /></td>
                 </tr>
                 <?php } endif; ?>
 				</tbody>
@@ -89,10 +84,13 @@
     			
 			<!-- Form actions -->
 			<div class="form-actions">
-			    <?php if($this->grades != '') : foreach($this->grades as $k => $v) { ?>
-			    <input type="hidden" name="cmplCredit" value="<?=_h($v['minCredit']);?>" />
-			    <?php } endif; ?>
-				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+			    <input type="hidden" name="assignID" value="<?=_h($this->grades[0]['assignID']);?>" />
+                <input type="hidden" name="termCode" value="<?=_h($this->grades[0]['termCode']);?>" />
+			    <input type="hidden" name="courseSecCode" value="<?=_h($this->grades[0]['courseSecCode']);?>" />
+			    <input type="hidden" name="facID" value="<?=_h($this->grades[0]['facID']);?>" />
+			    <input type="hidden" name="addDate" value="<?=date("Y-m-d");?>" />
+			    <input type="hidden" name="addedBy" value="<?=$auth->getPersonField('personID');?>" />
+				<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 			</div>
 			<!-- // Form actions END -->
 			

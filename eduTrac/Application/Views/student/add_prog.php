@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,7 +31,7 @@ $antGradDate = "05/".date("y",strtotime("+4 years"));
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-    jQuery('#select2_10').live('change', function(event) {
+    jQuery('#prog').live('change', function(event) {
         $.ajax({
             type    : 'POST',
             url     : '<?=BASE_URL;?>student/runProgLookup/',
@@ -49,17 +49,17 @@ jQuery(document).ready(function() {
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Student' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Student' );?></a></li>
     <li class="divider"></li>
     <li><a href="<?=BASE_URL;?>student/view/<?=_h($this->student[0]['stuID']);?>/<?=bm();?>" class="glyphicons user"><i></i> <?=get_name(_h($this->student[0]['stuID']));?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'Add Student Program' ) ); ?></li>
+	<li><?=_t( 'Add Student Program' );?></li>
 </ul>
 
-<h3><?=get_name(_h($this->student[0]['stuID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->student[0]['stuID']);?></h3>
+<h3><?=get_name(_h($this->student[0]['stuID']));?>: <?=_h($this->student[0]['stuID']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -70,52 +70,55 @@ jQuery(document).ready(function() {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Program' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="progID" id="select2_10">
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Program' );?></label>
+							<div class="col-md-8">
+								<select name="acadProgCode" id="prog" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_program','','acadProgID','acadProgCode','acadProgTitle');?>
+                                    <?php table_dropdown('acad_program','','acadProgCode','acadProgCode','acadProgTitle');?>
                                 </select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly id="schoolName" class="span12" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'School' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly id="schoolName" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
                                 <?=stu_prog_status_select();?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Grad Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="antGradDate" class="span2 center" id="antGradDate" value="<?=$antGradDate;?>" readonly required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Advisor' );?></label>
+                            <div class="col-md-8">
+                                <select name="advisorID"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php facID_dropdown(); ?>
+                                </select>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -124,37 +127,46 @@ jQuery(document).ready(function() {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
+						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Ant Grad Date' );?></label>
+                            <div class="col-md-2">
+                                <input type="text" name="antGradDate" class="form-control center" id="antGradDate" value="<?=$antGradDate;?>" readonly required />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="startDate" type="text" required/>
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker6">
+                                    <input class="form-control" name="startDate" type="text" required/>
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker7">
-                                    <input id="endDate" name="endDate" type="text" />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker7">
+                                    <input class="form-control" name="endDate" type="text" />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly name="approvedBy" class="span6" value="<?=_h($this->student[0]['stuID']);?>" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved By' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" value="<?=get_name($auth->getPersonField('personID'));?>" required />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -169,8 +181,9 @@ jQuery(document).ready(function() {
 				<!-- Form actions -->
 				<div class="form-actions">
 				    <input type="hidden" name="stuID" value="<?=_h($this->student[0]['stuID']);?>" />
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=$this->student[0]['stuID'];?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+				    <input type="hidden" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" />
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/view/<?=$this->student[0]['stuID'];?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

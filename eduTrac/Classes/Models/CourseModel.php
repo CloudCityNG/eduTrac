@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -50,13 +50,14 @@ class CourseModel {
         $bind = array( ":crse" => "%$crse%" );
         $q = DB::inst()->select( "course",
                     "courseCode LIKE :crse",
-                    "courseID",
+                    "courseCode",
                     "CASE currStatus 
                     WHEN 'A' THEN 'Active' 
                     WHEN 'I' THEN 'Inactive' 
                     WHEN 'P' THEN 'Pending' 
                     ELSE 'Obsolete' 
                     END AS 'Status',
+                    currStatus,
                     courseID,
                     courseCode,
                     courseShortTitle,
@@ -72,12 +73,11 @@ class CourseModel {
 	}
     
     public function runCourse($data) {
-        $this->_subj->Load_from_key($data['subjectID']);
-        $cc = $this->_subj->getSubjCode().'-'.$data['courseNumber'];
+        $cc = $data['subjectCode'].'-'.$data['courseNumber'];
         
         $bind = array( 
-            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectID" => $data['subjectID'],
-            "deptID" => $data['deptID'],"courseDesc" => $data['courseDesc'],
+            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectCode" => $data['subjectCode'],
+            "deptCode" => $data['deptCode'],"courseDesc" => $data['courseDesc'],
             "minCredit" => $data['minCredit'],"courseLevelCode" => $data['courseLevelCode'],
             "acadLevelCode" => $data['acadLevelCode'],"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],
@@ -99,20 +99,19 @@ class CourseModel {
     
     public function runEditCourse($data) {
         $array = [];
-        $this->_subj->Load_from_key($data['subjectID']);
         $bind = array( ":id" => $data['courseID'] );
         $sql = DB::inst()->select( "course","courseID = :id","","currStatus",$bind );
         foreach($sql as $r) {
             $array[] = $r;
         }
         
-        $cc = $this->_subj->getSubjCode().'-'.$data['courseNumber'];
+        $cc = $data['subjectCode'].'-'.$data['courseNumber'];
         $bind = array( ":courseID" => $data['courseID'] );
         $statusDate = date("Y-m-d");
         
         $update1 = array( 
-            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectID" => $data['subjectID'],
-            "deptID" => $data['deptID'],"courseDesc" => $data['courseDesc'],
+            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectCode" => $data['subjectCode'],
+            "deptCode" => $data['deptCode'],"courseDesc" => $data['courseDesc'],
             "minCredit" => $data['minCredit'],"courseLevelCode" => $data['courseLevelCode'],
             "acadLevelCode" => $data['acadLevelCode'],"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"currStatus" => $data['currStatus']
@@ -145,10 +144,10 @@ class CourseModel {
         $array = [];
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
-                a.courseID,a.courseNumber,a.courseCode,a.subjectID,a.deptID,a.courseDesc,a.minCredit,
+                a.courseID,a.courseNumber,a.courseCode,a.subjectCode,a.deptCode,a.courseDesc,a.minCredit,
                 a.courseLevelCode,a.acadLevelCode,a.courseShortTitle,a.courseLongTitle,a.preReq,a.allowAudit,a.allowWaitlist,
-                a.minEnroll,a.seatCap,a.startDate,a.endDate,a.currStatus,a.statusDate,a.approvedDate,a.LastUpdate,b.fname,
-                b.lname,c.subjectID 
+                a.minEnroll,a.seatCap,a.startDate,a.endDate,a.currStatus,a.statusDate,a.approvedDate,a.approvedBy,a.LastUpdate,b.fname,
+                b.lname 
             FROM 
                 course a 
             LEFT JOIN 
@@ -158,7 +157,7 @@ class CourseModel {
             LEFT JOIN 
                 subject c 
             ON 
-                a.subjectID = c.subjectID 
+                a.subjectCode = c.subjectCode 
             WHERE 
                 courseID = :id",
             $bind

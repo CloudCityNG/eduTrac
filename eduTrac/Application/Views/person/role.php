@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,15 +32,15 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>person/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Person' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>person/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Person' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Manage Person Role' ) ); ?></li>
+	<li><?=_t( 'Manage Person Role' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Manage Role for -' ) ); ?> <?=get_name(_h($this->role[0]['personID']));?></h3>
+<h3><?=get_name(_h($this->role[0]['personID']));?>: <?=_h($this->role[0]['personID']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -57,9 +57,9 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 					<!-- Table heading -->
 					<thead>
 						<tr>
-							<th><?php _e( _t( 'Role' ) ); ?></th>
-							<th><?php _e( _t( 'Member' ) ); ?></th>
-							<th><?php _e( _t( 'Not Member' ) ); ?></th>
+							<th><?=_t( 'Role' );?></th>
+							<th><?=_t( 'Member' );?></th>
+							<th><?=_t( 'Not Member' );?></th>
 						</tr>
 					</thead>
 					<!-- // Table heading END -->
@@ -93,7 +93,7 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 				<div class="form-actions">
 					<input type="hidden" name="action" value="saveRoles" />
 					<input type="hidden" name="personID" value="<?=_h($this->role[0]['personID']);?>" />
-					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
+					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

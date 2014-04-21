@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -76,11 +76,11 @@ class ProgramModel {
         $bind = array( 
                     "acadProgCode" => $data['acadProgCode'],"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
                     "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"approvedBy" => $data['approvedBy'],
-                    "approvedDate" => $data['approvedDate'],"deptID" => $data['deptID'],"schoolID" => $data['schoolID'],
-                    "acadYearID" => $data['acadYearID'],"startDate" => $data['startDate'],"endDate" => "NULL",
-                    "degreeID" => $data['degreeID'],"ccdID" => $data['ccdID'],"majorID" => $data['majorID'],
-                    "minorID" => $data['minorID'],"specID" => $data['specID'],"acadLevelCode" => $data['acadLevelCode'],
-                    "cipID" => $data['cipID'],"locationID" => $data['locationID']
+                    "approvedDate" => $data['approvedDate'],"deptCode" => $data['deptCode'],"schoolCode" => $data['schoolCode'],
+                    "acadYearCode" => $data['acadYearCode'],"startDate" => $data['startDate'],"endDate" => "NULL",
+                    "degreeCode" => $data['degreeCode'],"ccdCode" => $data['ccdCode'],"majorCode" => $data['majorCode'],
+                    "minorCode" => $data['minorCode'],"specCode" => $data['specCode'],"acadLevelCode" => $data['acadLevelCode'],
+                    "cipCode" => $data['cipCode'],"locationCode" => $data['locationCode']
         );
                
         $q = DB::inst()->insert( "acad_program", $bind );
@@ -91,7 +91,7 @@ class ProgramModel {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
             $this->_log->setLog('New Record','Academic Program',$data['acadProgTitle'],$this->_uname);
-            redirect( BASE_URL . 'program/view/' . $ID . bm() );
+            redirect( BASE_URL . 'program/view/' . $ID . '/' . bm() );
         }
     }
     
@@ -100,9 +100,9 @@ class ProgramModel {
         $bind = array( ":id" => $id );
         $q = DB::inst()->query( "SELECT 
                 a.acadProgID,a.acadProgCode,a.acadProgTitle,a.programDesc,a.currStatus,
-                a.statusDate,a.approvedDate,a.deptID,a.schoolID,a.acadYearID,
-                a.startDate,a.endDate,a.degreeID,a.ccdID,a.majorID,a.minorID,a.specID,
-                a.acadLevelCode,a.cipID,a.locationID,b.fname,b.lname,
+                a.statusDate,a.approvedDate,a.deptCode,a.schoolCode,a.acadYearCode,
+                a.startDate,a.endDate,a.degreeCode,a.ccdCode,a.majorCode,a.minorCode,a.specCode,
+                a.acadLevelCode,a.cipCode,a.locationCode,b.fname,b.lname,
                 c.deptName,d.schoolName,e.acadYearDesc,f.degreeName,g.ccdName,
                 h.majorName,i.minorName,j.specName,k.cipName,l.locationName 
             FROM 
@@ -114,43 +114,43 @@ class ProgramModel {
             LEFT JOIN 
                 department c 
             ON 
-                a.deptID = c.deptID 
+                a.deptCode = c.deptCode 
             LEFT JOIN 
                 school d 
             ON 
-                a.schoolID = d.schoolID 
+                a.schoolCode = d.schoolCode 
             LEFT JOIN 
                 acad_year e 
             ON 
-                a.acadYearID = e.acadYearID 
+                a.acadYearCode = e.acadYearCode 
             LEFT JOIN 
                 degree f 
             ON 
-                a.degreeID = f.degreeID 
+                a.degreeCode = f.degreeCode 
             LEFT JOIN 
                 ccd g 
             ON 
-                a.ccdID = g.ccdID 
+                a.ccdCode = g.ccdCode 
             LEFT JOIN 
                 major h 
             ON 
-                a.majorID = h.majorID 
+                a.majorCode = h.majorCode 
             LEFT JOIN 
                 minor i 
             ON 
-                a.minorID = i.minorID 
+                a.minorCode = i.minorCode 
             LEFT JOIN 
                 specialization j 
             ON 
-                a.specID = j.specID 
+                a.specCode = j.specCode 
             LEFT JOIN 
                 cip k 
             ON 
-                a.cipID = k.cipID 
+                a.cipCode = k.cipCode 
             LEFT JOIN 
                 location l 
             ON 
-                a.locationID = l.locationID 
+                a.locationCode = l.locationCode 
             WHERE 
                 a.acadProgID = :id",
             $bind
@@ -174,11 +174,11 @@ class ProgramModel {
         
         $update1 = array( 
                     "acadProgCode" => $data['acadProgCode'],"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
-                    "currStatus" => $data['currStatus'],"deptID" => $data['deptID'],"schoolID" => $data['schoolID'],
-                    "acadYearID" => $data['acadYearID'],"startDate" => $data['startDate'],"endDate" => $data['endDate'],
-                    "degreeID" => $data['degreeID'],"ccdID" => $data['ccdID'],"majorID" => $data['majorID'],
-                    "minorID" => $data['minorID'],"specID" => $data['specID'],"acadLevelCode" => $data['acadLevelCode'],
-                    "cipID" => $data['cipID'],"locationID" => $data['locationID']
+                    "currStatus" => $data['currStatus'],"deptCode" => $data['deptCode'],"schoolCode" => $data['schoolCode'],
+                    "acadYearCode" => $data['acadYearCode'],"startDate" => $data['startDate'],"endDate" => $data['endDate'],
+                    "degreeCode" => $data['degreeCode'],"ccdCode" => $data['ccdCode'],"majorCode" => $data['majorCode'],
+                    "minorCode" => $data['minorCode'],"specCode" => $data['specCode'],"acadLevelCode" => $data['acadLevelCode'],
+                    "cipCode" => $data['cipCode'],"locationCode" => $data['locationCode']
         );
         
         $q = DB::inst()->update( "acad_program", $update1, "acadProgID = :acadProgID", $bind );
@@ -188,7 +188,7 @@ class ProgramModel {
             DB::inst()->update( "acad_program", $update2, "acadProgID = :acadProgID", $bind );
         }
         $this->_log->setLog('Update Record','Academic Program',$data['acadProgTitle'],$this->_uname);
-        redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . bm() );
+        redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . '/' . bm() );
     }
     
     public function __destruct() {

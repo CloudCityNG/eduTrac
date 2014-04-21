@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.1
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,39 +36,30 @@ class Event extends \eduTrac\Classes\Core\Controller {
 		parent::__construct();
         $this->_log = new \eduTrac\Classes\Libraries\Log();
         if(!hasPermission('access_cronjob_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('Events');
-		$this->view->css = array( 
-								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-								);
-								
+		$this->view->staticTitle = array(_t('Events'));
 		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-								'theme/scripts/demo/tables.js'
-								);
+                                'plugins/datable/jquery.dataTables.min.js',
+                                'plugins/datable/dataTables.bootstrap.js',
+                                'plugins/datable/extras/TableTools/media/js/TableTools.min.js',
+                                'js/custom.js'
+                                );
         $this->view->cronList = $this->model->cronList();
 		$this->view->render('event/index');
 	}
     
     public function add() {
-        $this->view->staticTitle = array('Add Event');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Event'));
         $this->view->render('event/add');
     }
     

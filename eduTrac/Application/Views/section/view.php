@@ -22,28 +22,21 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
 $sec = new \eduTrac\Classes\DBObjects\Course;
 $sec->Load_from_key($this->sec[0]['courseID']);
-$list = '"'.implode('","', _h($sec->getPreReq())).'"';
 ?>
 
 <script type="text/javascript">
-$(function() {
-    $("#select2_course").select2({tags:[<?=$list;?>]});
-});
-</script>
-
-<script type="text/javascript">
 jQuery(document).ready(function() {
-    jQuery('#select2_10').live('change', function(event) {
+    jQuery('#term').live('change', function(event) {
         $.ajax({
             type    : 'POST',
-            url     : '<?=BASE_URL;?>section/runTermLookup/',
+            url     : '<?=BASE_URL;?>section/runSecTermLookup/',
             dataType: 'json',
             data    : $('#validateSubmitForm').serialize(),
             cache: false,
@@ -55,18 +48,23 @@ jQuery(document).ready(function() {
         });
     });
 });
+$(function(){
+    $('#sectionNumber').keyup(function() {
+        $('#section').text($(this).val());
+    });
+});
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Section' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Section' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View Section' ) ); ?></li>
+	<li><?=_h($this->sec[0]['termCode']);?>-<?=_h($this->sec[0]['courseSecCode']);?></li>
 </ul>
 
-<h3><?php _e( _t( 'Section' ) ); ?> <?=_h($this->sec[0]['courseSecCode']);?></h3>
+<h3><?=_h($this->sec[0]['termCode']);?>-<?=_h($this->sec[0]['courseSecCode']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -77,108 +75,108 @@ jQuery(document).ready(function() {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Section' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly class="span3" value="<?=_h($this->sec[0]['sectionNumber']);?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Section' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control col-md-3" value="<?=_h($this->sec[0]['sectionNumber']);?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Term' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="termID" id="select2_10"<?=csio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Term' );?></label>
+							<div class="col-md-8">
+								<select name="termCode" id="term" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('term', '', 'termID', 'termCode', 'termName',_h($this->sec[0]['termID'])); ?>
+                            		<?php table_dropdown('term', 'termCode <> "NULL"', 'termCode', 'termCode', 'termName',_h($this->sec[0]['termCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Section Start/End' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate"<?=csio();?> name="startDate" type="text" value="<?=_h($this->sec[0]['startDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Section Start/End' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-6" id="datepicker6">
+                                    <input class="form-control"<?=csio();?> id="startDate" name="startDate" type="text" value="<?=_h($this->sec[0]['startDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                                 
-                                <div class="input-append date" id="datetimepicker7">
-                                    <input id="endDate"<?=csio();?> name="endDate" type="text" value="<?=_h($this->sec[0]['endDate']);?>" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                                <div class="input-group date col-md-6" id="datepicker7">
+                                    <input class="form-control"<?=csio();?> id="endDate" name="endDate" type="text" value="<?=_h($this->sec[0]['endDate']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="deptID" id="select2_11"<?=csio();?> required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Department' );?></label>
+                            <div class="col-md-8">
+                                <select name="deptCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department', '', 'deptID', 'deptCode', 'deptName', _h($this->sec[0]['deptID'])); ?>
+                                    <?php table_dropdown('department', 'deptCode <> "NULL"', 'deptCode', 'deptCode', 'deptName', _h($this->sec[0]['deptCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Credits' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="minCredit"<?=csio();?> class="span4" value="<?=_h($this->sec[0]['minCredit']);?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Credits' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="minCredit"<?=csio();?> class="form-control" value="<?=_h($this->sec[0]['minCredit']);?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'CEU\'s' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="ceu" readonly class="span4" value="<?=_h($this->sec[0]['ceu']);?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'CEU\'s' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="ceu" readonly class="form-control" value="<?=_h($this->sec[0]['ceu']);?>" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Course Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Course Level' );?></label>
+                            <div class="col-md-8">
                                 <?=course_level_select(_h($this->sec[0]['courseLevelCode']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
                                 <?=acad_level_select(_h($this->sec[0]['acadLevelCode']),null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Short Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="secShortTitle" readonly class="span10" value="<?=_h($this->sec[0]['secShortTitle']);?>" required/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Short Title' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="secShortTitle" readonly class="form-control" value="<?=_h($this->sec[0]['secShortTitle']);?>" maxlength="25" required/>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -187,61 +185,62 @@ jQuery(document).ready(function() {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Location' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="locationID" id="select2_12"<?=csio();?> required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Location' );?></label>
+                            <div class="col-md-8">
+                                <select name="locationCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('location', '', 'locationID', 'locationCode', 'locationName', _h($this->sec[0]['locationID'])); ?>
+                                    <?php table_dropdown('location', 'locationCode <> "NULL"', 'locationCode', 'locationCode', 'locationName', _h($this->sec[0]['locationCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
                                 <?=course_sec_status_select(_h($this->sec[0]['currStatus']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
-                            <div class="controls">
-                                <input id="statusDate" name="statusDate" type="text" readonly value="<?=_h($this->sec[0]['statusDate']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Date' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="statusDate" type="text" readonly value="<?=_h($this->sec[0]['statusDate']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Prerequisites' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="select2_course" disabled value="<?=_h($sec->getpreReq());?>" class="span10" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Prerequisites' );?></label>
+                            <div class="col-md-8">
+                            	<input class="form-control" readonly type="text" value="<?=_h($sec->getpreReq());?>" />
+                                
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approval Person' ) ); ?></label>
-                            <div class="controls">
-                                <input id="approvedBy" type="text" readonly value="<?=get_name(_h($this->sec[0]['approvedBy']));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approval Person' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" readonly value="<?=get_name(_h($this->sec[0]['approvedBy']));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Approval Date' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="approvedDate" readonly value="<?=_h($this->sec[0]['approvedDate']);?>" class="span10" />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Approval Date' );?></label>
+							<div class="col-md-8">
+								<input type="text" name="approvedDate" readonly value="<?=_h($this->sec[0]['approvedDate']);?>" class="form-control" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -256,16 +255,13 @@ jQuery(document).ready(function() {
 				<div class="separator line bottom"></div>
 				
 				<!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Additional Info' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" disabled value="X" class="span1 center" />
-                                <a href="<?=BASE_URL;?>section/addnl_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
-                                    <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
-                                </a>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><?=_t( 'Additional Info' );?> <a href="<?=BASE_URL;?>section/addnl_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a></label>
+                            <div class="col-md-2">
+                                <input type="text" disabled value="X" class="form-control col-md-1 center" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -274,16 +270,13 @@ jQuery(document).ready(function() {
                 <!-- // Column End -->
                 
                 <!-- Column -->
-                    <div class="span6">
+                    <div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Offering Info' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" disabled value="X" class="span1 center" />
-                                <a href="<?=BASE_URL;?>section/offering_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>">
-                                    <img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" />
-                                </a>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"><?=_t( 'Offering Info' );?> <a href="<?=BASE_URL;?>section/offering_info/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a></label>
+                            <div class="col-md-2">
+                                <input type="text" disabled value="X" class="form-control col-md-1 center" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -298,8 +291,8 @@ jQuery(document).ready(function() {
 				<!-- Form actions -->
 				<div class="form-actions">
 				    <input type="hidden" name="courseSecID" value="<?=_h($this->sec[0]['courseSecID']);?>" />
-					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

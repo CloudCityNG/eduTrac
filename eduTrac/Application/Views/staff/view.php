@@ -2,10 +2,10 @@
 /**
  * View Staff View
  *  
- * PHP 5
+ * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 Joshua Parker
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,21 +20,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * @since eduTrac(tm) v 1.0
- * @license GNU General Public License v3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @link        http://www.7mediaws.org/
+ * @since       3.0.0
+ * @package     eduTrac
+ * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>staff/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Staff' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>staff/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Staff' );?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'View Staff' ) ); ?></li>
+	<li><?=_t( 'View Staff' );?></li>
 </ul>
 
-<h3><?=get_name(_h($this->staff[0]['staffID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->staff[0]['staffID']);?></h3>
+<h3><?=get_name(_h($this->staff[0]['staffID']));?>: <?=_h($this->staff[0]['staffID']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -45,81 +48,76 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
-			    
-			    <!-- Row -->
-				<div class="row-fluid">
-					<!-- Column -->
-					<div class="span12">
-					    
-					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="address"><?php _e( _t( 'Address' ) ); ?></label>
-                            <div class="controls">
-                                <input class="span3" type="text" readonly value="<?=_h($this->staffAddr[0]['address1']);?> <?=_h($this->staffAddr[0]['address2']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->staffAddr[0]['city']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->staffAddr[0]['state']);?>" />
-                                <input class="span3" type="text" readonly value="<?=_h($this->staffAddr[0]['zip']);?>" />
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                    </div>
-                    <!-- End Column -->
-                </div>
-                <!-- End Row -->
-                
-                <hr class="separator" />
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Building' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="buildingID"<?=staio();?> id="select2_11" required>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('building','','buildingID','buildingCode','buildingName',_h($this->staff[0]['buildingID'])); ?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="address"><?=_t( 'Address' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control col-md-3" type="text" readonly value="<?=_h($this->staffAddr[0]['address1']);?> <?=_h($this->staffAddr[0]['address2']);?>" />
+                                <input class="form-control col-md-3" type="text" readonly value="<?=_h($this->staffAddr[0]['city']);?> <?=_h($this->staffAddr[0]['state']);?> <?=_h($this->staffAddr[0]['zip']);?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Title' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" value="<?=getStaffJobTitle(_h($this->staff[0]['staffID']));?>" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Building' );?></label>
+                            <div class="col-md-8">
+                                <select name="buildingCode"<?=staio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('building','buildingCode <> "NULL"','buildingCode','buildingCode','buildingName',_h($this->staff[0]['buildingCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Office' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="officeID"<?=staio();?> id="select2_12">
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('room','','roomID','roomCode','roomNumber',_h($this->staff[0]['officeID'])); ?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Office' );?></label>
+                            <div class="col-md-8">
+                                <select name="officeCode"<?=staio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('room','roomCode <> "NULL"','roomCode','roomCode','roomNumber',_h($this->staff[0]['officeCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Office Phone' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="office_phone"<?=staio();?> class="span6" value="<?=_h($this->staff[0]['office_phone']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Office Phone' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="office_phone"<?=staio();?> class="form-control" value="<?=_h($this->staff[0]['office_phone']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="schoolID" id="select2_15">
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('school','','schoolID','schoolCode','schoolName',_h($this->staff[0]['schoolID'])); ?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'School' );?></label>
+                            <div class="col-md-8">
+                                <select name="schoolCode"<?=staio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('school','schoolCode <> "NULL"','schoolCode','schoolCode','schoolName',_h($this->staff[0]['schoolCode'])); ?>
                                 </select>
                             </div>
                         </div>
@@ -129,47 +127,65 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
-					    
-					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Department' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="deptID"<?=staio();?> id="select2_14" requied>
-                                    <option value="">&nbsp;</option>
-                                    <?php table_dropdown('department','','deptID','deptCode','deptName',_h($this->staff[0]['deptID'])); ?>
+					<div class="col-md-6">
+						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Department' );?></label>
+                            <div class="col-md-8">
+                                <select name="deptCode"<?=staio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" requied>
+                                    <option value="NULL">&nbsp;</option>
+                                    <?php table_dropdown('department','deptCode <> "NULL"','deptCode','deptCode','deptName',_h($this->staff[0]['deptCode'])); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="status" id="select2_13" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
+                                <select name="status"<?=staio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <option value="A"<?=selected('A',_h($this->staff[0]['status']),false);?>><?php _e( _t( 'A Active' ) ); ?></option>
-                                    <option value="I"<?=selected('I',_h($this->staff[0]['status']),false);?>><?php _e( _t( 'I Inactive' ) ); ?></option>
+                                    <option value="A"<?=selected('A',_h($this->staff[0]['status']),false);?>><?=_t( 'A Active' );?></option>
+                                    <option value="I"<?=selected('I',_h($this->staff[0]['status']),false);?>><?=_t( 'I Inactive' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Email' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly class="span6" value="<?=_h($this->staffAddr[0]['email1']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Email' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" value="<?=_h($this->staffAddr[0]['email1']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=get_name(_h($this->staff[0]['approvedBy']));?>" class="span6" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Add Date' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=date('D, M d, o',strtotime(_h($this->staff[0]['addDate'])));?>" class="form-control" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved By' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=get_name(_h($this->staff[0]['approvedBy']));?>" class="form-control" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Last Update' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=date('D, M d, o @ h:i A',strtotime(_h($this->staff[0]['LastUpdate'])));?>" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -184,8 +200,8 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 				    <input type="hidden" name="staffID" value="<?=_h($this->staff[0]['staffID']);?>" />
-					<button type="submit"<?=staids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>staff/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<button type="submit"<?=staids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>staff/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

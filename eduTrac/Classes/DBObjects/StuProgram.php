@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,7 +33,7 @@ class StuProgram {
 
 	private $_stuProgID; //int(11) unsigned zerofill
 	private $_stuID; //int(8) unsigned zerofill
-	private $_progCode; //varchar(15)
+	private $_acadProgCode; //varchar(15)
 	private $_currStatus; //varchar(1)
 	private $_statusDate; //date
 	private $_startDate; //date
@@ -53,7 +53,7 @@ class StuProgram {
 		foreach($q as $row) {
 			$this->_stuProgID = $row["stuProgID"];
 			$this->_stuID = $row["stuID"];
-			$this->_progID = $row["progID"];
+			$this->_acadProgCode = $row["acadProgCode"];
 			$this->_currStatus = $row["currStatus"];
 			$this->_statusDate = $row["statusDate"];
 			$this->_startDate = $row["startDate"];
@@ -88,7 +88,7 @@ class StuProgram {
                     LEFT JOIN 
                         acad_program b 
                     ON 
-                        a.progID = b.acadProgID 
+                        a.acadProgCode = b.acadProgCode 
                     WHERE 
                         a.stuID = :id 
                     AND 
@@ -118,8 +118,8 @@ class StuProgram {
 	/**
 	 * @return progCode - varchar(15)
 	 */
-	public function getProgID(){
-		return $this->_progID;
+	public function getAcadProgCode(){
+		return $this->_acadProgCode;
 	}
 
 	/**

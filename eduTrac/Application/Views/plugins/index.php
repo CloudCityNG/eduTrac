@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Plugins' ) ); ?></li>
+	<li><?=_t( 'Plugins' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Plugins' ) ); ?></h3>
+<h3><?=_t( 'Plugins' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -49,9 +49,9 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Plugin' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Description' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Action' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Plugin' );?></th>
+						<th class="text-center"><?=_t( 'Description' );?></th>
+						<th class="text-center"><?=_t( 'Action' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -69,7 +69,7 @@ use \eduTrac\Classes\Libraries\Hooks;
         				echo '<tr class="separated gradeX">';
         							
         			// Display the plugin information
-        			echo '<td class="center">'.$plugin['Name'].'</td>';
+        			echo '<td class="text-center">'.$plugin['Name'].'</td>';
         			echo '<td>'.$plugin['Description'];
         			echo '<br /><br />';
         			echo 'Version '.$plugin['Version'];
@@ -77,9 +77,9 @@ use \eduTrac\Classes\Libraries\Hooks;
         			echo ' | <a href="' .$plugin['PluginURI'].'">Visit plugin site</a></td>';
         			
         				if(Hooks::is_plugin_activated($plugin['filename']) == true) {
-        					echo '<td class="center"><a href="'.BASE_URL.'plugins/deactivate/?id='.urlencode($plugin['filename']).'" title="Deactivate" class="btn btn-circle"><i class="icon-minus-sign"></i></a></td>';
+        					echo '<td class="text-center"><a href="'.BASE_URL.'plugins/deactivate/?id='.urlencode($plugin['filename']).'" title="Deactivate" class="btn btn-default"><i class="fa fa-minus"></i></a></td>';
         				} else {
-        					echo '<td class="center"><a href="'.BASE_URL.'plugins/activate/?id='.urlencode($plugin['filename']).'" title="Activate" class="btn btn-circle"><i class="icon-plus-sign"></i></a></td>';
+        					echo '<td class="text-center"><a href="'.BASE_URL.'plugins/activate/?id='.urlencode($plugin['filename']).'" title="Activate" class="btn btn-default"><i class="fa fa-plus"></i></a></td>';
         				}
         				
         				echo '</tr>';

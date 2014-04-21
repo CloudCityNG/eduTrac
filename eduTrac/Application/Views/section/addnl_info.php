@@ -22,24 +22,24 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Section' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>section/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Section' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>section/view/<?=_h($this->addnl[0]['courseSecID']);?>/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_h($this->addnl[0]['courseSecCode']);?></a></li>
+	<li><a href="<?=BASE_URL;?>section/view/<?=_h($this->addnl[0]['courseSecID']);?>/<?=bm();?>" class="glyphicons adjust_alt"><i></i> <?=_h($this->addnl[0]['termCode']);?>-<?=_h($this->addnl[0]['courseSecCode']);?></a></li>
     <li class="divider"></li>
-	<li><?php _e( _t( 'View Section' ) ); ?></li>
+	<li><?=_t( 'View Section' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Additional Section Info:' ) ); ?> <?=_h($this->addnl[0]['courseSecCode']);?></h3>
+<h3><?=_h($this->addnl[0]['termCode']);?>-<?=_h($this->addnl[0]['courseSecCode']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -50,22 +50,22 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Instructor' ) ); ?></label>
-							<div class="controls">
-							    <select style="width:50%;" name="facID" id="select2_10"<?=csio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Instructor' );?></label>
+							<div class="col-md-8">
+							    <select name="facID" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
 							        <option value="">&nbsp;</option>
                             	   <?php facID_dropdown(_h($this->addnl[0]['facID'])); ?>
                             	</select>
@@ -74,23 +74,23 @@
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Section Type' ) ); ?></label>
-							<div class="controls">
-								<select style="width:35%;" name="secType" id="select2_11"<?=csio();?> required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Section Type' );?></label>
+							<div class="col-md-8">
+								<select name="secType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
 									<option value="">&nbsp;</option>
-	                        		<option value="ONL"<?=selected(_h($this->addnl[0]['secType']),'ONL',false);?>><?php _e( _t( 'ONL Online' ) ); ?></option>
-	                        		<option value="HB"<?=selected(_h($this->addnl[0]['secType']),'HB',false);?>><?php _e( _t( 'HB Hybrid' ) ); ?></option>
-	                        		<option value="ONC"<?=selected(_h($this->addnl[0]['secType']),'ONC',false);?>><?php _e( _t( 'ONC On-Campus' ) ); ?></option>
+	                        		<option value="ONL"<?=selected(_h($this->addnl[0]['secType']),'ONL',false);?>><?=_t( 'ONL Online' );?></option>
+	                        		<option value="HB"<?=selected(_h($this->addnl[0]['secType']),'HB',false);?>><?=_t( 'HB Hybrid' );?></option>
+	                        		<option value="ONC"<?=selected(_h($this->addnl[0]['secType']),'ONC',false);?>><?=_t( 'ONC On-Campus' );?></option>
 	                        	</select>
 	                       </div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Instructor Method' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Instructor Method' );?></label>
+                            <div class="col-md-8">
                                 <?=instructor_method(_h($this->addnl[0]['instructorMethod']));?>
                            </div>
                         </div>
@@ -100,22 +100,22 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Contact Hours' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="contactHours"<?=csio();?> value="<?=_h($this->addnl[0]['contactHours']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Contact Hours' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="contactHours"<?=csio();?> value="<?=_h($this->addnl[0]['contactHours']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Instructor Load' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="instructorLoad"<?=csio();?> value="<?=_h($this->addnl[0]['instructorLoad']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Instructor Load' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="instructorLoad"<?=csio();?> value="<?=_h($this->addnl[0]['instructorLoad']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -129,9 +129,9 @@
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<input type="hidden" name="courseSecID" value="<?=_h($this->addnl[0]['courseSecID']);?>" class="span10" />
-					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/view/<?=_h($this->addnl[0]['courseSecID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+					<input type="hidden" name="courseSecID" value="<?=_h($this->addnl[0]['courseSecID']);?>" />
+					<button type="submit"<?=csids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>section/view/<?=_h($this->addnl[0]['courseSecID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

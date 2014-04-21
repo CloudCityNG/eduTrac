@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -60,6 +60,19 @@
     function version() {
         Hooks::do_action('version');
     }
+	
+	function dashboard_top_widgets() {
+        Hooks::do_action('dashboard_top_widgets');
+    }
+	
+	function dashboard_right_widgets() {
+        Hooks::do_action('dashboard_right_widgets');
+    }
     
-    Hooks::add_action( 'head',          'head_version_meta',            5       );
-    Hooks::add_action( 'version',       'foot_version',                 5       );
+    Hooks::add_action( 'head',						'head_version_meta',            5       );
+    Hooks::add_action( 'version',					'foot_version',                 5       );
+	Hooks::add_action( 'dashboard_top_widgets',		'dashboard_student_count',      5       );
+	Hooks::add_action( 'dashboard_top_widgets',		'dashboard_course_count',       5       );
+	Hooks::add_action( 'dashboard_top_widgets',		'dashboard_acadProg_count',     5       );
+	Hooks::add_action( 'dashboard_right_widgets',	'dashboard_clock',     			5       );
+	Hooks::add_action( 'dashboard_right_widgets',	'dashboard_weather',			5       );

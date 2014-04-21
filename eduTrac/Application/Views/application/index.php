@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Application' ) ); ?></li>
+	<li><?=_t( 'Application' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Search Application' ) ); ?></h3>
+<h3><?=_t( 'Search Application' );?></h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -47,9 +47,9 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 				<div class="widget widget-heading-simple widget-body-white margin-none">
 					<div class="widget-body">
 						
-						<div class="widget widget-heading-simple widget-body-simple text-right">
-							<form class="form-search center" action="<?=BASE_URL;?>application/<?=bm();?>" method="post" autocomplete="off">
-							  	<input type="text" name="appl" class="input-xxlarge" placeholder="Search applications . . . " /> 
+						<div class="widget widget-heading-simple widget-body-simple text-right form-group">
+							<form class="form-search text-center" action="<?=BASE_URL;?>application/<?=bm();?>" method="post" autocomplete="off">
+							  	<input type="text" name="appl" class="form-control" placeholder="Search applications . . . " /> 
 							  	<a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
 							</form>
 						</div>
@@ -58,7 +58,7 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 				</div>
 			</div>
 			
-			<div class="break"></div>
+			<div class="separator bottom"></div>
 			
 			<?php if(isPostSet('appl')) { ?>
 			<!-- Table -->
@@ -67,10 +67,10 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="center"><?php _e( _t( 'Person ID' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Name' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Start Term' ) ); ?></th>
-						<th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+						<th class="text-center"><?=_t( 'Person ID' );?></th>
+						<th class="text-center"><?=_t( 'Name' );?></th>
+                        <th class="text-center"><?=_t( 'Start Term' );?></th>
+						<th class="text-center"><?=_t( 'Actions' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
@@ -79,15 +79,23 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($v['personID']);?></td>
-                    <td class="center"><?=get_name(_h($v['personID']));?></td>
-                    <td class="center"><?=_h($v['termName']);?></td>
-                    <td class="center">
-                    	<a href="<?=BASE_URL;?>application/view/<?=_h($v['applID']);?>/<?=bm();?>" title="View Application" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                    	
-                    	<?php if($person->isStuID() != $v['personID']) { ?>
-                    	<a href="<?=BASE_URL;?>student/add/<?=_h($v['personID']);?>/<?=bm();?>" title="Create Student Record" class="btn btn-circle"><i class="icon-user"></i></a>
-                    	<?php } ?>
+                    <td class="text-center"><?=_h($v['personID']);?></td>
+                    <td class="text-center"><?=get_name(_h($v['personID']));?></td>
+                    <td class="text-center"><?=_h($v['termName']);?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>application/view/<?=_h($v['applID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php if(!$person->isStuID($v['personID'])) { ?>
+                                <li><a href="<?=BASE_URL;?>student/add/<?=_h($v['personID']);?>/<?=bm();?>"><?=_t( 'Create Student' ); ?></a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
 				<?php } endif; ?>
@@ -103,14 +111,30 @@ $person = new \eduTrac\Classes\DBObjects\Person;
 	</div>
 	<div class="separator bottom"></div>
 	
-	<div class="modal hide fade" id="myModal">
-        <div class="modal-body">
-            <?=file_get_contents( APP_PATH . 'Info/person-search.txt' );?>
-        </div>
-        <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-        </div>
-    </div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal heading -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title"><?=_t( 'Application Search' );?></h3>
+				</div>
+				<!-- // Modal heading END -->
+				<!-- Modal body -->
+				<div class="modal-body">
+					<?=file_get_contents( APP_PATH . 'Info/person-search.txt' );?>
+				</div>
+				<!-- // Modal body END -->
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#" class="btn btn-default" data-dismiss="modal"><?=_t( 'Close' );?></a> 
+				</div>
+				<!-- // Modal footer END -->
+			</div>
+		</div>
+	</div>
+	<!-- // Modal END -->
 	
 	<!-- // Widget END -->
 	

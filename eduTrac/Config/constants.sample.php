@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -42,15 +42,9 @@ defined( 'DB_HOST' )                    or define( 'DB_HOST', '{hostname}' );
 defined( 'DB_NAME' )                    or define( 'DB_NAME', '{database}' );
 defined( 'DB_USER' )                    or define( 'DB_USER', '{username}' );
 defined( 'DB_PASS' )                    or define( 'DB_PASS', '{password}' );
-defined( 'TP' )                         or define( 'TP' , 'et_' ); // defines the table prefix
 
 /* Always provide a TRAILING SLASH (/) AFTER A PATH */
 defined( 'BASE_URL' )                   or define( 'BASE_URL', '{siteurl}' );
 defined( 'SITE_TITLE' )                 or define( 'SITE_TITLE', '{sitetitle}' );
 defined( 'PLUGINS_DIR' )                or define( 'PLUGINS_DIR', APP_PATH.'Plugins/' );
 defined( 'AUTH_TOKEN' )                 or define( 'AUTH_TOKEN', '' );
-define ('MAX_WORKERS',      15);
-define ('MAX_IDLE',         180);
-define ('SLEEP_INTERVAL',   10);
-define ('FS_LOG',           BASE_PATH . 'tmp' . DS . 'logs' . DS . 'cron.' . date('m-d-Y') . '.log');
-define ('FS_KILL',          BASE_PATH . 'tmp' . DS . 'logs' . DS . 'kill/daemon');

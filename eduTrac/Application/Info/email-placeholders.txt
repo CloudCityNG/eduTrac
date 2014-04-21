@@ -1,5 +1,4 @@
-Below are placeholders which you can use in your email templates. They will only be replaced if you've chosen these fields 
-in your saved query.
+Below are placeholders which you can use in your email templates. They will only be replaced if you've chosen these fields in your saved query.
 
 <ul>
     <li><font color="red">#uname#</font> - Username</li>

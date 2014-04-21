@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,6 +32,14 @@ class Help extends \eduTrac\Classes\Core\Controller {
 	
 	public function __construct() {
 		parent::__construct();
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {

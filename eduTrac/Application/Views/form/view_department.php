@@ -22,22 +22,22 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashbaord/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>form/department/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?php _e( _t( 'Department' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>form/department/<?=bm();?>" class="glyphicons pin_flag"><i></i> <?=_t( 'Department' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'View Department' ) ); ?></li>
+	<li><?=_t( 'View Department' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'View Deparment' ) ); ?></h3>
+<h3><?=_t( 'View Department' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -48,45 +48,45 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="deptCode"><font color="red">*</font> <?php _e( _t( 'Department Code' ) ); ?></label>
-							<div class="controls"><input class="span12" id="deptCode"<?=gio();?> name="deptCode" type="text" value="<?=_h($this->dept[0]['deptCode']);?>" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="deptCode"><font color="red">*</font> <?=_t( 'Department Code' );?></label>
+							<div class="col-md-8"><input class="form-control" id="deptCode"<?=gio();?> name="deptCode" type="text" value="<?=_h($this->dept[0]['deptCode']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="deptTypeCode"><font color="red">*</font> <?php _e( _t( 'Department Type' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="deptTypeCode"><font color="red">*</font> <?=_t( 'Department Type' );?></label>
+                            <div class="col-md-8">
                                 <?=dept_type_select(_h($this->dept[0]['deptTypeCode']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="deptName"><font color="red">*</font> <?php _e( _t( 'Department Name' ) ); ?></label>
-							<div class="controls"><input class="span12" id="deptName"<?=gio();?> name="deptName" type="text" value="<?=_h($this->dept[0]['deptName']);?>" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="deptName"><font color="red">*</font> <?=_t( 'Department Name' );?></label>
+							<div class="col-md-8"><input class="form-control" id="deptName"<?=gio();?> name="deptName" type="text" value="<?=_h($this->dept[0]['deptName']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="deptDesc"><?php _e( _t( 'Short Description' ) ); ?></label>
-							<div class="controls"><input class="span12" id="deptDesc"<?=gio();?> name="deptDesc" type="text" value="<?=_h($this->dept[0]['deptDesc']);?>" /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="deptDesc"><?=_t( 'Short Description' );?></label>
+							<div class="col-md-8"><input class="form-control" id="deptDesc"<?=gio();?> name="deptDesc" type="text" value="<?=_h($this->dept[0]['deptDesc']);?>" /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -101,7 +101,7 @@
 				<!-- Form actions -->
 				<div class="form-actions">
 					<input class="span12" name="deptID" type="hidden" value="<?=_h($this->dept[0]['deptID']);?>" required />
-					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Update' ) ); ?></button>
+					<button type="submit"<?=gids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Update' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

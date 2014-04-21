@@ -1,0 +1,1 @@
+UPDATE `et_option` SET option_value = '00019' WHERE option_name = 'dbversion';

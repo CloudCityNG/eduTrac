@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -31,10 +31,10 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'User Profile' ) ); ?></li>
+	<li><?=_t( 'User Profile' );?></li>
 </ul>
 
 <h3><?=get_name(_h($auth->getPersonField('personID')));?></h3>
@@ -48,49 +48,49 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'First Name' ) ); ?></label>
-							<div class="controls">
-								<input type="text"<?=rep('restrict_edit_profile');?> name="fname" value="<?=_h($auth->getPersonField('fname'));?>" class="span10" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'First Name' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text"<?=rep('restrict_edit_profile');?> name="fname" value="<?=_h($auth->getPersonField('fname'));?>" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Last Name' ) ); ?></label>
-							<div class="controls">
-								<input type="text"<?=rep('restrict_edit_profile');?> name="lname" value="<?=_h($auth->getPersonField('lname'));?>" class="span10" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Last Name' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text"<?=rep('restrict_edit_profile');?> name="lname" value="<?=_h($auth->getPersonField('lname'));?>" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
                         
                         <!-- Group -->
-    					<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Middle Initial' ) ); ?></label>
-							<div class="controls">
-								<input type="text"<?=rep('restrict_edit_profile');?> name="mname" value="<?=_h($auth->getPersonField('mname'));?>" class="span10" />
+    					<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Middle Initial' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text"<?=rep('restrict_edit_profile');?> name="mname" value="<?=_h($auth->getPersonField('mname'));?>" />
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-            			<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Reset Password' ) ); ?></label>
-							<div class="controls">
-								<input type="password" name="password" class="span10" />
+            			<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Reset Password' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="password" name="password" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -99,33 +99,33 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-            			<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Email' ) ); ?></label>
-							<div class="controls">
-								<input type="email"<?=rep('restrict_edit_profile');?> name="email" value="<?=_h($auth->getPersonField('email'));?>" class="span10" required />
+            			<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Email' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="email"<?=rep('restrict_edit_profile');?> name="email" value="<?=_h($auth->getPersonField('email'));?>" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
                         
                         <!-- Group -->
-        				<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'SSN' ) ); ?></label>
-							<div class="controls">
-								<input type="text"<?=rep('restrict_edit_profile');?> name="ssn" value="<?=_h($auth->getPersonField('ssn'));?>" class="span10" required />
+        				<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'SSN' );?></label>
+							<div class="col-md-8">
+								<input class="form-control" type="text"<?=rep('restrict_edit_profile');?> name="ssn" value="<?=_h($auth->getPersonField('ssn'));?>" required/>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Date of Birth' ) ); ?></label>
-                            <div class="controls">
-    							<div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="dob" type="text"<?=rep('restrict_edit_profile');?> value="<?=_h($auth->getPersonField('dob'));?>" required />
-                                    <span class="add-on"<?=ae('restrict_edit_profile');?>><i class="icon-th"></i></span>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Date of Birth' );?></label>
+                            <div class="col-md-8">
+    							<div class="input-group date col-md-8" id="datepicker6">
+                                    <input class="form-control" name="dob" type="text"<?=rep('restrict_edit_profile');?> value="<?=_h($auth->getPersonField('dob'));?>" required/>
+                                    <span class="input-group-addon"<?=ae('restrict_edit_profile');?>><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
 						</div>
@@ -140,7 +140,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

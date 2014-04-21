@@ -22,26 +22,26 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 ?>
 
 <ul class="breadcrumb">
-    <li><?php _e( _t( 'You are here' ) ); ?></li>
-    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+    <li><?=_t( 'You are here' );?></li>
+    <li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Student' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Student' );?></a></li>
     <li class="divider"></li>
     <li><a href="<?=BASE_URL;?>student/view/<?=_h($this->viewAcadCred[0]['stuID']);?>/<?=bm();?>" class="glyphicons user"><i></i> <?=get_name(_h($this->viewAcadCred[0]['stuID']));?></a></li>
     <li class="divider"></li>
-    <li><a href="<?=BASE_URL;?>student/academic_credits/<?=_h($this->viewAcadCred[0]['stuID']);?>/<?=bm();?>" class="glyphicons coins"><i></i> <?php _e( _t( 'Academic Credits' ) ); ?></a></li>
+    <li><a href="<?=BASE_URL;?>student/academic_credits/<?=_h($this->viewAcadCred[0]['stuID']);?>/<?=bm();?>" class="glyphicons coins"><i></i> <?=_t( 'Academic Credits' );?></a></li>
     <li class="divider"></li>
-    <li><?php _e( _t( 'View Academic Credits' ) ); ?></li>
+    <li><?=_t( 'View Academic Credits' );?></li>
 </ul>
 
-<h3><?=get_name(_h($this->viewAcadCred[0]['stuID']));?> <?php _e( _t( "ID: " ) ); ?><?=_h($this->viewAcadCred[0]['stuID']);?></h3>
+<h3><?=get_name(_h($this->viewAcadCred[0]['stuID']));?>: <?=_h($this->viewAcadCred[0]['stuID']);?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -53,70 +53,69 @@
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Course ID' ) ); ?></label>
-							<div class="controls">
-								<input type="text" readonly value="<?=_h($this->viewAcadCred[0]['courseID']);?>" class="span10" required />
-								<a href="<?=BASE_URL;?>course/view/<?=_h($this->viewAcadCred[0]['courseID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Course ID' );?> <a href="<?=BASE_URL;?>course/view/<?=_h($this->viewAcadCred[0]['courseID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a></label>
+							<div class="col-md-8">
+								<input type="text" readonly value="<?=_h($this->viewAcadCred[0]['courseID']);?>" class="form-control" required />
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Course Name' ) ); ?></label>
-							<div class="controls">
-								<input type="text" readonly value="<?=_h($this->viewAcadCred[0]['courseCode']);?>" class="span10" required />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Course Name' );?></label>
+							<div class="col-md-8">
+								<input type="text" readonly value="<?=_h($this->viewAcadCred[0]['courseCode']);?>" class="form-control" required />
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Section' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['sectionNumber']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Section' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['sectionNumber']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['secShortTitle']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Title' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['secShortTitle']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Subject' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['subjCode']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Subject' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['subjectCode']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Department' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['deptCode']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Department' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['deptCode']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['startDate']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['startDate']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -125,71 +124,72 @@
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'End Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['endDate']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['endDate']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Term' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['termCode']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Term' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['termCode']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Reporting term' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['reportingTerm']);?>" class="span10" required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Reporting term' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=_h($this->viewAcadCred[0]['reportingTerm']);?>" class="form-control" required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Grade' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="grade"<?=sio();?> value="<?=_h($this->viewAcadCred[0]['grade']);?>" class="span3 center" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Grade' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="grade"<?=sio();?> value="<?=_h($this->viewAcadCred[0]['grade']);?>" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
                                 <?=stu_course_sec_status_select(_h($this->viewAcadCred[0]['status']));?>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="statusDate" name="statusDate"<?=sio();?> value="<?=_h($this->viewAcadCred[0]['statusDate']);?>" type="text" required/>
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker6">
+                                    <input class="form-control" name="statusDate"<?=sio();?> value="<?=_h($this->viewAcadCred[0]['statusDate']);?>" type="text" required/>
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Status Time' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append bootstrap-timepicker">
-                                    <input id="timepicker1" type="text" name="statusTime"<?=sio();?> class="input-small" value="<?=_h($this->viewAcadCred[0]['statusTime']);?>" required /><span class="add-on"><i class="icon-time"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Status Time' );?></label>
+                            <div class="col-md-4">
+                                <div class="input-group bootstrap-timepicker">
+                                    <input id="timepicker10" type="text" name="statusTime"<?=sio();?> class="form-control" value="<?=_h($this->viewAcadCred[0]['statusTime']);?>" required />
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -206,10 +206,10 @@
 				<div class="form-actions">
 				    <input type="hidden" name="id" value="<?=_h($this->viewAcadCred[0]['id']);?>" />
 				    <input type="hidden" name="stuID" value="<?=_h($this->viewAcadCred[0]['stuID']);?>" />
-                    <input type="hidden" name="courseSecID" value="<?=_h($this->viewAcadCred[0]['courseSecID']);?>" />
-                    <input type="hidden" name="termID" value="<?=_h($this->viewAcadCred[0]['termID']);?>" />
-					<button type="submit"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/academic_credits/<?=_h($this->viewAcadCred[0]['stuID']);?>/<?=bm();?>'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+                    <input type="hidden" name="courseSecCode" value="<?=_h($this->viewAcadCred[0]['courseSecCode']);?>" />
+                    <input type="hidden" name="termCode" value="<?=_h($this->viewAcadCred[0]['termCode']);?>" />
+					<button type="submit"<?=sids();?> class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+					<button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/academic_credits/<?=_h($this->viewAcadCred[0]['stuID']);?>/<?=bm();?>'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

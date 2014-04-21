@@ -24,7 +24,7 @@ use \eduTrac\Classes\Core\DB;
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,8 +33,8 @@ class Course {
     protected $_courseID;
     protected $_courseNumber;
     protected $_courseCode;
-    protected $_subjectID;
-    protected $_deptID;
+    protected $_subjectCode;
+    protected $_deptCode;
     protected $_courseDesc;
     protected $_minCredit;
     protected $_maxCredit;
@@ -80,8 +80,8 @@ class Course {
             $this->_courseID = $row["courseID"];
             $this->_courseNumber = $row["courseNumber"];
             $this->_courseCode = $row["courseCode"];
-            $this->_subjectID = $row["subjectID"];
-            $this->_deptID = $row["deptID"];
+            $this->_subjectCode = $row["subjectCode"];
+            $this->_deptCode = $row["deptCode"];
             $this->_courseDesc = $row["courseDesc"];
             $this->_minCredit = $row["minCredit"];
             $this->_maxCredit = $row["maxCredit"];
@@ -145,15 +145,15 @@ class Course {
     /**
      * @return subjCode - varchar(11)
      */
-    public function getSubjectID(){
-        return $this->_subjectID;
+    public function getSubjectCode(){
+        return $this->_subjectCode;
     }
 
     /**
      * @return deptCode - varchar(11)
      */
-    public function getDeptID(){
-        return $this->_deptID;
+    public function getDeptCode(){
+        return $this->_deptCode;
     }
 
     /**

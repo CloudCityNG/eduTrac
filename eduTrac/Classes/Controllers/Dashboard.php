@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -36,25 +36,33 @@ class Dashboard extends \eduTrac\Classes\Core\Controller {
 		parent::__construct();
 		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
         if(!$this->_auth->isUserLoggedIn()) { redirect( BASE_URL ); }
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array('Dashboard');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/calendars/fullcalendar/fullcalendar/fullcalendar.css',
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
-                                );
-                                
-        $this->view->js = array( 
-                                'theme/scripts/plugins/calendars/fullcalendar/fullcalendar/fullcalendar.js',
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/plugins/forms/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+		$this->view->staticTitle = array(_t('Dashboard'));
+		$this->view->PROG = $this->model->PROG();
+		$this->view->stuDept = $this->model->stuDept();
+		$this->view->less = [ 'less/admin/module.admin.page.index.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.index.min.css' ];
+		$this->view->js = [ 
+                            'components/modules/admin/charts/flot/assets/lib/jquery.flot.js?v=v2.1.0',
+                            'components/modules/admin/charts/flot/assets/lib/jquery.flot.resize.js?v=v2.1.0',
+                            'components/modules/admin/charts/flot/assets/lib/plugins/jquery.flot.tooltip.min.js?v=v2.1.0',
+                            'components/modules/admin/charts/flot/assets/custom/js/flotcharts.common.js?v=v2.1.0',
+                            'components/modules/admin/charts/flot/assets/custom/js/flotchart-simple.init.js?v=v2.1.0',
+                            'components/modules/admin/charts/easy-pie/assets/lib/js/jquery.easy-pie-chart.js?v=v2.1.0',
+                            'components/modules/admin/charts/easy-pie/assets/custom/easy-pie.init.js?v=v2.1.0',
+                            'components/modules/admin/charts/flot/custom/chart.js',
+                            'components/modules/admin/charts/flot/custom/js/custom-flot.js'
+                            ];
 		$this->view->render('dashboard/index');
 	}
     

@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -46,32 +46,30 @@ jQuery(document).ready(function() {
     });
 });
 
-jQuery(document).ready(function() {
-    jQuery('#courseSecID').live('change', function(event) {
-        $.ajax({
-            type    : 'POST',
-            url     : '<?=BASE_URL;?>section/runSecLookup/',
-            dataType: 'json',
-            data    : $('#validateSubmitForm').serialize(),
-            cache: false,
-            success: function( data ) {
-                   for(var id in data) {        
-                          $(id).val( data[id] );
-                   }
-            }
-        });
-    });
+$(window).load(function() {
+	$("#terms").jCombo({url: "<?=BASE_URL;?>section/runTermLookup/" });
+	$("#section").jCombo({
+		url: "<?=BASE_URL;?>section/runSecLookup/", 
+		input_param: "id", 
+		parent: "#terms", 
+		onChange: function(newvalue) {
+			$("#message").text("changed to term " + newvalue)
+			.fadeIn("fast",function() {
+				$(this).fadeOut(3500);
+			});
+		}
+	});
 });
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Course Registration' ) ); ?></li>
+	<li><?=_t( 'Course Registration' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Course Registration' ) ); ?></h3>
+<h3><?=_t( 'Course Registration' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -82,23 +80,23 @@ jQuery(document).ready(function() {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><?php _e( _t( 'Student ID' ) ); ?></label>
-							<div class="controls">
-								<input type="text" name="stuID" id="stuID" class="span12" required />
-                                <input type="text" id="stuName" readonly="readonly" class="span12 center" />
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Student ID' );?></label>
+							<div class="col-md-8">
+								<input type="text" name="stuID" id="stuID" class="form-control" required />
+                                <input type="text" id="stuName" readonly="readonly" class="form-control text-center" />
 							</div>
 						</div>
 						<!-- // Group END -->
@@ -107,18 +105,29 @@ jQuery(document).ready(function() {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Course Sec ID' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="courseSecID" id="courseSecID" class="span12" required />
-                                <input type="text" id="courseSecCode" readonly="readonly" class="span4 center" required />
-                                <input type="text" id="secShortTitle" readonly="readonly" class="span4 center" required />
-                                <input type="text" id="term" readonly="readonly" class="span4 center" required />
-                                 i.e. (00000000001 or 1)
-                                <a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Term' );?></label>
+                            <div class="col-md-8">
+	                        	<select id="terms" class="form-control" required></select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						
+					</div>
+					<!-- // Column END -->
+					
+					<!-- Column -->
+					<div class="col-md-6">
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Course Section' );?></label>
+                            <div class="col-md-8">
+	                        	<select id="section" name="courseSecID" class="form-control" required></select>
+                                <span id="message" style="color:red; display:hidden;"></span>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -132,7 +141,7 @@ jQuery(document).ready(function() {
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Register' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Register' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -142,15 +151,6 @@ jQuery(document).ready(function() {
 		
 	</form>
 	<!-- // Form END -->
-    
-    <div class="modal hide fade" id="myModal">
-        <div class="modal-body">
-            <p><?=_t('You can find the id of a course section by visiting the');?> <a href="<?=BASE_URL;?>section/"><?=_t('search');?></a> <?=_t('screen for sections. The id is the first column in the table from the search result.');?></p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn btn-primary"><?php _e( _t( 'Cancel' ) ); ?></a>
-        </div>
-    </div>
 	
 </div>	
 		

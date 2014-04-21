@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -168,5 +168,40 @@ class Email {
 		$this->et_mail($email,"Progress Report",$message,$headers);
 		return Hooks::apply_filter('progress_report',$message,$headers);
 	}
+    
+    public function course_registration($email, $id, $courses, $host) {
+        $name = get_name($id);
+        $site = Hooks::get_option('site_title');
+        $message = 
+        "<p>Dear Registrar:</p>
+        
+        <p>This is a receipt for the following student's registration.</p>
+        
+        <p><strong>Student Name:</strong> $name</p>
+        
+        <p><strong>Student ID:</strong> $id</p>
+        
+        <p><strong>Courses:</strong><br />".implode("<br />",$courses)."</p>
+        
+        <p>Log into your account to verify this student's registration.</p>
+        
+        <p>$host</p>
+        
+        <p>Thank You</p>
+        
+        <p>Administrator<br />
+        ______________________________________________________<br />
+        THIS IS AN AUTOMATED RESPONSE.<br />
+        ***DO NOT RESPOND TO THIS EMAIL****</p>
+        ";
+
+        $headers  = "From: $site <auto-reply@$host>\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+        $headers .= "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    
+        $this->et_mail($email,"Course Registration",$message,$headers);
+        return Hooks::apply_filter('course_registration',$message,$headers);
+    }
   
 }

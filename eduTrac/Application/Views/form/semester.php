@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -30,13 +30,13 @@ use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here') ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here');?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Semester' ) ); ?></li>
+	<li><?=_t( 'Semester' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Semester' ) ); ?></h3>
+<h3><?=_t( 'Semester' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -47,41 +47,41 @@ use \eduTrac\Classes\Libraries\Hooks;
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required.' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required.' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="acadYearID"><font color="red">*</font> <?php _e( _t( 'Acad Year' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%" name="acadYearID" id="select2_10" required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Year' );?></label>
+							<div class="col-md-8">
+								<select name="acadYearCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('acad_year', '', 'acadYearID', 'acadYearCode', 'acadYearDesc'); ?>
+                            		<?php table_dropdown('acad_year', 'acadYearCode <> "NULL"', 'acadYearCode', 'acadYearCode', 'acadYearDesc'); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="semCode"><font color="red">*</font> <?php _e( _t( 'Semester Code' ) ); ?></label>
-                            <div class="controls"><input class="span12" id="semCode" name="semCode" type="text" required /></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="semCode"><font color="red">*</font> <?=_t( 'Semester Code' );?></label>
+                            <div class="col-md-8"><input class="form-control" name="semCode" type="text" required /></div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semName"><font color="red">*</font> <?php _e( _t( 'Semester' ) ); ?></label>
-							<div class="controls"><input class="span12" id="semName" name="semName" type="text" required /></div>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="semName"><font color="red">*</font> <?=_t( 'Semester' );?></label>
+							<div class="col-md-8"><input class="form-control" name="semName" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
@@ -89,40 +89,40 @@ use \eduTrac\Classes\Libraries\Hooks;
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label" for="semStartDate"><font color="red">*</font> <?php _e( _t( 'Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="semStartDate" name="semStartDate" type="text" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="semStartDate"><font color="red">*</font> <?=_t( 'Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date col-md-8" id="datepicker6">
+                                    <input class="form-control" name="semStartDate" type="text" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="semEndDate"><font color="red">*</font> <?php _e( _t( 'End Date' ) ); ?></label>
-							<div class="controls">
-								<div class="input-append date" id="datetimepicker8">
-						    		<input id="semEndDate" name="semEndDate" type="text" required />
-				    				<span class="add-on"><i class="icon-th"></i></span>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="semEndDate"><font color="red">*</font> <?=_t( 'End Date' );?></label>
+							<div class="col-md-8">
+								<div class="input-group date col-md-8" id="datepicker8">
+						    		<input class="form-control" name="semEndDate" type="text" required />
+				    				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 								</div>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label" for="active"><font color="red">*</font> <?php _e( _t( 'Active' ) ); ?></label>
-							<div class="controls">
-								<select style="width:25%" name="active" id="select2_11" required>
+						<div class="form-group">
+                            <label class="col-md-3 control-label" for="active"><font color="red">*</font> <?=_t( 'Active' );?></label>
+							<div class="col-md-8">
+								<select name="active" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-                            		<option value="1"><?php _e( _t( 'Yes' ) ); ?></option>
-                            		<option value="0"><?php _e( _t( 'No' ) ); ?></option>
+                            		<option value="1"><?=_t( 'Yes' );?></option>
+                            		<option value="0"><?=_t( 'No' );?></option>
                             	</select>
 							</div>
 						</div>
@@ -138,7 +138,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Submit' ) ); ?></button>
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
@@ -162,11 +162,11 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <!-- Table heading -->
                 <thead>
                     <tr>
-                        <th class="center"><?php _e( _t( 'Semester' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Start Date' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'End Date' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Status' ) ); ?></th>
-                        <th class="center"><?php _e( _t( 'Actions' ) ); ?></th>
+                        <th class="text-center"><?=_t( 'Semester' );?></th>
+                        <th class="text-center"><?=_t( 'Start Date' );?></th>
+                        <th class="text-center"><?=_t( 'End Date' );?></th>
+                        <th class="text-center"><?=_t( 'Status' );?></th>
+                        <th class="text-center"><?=_t( 'Actions' );?></th>
                     </tr>
                 </thead>
                 <!-- // Table heading END -->
@@ -175,13 +175,22 @@ use \eduTrac\Classes\Libraries\Hooks;
                 <tbody>
                 <?php if($this->semesterList != '') : foreach($this->semesterList as $key => $value) { ?>
                 <tr class="gradeX">
-                    <td class="center"><?=_h($value['semName']);?></td>
-                    <td class="center"><?=date('D, M d, o',strtotime(_h($value['semStartDate'])));?></td>
-                    <td class="center"><?=date('D, M d, o',strtotime(_h($value['semEndDate'])));?></td>
-                    <td class="center"><?php if($value['active'] == 1) {echo 'Active';}else{'Inactive';} ?></td>
-                    <td class="center">
-                        <a href="<?=BASE_URL;?>form/view_semester/<?=_h($value['semesterID']);?>/<?=bm();?>" title="View Semester" class="btn btn-circle"><i class="icon-eye-open"></i></a>
-                        <?php Hooks::do_action('search_semester_action'); ?>
+                    <td class="text-center"><?=_h($value['semName']);?></td>
+                    <td class="text-center"><?=date('D, M d, o',strtotime(_h($value['semStartDate'])));?></td>
+                    <td class="text-center"><?=date('D, M d, o',strtotime(_h($value['semEndDate'])));?></td>
+                    <td class="text-center"><?php if($value['active'] == 1) {echo 'Active';}else{'Inactive';} ?></td>
+                    <td class="text-center">
+                    	<div class="btn-group dropup">
+                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
+                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <li><a href="<?=BASE_URL;?>form/view_semester/<?=_h($value['semesterID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php Hooks::do_action('search_semester_action'); ?>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <?php } endif; ?>

@@ -51,23 +51,23 @@ function custom_email_filter_do_page() {
 			    <form class="form-horizontal margin-none" action="<?=BASE_URL;?>plugins/options/?page=custom_email_filter" id="validateSubmitForm" method="post" autocomplete="off">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                     
-                		<div class='control-group'>
-                			<label class='control-label' for='input01'><?=_t('From Name:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="fromName" type="text" value="<?=_h(\eduTrac\Classes\Libraries\Hooks::{'get_option'}('fromName'));?>" /></div>
+                		<div class='form-group'>
+                			<label class='col-md-3 control-label' for='input01'><?=_t('From Name:'); ?></label> 
+                			<div class="col-md-8"><input class="form-control" name="fromName" type="text" value="<?=_h(\eduTrac\Classes\Libraries\Hooks::{'get_option'}('fromName'));?>" /></div>
                 		</div>
                         
                     </div>
                         
                     <!-- Column -->
-    				<div class="span6">
+    				<div class="col-md-6">
                         
-                        <div class='control-group'>
-                    		<label class='control-label' for='input01'><?=_t('From Email:'); ?></label> 
-                			<div class="controls"><input id='input01' class="span10" name="fromEmail" type="text" value="<?=_h(\eduTrac\Classes\Libraries\Hooks::{'get_option'}('fromEmail')); ?>" /></div>
+                        <div class='form-group'>
+                    		<label class='col-md-3 control-label' for='input01'><?=_t('From Email:'); ?></label> 
+                			<div class="col-md-8"><input class="form-control" name="fromEmail" type="text" value="<?=_h(\eduTrac\Classes\Libraries\Hooks::{'get_option'}('fromEmail')); ?>" /></div>
                 		</div>
                     
                     </div>

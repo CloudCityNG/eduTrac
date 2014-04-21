@@ -5,7 +5,7 @@
  * PHP 5.4+
  *
  * eduTrac(tm) : Student Information System (http://www.7mediaws.org/)
- * Copyright (C) 2013 7 Media Web Solutions, LLC
+ * @copyright (c) 2013 7 Media Web Solutions, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -33,61 +33,72 @@ class Staff extends \eduTrac\Classes\Core\Controller {
 
 	public function __construct() {
 		parent::__construct();
+		/**
+		 * If user is logged in and the lockscreen cookie is set, 
+		 * redirect user to the lock screen until he/she enters 
+		 * his/her password to gain access.
+		 */
+		if(isset($_COOKIE['SCREENLOCK'])) {
+			redirect( BASE_URL . 'lock/' );
+		}
 	}
 	
 	public function index() {
 	    if(!hasPermission('access_staff_screen')) { redirect( BASE_URL . 'dashboard/' ); }
-		$this->view->staticTitle = array('Search Staff');
-		$this->view->css = array( 
-								'theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/css/TableTools.css',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/css/ColVis.css',
-								);
-								
-		$this->view->js = array( 
-								'theme/scripts/plugins/tables/DataTables/media/js/jquery.dataTables.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/TableTools/media/js/TableTools.min.js',
-								'theme/scripts/plugins/tables/DataTables/extras/ColVis/media/js/ColVis.min.js',
-								'theme/scripts/plugins/tables/DataTables/media/js/DT_bootstrap.js',
-								'theme/scripts/demo/tables.js'
-								);
+		$this->view->staticTitle = array(_t('Search Staff'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
 		$this->view->search = $this->model->search();
 		$this->view->render('staff/index');
 	}
     
     public function add($id) {
         if(!hasPermission('create_staff_record')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('Add Staff');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('Add Staff'));
         $this->view->person = $this->model->person($id);
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
+        if(empty($this->view->person)) {
+            redirect( BASE_URL . 'staff/view/' . $id . '/' );
+        }
         $this->view->render('staff/add');
     }
     
     public function view($id) {
         if(!hasPermission('create_staff_record')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array('View Staff');
-        $this->view->css = array( 
-                                'theme/scripts/plugins/forms/select2/select2.css',
-                                'theme/scripts/plugins/forms/multiselect/css/multi-select.css'
-                                );
-        $this->view->js = array( 
-                                'theme/scripts/plugins/forms/select2/select2.js',
-                                'theme/scripts/plugins/forms/multiselect/js/jquery.multi-select.js',
-                                'theme/scripts/plugins/forms/jquery-inputmask/dist/jquery.inputmask.bundle.min.js',
-                                'theme/scripts/demo/form_elements.js'
-                                );
+        $this->view->staticTitle = array(_t('View Staff'));
         $this->view->staff = $this->model->staff($id);
         $this->view->staffAddr = $this->model->staffAddr($id);
-        
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
+                            ];
         if(empty($this->view->staff)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
@@ -95,18 +106,74 @@ class Staff extends \eduTrac\Classes\Core\Controller {
         $this->view->render('staff/view');
     }
     
+    public function timesheets() {
+        if(!hasPermission('submit_timesheets')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array(_t('Timesheets'));
+        $this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->timesheets = $this->model->timesheets();
+        $this->view->render('staff/timesheets');
+    }
+    
+    public function view_timesheet($week) {
+        if(!hasPermission('submit_timesheets')) { redirect( BASE_URL . 'dashboard/' ); }
+        $this->view->staticTitle = array(_t('View Timesheet'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/lib/js/bootstrap-timepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-timepicker/assets/custom/js/bootstrap-timepicker.init.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            ];
+        $this->view->viewTimeSheet = $this->model->viewTimeSheet($week);
+        if(empty($this->view->viewTimeSheet)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+        $this->view->render('staff/view_timesheet');
+    }
+    
     public function runStaff() {
         if(!hasPermission('create_staff_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['staffID'] = isPostSet('staffID');
-        $data['buildingID'] = isPostSet('buildingID');
-        $data['schoolID'] = isPostSet('schoolID');
-        $data['officeID'] = isPostSet('officeID');
+        $data['supervisorID'] = isPostSet('supervisorID');
+        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['buildingCode'] = isPostSet('buildingCode');
+        $data['officeCode'] = isPostSet('officeCode');
+        $data['jobStatusCode'] = isPostSet('jobStatusCode');
+        $data['jobID'] = isPostSet('jobID');
         $data['office_phone'] = isPostSet('office_phone');
-        $data['deptID'] = isPostSet('deptID');
+        $data['deptCode'] = isPostSet('deptCode');
+        $data['staffType'] = isPostSet('staffType');
+        $data['status'] = isPostSet('status');
+        $data['hireDate'] = isPostSet('hireDate');
+        $data['startDate'] = isPostSet('startDate');
+        $data['endDate'] = isPostSet('endDate');
         $data['addDate'] = isPostSet('addDate');
         $data['approvedBy'] = isPostSet('approvedBy');
-        $data['status'] = isPostSet('status');
         $this->model->runStaff($data);
     }
     
@@ -114,13 +181,27 @@ class Staff extends \eduTrac\Classes\Core\Controller {
         if(!hasPermission('create_staff_record')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = array();
         $data['staffID'] = isPostSet('staffID');
-        $data['buildingID'] = isPostSet('buildingID');
-        $data['schoolID'] = isPostSet('schoolID');
-        $data['officeID'] = isPostSet('officeID');
+        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['buildingCode'] = isPostSet('buildingCode');
+        $data['officeCode'] = isPostSet('officeCode');
         $data['office_phone'] = isPostSet('office_phone');
-        $data['deptID'] = isPostSet('deptID');
+        $data['deptCode'] = isPostSet('deptCode');
         $data['status'] = isPostSet('status');
         $this->model->runEditStaff($data);
+    }
+    
+    public function runTimeSheets() {
+        if(!hasPermission('submit_timesheets')) { redirect( BASE_URL . 'dashboard/' ); exit(); }
+        $data = [];
+        $data['employeeID'] = isPostSet('employeeID');
+        $data['jobID'] = isPostSet('jobID');
+        $data['workWeek'] = isPostSet('workWeek');
+        $data['startDateTime'] = isPostSet('startDateTime');
+        $data['endDateTime'] = isPostSet('endDateTime');
+        $data['note'] = isPostSet('note');
+        $data['addDate'] = isPostSet('addDate');
+        $data['addedBy'] = isPostSet('addedBy');
+        $this->model->runTimeSheets($data);
     }
     
     public function search() {

@@ -23,7 +23,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -49,7 +49,9 @@ class InstitutionModel {
                 FROM 
                     institution 
                 WHERE 
-                    instName LIKE :inst",
+                    instName LIKE :inst 
+                OR 
+                	schoolCode LIKE :inst",
                 $bind 
         );
         foreach($q as $r) {
@@ -70,9 +72,9 @@ class InstitutionModel {
     
     public function runInstitution($data) {
         $bind = [
-                "ficeCode" => $data['ficeCode'],"instType" => $data['instType'],
+                "schoolCode" => $data['schoolCode'],"instType" => $data['instType'],
                 "instName" => $data['instName'],"city" => $data['city'],
-                "state" => $data['state']
+                "state" => $data['state'],"country" => $data['country']
                 ];
                 
         $q = DB::inst()->insert( 'institution', $bind );
@@ -88,9 +90,9 @@ class InstitutionModel {
     
     public function runEditInstitution($data) {
         $update = [
-                    "ficeCode" => $data['ficeCode'],"instType" => $data['instType'],
+                    "schoolCode" => $data['schoolCode'],"instType" => $data['instType'],
                     "instName" => $data['instName'],"city" => $data['city'],
-                    "state" => $data['state']
+                    "state" => $data['state'],"country" => $data['country']
                   ];
                 
         $bind = [ ":id" => $data['institutionID'] ];

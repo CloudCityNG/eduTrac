@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       1.0.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -52,15 +52,15 @@ jQuery(document).ready(function() {
 </script>
 
 <ul class="breadcrumb">
-	<li><?php _e( _t( 'You are here' ) ); ?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?php _e( _t( 'Dashboard' ) ); ?></a></li>
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?php _e( _t( 'Search Student' ) ); ?></a></li>
+	<li><a href="<?=BASE_URL;?>student/<?=bm();?>" class="glyphicons search"><i></i> <?=_t( 'Search Student' );?></a></li>
 	<li class="divider"></li>
-	<li><?php _e( _t( 'Add Student' ) ); ?></li>
+	<li><?=_t( 'Add Student' );?></li>
 </ul>
 
-<h3><?php _e( _t( 'Add Student' ) ); ?></h3>
+<h3><?=_t( 'Add Student' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -71,82 +71,91 @@ jQuery(document).ready(function() {
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><font color="red">*</font> <?php _e( _t( 'Indicates field is required' ) ); ?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
 			<div class="widget-body">
 			
 				<!-- Row -->
-				<div class="row-fluid">
+				<div class="row">
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
 					    
 					    <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Student Name' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" class="span12" readonly value="<?=get_name(_h($this->student[0]['personID']));?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Student Name' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" readonly value="<?=get_name(_h($this->student[0]['personID']));?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
 					
 						<!-- Group -->
-						<div class="control-group">
-							<label class="control-label"><font color="red">*</font> <?php _e( _t( 'Program' ) ); ?></label>
-							<div class="controls">
-								<select style="width:100%;" name="progID" id="select2_11" required>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Program' );?></label>
+							<div class="col-md-8">
+								<select name="acadProgCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
 									<option value="">&nbsp;</option>
-                            		<?php table_dropdown('acad_program', '', 'acadProgID', 'acadProgCode', 'acadProgTitle', _h($this->student[0]['acadProgID'])); ?>
+                            		<?php table_dropdown('acad_program', '', 'acadProgCode', 'acadProgCode', 'acadProgTitle', _h($this->student[0]['acadProgCode'])); ?>
                             	</select>
 							</div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Program Title' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="acadProgTitle" readonly class="span6" value="<?=_h($this->student[0]['acadProgTitle']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Program Title' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" id="acadProgTitle" readonly class="form-control" value="<?=_h($this->student[0]['acadProgTitle']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Major' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="majorName" readonly class="span6" value="<?=_h($this->student[0]['majorName']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Major' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" id="majorName" readonly class="form-control" value="<?=_h($this->student[0]['majorName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Location' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="locationName" readonly class="span6" value="<?=_h($this->student[0]['locationName']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Location' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" id="locationName" readonly class="form-control" value="<?=_h($this->student[0]['locationName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'School' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" id="schoolName" readonly class="span6" value="<?=_h($this->student[0]['schoolName']);?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'School' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" id="schoolName" readonly class="form-control" value="<?=_h($this->student[0]['schoolName']);?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Prog Start Date' ) ); ?></label>
-                            <div class="controls">
-                                <div class="input-append date" id="datetimepicker6">
-                                    <input id="startDate" name="startDate" type="text" required />
-                                    <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Prog Start Date' );?></label>
+                            <div class="col-md-8">
+                                <div class="input-group date" id="datepicker6">
+                                    <input class="form-control" name="startDate" type="text" required />
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Academic Level' );?></label>
+                            <div class="col-md-8">
+                                <?=acad_level_select(_h($this->student[0]['acadLevelCode']),null,'required');?>
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -155,34 +164,34 @@ jQuery(document).ready(function() {
 					<!-- // Column END -->
 					
 					<!-- Column -->
-					<div class="span6">
+					<div class="col-md-6">
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Academic Level' ) ); ?></label>
-                            <div class="controls">
-                                <?=acad_level_select(_h($this->student[0]['acadLevelCode']),null,'required');?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Start Term' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" value="<?=_h($this->student[0]['startTerm']);?>" readonly/>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Catalog Year' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="catYearID" id="select2_13" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Catalog Year' );?></label>
+                            <div class="col-md-8">
+                                <select name="catYearCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('acad_year', '', 'acadYearID', 'acadYearCode', 'acadYearDesc'); ?>
+                                    <?php table_dropdown('acad_year', 'acadYearCode <> "NULL"', 'acadYearCode', 'acadYearCode', 'acadYearDesc'); ?>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Advisor' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="advisorID" id="select2_14" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Advisor' );?></label>
+                            <div class="col-md-8">
+                                <select name="advisorID" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
                                     <?php facID_dropdown(); ?>
                                 </select>
@@ -191,43 +200,43 @@ jQuery(document).ready(function() {
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><font color="red">*</font> <?php _e( _t( 'Status' ) ); ?></label>
-                            <div class="controls">
-                                <select style="width:100%;" name="status"<?=sio();?> id="select2_15" required>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
+                            <div class="col-md-8">
+                                <select name="status"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
-                                    <option value="A"><?php _e( _t( 'A Active' ) ); ?></option>
-                                    <option value="H"><?php _e( _t( 'H Hiatus' ) ); ?></option>
-                                    <option value="L"><?php _e( _t( 'L Leave of Absence' ) ); ?></option>
-                                    <option value="W"><?php _e( _t( 'W Withdrawn' ) ); ?></option>
+                                    <option value="A"><?=_t( 'A Active' );?></option>
+                                    <option value="H"><?=_t( 'H Hiatus' );?></option>
+                                    <option value="L"><?=_t( 'L Leave of Absence' );?></option>
+                                    <option value="W"><?=_t( 'W Withdrawn' );?></option>
                                 </select>
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Grad Date' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="antGradDate" class="span2 center" id="antGradDate" value="<?=$antGradDate;?>" readonly required />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Grad Date' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" name="antGradDate" class="form-control" value="<?=$antGradDate;?>" readonly required />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Approved By' ) ); ?></label>
-                            <div class="controls">
-                                <input type="text" name="approvedBy" readonly value="<?=$auth->getPersonField('personID');?>" class="span4" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Approved By' );?></label>
+                            <div class="col-md-8">
+                                <input type="text" readonly value="<?=get_name($auth->getPersonField('personID'));?>" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->
                         
                         <!-- Group -->
-                        <div class="control-group">
-                            <label class="control-label"><?php _e( _t( 'Add Date' ) ); ?></label>
-                            <div class="controls">
-                                <input id="addDate" name="addDate" type="text" readonly value="<?=date("Y-m-d");?>" />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Add Date' );?></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" readonly value="<?=date("Y-m-d");?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -243,9 +252,11 @@ jQuery(document).ready(function() {
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-				    <input name="stuID" type="hidden" value="<?=_h($this->student[0]['personID']);?>" />
-					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php _e( _t( 'Save' ) ); ?></button>
-                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/'"><i></i><?php _e( _t( 'Cancel' ) ); ?></button>
+				    <input type="hidden" name="stuID" value="<?=_h($this->student[0]['personID']);?>" />
+				    <input type="hidden" name="addDate" value="<?=date("Y-m-d");?>" />
+				    <input type="hidden" name="approvedBy" value="<?=$auth->getPersonField('personID');?>" />
+					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+                    <button type="button" class="btn btn-icon btn-primary glyphicons circle_minus" onclick="window.location='<?=BASE_URL;?>student/'"><i></i><?=_t( 'Cancel' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				
