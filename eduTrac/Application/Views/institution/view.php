@@ -63,7 +63,7 @@
 						<!-- Group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'FICE/CEEB Code' );?></label>
-                            <div class="col-md-8"><input class="form-control" name="schoolCode"<?=gio();?> type="text" value="<?=_h($this->inst[0]['schoolCode']);?>" required/></div>
+                            <div class="col-md-8"><input class="form-control" name="fice_ceeb"<?=gio();?> type="text" value="<?=_h($this->inst[0]['fice_ceeb']);?>" required/></div>
                         </div>
                         <!-- // Group END -->
 						

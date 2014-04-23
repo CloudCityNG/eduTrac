@@ -93,9 +93,9 @@ jQuery(document).ready(function() {
                         <div class="form-group">
                             <label class="col-md-3 control-label"><?=_t( 'Institution' );?></label>
                             <div class="col-md-8">
-                            	<select name="schoolCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
+                            	<select name="fice_ceeb" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('institution','','schoolCode','schoolCode','instName'); ?>
+                                    <?php table_dropdown('institution','','fice_ceeb','fice_ceeb','instName'); ?>
                                 </select>
                         	</div>
                         </div>

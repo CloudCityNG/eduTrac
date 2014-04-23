@@ -63,7 +63,7 @@
 						<!-- Group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'FICE/CEEB Code' );?></label>
-                            <div class="col-md-8"><input class="form-control" name="schoolCode" type="text" required/></div>
+                            <div class="col-md-8"><input class="form-control" name="fice_ceeb" type="text" required/></div>
                         </div>
                         <!-- // Group END -->
 						

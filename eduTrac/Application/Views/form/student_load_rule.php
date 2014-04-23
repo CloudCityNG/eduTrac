@@ -95,7 +95,7 @@
 						<!-- Group -->
 						<div class="form-group">
                             <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Term(s)' );?> <a href="#modal1" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a></label>
-							<div class="col-md-8"><input class="form-control" name="term" type="text" required /></div>
+							<div class="col-md-8"><input class="form-control" name="term" type="text" required/></div>
 						</div>
 						<!-- // Group END -->
 						

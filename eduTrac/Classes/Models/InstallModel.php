@@ -38,9 +38,9 @@ class InstallModel {
     private $_dbname;
     private $_connect;
     private $_error;
-    private $_product = 'eduTrac';
+    private $_product = 'eduTrac ERP';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '4.1.1';
+    private $_version = '4.1.3';
     
     public function __construct() {
     	Session::init();
@@ -98,16 +98,16 @@ class InstallModel {
         $sql[] = "INSERT INTO `person` (`personID`, `uname`, `password`, `fname`, `lname`, `email`,`personType`,`approvedDate`,`approvedBy`) VALUES ('', '".Session::get('uname')."', '".Session::get('password')."', '".Session::get('fname')."', '".Session::get('lname')."', '".Session::get('email')."', 'STA', '".$this->_now."', '1');";
 		
 		$sql[] = "INSERT INTO `person_roles` VALUES(1, 1, 8, '".$this->_now."');";
-        
-        $sql[] = "INSERT INTO `staff` VALUES(1, '1', '00000000001', '00000000001', '00000000001', '', '00000000001', 'A', '".$this->_now."', '1', '');";
+		
+		$sql[] = "INSERT INTO `staff` VALUES(1, 1, 'NULL', 'NULL', 'NULL', '', 'NULL', 'A', '".$this->_now."', 1, '".$this->_now."');";
 		
 		$sql[] = "INSERT INTO `address` VALUES(00000000001, 00000001, '10 Eliot Street', '#2', 'Somerville', 'MA', '02143', 'US', 'P', '".$this->_now."', '0000-00-00', 'C', '6718997836', '', '', '', 'CEL', '', 'support@edutrac.org', '', '".$this->_now."', 00000001, '".$this->_now."');";
 		
 		$sql[] = "INSERT INTO `job` VALUES(1, 1, 'IT Support', '34.00', 40, NULL, '".$this->_now."', 00000001, '".$this->_now."');";
 		
-		$sql[] = "INSERT INTO `staff_meta` VALUES(1, 1, 1, 00000001, 00000001, 'STA', '2011-02-01', '2011-02-01', NULL, '".$this->_now."', 00000001, '".$this->_now."');";
+		$sql[] = "INSERT INTO `staff_meta` VALUES(1, 'FT', 1, 00000001, 00000001, 'STA', '2011-02-01', '2011-02-01', NULL, '".$this->_now."', 00000001, '".$this->_now."');";
                   
-        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00027');";
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00028');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
         

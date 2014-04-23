@@ -264,7 +264,7 @@
 				</div>
 				<!-- // Row END -->
 				
-				<?php if(_h($this->inst[0]['schoolCode']) != '') : ?>
+				<?php if(_h($this->inst[0]['fice_ceeb']) != '') : ?>
 				<div class="separator bottom"></div>
         
             <!-- Table -->
@@ -293,9 +293,9 @@
                     	<!-- Group -->
                         <div class="form-group">
                             <div class="col-md-12">
-                            	<select name="schoolCode[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
+                            	<select name="fice_ceeb[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
                                     <option value="">&nbsp;</option>
-                                    <?php table_dropdown('institution','','schoolCode','schoolCode','instName',_h($value['schoolCode'])); ?>
+                                    <?php table_dropdown('institution','','fice_ceeb','fice_ceeb','instName',_h($value['fice_ceeb'])); ?>
                                 </select>
                         	</div>
                         </div>

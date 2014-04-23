@@ -33,10 +33,10 @@ use \eduTrac\Classes\Libraries\Hooks;
 	<li><?=_t( 'You are here');?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?=_t( 'Semester' );?></li>
+	<li><?=_t( 'School' );?></li>
 </ul>
 
-<h3><?=_t( 'Semester' );?></h3>
+<h3><?=_t( 'School' );?></h3>
 <div class="innerLR">
 
 	<!-- Form -->
@@ -58,13 +58,6 @@ use \eduTrac\Classes\Libraries\Hooks;
 					
 					<!-- Column -->
 					<div class="col-md-6">
-                    
-                        <!-- Group -->
-                        <div class="form-group">
-							<label class="col-md-3 col-md-3 control-label" for="ficeCode"><font color="red">*</font> <?=_t( 'FICE Code' );?></label>
-                            <div class="col-md-8"><input class="form-control" name="ficeCode" type="text" /></div>
-                        </div>
-                        <!-- // Group END -->
 					    
 					    <!-- Group -->
                         <div class="form-group">
@@ -85,7 +78,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 							<label class="col-md-3 col-md-3 control-label" for="buildingCode"><?=_t( 'Building' );?></label>
 							<div class="col-md-8">
 								<select name="buildingCode" class="selectpicker col-md-12 form-control" data-style="btn-info" data-size="10" data-live-search="true">
-									<option value="">&nbsp;</option>
+									<option value="NULL">&nbsp;</option>
                             		<?php table_dropdown('building', 'buildingCode <> "NULL"', 'buildingCode', 'buildingCode', 'buildingName'); ?>
                             	</select>
 							</div>

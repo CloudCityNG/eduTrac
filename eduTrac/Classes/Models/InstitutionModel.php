@@ -51,7 +51,7 @@ class InstitutionModel {
                 WHERE 
                     instName LIKE :inst 
                 OR 
-                	schoolCode LIKE :inst",
+                	fice_ceeb LIKE :inst",
                 $bind 
         );
         foreach($q as $r) {
@@ -72,7 +72,7 @@ class InstitutionModel {
     
     public function runInstitution($data) {
         $bind = [
-                "schoolCode" => $data['schoolCode'],"instType" => $data['instType'],
+                "fice_ceeb" => $data['fice_ceeb'],"instType" => $data['instType'],
                 "instName" => $data['instName'],"city" => $data['city'],
                 "state" => $data['state'],"country" => $data['country']
                 ];
@@ -90,7 +90,7 @@ class InstitutionModel {
     
     public function runEditInstitution($data) {
         $update = [
-                    "schoolCode" => $data['schoolCode'],"instType" => $data['instType'],
+                    "fice_ceeb" => $data['fice_ceeb'],"instType" => $data['instType'],
                     "instName" => $data['instName'],"city" => $data['city'],
                     "state" => $data['state'],"country" => $data['country']
                   ];

@@ -245,6 +245,15 @@ $(function(){
 						</div>
 						<!-- // Group END -->
 						
+						<!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Comments' );?></label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="comment" rows="3" data-height="auto"><?=_h($this->sec[0]['comment']);?></textarea>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						
 					</div>
 					<!-- // Column END -->
 				</div>

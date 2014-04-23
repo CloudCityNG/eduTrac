@@ -81,7 +81,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                                 <div class="account-wall">
                                         <section class="align-lg-center">
                                         <!--<div class="site-logo"></div>-->
-                                        <h1 class="login-title"><span><?=_t( 'eduTrac' );?></span><?=_t( ' ERP' );?> <small> <?=Hooks::get_option('site_title');?></small></h1>
+                                        <h1 class="login-title"><span><?=_t( 'eduTrac' );?></span><?=_t( ' Community' );?> <small> <?=Hooks::get_option('site_title');?></small></h1>
                                         </section>
                                         <form id="form-signin" class="form-signin">
                                                 <section>
@@ -103,7 +103,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                                                 </section>
                                         </form>
                                         <p><a class="footer-link" href="<?=_h(Hooks::get_option('help_desk'));?>"><?=_t('Having troubles?');?> <?=_t('Get Help');?></a></p>
-                                        <p><a class="footer-link" href="http://www.7mediaws.org/"><?=_t('Powered by');?>  <?=_t( 'eduTrac ERP' );?> <?php version(); ?></a></p>
+                                        <p><a class="footer-link" href="http://www.7mediaws.org/"><?=_t('Powered by');?>  <?=_t( 'eduTrac Community' );?> <?php version(); ?></a></p>
                                 </div>  
                                 <!-- //account-wall-->
                                 

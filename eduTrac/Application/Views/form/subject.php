@@ -61,15 +61,15 @@ use \eduTrac\Classes\Libraries\Hooks;
 					
 						<!-- Group -->
 						<div class="form-group">
-                            <label class="col-md-3 control-label" for="subjCode"><font color="red">*</font> <?=_t( 'Subject Code' );?></label>
-							<div class="col-md-8"><input class="form-control" name="subjCode" type="text" required /></div>
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Subject Code' );?></label>
+							<div class="col-md-8"><input class="form-control" name="subjectCode" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="form-group">
-                            <label class="col-md-3 control-label" for="subjName"><font color="red">*</font> <?=_t( 'Subject Name' );?></label>
-							<div class="col-md-8"><input class="form-control" name="subjName" type="text" required /></div>
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Subject Name' );?></label>
+							<div class="col-md-8"><input class="form-control" name="subjectName" type="text" required /></div>
 						</div>
 						<!-- // Group END -->
 						
