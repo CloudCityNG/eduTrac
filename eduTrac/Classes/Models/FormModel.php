@@ -963,7 +963,7 @@ class FormModel {
     /* Begin School */
     public function runSchool($data) {
         $bind = array( 
-            "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
+            "schoolCode" => $data['schoolCode'],
             "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
             );
             
@@ -1002,7 +1002,7 @@ class FormModel {
     
     public function runEditSchool($data) {
         $update = array( 
-            "ficeCode" => $data['ficeCode'],"schoolCode" => $data['schoolCode'],
+            "schoolCode" => $data['schoolCode'],
             "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
             );
             

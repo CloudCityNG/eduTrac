@@ -77,7 +77,7 @@
 				<tbody>
 				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="text-center"><?=_h($v['schoolCode']);?></td>
+                    <td class="text-center"><?=_h($v['fice_ceeb']);?></td>
                     <td class="text-center"><?=_h($v['instType']);?></td>
                     <td class="text-center"><?=_h($v['instName']);?></td>
                     <td class="text-center">

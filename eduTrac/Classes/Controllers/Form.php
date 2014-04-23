@@ -1112,7 +1112,6 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     public function runSchool() {
         $data = array();
-        $data['ficeCode'] = isPostSet('ficeCode');
         $data['schoolCode'] = isPostSet('schoolCode');
         $data['schoolName'] = isPostSet('schoolName');
         $data['buildingCode'] = isPostSet('buildingCode');
@@ -1121,7 +1120,6 @@ class Form extends \eduTrac\Classes\Core\Controller {
     
     public function runEditSchool() {
         $data = array();
-        $data['ficeCode'] = isPostSet('ficeCode');
         $data['schoolCode'] = isPostSet('schoolCode');
         $data['schoolName'] = isPostSet('schoolName');
         $data['schoolID'] = isPostSet('schoolID');

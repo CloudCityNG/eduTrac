@@ -205,12 +205,12 @@ class ApplicationModel {
                 
         $q1 = DB::inst()->update("application",$update1,"applID = :applID AND personID = :personID",$bind1);
         
-        $size = count($data['schoolCode']);
+        $size = count($data['fice_ceeb']);
         $i = 0;
         while($i < $size) {
             $bind2 = [ ":id" => $data['instAttID'][$i],":personID" => $data['personID'] ];
             $update2 = [ 
-                    "schoolCode" => $data['schoolCode'][$i],"fromDate" => $data['fromDate'][$i],
+                    "fice_ceeb" => $data['fice_ceeb'][$i],"fromDate" => $data['fromDate'][$i],
 	                "toDate" => $data['toDate'][$i],"GPA" => $data['GPA'][$i],
 	                "major" => $data['major'][$i],"degree_awarded" => $data['degree_awarded'][$i],
 	                "degree_conferred_date" => $data['degree_conferred_date'][$i]
@@ -224,7 +224,7 @@ class ApplicationModel {
 	
 	public function runInstAttended($data) {        
         $bind = [ 
-                "schoolCode" => $data['schoolCode'],"fromDate" => $data['fromDate'],
+                "fice_ceeb" => $data['fice_ceeb'],"fromDate" => $data['fromDate'],
                 "toDate" => $data['toDate'],"GPA" => $data['GPA'],
                 "personID" => $data['personID'],
                 "major" => $data['major'],"degree_awarded" => $data['degree_awarded'],

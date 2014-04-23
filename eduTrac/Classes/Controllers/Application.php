@@ -138,6 +138,7 @@ class Application extends \eduTrac\Classes\Core\Controller {
         $data['SAT_Math'] = isPostSet('SAT_Math');
         $data['ACT_English'] = isPostSet('ACT_English');
         $data['ACT_Math'] = isPostSet('ACT_Math');
+		$data['addedBy'] = isPostSet('addedBy');
         $data['personID'] = isPostSet('personID');
         $this->model->runApplication($data);
     }
@@ -155,7 +156,7 @@ class Application extends \eduTrac\Classes\Core\Controller {
         $data['SAT_Math'] = isPostSet('SAT_Math');
         $data['ACT_English'] = isPostSet('ACT_English');
         $data['ACT_Math'] = isPostSet('ACT_Math');
-        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['fice_ceeb'] = isPostSet('fice_ceeb');
         $data['fromDate'] = isPostSet('fromDate');
         $data['toDate'] = isPostSet('toDate');
 		$data['major'] = isPostSet('major');
@@ -172,7 +173,7 @@ class Application extends \eduTrac\Classes\Core\Controller {
         if(!hasPermission('create_application')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
 		$data['personID'] = isPostSet('personID');
-        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['fice_ceeb'] = isPostSet('fice_ceeb');
         $data['fromDate'] = isPostSet('fromDate');
         $data['toDate'] = isPostSet('toDate');
         $data['major'] = isPostSet('major');

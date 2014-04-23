@@ -103,7 +103,7 @@ class Institution extends \eduTrac\Classes\Core\Controller {
     public function runInstitution() {
         if(!hasPermission('add_institution')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
-        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['fice_ceeb'] = isPostSet('fice_ceeb');
         $data['instType'] = isPostSet('instType');
         $data['instName'] = isPostSet('instName');
         $data['city'] = isPostSet('city');
@@ -115,7 +115,7 @@ class Institution extends \eduTrac\Classes\Core\Controller {
     public function runEditInstitution() {
         if(!hasPermission('add_institution')) { redirect( BASE_URL . 'dashboard/' ); }
         $data = [];
-        $data['schoolCode'] = isPostSet('schoolCode');
+        $data['fice_ceeb'] = isPostSet('fice_ceeb');
         $data['instType'] = isPostSet('instType');
         $data['instName'] = isPostSet('instName');
         $data['city'] = isPostSet('city');

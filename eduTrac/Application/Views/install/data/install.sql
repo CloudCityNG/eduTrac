@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `building` (
   KEY `locationCode` (`locationCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `building` VALUES(00000000001, 'NULL', '', 'NULL);
+INSERT INTO `building` VALUES(00000000001, 'NULL', '', 'NULL');
 
 CREATE TABLE IF NOT EXISTS `ccd` (
   `ccdID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -951,6 +951,7 @@ CREATE TABLE IF NOT EXISTS `gl_transaction` (
 CREATE TABLE IF NOT EXISTS `gradebook` (
   `gbID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `assignID` int(11) unsigned zerofill NOT NULL,
+  `termCode` varchar(11) NOT NULL,
   `courseSecCode` varchar(50) NOT NULL,
   `facID` int(8) unsigned zerofill NOT NULL,
   `stuID` int(8) unsigned zerofill NOT NULL,
@@ -960,8 +961,9 @@ CREATE TABLE IF NOT EXISTS `gradebook` (
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`gbID`),
   UNIQUE KEY `gradebook_unique_grade` (`assignID`,`courseSecCode`,`facID`,`stuID`),
-  KEY `courseSecCode` (`courseSecCode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+  KEY `courseSecCode` (`courseSecCode`),
+  KEY `termCode` (`termCode`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 CREATE TABLE IF NOT EXISTS `grade_scale` (
   `ID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -1018,19 +1020,19 @@ CREATE TABLE IF NOT EXISTS `graduation_hold` (
 
 CREATE TABLE IF NOT EXISTS `institution` (
   `institutionID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `schoolCode` varchar(11) DEFAULT NULL,
+  `fice_ceeb` varchar(11) DEFAULT NULL,
   `instType` varchar(4) NOT NULL,
   `instName` varchar(180) NOT NULL,
   `city` varchar(30) NOT NULL,
   `state` varchar(2) NOT NULL,
   `country` varchar(2) NOT NULL,
   PRIMARY KEY (`institutionID`),
-  KEY `schoolCode` (`schoolCode`)
+  KEY `fice_ceeb` (`fice_ceeb`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `institution_attended` (
   `instAttID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `schoolCode` varchar(11) NOT NULL,
+  `fice_ceeb` varchar(11) NOT NULL,
   `personID` int(8) unsigned zerofill NOT NULL,
   `fromDate` date NOT NULL,
   `toDate` date NOT NULL,
@@ -1042,7 +1044,7 @@ CREATE TABLE IF NOT EXISTS `institution_attended` (
   `addedBy` int(8) unsigned zerofill NOT NULL,
   `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`instAttID`),
-  UNIQUE KEY `inst_att` (`schoolCode`,`personID`),
+  UNIQUE KEY `inst_att` (`fice_ceeb`,`personID`),
   KEY `personID` (`personID`),
   KEY `addedBy` (`addedBy`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -1790,7 +1792,6 @@ CREATE TABLE IF NOT EXISTS `saved_query` (
 
 CREATE TABLE IF NOT EXISTS `school` (
   `schoolID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `ficeCode` varchar(8) DEFAULT NULL,
   `schoolCode` varchar(11) NOT NULL,
   `schoolName` varchar(180) NOT NULL,
   `buildingCode` varchar(11) NOT NULL,
@@ -1800,7 +1801,7 @@ CREATE TABLE IF NOT EXISTS `school` (
   KEY `buildingCode` (`buildingCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `school` VALUES(00000000001, NULL, 'NULL', '', 'NULL', '2014-02-26 22:13:31');
+INSERT INTO `school` VALUES(00000000001, 'NULL', 'NULL', 'NULL', '2014-02-26 22:13:31');
 
 CREATE TABLE IF NOT EXISTS `screen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2404,7 +2405,7 @@ ALTER TABLE `gradebook` ADD FOREIGN KEY (`termCode`) REFERENCES `term` (`termCod
 
 ALTER TABLE `gradebook` ADD FOREIGN KEY (`courseSecCode`) REFERENCES `course_sec` (`courseSecCode`) ON UPDATE CASCADE;
 
-ALTER TABLE `institution_attended` ADD FOREIGN KEY (`schoolCode`) REFERENCES `institution` (`schoolCode`) ON UPDATE CASCADE;
+ALTER TABLE `institution_attended` ADD FOREIGN KEY (`fice_ceeb`) REFERENCES `institution` (`fice_ceeb`) ON UPDATE CASCADE;
 
 ALTER TABLE `institution_attended` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 

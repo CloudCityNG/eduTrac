@@ -236,11 +236,12 @@
 				<hr class="separator" />
 				
 				<div class="separator line bottom"></div>
-								
+				
 				<!-- Group -->
 				<div class="form-group">
 					<div class="widget-body">
-						<textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5" required><?=_h($this->crse[0]['courseDesc']);?></textarea>
+						<label class="col-md-3 control-label"><?=_t( 'Course Description' );?></label>
+						<div class="col-md-6"><textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5"><?=_h($this->crse[0]['courseDesc']);?></textarea></div>
 					</div>
 				</div>
 				<!-- // Group END -->

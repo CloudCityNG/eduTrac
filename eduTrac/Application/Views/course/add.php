@@ -204,7 +204,8 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 				<!-- Group -->
 				<div class="form-group">
 					<div class="widget-body">
-						<textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5" required></textarea>
+						<label class="col-md-3 control-label"><?=_t( 'Course Description' );?></label>
+						<div class="col-md-6"><textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5"></textarea></div>
 					</div>
 				</div>
 				<!-- // Group END -->

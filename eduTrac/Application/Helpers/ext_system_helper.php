@@ -1007,7 +1007,11 @@ use \eduTrac\Classes\Libraries\Cookies;
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
             "X=X","X = X","union","'='","XSS","mysql_error",
             "die","password","auth_token","alert","img","src",
-            "drop tables","drop index","drop database","drop column"
+            "drop tables","drop index","drop database","drop column",
+            "show tables in","show databases"," in ",
+            "slave","hosts","grants","warnings","variables",
+            "triggers","privileges","engine","processlist",
+            "relaylog","errors"
         ];
         return $array;
     }

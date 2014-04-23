@@ -59,34 +59,27 @@
 					
 					<!-- Column -->
 					<div class="col-md-6">
-                        
-                        <!-- Group -->
-                        <div class="form-group">
-							<label class="col-md-3 col-md-3 control-label" for="ficeCode"><font color="red">*</font> <?=_t( 'FICE Code' );?></label>
-                            <div class="col-md-8"><input class="form-control" name="ficeCode" type="text" value="<?=$this->school[0]['ficeCode'];?>" /></div>
-                        </div>
-                        <!-- // Group END -->
 					    
 					    <!-- Group -->
                         <div class="form-group">
-							<label class="col-md-3 col-md-3 control-label" for="schoolCode"><font color="red">*</font> <?=_t( 'School Code' );?></label>
+							<label class="col-md-3 col-md-3 control-label"><font color="red">*</font> <?=_t( 'School Code' );?></label>
                             <div class="col-md-8"><input class="form-control"<?=gio();?> name="schoolCode" type="text" value="<?=$this->school[0]['schoolCode'];?>" required /></div>
                         </div>
                         <!-- // Group END -->
 					    
 					    <!-- Group -->
                         <div class="form-group">
-							<label class="col-md-3 col-md-3 control-label" for="schoolName"><font color="red">*</font> <?=_t( 'School Name' );?></label>
+							<label class="col-md-3 col-md-3 control-label"><font color="red">*</font> <?=_t( 'School Name' );?></label>
                             <div class="col-md-8"><input class="form-control"<?=gio();?> name="schoolName" type="text" value="<?=$this->school[0]['schoolName'];?>" required /></div>
                         </div>
                         <!-- // Group END -->
 						
 						<!-- Group -->
 						<div class="form-group">
-							<label class="col-md-3 col-md-3 control-label" for="buildingCode"><?=_t( 'Building' );?></label>
+							<label class="col-md-3 col-md-3 control-label"><?=_t( 'Building' );?></label>
 							<div class="col-md-8">
 								<select name="buildingCode" class="selectpicker col-md-12 form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=gio();?>>
-									<option value="">&nbsp;</option>
+									<option value="NULL">&nbsp;</option>
                             		<?php table_dropdown('building', 'buildingCode <> "NULL"', 'buildingCode', 'buildingCode', 'buildingName',$this->school[0]['buildingCode']); ?>
                             	</select>
 							</div>

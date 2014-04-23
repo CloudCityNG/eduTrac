@@ -1038,7 +1038,7 @@ class StudentModel {
             $time = date("h:m A");
             $bind1 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'],
+                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'][$i],
                     "courseCredits" => $data['courseCredits'][$i],"status" => 'N',
                     "courseFee" => $data['courseFee'][$i],
                    	"labFee" => $data['labFee'][$i],"materialFee" => $data['materialFee'][$i],
@@ -1050,7 +1050,7 @@ class StudentModel {
             
             $bind2 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'],
+                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'][$i],
                     "attCred" => $data['courseCredits'][$i],
                     "acadLevelCode" => $this->_stuProg->getAcadLevelCode($this->_auth->getPersonField('personID'))
                     ];
