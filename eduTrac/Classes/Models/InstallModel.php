@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac ERP';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '4.1.3';
+    private $_version = '4.1.4';
     
     public function __construct() {
     	Session::init();

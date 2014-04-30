@@ -322,3 +322,16 @@ use \eduTrac\Classes\Core\DB;
             return ' style="display:none;"';
         }
     }
+	
+	
+	/**
+	 * Disable option
+	 */
+	function dopt($perm) {
+        $auth = new \eduTrac\Classes\Libraries\Cookies;
+        $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
+        
+        if(!$acl->hasPermission($perm) && !$acl->userHasRole(8)) {
+            return ' disabled';
+        }
+    }

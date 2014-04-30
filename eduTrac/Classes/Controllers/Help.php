@@ -30,8 +30,12 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 class Help extends \eduTrac\Classes\Core\Controller {
 	
+	private $_auth;
+	
 	public function __construct() {
 		parent::__construct();
+		$this->_auth = new \eduTrac\Classes\Libraries\Cookies();
+        if(!$this->_auth->isUserLoggedIn()) { redirect( BASE_URL . 'dashboard/' ); }
 		/**
 		 * If user is logged in and the lockscreen cookie is set, 
 		 * redirect user to the lock screen until he/she enters 

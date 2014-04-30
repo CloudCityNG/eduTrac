@@ -28,7 +28,6 @@
  */
 
 $person = new \eduTrac\Classes\DBObjects\Person;
-$parent = new \eduTrac\Classes\DBObjects\Parents;
 ?>
 
 <ul class="breadcrumb">
@@ -79,7 +78,7 @@ $parent = new \eduTrac\Classes\DBObjects\Parents;
 				
 				<!-- Table body -->
 				<tbody>
-				<?php if($this->search != '') : foreach($this->search as $k => $v) { $parent->Load_from_key($v['personID']); ?>
+				<?php if($this->search != '') : foreach($this->search as $k => $v) { ?>
                 <tr class="gradeX">
                     <td class="text-center"><?=_h($v['personID']);?></td>
                     <td class="text-center"><?=_h($v['lname']);?></td>

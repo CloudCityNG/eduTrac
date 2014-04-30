@@ -742,10 +742,10 @@ use \eduTrac\Classes\Libraries\Cookies;
 	function course_sec_status_select($status = NULL) {
 		$select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
     			<option value="">&nbsp;</option>
-    	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
+    	    	<option'.dopt('activate_course_sec').' value="A"'.selected( $status, 'A', false ).'>A Active</option>
     	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
     			<option value="P"'.selected( $status, 'P', false ).'>P Pending</option>
-    			<option value="C"'.selected( $status, 'C', false ).'>C Cancel</option>
+    			<option'.dopt('cancel_course_sec').' value="C"'.selected( $status, 'C', false ).'>C Cancel</option>
     			<option value="O"'.selected( $status, 'O', false ).'>O Obsolete</option>
 		        </select>';
         return Hooks::apply_filter('status', $select, $status);
@@ -1580,7 +1580,7 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     function head_version_meta() {
-        echo "<meta name='generator' content='eduTrac " . CURRENT_VERSION . "'>\n";
+        echo "<meta name='generator' content='eduTrac ERP " . CURRENT_VERSION . "'>\n";
     }
     
     function foot_version() {
