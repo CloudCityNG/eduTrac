@@ -900,7 +900,21 @@ class SectionModel {
     
     public function runStuLookup($data) {
         $bind = [ ":id" => $data['stuID'] ];
-        $q = DB::inst()->select( "person","personID = :id","","personID,fname,lname",$bind );
+        $q = DB::inst()->query( "SELECT 
+        				a.stuID,
+        				b.personID,
+        				b.fname,
+        				b.lname 
+    				FROM 
+    					student a 
+					LEFT JOIN 
+						person b 
+					ON 
+						a.stuID = b.personID 
+					WHERE 
+						a.stuID = :id",
+					$bind
+		);
         foreach($q as $k => $v) {
             $json = [ 'input#stuName' => $v['lname'].', '.$v['fname'] ];
         }
@@ -964,7 +978,7 @@ class SectionModel {
         if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
         } else {
-           $this->_log->setLog('New Record','Course Registration',$data['courseSecID'],$this->_uname);
+           $this->_log->setLog('New Record','Course Registration',$this->_sec->getSecShortTitle(),$this->_uname);
            redirect( BASE_URL . 'success/save_data/' );
         }
     }
@@ -1004,7 +1018,7 @@ class SectionModel {
         if(!$q1 && !$q2) {
            redirect( BASE_URL . 'error/save_data/' );
         } else {
-           $this->_log->setLog('New Record','Batch Course Registration',$data['courseSecID'],$this->_uname);
+           $this->_log->setLog('New Record','Batch Course Registration',$this->_sec->getSecShortTitle(),$this->_uname);
            redirect( BASE_URL . 'success/save_data/' );
         }
     }
