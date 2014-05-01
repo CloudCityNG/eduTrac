@@ -1399,6 +1399,8 @@ INSERT INTO `permission` VALUES(00000000000000000221, 'access_sql', 'Access SQL'
 
 INSERT INTO `permission` VALUES(00000000000000000222, 'access_person_mgmt', 'Access Person Management');
 
+INSERT INTO `permission` VALUES(00000000000000000223, 'create_campus_site', 'Create Campus Site');
+
 CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uname` varchar(80) NOT NULL,
