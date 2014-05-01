@@ -1405,6 +1405,8 @@ INSERT INTO `permission` VALUES(00000000000000000221, 'access_sql', 'Access SQL'
 
 INSERT INTO `permission` VALUES(00000000000000000222, 'access_person_mgmt', 'Access Person Management');
 
+INSERT INTO `permission` VALUES(00000000000000000223, 'create_campus_site', 'Create Campus Site');
+
 CREATE TABLE IF NOT EXISTS `person` (
   `personID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uname` varchar(80) NOT NULL,
@@ -2533,7 +2535,7 @@ ALTER TABLE `timesheet` ADD FOREIGN KEY (`employeeID`) REFERENCES `staff` (`staf
 
 ALTER TABLE `timesheet` ADD FOREIGN KEY (`addedBy`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
                   
-INSERT INTO `et_option` VALUES(1, 'dbversion', '00028');
+INSERT INTO `et_option` VALUES(1, 'dbversion', '00029');
         
 INSERT INTO `et_option` VALUES(2, 'system_email', '{email}');
         
