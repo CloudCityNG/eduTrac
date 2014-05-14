@@ -760,7 +760,7 @@ class Hooks {
 	// Unserialize value only if it was serialized. Stolen from WP
 	public static function maybe_unserialize( $original ) {
 		if ( self::is_serialized( $original ) ) // don't attempt to unserialize data that wasn't serialized going in
-			return @unserialize( $original );
+			return unserialize( $original );
 		return $original;
 	}
 }

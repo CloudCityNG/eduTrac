@@ -246,6 +246,9 @@ class Section extends \eduTrac\Classes\Core\Controller {
 	    $this->view->staticTitle = array(_t('Student Section Roster'));
 	    $this->view->roster = $this->model->roster();
 		$this->view->rosterCount = $this->model->rosterCount();
+		if(empty($this->view->roster)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
         $this->view->render('bh',true);
         $this->view->render('section/roster',true);
         $this->view->render('bf',true);
@@ -386,6 +389,9 @@ class Section extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
                             ];
         $this->view->attendance = $this->model->attendance($id);
+		if(empty($this->view->attendance)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
         $this->view->render('section/attendance');
     }
 	
@@ -499,6 +505,27 @@ class Section extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
                             'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
                             'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            ];
+        $this->view->finalGrade = $this->model->finalGrade($id);
+        
+        if(empty($this->view->finalGrade)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+		$this->view->render('section/final_grade');
+	}
+	
+	public function fg_export($id) {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array(_t('Export Final Grade'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
@@ -509,7 +536,7 @@ class Section extends \eduTrac\Classes\Core\Controller {
         if(empty($this->view->finalGrade)) {
             redirect( BASE_URL . 'error/invalid_record/' );
         }
-		$this->view->render('section/final_grade');
+		$this->view->render('section/fg_export');
 	}
     
     public function progress() {

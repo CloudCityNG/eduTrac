@@ -210,6 +210,13 @@ class Person extends \eduTrac\Classes\Core\Controller {
         $data['personID'] = isPostSet('personID');
         $this->model->runRolePerm($data);       
     }
+	
+	public function runPersonPerm() {
+        $data = array();
+        $data['personID'] = isPostSet('personID');
+        $data['permission'] = isPostSet('permission');
+        $this->model->runPersonPerm($data);
+    }
     
     public function runAddAddress() {
         if(!hasPermission('add_address')) { redirect( BASE_URL . 'dashboard/' ); }

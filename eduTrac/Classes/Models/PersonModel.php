@@ -227,6 +227,15 @@ class PersonModel {
         }
         redirect($_SERVER['HTTP_REFERER']);
     }
+	
+	public function runPersonPerm($data) {
+		if(count($data['permission']) > 0) {
+			$q = DB::inst()->query( sprintf("REPLACE INTO person_perms SET `personID` = %u, `permission` = '%s'",$data['personID'],Hooks::maybe_serialize($data['permission'])) );
+		} else {
+			$q = DB::inst()->query( sprintf("DELETE FROM person_perms WHERE `personID` = %u",$data['personID']) );
+		}
+		redirect($_SERVER['HTTP_REFERER']);
+	}
     
     public function resetPassword($id) {
         $array = [];

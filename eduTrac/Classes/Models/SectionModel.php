@@ -80,7 +80,7 @@ class SectionModel {
     public function crse($id) {
         $array = [];
         $bind = array( ":id" => $id );
-        $q = DB::inst()->select( "course", "courseID = :id", "", "courseID,courseCode", $bind );
+        $q = DB::inst()->select( "course", "courseID = :id AND currStatus ='A' AND endDate <= '0000-00-00'", "", "courseID,courseCode", $bind );
         foreach($q as $r) {
             $array[] = $r;
         }
@@ -1094,10 +1094,9 @@ class SectionModel {
                                 termCode = :termCode",
                             $bind 
                 );
+				$this->_log->setLog('Update Record','Final Grade',get_name($data['stuID'][$i]).' ('.$data['termCode'].'-'.$data['courseSecCode'].')',$this->_uname);
             ++$i;
             }
-        
-        $this->_log->setLog('Update Record','Final Grade',$data['courseSecID'],$this->_uname);
         redirect( $_SERVER['HTTP_REFERER'] );
     }
 

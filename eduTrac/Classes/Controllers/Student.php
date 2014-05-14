@@ -153,6 +153,9 @@ class Student extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0'
                             ];
         $this->view->student = $this->model->getStudent($id);
+		if(empty($this->view->student)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
         $this->view->render('student/add_prog');
     }
     
@@ -294,6 +297,9 @@ class Student extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
                             ];
         $this->view->finalGrades = $this->model->finalGrades();
+		if(empty($this->view->finalGrades)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
 		$this->view->render('student/final_grades');
     }
     
@@ -321,6 +327,9 @@ class Student extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
                             ];
         $this->view->schedule = $this->model->schedule();
+		if(empty($this->view->schedule)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
 		$this->view->render('student/schedule');
 	}
     
@@ -426,6 +435,9 @@ class Student extends \eduTrac\Classes\Core\Controller {
 	    $this->view->stuInfo = $this->model->tranStuInfo();
 	    $this->view->courses = $this->model->tranCourse();
         $this->view->tranGPA = $this->model->tranGPA();
+		if(empty($this->view->stuInfo)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
         $this->view->render('bh',true);
         $this->view->render('student/generate',true);
         $this->view->render('bf',true);

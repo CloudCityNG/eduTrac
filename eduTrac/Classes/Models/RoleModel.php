@@ -107,6 +107,17 @@ class RoleModel {
         //Logs::writeLog('Modified','Role',$roleName,$this->_auth->getPersonField('uname'));
         redirect(BASE_URL . 'role/');
     }
+	
+	public function runRole($data) {
+        $roleID = $data['roleID'];
+        $roleName = $data['roleName'];
+		$rolePerm = Hooks::maybe_serialize($data['permission']);
+		
+        $strSQL = DB::inst()->query( sprintf("REPLACE INTO `role` SET `ID` = %u, `roleName` = '%s', `permission` = '%s'",$roleID,$roleName,$rolePerm ) );
+        /* Write to logs */
+        //Logs::writeLog('Modified','Role',$roleName,$this->_auth->getPersonField('uname'));
+        redirect(BASE_URL . 'role/');
+    }
     
     public function deleteRole($data) {
         $id = $data['roleID'];

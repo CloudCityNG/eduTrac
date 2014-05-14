@@ -105,6 +105,14 @@ class Role extends \eduTrac\Classes\Core\Controller {
         $data['personID'] = isPostSet('personID');
         $this->model->runRolePerm($data);       
     }
+	
+	public function runRole() {
+        $data = array();
+        $data['roleID'] = isPostSet('roleID');
+        $data['roleName'] = isPostSet('roleName');
+        $data['permission'] = isPostSet('permission');
+        $this->model->runRole($data);
+    }
     
     public function editSaveRole() {
         $data = array();

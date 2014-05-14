@@ -177,6 +177,20 @@ CREATE TABLE IF NOT EXISTS `building` (
 
 INSERT INTO `building` VALUES(00000000001, 'NULL', '','NULL');
 
+CREATE TABLE IF NOT EXISTS `campus` (
+  `campusID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(255) NOT NULL,
+  `site_title` varchar(255) NOT NULL,
+  `path` varchar(80) NOT NULL DEFAULT '/',
+  `dbname` varchar(255) NOT NULL,
+  `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `public` tinyint(2) NOT NULL DEFAULT '1',
+  `archived` tinyint(2) NOT NULL DEFAULT '0',
+  `deleted` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`campusID`),
+  UNIQUE KEY `campus` (`domain`,`path`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `ccd` (
   `ccdID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `ccdCode` varchar(11) NOT NULL,
@@ -1436,12 +1450,11 @@ CREATE TABLE IF NOT EXISTS `person` (
 
 CREATE TABLE IF NOT EXISTS `person_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `personID` int(11) unsigned zerofill NOT NULL,
-  `permID` bigint(20) NOT NULL,
-  `value` tinyint(1) NOT NULL DEFAULT '0',
-  `addDate` datetime NOT NULL,
+  `personID` int(8) unsigned zerofill NOT NULL,
+  `permission` text NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `userID` (`personID`,`permID`)
+  UNIQUE KEY `personID` (`personID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `person_roles` (
@@ -1503,19 +1516,20 @@ CREATE TABLE IF NOT EXISTS `restriction_code` (
 CREATE TABLE IF NOT EXISTS `role` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `roleName` varchar(20) NOT NULL,
+  `permission` text NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `roleName` (`roleName`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `role` VALUES(00000000000000000009, 'Faculty');
+INSERT INTO `role` VALUES(00000000000000000009, 'Faculty', 'a:19:{i:0;s:21:"access_faculty_screen";i:1;s:21:"access_student_screen";i:2;s:24:"access_course_sec_screen";i:3;s:23:"course_sec_inquiry_only";i:4;s:19:"course_inquiry_only";i:5;s:23:"access_acad_prog_screen";i:6;s:22:"acad_prog_inquiry_only";i:7;s:20:"address_inquiry_only";i:8;s:20:"general_inquiry_only";i:9;s:20:"faculty_inquiry_only";i:10;s:20:"student_inquiry_only";i:11;s:24:"access_stu_roster_screen";i:12;s:21:"access_grading_screen";i:13;s:19:"person_inquiry_only";i:14;s:19:"access_staff_screen";i:15;s:18:"staff_inquiry_only";i:16;s:16:"access_dashboard";i:17;s:16:"access_academics";i:18;s:18:"access_person_mgmt";}');
 
-INSERT INTO `role` VALUES(00000000000000000010, 'Parent');
+INSERT INTO `role` VALUES(00000000000000000010, 'Parent', '');
 
-INSERT INTO `role` VALUES(00000000000000000012, 'Staff');
+INSERT INTO `role` VALUES(00000000000000000011, 'Student', 'a:2:{i:0;s:21:"access_student_portal";i:1;s:12:"room_request";}');
 
-INSERT INTO `role` VALUES(00000000000000000011, 'Student');
+INSERT INTO `role` VALUES(00000000000000000012, 'Staff', 'a:32:{i:0;s:27:"access_sql_interface_screen";i:1;s:20:"access_course_screen";i:2;s:21:"access_faculty_screen";i:3;s:21:"access_student_screen";i:4;s:28:"access_email_template_screen";i:5;s:24:"access_course_sec_screen";i:6;s:23:"course_sec_inquiry_only";i:7;s:19:"course_inquiry_only";i:8;s:20:"access_person_screen";i:9;s:23:"access_acad_prog_screen";i:10;s:22:"acad_prog_inquiry_only";i:11;s:23:"access_error_log_screen";i:12;s:20:"access_report_screen";i:13;s:20:"address_inquiry_only";i:14;s:25:"access_save_query_screens";i:15;s:12:"access_forms";i:16;s:17:"create_fac_record";i:17;s:24:"access_stu_roster_screen";i:18;s:22:"access_bill_tbl_screen";i:19;s:17:"add_crse_sec_bill";i:20;s:11:"import_data";i:21;s:19:"person_inquiry_only";i:22;s:19:"access_staff_screen";i:23;s:18:"staff_inquiry_only";i:24;s:19:"create_staff_record";i:25;s:23:"access_student_accounts";i:26;s:16:"access_academics";i:27;s:22:"access_human_resources";i:28;s:17:"submit_timesheets";i:29;s:10:"access_sql";i:30;s:18:"access_person_mgmt";i:31;s:22:"access_payment_gateway";}');
 
-INSERT INTO `role` VALUES(00000000000000000008, 'Super Administrator');
+INSERT INTO `role` VALUES(00000000000000000008, 'Super Administrator', '');
 
 CREATE TABLE IF NOT EXISTS `role_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -2435,6 +2449,10 @@ ALTER TABLE `payment` ADD FOREIGN KEY (`postedBy`) REFERENCES `person` (`personI
 
 ALTER TABLE `person` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
+ALTER TABLE `person_perms` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `person_roles` ADD FOREIGN KEY (`personID`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
 ALTER TABLE `refund` ADD FOREIGN KEY (`stuID`) REFERENCES `student` (`stuID`) ON UPDATE CASCADE;
 
 ALTER TABLE `refund` ADD FOREIGN KEY (`termCode`) REFERENCES `term` (`termCode`) ON UPDATE CASCADE;
@@ -2535,7 +2553,7 @@ ALTER TABLE `timesheet` ADD FOREIGN KEY (`employeeID`) REFERENCES `staff` (`staf
 
 ALTER TABLE `timesheet` ADD FOREIGN KEY (`addedBy`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
                   
-INSERT INTO `et_option` VALUES(1, 'dbversion', '00029');
+INSERT INTO `et_option` VALUES(1, 'dbversion', '00030');
         
 INSERT INTO `et_option` VALUES(2, 'system_email', '{email}');
         
@@ -2583,7 +2601,7 @@ INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);
         
 INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
         
-INSERT INTO `et_option` VALUES(25, 'nav_collapse', '0');
+INSERT INTO `et_option` VALUES(25, 'auth_token', '');
 
 INSERT INTO `cronjob` VALUES(1, '{url}cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);
         

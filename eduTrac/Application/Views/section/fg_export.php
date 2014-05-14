@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Course Sections View
+ * Course Section Grading View
  *  
  * PHP 5.4+
  *
@@ -22,7 +22,7 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       3.0.0
+ * @since       3.0.1
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
@@ -32,10 +32,12 @@
 	<li><?=_t( 'You are here' );?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><?=_t( 'Course Sections' );?></li>
+	<li><a href="<?=BASE_URL;?>section/courses/<?=bm();?>" class="glyphicons book"><i></i> <?=_t( 'Course Sections' );?></a></li>
+    <li class="divider"></li>
+	<li><?=_t( 'Export Final Grade' );?></li>
 </ul>
 
-<h3><?=_t( 'My Course Sections' );?></h3>
+<h3><?=_t( 'Final Grade for ' );?><?=$this->finalGrade[0]['secShortTitle'];?> (<?=$this->finalGrade[0]['termCode'];?>-<?=$this->finalGrade[0]['courseSecCode'];?>)</h3>
 <div class="innerLR">
 
 	<!-- Widget -->
@@ -48,34 +50,23 @@
 				<!-- Table heading -->
 				<thead>
 					<tr>
-						<th class="text-center"><?=_t( 'Term' );?></th>
-						<th class="text-center"><?=_t( 'Section Code' );?></th>
-						<th class="text-center"><?=_t( 'Short Title' );?></th>
-						<th class="text-center"><?=_t( 'Actions' );?></th>
+                        <th class="text-center"><?=_t( 'Course Section' );?></th>
+						<th class="text-center"><?=_t( 'Student' );?></th>
+						<th class="text-center"><?=_t( 'Grade' );?></th>
 					</tr>
 				</thead>
 				<!-- // Table heading END -->
 				
 				<!-- Table body -->
 				<tbody>
-                <?php if($this->courseSec != '') : foreach($this->courseSec as $k => $v) { ?>
+                <?php if($this->finalGrade != '') : foreach($this->finalGrade as $k => $v) { ?>
                 <tr class="gradeX">
-                    <td class="text-center"><?=_h($v['termCode']);?></td>
-                    <td class="text-center"><?=_h($v['courseSecCode']);?></td>
-                    <td class="text-center"><?=_h($v['secShortTitle']);?></td>
+                    <td class="text-center"><?=_h($v['termCode'].'-'.$v['courseSecCode']);?></td>
                     <td class="text-center">
-                    	<div class="btn-group dropup">
-                            <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>
-                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
-                                <span class="caret"></span>
-                                <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
-                            </button>
-                            <ul role="menu" class="dropdown-menu dropup-text pull-right">
-                                <li><a href="<?=BASE_URL;?>section/final_grade/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>"><?=_t( 'Enter Final Grades' );?></a></li>
-                                <li><a href="<?=BASE_URL;?>section/fg_export/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>"><?=_t( 'Export Final Grades' );?></a></li>
-                                <li><a href="<?=BASE_URL;?>section/attendance/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>&date=<?=date("Y-m-d");?>"><?=_t( 'Attendance' );?></a></li>
-                            </ul>
-                        </div>
+                        <?=get_name(_h($v['stuID']));?>
+                    </td>
+                    <td class="text-center">
+                        <?=_h($v['grade']);?>
                     </td>
                 </tr>
                 <?php } endif; ?>
@@ -87,7 +78,6 @@
 			
 		</div>
 	</div>
-	<div class="separator bottom"></div>
 	<!-- // Widget END -->
 	
 </div>	

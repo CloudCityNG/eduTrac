@@ -118,7 +118,7 @@
                             <label class="col-md-3 control-label"><?=_t( 'Age' );?></label>
                             <div class="col-md-8">
                             	<?php if(_h($this->appl[0]['dob']) > '0000-00-00') : ?>
-                            	<input class="form-control" readonly type="text" value="<?=getAge(_h($this->appl[0]['dob']));?>" />
+                            	<input class="form-control" readonly type="text" value="<?=\eduTrac\Classes\Libraries\Util::getAge(_h($this->appl[0]['dob']));?>" />
                             	<?php else : ?>
                             	<input class="form-control" readonly type="text" />
                         		<?php endif; ?>

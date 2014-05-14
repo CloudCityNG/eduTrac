@@ -94,7 +94,9 @@ use \eduTrac\Classes\Libraries\Hooks;
                             </button>
                             <ul role="menu" class="dropdown-menu dropup-text pull-right">
                                 <li><a href="<?=BASE_URL;?>course/view/<?=_h($v['courseID']);?>/<?=bm();?>"><?=_t( 'View' ); ?></a></li>
+                                <?php if(_h($v['currStatus']) == _t( 'A' ) && _h($v['endDate']) == '0000-00-00') : ?>
                                 <li<?=ae('add_course_sec');?>><a href="<?=BASE_URL;?>section/add/<?=_h($v['courseID']);?>/<?=bm();?>"><?=_t( 'Create Section' ); ?></a></li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </td>
