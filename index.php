@@ -35,7 +35,7 @@ defined( 'APP_PATH' )			or define( 'APP_PATH', SYS_PATH . APP_FOLDER . DS );
 defined( 'LOCALE_DIR' ) 		or define( 'LOCALE_DIR', SYS_PATH . 'Locale' );
 defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH.'DropIns/' );
 defined( 'ENCODING' )			or define( 'ENCODING', 'UTF-8' );
-defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '4.1.4' );
+defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '4.1.5' );
 require( SYS_PATH . 'application.php' );
 $cookieDomain = new \eduTrac\Classes\Libraries\Cookies;
 defined( 'COOKIE_EXPIRE' )      or define( 'COOKIE_EXPIRE', time()+\eduTrac\Classes\Libraries\Hooks::get_option('cookieexpire') );
