@@ -49,8 +49,6 @@ $(function()
 							},
 							{
 						  	  "sExtends": "pdf",
-						      "sFieldBoundary": '"',
-							  "sFieldSeperator": ",",
 							}
 						  ],
 						"sSwfPath": componentsPath + "modules/admin/tables/datatables/assets/lib/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"

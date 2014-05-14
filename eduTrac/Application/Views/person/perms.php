@@ -44,7 +44,7 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 <div class="innerLR">
 
 	<!-- Form -->
-	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>person/runRolePerm/" id="validateSubmitForm" method="post" autocomplete="off">
+	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>person/runPersonPerm/" id="validateSubmitForm" method="post" autocomplete="off">
 		
 		<!-- Widget -->
 		<div class="widget widget-heading-simple widget-body-gray">
@@ -58,40 +58,14 @@ use \eduTrac\Classes\Libraries\ACL as ACL;
 					<thead>
 						<tr>
 							<th><?=_t( 'Permission' );?></th>
-							<th><?=_t( 'Status' );?></th>
+							<th class="text-center"><?=_t( 'Allow' );?></th>
 						</tr>
 					</thead>
 					<!-- // Table heading END -->
 				
 					<!-- Table body -->
 					<tbody>
-						<?php 
-						$permACL = new ACL(_h($this->perms[0]['personID']));
-							$rPerms = $permACL->perms;
-						    $aPerms = $permACL->getAllPerms('full');
-							foreach ($aPerms as $k => $v) {
-								echo '<tr><td>'._h($v['Name']).'</td>';
-								
-								echo '<td class="text-center"><select name="perm_' . _h($v['ID']) . '" class="selectpicker col-md-6" data-style="btn-info">';
-								echo '<option value="1"';
-									if ($permACL->hasPermission(_h($v['Key'])) && isset($rPerms[_h($v['Key'])]['inheritted']) != true) { echo ' selected="selected"'; }
-										echo '>Allow</option>';
-										echo '<option value="0"';
-									if (isset($rPerms[_h($v['Key'])]['value']) === false && isset($rPerms[_h($v['Key'])]['inheritted']) != true) { echo ' selected="selected"'; }
-										echo '>Deny</option>';
-										echo '<option value="x"';
-									if ($rPerms[_h($v['Key'])]['inheritted'] == true || !array_key_exists(_h($v['Key']),$rPerms)) {
-										echo ' selected="selected"';
-										if (isset($rPerms[_h($v['Key'])]['value']) === true ) {
-											$iVal = '(Allow)';
-										} else {
-											$iVal = '(Deny)';
-										}
-									}
-								echo '>Inherit ' . $iVal . '</option>';
-		            			echo '</select></td></tr>';
-							}
-						?>
+						<?php personPerm(_h($this->perms[0]['personID'])); ?>
 					</tbody>
 					<!-- // Table body END -->
 		

@@ -171,7 +171,7 @@ class ACL {
 	}
 	
 	public function getUserPerms($personID) {
-		$strSQL = "SELECT * FROM `person_perms` WHERE `personID` = " . floatval($personID) . " ORDER BY `addDate` ASC";
+		$strSQL = "SELECT * FROM `person_perms` WHERE `personID` = " . floatval($personID) . " ORDER BY `LastUpdate` ASC";
 		$data = $this->_db->query($strSQL);
 		$perms = array();
 		while($row = $data->fetch()) {
@@ -196,7 +196,7 @@ class ACL {
 		return false;
 	}
 	
-	public function hasPermission($permKey) {
+	/*public function hasPermission($permKey) {
 		$permKey = strtolower($permKey);
 		if (array_key_exists($permKey,$this->perms)) {
 			if ($this->perms[$permKey]['value'] === '1' || $this->perms[$permKey]['value'] === true) {
@@ -204,6 +204,32 @@ class ACL {
 			} else {
 				return false;
 			}
+		} else {
+			return false;
+		}
+	}*/
+	
+	public function hasPermission($permKey) {
+		$bind = [ ":perm" => "%$permKey%",":id" => $this->_auth->getPersonField('personID') ];
+		$q1 = $this->_db->query( "SELECT 
+						a.ID 
+					FROM 
+						role a 
+					LEFT JOIN 
+						person_roles b 
+					ON 
+						a.ID = b.roleID 
+					WHERE 
+						a.permission LIKE :perm 
+					AND 
+						b.personID = :id",
+					$bind 
+		);
+		$q2 = $this->_db->select('person_perms','permission LIKE :perm AND personID = :id','','ID',$bind);
+		if(count($q1) > 0) {
+			return true;
+		} elseif(count($q2) > 0) {
+			return true;
 		} else {
 			return false;
 		}

@@ -143,7 +143,7 @@ class Mailer extends \eduTrac\Classes\Core\Controller {
         $data['email_key'] = isPostSet('email_key');
         $data['email_name'] = isPostSet('email_name');
         $data['email_value'] = isPostSet('email_value');
-        $data['deptID'] = isPostSet('deptID');
+        $data['deptCode'] = isPostSet('deptCode');
         $this->model->runTemplate($data);
     }
     

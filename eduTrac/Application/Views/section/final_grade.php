@@ -48,13 +48,13 @@
 		<div class="widget-body">
 			
 			<!-- Table -->
-			<table class="dynamicTable tableTools table table-striped table-bordered table-condensed table-white">
+			<table class="table table-striped table-bordered table-condensed table-white">
 			
 				<!-- Table heading -->
 				<thead>
 					<tr>
                         <th class="text-center"><?=_t( 'Course Section' );?></th>
-						<th class="text-center"><?=_t( 'Student ID' );?></th>
+						<th class="text-center"><?=_t( 'Student' );?></th>
 						<th class="text-center"><?=_t( 'Grade' );?></th>
                         <th style="display:none;">&nbsp;</th>
 					</tr>
@@ -74,8 +74,8 @@
                         <?=grading_scale(_h($v['grade']));?>
                     </td>
                     <td style="display:none;">
-                        <input type="hidden" name="courseSecID" value="<?=_h($v['courseSecID']);?>" />
-                        <input type="hidden" name="termID" value="<?=_h($v['termID']);?>" />
+                        <input type="hidden" name="courseSecCode" value="<?=_h($v['courseSecCode']);?>" />
+                        <input type="hidden" name="termCode" value="<?=_h($v['termCode']);?>" />
                     </td>
                 </tr>
                 <?php } endif; ?>

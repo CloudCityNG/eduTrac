@@ -917,6 +917,7 @@ use \eduTrac\Classes\Libraries\Cookies;
      */
     function grading_scale($grade = NULL) {
     	$select = '<select name="grade[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>'."\n";
+		$select .= '<option value="">&nbsp;</option>'."\n";
 		$q = DB::inst()->select( "grade_scale","status = '1'" );
 		foreach($q as $r) {
 			$select .= '<option value="' . _h($r['grade']) . '"'.selected( $grade, _h($r['grade']), false ).'>' . _h($r['grade']) . '</option>'."\n";
@@ -985,6 +986,70 @@ use \eduTrac\Classes\Libraries\Cookies;
                 </select>';
         return Hooks::apply_filter('general_ledger_type', $select, $type);
     }
+	
+	function rolePerm($id) {
+		$array = [];
+		$q = DB::inst()->query("SELECT permission from role WHERE ID = $id");
+		foreach($q as $v) {
+			$array[] = $v;
+		}
+		$sql = DB::inst()->query("SELECT * FROM permission");
+		foreach($sql as $r) {
+			$perm = Hooks::maybe_unserialize($v['permission']);
+			echo '
+				<tr>
+					<td>'.$r['permName'].'</td>
+					<td class="text-center">
+				<input type="checkbox" name="permission[]" value="'.$r['permKey'].'" ';
+				if(in_array($r['permKey'],$perm)) { echo 'checked="checked"'; };
+				echo '/>
+					</td>
+				</tr>';
+		}
+	}
+	
+	function personPerm($id) {
+		$array = [];
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->query( "SELECT permission FROM person_perms WHERE personID = :id", $bind );
+		foreach($q as $r) {
+			$array[] = $r;
+		}
+		$personPerm = Hooks::maybe_unserialize($r['permission']);
+		/** 
+		 * Select the role(s) of the person who's 
+		 * personID = $id
+		 */ 
+		$array1 = [];
+		$bind1 = [ ":id" => $id ];
+		$q1 = DB::inst()->query( "SELECT roleID from person_roles WHERE personID = :id",$bind1 );
+		foreach($q1 as $r1) {
+			$array1[] = $r1;
+		}
+		/**
+		 * Select all the permissions from the role(s)
+		 * that are connected to the selected person.
+		 */
+		$array2 = [];
+		$bind2 = [ ":id" => _h($r1['roleID']) ];
+		$q2 = DB::inst()->query("SELECT permission from role WHERE ID = :id", $bind2);
+		foreach($q2 as $r2) {
+			$array2[] = $r2;
+		}
+		$perm = Hooks::maybe_unserialize($r2['permission']);
+		$sql = DB::inst()->query("SELECT * FROM permission");
+		foreach($sql as $r) {
+			echo '
+				<tr>
+					<td>'.$r['permName'].'</td>
+					<td class="text-center">
+				<input type="checkbox" name="permission[]" value="'.$r['permKey'].'" ';
+				if(in_array($r['permKey'],$perm)) { echo 'checked="checked" disabled="disabled"'; } elseif($personPerm != '' && in_array($r['permKey'],$personPerm)) { echo 'checked="chedked"';};
+				echo '/>
+					</td>
+				</tr>';
+		}
+	}
     
     /**
      * Checks against certain keywords when the SQL 
@@ -1511,12 +1576,10 @@ use \eduTrac\Classes\Libraries\Cookies;
                     }
                 }
     
-                return fclose($file);
+                fclose($file);
+				redirect( BASE_URL . 'upgrade/' );
             }
         }
-    
-        sleep(1);
-        redirect( BASE_URL . 'dashboard/' );
     }
     
     function remoteFileExists($url) {

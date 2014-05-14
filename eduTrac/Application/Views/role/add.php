@@ -26,10 +26,6 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-
-use \eduTrac\Classes\Libraries\ACL as ACL;
-$cRole = new ACL();
-
 ?>
 
 <ul class="breadcrumb">
@@ -45,7 +41,7 @@ $cRole = new ACL();
 <div class="innerLR">
 
 	<!-- Form -->
-	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>role/editSaveRole/" id="validateSubmitForm" method="post" autocomplete="off">
+	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>role/runRole/" id="validateSubmitForm" method="post" autocomplete="off">
 		
 		<!-- Widget -->
 		<div class="widget widget-heading-simple widget-body-gray">
@@ -73,35 +69,13 @@ $cRole = new ACL();
 								<tr>
 									<th><?=_t( 'Permission' );?></th>
 									<th><?=_t( 'Allow' );?></th>
-									<th><?=_t( 'Deny' );?></th>
-									<th><?=_t( 'Ignore' );?></th>
 								</tr>
 							</thead>
 							<!-- // Table heading END -->
-						
-							<!-- Table body -->
+							
 							<tbody>
-								<?php 
-									$rPerms = $cRole->getRolePerms(isGetSet('roleID'));
-        							$aPerms = $cRole->getAllPerms('full');
-        							foreach ($aPerms as $k => $v) {
-        								echo '<tr><td>'._h($v['Name']).'</td>';
-										
-										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_1\" value=\"1\"";
-                						if ($rPerms[_h($v['Key'])]['value'] === true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
-                						echo " /></td>";
-										 
-										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_0\" value=\"0\"";
-                						if ($rPerms[_h($v['Key'])]['value'] != true && isGetSet('roleID') != '') { echo " checked=\"checked\""; }
-                						echo " /></td>";
-										
-										echo "<td class=\"text-center\"><input type=\"radio\" class=\"radio\" name=\"perm_" . _h($v['ID']) . "\" id=\"perm_" . _h($v['ID']) . "_X\" value=\"X\"";
-                						if (isGetSet('roleID') == '' || !array_key_exists(_h($v['Key']),$rPerms)) { echo " checked=\"checked\""; }
-                						echo " /></td></tr>"; 
-									}
-								?>
+								<?php rolePerm(); ?>
 							</tbody>
-							<!-- // Table body END -->
 				
 					</table>
 					<!-- // Table END -->
@@ -110,8 +84,7 @@ $cRole = new ACL();
 				
 				<!-- Form actions -->
 				<div class="form-actions">
-					<input type="hidden" name="action" value="saveRole" />
-					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Save' );?></button>
+					<button type="submit" name="Submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?=_t( 'Submit' );?></button>
 				</div>
 				<!-- // Form actions END -->
 				

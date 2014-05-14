@@ -60,7 +60,7 @@ class Course {
     
     public function crseList($id) {
         $bind = array( ":id" => $id );
-        $q = DB::inst()->select( "course", "courseID != :id", "", "courseCode", $bind );
+        $q = DB::inst()->select( "course", "courseID != :id AND currStatus = 'A' AND endDate <= '0000-00-00'", "", "courseCode", $bind );
         foreach( $q as $r) {
             $array[] = $r['courseCode'];
         }
