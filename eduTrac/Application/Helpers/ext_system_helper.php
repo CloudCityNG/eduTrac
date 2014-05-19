@@ -306,6 +306,16 @@ use \eduTrac\Classes\Libraries\Cookies;
 			return false;
 		}
 	}
+	
+	function studentsExist($code,$term) {
+		$bind = [ ":code" => $code, ":term" => $term ];
+		$q = DB::inst()->select( "stu_course_sec","courseSecCode = :code AND termCode = :term","","*",$bind );
+		if(count($q) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
     
     /**
      * @since 4.0.7
@@ -1347,7 +1357,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         }
         
         $bind2 = [ ":stuID" => $auth->getPersonField('personID'), ":today" => date('Y-m-d') ];
-        $sql = DB::inst()->query( "SELECT 
+        $sql1 = DB::inst()->query( "SELECT 
                         * 
                     FROM 
                         restriction 
@@ -1362,9 +1372,14 @@ use \eduTrac\Classes\Libraries\Cookies;
                     $bind2 
         );
         
+        $bind3 = [ ":id" => $auth->getPersonField('personID') ];
+        $sql2 = DB::inst()->select("student","stuID=:id","","ID",$bind3);
+        
         if($courses != NULL && $courses >= Hooks::get_option('number_of_courses')) {
             return false;
-        } elseif(count($sql) > 0) {
+        } elseif(count($sql1) > 0) {
+            return false;
+		} elseif(count($sql2) <= 0) {
             return false;
         } else {
             return true;
