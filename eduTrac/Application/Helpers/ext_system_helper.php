@@ -1175,6 +1175,22 @@ use \eduTrac\Classes\Libraries\Cookies;
         }
         return _h($r['lname']).', '._h($r['fname']);
     }
+	
+	/**
+	 * @since 4.1.6
+	 */
+	function get_initials($ID,$initials=2) {
+        $bind = array( ":id" => $ID );
+        $q = DB::inst()->select( "person","personID = :id","","lname,fname",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+		if($initials == 2) {
+			return substr(_h($r['fname']),0,1).'. '.substr(_h($r['lname']),0,1).'.';
+		} else {
+			return _h($r['lname']).', '.substr(_h($r['fname']),0,1).'.';
+		}
+    }
     
     function hasAppl($id) {
         $bind = array( ":id" => $id );

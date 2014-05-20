@@ -125,7 +125,10 @@ class SectionModel {
                         dotw,
                         startTime,
                         endTime,
-                        roomCode 
+                        buildingCode,
+                        roomCode,
+                        locationCode,
+                        minCredit 
                     FROM 
                         course_sec 
                     WHERE 
