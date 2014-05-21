@@ -1060,6 +1060,38 @@ use \eduTrac\Classes\Libraries\Cookies;
 				</tr>';
 		}
 	}
+	
+	function student_has_restriction() {
+		$auth = new \eduTrac\Classes\Libraries\Cookies;
+        $bind = [ ":id" => $auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+        				GROUP_CONCAT(DISTINCT c.deptName SEPARATOR ',') AS 'Restriction' 
+    				FROM 
+    					restriction a 
+					LEFT JOIN 
+						restriction_code b 
+					ON 
+						a.rstrCode = b.rstrCode 
+					LEFT JOIN 
+						department c 
+					ON 
+						b.deptCode = c.deptCode 
+					WHERE 
+						a.severity = '99' 
+					AND 
+						a.endDate <= '0000-00-00' 
+					AND 
+						a.stuID = :id",
+					$bind 
+		);
+		if(count($q) > 0) {
+			foreach($q as $r) {
+				return '<strong>'.$r['Restriction'].'</strong>';
+			}
+		} else {
+			return false;
+		}
+	}
     
     /**
      * Checks against certain keywords when the SQL 
