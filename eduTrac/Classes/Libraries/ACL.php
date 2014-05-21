@@ -171,7 +171,7 @@ class ACL {
 	}
 	
 	public function getUserPerms($personID) {
-		$strSQL = "SELECT * FROM `person_perms` WHERE `personID` = " . floatval($personID) . " ORDER BY `LastUpdate` ASC";
+		$strSQL = "SELECT * FROM `person_perms` WHERE `personID` = " . floatval($personID) . " ORDER BY `addDate` ASC";
 		$data = $this->_db->query($strSQL);
 		$perms = array();
 		while($row = $data->fetch()) {
