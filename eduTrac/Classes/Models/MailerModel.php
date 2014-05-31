@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Cookies;
+use \eduTrac\Classes\Libraries\Util;
 class MailerModel {
     
     private $_auth;
@@ -134,7 +135,7 @@ class MailerModel {
     
     public function runTemplate($data) {
         $bind = [ 
-                "email_key" => $data['email_key'],
+                "email_key" => Util::_trim($data['email_key']),
                 "email_name" => $data['email_name'],
                 "email_value" => $data['email_value'],
                 "deptCode" => $data['deptCode']
@@ -153,7 +154,7 @@ class MailerModel {
     
     public function runEditTemplate($data) {
         $update = [ 
-                    "email_key" => $data['email_key'],
+                    "email_key" => Util::_trim($data['email_key']),
                     "email_name" => $data['email_name'],
                     "email_value" => $data['email_value']
                   ];

@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
+use \eduTrac\Classes\Libraries\Util;
 class PermissionModel {
     
     private $_auth;
@@ -84,7 +85,7 @@ class PermissionModel {
     public function editSaveDeletePerm($data) {
         $permID = $data['permID'];
         $permName = $data['permName'];
-        $permKey = $data['permKey'];
+        $permKey = Util::_trim($data['permKey']);
         
         if (isset($data['savePerm'])) {
             $strSQL = sprintf("REPLACE INTO `permission` SET `ID` = %u, `permName` = '%s', `permKey` = '%s'",$permID,$permName,$permKey);

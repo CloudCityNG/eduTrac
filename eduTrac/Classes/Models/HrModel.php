@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class HrModel {
 	
 	private $_auth;
@@ -292,7 +293,7 @@ class HrModel {
 	
 	public function runEditPayGrade($data) {
 		$update = [ 
-				"grade" => $data['grade'],
+				"grade" => Util::_trim($data['grade']),
 				"minimum_salary" => $data['minimum_salary'],
 				"maximum_salary" => $data['maximum_salary']
 				];
@@ -307,8 +308,8 @@ class HrModel {
 	
 	public function runJobTitle($data) {
 		$bind = [ 
-				"pay_grade" => $data['pay_grade'],"title" => $data['title'],
-				"hourly_wage" => $data['hourly_wage'],"weekly_hours" => $data['weekly_hours'],
+				"pay_grade" => Util::_trim($data['pay_grade']),"title" => $data['title'],
+				"hourly_wage" => Util::_trim($data['hourly_wage']),"weekly_hours" => $data['weekly_hours'],
 				"addDate" => $data['addDate'],"addedBy" => $data['addedBy'] 
 				];
 		$q = DB::inst()->insert('job',$bind);
@@ -321,8 +322,8 @@ class HrModel {
 	
 	public function runEditJobTitle($data) {
 		$update = [ 
-				"pay_grade" => $data['pay_grade'],"title" => $data['title'],
-				"hourly_wage" => $data['hourly_wage'],"weekly_hours" => $data['weekly_hours']
+				"pay_grade" => Util::_trim($data['pay_grade']),"title" => $data['title'],
+				"hourly_wage" => Util::_trim($data['hourly_wage']),"weekly_hours" => $data['weekly_hours']
 				];
 		$bind = [ ":id" => $data['ID'] ];
 		$q = DB::inst()->update("job",$update,"ID=:id",$bind);
@@ -335,15 +336,15 @@ class HrModel {
 	
 	public function runEditEmployee($data) {
 		$update1 = [ 
-					"schoolCode" => $data['school'],"buildingCode" => $data['building'],
-					"officeCode" => $data['office'],"office_phone" => $data['phone'],
-					"deptCode" => $data['dept'],"status" => $data['status'] 
+					"schoolCode" => Util::_trim($data['school']),"buildingCode" => Util::_trim($data['building']),
+					"officeCode" => Util::_trim($data['office']),"office_phone" => $data['phone'],
+					"deptCode" => Util::_trim($data['dept']),"status" => $data['status'] 
 					];
 		$bind1 = [ ":staff" => $data['staffID'] ];
 		$q1 = DB::inst()->update( 'staff',$update1,'staffID=:staff',$bind1 );
 		
 		$update2 = [ 
-					"jobStatusCode" => $data['jobStatus'],"jobID" => $data['job'],
+					"jobStatusCode" => Util::_trim($data['jobStatus']),"jobID" => $data['job'],
 					"supervisorID" => $data['supervisor'],"staffType" => $data['type'],
 					"hireDate" => $data['hire'],"startDate" => $data['start'],
 					"endDate" => $data['end'] 
@@ -360,7 +361,7 @@ class HrModel {
 	
 	public function runPosition($data) {
 		$bind = [ 
-				"jobStatusCode" => $data['jobStatus'],"jobID" => $data['job'],
+				"jobStatusCode" => Util::_trim($data['jobStatus']),"jobID" => $data['job'],
 				"supervisorID" => $data['supervisor'],"staffType" => $data['type'],
 				"hireDate" => $data['hire'],"startDate" => $data['start'],
 				"endDate" => $data['end'],"addDate" => $data['addDate'],

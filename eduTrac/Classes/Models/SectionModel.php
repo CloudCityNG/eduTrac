@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
+use \eduTrac\Classes\Libraries\Util;
 class SectionModel {
     
     private $_sec;
@@ -751,12 +752,12 @@ class SectionModel {
         $sc = $data['courseCode'].'-'.$data['sectionNumber'];
         
         $bind = array( 
-            "sectionNumber" => $data['sectionNumber'],"courseSecCode" => $sc,
-            "courseID" => $data['courseID'],"locationCode" => $data['locationCode'],
-            "termCode" => $data['termCode'],"courseCode" => $data['courseCode'],"secShortTitle" => $data['secShortTitle'],
+            "sectionNumber" => Util::_trim($data['sectionNumber']),"courseSecCode" => Util::_trim($sc),
+            "courseID" => $data['courseID'],"locationCode" => Util::_trim($data['locationCode']),
+            "termCode" => Util::_trim($data['termCode']),"courseCode" => Util::_trim($data['courseCode']),"secShortTitle" => $data['secShortTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => $data['deptCode'],
             "minCredit" => $data['minCredit'],"ceu" => $data['ceu'],
-            "courseLevelCode" => $data['courseLevelCode'],"acadLevelCode" => $data['acadLevelCode'],
+            "courseLevelCode" => Util::_trim($data['courseLevelCode']),"acadLevelCode" => Util::_trim($data['acadLevelCode']),
             "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"comment" => $data['comment'],
             "approvedDate" => $data['approvedDate'],"approvedBy" => $data['approvedBy']
         );
@@ -782,10 +783,10 @@ class SectionModel {
         $param = [ ":courseSecCode" => $this->_sec->getCourseSecCode(),":term" => $this->_sec->getTermCode() ];
         
         $update1 = array( 
-            "locationCode" => $data['locationCode'],"termCode" => $data['termCode'],"secShortTitle" => $data['secShortTitle'],
-            "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => $data['deptCode'],
+            "locationCode" => Util::_trim($data['locationCode']),"termCode" => Util::_trim($data['termCode']),"secShortTitle" => $data['secShortTitle'],
+            "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => Util::_trim($data['deptCode']),
             "minCredit" => $data['minCredit'],"comment" => $data['comment'],
-            "ceu" => $data['ceu'],"courseLevelCode" => $data['courseLevelCode'],"acadLevelCode" => $data['acadLevelCode']
+            "ceu" => $data['ceu'],"courseLevelCode" => Util::_trim($data['courseLevelCode']),"acadLevelCode" => Util::_trim($data['acadLevelCode'])
         );
         
         $q = DB::inst()->update( "course_sec", $update1, "courseSecID = :courseSecID", $bind );
@@ -846,7 +847,7 @@ class SectionModel {
   		}
         
         $update = [
-                    "buildingCode" => $data['buildingCode'],"roomCode" => $data['roomCode'],
+                    "buildingCode" => Util::_trim($data['buildingCode']),"roomCode" => Util::_trim($data['roomCode']),
                     "dotw" => $dotw,"startTime" => $data['startTime'],
                     "endTime" => $data['endTime'],"stuReg" => $data['stuReg']
                   ];
@@ -1031,8 +1032,8 @@ class SectionModel {
 		$t = 0;
 		while($t < $stuSize) {
 			$vars = [ 
-					":id" => $data['assignID'],"termCode" => $data['termCode'],
-					":SecCode" => $data['courseSecCode'],":facID" => $data['facID'],
+					":id" => $data['assignID'],"termCode" => Util::_trim($data['termCode']),
+					":SecCode" => Util::_trim($data['courseSecCode']),":facID" => $data['facID'],
 					":stuID" => $data['stuID'][$t] 
 					];
 			$sql = DB::inst()->select("gradebook","assignID = :id AND courseSecCode = :SecCode AND facID = :facID AND stuID = :stuID AND termCode = :termCode","","*",$vars);
@@ -1045,8 +1046,8 @@ class SectionModel {
 			while($i < $size) {
 				$update = [ "grade" => $data['grade'][$i] ];
 				$bind = [ 
-						":assignID" => $data['assignID'],":termCode" => $data['termCode'],
-                        ":SecCode" => $data['courseSecCode'],":facID" => $data['facID'],
+						":assignID" => $data['assignID'],":termCode" => Util::_trim($data['termCode']),
+                        ":SecCode" => Util::_trim($data['courseSecCode']),":facID" => $data['facID'],
                         ":stuID" => $data['stuID'][$i]
 						];
 				$q = DB::inst()->update( "gradebook",$update,"assignID = :assignID AND courseSecCode = :SecCode AND facID = :facID AND stuID = :stuID AND termCode = :termCode",$bind );
@@ -1057,8 +1058,8 @@ class SectionModel {
 			$i = 0;
 			while($i < $size) {
 				$bind = [ 
-						"assignID" => $data['assignID'],"termCode" => $data['termCode'],
-						"courseSecCode" => $data['courseSecCode'],"facID" => $data['facID'],
+						"assignID" => $data['assignID'],"termCode" => Util::_trim($data['termCode']),
+						"courseSecCode" => Util::_trim($data['courseSecCode']),"facID" => $data['facID'],
 						"stuID" => $data['stuID'][$i],"grade" => $data['grade'][$i],
 						"addDate" => $data['addDate'],"addedBy" => $data['addedBy']
 						];
@@ -1110,7 +1111,7 @@ class SectionModel {
                 $update = [ "status" => $data['status'][$i] ];
                 
                 $bind = [ 
-                        ":stuID" => $data['stuID'][$i],":term" => $data['termCode'],":courseSecCode" => $data['courseSecCode'],
+                        ":stuID" => $data['stuID'][$i],":term" => Util::_trim($data['termCode']),":courseSecCode" => Util::_trim($data['courseSecCode']),
                         ":date" => $data['date']
                         ];
                         
@@ -1174,9 +1175,9 @@ class SectionModel {
     
     public function runAssignment($data) {
     	$bind = [ 
-    			"termCode" => $data['termCode'],
-    			"courseSecCode" => $data['courseSecCode'],"facID" => $data['facID'],
-    			"shortName" => $data['shortName'],"title" => $data['title'],
+    			"termCode" => Util::_trim($data['termCode']),
+    			"courseSecCode" => Util::_trim($data['courseSecCode']),"facID" => $data['facID'],
+    			"shortName" => Util::_trim($data['shortName']),"title" => $data['title'],
     			"dueDate" => $data['dueDate'],"addDate" => $data['addDate'],
     			"addedBy" => $data['addedBy'] 
     			];

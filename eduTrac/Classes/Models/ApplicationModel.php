@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class ApplicationModel {
     
     private $_auth;
@@ -174,7 +175,7 @@ class ApplicationModel {
     public function runApplication($data) {
         $date = date("Y-m-d");
         $bind = [ 
-                "acadProgCode" => $data['acadProgCode'],"startTerm" => $data['startTerm'],
+                "acadProgCode" => Util::_trim($data['acadProgCode']),"startTerm" => $data['startTerm'],
                 "PSAT_Verbal" => $data['PSAT_Verbal'],"PSAT_Math" => $data['PSAT_Math'],
                 "SAT_Verbal" => $data['SAT_Verbal'],"SAT_Math" => $data['SAT_Math'],
                 "ACT_English" => $data['ACT_English'],"ACT_Math" => $data['ACT_Math'],
@@ -196,7 +197,7 @@ class ApplicationModel {
     public function runEditApplication($data) {
         $bind1 = [ ":applID" => $data['applID'],":personID" => $data['personID'] ];
         $update1 = [ 
-                "acadProgCode" => $data['acadProgCode'],"startTerm" => $data['startTerm'],
+                "acadProgCode" => Util::_trim($data['acadProgCode']),"startTerm" => $data['startTerm'],
                 "PSAT_Verbal" => $data['PSAT_Verbal'],"PSAT_Math" => $data['PSAT_Math'],
                 "SAT_Verbal" => $data['SAT_Verbal'],"SAT_Math" => $data['SAT_Math'],
                 "ACT_English" => $data['ACT_English'],"ACT_Math" => $data['ACT_Math'],
@@ -210,7 +211,7 @@ class ApplicationModel {
         while($i < $size) {
             $bind2 = [ ":id" => $data['instAttID'][$i],":personID" => $data['personID'] ];
             $update2 = [ 
-                    "fice_ceeb" => $data['fice_ceeb'][$i],"fromDate" => $data['fromDate'][$i],
+                    "fice_ceeb" => Util::_trim($data['fice_ceeb'][$i]),"fromDate" => $data['fromDate'][$i],
 	                "toDate" => $data['toDate'][$i],"GPA" => $data['GPA'][$i],
 	                "major" => $data['major'][$i],"degree_awarded" => $data['degree_awarded'][$i],
 	                "degree_conferred_date" => $data['degree_conferred_date'][$i]
@@ -224,7 +225,7 @@ class ApplicationModel {
 	
 	public function runInstAttended($data) {        
         $bind = [ 
-                "fice_ceeb" => $data['fice_ceeb'],"fromDate" => $data['fromDate'],
+                "fice_ceeb" => Util::_trim($data['fice_ceeb']),"fromDate" => $data['fromDate'],
                 "toDate" => $data['toDate'],"GPA" => $data['GPA'],
                 "personID" => $data['personID'],
                 "major" => $data['major'],"degree_awarded" => $data['degree_awarded'],

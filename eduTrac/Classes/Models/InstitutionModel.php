@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class InstitutionModel {
     
     private $_log;
@@ -72,7 +73,7 @@ class InstitutionModel {
     
     public function runInstitution($data) {
         $bind = [
-                "fice_ceeb" => $data['fice_ceeb'],"instType" => $data['instType'],
+                "fice_ceeb" => Util::_trim($data['fice_ceeb']),"instType" => Util::_trim($data['instType']),
                 "instName" => $data['instName'],"city" => $data['city'],
                 "state" => $data['state'],"country" => $data['country']
                 ];
@@ -90,7 +91,7 @@ class InstitutionModel {
     
     public function runEditInstitution($data) {
         $update = [
-                    "fice_ceeb" => $data['fice_ceeb'],"instType" => $data['instType'],
+                    "fice_ceeb" => Util::_trim($data['fice_ceeb']),"instType" => Util::_trim($data['instType']),
                     "instName" => $data['instName'],"city" => $data['city'],
                     "state" => $data['state'],"country" => $data['country']
                   ];
