@@ -71,8 +71,10 @@
                                 <span class="sr-only"><?=_t( 'Toggle Dropdown' ); ?></span>
                             </button>
                             <ul role="menu" class="dropdown-menu dropup-text pull-right">
+                                <?php if(studentsExist(_h($v['courseSecCode']),_h($v['termCode']))) : ?>
                                 <li><a href="<?=BASE_URL;?>section/final_grade/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>"><?=_t( 'Enter Final Grades' );?></a></li>
                                 <li><a href="<?=BASE_URL;?>section/fg_export/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>"><?=_t( 'Export Final Grades' );?></a></li>
+                                <?php endif; ?>
                                 <li><a href="<?=BASE_URL;?>section/attendance/<?=_h($v['courseSecCode']);?>&term=<?=_h($v['termCode']);?>&date=<?=date("Y-m-d");?>"><?=_t( 'Attendance' );?></a></li>
                             </ul>
                         </div>
