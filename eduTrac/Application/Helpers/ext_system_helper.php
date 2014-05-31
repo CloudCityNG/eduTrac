@@ -1081,6 +1081,10 @@ use \eduTrac\Classes\Libraries\Cookies;
 					AND 
 						a.endDate <= '0000-00-00' 
 					AND 
+						a.stuID = :id 
+					GROUP BY 
+						a.stuID 
+					HAVING 
 						a.stuID = :id",
 					$bind 
 		);
