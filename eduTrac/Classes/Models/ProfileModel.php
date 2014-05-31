@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class ProfileModel {
     
     private $_auth;
@@ -42,8 +43,8 @@ class ProfileModel {
     public function runProfile($data) {
         $update1 = [ 
                 "fname" => $data['fname'],"lname" => $data['lname'],
-                "mname" => $data['mname'],"email" => $data['email'],
-                "ssn" => $data['ssn'],"dob" => $data['dob']
+                "mname" => Util::_trim($data['mname']),"email" => Util::_trim($data['email']),
+                "ssn" => Util::_trim($data['ssn']),"dob" => $data['dob']
                 ];
                 
         $bind = [ ":personID" => $this->_auth->getPersonField('personID') ];

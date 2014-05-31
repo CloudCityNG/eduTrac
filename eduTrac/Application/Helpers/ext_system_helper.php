@@ -306,6 +306,16 @@ use \eduTrac\Classes\Libraries\Cookies;
 			return false;
 		}
 	}
+	
+	function studentsExist($code,$term) {
+		$bind = [ ":code" => $code, ":term" => $term ];
+		$q = DB::inst()->select( "stu_course_sec","courseSecCode = :code AND termCode = :term","","*",$bind );
+		if(count($q) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
     
     /**
      * @since 4.0.7
@@ -1050,6 +1060,42 @@ use \eduTrac\Classes\Libraries\Cookies;
 				</tr>';
 		}
 	}
+	
+	function student_has_restriction() {
+		$auth = new \eduTrac\Classes\Libraries\Cookies;
+        $bind = [ ":id" => $auth->getPersonField('personID') ];
+        $q = DB::inst()->query( "SELECT 
+        				GROUP_CONCAT(DISTINCT c.deptName SEPARATOR ',') AS 'Restriction' 
+    				FROM 
+    					restriction a 
+					LEFT JOIN 
+						restriction_code b 
+					ON 
+						a.rstrCode = b.rstrCode 
+					LEFT JOIN 
+						department c 
+					ON 
+						b.deptCode = c.deptCode 
+					WHERE 
+						a.severity = '99' 
+					AND 
+						a.endDate <= '0000-00-00' 
+					AND 
+						a.stuID = :id 
+					GROUP BY 
+						a.stuID 
+					HAVING 
+						a.stuID = :id",
+					$bind 
+		);
+		if(count($q) > 0) {
+			foreach($q as $r) {
+				return '<strong>'.$r['Restriction'].'</strong>';
+			}
+		} else {
+			return false;
+		}
+	}
     
     /**
      * Checks against certain keywords when the SQL 
@@ -1164,6 +1210,22 @@ use \eduTrac\Classes\Libraries\Cookies;
             $array[] = $r;
         }
         return _h($r['lname']).', '._h($r['fname']);
+    }
+	
+	/**
+	 * @since 4.1.6
+	 */
+	function get_initials($ID,$initials=2) {
+        $bind = array( ":id" => $ID );
+        $q = DB::inst()->select( "person","personID = :id","","lname,fname",$bind );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+		if($initials == 2) {
+			return substr(_h($r['fname']),0,1).'. '.substr(_h($r['lname']),0,1).'.';
+		} else {
+			return _h($r['lname']).', '.substr(_h($r['fname']),0,1).'.';
+		}
     }
     
     function hasAppl($id) {
@@ -1347,7 +1409,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         }
         
         $bind2 = [ ":stuID" => $auth->getPersonField('personID'), ":today" => date('Y-m-d') ];
-        $sql = DB::inst()->query( "SELECT 
+        $sql1 = DB::inst()->query( "SELECT 
                         * 
                     FROM 
                         restriction 
@@ -1362,9 +1424,14 @@ use \eduTrac\Classes\Libraries\Cookies;
                     $bind2 
         );
         
+        $bind3 = [ ":id" => $auth->getPersonField('personID') ];
+        $sql2 = DB::inst()->select("student","stuID=:id","","ID",$bind3);
+        
         if($courses != NULL && $courses >= Hooks::get_option('number_of_courses')) {
             return false;
-        } elseif(count($sql) > 0) {
+        } elseif(count($sql1) > 0) {
+            return false;
+		} elseif(count($sql2) <= 0) {
             return false;
         } else {
             return true;

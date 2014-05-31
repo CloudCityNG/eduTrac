@@ -63,10 +63,10 @@
                         
                         <!-- Group -->
     					<div class="form-group">
-							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Building' );?></label>
+							<label class="col-md-3 control-label"><?=_t( 'Building' );?></label>
 							<div class="col-md-8">
 							    <select name="buildingCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
-							        <option value="">&nbsp;</option>
+							        <option value="NULL">&nbsp;</option>
                             	   <?php table_dropdown('building','buildingCode <> "NULL"','buildingCode','buildingCode','buildingName',_h($this->soff[0]['buildingCode'])); ?>
                             	</select>
 							</div>
@@ -75,10 +75,10 @@
 					
 						<!-- Group -->
 						<div class="form-group">
-							<label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Class Room' );?></label>
+							<label class="col-md-3 control-label"><?=_t( 'Class Room' );?></label>
 							<div class="col-md-8">
 							    <select name="roomCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"<?=csio();?> required>
-							        <option value="">&nbsp;</option>
+							        <option value="NULL">&nbsp;</option>
                             	    <?php table_dropdown('room','roomCode <> "NULL"','roomCode','roomCode','roomNumber',_h($this->soff[0]['roomCode'])); ?>
                             	</select>
 							</div>

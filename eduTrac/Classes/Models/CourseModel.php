@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\DBObjects\Subject;
+use \eduTrac\Classes\Libraries\Util;
 class CourseModel {
     
     private $_subj;
@@ -76,10 +77,10 @@ class CourseModel {
         $cc = $data['subjectCode'].'-'.$data['courseNumber'];
         
         $bind = array( 
-            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectCode" => $data['subjectCode'],
-            "deptCode" => $data['deptCode'],"courseDesc" => $data['courseDesc'],
-            "minCredit" => $data['minCredit'],"courseLevelCode" => $data['courseLevelCode'],
-            "acadLevelCode" => $data['acadLevelCode'],"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
+            "courseNumber" => Util::_trim($data['courseNumber']),"courseCode" => Util::_trim($cc),"subjectCode" => Util::_trim($data['subjectCode']),
+            "deptCode" => Util::_trim($data['deptCode']),"courseDesc" => $data['courseDesc'],
+            "minCredit" => $data['minCredit'],"courseLevelCode" => Util::_trim($data['courseLevelCode']),
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],
             "approvedDate" => $data['approvedDate'],"approvedBy" => $data['approvedBy']
         );
@@ -110,10 +111,10 @@ class CourseModel {
         $statusDate = date("Y-m-d");
         
         $update1 = array( 
-            "courseNumber" => $data['courseNumber'],"courseCode" => $cc,"subjectCode" => $data['subjectCode'],
-            "deptCode" => $data['deptCode'],"courseDesc" => $data['courseDesc'],
-            "minCredit" => $data['minCredit'],"courseLevelCode" => $data['courseLevelCode'],
-            "acadLevelCode" => $data['acadLevelCode'],"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
+            "courseNumber" => Util::_trim($data['courseNumber']),"courseCode" => Util::_trim($cc),"subjectCode" => Util::_trim($data['subjectCode']),
+            "deptCode" => Util::_trim($data['deptCode']),"courseDesc" => $data['courseDesc'],
+            "minCredit" => $data['minCredit'],"courseLevelCode" => Util::_trim($data['courseLevelCode']),
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"courseShortTitle" => $data['courseShortTitle'],"courseLongTitle" => $data['courseLongTitle'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],"currStatus" => $data['currStatus']
         );
         

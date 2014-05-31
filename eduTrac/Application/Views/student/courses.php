@@ -68,6 +68,16 @@ $(window).load(function(){
 			</div>
 		</div>
 	<?php } ?>
+	
+	<?php if(student_has_restriction() != false) { ?>
+		<div class="widget widget-heading-simple widget-body-white">
+			<div class="widget-body">
+				<div class="alerts alerts-error">
+					<p><?=_t( 'You have a hold on your account which is restricting your from registering. Please contact the following office(s)/department(s) to inquire about the hold(s) on your account: ' );?><?=student_has_restriction();?></p>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
 
     <!-- Form -->
     <form class="margin-none" action="<?=BASE_URL;?>student/runRegister/" id="validateSubmitForm" method="post" autocomplete="off">

@@ -133,7 +133,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 <script type="text/javascript" src="<?=BASE_URL;?>static/assets/plugins/holder/holder.js"></script>
 <!-- Form plugins -->
 <script type="text/javascript" src="<?=BASE_URL;?>static/assets/plugins/form/form.js"></script>
-<!-- Library Themes Customize-->
+<script type="text/javascript" src="<?=BASE_URL;?>static/assets/js/miscellaneous.js"></script>
 <script type="text/javascript" src="<?=BASE_URL;?>static/assets/js/caplet.custom.js"></script>
 <script type="text/javascript">
 $(function() {

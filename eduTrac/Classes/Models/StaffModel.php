@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class StaffModel {
     
     private $_log;
@@ -222,16 +223,16 @@ class StaffModel {
     
     public function runStaff($data) {        
         $bind1 = array( 
-            "staffID" => $data['staffID'],"schoolCode" => $data['schoolCode'],
-            "buildingCode" => $data['buildingCode'],"officeCode" => $data['officeCode'],
-            "office_phone" => $data['office_phone'],"deptCode" => $data['deptCode'],
+            "staffID" => $data['staffID'],"schoolCode" => Util::_trim($data['schoolCode']),
+            "buildingCode" => Util::_trim($data['buildingCode']),"officeCode" => Util::_trim($data['officeCode']),
+            "office_phone" => $data['office_phone'],"deptCode" => Util::_trim($data['deptCode']),
 			"status" => $data['status'],"addDate" => $data['addDate'],
 			"approvedBy" => $data['approvedBy']
         );
         
         $bind2 = array( 
             "staffID" => $data['staffID'],"supervisorID" => $data['supervisorID'],
-            "jobStatusCode" => $data['jobStatusCode'],"jobID" => $data['jobID'],
+            "jobStatusCode" => Util::_trim($data['jobStatusCode']),"jobID" => $data['jobID'],
             "staffType" => $data['staffType'],"hireDate" => $data['hireDate'],
             "startDate" => $data['startDate'],"endDate" => $data['endDate'],
             "addDate" => $data['addDate'],"approvedBy" => $data['approvedBy']
@@ -251,10 +252,10 @@ class StaffModel {
     
     public function runEditStaff($data) {
         $update = array( 
-            "buildingCode" => $data['buildingCode'],
-            "officeCode" => $data['officeCode'],"office_phone" => $data['office_phone'],
-            "deptCode" => $data['deptCode'],"status" => $data['status'],
-            "schoolCode" => $data['schoolCode']
+            "buildingCode" => Util::_trim($data['buildingCode']),
+            "officeCode" => Util::_trim($data['officeCode']),"office_phone" => $data['office_phone'],
+            "deptCode" => Util::_trim($data['deptCode']),"status" => $data['status'],
+            "schoolCode" => Util::_trim($data['schoolCode'])
         );
         
         $bind = array( ":staffID" => $data['staffID'] );

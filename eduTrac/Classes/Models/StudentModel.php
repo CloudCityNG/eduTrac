@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
+use \eduTrac\Classes\Libraries\Util;
 class StudentModel {
     
     private $_stuProg;
@@ -88,7 +89,7 @@ class StudentModel {
         
         $bind2 = array( 
             "stuID" => $data['stuID'],"advisorID" => $data['advisorID'],
-            "catYearCode" => $data['catYearCode'],"acadProgCode" => $data['acadProgCode'],
+            "catYearCode" => Util::_trim($data['catYearCode']),"acadProgCode" => Util::_trim($data['acadProgCode']),
             "currStatus" => "A","statusDate" => $data['addDate'],
             "startDate" => $data['startDate'],"approvedBy" => $data['approvedBy'],
             "antGradDate" => $data['antGradDate'],
@@ -98,8 +99,8 @@ class StudentModel {
         $q2 = DB::inst()->insert( "stu_program", $bind2 );
         
         $bind3 = [ 
-                "stuID" => $data['stuID'],"acadProgCode" => $data['acadProgCode'],
-                "acadLevelCode" => $data['acadLevelCode'],"addDate" => $date 
+                "stuID" => $data['stuID'],"acadProgCode" => Util::_trim($data['acadProgCode']),
+                "acadLevelCode" => Util::_trim($data['acadLevelCode']),"addDate" => $date 
                 ];
                 
         $q3 = DB::inst()->insert( "stu_acad_level", $bind3 );
@@ -115,8 +116,8 @@ class StudentModel {
     
     public function runEditStudent($data) {
         $update = array( 
-            "advisorID" => $data['advisorID'],"catYearCode" => $data['catYearCode'],
-            "acadLevelCode" => $data['acadLevelCode'],"status" => $data['status']
+            "advisorID" => $data['advisorID'],"catYearCode" => Util::_trim($data['catYearCode']),
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"status" => $data['status']
         );
         
         $bind = array( ":stuID" => $data['stuID'] );
@@ -902,17 +903,17 @@ class StudentModel {
     public function runStuProg($data) {
         $this->_acadProg->Load_from_key($data['acadProgCode']);
         $date = date('Y-m-d');
-        $bind1 = array( "stuID" => $data['stuID'],"acadProgCode" => $data['acadProgCode'],
+        $bind1 = array( "stuID" => $data['stuID'],"acadProgCode" => Util::_trim($data['acadProgCode']),
                        "currStatus" => $data['currStatus'],"statusDate" => $data['startDate'],
                        "startDate" => $data['startDate'],"endDate" => $data['endDate'],
                        "approvedBy" => $data['approvedBy'],"antGradDate" => $data['antGradDate'],
-                       "advisorID" => $data['advisorID'],"catYearCode" => $data['catYearCode']
+                       "advisorID" => $data['advisorID'],"catYearCode" => Util::_trim($data['catYearCode'])
         );
         
         $bind2 = [ ":stuID" => $data['stuID'],":acadProgCode" => $data['acadProgCode'] ];
         
         $bind3 = [ 
-                "stuID" => $data['stuID'],"acadProgID" => $data['acadProgCode'],
+                "stuID" => $data['stuID'],"acadProgCode" => Util::_trim($data['acadProgCode']),
                 "acadLevelCode" => $this->_acadProg->getAcadLevelCode(),"addDate" => $date 
                 ];
         
@@ -934,7 +935,7 @@ class StudentModel {
         $update1 = array( "currStatus" => $data['currStatus'],"startDate" => $data['startDate'],
                         "endDate" => $data['endDate'],"eligible_to_graduate" => $data['eligible_to_graduate'],
                         "antGradDate" => $data['antGradDate'],"advisorID" => $data['advisorID'],
-                        "catYearCode" => $data['catYearCode']
+                        "catYearCode" => Util::_trim($data['catYearCode'])
         );
         
         $update2 = array( "statusDate" => $date );
@@ -966,10 +967,10 @@ class StudentModel {
         
         $bind1 = array( ":id" => $data['id'], ":stuID" => $data['stuID'] );
         $bind2 = [ 
-                ":stuID" => $data['stuID'], ":courseSecCode" => $data['courseSecCode'],
-                ":termCode" => $data['termCode']
+                ":stuID" => $data['stuID'], ":courseSecCode" => Util::_trim($data['courseSecCode']),
+                ":termCode" => Util::_trim($data['termCode'])
                 ]; 
-        $bind3 = [ ":termCode" => $data['termCode'] ];
+        $bind3 = [ ":termCode" => Util::_trim($data['termCode']) ];
         
         $sql = DB::inst()->select( "term","termCode = :termCode","","termStartDate,dropAddEndDate",$bind3 );
         foreach($sql as $r) {
@@ -1025,7 +1026,7 @@ class StudentModel {
          * restriction, then redirect the student to a error page, otherwise 
          * let the registration go through.
          */
-        $params = [ ":stuID" => $this->_auth->getPersonField('personID'),":term" => $data['termCode'] ];
+        $params = [ ":stuID" => $this->_auth->getPersonField('personID'),":term" => Util::_trim($data['termCode']) ];
         $q = DB::inst()->select('stu_course_sec','stuID=:stuID AND termCode=:term AND status IN("A","N")','','*',$params);
         if(bcadd(count($q),count($data['courseSecCode'])) > Hooks::{'get_option'}('number_of_courses')) {
             redirect( BASE_URL . 'error/registration/' );
@@ -1038,8 +1039,8 @@ class StudentModel {
             $time = date("h:m A");
             $bind1 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'][$i],
-                    "courseCredits" => $data['courseCredits'][$i],"status" => 'N',
+                    "courseSecCode" => Util::_trim($data['courseSecCode'][$i]),"termCode" => Util::_trim($data['termCode'][$i]),
+                    "courseCredits" => Util::_trim($data['courseCredits'][$i]),"status" => 'N',
                     "courseFee" => $data['courseFee'][$i],
                    	"labFee" => $data['labFee'][$i],"materialFee" => $data['materialFee'][$i],
                     "statusDate" => $date,"statusTime" => $time,
@@ -1050,8 +1051,8 @@ class StudentModel {
             
             $bind2 = [ 
                     "stuID" => $this->_auth->getPersonField('personID'),
-                    "courseSecCode" => $data['courseSecCode'][$i],"termCode" => $data['termCode'][$i],
-                    "attCred" => $data['courseCredits'][$i],
+                    "courseSecCode" => Util::_trim($data['courseSecCode'][$i]),"termCode" => Util::_trim($data['termCode'][$i]),
+                    "attCred" => Util::_trim($data['courseCredits'][$i]),
                     "acadLevelCode" => $this->_stuProg->getAcadLevelCode($this->_auth->getPersonField('personID'))
                     ];
                     
@@ -1259,7 +1260,7 @@ class StudentModel {
     
     public function runRSTR($data) {
         $bind = [
-                "stuID" => $data['stuID'],"rstrCode" => $data['rstrCode'],"severity" => $data['severity'],
+                "stuID" => $data['stuID'],"rstrCode" => Util::_trim($data['rstrCode']),"severity" => Util::_trim($data['severity']),
                 "startDate" => $data['startDate'],"endDate" => $data['endDate'],
                 "comment" => $data['comment'],"addDate" => $data['addDate'],"addedBy" => $data['addedBy']
                 ];
@@ -1278,7 +1279,7 @@ class StudentModel {
         $i = 0;
         while($i < $size) {
             $update = [
-                    "rstrCode" => $data['rstrCode'][$i],"severity" => $data['severity'][$i],
+                    "rstrCode" => Util::_trim($data['rstrCode'][$i]),"severity" => Util::_trim($data['severity'][$i]),
                     "startDate" => $data['startDate'][$i],"endDate" => $data['endDate'][$i],
                     "comment" => $data['comment'][$i]
                     ];

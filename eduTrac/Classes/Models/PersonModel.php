@@ -31,6 +31,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Cookies;
+use \eduTrac\Classes\Libraries\Util;
 class PersonModel {
     
     private $_auth;
@@ -300,12 +301,12 @@ class PersonModel {
         
         $date = date("Y-m-d");
         $bind1 = array( 
-                    "uname" => $data['uname'],"personType" => $data['personType'],
+                    "uname" => Util::_trim($data['uname']),"personType" => $data['personType'],
                     "prefix" => $data['prefix'],"fname" => $data['fname'],"lname" => $data['lname'],
-                    "mname" => $data['mname'],"email" => $data['email'],"ssn" => (int)$data['ssn'],
+                    "mname" => $data['mname'],"email" => Util::_trim($data['email']),"ssn" => (int)$data['ssn'],
                     "dob" => $data['dob'],"veteran" => $data['veteran'],"ethnicity" => $data['ethnicity'],
                     "gender" => $data['gender'],"emergency_contact" => $data['emergency_contact'],
-                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'],
+                    "emergency_contact_phone" => Util::_trim($data['emergency_contact_phone']),
                     "password" => $password,"approvedDate" => $date,"approvedBy" => $this->_auth->getPersonField('personID')
                     );
                     
@@ -318,7 +319,7 @@ class PersonModel {
                     "zip" => $data['zip'],"country" => $data['country'],
                     "startDate" => $date,"addressStatus" => "C",
                     "addDate" => $date,"addedBy" => $this->_auth->getPersonField('personID'),"phone1" => $data['phone'],
-                    "email1" => $data['email'] 
+                    "email1" => Util::_trim($data['email']) 
                     );
                     
         $q2 = DB::inst()->insert( "address", $bind2 );
@@ -338,10 +339,10 @@ class PersonModel {
                     "zip" => $data['zip'],"country" => $data['country'],
                     "addressType" => $data['addressType'],"startDate" => $data['startDate'],
                     "endDate" => $data['endDate'],"addressStatus" => $data['addressStatus'],
-                    "addDate" => $data['addDate'],"addedBy" => $data['addedBy'],"phone1" => $data['phone1'],
-                    "phone2" => $data['phone2'],"ext1" => $data['ext1'],"ext2" => $data['ext2'],
+                    "addDate" => $data['addDate'],"addedBy" => $data['addedBy'],"phone1" => Util::_trim($data['phone1']),
+                    "phone2" => Util::_trim($data['phone2']),"ext1" => Util::_trim($data['ext1']),"ext2" => Util::_trim($data['ext2']),
                     "phoneType1" => $data['phoneType1'],"phoneType2" => $data['phoneType2'],
-                    "email2" => $data['email2'],"personID" => $data['personID'] 
+                    "email2" => Util::_trim($data['email2']),"personID" => $data['personID'] 
                     );
                     
         $q = DB::inst()->insert( "address", $bind );
@@ -360,10 +361,10 @@ class PersonModel {
                     "city" => $data['city'],"state" => $data['state'],
                     "zip" => $data['zip'],"country" => $data['country'],
                     "addressType" => $data['addressType'],"startDate" => $data['startDate'],"endDate" => $data['endDate'],
-                    "addressStatus" => $data['addressStatus'],"phone1" => $data['phone1'],
-                    "phone2" => $data['phone2'],"ext1" => $data['ext1'],"ext2" => $data['ext2'],
+                    "addressStatus" => $data['addressStatus'],"phone1" => Util::_trim($data['phone1']),
+                    "phone2" => Util::_trim($data['phone2']),"ext1" => Util::_trim($data['ext1']),"ext2" => Util::_trim($data['ext2']),
                     "phoneType1" => $data['phoneType1'],"phoneType2" => $data['phoneType2'],
-                    "email2" => $data['email2'] 
+                    "email2" => Util::_trim($data['email2']) 
                     );
                     
         $bind = array( ":addressID" => $data['addressID'] );
@@ -375,10 +376,10 @@ class PersonModel {
     public function runEditPerson($data) {
         $update1 = array( 
                     "prefix" => $data['prefix'],"fname" => $data['fname'],"lname" => $data['lname'],
-                    "mname" => $data['mname'],"email" => $data['email'],"ssn" => (int)$data['ssn'],
+                    "mname" => Util::_trim($data['mname']),"email" => Util::_trim($data['email']),"ssn" => (int)$data['ssn'],
                     "dob" => $data['dob'],"veteran" => $data['veteran'],"ethnicity" => $data['ethnicity'],
                     "gender" => $data['gender'],"emergency_contact" => $data['emergency_contact'],
-                    "emergency_contact_phone" => $data['emergency_contact_phone'],"email" => $data['email'],
+                    "emergency_contact_phone" => Util::_trim($data['emergency_contact_phone']),"email" => Util::_trim($data['email']),
                     "personType" => $data['personType']
                     );
                     

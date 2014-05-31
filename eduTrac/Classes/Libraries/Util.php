@@ -613,4 +613,15 @@ class Util
 	    return $age;
 	}
 	
+	/**
+     * Removes all whitespace.
+     * 
+     * @since 4.1.6
+     * @param string $str
+     * @return mixed
+     */
+    public static function _trim($str) {
+        return preg_replace('/\s/', '', $str);
+    }
+	
 }

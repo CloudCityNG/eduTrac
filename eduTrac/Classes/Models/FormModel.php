@@ -29,6 +29,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  */
 
 use \eduTrac\Classes\Core\DB;
+use \eduTrac\Classes\Libraries\Util;
 class FormModel {
 
 	public function __construct() {}
@@ -36,7 +37,7 @@ class FormModel {
 	/* Begins semester methods */
 	public function runSemester($data) {			
 		$bind = array( 
-		      "acadYearCode" => $data['acadYearCode'],"semCode" => $data['semCode'],
+		      "acadYearCode" => Util::_trim($data['acadYearCode']),"semCode" => Util::_trim($data['semCode']),
 		      "semName" => $data['semName'],"semStartDate" => $data['semStartDate'],
 		      "semEndDate" => $data['semEndDate'],"active" => $data['active'] 
         );
@@ -70,7 +71,7 @@ class FormModel {
     
 	public function runEditSemester($data) {
 		$update = array( 
-                "acadYearCode" => $data['acadYearCode'],"semCode" => $data['semCode'],
+                "acadYearCode" => Util::_trim($data['acadYearCode']),"semCode" => Util::_trim($data['semCode']),
                 "semName" => $data['semName'],"semStartDate" => $data['semStartDate'],
                 "semEndDate" => $data['semEndDate'],"active" => $data['active'] 
         );
@@ -100,8 +101,8 @@ class FormModel {
 	/* Begins Term methods */
 	public function runTerm($data) {			
 		$bind = array( 
-		      "semCode" => $data['semCode'],"termCode" => $data['termCode'],
-		      "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
+		      "semCode" => Util::_trim($data['semCode']),"termCode" => Util::_trim($data['termCode']),
+		      "termName" => $data['termName'],"reportingTerm" => Util::_trim($data['reportingTerm']),
 		      "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
 		      "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
         );
@@ -136,8 +137,8 @@ class FormModel {
 	
 	public function runEditTerm($data) {
 		$update = array( 
-              "semCode" => $data['semCode'],"termCode" => $data['termCode'],
-              "termName" => $data['termName'],"reportingTerm" => $data['reportingTerm'],
+              "semCode" => Util::_trim($data['semCode']),"termCode" => Util::_trim($data['termCode']),
+              "termName" => $data['termName'],"reportingTerm" => Util::_trim($data['reportingTerm']),
               "termStartDate" => $data['termStartDate'],"termEndDate" => $data['termEndDate'],
               "dropAddEndDate" => $data['dropAddEndDate'],"active" => $data['active'] 
         );
@@ -167,7 +168,7 @@ class FormModel {
 	/* Begin academic year */
 	public function runAcadYear($data) {
 		$bind = array( 
-			"acadYearCode" => $data['acadYearCode'],"acadYearDesc" => $data['acadYearDesc']
+			"acadYearCode" => Util::_trim($data['acadYearCode']),"acadYearDesc" => $data['acadYearDesc']
 			);
 			
 		$q = DB::inst()->insert( "acad_year", $bind );
@@ -185,7 +186,7 @@ class FormModel {
 	
 	public function runEditAcadYear($data) {
 		$update = array( 
-			"acadYearCode" => $data['acadYearCode'],"acadYearDesc" => $data['acadYearDesc']
+			"acadYearCode" => Util::_trim($data['acadYearCode']),"acadYearDesc" => $data['acadYearDesc']
 			);
 			
 		$bind = array( ":acadYearID" => $data['acadYearID'] );
@@ -220,7 +221,7 @@ class FormModel {
 	/* Begin department */
 	public function runDept($data) {
 		$bind = array( 
-			"deptCode" => $data['deptCode'],"deptTypeCode" => $data['deptTypeCode'],
+			"deptCode" => Util::_trim($data['deptCode']),"deptTypeCode" => Util::_trim($data['deptTypeCode']),
 			"deptName" => $data['deptName'],"deptDesc" => $data['deptDesc']
 			);
 			
@@ -239,7 +240,7 @@ class FormModel {
 	
 	public function runEditDept($data) {
 		$update = array( 
-            "deptCode" => $data['deptCode'],"deptTypeCode" => $data['deptTypeCode'],
+            "deptCode" => Util::_trim($data['deptCode']),"deptTypeCode" => Util::_trim($data['deptTypeCode']),
             "deptName" => $data['deptName'],"deptDesc" => $data['deptDesc']
             );
 			
@@ -276,8 +277,8 @@ class FormModel {
 	public function runStuLoadRule($data) {
 		$bind = array( 
 			"status" => $data['status'],"min_cred" => $data['min_cred'],
-			"max_cred" => $data['max_cred'],"term" => $data['term'],
-			"acadLevelCode" => $data['acadLevelCode'],"active" => $data['active']
+			"max_cred" => $data['max_cred'],"term" => Util::_trim($data['term']),
+			"acadLevelCode" => Util::_trim($data['acadLevelCode']),"active" => $data['active']
 			);
 			
 		$q = DB::inst()->insert( "student_load_rule", $bind );
@@ -321,8 +322,8 @@ class FormModel {
 	public function runEditStuLoadRule($data) {
 		$update = array( 
             "status" => $data['status'],"min_cred" => $data['min_cred'],
-            "max_cred" => $data['max_cred'],"term" => $data['term'],
-            "acadLevelCode" => $data['acadLevelCode'],"active" => $data['active']
+            "max_cred" => $data['max_cred'],"term" => Util::_trim($data['term']),
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"active" => $data['active']
             );
 			
 		$bind = array( ":id" => $data['slrID'] );
@@ -357,7 +358,7 @@ class FormModel {
 	/* Begin degrees */
 	public function runDegree($data) {
 		$bind = array( 
-            "degreeCode" => $data['degreeCode'],"degreeName" => $data['degreeName'] 
+            "degreeCode" => Util::_trim($data['degreeCode']),"degreeName" => $data['degreeName'] 
             );
 			
 		$q = DB::inst()->insert( "degree", $bind );
@@ -375,7 +376,7 @@ class FormModel {
 	
 	public function runEditDegree($data) {
 		$update = array( 
-			"degreeCode" => $data['degreeCode'],"degreeName" => $data['degreeName'] 
+			"degreeCode" => Util::_trim($data['degreeCode']),"degreeName" => $data['degreeName'] 
 			);
 			
 		$bind = array( ":degreeID" => $data['degreeID']  );
@@ -410,7 +411,7 @@ class FormModel {
 	/* Begin majors */
 	public function runMajor($data) {
 		$bind = array( 
-			"majorCode" => $data['majorCode'],"majorName" => $data['majorName']
+			"majorCode" => Util::_trim($data['majorCode']),"majorName" => $data['majorName']
 			);
 			
 		$q = DB::inst()->insert( "major", $bind );
@@ -428,7 +429,7 @@ class FormModel {
 	
 	public function runEditMajor($data) {
 		$update = array( 
-			"majorCode" => $data['majorCode'],"majorName" => $data['majorName'] 
+			"majorCode" => Util::_trim($data['majorCode']),"majorName" => $data['majorName'] 
 			);
 			
 		$bind = array( ":majorID" => $data['majorID'] );
@@ -463,7 +464,7 @@ class FormModel {
 	/* Begin minors */
 	public function runMinor($data) {
 		$bind = array( 
-			"minorCode" => $data['minorCode'],"minorName" => $data['minorName']
+			"minorCode" => Util::_trim($data['minorCode']),"minorName" => $data['minorName']
 			);
 			
 		$q = DB::inst()->insert( "minor", $bind );
@@ -481,7 +482,7 @@ class FormModel {
 	
 	public function runEditMinor($data) {
 		$update = array( 
-            "minorCode" => $data['minorCode'],"minorName" => $data['minorName']
+            "minorCode" => Util::_trim($data['minorCode']),"minorName" => $data['minorName']
             );
 			
 		$bind = array( ":minorID" => $data['minorID'] );
@@ -517,7 +518,7 @@ class FormModel {
     public function runCCD($data) {
         $date = date("Y-m-d");
         $bind = array( 
-            "ccdCode" => $data['ccdCode'],"ccdName" => $data['ccdName'],
+            "ccdCode" => Util::_trim($data['ccdCode']),"ccdName" => $data['ccdName'],
             "addDate" => $date
             );
             
@@ -536,7 +537,7 @@ class FormModel {
     
     public function runEditCCD($data) {
         $update = array( 
-            "ccdCode" => $data['ccdCode'],"ccdName" => $data['ccdName']
+            "ccdCode" => Util::_trim($data['ccdCode']),"ccdName" => $data['ccdName']
             );
             
         $bind = array( ":ccdID" => $data['ccdID'] );
@@ -571,7 +572,7 @@ class FormModel {
     /* Begin CIP */
     public function runCIP($data) {
         $bind = array( 
-            "cipCode" => $data['cipCode'],"cipName" => $data['cipName']
+            "cipCode" => Util::_trim($data['cipCode']),"cipName" => $data['cipName']
             );
             
         $q = DB::inst()->insert( "cip", $bind );
@@ -589,7 +590,7 @@ class FormModel {
     
     public function runEditCIP($data) {
         $update = array( 
-            "cipCode" => $data['cipCode'],"cipName" => $data['cipName']
+            "cipCode" => Util::_trim($data['cipCode']),"cipName" => $data['cipName']
             );
             
         $bind = array( ":cipID" => $data['cipID'] );
@@ -624,7 +625,7 @@ class FormModel {
     /* Begin Location */
     public function runLocation($data) {
         $bind = array( 
-            "locationCode" => $data['locationCode'],"locationName" => $data['locationName']
+            "locationCode" => Util::_trim($data['locationCode']),"locationName" => $data['locationName']
             );
             
         $q = DB::inst()->insert( "location", $bind );
@@ -642,7 +643,7 @@ class FormModel {
     
     public function runEditLocation($data) {
         $update = array( 
-            "locationCode" => $data['locationCode'],"locationName" => $data['locationName']
+            "locationCode" => Util::_trim($data['locationCode']),"locationName" => $data['locationName']
             );
             
         $bind = array( ":locationID" => $data['locationID'] );
@@ -677,8 +678,8 @@ class FormModel {
     /* Begin Building */
     public function runBuilding($data) {
         $bind = array( 
-            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName'],
-            "locationCode" => $data['locationCode']
+            "buildingCode" => Util::_trim($data['buildingCode']),"buildingName" => $data['buildingName'],
+            "locationCode" => Util::_trim($data['locationCode'])
             );
             
         $q = DB::inst()->insert( "building", $bind );
@@ -696,8 +697,8 @@ class FormModel {
     
     public function runEditBuilding($data) {
         $update = array( 
-            "buildingCode" => $data['buildingCode'],"buildingName" => $data['buildingName'],
-            "locationCode" => $data['locationCode']
+            "buildingCode" => Util::_trim($data['buildingCode']),"buildingName" => $data['buildingName'],
+            "locationCode" => Util::_trim($data['locationCode'])
             );
             
         $bind = array( ":buildingID" => $data['buildingID'] );
@@ -732,7 +733,7 @@ class FormModel {
     /* Begin Room */
     public function runRoom($data) {
         $bind = array( 
-            "buildingCode" => $data['buildingCode'],"roomCode" => $data['roomCode'],
+            "buildingCode" => Util::_trim($data['buildingCode']),"roomCode" => Util::_trim($data['roomCode']),
             "roomNumber" => $data['roomNumber'],"roomCap" => $data['roomCap']
             );
             
@@ -766,7 +767,7 @@ class FormModel {
     
     public function runEditRoom($data) {
         $update = array( 
-            "buildingCode" => $data['buildingCode'],"roomCode" => $data['roomCode'],
+            "buildingCode" => Util::_trim($data['buildingCode']),"roomCode" => Util::_trim($data['roomCode']),
             "roomNumber" => $data['roomNumber'],"roomCap" => $data['roomCap']
             );
             
@@ -802,7 +803,7 @@ class FormModel {
     /* Begin Specialization */
     public function runSpec($data) {
         $bind = array( 
-            "specCode" => $data['specCode'],"specName" => $data['specName']
+            "specCode" => Util::_trim($data['specCode']),"specName" => $data['specName']
             );
             
         $q = DB::inst()->insert( "specialization", $bind );
@@ -820,7 +821,7 @@ class FormModel {
     
     public function runEditSpec($data) {
         $update = array( 
-            "specCode" => $data['specCode'],"specName" => $data['specName']
+            "specCode" => Util::_trim($data['specCode']),"specName" => $data['specName']
             );
             
         $bind = array( ":specID" => $data['specID'] );
@@ -855,7 +856,7 @@ class FormModel {
     /* Begin Class Status */
     public function runClassYear($data) {
         $bind = array( 
-            "acadLevelCode" => $data['acadLevelCode'],"classYear" => $data['classYear'],
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"classYear" => Util::_trim($data['classYear']),
             "minCredits" => $data['minCredits'],"maxCredits" => $data['maxCredits']
             );
             
@@ -874,7 +875,7 @@ class FormModel {
     
     public function runEditClassYear($data) {
         $update = array( 
-            "acadLevelCode" => $data['acadLevelCode'],"classYear" => $data['classYear'],
+            "acadLevelCode" => Util::_trim($data['acadLevelCode']),"classYear" => Util::_trim($data['classYear']),
             "minCredits" => $data['minCredits'],"maxCredits" => $data['maxCredits']
             );
             
@@ -910,7 +911,7 @@ class FormModel {
     /* Begin Subject */
     public function runSubj($data) {
         $bind = array( 
-            "subjectCode" => $data['subjectCode'],"subjectName" => $data['subjectName']
+            "subjectCode" => Util::_trim($data['subjectCode']),"subjectName" => $data['subjectName']
             );
             
         $q = DB::inst()->insert( "subject", $bind );
@@ -928,7 +929,7 @@ class FormModel {
     
     public function runEditSubj($data) {
         $update = array( 
-            "subjectCode" => $data['subjectCode'],"subjectName" => $data['subjectName']
+            "subjectCode" => Util::_trim($data['subjectCode']),"subjectName" => $data['subjectName']
             );
             
         $bind = array( ":subjectID" => $data['subjectID'] );
@@ -963,8 +964,8 @@ class FormModel {
     /* Begin School */
     public function runSchool($data) {
         $bind = array( 
-            "schoolCode" => $data['schoolCode'],
-            "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
+            "schoolCode" => Util::_trim($data['schoolCode']),
+            "schoolName" => $data['schoolName'],"buildingCode" => Util::_trim($data['buildingCode'])
             );
             
         $q = DB::inst()->insert( "school", $bind );
@@ -1002,8 +1003,8 @@ class FormModel {
     
     public function runEditSchool($data) {
         $update = array( 
-            "schoolCode" => $data['schoolCode'],
-            "schoolName" => $data['schoolName'],"buildingCode" => $data['buildingCode']
+            "schoolCode" => Util::_trim($data['schoolCode']),
+            "schoolName" => $data['schoolName'],"buildingCode" => Util::_trim($data['buildingCode'])
             );
             
         $bind = array( ":schoolID" => $data['schoolID'] );
@@ -1038,7 +1039,7 @@ class FormModel {
     /* Begin Institution */
     public function runInst($data) {
         $bind = array( 
-            "ficeCode" => $data['ficeCode'],"instName" => $data['instName'],
+            "ficeCode" => Util::_trim($data['ficeCode']),"instName" => $data['instName'],
             "city" => $data['city'], "state" => $data['state']
             );
             
@@ -1057,7 +1058,7 @@ class FormModel {
     
     public function runEditInst($data) {
         $update = array( 
-            "ficeCode" => $data['ficeCode'],"instName" => $data['instName'],
+            "ficeCode" => Util::_trim($data['ficeCode']),"instName" => $data['instName'],
             "city" => $data['city'], "state" => $data['state']
             );
             
@@ -1166,8 +1167,8 @@ class FormModel {
     public function runRSTRCode($data) {
         if(!empty($data['update']) && $data['update'] == 1) {
             $update = array( 
-            "rtrCode" => $data['rstrCode'],"description" => $data['description'],
-            "deptCode" => $data['deptCode']
+            "rtrCode" => Util::_trim($data['rstrCode']),"description" => $data['description'],
+            "deptCode" => Util::_trim($data['deptCode'])
             );
             
             $bind = array( ":id" => $data['rstrCodeID'] );
@@ -1176,8 +1177,8 @@ class FormModel {
             redirect( BASE_URL . 'form/view_rstr_code/' . $data['rstrCodeID'] . '/' . bm() );
         } else {
             $bind = array( 
-                "rstrCode" => $data['rstrCode'],"description" => $data['description'],
-                "deptCode" => $data['deptCode']
+                "rstrCode" => Util::_trim($data['rstrCode']),"description" => $data['description'],
+                "deptCode" => Util::_trim($data['deptCode'])
                 );
                 
             $q = DB::inst()->insert( "restriction_code", $bind );

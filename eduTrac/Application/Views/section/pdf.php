@@ -55,26 +55,32 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('helvetica', '', 10);
+$pdf->SetFont('helvetica', '', 8);
 
 // column titles
-$table = '<table cellpadding="4" cellspacing="5" border="0" class="table table-striped" id="table-example">';
+$table = '<table cellpadding="2" cellspacing="2" border="0" class="table table-striped" id="table-example">';
 $table .= '<thead><tr>';
-$table .= '<th><b>Course Section</b></th>';
-$table .= '<th><b>Title</b></th>';
-$table .= '<th><b>Instructor</b></th>';
-$table .= '<th><b>Meeting Days</b></th>';
-$table .= '<th><b>Meeting Time</b></th>';
-$table .= '<th><b>Room</b></th>';
+$table .= '<th><b>'._t( 'Course Section' ).'</b></th>';
+$table .= '<th style="width:100px;"><b>'._t( 'Title' ).'</b></th>';
+$table .= '<th><b>'._t( 'Instructor' ).'</b></th>';
+$table .= '<th><b>'._t( 'Credits' ).'</b></th>';
+$table .= '<th><b>'._t( 'Days' ).'</b></th>';
+$table .= '<th><b>'._t( 'Time' ).'</b></th>';
+$table .= '<th><b>'._t( 'Location' ).'</b></th>';
+$table .= '<th><b>'._t( 'Building' ).'</b></th>';
+$table .= '<th><b>'._t( 'Room' ).'</b></th>';
 $table .= '</tr></thead>';
 $table .= '<tbody>';
 foreach($this->pdf as $k => $v) {
      $table .= '<tr>';
      $table .= '<td>'._h($v['courseSecCode']).'</td>';
-     $table .= '<td>'._h($v['secShortTitle']).'</td>';
-     $table .= '<td>'.get_name(_h($v['facID'])).'</td>';
+     $table .= '<td style="width:100px;">'._h($v['secShortTitle']).'</td>';
+     $table .= '<td>'.get_initials(_h($v['facID']),1).'</td>';
+	 $table .= '<td>'._h($v['minCredit']).'</td>';
      $table .= '<td>'._h($v['dotw']).'</td>';
-     $table .= '<td>'._h($v['startTime']).' to '._h($v['endTime']).'</td>';
+     $table .= '<td>'._h($v['startTime']).' &nbsp;&nbsp; '._h($v['endTime']).'</td>';
+	 $table .= '<td>'._h($v['locationCode']).'</td>';
+	 $table .= '<td>'._h($v['buildingCode']).'</td>';
      $table .= '<td>'._h($v['roomCode']).'</td>';
      $table .= '</tr>';
 }

@@ -32,6 +32,7 @@ use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Log;
 use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Cookies;
+use \eduTrac\Classes\Libraries\Util;
 class ProgramModel {
 	
 	private $_auth;
@@ -74,13 +75,13 @@ class ProgramModel {
     
     public function runProg($data) {
         $bind = array( 
-                    "acadProgCode" => $data['acadProgCode'],"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
+                    "acadProgCode" => Util::_trim($data['acadProgCode']),"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
                     "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"approvedBy" => $data['approvedBy'],
-                    "approvedDate" => $data['approvedDate'],"deptCode" => $data['deptCode'],"schoolCode" => $data['schoolCode'],
-                    "acadYearCode" => $data['acadYearCode'],"startDate" => $data['startDate'],"endDate" => "NULL",
-                    "degreeCode" => $data['degreeCode'],"ccdCode" => $data['ccdCode'],"majorCode" => $data['majorCode'],
+                    "approvedDate" => $data['approvedDate'],"deptCode" => Util::_trim($data['deptCode']),"schoolCode" => Util::_trim($data['schoolCode']),
+                    "acadYearCode" => Util::_trim($data['acadYearCode']),"startDate" => $data['startDate'],"endDate" => "NULL",
+                    "degreeCode" => Util::_trim($data['degreeCode']),"ccdCode" => Util::_trim($data['ccdCode']),"majorCode" => Util::_trim($data['majorCode']),
                     "minorCode" => $data['minorCode'],"specCode" => $data['specCode'],"acadLevelCode" => $data['acadLevelCode'],
-                    "cipCode" => $data['cipCode'],"locationCode" => $data['locationCode']
+                    "cipCode" => Util::_trim($data['cipCode']),"locationCode" => Util::_trim($data['locationCode'])
         );
                
         $q = DB::inst()->insert( "acad_program", $bind );
@@ -173,12 +174,12 @@ class ProgramModel {
         $statusDate = date("Y-m-d");
         
         $update1 = array( 
-                    "acadProgCode" => $data['acadProgCode'],"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
-                    "currStatus" => $data['currStatus'],"deptCode" => $data['deptCode'],"schoolCode" => $data['schoolCode'],
-                    "acadYearCode" => $data['acadYearCode'],"startDate" => $data['startDate'],"endDate" => $data['endDate'],
-                    "degreeCode" => $data['degreeCode'],"ccdCode" => $data['ccdCode'],"majorCode" => $data['majorCode'],
-                    "minorCode" => $data['minorCode'],"specCode" => $data['specCode'],"acadLevelCode" => $data['acadLevelCode'],
-                    "cipCode" => $data['cipCode'],"locationCode" => $data['locationCode']
+                    "acadProgCode" => Util::_trim($data['acadProgCode']),"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
+                    "currStatus" => $data['currStatus'],"deptCode" => Util::_trim($data['deptCode']),"schoolCode" => Util::_trim($data['schoolCode']),
+                    "acadYearCode" => Util::_trim($data['acadYearCode']),"startDate" => $data['startDate'],"endDate" => $data['endDate'],
+                    "degreeCode" => Util::_trim($data['degreeCode']),"ccdCode" => Util::_trim($data['ccdCode']),"majorCode" => Util::_trim($data['majorCode']),
+                    "minorCode" => Util::_trim($data['minorCode']),"specCode" => Util::_trim($data['specCode']),"acadLevelCode" => Util::_trim($data['acadLevelCode']),
+                    "cipCode" => Util::_trim($data['cipCode']),"locationCode" => Util::_trim($data['locationCode'])
         );
         
         $q = DB::inst()->update( "acad_program", $update1, "acadProgID = :acadProgID", $bind );
