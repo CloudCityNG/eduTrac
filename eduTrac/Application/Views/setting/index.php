@@ -89,15 +89,6 @@ use \eduTrac\Classes\Libraries\Hooks;
 							</div>
 						</div>
 						<!-- // Group END -->
-						
-						<!-- Group -->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Hold File Location' );?> <a href="#myModal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a></label>
-                            <div class="col-md-8">
-                                <input type="text" name="hold_file_loc" value="<?=_h(Hooks::{'get_option'}('hold_file_loc'));?>" class="form-control" /> 
-                            </div>
-                        </div>
-                        <!-- // Group END -->
                         
                         <!-- Group -->
                         <div class="form-group">
@@ -174,77 +165,6 @@ use \eduTrac\Classes\Libraries\Hooks;
 					
 					<!-- Column -->
 					<div class="col-md-6">
-						
-						<!-- Group -->
-						<div class="form-group">
-							<label class="col-md-3 control-label"><?=_t( 'WWO Key' );?></label>
-							<div class="col-md-8">
-								<input type="text" name="wwo_key" value="<?=_h((int)Hooks::{'get_option'}('wwo_key'));?>" class="form-control" />
-								<span class="help-inline"><?=_t( 'Create a free account @ ' );?><a href="http://developer.worldweatheronline.com/member/register"><?=_t( 'WWO' );?></a></span>
-							</div>
-						</div>
-						<!-- // Group END -->
-						
-						<!-- Group -->
-						<div class="form-group">
-							<label class="col-md-3 control-label"><?=_t( 'Location' );?></label>
-							<div class="col-md-8">
-								<input type="text" name="location" value="<?=_h(Hooks::{'get_option'}('location'));?>" class="form-control" />
-							</div>
-						</div>
-						<!-- // Group END -->
-						
-						<!-- Group -->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Autodetect Location' );?></label>
-                            <div class="col-md-8">
-                                <select name="autodetect_location" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                                    <option value="">&nbsp;</option>
-                                    <option value="1"<?=selected( _h(Hooks::{'get_option'}( 'autodetect_location' )), '1', false ); ?>><?=_t( "On" );?></option>
-                                    <option value="0"<?=selected( _h(Hooks::{'get_option'}( 'autodetect_location' )), '0', false ); ?>><?=_t( "Off" );?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Autodetect Type' );?></label>
-                            <div class="col-md-8">
-                                <select name="autodetect_type" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                                    <option value="">&nbsp;</option>
-                                    <option value="1"<?=selected( _h(Hooks::{'get_option'}( 'autodetect_type' )), '1', false ); ?>><?=_t( "GEO DATABASE (higher accuracy)" );?></option>
-                                    <option value="0"<?=selected( _h(Hooks::{'get_option'}( 'autodetect_type' )), '0', false ); ?>><?=_t( "HOSTIP" );?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Degree Units' );?></label>
-                            <div class="col-md-8">
-                                <select name="degree_units" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                                    <option value="">&nbsp;</option>
-                                    <option value="C"<?=selected( _h(Hooks::{'get_option'}( 'degree_units' )), 'C', false ); ?>><?=_t( "C - Celsius" );?></option>
-                                    <option value="F"<?=selected( _h(Hooks::{'get_option'}( 'degree_units' )), 'F', false ); ?>><?=_t( "F - Fahrenheit" );?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
-                        
-                        <!-- Group -->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Wind Units' );?></label>
-                            <div class="col-md-8">
-                                <select name="wind_units" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                                    <option value="">&nbsp;</option>
-                                    <option value="M"<?=selected( _h(Hooks::{'get_option'}( 'wind_units' )), 'M', false ); ?>><?=_t( "M - Miles" );?></option>
-                                    <option value="K"<?=selected( _h(Hooks::{'get_option'}( 'wind_units' )), 'K', false ); ?>><?=_t( "K - Kilometers" );?></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // Group END -->
                         
                         <!-- Group -->
                         <div class="form-group">
@@ -258,6 +178,15 @@ use \eduTrac\Classes\Libraries\Hooks;
                             </div>
                         </div>
                         <!-- // Group END -->
+                        
+                        <!-- Group -->
+    					<div class="form-group">
+							<label class="col-md-3 control-label"><?=_t( 'Auth Token' );?> <a href="#token" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a></label>
+							<div class="col-md-8">
+								<input type="text" name="auth_token" value="<?=_h(Hooks::{'get_option'}('auth_token'));?>" class="form-control" />
+							</div>
+						</div>
+						<!-- // Group END -->
                         
                         <!-- Group -->
     					<div class="form-group">
@@ -331,6 +260,26 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<!-- // Modal heading END -->
 		        <div class="modal-body">
 		            <p><?=_t("This option should be set to 'No' until you have configured each");?> <a href="<?=BASE_URL;?>cron/"><?=_t('cron job');?></a>. <?=_t("If this is set to 'Yes' before that, your error logs will be huge.");?></p>
+		        </div>
+		        <div class="modal-footer">
+		            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>
+		        </div>
+	        </div>
+      	</div>
+    </div>
+    
+    <div class="modal fade" id="token">
+    	<div class="modal-dialog">
+			<div class="modal-content">
+	
+				<!-- Modal heading -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title"><?=_t( 'Auth Token' );?></h3>
+				</div>
+				<!-- // Modal heading END -->
+		        <div class="modal-body">
+		            <p><?=_t("If you plan to do development work using the RESTful API feature, then you will need an auth token.");?> <a href="http://edutrac.7mediaws.org/apis/restful_api/restful_api/"><?=_t('Click here');?></a> <?=_t("to generate an auth token for your account.");?></p>
 		        </div>
 		        <div class="modal-footer">
 		            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>

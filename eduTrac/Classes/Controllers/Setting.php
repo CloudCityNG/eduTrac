@@ -62,10 +62,10 @@ class Setting extends \eduTrac\Classes\Core\Controller {
 	}
 	
     public function runSetting() {
-        $options = array( 'system_email','enable_ssl','site_title','cookieexpire','cookiepath','hold_file_loc',
+        $options = array( 'system_email','enable_ssl','site_title','cookieexpire','cookiepath',
                           'maintenance_mode','enable_benchmark','nav_collapse','enable_cron_jobs',
                           'enable_cron_log','wwo_key','location','autodetect_location',
-                          'autodetect_type','degree_units','wind_units','curl','help_desk','reset_password_text');
+                          'autodetect_type','degree_units','wind_units','curl','auth_token','help_desk','reset_password_text');
         $this->model->runSetting($options);
     }
 }

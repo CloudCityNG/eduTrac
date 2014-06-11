@@ -29,7 +29,7 @@
 
 use \eduTrac\Classes\Libraries\Hooks;
 
-$download_path = _h(Hooks::get_option('hold_file_loc'));
+$download_path = HOLD_FILE_LOC;
 $file = $_GET['f'];
 
 $args = array(
