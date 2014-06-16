@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac ERP';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '4.1.6';
+    private $_version = '4.1.6.1';
     
     public function __construct() {
     	Session::init();
@@ -119,41 +119,41 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(6, 'cookiepath', '/');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(7, 'hold_file_loc', '/Applications/MAMP/_HOLD_/');";
+        $sql[] = "INSERT INTO `et_option` VALUES(7, 'enable_benchmark', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(8, 'enable_benchmark', '0');";
+        $sql[] = "INSERT INTO `et_option` VALUES(8, 'maintenance_mode', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(9, 'maintenance_mode', '0');";
+        $sql[] = "INSERT INTO `et_option` VALUES(9, 'enable_cron_log', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(10, 'enable_cron_log', '0');";
+        $sql[] = "INSERT INTO `et_option` VALUES(10, 'current_term_code', '');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(11, 'current_term_code', '');";
+        $sql[] = "INSERT INTO `et_option` VALUES(11, 'hour_display', '12');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(12, 'hour_display', '12');";
+        $sql[] = "INSERT INTO `et_option` VALUES(12, 'limit_query_size', '30');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(13, 'limit_query_size', '30');";
+        $sql[] = "INSERT INTO `et_option` VALUES(13, 'week_start', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(14, 'week_start', '0');";
+        $sql[] = "INSERT INTO `et_option` VALUES(14, 'startTime', '08:00 AM');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(15, 'startTime', '08:00 AM');";
+        $sql[] = "INSERT INTO `et_option` VALUES(15, 'endTime', '05:00 PM');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(16, 'endTime', '05:00 PM');";
+        $sql[] = "INSERT INTO `et_option` VALUES(16, 'bullets_display', '0');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(17, 'bullets_display', '0');";
+        $sql[] = "INSERT INTO `et_option` VALUES(17, 'enable_reserve_email', '1');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(18, 'enable_reserve_email', '1');";
+        $sql[] = "INSERT INTO `et_option` VALUES(18, 'reserve_from_email', 'test@gmail.com');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(19, 'reserve_from_email', 'test@gmail.com');";
+        $sql[] = "INSERT INTO `et_option` VALUES(19, 'reserve_reply_email', '');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(20, 'reserve_reply_email', '');";
+        $sql[] = "INSERT INTO `et_option` VALUES(20, 'open_registration', '1');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(21, 'open_registration', '1');";
+        $sql[] = "INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://www.7mediaws.org/client/');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://www.7mediaws.org/client/');";
+        $sql[] = "INSERT INTO `et_option` VALUES(22, 'enable_cron_jobs', 0);";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);";
+        $sql[] = "INSERT INTO `et_option` VALUES(23, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');";
+        $sql[] = "INSERT INTO `et_option` VALUES(24, 'auth_token', '');";
         
         $sql[] = "INSERT INTO `cronjob` VALUES(1, '".Session::get('siteurl')."cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);";
         

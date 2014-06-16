@@ -32,10 +32,11 @@ defined( 'BASE_PATH' )			or define( 'BASE_PATH', __DIR__ . DS );
 defined( 'APP_FOLDER' )			or define( 'APP_FOLDER', 'Application' );
 defined( 'SYS_PATH' )			or define( 'SYS_PATH', BASE_PATH . 'eduTrac' . DS );
 defined( 'APP_PATH' )			or define( 'APP_PATH', SYS_PATH . APP_FOLDER . DS );
+defined( 'HOLD_FILE_LOC' )		or define( 'HOLD_FILE_LOC', APP_PATH . '_HOLD_' . DS );
 defined( 'LOCALE_DIR' ) 		or define( 'LOCALE_DIR', SYS_PATH . 'Locale' );
-defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH.'DropIns/' );
+defined( 'DROPINS' )            or define( 'DROPINS', APP_PATH . 'DropIns' . DS );
 defined( 'ENCODING' )			or define( 'ENCODING', 'UTF-8' );
-defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '4.1.6' );
+defined( 'CURRENT_VERSION' )	or define( 'CURRENT_VERSION', '4.1.6.1' );
 require( SYS_PATH . 'application.php' );
 $cookieDomain = new \eduTrac\Classes\Libraries\Cookies;
 defined( 'COOKIE_EXPIRE' )      or define( 'COOKIE_EXPIRE', time()+\eduTrac\Classes\Libraries\Hooks::get_option('cookieexpire') );
@@ -44,7 +45,7 @@ defined( 'COOKIE_DOMAIN' )      or define( 'COOKIE_DOMAIN', $cookieDomain->cooki
 defined( 'DEFAULT_LOCALE' )     or define( 'DEFAULT_LOCALE', '' );
 benchmark_init();
 
-foreach (glob(DROPINS .'*.php') as $file) { 
+foreach (glob(DROPINS . '*.php') as $file) { 
     if(file_exists($file))
         \eduTrac\Classes\Libraries\Util::_include($file);
 }

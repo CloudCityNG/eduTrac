@@ -10,3 +10,10 @@ robots.txt
 *.cache
 *.csv
 tmp/logs/*.txt
+constants.php
+*.gz
+*.clr
+eduTrac/Application/_HOLD_/*.gz
+eduTrac/Application/_HOLD_/*.clr
+eduTrac/Classes/Libraries/Weather/xml/cache/*
+eduTrac/Application/FTP/Campus/*

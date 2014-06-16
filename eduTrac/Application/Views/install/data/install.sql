@@ -1446,7 +1446,7 @@ CREATE TABLE IF NOT EXISTS `person_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `permission` text NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `addDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `personID` (`personID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -420,13 +420,13 @@ class CronModel {
         $dbuser = DB_USER;
         $dbpass = DB_PASS;
         $dbname = DB_NAME;
-        $backupFile = Hooks::get_option('hold_file_loc') . $dbname . '-' . date("Y-m-d-H-i-s") . '.gz';
+        $backupFile = HOLD_FILE_LOC . $dbname . '-' . date("Y-m-d-H-i-s") . '.gz';
 		if(!file_exists($backupFile)) {
 	        $command = "mysqldump --opt -h $dbhost -u $dbuser -p$dbpass $dbname | gzip > $backupFile";
 	        system($command);
 		}
         
-        $files = glob(Hooks::get_option('hold_file_loc')."*.gz");
+        $files = glob( HOLD_FILE_LOC."*.gz" );
         foreach($files as $file) {
             if(is_file($file)
             && time() - filemtime($file) >= 20*24*3600) { // 20 days

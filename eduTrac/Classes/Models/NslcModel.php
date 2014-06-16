@@ -131,11 +131,11 @@ class NslcModel {
     public function writeToFile() {
         $q4 = DB::inst()->query( "SELECT * FROM nslc_hold_file" );
         
-        if(!file_exists(Hooks::get_option('hold_file_loc'))) {
-            mkdir(Hooks::get_option('hold_file_loc'), 0755);
+        if(!file_exists( HOLD_FILE_LOC )) {
+            mkdir(HOLD_FILE_LOC, 0755);
         }
         
-        $nslcFile = Hooks::get_option('hold_file_loc') . $this->_nslc->getBranch() . ".CLR";
+        $nslcFile = HOLD_FILE_LOC . $this->_nslc->getBranch() . ".CLR";
         $fh = fopen($nslcFile, 'w') or die("can't open file");
         
         fwrite($fh, str_pad("SSN", 15," ",STR_PAD_RIGHT));

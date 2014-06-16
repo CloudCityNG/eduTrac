@@ -1452,7 +1452,7 @@ CREATE TABLE IF NOT EXISTS `person_perms` (
   `ID` bigint(20) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `personID` int(8) unsigned zerofill NOT NULL,
   `permission` text NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `addDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `personID` (`personID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2565,43 +2565,41 @@ INSERT INTO `et_option` VALUES(5, 'cookieexpire', '604800');
         
 INSERT INTO `et_option` VALUES(6, 'cookiepath', '/');
         
-INSERT INTO `et_option` VALUES(7, 'hold_file_loc', '/Applications/MAMP/_HOLD_/');
+INSERT INTO `et_option` VALUES(7, 'enable_benchmark', '0');
         
-INSERT INTO `et_option` VALUES(8, 'enable_benchmark', '0');
+INSERT INTO `et_option` VALUES(8, 'maintenance_mode', '0');
         
-INSERT INTO `et_option` VALUES(9, 'maintenance_mode', '0');
+INSERT INTO `et_option` VALUES(9, 'enable_cron_log', '0');
         
-INSERT INTO `et_option` VALUES(10, 'enable_cron_log', '0');
+INSERT INTO `et_option` VALUES(10, 'current_term_code', '');
         
-INSERT INTO `et_option` VALUES(11, 'current_term_code', '');
+INSERT INTO `et_option` VALUES(11, 'hour_display', '12');
         
-INSERT INTO `et_option` VALUES(12, 'hour_display', '12');
+INSERT INTO `et_option` VALUES(12, 'limit_query_size', '30');
         
-INSERT INTO `et_option` VALUES(13, 'limit_query_size', '30');
+INSERT INTO `et_option` VALUES(13, 'week_start', '0');
         
-INSERT INTO `et_option` VALUES(14, 'week_start', '0');
+INSERT INTO `et_option` VALUES(14, 'startTime', '08:00 AM');
         
-INSERT INTO `et_option` VALUES(15, 'startTime', '08:00 AM');
+INSERT INTO `et_option` VALUES(15, 'endTime', '05:00 PM');
         
-INSERT INTO `et_option` VALUES(16, 'endTime', '05:00 PM');
+INSERT INTO `et_option` VALUES(16, 'bullets_display', '0');
         
-INSERT INTO `et_option` VALUES(17, 'bullets_display', '0');
+INSERT INTO `et_option` VALUES(17, 'enable_reserve_email', '1');
         
-INSERT INTO `et_option` VALUES(18, 'enable_reserve_email', '1');
+INSERT INTO `et_option` VALUES(18, 'reserve_from_email', 'test@gmail.com');
         
-INSERT INTO `et_option` VALUES(19, 'reserve_from_email', 'test@gmail.com');
+INSERT INTO `et_option` VALUES(19, 'reserve_reply_email', '');
         
-INSERT INTO `et_option` VALUES(20, 'reserve_reply_email', '');
+INSERT INTO `et_option` VALUES(20, 'open_registration', '1');
         
-INSERT INTO `et_option` VALUES(21, 'open_registration', '1');
+INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://www.7mediaws.org/client/');
         
-INSERT INTO `et_option` VALUES(22, 'help_desk', 'http://www.7mediaws.org/client/');
+INSERT INTO `et_option` VALUES(22, 'enable_cron_jobs', 0);
         
-INSERT INTO `et_option` VALUES(23, 'enable_cron_jobs', 0);
+INSERT INTO `et_option` VALUES(23, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
         
-INSERT INTO `et_option` VALUES(24, 'reset_password_text', '<b>eduTrac Password Reset</b><br>Password &amp; Login Information<br><br>You or someone else requested a new password to the eduTrac online system. If you did not request this change, please contact the administrator as soon as possible @ #adminemail#.&nbsp; To log into the eduTrac system, please visit #url# and login with your username and password.<br><br>FULL NAME:&nbsp; #fname# #lname#<br>USERNAME:&nbsp; #uname#<br>PASSWORD:&nbsp; #password#<br><br>If you need further assistance, please read the documentation at #helpdesk#.<br><br>KEEP THIS IN A SAFE AND SECURE LOCATION.<br><br>Thank You,<br>eduTrac Web Team<br>');
-        
-INSERT INTO `et_option` VALUES(25, 'auth_token', '');
+INSERT INTO `et_option` VALUES(24, 'auth_token', '');
 
 INSERT INTO `cronjob` VALUES(1, '{url}cron/activityLog/', 'Purge Activity Log', NULL, 0, 0, 0, 0);
         

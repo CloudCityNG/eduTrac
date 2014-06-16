@@ -1054,7 +1054,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 					<td>'.$r['permName'].'</td>
 					<td class="text-center">
 				<input type="checkbox" name="permission[]" value="'.$r['permKey'].'" ';
-				if(in_array($r['permKey'],$perm)) { echo 'checked="checked" disabled="disabled"'; } elseif($personPerm != '' && in_array($r['permKey'],$personPerm)) { echo 'checked="chedked"';};
+				if(in_array($r['permKey'],$perm)) { echo 'checked="checked" disabled="disabled"'; } elseif($personPerm != '' && in_array($r['permKey'],$personPerm)) { echo 'checked="checked"';};
 				echo '/>
 					</td>
 				</tr>';
@@ -1710,7 +1710,7 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     function head_version_meta() {
-        echo "<meta name='generator' content='eduTrac ERP " . CURRENT_VERSION . "'>\n";
+        echo "<meta name='generator' content='eduTrac Community " . CURRENT_VERSION . "'>\n";
     }
     
     function foot_version() {

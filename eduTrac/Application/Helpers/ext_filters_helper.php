@@ -192,7 +192,7 @@ use \eduTrac\Classes\Libraries\Cookies;
             'timeout' => 2      // Timeout in seconds
             )
         ));
-        $version = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/erp-version.txt',false,$context));
+        $version = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/com-version.txt',false,$context));
         return Hooks::apply_filter( 'get_current_version', $version[$array] );
     }
     
@@ -203,7 +203,7 @@ use \eduTrac\Classes\Libraries\Cookies;
             'timeout' => 2      // Timeout in seconds
             )
         ));
-    	$upgrade = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/erp-dbversion.txt',false,$context));
+    	$upgrade = explode("\n", file_get_contents('http://api.7mediaws.org/upgrades/com-dbversion.txt',false,$context));
 		return Hooks::apply_filter( 'upgrade_db', $upgrade[$array] );
 	}
 	
@@ -237,7 +237,7 @@ use \eduTrac\Classes\Libraries\Cookies;
 								$alert .= '</div>';
 								$alert .= '<!-- //modal-header-->';
 								$alert .= '<div class="modal-body">';
-									$alert .= '<p>'.file_get_contents( "http://api.7mediaws.org/upgrades/erp-changelog.txt",false,$context ).'</p>';
+									$alert .= '<p>'.file_get_contents( "http://api.7mediaws.org/upgrades/com-changelog.txt",false,$context ).'</p>';
 								$alert .= '</div>';
 								$alert .= '<!-- //modal-body-->';
 							$alert .= '</div>';
