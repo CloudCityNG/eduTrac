@@ -1710,7 +1710,7 @@ use \eduTrac\Classes\Libraries\Cookies;
     }
     
     function head_version_meta() {
-        echo "<meta name='generator' content='eduTrac ERP " . CURRENT_VERSION . "'>\n";
+        echo "<meta name='generator' content='eduTrac Community " . CURRENT_VERSION . "'>\n";
     }
     
     function foot_version() {
