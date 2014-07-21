@@ -36,7 +36,7 @@ Session::set('installurl',$installurl);
 <html xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?=_t( 'eduTrac ERP Installer' );?></title>
+<title><?=_t( 'eduTrac Community Installer' );?></title>
 
 <!-- JQuery -->
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -55,7 +55,7 @@ Session::set('installurl',$installurl);
 
 <div id="container">
     
-    <h2><?=_t( 'eduTrac ERP Installation Wizard' );?></h2>
+    <h2><?=_t( 'eduTrac Community Installation Wizard' );?></h2>
     
     <div id="wizard" class="wizard-default-style js">
         
@@ -67,7 +67,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Step 1 - Introduction' );?></h3>
                     
-                    <p><strong><?=_t( 'Welcome to eduTrac ERP College Management System. Before getting started, we need some information on the database. You will need to know the following items before proceeding.' );?></strong></p>
+                    <p><strong><?=_t( 'Welcome to eduTrac Community College Management System. Before getting started, we need some information on the database. You will need to know the following items before proceeding.' );?></strong></p>
                     
                     <ol>
                         <li><?=_t( 'Database name' );?></li>
@@ -116,7 +116,7 @@ Session::set('installurl',$installurl);
 					<ul>
 					  <li class="ok"><span><?=_t( 'ok' );?></span> &mdash; <?=_t( 'All OK' );?></li>
 					  <li class="warning"><span><?=_t( 'warning' );?></span> &mdash; <?=_t( 'Not a deal breaker and is only a recommendation' );?></li>
-					  <li class="error"><span><?=_t( 'error' );?></span> &mdash; <?=_t( "eduTrac ERP requires this feature and can't work without it" );?></li>
+					  <li class="error"><span><?=_t( 'error' );?></span> &mdash; <?=_t( "eduTrac Community requires this feature and can't work without it" );?></li>
 					</ul>
 				</div>
                 
@@ -132,7 +132,7 @@ Session::set('installurl',$installurl);
                 <div id="help-dbname" class="helper">
                     <div class="text">
                         <h3><?=_t( 'Database Name' );?></h3>
-                        <p><?=_t( 'The name of the database you want to run eduTrac ERP in.' );?></p>
+                        <p><?=_t( 'The name of the database you want to run eduTrac Community in.' );?></p>
                     </div>
                 </div>
                 <!-- </Helper -->
@@ -220,7 +220,7 @@ Session::set('installurl',$installurl);
                 
                 <div class="column_one">
                     <h3><?=_t( 'Step 5 - Website Information/Admin Account' );?></h3>
-                    <p><?=_t( 'Welcome to the eduTrac ERP installation process! Fill in the information to the right and you’ll be on your way to using the most user friendly college management system.' );?></p>
+                    <p><?=_t( 'Welcome to the eduTrac Community installation process! Fill in the information to the right and you’ll be on your way to using the most user friendly college management system.' );?></p>
                 </div>
                 
                 <div class="column_two">
@@ -268,7 +268,7 @@ Session::set('installurl',$installurl);
                 <div class="column_one">
                     <h3><?=_t( 'Success!' );?></h3>
                     
-                    <p><?=_t( 'eduTrac ERP has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page.' );?></p>
+                    <p><?=_t( 'eduTrac Community has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page.' );?></p>
                     <form action="<?=Session::get('installurl');?>install/runInstallFinish/" class="defaultRequest" method="post">
                         <p><button type="submit"><span><?=_t( 'Finish Installer' );?></span></button></p>
                     </form>

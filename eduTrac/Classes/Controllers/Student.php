@@ -410,7 +410,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
 	}
 	
 	public function tran() {
-	    if(!hasPermission('access_tran_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+	    if(!hasPermission('generate_transcripts')) { redirect( BASE_URL . 'dashboard/' ); }
 		$this->view->staticTitle = array(_t('Generate Transcript(s)'));
 		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables_responsive.less' ];
 		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables_responsive.min.css' ];
@@ -430,7 +430,7 @@ class Student extends \eduTrac\Classes\Core\Controller {
 	}
 	
 	public function generate() {
-	    if(!hasPermission('access_tran_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+	    if(!hasPermission('generate_transcripts')) { redirect( BASE_URL . 'dashboard/' ); }
 	    $this->view->staticTitle = array(_t('Transcript'));
 	    $this->view->stuInfo = $this->model->tranStuInfo();
 	    $this->view->courses = $this->model->tranCourse();

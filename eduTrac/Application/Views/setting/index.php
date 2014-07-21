@@ -30,6 +30,11 @@
 use \eduTrac\Classes\Libraries\Hooks;
 ?>
 
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script type="text/javascript">
+	tinymce.init({selector: "textarea"});
+</script>
+
 <ul class="breadcrumb">
 	<li><?=_t( 'You are here' );?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
@@ -210,7 +215,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				<div class="form-group row">
 					<label class="col-md-3 control-label"><?=_t( 'Reset Password Text' );?></label>
 					<div class="col-md-8">
-						<textarea id="mustHaveId" class="wysihtml5 col-md-8 form-control" name="reset_password_text" rows="20"><?=_h(Hooks::{'get_option'}('reset_password_text'));?></textarea>
+						<textarea id="mustHaveId" class="col-md-8 form-control" name="reset_password_text" rows="20"><?=_h(Hooks::{'get_option'}('reset_password_text'));?></textarea>
 					</div>
 				</div>
 				<!-- // Group END -->

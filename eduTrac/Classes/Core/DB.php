@@ -364,7 +364,7 @@ class DB {
             $sql = 'DELETE * FROM '.$table;
         } else {
             $sql = "DELETE FROM " . $table . " WHERE " . $where . ";";
-            $this->init($sql, $bind);
+            return $this->init($sql, $bind);
         }
     }
     

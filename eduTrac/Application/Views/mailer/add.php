@@ -28,11 +28,16 @@
  */
 ?>
 
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script type="text/javascript">
+	tinymce.init({selector: "textarea"});
+</script>
+
 <ul class="breadcrumb">
 	<li><?=_t( 'You are here' );?></li>
 	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
 	<li class="divider"></li>
-	<li><a href="<?=BASE_URL;?>mailer/<?=bm();?>" class="glyphicons e-mail"><i></i> <?=_t( 'Email Templates' );?></a></li>
+	<li><a href="<?=BASE_URL;?>mailer/<?=bm();?>" class="glyphicons envelope"><i></i> <?=_t( 'Email Templates' );?></a></li>
 	<li class="divider"></li>
 	<li><?=_t( 'Add Email Template' );?></li>
 </ul>
@@ -85,7 +90,7 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="email_value"><font color="red">*</font> <?=_t( 'Template' );?></label>
 								<div class="col-md-8">
-									<textarea id="id1" class="wysihtml5 col-md-12 form-control" rows="20" name="email_value" required></textarea>
+									<textarea id="id1" class="col-md-12 form-control" rows="20" name="email_value" required></textarea>
 								</div>
 							</div>
 						</div>
