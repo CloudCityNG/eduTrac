@@ -45,8 +45,13 @@ class Email {
 	  * email successfully. It just only means that the method used was able to
 	  * process the request without any errors.
 	  */
-	 public function et_mail( $to, $subject, $message, $headers = '' ) {
+	 public function et_mail( $to, $subject, $message, $headers = '', $attachments = array() ) {
 		$charset = 'UTF-8';
+		
+		extract( Hooks::apply_filter( 'et_mail', compact( 'to', 'subject', 'message', 'headers', 'attachments' ) ) );
+		
+		if ( !is_array($attachments) )
+			$attachments = explode( "\n", str_replace( "\r\n", "\n", $attachments ) );
 		
 		// From email and name
 		// If we don't have a name from the input headers

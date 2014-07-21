@@ -28,6 +28,11 @@
  */
 ?>
 
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script type="text/javascript">
+	tinymce.init({selector: "textarea"});
+</script>
+
 <ul class="breadcrumb">
 	<li><?=_t( 'You are here' );?></li>
 	<li><a href="<?=BASE_URL?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
@@ -241,7 +246,7 @@
 				<div class="form-group">
 					<div class="widget-body">
 						<label class="col-md-3 control-label"><?=_t( 'Course Description' );?></label>
-						<div class="col-md-6"><textarea id="mustHaveId"<?=cio();?> class="wysihtml5 col-md-12 form-control" name="courseDesc" rows="5"><?=_h($this->crse[0]['courseDesc']);?></textarea></div>
+						<div class="col-md-6"><textarea id="mustHaveId"<?=cio();?> class="col-md-12 form-control" name="courseDesc" rows="5"><?=_h($this->crse[0]['courseDesc']);?></textarea></div>
 					</div>
 				</div>
 				<!-- // Group END -->

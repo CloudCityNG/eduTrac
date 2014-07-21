@@ -930,6 +930,63 @@ CREATE TABLE IF NOT EXISTS `et_option` (
   UNIQUE KEY `option_name` (`option_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `event` (
+  `eventID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `eventType` varchar(255) NOT NULL,
+  `catID` int(11) NOT NULL,
+  `requestor` int(8) unsigned zerofill NOT NULL,
+  `roomCode` varchar(11) DEFAULT NULL,
+  `termCode` varchar(11) DEFAULT NULL,
+  `title` varchar(120) NOT NULL,
+  `description` text,
+  `weekday` int(1) DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `startTime` time DEFAULT NULL,
+  `endTime` time DEFAULT NULL,
+  `repeats` tinyint(1) DEFAULT NULL,
+  `repeatFreq` tinyint(1) DEFAULT NULL,
+  `status` enum('A','I') NOT NULL DEFAULT 'A',
+  `addDate` date NOT NULL,
+  `addedBy` int(8) unsigned zerofill NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`eventID`),
+  UNIQUE KEY `event` (`roomCode`,`termCode`,`title`,`weekday`,`startDate`,`startTime`,`endTime`),
+  KEY `termCode` (`termCode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `event_category` (
+  `catID` int(11) NOT NULL AUTO_INCREMENT,
+  `cat_name` varchar(30) NOT NULL,
+  `bgcolor` varchar(11) NOT NULL DEFAULT '#000000',
+  PRIMARY KEY (`catID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+INSERT INTO `event_category` VALUES(1, 'Course', '#8C7BC6');
+
+INSERT INTO `event_category` VALUES(2, 'Meeting', '#00CCFF');
+
+INSERT INTO `event_category` VALUES(3, 'Conference', '#E66000');
+
+INSERT INTO `event_category` VALUES(4, 'Event', '#61D0AF');
+
+DROP TABLE IF EXISTS `event_meta`;
+
+CREATE TABLE IF NOT EXISTS `event_meta` (
+  `eventMetaID` int(11) NOT NULL AUTO_INCREMENT,
+  `eventID` int(11) unsigned zerofill NOT NULL,
+  `roomCode` varchar(11) DEFAULT NULL,
+  `requestor` int(8) unsigned zerofill NOT NULL,
+  `start` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `title` varchar(120) NOT NULL,
+  `description` text,
+  `addDate` date NOT NULL,
+  `addedBy` int(8) unsigned zerofill NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`eventMetaID`),
+  UNIQUE KEY `event_meta` (`eventID`,`roomCode`,`start`,`end`,`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `gl_account` (
   `glacctID` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `gl_acct_number` varchar(200) NOT NULL,
@@ -2414,6 +2471,24 @@ ALTER TABLE `course_sec` ADD FOREIGN KEY (`courseID`) REFERENCES `course` (`cour
 ALTER TABLE `course_sec` ADD FOREIGN KEY (`approvedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `email_template` ADD FOREIGN KEY (`deptCode`) REFERENCES `department` (`deptCode`) ON UPDATE CASCADE;
+
+ALTER TABLE `event` ADD FOREIGN KEY (`catID`) REFERENCES `event_category` (`catID`) ON UPDATE CASCADE;
+
+ALTER TABLE `event` ADD FOREIGN KEY (`requestor`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `event` ADD FOREIGN KEY (`roomCode`) REFERENCES `room` (`roomCode`) ON UPDATE CASCADE;
+
+ALTER TABLE `event` ADD FOREIGN KEY (`termCode`) REFERENCES `term` (`termCode`) ON UPDATE CASCADE;
+
+ALTER TABLE `event` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `event_meta` ADD FOREIGN KEY (`eventID`) REFERENCES `event` (`eventID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `event_meta` ADD FOREIGN KEY (`roomCode`) REFERENCES `room` (`roomCode`) ON UPDATE CASCADE;
+
+ALTER TABLE `event_meta` ADD FOREIGN KEY (`requestor`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
+
+ALTER TABLE `event_meta` ADD FOREIGN KEY (`addedBy`) REFERENCES `person` (`personID`) ON UPDATE CASCADE;
 
 ALTER TABLE `gl_transaction` ADD FOREIGN KEY (`jeID`) REFERENCES `gl_journal_entry` (`jeID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
