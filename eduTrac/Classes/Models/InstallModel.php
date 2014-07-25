@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Community';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '4.1.7';
+    private $_version = '4.1.8';
     
     public function __construct() {
     	Session::init();
@@ -107,7 +107,7 @@ class InstallModel {
 		
 		$sql[] = "INSERT INTO `staff_meta` VALUES(1, 'FT', 1, 00000001, 00000001, 'STA', '2011-02-01', '2011-02-01', NULL, '".$this->_now."', 00000001, '".$this->_now."');";
                   
-        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00031');";
+        $sql[] = "INSERT INTO `et_option` VALUES(1, 'dbversion', '00032');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(2, 'system_email', '".Session::get('email')."');";
         

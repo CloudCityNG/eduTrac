@@ -48,7 +48,7 @@
 		
 			<!-- Widget heading -->
 			<div class="widget-head">
-				<h4 class="heading"><?=_t( 'Indicates field is required' );?></h4>
+				<h4 class="heading"><font color="red">*</font> <?=_t( 'Indicates field is required' );?></h4>
 			</div>
 			<!-- // Widget heading END -->
 			
@@ -80,6 +80,19 @@
 							<div class="col-md-8"><input class="form-control" name="points" type="text" value="<?=_h($this->scale[0]['points']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
+						
+						<!-- Group -->
+						<div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Count in GPA' );?> <a href="#modal" data-toggle="modal"><img src="<?=BASE_URL;?>static/common/theme/images/help.png" /></a></label>
+                            <div class="col-md-8">
+                                <select name="count_in_gpa" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="">&nbsp;</option>
+                                    <option value="1"<?=selected('1',_h($this->scale[0]['count_in_gpa']),false);?>><?=_t( 'Yes' );?></option>
+                                    <option value="0"<?=selected('0',_h($this->scale[0]['count_in_gpa']),false);?>><?=_t( 'No' );?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
 						
 					</div>
 					<!-- // Column END -->
@@ -122,6 +135,31 @@
 		
 	</form>
 	<!-- // Form END -->
+	
+	<!-- Modal -->
+	<div class="modal fade" id="modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal heading -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title"><?=_t( 'Count in GPA' );?></h3>
+				</div>
+				<!-- // Modal heading END -->
+				<!-- Modal body -->
+				<div class="modal-body">
+					<p><?=_t( 'Should this be applied and calculated in the GPA?' );?></p>
+				</div>
+				<!-- // Modal body END -->
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#" class="btn btn-default" data-dismiss="modal"><?=_t( 'Close' );?></a> 
+				</div>
+				<!-- // Modal footer END -->
+			</div>
+		</div>
+	</div>
+	<!-- // Modal END -->
 	
 </div>	
 	
