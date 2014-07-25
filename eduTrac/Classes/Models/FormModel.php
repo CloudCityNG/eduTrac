@@ -1097,7 +1097,7 @@ class FormModel {
     		$update = array( 
             "grade" => $data['grade'],"percent" => $data['percent'],
             "points" => $data['points'], "status" => $data['status'],
-            "description" => $data['description']
+            "description" => $data['description'],"count_in_gpa" => $data['count_in_gpa']
             );
             
 	        $bind = array( ":id" => $data['ID'] );
@@ -1108,7 +1108,7 @@ class FormModel {
 	        $bind = array( 
 	            "grade" => $data['grade'],"percent" => $data['percent'],
 	            "points" => $data['points'], "status" => $data['status'],
-	            "description" => $data['description']
+	            "description" => $data['description'],"count_in_gpa" => $data['count_in_gpa']
 	            );
 	            
 	        $q = DB::inst()->insert( "grade_scale", $bind );

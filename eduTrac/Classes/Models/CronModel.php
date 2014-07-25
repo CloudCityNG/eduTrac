@@ -388,30 +388,39 @@ class CronModel {
     }
     
     public function runTermGPA() {
-        $q1 = DB::inst()->query( "SELECT 
-                        stuID,
-                        termCode,
-                        acadLevelCode,
-                        SUM(attCred),
-                        SUM(compCred),
-                        SUM(gradePoints) 
+        $q = DB::inst()->query( "SELECT 
+                        b.stuID,
+                        b.termCode,
+                        b.acadLevelCode,
+                        SUM(b.attCred) AS Attempted,
+                        SUM(b.compCred) AS Completed,
+                        SUM(b.gradePoints) AS Points,
+                        SUM(b.compCred*b.gradePoints)/SUM(b.compCred) AS GPA 
                     FROM 
-                        stu_acad_cred 
+                        grade_scale a 
+                    LEFT JOIN 
+                    	stu_acad_cred b 
+                	ON 
+                		a.grade = b.grade 
                     WHERE 
-                        grade <> 'NULL' 
+                        a.count_in_gpa = '1' 
                     AND 
-                    	grade <> 'AW' 
-                	AND 
-                		grade <> 'NA'" 
+                    	a.status = '1' 
+                    AND 
+                    	b.grade <> 'NULL' 
+                	GROUP BY 
+                		b.stuID,b.termCode,b.acadLevelCode" 
         );
-        if($q1->rowCount() > 0) {
-            $q2 = DB::inst()->query(  
-				"INSERT IGNORE INTO stu_term_gpa (stuID,termCode,acadLevelCode,attCred,compCred,gradePoints,termGPA) 
-				SELECT stuID,termCode,acadLevelCode,SUM(attCred),SUM(compCred),SUM(gradePoints),SUM(compCred*gradePoints)/SUM(compCred) 
-				FROM stu_acad_cred 
-				WHERE grade <> 'NULL' AND grade <> 'AW' AND grade <> 'NA' 
-				GROUP BY stuID,termCode,acadLevelCode"
-			);
+        if($q->rowCount() > 0) {
+        	foreach($q as $r) {
+        		$bind = [ 
+        					"stuID" => $r['stuID'],"termCode" => $r['termCode'],
+        					"acadLevelCode" => $r['acadLevelCode'],"attCred" => $r['Attempted'],
+        					"compCred" => $r['Completed'],"gradePoints" => $r['Points'],
+        					"termGPA" => $r['GPA']
+    					];
+        		DB::inst()->insert("stu_term_gpa",$bind);
+        	}
         }
     }
     
@@ -452,14 +461,18 @@ class CronModel {
                     stu_acad_cred b 
                 ON 
                     a.stuID = b.stuID 
+                LEFT JOIN 
+                	grade_scale c 
+            	ON 
+            		b.grade = c.grade 
                 WHERE 
                     a.termCode = b.termCode 
                 AND 
                 	b.grade <> 'NULL' 
         		AND 
-        			b.grade <> 'AW' 
+        			c.count_in_gpa = '1' 
     			AND 
-    				b.grade <> 'NA' 
+    				c.status = '1' 
                 AND 
                     a.acadLevelCode = b.acadLevelCode 
                 GROUP BY 

@@ -1243,6 +1243,7 @@ class Form extends \eduTrac\Classes\Core\Controller {
         $data['grade'] = isPostSet('grade');
         $data['percent'] = isPostSet('percent');
         $data['points'] = isPostSet('points');
+		$data['count_in_gpa'] = isPostSet('count_in_gpa');
         $data['status'] = isPostSet('status');
 		$data['description'] = isPostSet('description');
 		$data['update'] = isPostSet('update');
