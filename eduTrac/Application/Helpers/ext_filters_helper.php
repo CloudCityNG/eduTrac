@@ -260,3 +260,61 @@ use \eduTrac\Classes\Libraries\Cookies;
      function get_cdn_uri() {
           return Hooks::apply_filter( 'cdn_uri', 'http://edutrac.s3.amazonaws.com/' );
      }
+	 
+	 /**
+      * Retrieves eduTrac site root url.
+      *
+      * @since 4.1.9
+      * @uses apply_filter() Calls 'base_url' filter.
+      *
+      * @return string eduTrac root url.
+      */
+     function get_base_url() {
+     	$url = BASE_URL;
+		return Hooks::apply_filter( 'base_url', $url );
+     }
+	 
+	 /**
+      * Retrieve javascript directory uri.
+      *
+      * @since 4.1.9
+      * @uses apply_filter() Calls 'javascript_directory_uri' filter.
+      *
+      * @return string eduTrac javascript url.
+      */
+     function get_javascript_directory_uri() {
+     	$directory = 'static/assets/components';
+		$javascript_root_uri = get_base_url();
+		$javascript_dir_uri = "$javascript_root_uri$directory/";
+		return Hooks::apply_filter( 'javascript_directory_uri', $javascript_dir_uri, $javascript_root_uri, $directory );
+     }
+	 
+	 /**
+      * Retrieve less directory uri.
+      *
+      * @since 4.1.9
+      * @uses apply_filter() Calls 'less_directory_uri' filter.
+      *
+      * @return string eduTrac less url.
+      */
+     function get_less_directory_uri() {
+     	$directory = 'static/assets/less';
+		$less_root_uri = get_base_url();
+		$less_dir_uri = "$less_root_uri$directory/";
+		return Hooks::apply_filter( 'less_directory_uri', $less_dir_uri, $less_root_uri, $directory );
+     }
+	 
+	 /**
+      * Retrieve css directory uri.
+      *
+      * @since 4.1.9
+      * @uses apply_filter() Calls 'css_directory_uri' filter.
+      *
+      * @return string eduTrac css url.
+      */
+     function get_css_directory_uri() {
+     	$directory = 'static/assets/css';
+		$css_root_uri = get_base_url();
+		$css_dir_uri = "$css_root_uri$directory/";
+		return Hooks::apply_filter( 'css_directory_uri', $css_dir_uri, $css_root_uri, $directory );
+     }

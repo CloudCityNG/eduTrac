@@ -31,6 +31,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\DBObjects\Subject;
 use \eduTrac\Classes\Libraries\Util;
+use \eduTrac\Classes\Libraries\Hooks;
 class CourseModel {
     
     private $_subj;
@@ -76,7 +77,7 @@ class CourseModel {
     public function runCourse($data) {
         $cc = $data['subjectCode'].'-'.$data['courseNumber'];
         
-        $bind = array( 
+        $crse = array( 
             "courseNumber" => Util::_trim($data['courseNumber']),"courseCode" => Util::_trim($cc),"subjectCode" => Util::_trim($data['subjectCode']),
             "deptCode" => Util::_trim($data['deptCode']),"courseDesc" => $data['courseDesc'],
             "minCredit" => $data['minCredit'],"courseLevelCode" => Util::_trim($data['courseLevelCode']),
@@ -85,13 +86,14 @@ class CourseModel {
             "approvedDate" => $data['approvedDate'],"approvedBy" => $data['approvedBy']
         );
         
-        $q = DB::inst()->insert( "course", $bind );
+        $q = DB::inst()->insert( "course", $crse );
            
         $ID = DB::inst()->lastInsertId('courseID');
         
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+        	Hooks::do_action( 'create_course', $crse );
             $this->_log->setLog('New Record','Course',$data['courseShortTitle'],$this->_uname);
             redirect( BASE_URL . 'course/view/' . $ID . '/' . bm() );
         }

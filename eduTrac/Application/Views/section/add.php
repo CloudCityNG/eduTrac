@@ -27,6 +27,8 @@
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
+use \eduTrac\Classes\Libraries\Hooks;
+
 if($this->crse != '') : foreach($this->crse as $k => $v) {
     $crse = new \eduTrac\Classes\DBObjects\Course;
     $crse->Load_from_key($v['courseID']);
@@ -107,6 +109,8 @@ $(function(){
 							</div>
 						</div>
 						<!-- // Group END -->
+						
+						<?php Hooks::do_action( 'create_course_section_field_left' ); ?>
 						
 						<!-- Group -->
                         <div class="form-group">
@@ -199,6 +203,8 @@ $(function(){
                             </div>
                         </div>
                         <!-- // Group END -->
+                        
+                        <?php Hooks::do_action( 'create_course_section_field_right' ); ?>
                         
                         <!-- Group -->
                         <div class="form-group">

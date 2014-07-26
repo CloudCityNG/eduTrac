@@ -55,7 +55,7 @@ $auth = new Cookies;
 	In development, use the LESS files and the less.js compiler
 	instead of the minified CSS loaded by default.
 	**********************************************************
-	<link rel="stylesheet/less" href="<?=BASE_URL;?>static/assets/less/admin/module.admin.page.layout.section.layout-fluid-menu-top-full.less" />
+	<link rel="stylesheet/less" href="<?=get_less_directory_uri();?>admin/module.admin.page.layout.section.layout-fluid-menu-top-full.less" />
 	<?php
 	if (isset($this->less)) {
         foreach ($this->less as $less){
@@ -66,8 +66,8 @@ $auth = new Cookies;
 	-->
 	
 	<!--[if lt IE 9]><link rel="stylesheet" href="<?=BASE_URL;?>static/assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
-	<link rel="stylesheet" href="<?=BASE_URL;?>static/assets/css/admin/module.admin.page.layout.section.layout-fluid-menu-top-full.min.css" />
-	<link rel="stylesheet" href="<?=BASE_URL;?>static/assets/css/admin/custom.css" />
+	<link rel="stylesheet" href="<?=get_css_directory_uri();?>admin/module.admin.page.layout.section.layout-fluid-menu-top-full.min.css" />
+	<link rel="stylesheet" href="<?=get_css_directory_uri();?>admin/custom.css" />
 	
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -75,13 +75,13 @@ $auth = new Cookies;
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<script src="<?=BASE_URL;?>static/assets/components/library/jquery/jquery.min.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/library/jquery/jquery-migrate.min.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/library/modernizr/modernizr.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/plugins/less-js/less.min.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/plugins/typeahead/bootstrap-typeahead.js?v=v2.3.2"></script>
+<script src="<?=get_javascript_directory_uri();?>library/jquery/jquery.min.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>library/jquery/jquery-migrate.min.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>library/modernizr/modernizr.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>plugins/less-js/less.min.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>plugins/browser/ie/ie.prototype.polyfill.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>plugins/typeahead/bootstrap-typeahead.js?v=v2.3.2"></script>
 	
 	<?php
 	if (isset($this->css)) {
