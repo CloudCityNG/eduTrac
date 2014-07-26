@@ -33,7 +33,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 		<div id="custom-footer" class="hidden-print">
 			
 			<!--  Copyright Line -->
-			<div class="copy"><?php _e( _t( '&copy; 2013' ) ); ?> - <?php version(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
+			<div class="copy"><?=_t( '&copy; 2013' ); ?> - <?php version(); ?> &nbsp; <a href="http://tinyphp.us/"><img src="<?=BASE_URL;?>static/images/button.png" alt="Powered by tinyPHP"/></a></div>
 			<!--  End Copyright Line -->
 	
 		</div>
@@ -59,10 +59,10 @@ use \eduTrac\Classes\Libraries\Hooks;
 	
 	var themerPrimaryColor = primaryColor;
 	</script>
-<script src="<?=BASE_URL;?>static/assets/components/library/bootstrap/js/bootstrap.min.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/plugins/slimscroll/jquery.slimscroll.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/plugins/breakpoints/breakpoints.js?v=v2.1.0"></script>
-<script src="<?=BASE_URL;?>static/assets/components/core/js/core.init.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>library/bootstrap/js/bootstrap.min.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>plugins/slimscroll/jquery.slimscroll.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>plugins/breakpoints/breakpoints.js?v=v2.1.0"></script>
+<script src="<?=get_javascript_directory_uri();?>core/js/core.init.js?v=v2.1.0"></script>
 	
 	<?php
 		if (isset($this->js)) {

@@ -33,6 +33,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 use \eduTrac\Classes\Libraries\Util;
 class SectionModel {
     
+	private $_crse;
     private $_sec;
     private $_auth;
     private $_stuProg;
@@ -41,6 +42,7 @@ class SectionModel {
     private $_uname;
 	
 	public function __construct() {
+		$this->_crse = new \eduTrac\Classes\DBObjects\Course;
 	    $this->_sec = new \eduTrac\Classes\DBObjects\CourseSec;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
         $this->_stuProg = new \eduTrac\Classes\DBObjects\StuProgram;
@@ -749,13 +751,14 @@ class SectionModel {
     }
     
     public function runSection($data) {
+    	$this->_crse->Load_from_key($data['courseID']);
         $sc = $data['courseCode'].'-'.$data['sectionNumber'];
         
         $bind = array( 
             "sectionNumber" => Util::_trim($data['sectionNumber']),"courseSecCode" => Util::_trim($sc),
             "courseID" => $data['courseID'],"locationCode" => Util::_trim($data['locationCode']),
             "termCode" => Util::_trim($data['termCode']),"courseCode" => Util::_trim($data['courseCode']),"secShortTitle" => $data['secShortTitle'],
-            "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => $data['deptCode'],
+            "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => Util::_trim($data['deptCode']),
             "minCredit" => $data['minCredit'],"ceu" => $data['ceu'],
             "courseLevelCode" => Util::_trim($data['courseLevelCode']),"acadLevelCode" => Util::_trim($data['acadLevelCode']),
             "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"comment" => $data['comment'],
@@ -769,6 +772,18 @@ class SectionModel {
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+        	$section = array( 
+	            "sectionNumber" => Util::_trim($data['sectionNumber']),"courseSecCode" => Util::_trim($sc),
+	            "courseID" => $data['courseID'],"locationCode" => Util::_trim($data['locationCode']),
+	            "termCode" => Util::_trim($data['termCode']),"courseCode" => Util::_trim($data['courseCode']),"secShortTitle" => $data['secShortTitle'],
+	            "startDate" => $data['startDate'],"endDate" => $data['endDate'],"deptCode" => Util::_trim($data['deptCode']),
+	            "minCredit" => $data['minCredit'],"ceu" => $data['ceu'],
+	            "courseLevelCode" => Util::_trim($data['courseLevelCode']),"acadLevelCode" => Util::_trim($data['acadLevelCode']),
+	            "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"comment" => $data['comment'],
+	            "approvedDate" => $data['approvedDate'],"approvedBy" => $data['approvedBy'],"secLongTitle" => $this->_crse->getCourseLongTitle(),
+	            "section" => Util::_trim($data['termCode']).'-'.$sc,"description" => $this->_crse->getCourseDesc()
+	        );
+        	Hooks::do_action('create_course_section',$section);
             $this->_log->setLog('New Record','Course Section',$data['secShortTitle'],$this->_uname);
             redirect( BASE_URL . 'section/view/' . $ID . '/' . bm() );
         }

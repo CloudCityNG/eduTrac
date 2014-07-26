@@ -30,6 +30,7 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 use \eduTrac\Classes\Core\DB;
 use \eduTrac\Classes\Libraries\Util;
+use \eduTrac\Classes\Libraries\Hooks;
 class FormModel {
 
 	public function __construct() {}
@@ -917,6 +918,10 @@ class FormModel {
         $q = DB::inst()->insert( "subject", $bind );
         
         $ID = DB::inst()->lastInsertId();
+		
+		if($q) {
+			Hooks::do_action( 'create_subject_code', Util::_trim($data['subjectCode']), $data['subjectName'] );
+		}
             
         redirect( BASE_URL . 'form/view_subject/' . $ID . '/' . bm() );
     
