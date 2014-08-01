@@ -46,5 +46,4 @@ defined( 'DB_PASS' )                    or define( 'DB_PASS', '{password}' );
 /* Always provide a TRAILING SLASH (/) AFTER A PATH */
 defined( 'BASE_URL' )                   or define( 'BASE_URL', '{siteurl}' );
 defined( 'SITE_TITLE' )                 or define( 'SITE_TITLE', '{sitetitle}' );
-defined( 'PLUGINS_DIR' )                or define( 'PLUGINS_DIR', APP_PATH.'Plugins/' );
 defined( 'AUTH_TOKEN' )                 or define( 'AUTH_TOKEN', '' );

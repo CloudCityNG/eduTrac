@@ -1557,6 +1557,30 @@ use \eduTrac\Classes\Libraries\Cookies;
 		return $count;
 	}
 	
+	/**
+	 * Merge user defined arguments into defaults array.
+	 *
+	 * This function is used throughout eduTrac to allow for both string or array
+	 * to be merged into another array.
+	 *
+	 * @since 4.2.0
+	 * @param string|array $args     Value to merge with $defaults
+	 * @param array        $defaults Optional. Array that serves as the defaults. Default empty.
+	 * @return array Merged user defined values with defaults.
+	 */
+	function et_parse_args( $args, $defaults = '' ) {
+		if ( is_object( $args ) )
+			$r = get_object_vars( $args );
+		elseif ( is_array( $args ) )
+			$r =& $args;
+		else
+			et_parse_str( $args, $r );
+	
+		if ( is_array( $defaults ) )
+			return array_merge( $defaults, $r );
+		return $r;
+	}
+	
 	function timeAgo($original) {
 	    // array of time period chunks
 	    $chunks = array(

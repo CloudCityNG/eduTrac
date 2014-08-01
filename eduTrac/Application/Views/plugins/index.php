@@ -64,7 +64,7 @@ use \eduTrac\Classes\Libraries\Hooks;
         			// Let's read the content of the array
         			foreach($plugins_header as $plugin) {
         			if(Hooks::is_plugin_activated($plugin['filename']) == true)
-        				echo '<tr>';
+        				echo '<tr class="separated gradeX">';
         			else
         				echo '<tr class="separated gradeX">';
         							

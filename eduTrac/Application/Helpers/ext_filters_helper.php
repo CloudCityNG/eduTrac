@@ -318,3 +318,23 @@ use \eduTrac\Classes\Libraries\Cookies;
 		$css_dir_uri = "$css_root_uri$directory/";
 		return Hooks::apply_filter( 'css_directory_uri', $css_dir_uri, $css_root_uri, $directory );
      }
+	
+	/**
+	 * Parses a string into variables to be stored in an array.
+	 *
+	 * Uses {@link http://www.php.net/parse_str parse_str()}
+	 *
+	 * @since 4.2.0
+	 * @param string $string The string to be parsed.
+	 * @param array $array Variables will be stored in this array.
+	 */
+	function et_parse_str( $string, &$array ) {
+		parse_str( $string, $array );
+		/**
+		 * Filter the array of variables derived from a parsed string.
+		 *
+		 * @since 4.2.0
+		 * @param array $array The array populated with variables.
+		 */
+		$array = Hooks::apply_filter( 'et_parse_str', $array );
+	}

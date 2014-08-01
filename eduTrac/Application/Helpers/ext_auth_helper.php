@@ -54,7 +54,7 @@ use \eduTrac\Classes\Core\DB;
         $auth = new \eduTrac\Classes\Libraries\Cookies;
         $acl = new \eduTrac\Classes\Libraries\ACL($auth->getPersonField('personID'));
         
-        if(!$acl->hasPermission($perm) && !$acl->userHasRole(8)) {
+        if($acl->hasPermission($perm) && !$acl->userHasRole(8)) {
             return ' readonly="readonly"';
         }
     }

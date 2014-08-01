@@ -74,8 +74,6 @@ class Hooks {
 	*/
 	private static $error = array();
 	
-	private static $_parsecode_tags;
-	
 	//public function __construct() {}
 	
 	/**
@@ -188,9 +186,9 @@ class Hooks {
 				$plugin = str_replace('.plugin.php', '', $pluginFile);
 				
 				if(!file_exists(PLUGINS_DIR . $plugin . '/' . $pluginFile)) {
-					require_once(PLUGINS_DIR . $pluginFile);
+					Util::_require_once(PLUGINS_DIR . $pluginFile);
 				} else {
-					require_once(PLUGINS_DIR . $plugin . '/' . $pluginFile);
+					Util::_require_once(PLUGINS_DIR . $plugin . '/' . $pluginFile);
 				}
 			}
 		}
@@ -602,6 +600,36 @@ class Hooks {
 			echo '<li><a href="'.BASE_URL.'plugins/options/?page='.$page['slug'].'" class="glyphicons cogwheel"><i></i>'.$page['title'].'</a></li>';
 		}
 	}
+	
+	/**
+ 	* Display list of links to plugin admin pages, if any
+ 	*/
+	public static function list_plugin_parent_pages() {
+    
+		if( !property_exists( DB::inst(), 'parent_pages' ) || !DB::inst()->parent_pages )
+			return;
+		
+		foreach( (array)DB::inst()->parent_pages as $pPage ) {
+			echo '<li class="dropdown submenu">';
+				echo '<a href="'.BASE_URL.'plugins/options/?pPage='.$pPage['slug'].'" class="dropdown-toggle glyphicons cogwheel"><i></i>'.$pPage['title'].'</a>';
+				echo '<ul class="dropdown-menu submenu-show submenu-hide pull-right">';
+					self::list_plugin_child_pages();
+				echo '</ul></li>';
+		}
+	}
+	
+	/**
+ 	* Display list of links to plugin admin pages, if any
+ 	*/
+	public static function list_plugin_child_pages() {
+    
+		if( !property_exists( DB::inst(), 'child_pages' ) || !DB::inst()->child_pages )
+			return;
+		
+		foreach( (array)DB::inst()->child_pages as $child_page ) {
+			echo '<li><a href="'.BASE_URL.'plugins/options/?cPage='.$child_page['slug'].'">'.$child_page['title'].'</a></li>';
+		}
+	}
 
 	/**
  	 * Register a plugin administration page
@@ -617,6 +645,45 @@ class Hooks {
 			DB::inst()->plugin_pages = array();
 
 		DB::inst()->plugin_pages[ $slug ] = array(
+			'slug'  => $slug,
+			'title' => $title,
+			'function' => $function
+		);
+	}
+	
+	/**
+ 	 * Register a regular plugin parent page
+	 * 
+	 * @param string $slug
+	 * @param string $title
+	 * @param string $function
+	 * @param string $icon_url
+ 	*/
+	public static function register_plugin_parent_page( $slug, $title, $function ) {
+	
+		if( !property_exists( DB::inst(), 'parent_pages' ) || !DB::inst()->parent_pages )
+			DB::inst()->parent_pages = array();
+
+		DB::inst()->parent_pages[ $slug ] = array(
+			'slug'  => $slug,
+			'title' => $title,
+			'function' => $function
+		);
+	}
+	
+	/**
+ 	 * Register a plugin child page
+	 * 
+	 * @param string $slug
+	 * @param string $title
+	 * @param string $function
+ 	*/
+	public static function register_plugin_child_page( $slug, $title, $function ) {
+	
+		if( !property_exists( DB::inst(), 'child_pages' ) || !DB::inst()->child_pages )
+			DB::inst()->child_pages = array();
+
+		DB::inst()->child_pages[ $slug ] = array(
 			'slug'  => $slug,
 			'title' => $title,
 			'function' => $function
@@ -639,6 +706,42 @@ class Hooks {
 		self::do_action( 'load-' . $plugin_page);
 	
 		call_user_func( DB::inst()->plugin_pages[$plugin_page]['function'] );
+	}
+	
+	/**
+ 	 * Handle plugin administration page
+	 * 
+	 * @param string $plugin_page
+ 	*/
+	public static function plugin_parent_page( $parent_page ) {
+
+		// Check the plugin page is actually registered
+		if( !isset( DB::inst()->parent_pages[$parent_page] ) ) {
+			die( 'This page does not exist. Maybe a plugin you thought was activated is inactive?' );
+		}
+	
+		// Draw the page itself
+		self::do_action( 'load-' . $parent_page);
+	
+		call_user_func( DB::inst()->parent_pages[$parent_page]['function'] );
+	}
+	
+	/**
+ 	 * Handle plugin administration page
+	 * 
+	 * @param string $plugin_page
+ 	*/
+	public static function plugin_child_page( $child_page ) {
+
+		// Check the plugin page is actually registered
+		if( !isset( DB::inst()->child_pages[$child_page] ) ) {
+			die( 'This page does not exist. Maybe a plugin you thought was activated is inactive?' );
+		}
+	
+		// Draw the page itself
+		self::do_action( 'load-' . $child_page);
+	
+		call_user_func( DB::inst()->child_pages[$child_page]['function'] );
 	}
 	
 	// Read an option from et. Return value or $default if not found
