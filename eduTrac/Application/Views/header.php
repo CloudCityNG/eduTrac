@@ -120,6 +120,7 @@ $auth = new Cookies;
 					<ul class="dropdown-menu pull-left">
 						<li<?=ae('access_plugin_screen');?>><a href="<?=BASE_URL;?>plugins/<?=bm();?>" class="glyphicons cogwheel"><i></i><?=_t( 'Plugins' );?></a></li>
 						<?php Hooks::list_plugin_admin_pages();?>
+						<?php Hooks::list_plugin_parent_pages();?>
 						<!-- // Components Submenu Regular Items END -->
 					</ul>
 				</li>
@@ -291,6 +292,9 @@ $auth = new Cookies;
                         
 					</ul>
 				</li>
+				
+				<?=Hooks::do_action('custom_list_menu_item');?>
+				
 				<?php if($auth->getPersonField('personType') != 'STU') { ?>
 				<li class="search open">
 					<form autocomplete="off" class="dropdown dd-1" method="post" action="<?=BASE_URL;?>dashboard/search/">

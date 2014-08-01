@@ -1,6 +1,7 @@
-<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
+<?php namespace eduTrac\Classes\Models;
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Plugin Options View
+ * Page Model
  *  
  * PHP 5.4+
  *
@@ -22,23 +23,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       3.0.0
+ * @since       4.2.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-use \eduTrac\Classes\Libraries\Hooks;
 
-// Handle plugin admin pages
-if( isset( $_GET['page'] ) && !empty( $_GET['page'] ) ) {
-    Hooks::plugin_admin_page( $_GET['page'] );
-}
+use \eduTrac\Classes\Core\DB;
+class PageModel {
 
-// Handle plugin parent pages
-if( isset( $_GET['pPage'] ) && !empty( $_GET['pPage'] ) ) {
-    Hooks::plugin_parent_page( $_GET['pPage'] );
-}
+	public function __construct() {}
+	
+	public function index() {}
+	
+	public function __destruct() {
+        DB::inst()->close();
+    }
 
-// Handle plugin child pages
-if( isset( $_GET['cPage'] ) && !empty( $_GET['cPage'] ) ) {
-    Hooks::plugin_child_page( $_GET['cPage'] );
 }

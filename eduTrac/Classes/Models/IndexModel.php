@@ -78,7 +78,7 @@ class IndexModel {
                     AND 
                         (b.status = 'A' 
                     OR 
-                        c.status = 'A'))",
+                        c.status <> 'I'))",
                     $bind 
         );
         foreach($q as $r) {

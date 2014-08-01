@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Plugin Options View
+ * Page View
  *  
  * PHP 5.4+
  *
@@ -22,23 +22,41 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       3.0.0
+ * @since       4.2.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
-use \eduTrac\Classes\Libraries\Hooks;
 
-// Handle plugin admin pages
-if( isset( $_GET['page'] ) && !empty( $_GET['page'] ) ) {
-    Hooks::plugin_admin_page( $_GET['page'] );
+// Handle custom pages
+if( !isset( $_GET['pg'] ) && empty( $_GET['pg'] ) ) {
+    redirect( BASE_URL . 'dashboard' );
 }
 
-// Handle plugin parent pages
-if( isset( $_GET['pPage'] ) && !empty( $_GET['pPage'] ) ) {
-    Hooks::plugin_parent_page( $_GET['pPage'] );
-}
+\eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_permission');
+?>
 
-// Handle plugin child pages
-if( isset( $_GET['cPage'] ) && !empty( $_GET['cPage'] ) ) {
-    Hooks::plugin_child_page( $_GET['cPage'] );
-}
+<ul class="breadcrumb">
+	<li><?=_t( 'You are here' );?></li>
+	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
+	<li class="divider"></li>
+	<li><?=\eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_title');?></li>
+</ul>
+
+<h3><?=\eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_title');?></h3>
+<div class="innerLR">
+		
+	<!-- Widget -->
+	<div class="widget widget-heading-simple widget-body-white">
+		
+		<div class="widget-body">
+			
+			<?=the_custom_page_content();?>
+			
+		</div>
+	</div>
+	<!-- // Widget END -->
+	
+</div>	
+		
+		</div>
+		<!-- // Content END -->

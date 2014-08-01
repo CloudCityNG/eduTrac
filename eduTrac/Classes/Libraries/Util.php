@@ -624,4 +624,52 @@ class Util
         return preg_replace('/\s/', '', $str);
     }
 	
+	/**
+	 * Function used to create a slug associated to an "ugly" string.
+	 *
+	 * @since 4.2.0
+	 * @param string $string the string to transform.
+	 * @return string the resulting slug.
+	 */
+	public static function slugify($string) {
+	    $table = array(
+	            'Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c',
+	            'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+	            'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
+	            'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
+	            'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
+	            'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
+	            'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
+	            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', '/' => '-', ' ' => '-'
+	    );
+	    // -- Remove duplicated spaces
+	    $stripped = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $string);
+	    // -- Returns the slug
+	    return strtolower(strtr($string, $table));
+	}
+	
+	/**
+	 * Merge user defined arguments into defaults array.
+	 *
+	 * This function is used throughout eduTrac to allow for both string or array
+	 * to be merged into another array.
+	 *
+	 * @since 4.2.0
+	 * @param string|array $args     Value to merge with $defaults
+	 * @param array        $defaults Optional. Array that serves as the defaults. Default empty.
+	 * @return array Merged user defined values with defaults.
+	 */
+	public function et_parse_args( $args, $defaults = '' ) {
+		if ( is_object( $args ) )
+			$r = get_object_vars( $args );
+		elseif ( is_array( $args ) )
+			$r =& $args;
+		else
+			et_parse_str( $args, $r );
+	
+		if ( is_array( $defaults ) )
+			return array_merge( $defaults, $r );
+		return $r;
+	}
+	
 }

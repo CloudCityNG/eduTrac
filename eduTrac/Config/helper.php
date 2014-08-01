@@ -16,4 +16,4 @@
 
 
 $apphelp = new eduTrac\Classes\Core\Extension();
-$apphelp->helper(array('actions','gettext','default','system','auth','installer','filters','elfinder'));
+$apphelp->helper(array('actions','gettext','parsecodes','default','system','auth','installer','filters','elfinder'));

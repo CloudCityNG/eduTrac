@@ -88,7 +88,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
 						
 						<!-- Group -->
             			<div class="form-group">
-							<label class="col-md-3 control-label"><?=_t( 'Reset Password' );?></label>
+							<label class="col-md-3 control-label"><?=_t( 'New Password' );?></label>
 							<div class="col-md-8">
 								<input class="form-control" type="password" name="password" />
 							</div>

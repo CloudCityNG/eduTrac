@@ -44,6 +44,8 @@
 	* @uses do_action() Calls 'admin_menu' hook.
 	*/
 	Hooks::do_action('admin_menu');
+	Hooks::do_action('custom_plugin_page');
+	Hooks::do_action('create_db_table');
 
 	function init() {
 		Hooks::do_action('init');
@@ -76,3 +78,6 @@
 	Hooks::add_action( 'dashboard_top_widgets',		'dashboard_acadProg_count',     5       );
 	Hooks::add_action( 'dashboard_right_widgets',	'dashboard_clock',     			5       );
 	Hooks::add_action( 'dashboard_right_widgets',	'dashboard_weather',			5       );
+	Hooks::add_filter( 'the_custom_page_content', 	'et_autop'            					);
+	Hooks::add_filter( 'the_custom_page_content', 	'parsecode_unautop'  					);
+	Hooks::add_filter( 'the_custom_page_content', 	'do_parsecode', 				5		);

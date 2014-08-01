@@ -73,7 +73,7 @@ $(window).load(function(){
 		<div class="widget widget-heading-simple widget-body-white">
 			<div class="widget-body">
 				<div class="alerts alerts-error">
-					<p><?=_t( 'You have a hold on your account which is restricting your from registering. Please contact the following office(s)/department(s) to inquire about the hold(s) on your account: ' );?><?=student_has_restriction();?></p>
+					<p><?=_t( 'You have a hold on your account which is currently restricting you from registering for a course(s). Please contact the following office(s)/department(s) to inquire about the hold(s) on your account: ' );?><?=student_has_restriction();?></p>
 				</div>
 			</div>
 		</div>
