@@ -44,8 +44,34 @@
 	* @uses do_action() Calls 'admin_menu' hook.
 	*/
 	Hooks::do_action('admin_menu');
+	
+	/**
+	 * An action called to add custom page links
+	 * to menu structure.
+	 *
+	 * @since 4.2.0
+	 * @uses do_action() Calls 'custom_plugin_page' hook.
+	 */
 	Hooks::do_action('custom_plugin_page');
+	
+	/**
+	 * An action called to create db tables needed
+	 * for a plugin
+	 *
+	 * @since 4.2.0
+	 * @uses do_action() Calls 'create_db_table' hook.
+	 */
 	Hooks::do_action('create_db_table');
+	
+	/**
+	 * An action called to add component/companion pages
+	 * for a plugin. These are typically pages that users
+	 * will access to interact with a particular plugin.
+	 *
+	 * @since 4.2.1
+	 * @uses do_action() Calls 'component_menu' hook.
+	 */
+	Hooks::do_action('component_menu');
 
 	function init() {
 		Hooks::do_action('init');

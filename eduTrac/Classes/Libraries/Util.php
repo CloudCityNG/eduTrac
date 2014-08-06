@@ -626,7 +626,6 @@ class Util
 	
 	/**
 	 * Function used to create a slug associated to an "ugly" string.
-	 *
 	 * @since 4.2.0
 	 * @param string $string the string to transform.
 	 * @return string the resulting slug.
@@ -649,27 +648,82 @@ class Util
 	}
 	
 	/**
-	 * Merge user defined arguments into defaults array.
-	 *
-	 * This function is used throughout eduTrac to allow for both string or array
-	 * to be merged into another array.
-	 *
-	 * @since 4.2.0
-	 * @param string|array $args     Value to merge with $defaults
-	 * @param array        $defaults Optional. Array that serves as the defaults. Default empty.
-	 * @return array Merged user defined values with defaults.
+	 * @since 4.2.1
+	 * @param string $file Filepath
+	 * @param int $digits Digits to display
+	 * @return string|bool Size (KB, MB, GB, TB) or boolean
 	 */
-	public function et_parse_args( $args, $defaults = '' ) {
-		if ( is_object( $args ) )
-			$r = get_object_vars( $args );
-		elseif ( is_array( $args ) )
-			$r =& $args;
-		else
-			et_parse_str( $args, $r );
+	public static function getFilesize($file,$digits = 2) {
+	       if (is_file($file)) {
+	           $fileSize = filesize($file);
+	               $sizes = array("TB","GB","MB","KB","B");
+	               $total = count($sizes);
+	               while ($total-- && $fileSize > 1024) {
+	                       $fileSize /= 1024;
+	                       }
+	               return round($fileSize, $digits)." ".$sizes[$total];
+	       }
+	       return false;
+	}
 	
-		if ( is_array( $defaults ) )
-			return array_merge( $defaults, $r );
-		return $r;
+	public static function check_mime_type($file,$mode=0) {
+		// mode 0 = full check
+    	// mode 1 = extension check only
+
+	    $mime_types = array(
+	
+	        'txt' => 'text/plain',
+	        'csv' => 'text/plain',
+	
+	        // images
+	        'png' => 'image/png',
+	        'jpe' => 'image/jpeg',
+	        'jpeg' => 'image/jpeg',
+	        'jpg' => 'image/jpeg',
+	        'gif' => 'image/gif',
+	        'bmp' => 'image/bmp',
+	        'tiff' => 'image/tiff',
+	        'tif' => 'image/tiff',
+	        'svg' => 'image/svg+xml',
+	        'svgz' => 'image/svg+xml',
+	
+	        // archives
+	        'zip' => 'application/zip',
+	        'rar' => 'application/x-rar-compressed',
+	
+	
+	        // adobe
+	        'pdf' => 'application/pdf',
+	        'ai' => 'application/postscript',
+	        'eps' => 'application/postscript',
+	        'ps' => 'application/postscript',
+	
+	        // ms office
+	        'doc' => 'application/msword',
+	        'rtf' => 'application/rtf',
+	        'xls' => 'application/vnd.ms-excel',
+	        'ppt' => 'application/vnd.ms-powerpoint',
+	        'docx' => 'application/msword',
+	        'xlsx' => 'application/vnd.ms-excel',
+	        'pptx' => 'application/vnd.ms-powerpoint'
+        );
+
+    	$ext = strtolower(array_pop(explode('.',$file)));
+		
+		if(function_exists('mime_content_type')&&$mode==0) {
+	        $mimetype = mime_content_type($file);
+	        return $mimetype;
+        }
+
+	    if(function_exists('finfo_open')&&$mode==0) {
+	        $finfo = finfo_open(FILEINFO_MIME);
+	        $mimetype = finfo_file($finfo, $file);
+	        finfo_close($finfo);
+	        return $mimetype;
+        }
+		elseif(array_key_exists($ext, $mime_types)) {
+    		return $mime_types[$ext];
+    	}
 	}
 	
 }

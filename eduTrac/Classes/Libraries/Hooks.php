@@ -630,6 +630,19 @@ class Hooks {
 			echo '<li><a href="'.BASE_URL.'plugins/options/?cPage='.$child_page['slug'].'">'.$child_page['title'].'</a></li>';
 		}
 	}
+	
+	/**
+ 	* Display list of companion links to plugins, if any
+ 	*/
+	public static function list_plugin_component_pages() {
+    
+		if( !property_exists( DB::inst(), 'comp_pages' ) || !DB::inst()->comp_pages )
+			return;
+		
+		foreach( (array)DB::inst()->comp_pages as $comp_page ) {
+			echo '<li><a href="'.BASE_URL.'component/?cID='.$comp_page['slug'].'">'.$comp_page['title'].'</a></li>';
+		}
+	}
 
 	/**
  	 * Register a plugin administration page
@@ -665,6 +678,25 @@ class Hooks {
 			DB::inst()->parent_pages = array();
 
 		DB::inst()->parent_pages[ $slug ] = array(
+			'slug'  => $slug,
+			'title' => $title,
+			'function' => $function
+		);
+	}
+	
+	/**
+ 	 * Register a plugin component page
+	 * 
+	 * @param string $slug
+	 * @param string $title
+	 * @param string $function
+ 	*/
+	public static function register_component_page( $slug, $title, $function ) {
+	
+		if( !property_exists( DB::inst(), 'comp_pages' ) || !DB::inst()->comp_pages )
+			DB::inst()->comp_pages = array();
+
+		DB::inst()->comp_pages[ $slug ] = array(
 			'slug'  => $slug,
 			'title' => $title,
 			'function' => $function
@@ -742,6 +774,24 @@ class Hooks {
 		self::do_action( 'load-' . $child_page);
 	
 		call_user_func( DB::inst()->child_pages[$child_page]['function'] );
+	}
+	
+	/**
+ 	 * Handle plugin component page
+	 * 
+	 * @param string $comp_page
+ 	*/
+	public static function plugin_component_page( $comp_page ) {
+
+		// Check the plugin page is actually registered
+		if( !isset( DB::inst()->comp_pages[$comp_page] ) ) {
+			die( 'This page does not exist. Maybe a component you thought was activated is inactive?' );
+		}
+	
+		// Draw the page itself
+		self::do_action( 'load-' . $comp_page);
+	
+		call_user_func( DB::inst()->comp_pages[$comp_page]['function'] );
 	}
 	
 	// Read an option from et. Return value or $default if not found

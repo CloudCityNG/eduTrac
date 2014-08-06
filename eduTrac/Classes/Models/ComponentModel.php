@@ -1,6 +1,7 @@
-<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
+<?php namespace eduTrac\Classes\Models;
+if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Page View
+ * Component Model
  *  
  * PHP 5.4+
  *
@@ -22,41 +23,20 @@
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       4.2.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-// Handle custom pages
-if( !isset( $_GET['pg'] ) && empty( $_GET['pg'] ) ) {
-    redirect( BASE_URL . 'dashboard' );
-}
+use \eduTrac\Classes\Core\DB;
+class ComponentModel {
 
-\eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_permission');
-?>
-
-<ul class="breadcrumb">
-	<li><?=_t( 'You are here' );?></li>
-	<li><a href="<?=BASE_URL;?>dashboard/<?=bm();?>" class="glyphicons dashboard"><i></i> <?=_t( 'Dashboard' );?></a></li>
-	<li class="divider"></li>
-	<li><?php \eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_title'); ?></li>
-</ul>
-
-<h3><?php \eduTrac\Classes\Libraries\Hooks::{'do_action'}('page_title'); ?></h3>
-<div class="innerLR">
-		
-	<!-- Widget -->
-	<div class="widget widget-heading-simple widget-body-white">
-		
-		<div class="widget-body">
-			
-			<?php \eduTrac\Classes\Libraries\Hooks::{'do_action'}('custom_page_content'); ?>
-			
-		</div>
-	</div>
-	<!-- // Widget END -->
+	public function __construct() {}
 	
-</div>	
-		
-		</div>
-		<!-- // Content END -->
+	public function index() {}
+	
+	public function __destruct() {
+        DB::inst()->close();
+    }
+
+}

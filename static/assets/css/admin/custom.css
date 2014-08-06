@@ -1257,3 +1257,25 @@ body .ui-tooltip {
 	filter: Alpha(Opacity=30);
 	border-radius: 0;
 }
+.Low {
+	background-color:#77DD77 !important;
+	color:#666666 !important;
+	font-weight:700 !important;
+}
+.Normal {
+	background-color:#FFFFE0 !important;
+	color:#666666 !important;
+	font-weight:600 !important;
+}
+.High {
+	background-color:#FF6961 !important;
+	color:#666666 !important;
+	font-weight:600 !important;
+}
+.viewTicket {
+	width:1000px;
+	margin:0 auto !important;
+}
+.viewTicketInner {
+	width:1000px;
+}

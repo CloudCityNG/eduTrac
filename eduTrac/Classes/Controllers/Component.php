@@ -1,7 +1,7 @@
 <?php namespace eduTrac\Classes\Controllers;
 if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /**
- * Page Controller
+ * Component Controller
  *  
  * PHP 5.4+
  *
@@ -23,12 +23,12 @@ if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
  * 
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3
  * @link        http://www.7mediaws.org/
- * @since       4.2.0
+ * @since       3.0.0
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
 
-class Page extends \eduTrac\Classes\Core\Controller {
+class Component extends \eduTrac\Classes\Core\Controller {
 	
 	private $_auth;
 	
@@ -47,7 +47,7 @@ class Page extends \eduTrac\Classes\Core\Controller {
 	}
 	
 	public function index() {
-		$this->view->staticTitle = array(_t('Pages'));
+		$this->view->staticTitle = array(_t('Component'));
 		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
 		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
         $this->view->js = [ 
@@ -63,7 +63,7 @@ class Page extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0',
                             'components/modules/admin/forms/elements/jasny-fileupload/assets/js/bootstrap-fileupload.js?v=v2.1.0'
                             ];
-		$this->view->render('page/index');	
+		$this->view->render('component/index');	
 	}
 
 }

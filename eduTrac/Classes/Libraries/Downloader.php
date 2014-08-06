@@ -238,14 +238,14 @@ class Downloader {
 		
 		/* by Function - mime_content_type */
 		if( function_exists( 'mime_content_type' ) ) {
-			$file_mime_type = @mime_content_type( $file_path );
+			$file_mime_type = mime_content_type( $file_path );
 		}
 		
 		/* by Function - mime_content_type */
 		else if( function_exists( 'finfo_file' ) ) {
 			
-			$finfo = @finfo_open(FILEINFO_MIME);
-			$file_mime_type = @finfo_file($finfo, $file_path);
+			$finfo = finfo_open(FILEINFO_MIME);
+			$file_mime_type = finfo_file($finfo, $file_path);
 			finfo_close($finfo);  
 		
 		}
