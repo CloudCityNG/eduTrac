@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /*
 Plugin Name: ET SMTP
 Plugin URI: http://www.7mediaws.org/
-Version: 1.0.1
+Version: 1.0.2
 Description: ET SMTP will allow you to send emails through an SMTP server and override the PHP mail() as well as the eduTrac et_mail() sending methods.
 Author: Joshua Parker
 Author URI: http://www.7mediaws.org/
@@ -96,6 +96,11 @@ $email = new \eduTrac\Classes\Libraries\Email;
 		redirect( BASE_URL . 'plugins');
 	}
 ?>
+
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script type="text/javascript">
+	tinymce.init({selector: "textarea"});
+</script>
 
 <ul class="breadcrumb">
     <li><?=_t( 'You are here' );?></li>
@@ -215,7 +220,7 @@ $email = new \eduTrac\Classes\Libraries\Email;
                         		<div class="form-group">
                         			<label class="col-md-3 control-label" for='input01'><?=_t('Message:'); ?></label> 
                         			<div class="col-md-8">
-                        			    <textarea id="mustHaveId" class="wysihtml5 col-md-12 form-control" name="et_smtp_message" rows="5"></textarea>
+                        			    <textarea id="mustHaveId" class="col-md-12 form-control" name="et_smtp_message" rows="5"></textarea>
                     			    </div>
                         		</div>
                         </fieldset>

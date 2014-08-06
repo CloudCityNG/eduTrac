@@ -58,14 +58,15 @@ class Plugins extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/lib/js/jquery.dataTables.min.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
-                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0'
+                            'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/jasny-fileupload/assets/js/bootstrap-fileupload.js?v=v2.1.0'
                             ];
 		$this->view->render('plugins/index');
 	}
     
     public function options() {
     	if(!hasPermission('access_plugin_admin_page')) { redirect( BASE_URL . 'dashboard/' ); }
-        $this->view->staticTitle = array(_t('Plugin Option Page'));
+        $this->view->staticTitle = array(_t('Plugin'));
     	$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
 		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
         $this->view->js = [ 
@@ -79,9 +80,7 @@ class Plugins extends \eduTrac\Classes\Core\Controller {
                             'components/modules/admin/tables/datatables/assets/lib/extras/TableTools/media/js/TableTools.min.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/custom/js/DT_bootstrap.js?v=v2.1.0',
                             'components/modules/admin/tables/datatables/assets/custom/js/datatables.init.js?v=v2.1.0',
-                            'components/modules/admin/forms/editors/wysihtml5/assets/lib/js/wysihtml5-0.3.0_rc2.min.js?v=v2.1.0',
-                            'components/modules/admin/forms/editors/wysihtml5/assets/lib/js/bootstrap-wysihtml5-0.0.2.js?v=v2.1.0',
-                            'components/modules/admin/forms/editors/wysihtml5/assets/custom/wysihtml5.init.js?v=v2.1.0'
+                            'components/modules/admin/forms/elements/jasny-fileupload/assets/js/bootstrap-fileupload.js?v=v2.1.0'
                             ];
 		$this->view->render('plugins/options');
     }

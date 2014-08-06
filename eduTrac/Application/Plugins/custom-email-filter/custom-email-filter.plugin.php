@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 /*
 Plugin Name: Custom Email Filter
 Plugin URI: http://www.7mediaws.org/

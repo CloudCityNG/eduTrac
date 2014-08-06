@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASE_PATH') ) exit('No direct script access allowed');
 
 class CustomEmailFilter {
     public function __construct() {
