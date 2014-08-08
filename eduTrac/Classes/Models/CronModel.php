@@ -395,7 +395,7 @@ class CronModel {
                         SUM(b.attCred) AS Attempted,
                         SUM(b.compCred) AS Completed,
                         SUM(b.gradePoints) AS Points,
-                        SUM(b.compCred*b.gradePoints)/SUM(b.compCred) AS GPA 
+                        SUM(b.attCred*b.gradePoints)/SUM(b.attCred) AS GPA 
                     FROM 
                         grade_scale a 
                     LEFT JOIN 
@@ -454,7 +454,7 @@ class CronModel {
                     SUM(b.attCred) AS Attempted,
                     SUM(b.compCred) AS Completed,
                     SUM(b.gradePoints) AS termGradePoints,
-                    SUM(b.compCred*b.gradePoints) AS Points 
+                    SUM(b.attCred*b.gradePoints) AS Points 
                 FROM 
                     stu_term_gpa a 
                 LEFT JOIN 
@@ -481,7 +481,7 @@ class CronModel {
         foreach($q1 as $r1) {
             if($r1['GradePoints'] != $r1['termGradePoints']) {
                 //$points = $r1['Completed']*$r1['termGradePoints'];
-                $GPA = $r1['Points']/$r1['Completed'];
+                $GPA = $r1['Points']/$r1['Attempted'];
                 $update = [ 
                             "attCred" => $r1['Attempted'],
                             "compCred" => $r1['Completed'],

@@ -1192,9 +1192,9 @@ class StudentModel {
         $q = DB::inst()->query( "SELECT 
                         a.compCred AS acadCompCred,
                         a.attCred AS acadAttCred,
-                        a.gradePoints AS acadGradePoints,
                         a.grade,
                         a.gradePoints AS acadGradePoints,
+                        a.attCred*a.gradePoints AS Points,
                         b.secShortTitle,
                         b.courseCode,
                         b.courseSecCode,
@@ -1210,7 +1210,7 @@ class StudentModel {
                     LEFT JOIN 
                         course_sec b 
                     ON 
-                        a.courseSecCode = b.courseSecCode 
+                        a.courseSecCode = b.courseSecCode AND a.termCode = b.termCode
                     LEFT JOIN 
                         stu_term_gpa c
                     ON 
@@ -1220,7 +1220,7 @@ class StudentModel {
                     AND 
                         a.acadLevelCode = :acadLevelCode 
                     GROUP BY 
-                        a.courseSecCode,a.termCode",
+                        a.courseSecCode,a.termCode,a.acadLevelCode",
                     $bind
         );
         
@@ -1239,7 +1239,7 @@ class StudentModel {
                         SUM(attCred) as Attempted,
                         SUM(compCred) as Completed,
                         SUM(gradePoints) as Points,
-                        SUM(compCred*gradePoints)/SUM(compCred) as GPA 
+                        SUM(attCred*gradePoints)/SUM(attCred) as GPA 
                     FROM 
                         stu_acad_cred 
                     WHERE 

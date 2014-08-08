@@ -104,7 +104,7 @@ jQuery(document).ready(function() {
                         
                         <!-- Group -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label"><?=_t( 'Status' );?></label>
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Status' );?></label>
                             <div class="col-md-8">
                                 <?=stu_prog_status_select();?>
                             </div>
@@ -118,6 +118,18 @@ jQuery(document).ready(function() {
                                 <select name="advisorID"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
                                     <option value="">&nbsp;</option>
                                     <?php facID_dropdown(); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+                        
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Catalog Year' );?></label>
+                            <div class="col-md-8">
+                                <select name="catYearCode"<?=sio();?> class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
+                                    <option value="">&nbsp;</option>
+                                    <?php table_dropdown('acad_year', 'acadYearCode <> "NULL"', 'acadYearCode', 'acadYearCode', 'acadYearDesc'); ?>
                                 </select>
                             </div>
                         </div>

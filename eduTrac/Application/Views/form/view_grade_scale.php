@@ -63,7 +63,7 @@
 						<!-- Group -->
 						<div class="form-group">
                             <label class="col-md-3 control-label"><font color="red">*</font> <?=_t( 'Grade' );?></label>
-							<div class="col-md-8"><input class="form-control" name="grade" type="text" value="<?=_h($this->scale[0]['grade']);?>" required /></div>
+							<div class="col-md-8"><input class="form-control"<?php if(_h($this->scale[0]['grade']) == 'W') : echo ' readonly'; endif; ?> name="grade" type="text" value="<?=_h($this->scale[0]['grade']);?>" required /></div>
 						</div>
 						<!-- // Group END -->
 						

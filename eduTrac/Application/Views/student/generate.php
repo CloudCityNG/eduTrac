@@ -90,6 +90,7 @@ $table .= '<th><b>'._t( 'Grade' ).'</b></th>';
 $table .= '<th><b>'._t( 'Attempted Credits' ).'</b></th>';
 $table .= '<th><b>'._t( 'Completed Credits' ).'</b></th>';
 $table .= '<th><b>'._t( 'Grade Points' ).'</b></th>';
+$table .= '<th><b>'._t( 'Cum Grd Pts' ).'</b></th>';
 $table .= '<th><b>'._t( 'Dates' ).'</b></th>';
 $table .= '</tr></thead>';
 $table .= '<tbody>';
@@ -101,6 +102,7 @@ foreach($this->courses as $k => $v) {
      $table .= '<td>'._h($v['acadAttCred']).'</td>';
      $table .= '<td>'._h($v['acadCompCred']).'</td>';
      $table .= '<td>'._h($v['acadGradePoints']).'</td>';
+	 $table .= '<td>'._h($v['Points']).'</td>';
      $table .= '<td>'._h($v['startDate']).' to ' . _h($v['endDate']) . '</td>';
      $table .= '</tr>';
 }
@@ -109,7 +111,8 @@ $table .= '<tr>';
 $table .= '<td colspan="3"><b>'._t( 'Totals' ).'</b></td>';
 $table .= '<td>CRED.ATT = '._h($this->tranGPA[0]['Attempted']).'</td>';
 $table .= '<td>CRED.CPT = '._h($this->tranGPA[0]['Completed']).'</td>';
-$table .= '<td>GRADE.PTS = '._h($this->tranGPA[0]['Points']).'</td>';
+$table .= '<td style="width:.13em;">GRADE.PTS = '._h($this->tranGPA[0]['Points']).'</td>';
+$table .= '<td>&nbsp;</td>';
 $table .= '<td>GPA = '._h($this->tranGPA[0]['GPA']).'</td>';
 $table .= '</tr>';
  

@@ -542,6 +542,33 @@ class SectionModel {
 		return $array;
 	}
 	
+	public function secGrade($id) {
+        $array = [];
+        $bind = [ ":id" => $id ];
+        $q = DB::inst()->query( "SELECT 
+                a.stuID,
+                a.courseSecCode,
+                a.termCode,
+                a.grade,
+                b.courseSecID,
+                b.secShortTitle,
+                b.minCredit 
+            FROM 
+                stu_acad_cred a 
+            LEFT JOIN 
+                course_sec b 
+            ON 
+                a.courseSecCode = b.courseSecCode AND a.termCode = b.termCode 
+            WHERE 
+                b.courseSecID = :id",
+            $bind 
+        );
+        foreach($q as $r) {
+            $array[] = $r;
+        }
+        return $array;
+    }
+	
 	public function gradebookAssign($code) {
 		$array = [];
 		$bind = [ ":code" => $code, ":term" => isGetSet('term'), ":fac" => $this->_auth->getPersonField('personID') ];

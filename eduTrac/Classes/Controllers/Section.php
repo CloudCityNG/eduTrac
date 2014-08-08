@@ -514,6 +514,27 @@ class Section extends \eduTrac\Classes\Core\Controller {
 		$this->view->render('section/final_grade');
 	}
 	
+	public function section_fgrades($id) {
+        if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
+    	$this->view->staticTitle = array(_t('Course Section Final Grade'));
+		$this->view->less = [ 'less/admin/module.admin.page.form_elements.less','less/admin/module.admin.page.tables.less' ];
+		$this->view->css = [ 'css/admin/module.admin.page.form_elements.min.css','css/admin/module.admin.page.tables.min.css' ];
+        $this->view->js = [ 
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/lib/js/bootstrap-select.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-select/assets/custom/js/bootstrap-select.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/lib/js/select2.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/select2/assets/custom/js/select2.init.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.1.0',
+                            'components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.1.0',
+                            ];
+        $this->view->secGrade = $this->model->secGrade($id);
+        
+        if(empty($this->view->secGrade)) {
+            redirect( BASE_URL . 'error/invalid_record/' );
+        }
+		$this->view->render('section/section_fgrades');
+	}
+	
 	public function fg_export($id) {
         if(!hasPermission('access_grading_screen')) { redirect( BASE_URL . 'dashboard/' ); }
     	$this->view->staticTitle = array(_t('Export Final Grade'));
