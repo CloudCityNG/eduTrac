@@ -188,9 +188,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                     <td class="text-center"><?=_h($value['points']);?></td>
                     <td class="text-center"><?=_h($value['Status']);?></td>
                     <td class="center">
-                    	<?php if(_h($value['grade']) != 'W') : ?>
                         <a href="<?=BASE_URL; ?>form/view_grade_scale/<?=_h($value['ID']); ?>/<?=bm();?>" title="View" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                    	<?php endif; ?>
                     </td>
                 </tr>
                 <?php } endif; ?>

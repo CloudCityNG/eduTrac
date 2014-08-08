@@ -253,6 +253,16 @@ $(function(){
                             </div>
                         </div>
                         <!-- // Group END -->
+                        <?php if(hasPermission('access_grading_screen')) : ?>
+                        <!-- Group -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><?=_t( 'Final Grades' );?> <a href="<?=BASE_URL;?>section/section_fgrades/<?=_h($this->sec[0]['courseSecID']);?>/<?=bm();?>"><img src="<?=BASE_URL;?>static/common/theme/images/cascade.png" /></a></label>
+                            <div class="col-md-2">
+                                <input type="text" disabled value="X" class="form-control col-md-1 center" />
+                            </div>
+                        </div>
+                        <!-- // Group END -->
+						<?php endif; ?>
 						
 					</div>
 					<!-- // Column END -->
