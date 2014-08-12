@@ -74,7 +74,7 @@
                     <td class="text-center"><?=_h($v['courseCredits']);?></td>
                     <td class="text-center"><?=_h($v['ceu']);?></td>
                     <td class="text-center"><?=_h($v['termCode']);?></td>
-                    <td class="text-center"><?=_h($v['grade']);?></td>
+                    <td class="text-center"><?=getAcadCredGrade(_h($v['courseSecCode']),_h($v['termCode']));?></td>
                     <td class="text-center">
                     	<div class="btn-group dropup">
                             <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>

@@ -184,7 +184,7 @@ $auth = new \eduTrac\Classes\Libraries\Cookies;
                             <label class="col-md-3 control-label"><?=_t( 'End Date' );?></label>
                             <div class="col-md-8">
                                 <div class="input-group date col-md-8" id="datepicker7">
-                                    <input class="form-control"<?=apio();?> name="endDate" type="text" value="<?=_h($this->prog[0]['endDate']);?>" />
+                                    <input class="form-control"<?=apio();?> name="endDate" type="text" value="<?=(_h($this->prog[0]['endDate']) > '0000-00-00' ? _h($this->prog[0]['endDate']) : '');?>" />
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>

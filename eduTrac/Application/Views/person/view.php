@@ -204,7 +204,7 @@ $user->Load_from_key($this->person[0]['personID']);
                         <div class="form-group">
                             <label class="col-md-3 control-label"><?=_t( 'Social Security #' );?></label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="ssn"<?=pio();?> value="<?=_h((int)$this->person[0]['ssn']);?>" />
+                                <input class="form-control" type="text" name="ssn"<?=pio();?> value="<?=(_h((int)$this->person[0]['ssn']) > 0 ? _h((int)$this->person[0]['ssn']) : '');?>" />
                             </div>
                         </div>
                         <!-- // Group END -->
@@ -249,7 +249,7 @@ $user->Load_from_key($this->person[0]['personID']);
                             <label class="col-md-3 control-label"><?=_t( 'Date of Birth' );?></label>
                             <div class="col-md-8">
                                 <div class="input-group date col-md-8" id="datepicker6">
-                                    <input class="form-control" name="dob"<?=pio();?> type="text" value="<?=_h($this->person[0]['dob']);?>" />
+                                    <input class="form-control" name="dob"<?=pio();?> type="text" value="<?=(_h($this->person[0]['dob']) > '0000-00-00' ? _h($this->person[0]['dob']) : '');?>" />
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
                                 </div>
                             </div>

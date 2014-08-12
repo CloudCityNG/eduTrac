@@ -84,7 +84,7 @@ use \eduTrac\Classes\Libraries\Hooks;
                     <td class="text-center"><?=_h($v['courseShortTitle']);?></td>
                     <td class="text-center"><?=_h($v['Status']);?></td>
                     <td class="text-center"><?=_h($v['startDate']);?></td>
-                    <td class="text-center"><?=_h($v['endDate']);?></td>
+                    <td class="text-center"><?=(_h($v['endDate']) > '0000-00-00' ? _h($v['endDate']) : '');?></td>
                     <td class="text-center">
                     	<div class="btn-group dropup">
                             <button class="btn btn-default btn-xs" type="button"><?=_t( 'Actions' ); ?></button>

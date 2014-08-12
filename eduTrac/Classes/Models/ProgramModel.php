@@ -74,7 +74,7 @@ class ProgramModel {
     }
     
     public function runProg($data) {
-        $bind = array( 
+        $prog = array( 
                     "acadProgCode" => Util::_trim($data['acadProgCode']),"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
                     "currStatus" => $data['currStatus'],"statusDate" => $data['statusDate'],"approvedBy" => $data['approvedBy'],
                     "approvedDate" => $data['approvedDate'],"deptCode" => Util::_trim($data['deptCode']),"schoolCode" => Util::_trim($data['schoolCode']),
@@ -84,13 +84,14 @@ class ProgramModel {
                     "cipCode" => Util::_trim($data['cipCode']),"locationCode" => Util::_trim($data['locationCode'])
         );
                
-        $q = DB::inst()->insert( "acad_program", $bind );
+        $q = DB::inst()->insert( "acad_program", $prog );
            
         $ID = DB::inst()->lastInsertId('acadProgID');
         
         if(!$q) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+        	Hooks::do_action( 'create_acad_program', $prog );
             $this->_log->setLog('New Record','Academic Program',$data['acadProgTitle'],$this->_uname);
             redirect( BASE_URL . 'program/view/' . $ID . '/' . bm() );
         }
@@ -173,7 +174,7 @@ class ProgramModel {
         
         $statusDate = date("Y-m-d");
         
-        $update1 = array( 
+        $prog = array( 
                     "acadProgCode" => Util::_trim($data['acadProgCode']),"acadProgTitle" => $data['acadProgTitle'],"programDesc" => $data['programDesc'],
                     "currStatus" => $data['currStatus'],"deptCode" => Util::_trim($data['deptCode']),"schoolCode" => Util::_trim($data['schoolCode']),
                     "acadYearCode" => Util::_trim($data['acadYearCode']),"startDate" => $data['startDate'],"endDate" => $data['endDate'],
@@ -182,12 +183,13 @@ class ProgramModel {
                     "cipCode" => Util::_trim($data['cipCode']),"locationCode" => Util::_trim($data['locationCode'])
         );
         
-        $q = DB::inst()->update( "acad_program", $update1, "acadProgID = :acadProgID", $bind );
+        $q = DB::inst()->update( "acad_program", $prog, "acadProgID = :acadProgID", $bind );
         
         $update2 = array( "statusDate" => $statusDate );
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "acad_program", $update2, "acadProgID = :acadProgID", $bind );
         }
+		Hooks::do_action( 'edit_acad_program', $prog );
         $this->_log->setLog('Update Record','Academic Program',$data['acadProgTitle'],$this->_uname);
         redirect( BASE_URL . 'program/view/' . $data['acadProgID'] . '/' . bm() );
     }

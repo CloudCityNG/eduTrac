@@ -644,309 +644,6 @@ use \eduTrac\Classes\Libraries\Cookies;
 	    }
 	}
     
-    /**
-     * Address type select: shows general list of address types and
-     * if $typeCode is not NULL, shows the address type attached 
-     * to a particular record.
-     * 
-     * @since 1.0.0
-     * @param string $typeCode
-     * @return string Returns the record key if selected is true.
-     */
-    function address_type_select($typeCode = NULL) {
-        $select = '<select name="addressType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-            <option value="">&nbsp;</option>
-            <option value="B"'.selected( $typeCode, 'B', false ).'>Business</option>
-            <option value="H"'.selected( $typeCode, 'H', false ).'>Home/Mailing</option>
-            <option value="P"'.selected( $typeCode, 'P', false ).'>Permanent</option>
-            </select>';
-        return Hooks::apply_filter('address_type', $select, $typeCode);
-    }
-    
-    /**
-     * Department Type select: shows general list of department types and
-     * if $typeCode is not NULL, shows the department type attached 
-     * to a particular record.
-     * 
-     * @since 1.0.0
-     * @param string $typeCode
-     * @return string Returns the record key if selected is true.
-     */
-    function dept_type_select($typeCode = NULL) {
-        $select = '<select name="deptTypeCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-            <option value="">&nbsp;</option>
-            <option value="'._t('ADMIN').'"'.selected( $typeCode, _t('ADMIN'), false ).'>'._t( 'Administrative' ).'</option>
-            <option value="'._t('ACAD').'"'.selected( $typeCode, _t('ACAD'), false ).'>'._t( 'Academic' ).'</option>
-            </select>';
-        return Hooks::apply_filter('dept_type', $select, $typeCode);
-    }
-    
-	/**
-	 * Acad Level select: shows general list of academic levels and
-	 * if $status is not NULL, shows the academic level attached 
-	 * to a particular record.
-	 * 
-	 * @since 1.0.0
-	 * @param string $status
-	 * @return string Returns the record status if selected is true.
-	 */
-	function address_status_select($status = NULL) {
-		$select = '<select name="addressStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-			<option value="">&nbsp;</option>
-	    	<option value="C"'.selected( $status, 'C', false ).'>Current</option>
-			<option value="I"'.selected( $status, 'I', false ).'>Inactive</option>
-		    </select>';
-		return Hooks::apply_filter('address_status', $select, $status);
-	}
-    
-    /**
-     * Acad Level select: shows general list of academic levels and
-     * if $levelCode is not NULL, shows the academic level attached 
-     * to a particular record.
-     * 
-     * @since 1.0.0
-     * @param string $levelCode
-     * @return string Returns the record key if selected is true.
-     */
-    function acad_level_select($levelCode = null, $readonly = null, $required = '') {
-        $select = '<select name="acadLevelCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true"'.$readonly.$required.'>
-            <option value="">&nbsp;</option>
-            <option value="NA"'.selected( $levelCode, 'NA', false ).'>N/A Not Applicable</option>
-            <option value="CE"'.selected( $levelCode, 'CE', false ).'>CE Continuing Education</option>
-            <option value="UG"'.selected( $levelCode, 'UG', false ).'>UG Undergraduate</option>
-            <option value="GR"'.selected( $levelCode, 'GR', false ).'>GR Graduate</option>
-            <option value="PhD"'.selected( $levelCode, 'PhD', false ).'>PhD Doctorate</option>
-            </select>';
-        return Hooks::apply_filter('acad_level', $select, $levelCode);
-    }
-	
-	/**
-	 * Status dropdown: shows general list of statuses and
-	 * if $status is not NULL, shows the current status 
-	 * for a particular record.
-	 * 
-	 * @since 1.0.0
-	 * @param string $status
-	 * @return string Returns the record key if selected is true.
-	 */
-	function status_select($status = NULL) {
-		$select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-    			<option value="">&nbsp;</option>
-    	    	<option value="A"'.selected( $status, 'A', false ).'>A Active</option>
-    	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
-    			<option value="P"'.selected( $status, 'P', false ).'>P Pending</option>
-    			<option value="O"'.selected( $status, 'O', false ).'>O Obsolete</option>
-		        </select>';
-        return Hooks::apply_filter('status', $select, $status);
-	}
-    
-    /**
-     * Course section select: shows general list of statuses and
-	 * if $status is not NULL, shows the current status 
-	 * for a particular course section record.
-	 * 
-	 * @since 1.0.0
-	 * @param string $status
-	 * @return string Returns the record key if selected is true.
-	 */
-	function course_sec_status_select($status = NULL) {
-		$select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-    			<option value="">&nbsp;</option>
-    	    	<option'.dopt('activate_course_sec').' value="A"'.selected( $status, 'A', false ).'>A Active</option>
-    	    	<option value="I"'.selected( $status, 'I', false ).'>I Inactive</option>
-    			<option value="P"'.selected( $status, 'P', false ).'>P Pending</option>
-    			<option'.dopt('cancel_course_sec').' value="C"'.selected( $status, 'C', false ).'>C Cancel</option>
-    			<option value="O"'.selected( $status, 'O', false ).'>O Obsolete</option>
-		        </select>';
-        return Hooks::apply_filter('status', $select, $status);
-	}
-	
-    /**
-     * Person type select: shows general list of person types and
-     * if $type is not NULL, shows the person type 
-     * for a particular person record.
-     * 
-     * @since 1.0.0
-     * @param string $type
-     * @return string Returns the record type if selected is true.
-     */
-    function person_type_select($type = NULL) {
-        $select = '<select name="personType" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="FAC"'.selected( $type, 'FAC', false ).'>FAC Faculty</option>
-                <option value="ADJ"'.selected( $type, 'ADJ', false ).'>ADJ Adjunct</option>
-                <option value="STA"'.selected( $type, 'STA', false ).'>STA Staff</option>
-                <option value="APL"'.selected( $type, 'APL', false ).'>APL Applicant</option>
-                <option value="STU"'.selected( $type, 'STU', false ).'>STU Student</option>
-                </select>';
-        return Hooks::apply_filter('person_type', $select, $type);
-    }
-	
-	/**
-	 * Course Level dropdown: shows general list of course levels and
-	 * if $levelCode is not NULL, shows the course level attached 
-	 * to a particular record.
-	 * 
-	 * @since 1.0.0
-	 * @param string $levelCode
-	 * @return string Returns the record key if selected is true.
-	 */
-	function course_level_select($levelCode = NULL, $readonly = null) {		
-		$select = '<select name="courseLevelCode" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required'.$readonly.'>
-			<option value="">&nbsp;</option>
-	    	<option value="100"'.selected( $levelCode, '100', false ).'>100 Course Level</option>
-			<option value="200"'.selected( $levelCode, '200', false ).'>200 Course Level</option>
-			<option value="300"'.selected( $levelCode, '300', false ).'>300 Course Level</option>
-			<option value="400"'.selected( $levelCode, '400', false ).'>400 Course Level</option>
-			<option value="500"'.selected( $levelCode, '500', false ).'>500 Course Level</option>
-			<option value="600"'.selected( $levelCode, '600', false ).'>600 Course Level</option>
-			<option value="700"'.selected( $levelCode, '700', false ).'>700 Course Level</option>
-			<option value="800"'.selected( $levelCode, '800', false ).'>800 Course Level</option>
-			<option value="900"'.selected( $levelCode, '900', false ).'>900 Course Level</option>
-		    </select>';
-		return Hooks::apply_filter('course_level', $select, $levelCode);
-	}
-	
-	/**
-     * Instructor method select: shows general list of instructor methods and
-     * if $method is not NULL, shows the instructor method 
-     * for a particular course section.
-     * 
-     * @since 1.0.0
-     * @param string $method
-     * @return string Returns the record method if selected is true.
-     */
-    function instructor_method($method = NULL) {
-        $select = '<select name="instructorMethod" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="' . _t('LEC') . '"'.selected( $method, _t('LEC'), false ).'>' . _t('LEC Lecture') . '</option>
-                <option value="' . _t('LAB') . '"'.selected( $method, _t('LAB'), false ).'>' . _t('LAB Lab') . '</option>
-                <option value="' . _t('SEM') . '"'.selected( $method, _t('SEM'), false ).'>' . _t('SEM Seminar') . '</option>
-                <option value="' . _t('LL') . '"'.selected( $method, _t('LL'), false ).'>' . _t('LL Lecture + Lab') . '</option>
-                <option value="' . _t('LS') . '"'.selected( $method, _t('LS'), false ).'>' . _t('LS Lecture + Seminar') . '</option>
-                <option value="' . _t('SL') . '"'.selected( $method, _t('SL'), false ).'>' . _t('SL Seminar + Lab') . '</option>
-                <option value="' . _t('LLS') . '"'.selected( $method, _t('LLS'), false ).'>' . _t('LLS Lecture + Lab + Seminar') . '</option>
-                </select>';
-        return Hooks::apply_filter('instructor_method', $select, $method);
-    }
-    
-   /**
-     * Student Course section status select: shows general list of course sec statuses and
-     * if $status is not NULL, shows the status 
-     * for a particular student course section record.
-     * 
-     * @since 1.0
-     * @param string $status
-     * @return string Returns the record status if selected is true.
-     */
-    function stu_course_sec_status_select($status = NULL) {
-        $select = '<select name="status" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Add') . '</option>
-                <option value="' . _t('N') . '"'.selected( $status, _t('N'), false ).'>' . _t('N New') . '</option>
-                <option value="' . _t('D') . '"'.selected( $status, _t('D'), false ).'>' . _t('D Drop') . '</option>
-                <option value="' . _t('W') . '"'.selected( $status, _t('W'), false ).'>' . _t('W Withdrawn') . '</option>
-                <option value="' . _t('C') . '"'.selected( $status, _t('C'), false ).'>' . _t('C Cancelled') . '</option>
-                </select>';
-        return Hooks::apply_filter('course_sec_status', $select, $status);
-    }
-    
-    /**
-     * Student program status select: shows general list of student 
-     * statuses and if $status is not NULL, shows the status 
-     * for a particular student program record.
-     * 
-     * @since 1.0.0
-     * @param string $status
-     * @return string Returns the record status if selected is true.
-     */
-    function stu_prog_status_select($status = NULL) {
-        $select = '<select name="currStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="' . _t('A') . '"'.selected( $status, _t('A'), false ).'>' . _t('A Active') . '</option>
-                <option value="' . _t('P') . '"'.selected( $status, _t('P'), false ).'>' . _t('P Potential') . '</option>
-                <option value="' . _t('W') . '"'.selected( $status, _t('W'), false ).'>' . _t('W Withdrawn') . '</option>
-                <option value="' . _t('C') . '"'.selected( $status, _t('C'), false ).'>' . _t('C Changed Mind') . '</option>
-                <option value="' . _t('G') . '"'.selected( $status, _t('G'), false ).'>' . _t('G Graduated') . '</option>
-                </select>';
-        return Hooks::apply_filter('stu_prog_status', $select, $status);
-    }
-    
-    /**
-     * Credit type select: shows general list of credit types and
-     * if $type is not NULL, shows the credit type 
-     * for a particular course or course section record.
-     * 
-     * @since 1.0.0
-     * @param string $type
-     * @return string Returns the record type if selected is true.
-     */
-    function credit_type($type = NULL) {
-        $select = '<select name="status" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="' . _t('I') . '"'.selected( $status, _t('I'), false ).'>' . _t('I Institutional') . '</option>
-                <option value="' . _t('TR') . '"'.selected( $status, _t('TR'), false ).'>' . _t('TR Transfer') . '</option>
-                <option value="' . _t('AP') . '"'.selected( $status, _t('AP'), false ).'>' . _t('AP Advanced Placement') . '</option>
-                <option value="' . _t('X') . '"'.selected( $status, _t('X'), false ).'>' . _t('X Exempt') . '</option>
-                <option value="' . _t('T') . '"'.selected( $status, _t('T'), false ).'>' . _t('T Test') . '</option>
-                </select>';
-        return Hooks::apply_filter('course_sec_status', $select, $status);
-    }
-    
-    /**
-     * Class year select: shows general list of class years and
-     * if $year is not NULL, shows the class year
-     * for a particular student.
-     * 
-     * @since 1.0.0
-     * @param string $year
-     * @return string Returns the record year if selected is true.
-     */
-    function class_year($year = NULL) {
-        $select = '<select name="classYear" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                <option value="">&nbsp;</option>
-                <option value="' . _t('FR') . '"'.selected( $year, _t('FR'), false ).'>' . _t('FR Freshman') . '</option>
-                <option value="' . _t('SO') . '"'.selected( $year, _t('SO'), false ).'>' . _t('SO Sophomore') . '</option>
-                <option value="' . _t('JR') . '"'.selected( $year, _t('JR'), false ).'>' . _t('JR Junior') . '</option>
-                <option value="' . _t('SR') . '"'.selected( $year, _t('SR'), false ).'>' . _t('SR Senior') . '</option>
-                <option value="' . _t('UG') . '"'.selected( $year, _t('UG'), false ).'>' . _t('UG Undergraduate Student') . '</option>
-                <option value="' . _t('GR') . '"'.selected( $year, _t('GR'), false ).'>' . _t('GR Grad Student') . '</option>
-                <option value="' . _t('PhD') . '"'.selected( $year, _t('PhD'), false ).'>' . _t('PhD PhD Student') . '</option>
-                </select>';
-        return Hooks::apply_filter('class_year', $select, $year);
-    }
-    
-    /**
-     * Grading scale: shows general list of letter grades and
-     * if $grade is not NULL, shows the grade
-     * for a particular student course section record
-     * 
-     * @since 1.0.0
-     * @param string $grade
-     * @return string Returns the stu_course_sec grade if selected is true.
-     */
-    function grading_scale($grade = NULL) {
-    	$select = '<select name="grade[]" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>'."\n";
-		$select .= '<option value="">&nbsp;</option>'."\n";
-		$q = DB::inst()->select( "grade_scale","status = '1'" );
-		foreach($q as $r) {
-			$select .= '<option value="' . _h($r['grade']) . '"'.selected( $grade, _h($r['grade']), false ).'>' . _h($r['grade']) . '</option>'."\n";
-		}
-        $select .= '</select>';
-        return Hooks::apply_filter('grading_scale', $select, $grade);
-    }
-	
-	function grades($id,$aID) {
-		$array = [];
-		$bind = [ ":id" => $id,":aID" => $aID ];
-		$q = DB::inst()->select("gradebook","stuID = :id AND assignID = :aID","","*",$bind);
-		foreach($q as $r) {
-			$array[] = $r;
-		}
-        $select = grading_scale(_h($r['grade']));
-        return Hooks::apply_filter('grades', $select);
-    }
-    
 	function stuGrades($id,$aID) {
 		$bind = [ ":id" => $id,":aID" => $aID ];
 		$q = DB::inst()->select("gradebook","stuID = :id AND assignID = :aID","","*",$bind);
@@ -955,47 +652,6 @@ use \eduTrac\Classes\Libraries\Cookies;
 		}
 		return $array;
 	}
-    
-    /**
-     * Admit status: shows general list of admission statuses and
-     * if $status is not NULL, shows the admit status
-     * for a particular applicant.
-     * 
-     * @since 1.0.0
-     * @param string $status
-     * @return string Returns the application admit status if selected is true.
-     */
-    function admit_status_select($status = NULL) {
-        $select = '<select name="admitStatus" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true">
-                <option value="">&nbsp;</option>
-                <option value="' . _t('FF') . '"'.selected( $status, _t('FF'), false ).'>' . _t('FF First Time Freshman') . '</option>
-                <option value="' . _t('TR') . '"'.selected( $status, _t('TR'), false ).'>' . _t('TR Transfer') . '</option>
-                <option value="' . _t('RA') . '"'.selected( $status, _t('RA'), false ).'>' . _t('RA Readmit') . '</option>
-                <option value="' . _t('NA') . '"'.selected( $status, _t('NA'), false ).'>' . _t('NA Non-Applicable') . '</option>
-                </select>';
-        return Hooks::apply_filter('admit_status', $select, $status);
-    }
-	
-	/**
-     * General Ledger type select: shows general list of general 
-	 * ledger types and if $type is not NULL, shows the general 
-	 * ledger type for a particular general ledger record.
-     * 
-     * @since 1.1.5
-     * @param string $type
-     * @return string Returns the record type if selected is true.
-     */
-    function general_ledger_type_select($type = NULL) {
-        $select = '<select name="gl_acct_type" class="selectpicker form-control" data-style="btn-info" data-size="10" data-live-search="true" required>
-                <option value="">&nbsp;</option>
-                <option value="'._t('Asset').'"'.selected( $type, _t('Asset'), false ).'>'._t('Asset').'</option>
-                <option value="'._t('Liability').'"'.selected( $type, _t('Liability'), false ).'>'._t('Liability').'</option>
-                <option value="'._t('Equity').'"'.selected( $type, _t('Equity'), false ).'>'._t('Equity').'</option>
-                <option value="'._t('Revenue').'"'.selected( $type, _t('Revenue'), false ).'>'._t('Revenue').'</option>
-                <option value="'._t('Expense').'"'.selected( $type, _t('Expense'), false ).'>'._t('Expense').'</option>
-                </select>';
-        return Hooks::apply_filter('general_ledger_type', $select, $type);
-    }
 	
 	function rolePerm($id) {
 		$array = [];
@@ -1353,15 +1009,6 @@ use \eduTrac\Classes\Libraries\Cookies;
 	    }
 	}
 	
-	function get_user_avatar($email, $s = 80, $class = '', $d = 'mm', $r = 'g', $img = false) {
-	    $url = 'http://www.gravatar.com/avatar/';
-        $url .= md5( strtolower( trim( $email ) ) );
-        $url .= "?s=200&d=$d&r=$r";
-		$avatarsize = getimagesize($url);
-		$avatar = '<img src="' . $url . '" ' . imgResize($avatarsize[1],  $avatarsize[1], $s) . ' class="'.$class .'" />';
-		return Hooks::apply_filter('user_avatar', $avatar, $email, $s);
-	}
-	
 	function getuserdata($id,$field) {
 		$bind = [ ":id" => $id ];
 		$q = DB::inst()->query( "SELECT 
@@ -1535,20 +1182,25 @@ use \eduTrac\Classes\Libraries\Cookies;
             return ' style="color:red"';
         }
     }
-	
-	function success_update() {
-		$message = '<div class="alert alert-success">';
-				$message .= '<strong>'._t('Success!').'</strong> '._t( 'The record was updated successfully.');
-		$message .= '</div>';
-		return $message;
-	}
-	
-	function error_update() {
-		$message = '<div class="alert alert-danger">';
-				$message .= '<strong>'._t('Error!').'</strong> '._t( 'The system was unable to update the record in the database. Please try again. If the problem persists, contact your system administrator.');
-		$message .= '</div>';
-		return $message;
-	}
+    
+    /**
+	 * Retrieves the grade from student's 
+	 * stu_acad_cred record.
+	 * 
+	 * @since 4.2.3
+	 * @param $code
+	 * @param $term
+	 * @return mixed
+	 */
+    function getAcadCredGrade($code,$term) {
+    	$bind = [ ":code" => $code,":term" => $term ];
+		$q = DB::inst()->select('stu_acad_cred','courseSecCode=:code AND termCode=:term','','grade',$bind);
+		if(count($q) > 0) {
+			foreach($q as $r) {
+				return _h($r['grade']);
+			}
+		}
+    }
 	
 	function percent($num_amount, $num_total) {
 		$count1 = $num_amount / $num_total;

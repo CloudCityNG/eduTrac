@@ -157,7 +157,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"><?=_t( 'Grade' );?></label>
                             <div class="col-md-8">
-                                <input type="text" name="grade"<?=sio();?> value="<?=_h($this->viewAcadCred[0]['grade']);?>" class="form-control" />
+                                <input type="text" name="grade"<?=sio();?> value="<?=getAcadCredGrade(_h($this->viewAcadCred[0]['courseSecCode']),_h($this->viewAcadCred[0]['termCode']));?>" class="form-control" />
                             </div>
                         </div>
                         <!-- // Group END -->

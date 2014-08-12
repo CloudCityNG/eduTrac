@@ -342,26 +342,15 @@ class StudentModel {
                         a.status,
                         a.termCode,
                         a.courseSecCode,
-                        b.grade,
-                        c.secShortTitle 
+                        b.secShortTitle 
                     FROM 
                         stu_course_sec a 
                     LEFT JOIN 
-                        stu_acad_cred b 
+                        course_sec b 
                     ON 
-                        a.courseSecCode = b.courseSecCode 
-                    LEFT JOIN 
-                        course_sec c 
-                    ON 
-                        a.courseSecCode = c.courseSecCode 
+                        a.courseSecCode = b.courseSecCode AND a.termCode = b.termCode 
                     WHERE 
                         a.stuID = :id 
-                    AND 
-                    	a.stuID = b.stuID 
-                    AND 
-                        a.termCode = b.termCode 
-                    AND 
-                    	a.termCode = c.termCode 
                     GROUP BY 
                     	a.stuID,a.courseSecCode,a.termCode",
                     $bind 
@@ -393,8 +382,7 @@ class StudentModel {
                         d.courseSecCode,
                         d.status,
                         d.statusDate,
-                        d.statusTime,
-                        e.grade 
+                        d.statusTime 
                     FROM 
                         course_sec a 
                     LEFT JOIN 
@@ -408,19 +396,9 @@ class StudentModel {
                     LEFT JOIN 
                         stu_course_sec d 
                     ON 
-                        a.courseSecCode = d.courseSecCode 
-                    LEFT JOIN 
-                        stu_acad_cred e 
-                    ON 
-                        a.courseSecCode = e.courseSecCode 
+                        a.courseSecCode = d.courseSecCode AND a.termCode = d.termCode 
                     WHERE 
-                        d.id = :id 
-                    AND 
-                        a.termCode = d.termCode 
-                    AND 
-                    	a.termCode = e.termCode 
-                    AND 
-                    	d.stuID = e.stuID",
+                        d.id = :id",
                     $bind 
         );
         foreach($q as $r) {

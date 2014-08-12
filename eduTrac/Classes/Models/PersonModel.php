@@ -300,7 +300,7 @@ class PersonModel {
         }
         
         $date = date("Y-m-d");
-        $bind1 = array( 
+        $person = array( 
                     "uname" => Util::_trim($data['uname']),"personType" => $data['personType'],
                     "prefix" => $data['prefix'],"fname" => $data['fname'],"lname" => $data['lname'],
                     "mname" => $data['mname'],"email" => Util::_trim($data['email']),"ssn" => (int)$data['ssn'],
@@ -310,10 +310,10 @@ class PersonModel {
                     "password" => $password,"approvedDate" => $date,"approvedBy" => $this->_auth->getPersonField('personID')
                     );
                     
-        $q1 = DB::inst()->insert( "person", $bind1 );
+        $q1 = DB::inst()->insert( "person", $person );
         $ID = DB::inst()->lastInsertId('personID');
                     
-        $bind2 = array( 
+        $address = array( 
                     "personID" => $ID, "address1" => $data['address1'],"address2" => $data['address2'],
                     "city" => $data['city'],"state" => $data['state'],"addressType" => "P",
                     "zip" => $data['zip'],"country" => $data['country'],
@@ -322,11 +322,13 @@ class PersonModel {
                     "email1" => Util::_trim($data['email']) 
                     );
                     
-        $q2 = DB::inst()->insert( "address", $bind2 );
+        $q2 = DB::inst()->insert( "address", $address );
         
         if(!$q1) {
             redirect( BASE_URL . 'error/save_data/' );
         } else {
+        	Hooks::do_action( 'create_person_record', $person );
+			Hooks::do_action( 'create_person_address_record', $address );
             $this->_log->setLog('New Record','Person',get_name($ID),$this->_uname);
             redirect( BASE_URL . 'person/view/' . $ID . '/' . bm() );
         }
