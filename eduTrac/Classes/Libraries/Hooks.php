@@ -257,7 +257,7 @@ class Hooks {
      * @link http://api.7mediaws.org/9/
      * @access public
      * @since 0.1
-     * @param string $tag The action hook to which the function to be removed is hooked.
+     * @param string $hook The action hook to which the function to be removed is hooked.
      * @param callback $function_to_remove The name of the function which should be removed.
      * @param int $priority optional The priority of the function (default: 10).
      * @return boolean Whether the function is removed.
@@ -272,7 +272,7 @@ class Hooks {
      * @link http://api.7mediaws.org/a/
      * @access public
      * @since 0.1
-     * @param string $tag The action to remove hooks from.
+     * @param string $hook The action to remove hooks from.
      * @param int $priority The priority number to remove them from.
      * @return bool True when finished.
      */
@@ -541,7 +541,7 @@ class Hooks {
      * remove_all_filters Remove all of the hooks from a filter.
      * @access public
      * @since 0.1
-     * @param string $tag The filter to remove hooks from.
+     * @param string $hook The filter to remove hooks from.
      * @param int $priority The priority number to remove.
      * @return bool True when finished.
      */
@@ -687,6 +687,7 @@ class Hooks {
 	/**
  	 * Register a plugin component page
 	 * 
+	 * @since 4.2.1
 	 * @param string $slug
 	 * @param string $title
 	 * @param string $function
