@@ -1,0 +1,2 @@
+custom-email-filter
+1.0.0

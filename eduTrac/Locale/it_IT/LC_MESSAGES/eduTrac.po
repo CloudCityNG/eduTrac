@@ -1,0 +1,4779 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eduTrac\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-26 12:01-0500\n"
+"PO-Revision-Date: 2014-07-26 12:01-0500\n"
+"Last-Translator: Joshua Parker <josh@joshparker.us>\n"
+"Language-Team: 7 Media Web Solutions, LLC <email@7mediaws.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"X-Poedit-KeywordsList: _t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: ../..\n"
+"X-Poedit-SearchPath-2: ../../..\n"
+"X-Poedit-SearchPath-3: ../../../..\n"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:80
+msgid "N/A"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_filters_helper.php:100
+#, fuzzy
+msgid "Active Students"
+msgstr "Vedi Studente"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:121
+#, fuzzy
+msgid "Active Courses"
+msgstr "Vedi Corso"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:142
+#, fuzzy
+msgid "Active Programs"
+msgstr "Programma Accademico"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:228
+msgid "Update!"
+msgstr "Update!"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:228
+#, fuzzy
+msgid "Hey admin, there is a new eduTrac Community update."
+msgstr "Ehi admin, c'è un nuovo aggiornamento eduTrac."
+
+#: ../../../Application/Helpers/ext_filters_helper.php:228
+msgid " Click here"
+msgstr "Clicca qui"
+
+#: ../../../Application/Helpers/ext_filters_helper.php:228
+msgid "to download it. Also feel free to check out the"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_filters_helper.php:228
+msgid "changelog"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_filters_helper.php:236
+#, fuzzy
+msgid "Changelog"
+msgstr "Cambia"
+
+#: ../../../Application/Helpers/ext_installer_helper.php:32
+msgid "Minimum PHP version required in order to run eduTrac ERP is PHP 5.4. Your PHP version: "
+msgstr ""
+
+#: ../../../Application/Helpers/ext_installer_helper.php:35
+msgid "Your PHP version is "
+msgstr ""
+
+#: ../../../Application/Helpers/ext_installer_helper.php:46
+msgid "Your memory limit is: "
+msgstr ""
+
+#: ../../../Application/Helpers/ext_installer_helper.php:49
+msgid "Your memory is too low to complete the installation. Minimal value is 64MB, and you have it set to "
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:678
+msgid "ADMIN"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:678
+msgid "Administrative"
+msgstr "Amministrazione"
+
+#: ../../../Application/Helpers/ext_system_helper.php:679
+msgid "ACAD"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:679
+#, fuzzy
+msgid "Academic"
+msgstr "Anno Accademico"
+
+#: ../../../Application/Helpers/ext_system_helper.php:822
+msgid "LEC"
+msgstr "LEC Lettura"
+
+#: ../../../Application/Helpers/ext_system_helper.php:822
+msgid "LEC Lecture"
+msgstr "LEC Lettura"
+
+#: ../../../Application/Helpers/ext_system_helper.php:823
+msgid "LAB"
+msgstr "LL Lettura + Lab"
+
+#: ../../../Application/Helpers/ext_system_helper.php:823
+msgid "LAB Lab"
+msgstr "LL Lettura + Lab"
+
+#: ../../../Application/Helpers/ext_system_helper.php:824
+msgid "SEM"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:824
+msgid "SEM Seminar"
+msgstr "SEM Seminario"
+
+#: ../../../Application/Helpers/ext_system_helper.php:825
+msgid "LL"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:825
+msgid "LL Lecture + Lab"
+msgstr "LL Lettura + Lab"
+
+#: ../../../Application/Helpers/ext_system_helper.php:826
+msgid "LS"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:826
+msgid "LS Lecture + Seminar"
+msgstr "LS Lettura + Seminario"
+
+#: ../../../Application/Helpers/ext_system_helper.php:827
+msgid "SL"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:827
+msgid "SL Seminar + Lab"
+msgstr "SL Seminario + Lab"
+
+#: ../../../Application/Helpers/ext_system_helper.php:828
+msgid "LLS"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:828
+msgid "LLS Lecture + Lab + Seminar"
+msgstr "LLS Lettura + Lab + Seminario"
+
+#: ../../../Application/Helpers/ext_system_helper.php:845
+#: ../../../Application/Helpers/ext_system_helper.php:866
+msgid "A"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:845
+msgid "A Add"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:846
+msgid "N"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:846
+msgid "N New"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:847
+msgid "D"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:847
+msgid "D Drop"
+msgstr "D Scendere"
+
+#: ../../../Application/Helpers/ext_system_helper.php:848
+#: ../../../Application/Helpers/ext_system_helper.php:868
+msgid "W"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:848
+#: ../../../Application/Helpers/ext_system_helper.php:868
+msgid "W Withdrawn"
+msgstr "W Ritirato"
+
+#: ../../../Application/Helpers/ext_system_helper.php:849
+#: ../../../Application/Helpers/ext_system_helper.php:869
+msgid "C"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:849
+msgid "C Cancelled"
+msgstr "C Cancellato"
+
+#: ../../../Application/Helpers/ext_system_helper.php:866
+msgid "A Active"
+msgstr "A Attivo"
+
+#: ../../../Application/Helpers/ext_system_helper.php:867
+msgid "P"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:867
+msgid "P Potential"
+msgstr "P Potenziale"
+
+#: ../../../Application/Helpers/ext_system_helper.php:869
+msgid "C Changed Mind"
+msgstr "C Cambia decisione"
+
+#: ../../../Application/Helpers/ext_system_helper.php:870
+msgid "G"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:870
+msgid "G Graduated"
+msgstr "G Laureato"
+
+#: ../../../Application/Helpers/ext_system_helper.php:887
+msgid "I"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:887
+msgid "I Institutional"
+msgstr "I istituzionale"
+
+#: ../../../Application/Helpers/ext_system_helper.php:888
+#: ../../../Application/Helpers/ext_system_helper.php:972
+msgid "TR"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:888
+#: ../../../Application/Helpers/ext_system_helper.php:972
+msgid "TR Transfer"
+msgstr "TR Trasferire"
+
+#: ../../../Application/Helpers/ext_system_helper.php:889
+msgid "AP"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:889
+msgid "AP Advanced Placement"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:890
+msgid "X"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:890
+msgid "X Exempt"
+msgstr "X Esente"
+
+#: ../../../Application/Helpers/ext_system_helper.php:891
+msgid "T"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:891
+msgid "T Test"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:908
+msgid "FR"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:908
+msgid "FR Freshman"
+msgstr "FR Matricola"
+
+#: ../../../Application/Helpers/ext_system_helper.php:909
+msgid "SO"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:909
+msgid "SO Sophomore"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:910
+msgid "JR"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:910
+msgid "JR Junior"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:911
+msgid "SR"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:911
+msgid "SR Senior"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:912
+msgid "UG"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:912
+msgid "UG Undergraduate Student"
+msgstr "UG Studente Universitario"
+
+#: ../../../Application/Helpers/ext_system_helper.php:913
+msgid "GR"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:913
+msgid "GR Grad Student"
+msgstr "GR Grado Studente"
+
+#: ../../../Application/Helpers/ext_system_helper.php:914
+msgid "PhD"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:914
+msgid "PhD PhD Student"
+msgstr "PhD PhD Studente"
+
+#: ../../../Application/Helpers/ext_system_helper.php:971
+msgid "FF"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:971
+msgid "FF First Time Freshman"
+msgstr "FF Prima Immatricolazione"
+
+#: ../../../Application/Helpers/ext_system_helper.php:973
+msgid "RA"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:973
+msgid "RA Readmit"
+msgstr "RA Riammesso"
+
+#: ../../../Application/Helpers/ext_system_helper.php:974
+msgid "NA"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:974
+msgid "NA Non-Applicable"
+msgstr "NA Non Applicabile"
+
+#: ../../../Application/Helpers/ext_system_helper.php:991
+msgid "Asset"
+msgstr "Attività"
+
+#: ../../../Application/Helpers/ext_system_helper.php:992
+msgid "Liability"
+msgstr "Responsabilità"
+
+#: ../../../Application/Helpers/ext_system_helper.php:993
+msgid "Equity"
+msgstr "Equità"
+
+#: ../../../Application/Helpers/ext_system_helper.php:994
+msgid "Revenue"
+msgstr "Reddito"
+
+#: ../../../Application/Helpers/ext_system_helper.php:995
+msgid "Expense"
+msgstr "Spese"
+
+#: ../../../Application/Helpers/ext_system_helper.php:1541
+msgid "Success!"
+msgstr ""
+
+#: ../../../Application/Helpers/ext_system_helper.php:1541
+#, fuzzy
+msgid "The record was updated successfully."
+msgstr "Il record richiesto è stato aggiornato con successo."
+
+#: ../../../Application/Helpers/ext_system_helper.php:1548
+msgid "Error!"
+msgstr "Errore!"
+
+#: ../../../Application/Helpers/ext_system_helper.php:1548
+#, fuzzy
+msgid "The system was unable to update the record in the database. Please try again. If the problem persists, contact your system administrator."
+msgstr "Il sistema è stato in grado di scrivere il vostro aggiornamento al database. Si prega di tornare indietro, riprovare oppure contattare l'amministratore di sistema se il problema persiste."
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:29
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:101
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:40
+msgid "You are here"
+msgstr "Tu sei qui"
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:30
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:102
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:41
+msgid "Dashboard"
+msgstr ""
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:32
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:104
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:43
+msgid "Plugins"
+msgstr ""
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:34
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:37
+msgid "Custom Email Filter"
+msgstr ""
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:59
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:136
+msgid "From Name:"
+msgstr ""
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:69
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:131
+msgid "From Email:"
+msgstr ""
+
+#: ../../../Application/Plugins/custom-email-filter/custom-email-filter.plugin.php:83
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:188
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:233
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:91
+msgid "Submit"
+msgstr "Invia"
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:106
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:109
+msgid "eduTrac SMTP Settings"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:141
+msgid "Host:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:146
+msgid "SMTP Secure:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:158
+msgid "Port:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:163
+msgid "SMTP Authentication:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:169
+msgid "Username:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:174
+msgid "Password:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:204
+msgid "Send Test Email"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:206
+msgid "To:"
+msgstr ""
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:211
+msgid "Subject:"
+msgstr "Materie"
+
+#: ../../../Application/Plugins/et-smtp/et-smtp.plugin.php:216
+msgid "Message:"
+msgstr "Messaggio:"
+
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:45
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:48
+#, fuzzy
+msgid "Moodle Settings"
+msgstr "Sezione miei corsi"
+
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:70
+msgid "Moodle API Token:"
+msgstr ""
+
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:80
+msgid "Moodle URL:"
+msgstr ""
+
+#: ../../../Application/Plugins/moodle/moodle.plugin.php:134
+#, fuzzy
+msgid "Moodle Category"
+msgstr "Categoria"
+
+#: ../../../Application/Views/footer.php:36
+msgid "&copy; 2013"
+msgstr "&copy; 2014"
+
+#: ../../../Application/Views/header.php:127
+msgid "Screens"
+msgstr "Gestione"
+
+#: ../../../Application/Views/header.php:133
+msgid "General Settings"
+msgstr ""
+
+#: ../../../Application/Views/header.php:134
+#, fuzzy
+msgid "Registration Settings"
+msgstr "Prenotazione"
+
+#: ../../../Application/Views/header.php:135
+#: ../../../Application/Views/cron/add.php:35
+#: ../../../Application/Views/cron/index.php:37
+#: ../../../Application/Views/cron/index.php:40
+#: ../../../Application/Views/cron/view.php:47
+msgid "Cron Jobs"
+msgstr ""
+
+#: ../../../Application/Views/header.php:136
+msgid "(MPRM) Manage Perm"
+msgstr ""
+
+#: ../../../Application/Views/header.php:137
+msgid "(MRLE) Manage Role"
+msgstr ""
+
+#: ../../../Application/Views/header.php:138
+msgid "Error Log"
+msgstr ""
+
+#: ../../../Application/Views/header.php:143
+msgid "Forms"
+msgstr "Moduli"
+
+#: ../../../Application/Views/header.php:145
+msgid "(SEM) - Semester"
+msgstr "(SEM) - Semestre"
+
+#: ../../../Application/Views/header.php:146
+msgid "(TERM) - Term"
+msgstr "(TERM) - Sessione"
+
+#: ../../../Application/Views/header.php:147
+msgid "(AYR) - Academic Year"
+msgstr "(AYR) - Anno Accademico"
+
+#: ../../../Application/Views/header.php:148
+msgid "(DEPT) - Department"
+msgstr "(DEPT) - Dipartimento"
+
+#: ../../../Application/Views/header.php:149
+msgid "(SUBJ) - Subject"
+msgstr "(SUBJ) - Materie"
+
+#: ../../../Application/Views/header.php:150
+#, fuzzy
+msgid "(SLR) - Student Load Rules"
+msgstr "(SPRO) Profilo Studente"
+
+#: ../../../Application/Views/header.php:151
+msgid "(DEG) - Degree"
+msgstr "(DEG) - Laurea"
+
+#: ../../../Application/Views/header.php:152
+msgid "(MAJR) - Major"
+msgstr ""
+
+#: ../../../Application/Views/header.php:153
+msgid "(MINR) - Minor"
+msgstr ""
+
+#: ../../../Application/Views/header.php:154
+msgid "(CCD) - CCD"
+msgstr ""
+
+#: ../../../Application/Views/header.php:155
+msgid "(SPEC) - Specialization"
+msgstr "(SPEC) - Specializzazione"
+
+#: ../../../Application/Views/header.php:156
+msgid "(CIP) - CIP"
+msgstr ""
+
+#: ../../../Application/Views/header.php:157
+#, fuzzy
+msgid "(RSTR) - Restriction Codes"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/header.php:158
+msgid "(LOC) - Location"
+msgstr "(LOC) - Posizione"
+
+#: ../../../Application/Views/header.php:159
+msgid "(BLDG) - Building"
+msgstr ""
+
+#: ../../../Application/Views/header.php:160
+msgid "(ROOM) - Room"
+msgstr "(ROOM) - Aula"
+
+#: ../../../Application/Views/header.php:161
+msgid "(SCH) - School"
+msgstr "(SCH) - Scuola"
+
+#: ../../../Application/Views/header.php:162
+msgid "(GRSC) - Grade Scale"
+msgstr ""
+
+#: ../../../Application/Views/header.php:166
+msgid "FTP"
+msgstr ""
+
+#: ../../../Application/Views/header.php:168
+msgid "Importer"
+msgstr ""
+
+#: ../../../Application/Views/header.php:170
+msgid "Online Documentation"
+msgstr "Documentazione Online"
+
+#: ../../../Application/Views/header.php:173
+msgid "Human Resources"
+msgstr ""
+
+#: ../../../Application/Views/header.php:175
+msgid "Employees"
+msgstr ""
+
+#: ../../../Application/Views/header.php:176
+#, fuzzy
+msgid "Pay Grades"
+msgstr "Mio Livello"
+
+#: ../../../Application/Views/header.php:177
+#, fuzzy
+msgid "Job Titles"
+msgstr "Titolo lungo"
+
+#: ../../../Application/Views/header.php:184
+msgid "SQL"
+msgstr ""
+
+#: ../../../Application/Views/header.php:186
+msgid "Create Query"
+msgstr ""
+
+#: ../../../Application/Views/header.php:187
+msgid "Queries"
+msgstr ""
+
+#: ../../../Application/Views/header.php:188
+msgid "SQL Interface"
+msgstr ""
+
+#: ../../../Application/Views/header.php:193
+#, fuzzy
+msgid "Academics"
+msgstr "Anno Accademico"
+
+#: ../../../Application/Views/header.php:196
+#: ../../../Application/Views/application/add.php:184
+#: ../../../Application/Views/application/view.php:188
+msgid "Academic Program"
+msgstr "Programma Accademico"
+
+#: ../../../Application/Views/header.php:198
+msgid "(PROG) - Program"
+msgstr "(PROG) - Programma"
+
+#: ../../../Application/Views/header.php:199
+msgid "(APRG) - New Program"
+msgstr "(APRG) - Nuovo Programma"
+
+#: ../../../Application/Views/header.php:204
+msgid "Course"
+msgstr "Corso"
+
+#: ../../../Application/Views/header.php:206
+msgid "(CRSE) - Course"
+msgstr "(CRSE) - Corso"
+
+#: ../../../Application/Views/header.php:207
+msgid "(ACRS) - New Course"
+msgstr "(ACRS) - Nuovo Corso"
+
+#: ../../../Application/Views/header.php:212
+msgid "Course Section"
+msgstr "Corso sezione"
+
+#: ../../../Application/Views/header.php:214
+msgid "(SECT) - Section"
+msgstr "(SECT) - Sezione"
+
+#: ../../../Application/Views/header.php:215
+msgid "(RGN) - Register"
+msgstr "(RGN) - Registra"
+
+#: ../../../Application/Views/header.php:216
+msgid "(BRGN) - Batch Register"
+msgstr "(BRGN) - Batch Registra"
+
+#: ../../../Application/Views/header.php:217
+#, fuzzy
+msgid "(SROS) - Student Roster"
+msgstr "(SPRO) Profilo Studente"
+
+#: ../../../Application/Views/header.php:218
+#, fuzzy
+msgid "Course Catalogs"
+msgstr "Codice Corso"
+
+#: ../../../Application/Views/header.php:219
+msgid "My Course Sections"
+msgstr "Sezione miei corsi"
+
+#: ../../../Application/Views/header.php:226
+#: ../../../Application/Views/application/inst_attended.php:94
+#: ../../../Application/Views/application/view.php:276
+msgid "Institution"
+msgstr "Istituzione"
+
+#: ../../../Application/Views/header.php:228
+msgid "(INST) - Institution"
+msgstr "(INST) - Istituzione"
+
+#: ../../../Application/Views/header.php:229
+msgid "(AINST) - New Institution"
+msgstr "(AINST) - Nuova Istituzione"
+
+#: ../../../Application/Views/header.php:234
+msgid "Communication Mgmt"
+msgstr ""
+
+#: ../../../Application/Views/header.php:236
+msgid "Email Templates"
+msgstr ""
+
+#: ../../../Application/Views/header.php:237
+msgid "Add Email Template"
+msgstr ""
+
+#: ../../../Application/Views/header.php:238
+#, fuzzy
+msgid "Schedule Email"
+msgstr "Orario"
+
+#: ../../../Application/Views/header.php:239
+msgid "Email Queue"
+msgstr ""
+
+#: ../../../Application/Views/header.php:244
+msgid "NSLC"
+msgstr ""
+
+#: ../../../Application/Views/header.php:246
+msgid "(NSCP) Purge"
+msgstr ""
+
+#: ../../../Application/Views/header.php:247
+msgid "(NSCS) Setup"
+msgstr ""
+
+#: ../../../Application/Views/header.php:248
+#, fuzzy
+msgid "(NSCX) Extraction"
+msgstr "(SECT) - Sezione"
+
+#: ../../../Application/Views/header.php:249
+#, fuzzy
+msgid "(NSCE) Verification"
+msgstr "(SECT) - Sezione"
+
+#: ../../../Application/Views/header.php:250
+#, fuzzy
+msgid "(NSCC) Correction"
+msgstr "(SECT) - Sezione"
+
+#: ../../../Application/Views/header.php:251
+msgid "(NSCT) NSLC File"
+msgstr ""
+
+#: ../../../Application/Views/header.php:257
+msgid "Person Management"
+msgstr ""
+
+#: ../../../Application/Views/header.php:260
+msgid "Person"
+msgstr "Utente"
+
+#: ../../../Application/Views/header.php:262
+msgid "(NAE) Search"
+msgstr "(NAE) Cerca"
+
+#: ../../../Application/Views/header.php:263
+msgid "(APER) Add Person"
+msgstr "(APER) Add Utente"
+
+#: ../../../Application/Views/header.php:267
+msgid "(STAF) Staff"
+msgstr "(STAF) Staff"
+
+#: ../../../Application/Views/header.php:270
+msgid "Student"
+msgstr "Studente"
+
+#: ../../../Application/Views/header.php:272
+msgid "(SPRO) Student Profile"
+msgstr "(SPRO) Profilo Studente"
+
+#: ../../../Application/Views/header.php:273
+msgid "Graduate Student(s)"
+msgstr "Studente(s) Laureato"
+
+#: ../../../Application/Views/header.php:274
+msgid "Generate Transcript"
+msgstr "Genera Trascrizione"
+
+#: ../../../Application/Views/header.php:281
+#: ../../../Application/Views/application/index.php:36
+msgid "Application"
+msgstr "Applicazione"
+
+#: ../../../Application/Views/header.php:283
+msgid "(APPL) Application"
+msgstr "(APPL) Application"
+
+#: ../../../Application/Views/header.php:284
+#: ../../../Application/Views/application/inst_attended.php:56
+#: ../../../Application/Views/application/inst_attended.php:59
+#, fuzzy
+msgid "Institution Attended"
+msgstr "Istituzione frequentata"
+
+#: ../../../Application/Views/header.php:288
+msgid "Student Portal"
+msgstr "Portale Studente"
+
+#: ../../../Application/Views/header.php:319
+msgid "Profile"
+msgstr "Profilo"
+
+#: ../../../Application/Views/header.php:319
+msgid "edit"
+msgstr "Edita"
+
+#: ../../../Application/Views/header.php:330
+msgid "Switch Back to"
+msgstr "Tornare alla"
+
+#: ../../../Application/Views/header.php:334
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Gestione"
+
+#: ../../../Application/Views/header.php:338
+msgid "Sign Out"
+msgstr "Esci"
+
+#: ../../../Application/Views/application/add.php:35
+#: ../../../Application/Views/application/index.php:39
+#: ../../../Application/Views/application/inst_attended.php:54
+#: ../../../Application/Views/application/view.php:35
+msgid "Search Application"
+msgstr "Cerca Applicazione"
+
+#: ../../../Application/Views/application/add.php:37
+#: ../../../Application/Views/application/add.php:40
+msgid "Create Application"
+msgstr "Crea Applicazione"
+
+#: ../../../Application/Views/application/add.php:51
+#: ../../../Application/Views/application/inst_attended.php:70
+#: ../../../Application/Views/application/view.php:51
+msgid "Indicates field is required."
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:65
+#: ../../../Application/Views/application/index.php:70
+#: ../../../Application/Views/application/view.php:65
+msgid "Person ID"
+msgstr "Utente ID"
+
+#: ../../../Application/Views/application/add.php:74
+#: ../../../Application/Views/application/view.php:74
+#, fuzzy
+msgid "First/Mid/Last Name"
+msgstr "Cognome"
+
+#: ../../../Application/Views/application/add.php:89
+#: ../../../Application/Views/application/view.php:89
+#, fuzzy
+msgid "Permanent Address"
+msgstr "Nome e Indirizzo"
+
+#: ../../../Application/Views/application/add.php:99
+#: ../../../Application/Views/application/view.php:99
+msgid "DOB"
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:118
+#: ../../../Application/Views/application/view.php:118
+msgid "Age"
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:131
+#: ../../../Application/Views/application/view.php:131
+msgid "Gender"
+msgstr "Sesso"
+
+#: ../../../Application/Views/application/add.php:140
+#: ../../../Application/Views/application/view.php:140
+#, fuzzy
+msgid "Phone Number"
+msgstr "Numero Linea"
+
+#: ../../../Application/Views/application/add.php:149
+#: ../../../Application/Views/application/view.php:149
+#, fuzzy
+msgid "Email Address"
+msgstr "Edita Indirizzo"
+
+#: ../../../Application/Views/application/add.php:172
+#: ../../../Application/Views/application/view.php:172
+#, fuzzy
+msgid "Application Date"
+msgstr "Applicazione"
+
+#: ../../../Application/Views/application/add.php:196
+#: ../../../Application/Views/application/index.php:72
+#: ../../../Application/Views/application/view.php:200
+msgid "Start Term"
+msgstr "Inzio sessione"
+
+#: ../../../Application/Views/application/add.php:208
+#: ../../../Application/Views/application/view.php:212
+msgid "Admit Status"
+msgstr "Stato Ammissione"
+
+#: ../../../Application/Views/application/add.php:223
+#: ../../../Application/Views/application/view.php:227
+msgid "PSAT Verbal/Math"
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:235
+#: ../../../Application/Views/application/view.php:239
+msgid "SAT Verbal/Math"
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:247
+#: ../../../Application/Views/application/view.php:251
+msgid "ACT English/Math"
+msgstr ""
+
+#: ../../../Application/Views/application/add.php:270
+#: ../../../Application/Views/application/inst_attended.php:183
+#: ../../../Application/Views/application/view.php:394
+#: ../../../Application/Views/course/addnl_info.php:138
+#: ../../../Application/Views/course/view.php:258
+msgid "Cancel"
+msgstr "Cancella"
+
+#: ../../../Application/Views/application/index.php:71
+msgid "Name"
+msgstr "Nome"
+
+#: ../../../Application/Views/application/index.php:73
+#: ../../../Application/Views/application/index.php:87
+#: ../../../Application/Views/course/index.php:74
+#: ../../../Application/Views/course/index.php:90
+#: ../../../Application/Views/cron/index.php:89
+msgid "Actions"
+msgstr "Azioni"
+
+#: ../../../Application/Views/application/index.php:90
+#: ../../../Application/Views/course/index.php:93
+#: ../../../Application/Views/cron/index.php:92
+msgid "Toggle Dropdown"
+msgstr ""
+
+#: ../../../Application/Views/application/index.php:93
+#: ../../../Application/Views/course/index.php:96
+#: ../../../Application/Views/cron/index.php:95
+#, fuzzy
+msgid "View"
+msgstr "Vedi CCD"
+
+#: ../../../Application/Views/application/index.php:95
+#, fuzzy
+msgid "Create Student"
+msgstr "Studente(s) Laureato"
+
+#: ../../../Application/Views/application/index.php:121
+#, fuzzy
+msgid "Application Search"
+msgstr "Applicazione"
+
+#: ../../../Application/Views/application/index.php:131
+#, fuzzy
+msgid "Close"
+msgstr "Corso"
+
+#: ../../../Application/Views/application/inst_attended.php:84
+#, fuzzy
+msgid "Applicant ID"
+msgstr "Applicazione"
+
+#: ../../../Application/Views/application/inst_attended.php:106
+#, fuzzy
+msgid "Attend From Date"
+msgstr "Frequenta da Data"
+
+#: ../../../Application/Views/application/inst_attended.php:118
+#, fuzzy
+msgid "Attend To Date"
+msgstr "Frequenta a Data"
+
+#: ../../../Application/Views/application/inst_attended.php:136
+#: ../../../Application/Views/application/view.php:279
+msgid "Major"
+msgstr ""
+
+#: ../../../Application/Views/application/inst_attended.php:145
+#: ../../../Application/Views/application/view.php:280
+msgid "GPA"
+msgstr ""
+
+#: ../../../Application/Views/application/inst_attended.php:154
+#: ../../../Application/Views/application/view.php:281
+msgid "Degree"
+msgstr "Laurea"
+
+#: ../../../Application/Views/application/inst_attended.php:163
+#, fuzzy
+msgid "Conferral Date"
+msgstr "Dati Livello"
+
+#: ../../../Application/Views/application/view.php:37
+#: ../../../Application/Views/application/view.php:40
+#, fuzzy
+msgid "View Application"
+msgstr "Applicazione"
+
+#: ../../../Application/Views/application/view.php:277
+#, fuzzy
+msgid "From Date"
+msgstr "Frequenta da Data"
+
+#: ../../../Application/Views/application/view.php:278
+#, fuzzy
+msgid "To Date"
+msgstr "Frequentato a Data"
+
+#: ../../../Application/Views/application/view.php:282
+msgid "Grad Date"
+msgstr "Dati Livello"
+
+#: ../../../Application/Views/application/view.php:283
+#: ../../../Application/Views/cron/index.php:57
+msgid "Action"
+msgstr "Azione"
+
+#: ../../../Application/Views/course/add.php:38
+#: ../../../Application/Views/course/addnl_info.php:45
+#: ../../../Application/Views/course/index.php:39
+#: ../../../Application/Views/course/view.php:40
+msgid "Search Course"
+msgstr "Cerca Corso"
+
+#: ../../../Application/Views/course/add.php:40
+msgid "Create Course"
+msgstr "Crea Corso"
+
+#: ../../../Application/Views/course/add.php:43
+msgid "Add Course"
+msgstr "Add Corso"
+
+#: ../../../Application/Views/course/add.php:54
+#: ../../../Application/Views/course/addnl_info.php:63
+#: ../../../Application/Views/course/view.php:56
+#: ../../../Application/Views/cron/add.php:51
+#: ../../../Application/Views/cron/view.php:63
+msgid "Indicates field is required"
+msgstr ""
+
+#: ../../../Application/Views/course/add.php:67
+#: ../../../Application/Views/course/view.php:69
+msgid "Department"
+msgstr "Dipartimento"
+
+#: ../../../Application/Views/course/add.php:79
+#: ../../../Application/Views/course/view.php:81
+msgid "Subject"
+msgstr "Materie"
+
+#: ../../../Application/Views/course/add.php:91
+#: ../../../Application/Views/course/view.php:102
+msgid "Course Level"
+msgstr "Livello Corso"
+
+#: ../../../Application/Views/course/add.php:100
+#: ../../../Application/Views/course/index.php:70
+#: ../../../Application/Views/course/view.php:111
+msgid "Short Title"
+msgstr "Titolo breve"
+
+#: ../../../Application/Views/course/add.php:107
+#: ../../../Application/Views/course/view.php:120
+msgid "Long Title"
+msgstr "Titolo lungo"
+
+#: ../../../Application/Views/course/add.php:114
+#: ../../../Application/Views/course/view.php:93
+msgid "Course Number"
+msgstr "Numero Corso"
+
+#: ../../../Application/Views/course/add.php:121
+#: ../../../Application/Views/course/index.php:72
+#: ../../../Application/Views/course/view.php:129
+msgid "Effective Date"
+msgstr "Data effettiva"
+
+#: ../../../Application/Views/course/add.php:133
+#: ../../../Application/Views/course/index.php:73
+#: ../../../Application/Views/course/view.php:141
+msgid "End Date"
+msgstr "Data fine"
+
+#: ../../../Application/Views/course/add.php:151
+#: ../../../Application/Views/course/view.php:159
+msgid "Credits"
+msgstr "Crediti"
+
+#: ../../../Application/Views/course/add.php:158
+#: ../../../Application/Views/course/view.php:168
+msgid "Academic Level"
+msgstr "Livello Accademico"
+
+#: ../../../Application/Views/course/add.php:167
+#: ../../../Application/Views/course/index.php:71
+#: ../../../Application/Views/course/view.php:177
+msgid "Status"
+msgstr "Stato"
+
+#: ../../../Application/Views/course/add.php:176
+#: ../../../Application/Views/course/view.php:186
+msgid "Status Date"
+msgstr "Data Stato"
+
+#: ../../../Application/Views/course/add.php:183
+#: ../../../Application/Views/course/view.php:195
+msgid "Approval Person"
+msgstr "Approvazione Utente"
+
+#: ../../../Application/Views/course/add.php:190
+#: ../../../Application/Views/course/view.php:204
+msgid "Approval Date"
+msgstr "Data approvazione"
+
+#: ../../../Application/Views/course/add.php:207
+#: ../../../Application/Views/course/view.php:248
+msgid "Course Description"
+msgstr "Descrizione Corso"
+
+#: ../../../Application/Views/course/add.php:218
+#: ../../../Application/Views/course/addnl_info.php:137
+#: ../../../Application/Views/course/view.php:257
+#: ../../../Application/Views/cron/add.php:285
+#: ../../../Application/Views/cron/view.php:285
+msgid "Save"
+msgstr "Salva"
+
+#: ../../../Application/Views/course/addnl_info.php:52
+msgid "Additional Course Info:"
+msgstr "Ulteriori Info Corso"
+
+#: ../../../Application/Views/course/addnl_info.php:76
+msgid "Prerequisites"
+msgstr "Prerequisiti"
+
+#: ../../../Application/Views/course/addnl_info.php:83
+msgid "Allow Audit"
+msgstr "Consenti Revisione"
+
+#: ../../../Application/Views/course/addnl_info.php:87
+#: ../../../Application/Views/course/addnl_info.php:100
+msgid "Yes"
+msgstr "Si"
+
+#: ../../../Application/Views/course/addnl_info.php:88
+#: ../../../Application/Views/course/addnl_info.php:101
+msgid "No"
+msgstr "No"
+
+#: ../../../Application/Views/course/addnl_info.php:96
+msgid "Allow Waitlist"
+msgstr "Consenti lista di attesa"
+
+#: ../../../Application/Views/course/addnl_info.php:115
+msgid "Minimum Enrollment"
+msgstr "Iscrizione Minima"
+
+#: ../../../Application/Views/course/addnl_info.php:122
+msgid "Seating Capacity"
+msgstr "Posti a sedere"
+
+#: ../../../Application/Views/course/index.php:36
+msgid "Courses"
+msgstr "Corsi"
+
+#: ../../../Application/Views/course/index.php:69
+msgid "Course Code"
+msgstr "Codice Corso"
+
+#: ../../../Application/Views/course/index.php:98
+msgid "Create Section"
+msgstr "Crea Sezione"
+
+#: ../../../Application/Views/course/view.php:213
+msgid "Last Update"
+msgstr "Ultimo Update"
+
+#: ../../../Application/Views/course/view.php:222
+msgid "Additional Info"
+msgstr "Ulteriori Info"
+
+#: ../../../Application/Views/cron/add.php:37
+#: ../../../Application/Views/cron/add.php:40
+msgid "Add Cron Job"
+msgstr "Add Crono Lavoro"
+
+#: ../../../Application/Views/cron/add.php:65
+#: ../../../Application/Views/cron/view.php:77
+msgid "Script to Run"
+msgstr "Script per eseguire"
+
+#: ../../../Application/Views/cron/add.php:72
+#: ../../../Application/Views/cron/index.php:53
+#: ../../../Application/Views/cron/view.php:84
+msgid "Job Name"
+msgstr "Nome Lavoro"
+
+#: ../../../Application/Views/cron/add.php:79
+#: ../../../Application/Views/cron/view.php:91
+msgid "Minutes"
+msgstr "Minuti"
+
+#: ../../../Application/Views/cron/add.php:149
+#: ../../../Application/Views/cron/view.php:161
+msgid "Hourly"
+msgstr "Ore"
+
+#: ../../../Application/Views/cron/add.php:183
+#: ../../../Application/Views/cron/view.php:195
+msgid "Daily"
+msgstr "Giorno"
+
+#: ../../../Application/Views/cron/add.php:200
+#: ../../../Application/Views/cron/view.php:212
+msgid "Weekly"
+msgstr "Settimana"
+
+#: ../../../Application/Views/cron/add.php:263
+msgid "How Often?"
+msgstr "Quanto Frequente?"
+
+#: ../../../Application/Views/cron/add.php:266
+msgid "Until I Delete It"
+msgstr "Fino a quando Io cancello"
+
+#: ../../../Application/Views/cron/add.php:267
+msgid "Only Once, Then Delete The Job"
+msgstr "Solo una volta, poi eliminare il lavoro"
+
+#: ../../../Application/Views/cron/index.php:54
+msgid "Last Fired"
+msgstr "Ultimo Fired"
+
+#: ../../../Application/Views/cron/index.php:55
+msgid "Next Execution"
+msgstr "Prossima esecuzione"
+
+#: ../../../Application/Views/cron/index.php:56
+msgid "Interval"
+msgstr "Intervallo"
+
+#: ../../../Application/Views/cron/view.php:49
+#: ../../../Application/Views/cron/view.php:52
+msgid "View Cron Job"
+msgstr "Vedi Crono Lavoro"
+
+#: ../../../Application/Views/dashboard/index.php:55
+#, fuzzy
+msgid "Students by Academic Program"
+msgstr "Add Programma Accademico"
+
+#: ../../../Application/Views/dashboard/index.php:65
+#, fuzzy
+msgid "Students"
+msgstr "Studente"
+
+#: ../../../Application/Views/dashboard/index.php:89
+msgid "Gender by Academic Departments"
+msgstr ""
+
+#: ../../../Application/Views/dashboard/index.php:99
+msgid "Male"
+msgstr "Maschio"
+
+#: ../../../Application/Views/dashboard/index.php:100
+msgid "Female"
+msgstr "Femmina"
+
+#: ../../../Application/Views/error/course_registration.php:43
+#, fuzzy
+msgid "The system was unable to register you for the requested course section. Please "
+msgstr "Il sistema non è riuscito a registrare voi per la sezione di corso richiesto. Si prega <a onclick=\"history.go(-1);\"> <font color=\"orange\"> tornare </ font> </ a> e riprovare."
+
+#: ../../../Application/Views/error/course_registration.php:43
+#, fuzzy
+msgid "go back"
+msgstr "Torna indietro"
+
+#: ../../../Application/Views/error/course_registration.php:43
+msgid "and try again."
+msgstr ""
+
+#: ../../../Application/Views/error/delete_record.php:43
+msgid "Sorry but the system could not delete the record you requested. Please go back and try again. If the issue persists, contact the system administrator."
+msgstr "Spiacente, ma il sistema non è riuscito a eliminare il record che hai richiesto. Si prega di tornare indietro e provare di nuovo. Se il problema persiste, contattare l'amministratore di sistema."
+
+#: ../../../Application/Views/error/edit_data.php:43
+msgid "The system was unable to write your update to the database. Please go back, try again, or contact your system administrator if the problem persists."
+msgstr "Il sistema è stato in grado di scrivere il vostro aggiornamento al database. Si prega di tornare indietro, riprovare oppure contattare l'amministratore di sistema se il problema persiste."
+
+#: ../../../Application/Views/error/import.php:43
+#, fuzzy
+msgid "The file you tried to upload is not a .csv file. Please "
+msgstr "Il file che si sta tentando di caricare non è un file zip.. Riprova."
+
+#: ../../../Application/Views/error/index.php:39
+msgid "Ouch!"
+msgstr "Ohi!"
+
+#: ../../../Application/Views/error/index.php:39
+msgid "404 error"
+msgstr ""
+
+#: ../../../Application/Views/error/index.php:47
+msgid "It seems the page you are looking for is not here anymore. The page might have moved to another address or just removed by our staff."
+msgstr "Sembra che la pagina che stai cercando non è più qui. La pagina potrebbe essere trasferito a un altro indirizzo o appena tolto dal nostro staff."
+
+#: ../../../Application/Views/error/index.php:55
+msgid "Is this a serious error?"
+msgstr ""
+
+#: ../../../Application/Views/error/index.php:55
+msgid "Let us know"
+msgstr "Fateci sapere"
+
+#: ../../../Application/Views/error/index.php:58
+msgid "Go back to"
+msgstr "Torna indietro"
+
+#: ../../../Application/Views/error/index.php:61
+msgid "Browse through our"
+msgstr "Sfoglia la nostra"
+
+#: ../../../Application/Views/error/index.php:61
+msgid "Support Center"
+msgstr ""
+
+#: ../../../Application/Views/error/invalid_record.php:43
+msgid "The record your are looking for does not exist. Please try again."
+msgstr "Il record che state cercando non esiste. Riprova."
+
+#: ../../../Application/Views/error/logs.php:54
+msgid "Error Type"
+msgstr ""
+
+#: ../../../Application/Views/error/logs.php:55
+msgid "String"
+msgstr "Stringa"
+
+#: ../../../Application/Views/error/logs.php:56
+msgid "File"
+msgstr "Il nome del file non è valido"
+
+#: ../../../Application/Views/error/logs.php:57
+msgid "Line Number"
+msgstr "Numero Linea"
+
+#: ../../../Application/Views/error/logs.php:58
+msgid "Delete"
+msgstr "Cancella"
+
+#: ../../../Application/Views/error/nslc_extraction.php:43
+msgid "There was an error with trying to extract your data. Either you need to run the Purge screen or check your saved query for errors."
+msgstr "Si è verificato un errore cercando di estrarre i dati. O si deve eseguire il comando ELIMINA o screen check tua ricerca salvato per gli errori."
+
+#: ../../../Application/Views/error/nslc_purge.php:43
+msgid "Sorry, was unable to purge the current NSLC date. Please go back and try again."
+msgstr "Spiacenti, non era in grado di eliminare la data NSLC corrente. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Application/Views/error/population.php:43
+#, fuzzy
+msgid "Population was either null or you were trying to choose two populations at the same time. Please "
+msgstr "Popolazione era nullo o si cercasse di scegliere due popolazioni allo stesso tempo. Si prega <a onclick=\"history.go(-1);\"> <font color=\"orange\"> tornare </ font> </ a> e riprovare."
+
+#: ../../../Application/Views/error/registration.php:44
+msgid "Your institution has set a registration restriction. You are only allowed to register for <strong>"
+msgstr ""
+
+#: ../../../Application/Views/error/registration.php:44
+#, fuzzy
+msgid " courses</strong> per term. Please go back and try again."
+msgstr "Il tuo nome utente o la password non è corretta. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Application/Views/error/reset_password.php:43
+msgid "There was an error with trying to reset the password. Please go back and try again."
+msgstr "C'è stato un errore con il tentativo di reimpostare la password. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Application/Views/error/save_data.php:43
+msgid "The system was unable to write your entry to the database. This error usually occurs when there were no changes made to a record, and you clicked the save button. If this is not the case, please go back, try again, or contact your system administrator if the problem persists."
+msgstr "Il sistema non è riuscito a scrivere la sua entrata nel database. Questo errore si verifica in genere quando non c'erano le modifiche apportate a un record, e si fa clic sul pulsante Salva. Se questo non è il caso, si prega di tornare indietro, riprovare oppure contattare l'amministratore di sistema se il problema persiste."
+
+#: ../../../Application/Views/error/save_query.php:43
+msgid "You save list could not be written to the database. Please go back and try again."
+msgstr "Si salva elenco non poteva essere scritto nel database. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Application/Views/error/screen_error.php:44
+msgid "The screen "
+msgstr "Il record è stato cancellato con successo. Utilizzare il menu di navigazione in alto per passare a una nuova schermata."
+
+#: ../../../Application/Views/error/screen_error.php:44
+#, fuzzy
+msgid " does not exist. Please try your search again."
+msgstr "Il record che state cercando non esiste. Riprova."
+
+#: ../../../Application/Views/error/sql.php:44
+msgid "You are restricted from using certain keywords and characters in your select queries. Please go back back and try again."
+msgstr "Si sta l'uso di determinate parole chiave e personaggi dei tuoi query di selezione. Si prega di tornare indietro e riprovare."
+
+#: ../../../Application/Views/error/update_record.php:43
+msgid "Sorry but the system was unable to update the requested record. Please go back and try again."
+msgstr "Spiacente, ma il sistema non è riuscito ad aggiornare il record richiesto. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Application/Views/form/acad_year.php:36
+#: ../../../Application/Views/form/acad_year.php:39
+#: ../../../Application/Views/form/acad_year.php:110
+#: ../../../Application/Views/form/semester.php:64
+msgid "Academic Year"
+msgstr "Anno Accademico"
+
+#: ../../../Application/Views/form/acad_year.php:64
+#: ../../../Application/Views/form/acad_year.php:71
+msgid "Acad Year"
+msgstr "Anno Accademico"
+
+#: ../../../Application/Views/form/acad_year.php:109
+msgid "Academic Year Code"
+msgstr "Codice Anno Accademico"
+
+#: ../../../Application/Views/form/building.php:36
+#: ../../../Application/Views/form/building.php:39
+#: ../../../Application/Views/form/room.php:64
+#: ../../../Application/Views/form/room.php:134
+#: ../../../Application/Views/form/school.php:78
+#: ../../../Application/Views/form/school.php:124
+msgid "Building"
+msgstr ""
+
+#: ../../../Application/Views/form/building.php:64
+#: ../../../Application/Views/form/building.php:125
+msgid "Building Code"
+msgstr "Codice Edificio"
+
+#: ../../../Application/Views/form/building.php:71
+#: ../../../Application/Views/form/building.php:126
+msgid "Building Name"
+msgstr "Nome Edificio"
+
+#: ../../../Application/Views/form/building.php:84
+#: ../../../Application/Views/form/location.php:36
+#: ../../../Application/Views/form/location.php:39
+msgid "Location"
+msgstr "Posizione"
+
+#: ../../../Application/Views/form/ccd.php:36
+#: ../../../Application/Views/form/ccd.php:39
+msgid "CCD"
+msgstr ""
+
+#: ../../../Application/Views/form/ccd.php:64
+#: ../../../Application/Views/form/ccd.php:109
+msgid "CCD Code"
+msgstr "CCD Codice"
+
+#: ../../../Application/Views/form/ccd.php:71
+#: ../../../Application/Views/form/ccd.php:110
+msgid "CCD Name"
+msgstr "CCD Nome"
+
+#: ../../../Application/Views/form/cip.php:36
+#: ../../../Application/Views/form/cip.php:39
+msgid "CIP"
+msgstr ""
+
+#: ../../../Application/Views/form/cip.php:64
+#: ../../../Application/Views/form/cip.php:107
+msgid "CIP Code"
+msgstr "CIP Codice"
+
+#: ../../../Application/Views/form/cip.php:71
+#: ../../../Application/Views/form/cip.php:108
+msgid "CIP Name"
+msgstr "CIP Nome"
+
+#: ../../../Application/Views/form/degree.php:64
+#: ../../../Application/Views/form/degree.php:107
+msgid "Degree Code"
+msgstr "Codice Laurea"
+
+#: ../../../Application/Views/form/degree.php:71
+#: ../../../Application/Views/form/degree.php:108
+msgid "Degree Name"
+msgstr "Nome Laurea"
+
+#: ../../../Application/Views/form/department.php:64
+#: ../../../Application/Views/form/department.php:125
+msgid "Department Code"
+msgstr "Codice Dipartimento"
+
+#: ../../../Application/Views/form/department.php:71
+msgid "Department Type"
+msgstr "Tipo Dipartimento"
+
+#: ../../../Application/Views/form/department.php:80
+#: ../../../Application/Views/form/department.php:126
+msgid "Department Name"
+msgstr "Nome Dipartimento"
+
+#: ../../../Application/Views/form/department.php:87
+#: ../../../Application/Views/form/grade_scale.php:111
+msgid "Short Description"
+msgstr "Descrizione Breve"
+
+#: ../../../Application/Views/form/department.php:127
+msgid "Department Description"
+msgstr "Descrizione Dipartimento"
+
+#: ../../../Application/Views/form/grade_scale.php:36
+#: ../../../Application/Views/form/grade_scale.php:39
+#, fuzzy
+msgid "Grade Scale"
+msgstr "Dati Livello"
+
+#: ../../../Application/Views/form/grade_scale.php:64
+#: ../../../Application/Views/form/grade_scale.php:173
+msgid "Grade"
+msgstr "Livello"
+
+#: ../../../Application/Views/form/grade_scale.php:71
+#: ../../../Application/Views/form/grade_scale.php:174
+#, fuzzy
+msgid "Percent"
+msgstr "Parente"
+
+#: ../../../Application/Views/form/grade_scale.php:78
+#, fuzzy
+msgid "Points"
+msgstr "Minuti"
+
+#: ../../../Application/Views/form/grade_scale.php:85
+#: ../../../Application/Views/form/grade_scale.php:145
+msgid "Count in GPA"
+msgstr ""
+
+#: ../../../Application/Views/form/grade_scale.php:101
+#: ../../../Application/Views/form/semester.php:120
+msgid "Active"
+msgstr "Attivo"
+
+#: ../../../Application/Views/form/grade_scale.php:150
+msgid "Should this be applied and calculated in the GPA?"
+msgstr ""
+
+#: ../../../Application/Views/form/grade_scale.php:175
+#, fuzzy
+msgid "Grade Points"
+msgstr "Livelli"
+
+#: ../../../Application/Views/form/location.php:64
+#: ../../../Application/Views/form/location.php:109
+msgid "Location Code"
+msgstr "Codice Posizione"
+
+#: ../../../Application/Views/form/location.php:71
+#: ../../../Application/Views/form/location.php:110
+msgid "Location Name"
+msgstr "Nome Posizione"
+
+#: ../../../Application/Views/form/major.php:64
+#: ../../../Application/Views/form/major.php:109
+msgid "Major Code"
+msgstr ""
+
+#: ../../../Application/Views/form/major.php:71
+#: ../../../Application/Views/form/major.php:110
+msgid "Major Name"
+msgstr ""
+
+#: ../../../Application/Views/form/minor.php:36
+#: ../../../Application/Views/form/minor.php:39
+msgid "Minor"
+msgstr ""
+
+#: ../../../Application/Views/form/minor.php:64
+#: ../../../Application/Views/form/minor.php:109
+msgid "Minor Code"
+msgstr ""
+
+#: ../../../Application/Views/form/minor.php:71
+#: ../../../Application/Views/form/minor.php:110
+msgid "Minor Name"
+msgstr ""
+
+#: ../../../Application/Views/form/room.php:36
+#: ../../../Application/Views/form/room.php:39
+msgid "Room"
+msgstr "Classe"
+
+#: ../../../Application/Views/form/room.php:76
+msgid "Room Code"
+msgstr "Codice Aula"
+
+#: ../../../Application/Views/form/room.php:89
+#: ../../../Application/Views/form/room.php:135
+msgid "Room Number"
+msgstr "Numero Aula"
+
+#: ../../../Application/Views/form/rstr_code.php:36
+#: ../../../Application/Views/form/rstr_code.php:39
+#, fuzzy
+msgid "Restriction Codes"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/form/rstr_code.php:64
+#, fuzzy
+msgid "Code"
+msgstr "CCD Codice"
+
+#: ../../../Application/Views/form/rstr_code.php:71
+#: ../../../Application/Views/form/rstr_code.php:120
+msgid "Description"
+msgstr "Descrizione"
+
+#: ../../../Application/Views/form/rstr_code.php:119
+#, fuzzy
+msgid "Restriction Code"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/form/school.php:36
+#: ../../../Application/Views/form/school.php:39
+msgid "School"
+msgstr "Scuola"
+
+#: ../../../Application/Views/form/school.php:64
+#: ../../../Application/Views/form/school.php:123
+msgid "School Name"
+msgstr "Nome Scuola"
+
+#: ../../../Application/Views/form/school.php:71
+#: ../../../Application/Views/form/school.php:122
+msgid "School Code"
+msgstr "Codice Scuola"
+
+#: ../../../Application/Views/form/semester.php:36
+#: ../../../Application/Views/form/semester.php:39
+#: ../../../Application/Views/form/semester.php:83
+#: ../../../Application/Views/form/semester.php:165
+msgid "Semester"
+msgstr "Semestre"
+
+#: ../../../Application/Views/form/semester.php:76
+msgid "Semester Code"
+msgstr "Codice Semestre"
+
+#: ../../../Application/Views/form/semester.php:96
+#: ../../../Application/Views/form/semester.php:166
+msgid "Start Date"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/form/specialization.php:36
+#: ../../../Application/Views/form/specialization.php:39
+msgid "Specialization"
+msgstr "Specializzazione"
+
+#: ../../../Application/Views/form/specialization.php:64
+#: ../../../Application/Views/form/specialization.php:109
+msgid "Specialization Code"
+msgstr "Codice Specializzazione"
+
+#: ../../../Application/Views/form/specialization.php:71
+#: ../../../Application/Views/form/specialization.php:110
+msgid "Specialization Name"
+msgstr "Nome Specializzazione"
+
+#: ../../../Application/Views/form/student_load_rule.php:35
+#: ../../../Application/Views/form/student_load_rule.php:38
+#, fuzzy
+msgid "Student Load Rules"
+msgstr "Portale Studente"
+
+#: ../../../Application/Views/form/student_load_rule.php:67
+#, fuzzy
+msgid "Full Time"
+msgstr "Tempo"
+
+#: ../../../Application/Views/form/student_load_rule.php:68
+#, fuzzy
+msgid "3/4 Time"
+msgstr "Tempo"
+
+#: ../../../Application/Views/form/student_load_rule.php:69
+#, fuzzy
+msgid "Half Time"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/form/student_load_rule.php:70
+msgid "Less Than Half Time"
+msgstr ""
+
+#: ../../../Application/Views/form/student_load_rule.php:78
+#: ../../../Application/Views/form/student_load_rule.php:155
+msgid "Minimum Credits"
+msgstr "Crediti minimi"
+
+#: ../../../Application/Views/form/student_load_rule.php:85
+#: ../../../Application/Views/form/student_load_rule.php:156
+msgid "Maximum Credits"
+msgstr "Crediti massimi"
+
+#: ../../../Application/Views/form/student_load_rule.php:97
+#: ../../../Application/Views/form/student_load_rule.php:157
+#: ../../../Application/Views/form/student_load_rule.php:205
+#, fuzzy
+msgid "Term(s)"
+msgstr "Periodo"
+
+#: ../../../Application/Views/form/student_load_rule.php:104
+#: ../../../Application/Views/form/student_load_rule.php:158
+#: ../../../Application/Views/form/student_load_rule.php:219
+#, fuzzy
+msgid "Academic Level(s)"
+msgstr "Livello Accademico"
+
+#: ../../../Application/Views/form/student_load_rule.php:208
+msgid "In this field, you will only enter your term designation without the two digit year separated by a backslash \"\\\" (i.e. FA\\FAM1\\SP)."
+msgstr ""
+
+#: ../../../Application/Views/form/student_load_rule.php:222
+msgid "Enter the academic level or levels that should be applied to this rule separated by a backslash \"\\\" (i.e. CE\\UG\\GR)"
+msgstr ""
+
+#: ../../../Application/Views/form/subject.php:64
+#: ../../../Application/Views/form/subject.php:109
+msgid "Subject Code"
+msgstr "Codice Materia"
+
+#: ../../../Application/Views/form/subject.php:71
+#: ../../../Application/Views/form/subject.php:110
+msgid "Subject Name"
+msgstr "Nome Materia"
+
+#: ../../../Application/Views/form/term.php:36
+#: ../../../Application/Views/form/term.php:39
+#: ../../../Application/Views/form/term.php:83
+#: ../../../Application/Views/form/term.php:181
+msgid "Term"
+msgstr "Periodo"
+
+#: ../../../Application/Views/form/term.php:76
+msgid "Term Code"
+msgstr "Codice Periodo"
+
+#: ../../../Application/Views/form/term.php:90
+msgid "Reporting Term"
+msgstr "Rapporto Periodo"
+
+#: ../../../Application/Views/form/term.php:127
+msgid "Drop/Add End Date"
+msgstr "Drop/Add Data fine"
+
+#: ../../../Application/Views/form/view_acad_year.php:37
+#: ../../../Application/Views/form/view_acad_year.php:40
+msgid "View Academic Year"
+msgstr "Vedi Anno Accademico"
+
+#: ../../../Application/Views/form/view_building.php:37
+msgid "View Building"
+msgstr "Vedi Building"
+
+#: ../../../Application/Views/form/view_building.php:40
+#: ../../../Application/Views/form/view_ccd.php:40
+#: ../../../Application/Views/form/view_cip.php:40
+#: ../../../Application/Views/form/view_location.php:40
+#: ../../../Application/Views/form/view_major.php:40
+#: ../../../Application/Views/form/view_minor.php:40
+#: ../../../Application/Views/form/view_room.php:40
+msgid "Viewing "
+msgstr ""
+
+#: ../../../Application/Views/form/view_ccd.php:37
+msgid "View CCD"
+msgstr "Vedi CCD"
+
+#: ../../../Application/Views/form/view_cip.php:37
+msgid "View CIP"
+msgstr "Vedi CIP"
+
+#: ../../../Application/Views/form/view_degree.php:37
+#: ../../../Application/Views/form/view_degree.php:40
+msgid "View Degree"
+msgstr "Vedi Laurea"
+
+#: ../../../Application/Views/form/view_department.php:37
+#: ../../../Application/Views/form/view_department.php:40
+msgid "View Department"
+msgstr "Vedi Dipartimento"
+
+#: ../../../Application/Views/form/view_department.php:104
+msgid "Update"
+msgstr "Update"
+
+#: ../../../Application/Views/form/view_grade_scale.php:35
+#, fuzzy
+msgid "Grading Scale"
+msgstr "Dati Laurea"
+
+#: ../../../Application/Views/form/view_grade_scale.php:37
+#: ../../../Application/Views/form/view_grade_scale.php:40
+#, fuzzy
+msgid "Edit Grade"
+msgstr "Livello"
+
+#: ../../../Application/Views/form/view_location.php:37
+msgid "View Location"
+msgstr "Vedi Posizione"
+
+#: ../../../Application/Views/form/view_major.php:37
+msgid "View Major"
+msgstr ""
+
+#: ../../../Application/Views/form/view_minor.php:37
+msgid "View Minor"
+msgstr ""
+
+#: ../../../Application/Views/form/view_room.php:37
+msgid "View Room"
+msgstr "Vedi Aula"
+
+#: ../../../Application/Views/form/view_rstr_code.php:38
+#: ../../../Application/Views/form/view_rstr_code.php:41
+#, fuzzy
+msgid "Edit Restriction Code"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/form/view_school.php:37
+#: ../../../Application/Views/form/view_school.php:40
+msgid "View School"
+msgstr "Vedi Scuola"
+
+#: ../../../Application/Views/form/view_semester.php:37
+#: ../../../Application/Views/form/view_semester.php:40
+msgid "View Semester"
+msgstr "Semestre"
+
+#: ../../../Application/Views/form/view_specialization.php:35
+msgid "Specialization List"
+msgstr "Lista Specializzazione"
+
+#: ../../../Application/Views/form/view_specialization.php:37
+msgid "View Specialization"
+msgstr "Vedi Specializzazione"
+
+#: ../../../Application/Views/form/view_student_load_rule.php:37
+#: ../../../Application/Views/form/view_student_load_rule.php:40
+#, fuzzy
+msgid "Edit Student Load Rule"
+msgstr "Edita Programma Studente"
+
+#: ../../../Application/Views/form/view_subject.php:37
+msgid "View Subject"
+msgstr "Vedi Materie"
+
+#: ../../../Application/Views/form/view_term.php:37
+#: ../../../Application/Views/form/view_term.php:40
+msgid "View Term"
+msgstr "Vedi Periodo"
+
+#: ../../../Application/Views/hr/add.php:35
+#: ../../../Application/Views/hr/index.php:39
+#: ../../../Application/Views/hr/positions.php:36
+#: ../../../Application/Views/hr/view.php:36
+#, fuzzy
+msgid "Search Employee"
+msgstr "Cerca Corso"
+
+#: ../../../Application/Views/hr/add.php:37
+#: ../../../Application/Views/hr/index.php:97
+#: ../../../Application/Views/hr/jobs.php:94
+#: ../../../Application/Views/hr/jobs.php:166
+#: ../../../Application/Views/hr/positions.php:109
+#, fuzzy
+msgid "Add Position"
+msgstr "Add Istituzione"
+
+#: ../../../Application/Views/hr/add.php:64
+#: ../../../Application/Views/hr/positions.php:121
+#: ../../../Application/Views/hr/view.php:65
+#, fuzzy
+msgid "Employment Type"
+msgstr "Tipo Dipartimento"
+
+#: ../../../Application/Views/hr/add.php:76
+#: ../../../Application/Views/hr/positions.php:133
+#: ../../../Application/Views/hr/view.php:77
+#, fuzzy
+msgid "Staff Type"
+msgstr "Staff"
+
+#: ../../../Application/Views/hr/add.php:80
+#: ../../../Application/Views/hr/positions.php:137
+#: ../../../Application/Views/hr/view.php:81
+msgid "Faculty"
+msgstr "Facoltà"
+
+#: ../../../Application/Views/hr/add.php:81
+#: ../../../Application/Views/hr/positions.php:138
+#: ../../../Application/Views/hr/view.php:82
+#: ../../../Application/Views/import/index.php:99
+msgid "Staff"
+msgstr "Staff"
+
+#: ../../../Application/Views/hr/add.php:89
+#: ../../../Application/Views/hr/positions.php:146
+#: ../../../Application/Views/hr/view.php:90
+msgid "Supervisor"
+msgstr ""
+
+#: ../../../Application/Views/hr/add.php:101
+#: ../../../Application/Views/hr/jobs.php:55
+#: ../../../Application/Views/hr/positions.php:55
+#: ../../../Application/Views/hr/positions.php:158
+#: ../../../Application/Views/hr/view.php:102
+#, fuzzy
+msgid "Job Title"
+msgstr "Titolo lungo"
+
+#: ../../../Application/Views/hr/add.php:119
+#: ../../../Application/Views/hr/positions.php:59
+#: ../../../Application/Views/hr/positions.php:170
+#: ../../../Application/Views/hr/view.php:210
+#, fuzzy
+msgid "Hire Date"
+msgstr "Dati Livello"
+
+#: ../../../Application/Views/hr/add.php:155
+#: ../../../Application/Views/hr/view.php:272
+msgid "Approved By"
+msgstr "Approvato da"
+
+#: ../../../Application/Views/hr/grades.php:55
+#: ../../../Application/Views/hr/grades.php:108
+#: ../../../Application/Views/hr/grades.php:164
+#, fuzzy
+msgid "Starting Salary"
+msgstr "Posti a sedere"
+
+#: ../../../Application/Views/hr/grades.php:56
+#: ../../../Application/Views/hr/grades.php:117
+#: ../../../Application/Views/hr/grades.php:173
+msgid "Ending Salary"
+msgstr ""
+
+#: ../../../Application/Views/hr/grades.php:92
+#: ../../../Application/Views/hr/grades.php:148
+#, fuzzy
+msgid "Add Pay Grade"
+msgstr "Mio Livello"
+
+#: ../../../Application/Views/hr/index.php:36
+msgid "Employee"
+msgstr ""
+
+#: ../../../Application/Views/hr/index.php:70
+msgid "ID"
+msgstr "ID"
+
+#: ../../../Application/Views/hr/index.php:73
+msgid "Phone"
+msgstr "Telefono"
+
+#: ../../../Application/Views/hr/index.php:99
+#, fuzzy
+msgid "View Positions"
+msgstr "Vedi Posizione"
+
+#: ../../../Application/Views/hr/index.php:126
+msgid "Employee Search"
+msgstr ""
+
+#: ../../../Application/Views/hr/jobs.php:54
+#: ../../../Application/Views/hr/jobs.php:103
+#: ../../../Application/Views/hr/jobs.php:175
+#: ../../../Application/Views/hr/positions.php:54
+#, fuzzy
+msgid "Pay Grade"
+msgstr "Mio Livello"
+
+#: ../../../Application/Views/hr/jobs.php:56
+#: ../../../Application/Views/hr/jobs.php:124
+#: ../../../Application/Views/hr/jobs.php:196
+#: ../../../Application/Views/hr/positions.php:56
+#: ../../../Application/Views/hr/view.php:171
+#, fuzzy
+msgid "Hourly Wage"
+msgstr "Ore"
+
+#: ../../../Application/Views/hr/jobs.php:57
+#: ../../../Application/Views/hr/jobs.php:133
+#: ../../../Application/Views/hr/jobs.php:205
+#, fuzzy
+msgid "Hours Per Week"
+msgstr "Costo Corso"
+
+#: ../../../Application/Views/hr/jobs.php:115
+#: ../../../Application/Views/hr/jobs.php:187
+msgid "Title"
+msgstr "Titolo"
+
+#: ../../../Application/Views/hr/positions.php:38
+#, fuzzy
+msgid "Positions"
+msgstr "Azioni"
+
+#: ../../../Application/Views/hr/positions.php:41
+msgid "Positions Past & Present for "
+msgstr ""
+
+#: ../../../Application/Views/hr/positions.php:57
+#: ../../../Application/Views/hr/view.php:189
+#, fuzzy
+msgid "Weekly Hours"
+msgstr "Settimana"
+
+#: ../../../Application/Views/hr/positions.php:58
+#: ../../../Application/Views/hr/view.php:198
+msgid "Monthly Salary"
+msgstr ""
+
+#: ../../../Application/Views/hr/positions.php:80
+#, fuzzy
+msgid "Not Set"
+msgstr "Note"
+
+#: ../../../Application/Views/hr/view.php:38
+#, fuzzy
+msgid "View Employee"
+msgstr "Semestre"
+
+#: ../../../Application/Views/hr/view.php:126
+msgid "Office"
+msgstr "Ufficio"
+
+#: ../../../Application/Views/hr/view.php:138
+msgid "Office Phone"
+msgstr "Telefono Ufficio"
+
+#: ../../../Application/Views/hr/view.php:255
+msgid "I Inactive"
+msgstr "I Inattivo"
+
+#: ../../../Application/Views/hr/view.php:263
+msgid "Add Date"
+msgstr "Add Data"
+
+#: ../../../Application/Views/import/index.php:35
+#: ../../../Application/Views/import/index.php:38
+msgid "Quick Importer"
+msgstr ""
+
+#: ../../../Application/Views/import/index.php:66
+msgid "Select file"
+msgstr "Seleziona file"
+
+#: ../../../Application/Views/import/index.php:66
+msgid "Change"
+msgstr "Cambia"
+
+#: ../../../Application/Views/import/index.php:66
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: ../../../Application/Views/import/index.php:74
+msgid "Database Table"
+msgstr ""
+
+#: ../../../Application/Views/import/index.php:83
+msgid "Credit Load"
+msgstr "Credito Caricato"
+
+#: ../../../Application/Views/import/index.php:98
+msgid "Address"
+msgstr "Indirizzo"
+
+#: ../../../Application/Views/import/index.php:100
+#, fuzzy
+msgid "Staff Meta"
+msgstr "Staff"
+
+#: ../../../Application/Views/import/index.php:105
+msgid "Student Acad Cred"
+msgstr "Crediti Accademici Studente"
+
+#: ../../../Application/Views/import/index.php:106
+msgid "Student Acad Level"
+msgstr "Livello accademico studente"
+
+#: ../../../Application/Views/import/index.php:107
+msgid "Student Course Section"
+msgstr "Sezione Corso Studente"
+
+#: ../../../Application/Views/import/index.php:108
+msgid "Student Program"
+msgstr "Programma Studente"
+
+#: ../../../Application/Views/import/index.php:109
+msgid "Student Term"
+msgstr "Periodo Studente"
+
+#: ../../../Application/Views/import/index.php:110
+msgid "Student Term GPA"
+msgstr "Periodo Studente GPA"
+
+#: ../../../Application/Views/import/index.php:111
+msgid "Student Term Load"
+msgstr "Periodo Studente Caricato"
+
+#: ../../../Application/Views/index/index.php:57
+msgid "Checking..."
+msgstr ""
+
+#: ../../../Application/Views/index/index.php:84
+msgid "eduTrac"
+msgstr "Gestione Didattica"
+
+#: ../../../Application/Views/index/index.php:84
+#, fuzzy
+msgid " Community"
+msgstr "Paese"
+
+#: ../../../Application/Views/index/index.php:96
+msgid "Sign in"
+msgstr "Entra"
+
+#: ../../../Application/Views/index/index.php:101
+#, fuzzy
+msgid "Remember"
+msgstr "Ricordami"
+
+#: ../../../Application/Views/index/index.php:105
+msgid "Having troubles?"
+msgstr "Hai problemi?"
+
+#: ../../../Application/Views/index/index.php:105
+msgid "Get Help"
+msgstr ""
+
+#: ../../../Application/Views/index/index.php:106
+msgid "Powered by"
+msgstr ""
+
+#: ../../../Application/Views/index/index.php:106
+msgid "eduTrac Community"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:39
+msgid "eduTrac Community Installer"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:58
+msgid "eduTrac Community Installation Wizard"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:68
+msgid "Step 1 - Introduction"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:70
+msgid "Welcome to eduTrac Community College Management System. Before getting started, we need some information on the database. You will need to know the following items before proceeding."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:73
+msgid "Database name"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:74
+msgid "Database username"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:75
+msgid "Database password"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:76
+msgid "Database host"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:79
+msgid "If for any reason this automatic file creation doesn't work, don't worry. All this does is fill in the database information to a configuration file. You may also simply open eduTrac/Config/contants-sample.php in a text editor, fill in your information, and save it as constants.php."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:81
+msgid "In all likelihood, these items were supplied to you by your Web Host. If you do not have this information, then you will need to contact them before you can continue. If you're all ready..."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:82
+#: ../../../Application/Views/install/index.php:111
+#: ../../../Application/Views/install/index.php:165
+msgid "Next Step"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:94
+msgid "Step 2 - Environment Test"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:96
+msgid "If your system fails any of the tests to the right, then you need to correct them, refresh your browser to make sure all have a green 'ok' or an orange 'warning' and then proceed with the install. If you proceed without correcting the errors, the install may fail and/or eduTrac may not function properly."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:115
+msgid "Legend"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:117
+msgid "ok"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:117
+msgid "All OK"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:118
+msgid "warning"
+msgstr "Attenzione!"
+
+#: ../../../Application/Views/install/index.php:118
+msgid "Not a deal breaker and is only a recommendation"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:119
+msgid "error"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:119
+msgid "eduTrac Community requires this feature and can't work without it"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:134
+#: ../../../Application/Views/install/index.php:150
+msgid "Database Name"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:135
+#, fuzzy
+msgid "The name of the database you want to run eduTrac Community in."
+msgstr "Ehi admin, c'è un nuovo aggiornamento eduTrac."
+
+#: ../../../Application/Views/install/index.php:141
+msgid "Step 3 - Database Connection"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:143
+msgid "On the right, you should enter your database connection details. If you're not sure about these, contact your host."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:153
+#: ../../../Application/Views/install/index.php:205
+#: ../../../Application/Views/install/index.php:236
+msgid "Username"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:156
+#: ../../../Application/Views/install/index.php:214
+#: ../../../Application/Views/install/index.php:245
+msgid "Password"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:159
+msgid "Database Host"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:180
+msgid "Step 4 - Install Database Tables"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:182
+msgid "It will take at least 30 seconds to a minute to install the tables. So please be patient."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:189
+msgid "Install Tables"
+msgstr "Installa Tables"
+
+#: ../../../Application/Views/install/index.php:206
+msgid "Usernames can have only alphanumeric characters, spaces, underscores, hyphens, periods and the @ symbol."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:215
+msgid "A password will be automatically generated for you if you leave this blank."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:216
+msgid "Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &amp; )."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:222
+msgid "Step 5 - Website Information/Admin Account"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:223
+msgid "Welcome to the eduTrac Community installation process! Fill in the information to the right and you’ll be on your way to using the most user friendly college management system."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:230
+msgid "Site Title"
+msgstr "Titolo Sito"
+
+#: ../../../Application/Views/install/index.php:233
+msgid "Site URL"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:239
+msgid "First Name"
+msgstr "Cognome"
+
+#: ../../../Application/Views/install/index.php:242
+msgid "Last Name"
+msgstr "Nome"
+
+#: ../../../Application/Views/install/index.php:248
+msgid "Your E-mail"
+msgstr "La tua E-mail"
+
+#: ../../../Application/Views/install/index.php:254
+msgid "Create Admin"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:271
+msgid "eduTrac Community has been installed. Click the button below in order to create the config file, flush the installer and be redirected to the login page."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:273
+msgid "Finish Installer"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:285
+msgid "Javascript is required in order to use this installer."
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:286
+msgid "How to enable javascript"
+msgstr ""
+
+#: ../../../Application/Views/install/index.php:288
+msgid "Upgrade Browser"
+msgstr ""
+
+#: ../../../Application/Views/institution/add.php:35
+msgid "Search Institution"
+msgstr "Cerca Istituzione"
+
+#: ../../../Application/Views/institution/add.php:37
+#: ../../../Application/Views/institution/add.php:40
+msgid "Add Institution"
+msgstr "Add Istituzione"
+
+#: ../../../Application/Views/institution/add.php:65
+#, fuzzy
+msgid "FICE/CEEB Code"
+msgstr "FICE Codice"
+
+#: ../../../Application/Views/institution/add.php:72
+msgid "Type"
+msgstr "Tipo"
+
+#: ../../../Application/Views/institution/add.php:76
+msgid "High School"
+msgstr ""
+
+#: ../../../Application/Views/institution/add.php:77
+msgid "College"
+msgstr ""
+
+#: ../../../Application/Views/institution/add.php:78
+msgid "University"
+msgstr "Università"
+
+#: ../../../Application/Views/institution/add.php:86
+msgid "Institution Name"
+msgstr "Nome Istituzione"
+
+#: ../../../Application/Views/institution/add.php:99
+msgid "City"
+msgstr "Città"
+
+#: ../../../Application/Views/institution/add.php:106
+msgid "State"
+msgstr ""
+
+#: ../../../Application/Views/institution/add.php:113
+msgid "Country"
+msgstr "Paese"
+
+#: ../../../Application/Views/institution/index.php:69
+msgid "Institution Type"
+msgstr "Tipo Istituzione"
+
+#: ../../../Application/Views/institution/view.php:37
+#: ../../../Application/Views/institution/view.php:40
+msgid "View Institution"
+msgstr "Vedi Istituzione"
+
+#: ../../../Application/Views/institution/view.php:76
+msgid "HS High School"
+msgstr ""
+
+#: ../../../Application/Views/institution/view.php:77
+msgid "COL College"
+msgstr ""
+
+#: ../../../Application/Views/institution/view.php:78
+msgid "UNIV University"
+msgstr "UNIV Università"
+
+#: ../../../Application/Views/lock/index.php:84
+msgid " ERP"
+msgstr ""
+
+#: ../../../Application/Views/lock/index.php:98
+msgid "Unlock"
+msgstr ""
+
+#: ../../../Application/Views/mailer/add.php:70
+#: ../../../Application/Views/mailer/add.php:131
+#: ../../../Application/Views/mailer/view.php:70
+#: ../../../Application/Views/mailer/view.php:139
+msgid "Placeholders"
+msgstr ""
+
+#: ../../../Application/Views/mailer/add.php:76
+#: ../../../Application/Views/mailer/index.php:51
+#: ../../../Application/Views/mailer/view.php:76
+msgid "Email Key"
+msgstr ""
+
+#: ../../../Application/Views/mailer/add.php:83
+#: ../../../Application/Views/mailer/view.php:83
+#, fuzzy
+msgid "Email Name"
+msgstr "Nome Allievo"
+
+#: ../../../Application/Views/mailer/add.php:91
+#: ../../../Application/Views/mailer/view.php:91
+msgid "Template"
+msgstr ""
+
+#: ../../../Application/Views/mailer/queue.php:54
+msgid "Query"
+msgstr ""
+
+#: ../../../Application/Views/mailer/queue.php:55
+#, fuzzy
+msgid "Processed"
+msgstr "Processo"
+
+#: ../../../Application/Views/mailer/queue.php:72
+msgid "Are you sure you want to delete \""
+msgstr ""
+
+#: ../../../Application/Views/mailer/schedule.php:66
+#, fuzzy
+msgid "Email Subject"
+msgstr "Vedi Materie"
+
+#: ../../../Application/Views/mailer/schedule.php:73
+#, fuzzy
+msgid "From Name"
+msgstr "Cognome"
+
+#: ../../../Application/Views/mailer/schedule.php:80
+#, fuzzy
+msgid "From Email"
+msgstr "Email Principale"
+
+#: ../../../Application/Views/mailer/schedule.php:93
+msgid "Email Template"
+msgstr ""
+
+#: ../../../Application/Views/mailer/schedule.php:105
+#: ../../../Application/Views/nslc/extraction.php:65
+msgid "Saved Query"
+msgstr ""
+
+#: ../../../Application/Views/mailer/view.php:42
+#: ../../../Application/Views/mailer/view.php:45
+msgid "View Email Template"
+msgstr ""
+
+#: ../../../Application/Views/nslc/correction.php:35
+msgid "NSLC Hold File Record"
+msgstr ""
+
+#: ../../../Application/Views/nslc/correction.php:38
+msgid "ID: "
+msgstr ""
+
+#: ../../../Application/Views/nslc/correction.php:104
+msgid "SSN"
+msgstr ""
+
+#: ../../../Application/Views/nslc/extraction.php:37
+#: ../../../Application/Views/nslc/extraction.php:40
+#, fuzzy
+msgid "NSLC Extraction"
+msgstr "Prossima esecuzione"
+
+#: ../../../Application/Views/nslc/extraction.php:62
+msgid "Once you've submitted your saved query, the next screen you come to will be the Verification screen. If data is in the hold file table, you will receive an error. You must first purge this table of old data before you can continue with the extraction."
+msgstr ""
+
+#: ../../../Application/Views/nslc/index.php:35
+#: ../../../Application/Views/nslc/index.php:38
+msgid "NSLC File Search"
+msgstr ""
+
+#: ../../../Application/Views/nslc/purge.php:35
+#: ../../../Application/Views/nslc/purge.php:38
+#, fuzzy
+msgid "NSLC Purge"
+msgstr "Auto elimina"
+
+#: ../../../Application/Views/nslc/purge.php:64
+msgid "If you are running a new branch process, click the Submit button to purge the old data."
+msgstr ""
+
+#: ../../../Application/Views/nslc/setup.php:54
+#: ../../../Application/Views/nslc/setup.php:57
+msgid "NSLC Setup"
+msgstr ""
+
+#: ../../../Application/Views/nslc/setup.php:82
+msgid "Branch"
+msgstr ""
+
+#: ../../../Application/Views/nslc/setup.php:110
+#, fuzzy
+msgid "Term Start Date"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/nslc/setup.php:119
+#, fuzzy
+msgid "Term End Date"
+msgstr "Data fine"
+
+#: ../../../Application/Views/nslc/verification.php:35
+#: ../../../Application/Views/nslc/verification.php:38
+msgid "NSLC Verification"
+msgstr ""
+
+#: ../../../Application/Views/nslc/verification.php:60
+msgid "Click the submit button below to run the verification process. A new window/tab will open with a report."
+msgstr ""
+
+#: ../../../Application/Views/permission/add.php:35
+#: ../../../Application/Views/permission/index.php:42
+#: ../../../Application/Views/permission/view.php:38
+msgid "Manage Permissions"
+msgstr "Manager Permessi"
+
+#: ../../../Application/Views/permission/add.php:37
+#: ../../../Application/Views/permission/add.php:40
+msgid "Add Permission"
+msgstr "Add Permesso"
+
+#: ../../../Application/Views/permission/add.php:72
+#: ../../../Application/Views/permission/index.php:56
+#: ../../../Application/Views/permission/view.php:75
+msgid "Key"
+msgstr ""
+
+#: ../../../Application/Views/permission/index.php:39
+#: ../../../Application/Views/person/index.php:110
+msgid "Permissions"
+msgstr "Permessi"
+
+#: ../../../Application/Views/permission/index.php:58
+msgid "Edit"
+msgstr "Edita"
+
+#: ../../../Application/Views/permission/index.php:92
+msgid "New Permision"
+msgstr "Nuovo Permesso"
+
+#: ../../../Application/Views/permission/view.php:40
+#: ../../../Application/Views/permission/view.php:43
+msgid "View Permission"
+msgstr "Vedi Permesso"
+
+#: ../../../Application/Views/person/add.php:69
+#: ../../../Application/Views/person/add.php:72
+msgid "Name & Address"
+msgstr "Nome e Indirizzo"
+
+#: ../../../Application/Views/person/add.php:105
+#: ../../../Application/Views/person/add.php:356
+#: ../../../Application/Views/person/view.php:76
+#: ../../../Application/Views/person/view.php:330
+msgid "Person Type"
+msgstr "Tipo Utente"
+
+#: ../../../Application/Views/person/add.php:114
+#: ../../../Application/Views/person/view.php:85
+msgid "Prefix"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:118
+#: ../../../Application/Views/person/view.php:89
+msgid "Ms."
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:119
+#: ../../../Application/Views/person/view.php:90
+msgid "Miss."
+msgstr "Sig.rina"
+
+#: ../../../Application/Views/person/add.php:120
+#: ../../../Application/Views/person/view.php:91
+msgid "Mrs."
+msgstr "Sig.ra"
+
+#: ../../../Application/Views/person/add.php:121
+#: ../../../Application/Views/person/view.php:92
+msgid "Mr."
+msgstr "Sig."
+
+#: ../../../Application/Views/person/add.php:147
+#: ../../../Application/Views/person/addr_form.php:89
+#: ../../../Application/Views/person/edit_addr.php:86
+#: ../../../Application/Views/person/view.php:118
+#: ../../../Application/Views/person/view_addr.php:86
+#: ../../../Application/Views/profile/index.php:82
+msgid "Middle Initial"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:156
+#: ../../../Application/Views/person/addr_form.php:98
+#: ../../../Application/Views/person/edit_addr.php:95
+#: ../../../Application/Views/person/view.php:127
+#: ../../../Application/Views/person/view_addr.php:95
+msgid "Address1"
+msgstr "Indirizzo1"
+
+#: ../../../Application/Views/person/add.php:165
+#: ../../../Application/Views/person/addr_form.php:107
+#: ../../../Application/Views/person/edit_addr.php:104
+#: ../../../Application/Views/person/view.php:136
+#: ../../../Application/Views/person/view_addr.php:104
+msgid "Address2"
+msgstr "Indirizzo2"
+
+#: ../../../Application/Views/person/add.php:195
+#: ../../../Application/Views/person/addr_form.php:137
+#: ../../../Application/Views/person/edit_addr.php:134
+#: ../../../Application/Views/person/view.php:163
+#: ../../../Application/Views/person/view_addr.php:134
+msgid "Zip Code"
+msgstr "Codice Corso"
+
+#: ../../../Application/Views/person/add.php:231
+#: ../../../Application/Views/person/view.php:196
+#, fuzzy
+msgid "Preferred Email"
+msgstr "Principale/Preferita Email"
+
+#: ../../../Application/Views/person/add.php:240
+#: ../../../Application/Views/person/view.php:205
+msgid "Social Security #"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:249
+#: ../../../Application/Views/person/view.php:214
+msgid "Veteran?"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:261
+#: ../../../Application/Views/person/view.php:226
+msgid "Ethnicity?"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:265
+#: ../../../Application/Views/person/view.php:230
+msgid "White, Non-Hispanic"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:266
+#: ../../../Application/Views/person/view.php:231
+msgid "Black, Non-Hispanic"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:267
+#: ../../../Application/Views/person/view.php:232
+msgid "Hispanic"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:268
+#: ../../../Application/Views/person/view.php:233
+msgid "Native American"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:269
+#: ../../../Application/Views/person/view.php:234
+msgid "Native Alaskan"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:270
+#: ../../../Application/Views/person/view.php:235
+msgid "Pacific Islander"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:271
+#: ../../../Application/Views/person/view.php:236
+msgid "Asian"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:272
+#: ../../../Application/Views/person/view.php:237
+msgid "Indian"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:273
+#: ../../../Application/Views/person/view.php:238
+msgid "Middle Eastern"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:274
+#: ../../../Application/Views/person/view.php:239
+msgid "African"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:275
+#: ../../../Application/Views/person/view.php:240
+msgid "Mixed Race"
+msgstr ""
+
+#: ../../../Application/Views/person/add.php:276
+#: ../../../Application/Views/person/view.php:241
+msgid "Other"
+msgstr "Altro"
+
+#: ../../../Application/Views/person/add.php:284
+#: ../../../Application/Views/person/view.php:249
+#: ../../../Application/Views/profile/index.php:124
+msgid "Date of Birth"
+msgstr "Data Nascita"
+
+#: ../../../Application/Views/person/add.php:309
+#: ../../../Application/Views/person/view.php:274
+msgid "Emergency Contact"
+msgstr "Contatto Emergenza"
+
+#: ../../../Application/Views/person/add.php:318
+#: ../../../Application/Views/person/view.php:283
+msgid "Emergency Contact Phone"
+msgstr "Contatto telefonico emergenza"
+
+#: ../../../Application/Views/person/add.php:327
+#: ../../../Application/Views/person/view.php:292
+msgid "Approved Date"
+msgstr "Data Approvazione"
+
+#: ../../../Application/Views/person/addr_form.php:38
+#: ../../../Application/Views/person/addr_sum.php:35
+#: ../../../Application/Views/person/edit_addr.php:35
+#: ../../../Application/Views/person/index.php:40
+#: ../../../Application/Views/person/perms.php:38
+#: ../../../Application/Views/person/role.php:38
+#: ../../../Application/Views/person/view.php:38
+#: ../../../Application/Views/person/view_addr.php:35
+msgid "Search Person"
+msgstr "Cerca Utente"
+
+#: ../../../Application/Views/person/addr_form.php:42
+#: ../../../Application/Views/person/addr_sum.php:39
+#: ../../../Application/Views/person/edit_addr.php:39
+#: ../../../Application/Views/person/view_addr.php:39
+msgid "Address Summary"
+msgstr "Sommario Indirizzo"
+
+#: ../../../Application/Views/person/addr_form.php:44
+#: ../../../Application/Views/person/edit_addr.php:41
+#: ../../../Application/Views/person/view_addr.php:41
+msgid "Edit Address"
+msgstr "Edita Indirizzo"
+
+#: ../../../Application/Views/person/addr_form.php:164
+#: ../../../Application/Views/person/edit_addr.php:161
+#: ../../../Application/Views/person/view_addr.php:161
+msgid "Address Type"
+msgstr "Tipo indirizzo"
+
+#: ../../../Application/Views/person/addr_form.php:215
+#: ../../../Application/Views/person/edit_addr.php:216
+#: ../../../Application/Views/person/view_addr.php:216
+msgid "Added By"
+msgstr "Aggiunto da"
+
+#: ../../../Application/Views/person/addr_form.php:252
+#: ../../../Application/Views/person/addr_form.php:305
+#: ../../../Application/Views/person/edit_addr.php:253
+#: ../../../Application/Views/person/edit_addr.php:306
+#: ../../../Application/Views/person/view_addr.php:253
+#: ../../../Application/Views/person/view_addr.php:306
+msgid "Extension"
+msgstr "Estensione"
+
+#: ../../../Application/Views/person/addr_form.php:271
+#: ../../../Application/Views/person/addr_form.php:324
+#: ../../../Application/Views/person/edit_addr.php:272
+#: ../../../Application/Views/person/edit_addr.php:325
+#: ../../../Application/Views/person/view_addr.php:272
+#: ../../../Application/Views/person/view_addr.php:325
+msgid "Business"
+msgstr "Lavoro"
+
+#: ../../../Application/Views/person/addr_form.php:272
+#: ../../../Application/Views/person/addr_form.php:325
+#: ../../../Application/Views/person/edit_addr.php:273
+#: ../../../Application/Views/person/edit_addr.php:326
+#: ../../../Application/Views/person/view_addr.php:273
+#: ../../../Application/Views/person/view_addr.php:326
+msgid "Cellular"
+msgstr "Cellulare"
+
+#: ../../../Application/Views/person/addr_form.php:273
+#: ../../../Application/Views/person/addr_form.php:326
+#: ../../../Application/Views/person/edit_addr.php:274
+#: ../../../Application/Views/person/edit_addr.php:327
+#: ../../../Application/Views/person/view_addr.php:274
+#: ../../../Application/Views/person/view_addr.php:327
+msgid "Home"
+msgstr ""
+
+#: ../../../Application/Views/person/addr_form.php:347
+#: ../../../Application/Views/person/edit_addr.php:348
+#: ../../../Application/Views/person/view_addr.php:348
+msgid "Primary Email"
+msgstr "Email Principale"
+
+#: ../../../Application/Views/person/addr_form.php:365
+#: ../../../Application/Views/person/edit_addr.php:366
+#: ../../../Application/Views/person/view_addr.php:366
+msgid "Secondary Email"
+msgstr "Email Secondaria"
+
+#: ../../../Application/Views/person/addr_sum.php:111
+msgid "Add"
+msgstr "Add"
+
+#: ../../../Application/Views/person/index.php:97
+#, fuzzy
+msgid "Switch to User"
+msgstr "Tornare alla"
+
+#: ../../../Application/Views/person/index.php:101
+#, fuzzy
+msgid "Create Staff Record"
+msgstr "Crea Sezione"
+
+#: ../../../Application/Views/person/index.php:108
+#: ../../../Application/Views/person/role.php:60
+msgid "Role"
+msgstr "Ruolo"
+
+#: ../../../Application/Views/person/index.php:135
+#, fuzzy
+msgid "Person Search"
+msgstr "Tipo Utente"
+
+#: ../../../Application/Views/person/perms.php:40
+msgid "Manage Person Permissions"
+msgstr "Manage Permessi Utente"
+
+#: ../../../Application/Views/person/perms.php:60
+msgid "Permission"
+msgstr "Autorizzazione"
+
+#: ../../../Application/Views/person/perms.php:61
+msgid "Allow"
+msgstr "Consenti"
+
+#: ../../../Application/Views/person/role.php:40
+msgid "Manage Person Role"
+msgstr "Gestisci Ruolo Utente"
+
+#: ../../../Application/Views/person/role.php:61
+msgid "Member"
+msgstr "Membro"
+
+#: ../../../Application/Views/person/role.php:62
+msgid "Not Member"
+msgstr "Non Membro"
+
+#: ../../../Application/Views/person/view.php:40
+msgid "View Person"
+msgstr "Vedi Utente"
+
+#: ../../../Application/Views/person/view.php:43
+msgid "Person:"
+msgstr "Utente:"
+
+#: ../../../Application/Views/person/view.php:347
+#: ../../../Application/Views/profile/index.php:91
+msgid "Reset Password"
+msgstr ""
+
+#: ../../../Application/Views/plugins/index.php:52
+msgid "Plugin"
+msgstr "Plugin"
+
+#: ../../../Application/Views/profile/index.php:37
+msgid "User Profile"
+msgstr "Profilo Utente"
+
+#: ../../../Application/Views/profile/index.php:106
+msgid "Email"
+msgstr ""
+
+#: ../../../Application/Views/program/add.php:38
+#: ../../../Application/Views/program/index.php:38
+#: ../../../Application/Views/program/view.php:38
+msgid "Search Program"
+msgstr "Cerca Programma"
+
+#: ../../../Application/Views/program/add.php:40
+msgid "Create Program"
+msgstr "Crea Programma"
+
+#: ../../../Application/Views/program/add.php:43
+msgid "Add Academic Program"
+msgstr "Add Programma Accademico"
+
+#: ../../../Application/Views/program/add.php:67
+#: ../../../Application/Views/program/index.php:68
+#: ../../../Application/Views/program/view.php:67
+msgid "Program Code"
+msgstr "Codice Programma"
+
+#: ../../../Application/Views/program/add.php:154
+#: ../../../Application/Views/program/view.php:154
+msgid "Effective Catalog Year"
+msgstr "Catalogo Effettivo Anno"
+
+#: ../../../Application/Views/program/index.php:35
+msgid "Programs"
+msgstr ""
+
+#: ../../../Application/Views/program/index.php:69
+msgid "Program Title"
+msgstr "Titolo Programma"
+
+#: ../../../Application/Views/program/view.php:40
+msgid "View Program"
+msgstr "Vedi Programma"
+
+#: ../../../Application/Views/registration/index.php:64
+msgid "Open Registration"
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:77
+msgid "Current Term"
+msgstr "Periodo Corrente"
+
+#: ../../../Application/Views/registration/index.php:89
+#: ../../../Application/Views/registration/index.php:175
+#, fuzzy
+msgid "# of Courses"
+msgstr "Corsi"
+
+#: ../../../Application/Views/registration/index.php:98
+#: ../../../Application/Views/registration/index.php:199
+msgid "Account Balance"
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:113
+#: ../../../Application/Views/registration/index.php:223
+#, fuzzy
+msgid "Open Terms"
+msgstr "Periodo Studente"
+
+#: ../../../Application/Views/registration/index.php:122
+#: ../../../Application/Views/registration/index.php:247
+#, fuzzy
+msgid "Registration Term"
+msgstr "Rapporto Periodo"
+
+#: ../../../Application/Views/registration/index.php:134
+#, fuzzy
+msgid "Registrar's Email"
+msgstr "Email Principale"
+
+#: ../../../Application/Views/registration/index.php:143
+#, fuzzy
+msgid "Instructions"
+msgstr "Docente"
+
+#: ../../../Application/Views/registration/index.php:180
+msgid "Set the number of courses a student is able to register into for any given term. There should only be one open term and it must match the registration term. Depending how long your course offering list is, this may not work 100%."
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:204
+msgid "If a student's current balance minus the current term is greater than the `Account Balance`, then the student is not eligible to register for courses (i.e. -100). Set to 0 to disable."
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:228
+msgid "Enter a comma delimited list of course terms that can be viewed on the course registration screen (i.e. \"13/FA\",\"14/SP\")."
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:252
+msgid "If `Open Registration` is set to yes, then choose the term for which a student can register into courses."
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:271
+#, fuzzy
+msgid "Registrar Email"
+msgstr "Email Principale"
+
+#: ../../../Application/Views/registration/index.php:276
+msgid "When a student registers for courses, to what email address should a registration notification be sent?"
+msgstr ""
+
+#: ../../../Application/Views/registration/index.php:295
+#, fuzzy
+msgid "Registration Instructions"
+msgstr "Prenotazione"
+
+#: ../../../Application/Views/registration/index.php:300
+msgid "Enter any comments or instructions you would like to appear on the course registration page."
+msgstr ""
+
+#: ../../../Application/Views/reservation/category.php:35
+#: ../../../Application/Views/reservation/category.php:38
+msgid "Reservation Categories"
+msgstr "Categorie Prenotazione"
+
+#: ../../../Application/Views/reservation/category.php:63
+msgid "Category Name"
+msgstr "Nome Categoria"
+
+#: ../../../Application/Views/reservation/category.php:76
+#: ../../../Application/Views/reservation/category.php:128
+msgid "Text Color"
+msgstr ""
+
+#: ../../../Application/Views/reservation/category.php:89
+#: ../../../Application/Views/reservation/category.php:129
+msgid "Background Color"
+msgstr ""
+
+#: ../../../Application/Views/reservation/category.php:127
+msgid "Category"
+msgstr "Categoria"
+
+#: ../../../Application/Views/reservation/index.php:37
+#: ../../../Application/Views/reservation/index.php:40
+msgid "Room Reservation Settings"
+msgstr "Prenotazione"
+
+#: ../../../Application/Views/reservation/index.php:64
+msgid "Hour Display"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:67
+msgid "12 Hour Display"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:68
+msgid "24 Hour Display"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:77
+msgid "Query Size"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:87
+msgid "Week Start"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/reservation/index.php:90
+msgid "Monday"
+msgstr "Lunedi"
+
+#: ../../../Application/Views/reservation/index.php:91
+msgid "Sunday"
+msgstr "Domenica"
+
+#: ../../../Application/Views/reservation/index.php:100
+msgid "Start Time"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/reservation/index.php:112
+msgid "End Time"
+msgstr "Fine periodo"
+
+#: ../../../Application/Views/reservation/index.php:130
+msgid "Bullets"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:143
+msgid "Enable Email"
+msgstr "Abilita Email"
+
+#: ../../../Application/Views/reservation/index.php:156
+msgid "Email From"
+msgstr ""
+
+#: ../../../Application/Views/reservation/index.php:166
+msgid "Reply To Email"
+msgstr "Rispondi to Email"
+
+#: ../../../Application/Views/role/add.php:35
+#: ../../../Application/Views/role/index.php:39
+#: ../../../Application/Views/role/index.php:42
+#: ../../../Application/Views/role/view.php:39
+msgid "Manage Roles"
+msgstr "Gestisci ruolo"
+
+#: ../../../Application/Views/role/add.php:37
+#: ../../../Application/Views/role/add.php:40
+msgid "Add Role"
+msgstr "Add Ruolo"
+
+#: ../../../Application/Views/role/add.php:59
+#: ../../../Application/Views/role/view.php:63
+msgid "Role Name"
+msgstr "Nome Ruolo"
+
+#: ../../../Application/Views/role/index.php:94
+msgid "New Role"
+msgstr "Nuovo Ruolo"
+
+#: ../../../Application/Views/role/view.php:41
+#: ../../../Application/Views/role/view.php:44
+msgid "Edit Role"
+msgstr "Edita Ruolo"
+
+#: ../../../Application/Views/role/view.php:76
+msgid "Deny"
+msgstr "Nega"
+
+#: ../../../Application/Views/role/view.php:77
+msgid "Ignore"
+msgstr "Ignora"
+
+#: ../../../Application/Views/savequery/add.php:35
+#: ../../../Application/Views/savequery/add.php:38
+msgid "Save Query"
+msgstr "Salva Query"
+
+#: ../../../Application/Views/savequery/add.php:63
+#: ../../../Application/Views/savequery/view.php:67
+msgid "Save Query Name"
+msgstr "Salva Nome Query"
+
+#: ../../../Application/Views/savequery/add.php:81
+#: ../../../Application/Views/savequery/add.php:127
+#: ../../../Application/Views/savequery/view.php:85
+#: ../../../Application/Views/savequery/view.php:132
+msgid "Auto Purge"
+msgstr "Auto elimina"
+
+#: ../../../Application/Views/savequery/add.php:131
+#: ../../../Application/Views/savequery/view.php:136
+msgid "If enabled, saved queries get purged every 30 days. If you use your saved query on a regular basis, you should set this option to no."
+msgstr "Se abilitata, query salvate vengono eliminati ogni 30 giorni. Se si utilizza la query salvata su base regolare, è necessario impostare questa opzione su n."
+
+#: ../../../Application/Views/savequery/index.php:51
+msgid "Saved Query Name"
+msgstr "Nome Query salvata"
+
+#: ../../../Application/Views/savequery/index.php:52
+msgid "Creation Date"
+msgstr "Data Creazione"
+
+#: ../../../Application/Views/savequery/index.php:79
+msgid "Are you sure you want to delete this saved query?"
+msgstr ""
+
+#: ../../../Application/Views/savequery/view.php:37
+msgid "Saved Queries"
+msgstr "Salva Queries"
+
+#: ../../../Application/Views/savequery/view.php:39
+#: ../../../Application/Views/savequery/view.php:42
+msgid "View Saved Query"
+msgstr "Vedi Query salvata"
+
+#: ../../../Application/Views/section/add.php:65
+#: ../../../Application/Views/section/addnl_info.php:35
+msgid "Search Section"
+msgstr "Cerca Sezione"
+
+#: ../../../Application/Views/section/add.php:94
+msgid "Section"
+msgstr "Sezione"
+
+#: ../../../Application/Views/section/add.php:117
+msgid "Section Start/End"
+msgstr "Start/End Sezione"
+
+#: ../../../Application/Views/section/add.php:155
+msgid "CEU's"
+msgstr ""
+
+#: ../../../Application/Views/section/add.php:247
+msgid "Comments"
+msgstr ""
+
+#: ../../../Application/Views/section/addnl_info.php:39
+msgid "View Section"
+msgstr "Vedi Sezione"
+
+#: ../../../Application/Views/section/addnl_info.php:66
+msgid "Instructor"
+msgstr "Docente"
+
+#: ../../../Application/Views/section/addnl_info.php:78
+msgid "Section Type"
+msgstr "Sezione Tipo"
+
+#: ../../../Application/Views/section/addnl_info.php:82
+msgid "ONL Online"
+msgstr ""
+
+#: ../../../Application/Views/section/addnl_info.php:83
+msgid "HB Hybrid"
+msgstr ""
+
+#: ../../../Application/Views/section/addnl_info.php:84
+msgid "ONC On-Campus"
+msgstr ""
+
+#: ../../../Application/Views/section/addnl_info.php:92
+msgid "Instructor Method"
+msgstr "Metodo Docente"
+
+#: ../../../Application/Views/section/addnl_info.php:107
+msgid "Contact Hours"
+msgstr "Orario di contatto"
+
+#: ../../../Application/Views/section/addnl_info.php:116
+msgid "Instructor Load"
+msgstr "Docente Caricato"
+
+#: ../../../Application/Views/section/attendance.php:37
+#: ../../../Application/Views/section/attendance_report.php:37
+msgid "Attendance"
+msgstr "Frequenza"
+
+#: ../../../Application/Views/section/attendance.php:40
+msgid "Attendance for "
+msgstr "Frequenza per"
+
+#: ../../../Application/Views/section/attendance.php:52
+msgid "Today's Date"
+msgstr "Frequentato a Data"
+
+#: ../../../Application/Views/section/attendance.php:66
+msgid "Student ID"
+msgstr "Studente ID"
+
+#: ../../../Application/Views/section/attendance.php:67
+msgid "Student Name"
+msgstr "Nome Studente"
+
+#: ../../../Application/Views/section/attendance.php:88
+msgid "Absent"
+msgstr "Assente"
+
+#: ../../../Application/Views/section/attendance.php:89
+msgid "Present"
+msgstr "Presente"
+
+#: ../../../Application/Views/section/attendance_report.php:39
+#: ../../../Application/Views/section/attendance_report.php:42
+msgid "Attendance Report"
+msgstr "Repot Frequenza"
+
+#: ../../../Application/Views/section/attendance_report.php:87
+msgid "Date"
+msgstr "Frequentato a Data"
+
+#: ../../../Application/Views/section/batch_register.php:52
+#: ../../../Application/Views/section/batch_register.php:55
+msgid "Batch Registration"
+msgstr "Batch Registrazione"
+
+#: ../../../Application/Views/section/batch_register.php:77
+msgid "Use the batch registration process if you need to register a group of students into a particular course section. This screen comes in handy when you need to create a saved query from a course section you need to cancel. The best way is to create your saved query by selecting the student id's in the old course section with an 'A' or 'N' status. Register them into the new course section and then cancel the old course section."
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:64
+#, fuzzy
+msgid "Booking Info"
+msgstr "Info Offerta"
+
+#: ../../../Application/Views/section/booking_info.php:75
+msgid "Booking"
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:75
+#, fuzzy
+msgid "Info"
+msgstr "Ignora"
+
+#: ../../../Application/Views/section/booking_info.php:81
+#, fuzzy
+msgid "Notice!"
+msgstr "Note"
+
+#: ../../../Application/Views/section/booking_info.php:81
+msgid "If a class meets more than once day a week, then you will need to fill out the form for each of the days the class meets in a week."
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:89
+#, fuzzy
+msgid "Book Classroom"
+msgstr "Aula Classe"
+
+#: ../../../Application/Views/section/booking_info.php:95
+msgid "Book Days"
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:101
+#, fuzzy
+msgid "Book Time"
+msgstr "Tempo"
+
+#: ../../../Application/Views/section/booking_info.php:107
+#, fuzzy
+msgid "Term Dates"
+msgstr "Codice Periodo"
+
+#: ../../../Application/Views/section/booking_info.php:109
+msgid "to"
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:113
+#: ../../../Application/Views/section/booking_info.php:228
+#, fuzzy
+msgid "Classroom"
+msgstr "Aula Classe"
+
+#: ../../../Application/Views/section/booking_info.php:122
+#, fuzzy
+msgid "First Day"
+msgstr "Cognome"
+
+#: ../../../Application/Views/section/booking_info.php:138
+#, fuzzy
+msgid "Last Day"
+msgstr "Nome"
+
+#: ../../../Application/Views/section/booking_info.php:172
+msgid "Repeat?"
+msgstr "Ripetere?"
+
+#: ../../../Application/Views/section/booking_info.php:182
+msgid "Repeat Occurrence"
+msgstr "Ripetere Evento"
+
+#: ../../../Application/Views/section/booking_info.php:187
+msgid "Every Day"
+msgstr "Ogni Giorno"
+
+#: ../../../Application/Views/section/booking_info.php:195
+#, fuzzy
+msgid "Biweekly"
+msgstr "Settimana"
+
+#: ../../../Application/Views/section/booking_info.php:211
+msgid "Check Availability"
+msgstr ""
+
+#: ../../../Application/Views/section/booking_info.php:225
+#, fuzzy
+msgid "Meeting Day"
+msgstr "Giorni Incontro"
+
+#: ../../../Application/Views/section/booking_info.php:226
+#, fuzzy
+msgid "Start Date/Time"
+msgstr "Inizio periodo"
+
+#: ../../../Application/Views/section/booking_info.php:227
+#, fuzzy
+msgid "End Date/Time"
+msgstr "Data fine"
+
+#: ../../../Application/Views/section/catalog.php:53
+#, fuzzy
+msgid "Term Name"
+msgstr "Nome Laurea"
+
+#: ../../../Application/Views/section/catalog.php:75
+msgid "PDF Export"
+msgstr ""
+
+#: ../../../Application/Views/section/courses.php:35
+#: ../../../Application/Views/section/fg_export.php:35
+#: ../../../Application/Views/section/final_grade.php:35
+#: ../../../Application/Views/section/grading.php:36
+msgid "Course Sections"
+msgstr "Sezione corsi"
+
+#: ../../../Application/Views/section/courses.php:52
+#: ../../../Application/Views/section/index.php:70
+msgid "Section Code"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/section/courses.php:75
+#, fuzzy
+msgid "Enter Final Grades"
+msgstr "Livelli"
+
+#: ../../../Application/Views/section/courses.php:76
+#, fuzzy
+msgid "Export Final Grades"
+msgstr "Livelli"
+
+#: ../../../Application/Views/section/fg_export.php:37
+#, fuzzy
+msgid "Export Final Grade"
+msgstr "Livello"
+
+#: ../../../Application/Views/section/fg_export.php:40
+#: ../../../Application/Views/section/final_grade.php:40
+#, fuzzy
+msgid "Final Grade for "
+msgstr "Livelli per"
+
+#: ../../../Application/Views/section/final_grade.php:37
+#, fuzzy
+msgid "Final Grade"
+msgstr "Livello"
+
+#: ../../../Application/Views/section/grading.php:38
+#: ../../../Application/Views/section/progress.php:127
+msgid "Assignments"
+msgstr "Assegnazioni"
+
+#: ../../../Application/Views/section/grading.php:40
+msgid "Grades"
+msgstr "Livelli"
+
+#: ../../../Application/Views/section/index.php:36
+msgid "Sections"
+msgstr "Sezioni"
+
+#: ../../../Application/Views/section/index.php:69
+msgid "Course Sec ID"
+msgstr "Corso Sez ID"
+
+#: ../../../Application/Views/section/offering_info.php:39
+#: ../../../Application/Views/section/view.php:286
+msgid "Offering Info"
+msgstr "Info Offerta"
+
+#: ../../../Application/Views/section/offering_info.php:78
+msgid "Class Room"
+msgstr "Aula Classe"
+
+#: ../../../Application/Views/section/offering_info.php:90
+msgid "Meeting Days"
+msgstr "Giorni Incontro"
+
+#: ../../../Application/Views/section/offering_info.php:102
+msgid "Tuesday"
+msgstr "Martedì"
+
+#: ../../../Application/Views/section/offering_info.php:106
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#: ../../../Application/Views/section/offering_info.php:110
+msgid "Thursday"
+msgstr "Giovedì"
+
+#: ../../../Application/Views/section/offering_info.php:114
+msgid "Friday"
+msgstr "Venerdì"
+
+#: ../../../Application/Views/section/offering_info.php:118
+msgid "Saturday"
+msgstr "Sabato"
+
+#: ../../../Application/Views/section/offering_info.php:156
+msgid "Register Online"
+msgstr "Registra online"
+
+#: ../../../Application/Views/section/pdf.php:67
+#, fuzzy
+msgid "Days"
+msgstr "Giorno"
+
+#: ../../../Application/Views/section/pdf.php:68
+msgid "Time"
+msgstr "Tempo"
+
+#: ../../../Application/Views/section/progress.php:54
+#: ../../../Application/Views/section/progress.php:57
+msgid "Submit Progress Report"
+msgstr "Invia Repot Progressi"
+
+#: ../../../Application/Views/section/progress.php:100
+msgid "Course Title"
+msgstr "Titolo Corso"
+
+#: ../../../Application/Views/section/progress.php:120
+msgid "Behavior"
+msgstr "Comportamento"
+
+#: ../../../Application/Views/section/progress.php:148
+msgid "Notes"
+msgstr "Note"
+
+#: ../../../Application/Views/section/register.php:69
+#: ../../../Application/Views/section/register.php:72
+msgid "Course Registration"
+msgstr "Registrazione Corso"
+
+#: ../../../Application/Views/section/register.php:144
+msgid "Register"
+msgstr ""
+
+#: ../../../Application/Views/section/roster.php:89
+#, fuzzy
+msgid "Acad Level"
+msgstr "Livello Accademico"
+
+#: ../../../Application/Views/section/roster.php:90
+msgid "Acad Program"
+msgstr "Programma Accademico"
+
+#: ../../../Application/Views/section/roster.php:91
+#, fuzzy
+msgid "Acad Credit Status"
+msgstr "Stato Crediti Accademici"
+
+#: ../../../Application/Views/section/sros.php:52
+#: ../../../Application/Views/section/sros.php:55
+#, fuzzy
+msgid "Student Roster"
+msgstr "Periodo Studente"
+
+#: ../../../Application/Views/setting/index.php:42
+#: ../../../Application/Views/setting/index.php:45
+msgid "System Settings"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:78
+msgid "System Email"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:87
+msgid "Enable SSL"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:100
+msgid "Maintenance Mode"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:113
+#, fuzzy
+msgid "Enable Benchmark"
+msgstr "Abilita Email"
+
+#: ../../../Application/Views/setting/index.php:126
+#: ../../../Application/Views/setting/index.php:263
+msgid "Enable Cron Jobs"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:139
+msgid "Enable Cron Log"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:152
+msgid "Cookie TTL"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:161
+msgid "Cookie Path"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:176
+#, fuzzy
+msgid "Curl"
+msgstr "Ore"
+
+#: ../../../Application/Views/setting/index.php:180
+msgid "On"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:181
+#, fuzzy
+msgid "Off"
+msgstr "Ufficio"
+
+#: ../../../Application/Views/setting/index.php:189
+#: ../../../Application/Views/setting/index.php:283
+msgid "Auth Token"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:198
+msgid "Help Desk"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:216
+msgid "Reset Password Text"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:243
+msgid "Hold File Location"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:267
+msgid "This option should be set to 'No' until you have configured each"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:267
+msgid "cron job"
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:267
+msgid "If this is set to 'Yes' before that, your error logs will be huge."
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:287
+msgid "If you plan to do development work using the RESTful API feature, then you will need an auth token."
+msgstr ""
+
+#: ../../../Application/Views/setting/index.php:287
+#, fuzzy
+msgid "Click here"
+msgstr "Clicca qui"
+
+#: ../../../Application/Views/setting/index.php:287
+msgid "to generate an auth token for your account."
+msgstr ""
+
+#: ../../../Application/Views/sql/index.php:121
+msgid "Successly Executed - "
+msgstr ""
+
+#: ../../../Application/Views/sql/index.php:126
+msgid "Query is : "
+msgstr ""
+
+#: ../../../Application/Views/staff/add.php:35
+#: ../../../Application/Views/staff/index.php:38
+#: ../../../Application/Views/staff/view.php:35
+msgid "Search Staff"
+msgstr "Cerca Staff"
+
+#: ../../../Application/Views/staff/add.php:37
+#: ../../../Application/Views/staff/add.php:40
+msgid "Add Staff"
+msgstr "Add Staff"
+
+#: ../../../Application/Views/staff/index.php:117
+#, fuzzy
+msgid "Staff Search"
+msgstr "Cerca"
+
+#: ../../../Application/Views/staff/view.php:37
+msgid "View Staff"
+msgstr "Vedi Staff"
+
+#: ../../../Application/Views/student/academic_credits.php:35
+#: ../../../Application/Views/student/add.php:58
+#: ../../../Application/Views/student/add_prog.php:55
+#: ../../../Application/Views/student/index.php:38
+#: ../../../Application/Views/student/rstr.php:44
+msgid "Search Student"
+msgstr "Cerca Studente"
+
+#: ../../../Application/Views/student/academic_credits.php:39
+#: ../../../Application/Views/student/index.php:93
+msgid "Academic Credits"
+msgstr "Crediti Accademici"
+
+#: ../../../Application/Views/student/academic_credits.php:55
+msgid "Course Sec Name"
+msgstr "Nome sez. Corso"
+
+#: ../../../Application/Views/student/add.php:60
+#: ../../../Application/Views/student/add.php:63
+msgid "Add Student"
+msgstr "Add Studente"
+
+#: ../../../Application/Views/student/add.php:96
+#: ../../../Application/Views/student/add_prog.php:86
+msgid "Program"
+msgstr "Programma"
+
+#: ../../../Application/Views/student/add.php:144
+msgid "Prog Start Date"
+msgstr "Data inizio Programma"
+
+#: ../../../Application/Views/student/add.php:180
+msgid "Catalog Year"
+msgstr "Catalogo Anno"
+
+#: ../../../Application/Views/student/add.php:192
+#: ../../../Application/Views/student/add_prog.php:116
+msgid "Advisor"
+msgstr ""
+
+#: ../../../Application/Views/student/add.php:209
+msgid "H Hiatus"
+msgstr ""
+
+#: ../../../Application/Views/student/add.php:210
+msgid "L Leave of Absence"
+msgstr ""
+
+#: ../../../Application/Views/student/add_prog.php:59
+msgid "Add Student Program"
+msgstr "Add Programma Studente"
+
+#: ../../../Application/Views/student/add_prog.php:134
+msgid "Ant Grad Date"
+msgstr "Ant Livello Dati"
+
+#: ../../../Application/Views/student/courses.php:59
+msgid "Search Courses"
+msgstr "Cerca Corsi"
+
+#: ../../../Application/Views/student/courses.php:76
+msgid "You have a hold on your account which is restricting your from registering. Please contact the following office(s)/department(s) to inquire about the hold(s) on your account: "
+msgstr ""
+
+#: ../../../Application/Views/student/courses.php:98
+msgid "Meeting Day(s)"
+msgstr ""
+
+#: ../../../Application/Views/student/courses.php:130
+#, fuzzy
+msgid "Section Info"
+msgstr "Codice Sezione"
+
+#: ../../../Application/Views/student/courses.php:138
+#, fuzzy
+msgid "Instructor:"
+msgstr "Docente"
+
+#: ../../../Application/Views/student/courses.php:142
+#, fuzzy
+msgid "Description:"
+msgstr "Descrizione"
+
+#: ../../../Application/Views/student/courses.php:146
+msgid "Comment:"
+msgstr ""
+
+#: ../../../Application/Views/student/courses.php:150
+#, fuzzy
+msgid "Course Fee:"
+msgstr "Costo Corso"
+
+#: ../../../Application/Views/student/courses.php:154
+#, fuzzy
+msgid "Lab Fee:"
+msgstr "Costo Lab"
+
+#: ../../../Application/Views/student/courses.php:158
+#, fuzzy
+msgid "Material Fee:"
+msgstr "Costo Materiale Corso"
+
+#: ../../../Application/Views/student/final_grades.php:37
+#: ../../../Application/Views/student/final_grades.php:40
+#: ../../../Application/Views/student/portal.php:60
+#, fuzzy
+msgid "Final Grades"
+msgstr "Livelli"
+
+#: ../../../Application/Views/student/generate.php:76
+#, fuzzy
+msgid "Student ID: "
+msgstr "Studente ID"
+
+#: ../../../Application/Views/student/generate.php:77
+msgid "Social Security #: "
+msgstr ""
+
+#: ../../../Application/Views/student/generate.php:78
+#, fuzzy
+msgid "Graduation Date: "
+msgstr "Dati Laurea"
+
+#: ../../../Application/Views/student/generate.php:90
+#, fuzzy
+msgid "Attempted Credits"
+msgstr "Crediti Accademici"
+
+#: ../../../Application/Views/student/generate.php:91
+msgid "Completed Credits"
+msgstr ""
+
+#: ../../../Application/Views/student/generate.php:93
+#, fuzzy
+msgid "Dates"
+msgstr "Frequentato a Data"
+
+#: ../../../Application/Views/student/generate.php:109
+msgid "Totals"
+msgstr ""
+
+#: ../../../Application/Views/student/grades.php:37
+#: ../../../Application/Views/student/schedule.php:37
+#, fuzzy
+msgid "Terms"
+msgstr "Periodo"
+
+#: ../../../Application/Views/student/grades.php:39
+#: ../../../Application/Views/student/schedule.php:39
+#: ../../../Application/Views/student/schedule.php:42
+msgid "Schedule"
+msgstr "Orario"
+
+#: ../../../Application/Views/student/grades.php:44
+msgid "Grades for "
+msgstr "Livelli per"
+
+#: ../../../Application/Views/student/graduation.php:83
+msgid "Graduation Date"
+msgstr "Dati Laurea"
+
+#: ../../../Application/Views/student/index.php:94
+#: ../../../Application/Views/student/rstr.php:61
+#: ../../../Application/Views/student/rstr.php:172
+#, fuzzy
+msgid "Restriction"
+msgstr "Descrizione"
+
+#: ../../../Application/Views/student/index.php:119
+#, fuzzy
+msgid "Student Search"
+msgstr "Periodo Studente"
+
+#: ../../../Application/Views/student/portal.php:45
+msgid "Hello Student!"
+msgstr "Hello Studente"
+
+#: ../../../Application/Views/student/portal.php:46
+msgid "Welcome to the student portal. From here, you can view and print your class schedule, view grades, request transcripts, and register for courses."
+msgstr "Benvenuti nel portale dello studente. Da qui, è possibile visualizzare e stampare l'orario delle lezioni, vista gradi, richiesta di trascrizioni, e iscriversi ai corsi."
+
+#: ../../../Application/Views/student/portal.php:55
+msgid "Menu"
+msgstr ""
+
+#: ../../../Application/Views/student/portal.php:59
+msgid "Class Schedule"
+msgstr "Orario Classe"
+
+#: ../../../Application/Views/student/rstr.php:46
+#, fuzzy
+msgid "Student Restriction"
+msgstr "Sezione Corso Studente"
+
+#: ../../../Application/Views/student/rstr.php:62
+#: ../../../Application/Views/student/rstr.php:183
+#, fuzzy
+msgid "Severity"
+msgstr "Università"
+
+#: ../../../Application/Views/student/rstr.php:210
+msgid "Comment"
+msgstr ""
+
+#: ../../../Application/Views/student/schedule.php:59
+msgid "Day(s) of the Week"
+msgstr ""
+
+#: ../../../Application/Views/student/tran.php:35
+#: ../../../Application/Views/student/tran.php:38
+msgid "Transcript"
+msgstr ""
+
+#: ../../../Application/Views/student/tran.php:71
+msgid "Transcript Type"
+msgstr ""
+
+#: ../../../Application/Views/student/view_academic_credits.php:41
+msgid "View Academic Credits"
+msgstr "Vedi Crediti Accademici"
+
+#: ../../../Application/Views/student/view_academic_credits.php:62
+msgid "Course ID"
+msgstr "Corso ID"
+
+#: ../../../Application/Views/student/view_academic_credits.php:71
+msgid "Course Name"
+msgstr "Nome Corso"
+
+#: ../../../Application/Views/student/view_academic_credits.php:149
+msgid "Reporting term"
+msgstr "Riporta Periodo"
+
+#: ../../../Application/Views/student/view_academic_credits.php:188
+msgid "Status Time"
+msgstr "Stato Tempo"
+
+#: ../../../Application/Views/student/view_prog.php:39
+msgid "Edit Student Program"
+msgstr "Edita Programma Studente"
+
+#: ../../../Application/Views/student/view_prog.php:126
+msgid "Eligible to Graduate?"
+msgstr ""
+
+#: ../../../Application/Views/student/view_prog.php:238
+msgid "Eligible to Graduate"
+msgstr ""
+
+#: ../../../Application/Views/student/view_prog.php:243
+msgid "Select the checkbox if the student is eligible to graduate from this particular program."
+msgstr ""
+
+#: ../../../Application/Views/success/course_registration.php:43
+msgid "Your were succesfully registered into the requested course section. If you would like to register for another, "
+msgstr ""
+
+#: ../../../Application/Views/success/course_registration.php:43
+#, fuzzy
+msgid "to the registration screen."
+msgstr "Batch Registrazione"
+
+#: ../../../Application/Views/success/delete_record.php:43
+msgid "The record was deleted successfully. Use the navigation above to navigate to a new screen."
+msgstr "Il record è stato cancellato con successo. Utilizzare il menu di navigazione in alto per passare a una nuova schermata."
+
+#: ../../../Application/Views/success/nslc_purge.php:43
+msgid "Records were purged successfully. You may continue with the NSLC process."
+msgstr "Record sono stati eliminati con successo. Si può continuare con il processo NSLC."
+
+#: ../../../Application/Views/success/progress_report.php:43
+msgid "You progress was submitted successfully. Also, the parent will receive an email alerting to the new progress report."
+msgstr "Il tuo progresso è stato presentato con successo. Inoltre, il genitore riceverà una e-mail di avviso per la nuova relazione."
+
+#: ../../../Application/Views/success/reset_password.php:43
+msgid "The password for the requested user has been reset. They should also receive an email address with their new password as well."
+msgstr "È stata reimpostata la password per l'utente richiesto. Dovrebbero anche ricevere un indirizzo e-mail con la nuova password."
+
+#: ../../../Application/Views/success/save_data.php:43
+msgid "The data was saved successfully to the database."
+msgstr "I dati sono stati salvati correttamente al database."
+
+#: ../../../Application/Views/success/save_query.php:43
+msgid "The save list "
+msgstr "L'elenco salvataggio"
+
+#: ../../../Application/Views/success/save_query.php:43
+#, fuzzy
+msgid " was saved to the database."
+msgstr "I dati sono stati salvati correttamente al database."
+
+#: ../../../Application/Views/success/update_record.php:43
+msgid "The requested record was updated successfully."
+msgstr "Il record richiesto è stato aggiornato con successo."
+
+#: ../../../Application/Views/support/index.php:27
+#: ../../../Application/Views/support/index.php:30
+#, fuzzy
+msgid "Online Documenation"
+msgstr "Documentazione Online"
+
+#: ../../../Application/Views/support/index.php:39
+msgid "Your browser does not support iframes."
+msgstr ""
+
+#: ../../../Application/Views/timetable/index.php:89
+#, fuzzy
+msgid "Timetable"
+msgstr "Titolo"
+
+#: ../../../Application/Views/timetable/index.php:98
+msgid "Month"
+msgstr ""
+
+#: ../../../Application/Views/timetable/index.php:99
+#, fuzzy
+msgid "Week"
+msgstr "Settimana"
+
+#: ../../../Application/Views/timetable/index.php:100
+#, fuzzy
+msgid "Day"
+msgstr "Giorno"
+
+#: ../../../Application/Views/timetable/index.php:101
+#, fuzzy
+msgid "Today"
+msgstr "Lunedi"
+
+#: ../../../Application/Views/timetable/index.php:109
+#, fuzzy
+msgid "table"
+msgstr "Maschio"
+
+#: ../../../Application/Views/upgrade/index.php:48
+msgid "Warning!"
+msgstr "Attenzione!"
+
+#: ../../../Application/Views/upgrade/index.php:48
+msgid "Hey admin, your database is out of date and currently at version "
+msgstr ""
+
+#: ../../../Application/Views/upgrade/index.php:48
+msgid ". Click the button below to upgrade your database. When the upgrade is complete,"
+msgstr ""
+
+#: ../../../Application/Views/upgrade/index.php:48
+msgid "click here"
+msgstr "Clicca qui"
+
+#: ../../../Application/Views/upgrade/index.php:48
+msgid "to return to the dashboard. If you are behind on a few versions, you may be redirected to this page again until the system is fully up to date."
+msgstr ""
+
+#: ../../../Application/Views/upgrade/index.php:62
+msgid "Hey admin, you database is currently up to date. There is nothing else here to see. "
+msgstr ""
+
+#: ../../../Application/Views/upgrade/index.php:62
+msgid "to return to the dashboard."
+msgstr ""
+
+#: ../../../Classes/Controllers/Application.php:39
+#, fuzzy
+msgid "Search Applications"
+msgstr "Cerca Applicazione"
+
+#: ../../../Classes/Controllers/Application.php:60
+#, fuzzy
+msgid "Add Application"
+msgstr "Applicazione"
+
+#: ../../../Classes/Controllers/Course.php:91
+msgid "View Course"
+msgstr "Vedi Corso"
+
+#: ../../../Classes/Controllers/Course.php:117
+#, fuzzy
+msgid "Additional Course Info"
+msgstr "Ulteriori Info Corso"
+
+#: ../../../Classes/Controllers/Error.php:76
+msgid "Missing Population"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:81
+msgid "Importer Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:86
+msgid "Invalid Record"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:91
+msgid "SQL Restricted Keywords"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:96
+#, fuzzy
+msgid "Screen Error"
+msgstr "Gestione"
+
+#: ../../../Classes/Controllers/Error.php:101
+msgid "Delete Record Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:106
+msgid "Update Record Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:116
+msgid "NSLC Purge Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:121
+msgid "NSLC Extraction Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Error.php:126
+#, fuzzy
+msgid "Course Registration Error"
+msgstr "Registrazione Corso"
+
+#: ../../../Classes/Controllers/Error.php:131
+#, fuzzy
+msgid "Registration Restriction"
+msgstr "Prenotazione"
+
+#: ../../../Classes/Controllers/Error.php:136
+#, fuzzy
+msgid "Save Data"
+msgstr "Inizio periodo"
+
+#: ../../../Classes/Controllers/Error.php:141
+#, fuzzy
+msgid "Edit Data"
+msgstr "Data fine"
+
+#: ../../../Classes/Controllers/Error.php:146
+msgid "Reset Password Error"
+msgstr ""
+
+#: ../../../Classes/Controllers/Event.php:50
+#, fuzzy
+msgid "Events"
+msgstr "Lista Eventi"
+
+#: ../../../Classes/Controllers/Event.php:62
+#, fuzzy
+msgid "Add Event"
+msgstr "Add Studente"
+
+#: ../../../Classes/Controllers/Form.php:343
+#, fuzzy
+msgid "View Student Load Rule"
+msgstr "Vedi Studente"
+
+#: ../../../Classes/Controllers/Form.php:822
+#, fuzzy
+msgid "Add Room"
+msgstr "Add Ruolo"
+
+#: ../../../Classes/Controllers/Form.php:887
+#, fuzzy
+msgid "Add Specialization"
+msgstr "Specializzazione"
+
+#: ../../../Classes/Controllers/Form.php:948
+msgid "Class Year"
+msgstr "Anno Classe"
+
+#: ../../../Classes/Controllers/Form.php:968
+msgid "View Class Year"
+msgstr "(CLYR) - Anno Classe"
+
+#: ../../../Classes/Controllers/Form.php:1222
+#, fuzzy
+msgid "View Grade"
+msgstr "Vedi Corso"
+
+#: ../../../Classes/Controllers/Form.php:1281
+#, fuzzy
+msgid "View Restriction Code"
+msgstr "Vedi Sezione"
+
+#: ../../../Classes/Controllers/Help.php:50
+msgid "This is the help page."
+msgstr "Questa è la pagina di aiuto."
+
+#: ../../../Classes/Controllers/Hr.php:47
+#, fuzzy
+msgid "Search Employees"
+msgstr "Cerca Corsi"
+
+#: ../../../Classes/Controllers/Hr.php:67
+#, fuzzy
+msgid "Add New Position"
+msgstr "Add Istituzione"
+
+#: ../../../Classes/Controllers/Hr.php:145
+msgid "Timesheets"
+msgstr ""
+
+#: ../../../Classes/Controllers/Hr.php:165
+#, fuzzy
+msgid "View Timesheet"
+msgstr "Semestre"
+
+#: ../../../Classes/Controllers/Hr.php:190
+#, fuzzy
+msgid "View Timesheet Record"
+msgstr "Semestre"
+
+#: ../../../Classes/Controllers/Hr.php:209
+msgid "View Employee Positions"
+msgstr ""
+
+#: ../../../Classes/Controllers/Index.php:48
+#, fuzzy
+msgid "Login"
+msgstr "Posizione"
+
+#: ../../../Classes/Controllers/Install.php:50
+msgid "eduTrac Installer"
+msgstr ""
+
+#: ../../../Classes/Controllers/Institution.php:47
+#, fuzzy
+msgid "Institutions"
+msgstr "Istituzione"
+
+#: ../../../Classes/Controllers/Lock.php:43
+#, fuzzy
+msgid "Screen Lock"
+msgstr "Gestione"
+
+#: ../../../Classes/Controllers/Mailer.php:106
+#, fuzzy
+msgid "Schedule Mailer"
+msgstr "Orario"
+
+#: ../../../Classes/Controllers/Nslc.php:47
+#, fuzzy
+msgid "Search NSLC File"
+msgstr "Cerca Corso"
+
+#: ../../../Classes/Controllers/Nslc.php:59
+#, fuzzy
+msgid "NSLC Correction"
+msgstr "Sezione"
+
+#: ../../../Classes/Controllers/Nslc.php:79
+msgid "Download NSLC File"
+msgstr ""
+
+#: ../../../Classes/Controllers/Person.php:68
+#, fuzzy
+msgid "Add New Person"
+msgstr "Nuovo Permesso"
+
+#: ../../../Classes/Controllers/Person.php:84
+#, fuzzy
+msgid "Add Address Form"
+msgstr "Edita Indirizzo"
+
+#: ../../../Classes/Controllers/Person.php:140
+#, fuzzy
+msgid "View Address"
+msgstr "Edita Indirizzo"
+
+#: ../../../Classes/Controllers/Person.php:161
+#, fuzzy
+msgid "User Roles"
+msgstr "Profilo Utente"
+
+#: ../../../Classes/Controllers/Person.php:185
+#, fuzzy
+msgid "User Permissions"
+msgstr "Permessi"
+
+#: ../../../Classes/Controllers/Plugins.php:68
+msgid "Plugin Option Page"
+msgstr ""
+
+#: ../../../Classes/Controllers/Program.php:68
+#, fuzzy
+msgid "Add Program"
+msgstr "Programma Accademico"
+
+#: ../../../Classes/Controllers/Reservation.php:46
+#, fuzzy
+msgid "Reservation Settings"
+msgstr "Prenotazione"
+
+#: ../../../Classes/Controllers/Role.php:85
+#, fuzzy
+msgid "View Role"
+msgstr "Nuovo Ruolo"
+
+#: ../../../Classes/Controllers/Savequery.php:47
+#, fuzzy
+msgid "List Saved Queries"
+msgstr "Salva Queries"
+
+#: ../../../Classes/Controllers/Savequery.php:67
+#, fuzzy
+msgid "Create Save Queries"
+msgstr "Salva Queries"
+
+#: ../../../Classes/Controllers/Section.php:68
+#, fuzzy
+msgid "Add Section"
+msgstr "Sezione"
+
+#: ../../../Classes/Controllers/Section.php:113
+#, fuzzy
+msgid "Additional Course Section Info"
+msgstr "Ulteriori Info Sezione"
+
+#: ../../../Classes/Controllers/Section.php:134
+#, fuzzy
+msgid "Course Section Offering Info"
+msgstr "Roster sezione Corso"
+
+#: ../../../Classes/Controllers/Section.php:160
+#, fuzzy
+msgid "Course Section Billing Info"
+msgstr "Corso sezione"
+
+#: ../../../Classes/Controllers/Section.php:172
+#, fuzzy
+msgid "Course Section Booking Info"
+msgstr "Corso sezione"
+
+#: ../../../Classes/Controllers/Section.php:212
+#, fuzzy
+msgid "Batch Course Registration"
+msgstr "Registrazione Corso"
+
+#: ../../../Classes/Controllers/Section.php:229
+#, fuzzy
+msgid "Print Student Roster"
+msgstr "Edita Programma Studente"
+
+#: ../../../Classes/Controllers/Section.php:246
+#, fuzzy
+msgid "Student Section Roster"
+msgstr "Roster sezione Corso"
+
+#: ../../../Classes/Controllers/Section.php:280
+#, fuzzy
+msgid "Course Catalog By Terms"
+msgstr "Costo Materiale Corso"
+
+#: ../../../Classes/Controllers/Section.php:301
+#, fuzzy
+msgid "Course Catalog"
+msgstr "Codice Corso"
+
+#: ../../../Classes/Controllers/Section.php:313
+#, fuzzy
+msgid "Add Course Section Assignment"
+msgstr "Sezione corsi"
+
+#: ../../../Classes/Controllers/Section.php:331
+#, fuzzy
+msgid "Course Section Assignments"
+msgstr "Sezione corsi"
+
+#: ../../../Classes/Controllers/Section.php:355
+#, fuzzy
+msgid "View Course Section Assignment"
+msgstr "Sezione miei corsi"
+
+#: ../../../Classes/Controllers/Section.php:400
+#, fuzzy
+msgid "Course Section Grading"
+msgstr "Corso sezione"
+
+#: ../../../Classes/Controllers/Section.php:424
+#, fuzzy
+msgid "Export Course Section Grades"
+msgstr "Sezione corsi"
+
+#: ../../../Classes/Controllers/Section.php:448
+#, fuzzy
+msgid "Course Section Gradebook"
+msgstr "Corso sezione"
+
+#: ../../../Classes/Controllers/Section.php:498
+#, fuzzy
+msgid "Course Section Final Grade"
+msgstr "Corso sezione"
+
+#: ../../../Classes/Controllers/Section.php:544
+#, fuzzy
+msgid "Create Progress Report"
+msgstr "Vedi report progressi"
+
+#: ../../../Classes/Controllers/Sql.php:47
+#, fuzzy
+msgid "SQL Terminal"
+msgstr "SEM Seminario"
+
+#: ../../../Classes/Controllers/Student.php:92
+msgid "View Student"
+msgstr "Vedi Studente"
+
+#: ../../../Classes/Controllers/Student.php:119
+#, fuzzy
+msgid "Student Restrictions"
+msgstr "Sezione Corso Studente"
+
+#: ../../../Classes/Controllers/Student.php:164
+#, fuzzy
+msgid "View Student Program"
+msgstr "Programma Studente"
+
+#: ../../../Classes/Controllers/Student.php:185
+#: ../../../Classes/Controllers/Student.php:212
+#, fuzzy
+msgid "Student Academic Credits"
+msgstr "Crediti Accademici Studente"
+
+#: ../../../Classes/Controllers/Student.php:359
+msgid "My Bills"
+msgstr ""
+
+#: ../../../Classes/Controllers/Student.php:380
+#, fuzzy
+msgid "View My Bill"
+msgstr "Vedi Building"
+
+#: ../../../Classes/Controllers/Student.php:414
+#, fuzzy
+msgid "Generate Transcript(s)"
+msgstr "Genera Trascrizione"
+
+#: ../../../Classes/Controllers/Success.php:54
+#, fuzzy
+msgid "Save Query Success"
+msgstr "Salva Nome Query"
+
+#: ../../../Classes/Controllers/Success.php:59
+msgid "Save Data Success"
+msgstr ""
+
+#: ../../../Classes/Controllers/Success.php:64
+#, fuzzy
+msgid "Course Registration Success"
+msgstr "Registrazione Corso"
+
+#: ../../../Classes/Controllers/Success.php:69
+msgid "Purge NSLC Success"
+msgstr ""
+
+#: ../../../Classes/Controllers/Success.php:74
+msgid "Delete Record Success"
+msgstr ""
+
+#: ../../../Classes/Controllers/Success.php:79
+msgid "Update Record Success"
+msgstr ""
+
+#: ../../../Classes/Controllers/Success.php:84
+msgid "Reset Password Success"
+msgstr ""
+
+#: ../../../Classes/Controllers/Success.php:89
+#, fuzzy
+msgid "Sent Progress Report Successfully"
+msgstr "Vedi report progressi per"
+
+#: ../../../Classes/Controllers/Upgrade.php:50
+msgid "Database Upgrade"
+msgstr ""
+
+#: ../../../Classes/Libraries/Messages.php:36
+msgid "Your message has been sent and someone will contact you as soon as possible."
+msgstr "Il tuo messaggio è stato inviato e qualcuno vi contatterà appena possibile."
+
+#: ../../../Classes/Libraries/Messages.php:37
+msgid "Sorry, all fields must be filled in before you can submit the form."
+msgstr "Siamo spiacenti, tutti i campi devono essere compilati prima di poter inviare il modulo."
+
+#: ../../../Classes/Libraries/Messages.php:38
+msgid "Sorry, your topic could not be posted. Please try again."
+msgstr "Spiacenti, l'argomento non può essere pubblicato. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:39
+msgid "You forgot to choose a message to delete. Go back and try again."
+msgstr "Hai dimenticato di scegliere un messaggio da eliminare. Torna indietro e riprovare."
+
+#: ../../../Classes/Libraries/Messages.php:40
+msgid "Sorry, your reply could not be updated."
+msgstr "Spiacente, la risposta non potrebbe essere aggiornato."
+
+#: ../../../Classes/Libraries/Messages.php:41
+msgid "Message successfully sent!"
+msgstr "Messaggio inviato con successo!"
+
+#: ../../../Classes/Libraries/Messages.php:42
+msgid "Error, couldn't send PM. Maybe wrong user."
+msgstr "Errore, non poteva inviare PM. User forse sbagliato."
+
+#: ../../../Classes/Libraries/Messages.php:43
+msgid "Message successfully deleted!"
+msgstr "Messaggio cancellato con successo!"
+
+#: ../../../Classes/Libraries/Messages.php:44
+msgid "Error, couldn't delete PM!"
+msgstr "Errore, non poteva eliminare PM!"
+
+#: ../../../Classes/Libraries/Messages.php:45
+msgid "Your new member has been added and was sent an email with new account details."
+msgstr "Il vostro nuovo membro è stato aggiunto ed è stata inviata una mail con nuovi dettagli dell'account."
+
+#: ../../../Classes/Libraries/Messages.php:46
+msgid "Sorry, the new user could not be added. Please try again."
+msgstr "Spiacenti, il nuovo utente non può essere aggiunto. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:47
+msgid "Your news posting has been deleted. Go back to your the main news page."
+msgstr "La tua notizia distacco è stato cancellato. Torna alla tua pagina principale notizia."
+
+#: ../../../Classes/Libraries/Messages.php:48
+msgid "You forgot to choose a news posting to delete.  Go back to the main news page and try again."
+msgstr "Hai dimenticato di scegliere un distacco di notizie da eliminare. Torna alla pagina principale di notizie e riprovare."
+
+#: ../../../Classes/Libraries/Messages.php:49
+msgid "The user has been updated successfully."
+msgstr "L'utente è stato aggiornato con successo."
+
+#: ../../../Classes/Libraries/Messages.php:50
+msgid "The user was not updated, please try again."
+msgstr "L'utente non è stato aggiornato, riprova."
+
+#: ../../../Classes/Libraries/Messages.php:51
+msgid "News item updated successfully."
+msgstr "Notizia aggiornata correttamente."
+
+#: ../../../Classes/Libraries/Messages.php:52
+msgid "An error occurred. Please check your post and try again."
+msgstr "Si è verificato un errore. Si prega di controllare il tuo post e riprovare."
+
+#: ../../../Classes/Libraries/Messages.php:53
+msgid "The file you are trying to upload is not a .zip file. Please try again."
+msgstr "Il file che si sta tentando di caricare non è un file zip.. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:54
+msgid "Your plugin was uploaded and installed properly."
+msgstr "Il tuo plugin è stato caricato e installato correttamente."
+
+#: ../../../Classes/Libraries/Messages.php:55
+msgid "There was a problem uploading your plugin. Please try again or check the plugin package."
+msgstr "C'è stato un problema di caricamento del plugin. Riprovare o controllare il pacchetto plugin."
+
+#: ../../../Classes/Libraries/Messages.php:56
+msgid "The re-install was successful."
+msgstr "La re-installazione ha avuto successo."
+
+#: ../../../Classes/Libraries/Messages.php:57
+msgid "There was an error with the re-install. It is better that you download the full version and overwrite the files on your server manually."
+msgstr "C'è stato un errore con la re-installazione. E 'meglio scaricare la versione completa e sovrascrivere i file sul vostro server manualmente."
+
+#: ../../../Classes/Libraries/Messages.php:58
+msgid "Your system was upgraded to the latest version."
+msgstr "Il sistema è stato aggiornato alla versione più recente."
+
+#: ../../../Classes/Libraries/Messages.php:59
+msgid "There was an error upgrading to the latest version. It is better that you download the full version and overwrite the files on your server manually."
+msgstr "Si è verificato un errore nell'aggiornamento alla versione più recente. E 'meglio  scaricare la versione completa e sovrascrivere i file sul vostro server manualmente."
+
+#: ../../../Classes/Libraries/Messages.php:60
+msgid "Sorry, your user type was not added. Please try again."
+msgstr "Spiacenti, il tuo tipo di utente non è stato aggiunto. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:61
+msgid "There was an error uploading the file, please try again!"
+msgstr "Si è verificato un errore durante il caricamento del file, riprova!"
+
+#: ../../../Classes/Libraries/Messages.php:62
+msgid "File name is not valid or the file was more than "
+msgstr "Il nome del file non è valido"
+
+#: ../../../Classes/Libraries/Messages.php:63
+msgid "You profile was updated successfully."
+msgstr "Il profilo è stato aggiornato con successo."
+
+#: ../../../Classes/Libraries/Messages.php:64
+msgid "Your profile could not be updated. Please try again."
+msgstr "Il tuo profilo non può essere aggiornato. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:65
+msgid "Your password has been updated."
+msgstr "La tua password è stata aggiornata."
+
+#: ../../../Classes/Libraries/Messages.php:66
+msgid "Sorry, your password cannot be blank."
+msgstr "Spiacenti, la password non può essere vuota."
+
+#: ../../../Classes/Libraries/Messages.php:67
+msgid "The project has been added."
+msgstr "È stato aggiunto al progetto."
+
+#: ../../../Classes/Libraries/Messages.php:68
+msgid "Project name, description, type, and email must be filled out before submitting the form."
+msgstr "Nome del progetto, la descrizione, il tipo e-mail devono essere compilati prima di inviare il modulo."
+
+#: ../../../Classes/Libraries/Messages.php:69
+msgid "Your project has been updated."
+msgstr "Il progetto è stato aggiornato."
+
+#: ../../../Classes/Libraries/Messages.php:70
+msgid "Your project was unable to be updated. Please try again."
+msgstr "Il progetto non è stato aggiornato. Riprova."
+
+#: ../../../Classes/Libraries/Messages.php:71
+msgid "Your username or password was entered incorreclty. Please go back and try again."
+msgstr "Il tuo nome utente o la password non è corretta. Si prega di tornare indietro e provare di nuovo."
+
+#: ../../../Classes/Models/InstallModel.php:67
+#: ../../../Classes/Models/InstallModel.php:82
+msgid "Unable to establish a database connection."
+msgstr "Impossibile stabilire una connessione al database."
+
+#, fuzzy
+#~ msgid "Autodetect Location"
+#~ msgstr "Vedi Posizione"
+
+#, fuzzy
+#~ msgid "Autodetect Type"
+#~ msgstr "Tipo Dipartimento"
+
+#, fuzzy
+#~ msgid "Degree Units"
+#~ msgstr "Laurea"
+
+#~ msgid "Course:"
+#~ msgstr "Corso:"
+
+#~ msgid "Latest 7 Media News"
+#~ msgstr "Ultime 7 novità"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendario"
+
+#~ msgid "Every Two Weeks"
+#~ msgstr "Ogni 2 settimane"
+
+#~ msgid "Support"
+#~ msgstr "Supporto"
+
+#~ msgid "Community Support Site"
+#~ msgstr "Sito Comunity Support"
+
+#~ msgid ""
+#~ "The file you tried to upload is not a .csv file. Please <a onclick="
+#~ "\"history.go(-1);\"><font color=\"orange\">go back</font></a> and try "
+#~ "again."
+#~ msgstr ""
+#~ "Il file si è tentato di caricare non è un file. Csv. Si prega <a onclick="
+#~ "\"history.go(-1);\"> <font color=\"orange\"> tornare </ font> </ a> e "
+#~ "riprovare."
+
+#~ msgid "Search Faculty"
+#~ msgstr "Cerca Facoltà"
+
+#~ msgid "Add Faculty"
+#~ msgstr "Add Facoltà"
+
+#~ msgid "View Faculty"
+#~ msgstr "Vedi Facoltà"
+
+#~ msgid "Cred Load Name"
+#~ msgstr "Nome Credito caricato"
+
+#~ msgid "Credit Load Code"
+#~ msgstr "Codice credito caricato"
+
+#~ msgid "Credit Load Name"
+#~ msgstr "Nome credito caricato"
+
+#~ msgid "State/Province"
+#~ msgstr "Stato/Provincia"
+
+#~ msgid "View Deparment"
+#~ msgstr "Vedi Dipartimento"
+
+#~ msgid "(CRL) - Credit Load"
+#~ msgstr "(CRL) - Carica Crediti"
+
+#~ msgid "(CLYR) - Class Year"
+#~ msgstr "(CLYR) - Classe Anno"
+
+#~ msgid "(FAC) Faculty"
+#~ msgstr "(FAC) Facoltà"
+
+#~ msgid "Parent/Child Connect"
+#~ msgstr "Parente/Studente Connect"
+
+#~ msgid "Parent Portal"
+#~ msgstr "Portale Parente"
+
+#~ msgid "Child's ID"
+#~ msgstr "Allievo ID"
+
+#~ msgid "Parent/Child Connection"
+#~ msgstr "Parente/Allievo Connect"
+
+#~ msgid "Parent ID"
+#~ msgstr "Parente ID"
+
+#~ msgid "Child ID"
+#~ msgstr "Allievo ID"
+
+#~ msgid "Connect"
+#~ msgstr "Connetti"
+
+#~ msgid "Search Parent"
+#~ msgstr "Cerca Parente"
+
+#~ msgid "Hello Parent!"
+#~ msgstr "Hello Parente"
+
+#~ msgid ""
+#~ "Welcome to the parent portal. The parent portal allows you to see your "
+#~ "child's final grades and progress reports."
+#~ msgstr ""
+#~ "Benvenuti nel portale parente. Il  portale permette di vedere voti finali "
+#~ "del vostro bambino e relazioni."
+
+#~ msgid "Child(ren)"
+#~ msgstr "Allievi"
+
+#~ msgid "Progress Report List"
+#~ msgstr "Report lista Progressi"
+
+#~ msgid "Progress Reports"
+#~ msgstr "Report Progressi"
+
+#~ msgid "Teacher"
+#~ msgstr "Docente"
+
+#~ msgid "View Parent"
+#~ msgstr "Vedi Parente"
+
+#~ msgid "Inactive"
+#~ msgstr "Inattivo"
+
+#~ msgid "Manage Permissions for -"
+#~ msgstr "Gestire le autorizzazioni per -"
+
+#~ msgid "Manage Role for -"
+#~ msgstr "Gestire ruolo per -"
+
+#~ msgid "Dept/Div"
+#~ msgstr "Dip/Div"
+
+#~ msgid "You can find the id of a course section by visiting the"
+#~ msgstr "Potete trovare l'id di una sezione naturalmente visitando il"
+
+#~ msgid "search"
+#~ msgstr "Cerca"
+
+#~ msgid ""
+#~ "screen for sections. The id is the first column in the table from the "
+#~ "search result."
+#~ msgstr ""
+#~ "schermo per le sezioni. L'ID è la prima colonna della tabella dai "
+#~ "risultati della ricerca."
+
+#~ msgid "Offering Info:"
+#~ msgstr "Info Offerta:"
+
+#~ msgid "My Courses"
+#~ msgstr "I miei Corsi"
+
+#~ msgid "Course Sec Code"
+#~ msgstr "Codice Sez. Corso"
+
+#~ msgid "Reservation"
+#~ msgstr "Prenotazione"
+
+#~ msgid "Student Accounts"
+#~ msgstr "Account Studente"
