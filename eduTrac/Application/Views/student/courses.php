@@ -175,10 +175,10 @@ $(window).load(function(){
 						<!-- // Modal END -->
                     </td>
                     <td<?=isRegistrationOpen();?> class="text-center">
-                        <input type="hidden" name="courseCredits[]" value="<?=_h($v['minCredit']);?>" />
-                        <input type="hidden" name="termCode[]" value="<?=_h($v['termCode']);?>" />
                         <?php if(_h($v['termCode']) == Hooks::get_option('registration_term')) : ?>
                         <?php if(student_can_register()) : ?>
+                    	<input type="hidden" name="courseCredits[]" value="<?=_h($v['minCredit']);?>" />
+                        <input type="hidden" name="termCode[]" value="<?=_h($v['termCode']);?>" />
                         <input<?=getStuSec(_h($v['courseSecCode']),_h($v['termCode']));?> type="checkbox" name="courseSecCode[]" value="<?=_h($v['courseSecCode']);?>" />
                         <?php endif; endif; ?>
                     </td>

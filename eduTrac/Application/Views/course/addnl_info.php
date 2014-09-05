@@ -28,6 +28,7 @@
  */
 
 use \eduTrac\Classes\Libraries\Hooks;
+$message = new \eduTrac\Classes\Libraries\Messages;
 $courseList = new \eduTrac\Classes\DBObjects\Course;
 $list = '"'.implode('","', $courseList->crseList(_h($this->addnl[0]['courseID']))).'"';
 ?>
@@ -36,6 +37,8 @@ $list = '"'.implode('","', $courseList->crseList(_h($this->addnl[0]['courseID'])
 $(function() {
     $("#select2_5").select2({tags:[<?=$list;?>]});
 });
+$(".success-panel").show();
+setTimeout(function() { $(".success-panel").hide(); }, 5000);
 </script>
 
 <ul class="breadcrumb">
@@ -51,6 +54,8 @@ $(function() {
 
 <h3><?=_t( 'Additional Course Info:' );?> <?=_h($this->addnl[0]['courseCode']);?></h3>
 <div class="innerLR">
+	
+	<?=$message->flashMessage();?>
 
 	<!-- Form -->
 	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>course/runAddnl/" id="validateSubmitForm" method="post" autocomplete="off">

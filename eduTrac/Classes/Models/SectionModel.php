@@ -811,7 +811,7 @@ class SectionModel {
 	            "section" => Util::_trim($data['termCode']).'-'.$sc,"description" => $this->_crse->getCourseDesc()
 	        );
         	Hooks::do_action('create_course_section',$section);
-            $this->_log->setLog('New Record','Course Section',$data['secShortTitle'],$this->_uname);
+            $this->_log->setLog('New Record','Course Section',$data['secShortTitle'] . ' ('.Util::_trim($data['termCode']).'-'.Util::_trim($sc) . ')',$this->_uname);
             redirect( BASE_URL . 'section/view/' . $ID . '/' . bm() );
         }
     
@@ -864,7 +864,7 @@ class SectionModel {
                 DB::inst()->update( "course_sec", $update3, "courseSecID = :courseSecID", $bind );
             }
         }
-        $this->_log->setLog('Update Record','Course Section',$data['secShortTitle'],$this->_uname);
+        $this->_log->setLog('Update Record','Course Section',$data['secShortTitle'] . ' ('.Util::_trim($data['termCode']).'-'.$this->_sec->getCourseSecCode() . ')',$this->_uname);
         redirect( BASE_URL . 'section/view/' . $data['courseSecID'] . '/' . bm() );
     }
     

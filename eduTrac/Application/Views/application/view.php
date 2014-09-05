@@ -26,7 +26,13 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+$message = new \eduTrac\Classes\Libraries\Messages;
 ?>
+
+<script type="text/javascript">
+$(".panel").show();
+setTimeout(function() { $(".panel").hide(); }, 5000);
+</script>
 
 <ul class="breadcrumb">
     <li><?=_t( 'You are here' );?></li>
@@ -39,6 +45,8 @@
 
 <h3><?=_t( 'View Application' );?></h3>
 <div class="innerLR">
+	
+	<?=$message->flashMessage();?>
 
 	<!-- Form -->
 	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>application/runEditApplication/" id="validateSubmitForm" method="post" autocomplete="off">

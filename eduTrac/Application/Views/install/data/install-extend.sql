@@ -2669,7 +2669,7 @@ INSERT INTO `et_option` VALUES(19, 'reserve_reply_email', '');
         
 INSERT INTO `et_option` VALUES(20, 'open_registration', '1');
         
-INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://www.7mediaws.org/client/');
+INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://community.7mediaws.org/projects/edutrac');
         
 INSERT INTO `et_option` VALUES(22, 'enable_cron_jobs', 0);
         

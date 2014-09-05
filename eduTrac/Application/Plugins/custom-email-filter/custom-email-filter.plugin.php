@@ -3,7 +3,7 @@
 Plugin Name: Custom Email Filter
 Plugin URI: http://www.7mediaws.org/
 Version: 1.0.0
-Description: This plugin gives you the ability to override the default 'eduTrac' from name and email address.
+Description: This plugin gives you the ability to override the default 'eduTrac' from name and email address. If you are using the smtp plugin, you do not need to use this plugin.
 Author: Joshua Parker
 Author URI: http://www.7mediaws.org/
 Plugin Slug: custom-email-filter

@@ -185,10 +185,12 @@ class Hooks {
 				$pluginFile = $v['location'];
 				$plugin = str_replace('.plugin.php', '', $pluginFile);
 				
-				if(!file_exists(PLUGINS_DIR . $plugin . '/' . $pluginFile)) {
+				if(file_exists(PLUGINS_DIR . $pluginFile)) {
 					Util::_require_once(PLUGINS_DIR . $pluginFile);
-				} else {
+				} elseif(file_exists(PLUGINS_DIR . $plugin . '/' . $pluginFile)) {
 					Util::_require_once(PLUGINS_DIR . $plugin . '/' . $pluginFile);
+				} else {
+					self::deactivate_plugin($v['location']);
 				}
 			}
 		}
