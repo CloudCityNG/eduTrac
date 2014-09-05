@@ -35,10 +35,12 @@ class ApplicationModel {
     private $_auth;
     private $_log;
     private $_uname;
+	private $_message;
 	
 	public function __construct() {
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies; 
-        $this->_log = new \eduTrac\Classes\Libraries\Log;  
+        $this->_log = new \eduTrac\Classes\Libraries\Log;
+		$this->_message = new \eduTrac\Classes\Libraries\Messages;
         $this->_uname = $this->_auth->getPersonField('uname');
 	}
     
@@ -219,6 +221,14 @@ class ApplicationModel {
             $q2 = DB::inst()->update("institution_attended",$update2,"instAttID = :id AND personID = :personID",$bind2);
             ++$i;
         }
+        
+		// Flash messages for success or error
+		if($q1) {
+			$this->_message->init('success_message', $this->_message->notice(3));
+		} else {
+			$this->_message->init('error_message', $this->_message->notice(4));
+		}
+		// Sets audit trail logs
         $this->_log->setLog('Update Record','Application',get_name($data['personID']),$this->_uname);
         redirect( BASE_URL . 'application/view/' . $data['applID'] . '/' . bm() );
     }

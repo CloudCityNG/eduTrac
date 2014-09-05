@@ -1035,6 +1035,7 @@ class StudentModel {
                     ];
                     
             $q2 = DB::inst()->insert( "stu_acad_cred", $bind2 );
+			$this->_log->setLog('New Record','Course Registration',Util::_trim($data['termCode'][$i]).'-'.Util::_trim($data['courseSecCode'][$i]),$this->_uname);
             ++$i;
         }
         

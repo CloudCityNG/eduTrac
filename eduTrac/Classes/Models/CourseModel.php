@@ -38,11 +38,13 @@ class CourseModel {
     private $_log;
     private $_auth;
     private $_uname;
+	private $_message;
 	
 	public function __construct() {
         $this->_subj = new Subject;
         $this->_log = new \eduTrac\Classes\Libraries\Log;
         $this->_auth = new \eduTrac\Classes\Libraries\Cookies;
+		$this->_message = new \eduTrac\Classes\Libraries\Messages;
         $this->_uname = $this->_auth->getPersonField('uname');
 	}
 	
@@ -127,6 +129,14 @@ class CourseModel {
         if($r['currStatus'] != $data['currStatus']) {
             DB::inst()->update( "course", $update2, "courseID = :courseID", $bind );
         }
+		
+		// Flash messages for success or error
+		if($q) {
+			$this->_message->init('success_message', $this->_message->notice(3));
+		} else {
+			$this->_message->init('error_message', $this->_message->notice(4));
+		}
+		// Sets audit trail logs
         $this->_log->setLog('Update Record','Course',$data['courseShortTitle'],$this->_uname);
         redirect( BASE_URL . 'course/view/' . $data['courseID'] . '/' . bm() );
     }
@@ -140,6 +150,13 @@ class CourseModel {
         $bind = array( ":courseID" => $data['courseID'] );
         
         $q = DB::inst()->update( "course", $update, "courseID = :courseID", $bind );
+		
+		// Flash messages for success or error
+		if($q) {
+			$this->_message->init('success_message', $this->_message->notice(3));
+		} else {
+			$this->_message->init('error_message', $this->_message->notice(4));
+		}
         redirect( BASE_URL . 'course/addnl_info/' . $data['courseID'] . '/' . bm() );
     }
     

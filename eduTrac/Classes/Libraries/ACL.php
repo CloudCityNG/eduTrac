@@ -240,8 +240,4 @@ class ACL {
 		$row = $strSQL->fetch();
 		return $row[0];
 	}
-	
-	public function __destruct() {
-		$this->_db->close();
-	}
 }

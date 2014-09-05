@@ -166,7 +166,7 @@ class Cookies {
      * @return mixed
      * 
      */ 
-    public function _setcookie($name,$value,$expire=COOKIE_EXPIRE,$path=COOKIE_PATH,$domain=COOKIE_DOMAIN,$secure=false,$httponly=false) {
+    public function _setcookie($name,$value,$expire=COOKIE_EXPIRE,$path=COOKIE_PATH,$domain='',$secure=false,$httponly=false) {
         setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
     }
     
