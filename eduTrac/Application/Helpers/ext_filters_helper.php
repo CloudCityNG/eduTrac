@@ -225,7 +225,7 @@ use \eduTrac\Classes\Libraries\Cookies;
         if($acl->userHasRole(8)) {
             if(CURRENT_VERSION < getCurrentVersion(0)) {
             	$alert = '<div class="alerts alerts-warn center">';
-						$alert .= '<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac Community update.' ).' <a href="http://sourceforge.net/projects/edutrac/">'._t( ' Click here' ).'</a> '._t( 'to download it. Also feel free to check out the').' <a href="#modal" data-toggle="modal">'._t( 'changelog' ).'</a>';
+						$alert .= '<strong>'._t( 'Update!' ).'</strong> '._t( 'Hey admin, there is a new eduTrac Community update.' ).' <a href="https://github.com/7mediaws/eduTrac">'._t( ' Click here' ).'</a> '._t( 'to download it. Also feel free to check out the').' <a href="#modal" data-toggle="modal">'._t( 'changelog' ).'</a>';
 				$alert .= '</div>';
 				
 				$alert .= '<div id="modal" class="modal fade">';

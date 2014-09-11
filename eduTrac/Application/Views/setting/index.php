@@ -284,7 +284,7 @@ use \eduTrac\Classes\Libraries\Hooks;
 				</div>
 				<!-- // Modal heading END -->
 		        <div class="modal-body">
-		            <p><?=_t("If you plan to do development work using the RESTful API feature, then you will need an auth token.");?> <a href="http://edutrac.7mediaws.org/apis/restful_api/restful_api/"><?=_t('Click here');?></a> <?=_t("to generate an auth token for your account.");?></p>
+		            <p><?=_t("If you plan to do development work using the RESTful API feature, then you will need an auth token.");?> <a href="http://community.7mediaws.org/projects/edutrac/wiki/RESTful_API"><?=_t('Click here');?></a> <?=_t("to generate an auth token for your account.");?></p>
 		        </div>
 		        <div class="modal-footer">
 		            <a href="#" data-dismiss="modal" class="btn btn-primary"><?=_t( 'Cancel' );?></a>

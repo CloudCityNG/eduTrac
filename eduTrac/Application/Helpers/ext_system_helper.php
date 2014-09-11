@@ -269,6 +269,51 @@ use \eduTrac\Classes\Libraries\Cookies;
         return $html_output;
     }
     
+	/**
+	 * A function which returns true if the logged in user
+	 * is a student in the system.
+	 * @since 4.3
+	 * @param $id
+	 * @return mixed
+	 */
+	function isStudent($id) {
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->select( 'student','stuID=:id','','ID',$bind );
+		if(count($q) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * A function which returns true if the logged in user
+	 * has an active student, staff, or faculty record.
+	 * @since 4.3
+	 * @param $id
+	 * @return mixed
+	 */
+	function isRecordActive($id) {
+		$bind = [ ":id" => $id ];
+		$q = DB::inst()->query( "SELECT 
+				a.personID 
+			FROM 
+				person a 
+			LEFT JOIN student b ON a.personID = b.stuID 
+			LEFT JOIN staff c ON a.personID = c.staffID 
+			WHERE 
+				a.personID=:id 
+			AND 
+				b.status = 'A' 
+			OR 
+				c.status = 'A'",
+			$bind
+		);
+		if(count($q) > 0) {
+			return true;
+		}
+		return false;
+	}
+    
     /**
      * General ledger account dropdown: pulls dropdown list from general ledger 
 	 * account table. if $activeID is not NULL, shows the record attached 
@@ -772,13 +817,20 @@ use \eduTrac\Classes\Libraries\Cookies;
             "upgrade","update","html","script","css",
             "x=x","x = x","everything","anyone","everyone",
             "upload","&","&amp;","xp_","$","0=0","0 = 0",
-            "X=X","X = X","union","'='","XSS","mysql_error",
+            "X=X","X = X","mysql","'='","XSS","mysql_",
             "die","password","auth_token","alert","img","src",
             "drop tables","drop index","drop database","drop column",
             "show tables in","show databases"," in ",
             "slave","hosts","grants","warnings","variables",
             "triggers","privileges","engine","processlist",
-            "relaylog","errors"
+            "relaylog","errors","information_schema","mysqldump",
+            "hostname","root","use","describe","flush","privileges",
+            "mysqladmin","set","quit","-u","-p","load data",
+            "backup table","cache index","change master to","commit",
+            "drop user","drop view","kill","load index","load table",
+            "lock","reset","restore","rollback","savepoint",
+            "show character set","show collation","innodb",
+            "show table status"
         ];
         return $array;
     }

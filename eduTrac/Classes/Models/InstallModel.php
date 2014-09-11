@@ -40,7 +40,7 @@ class InstallModel {
     private $_error;
     private $_product = 'eduTrac Community';
     private $_company = '7 Media Web Solutions, LLC';
-    private $_version = '4.2.3';
+    private $_version = '4.3';
     
     public function __construct() {
     	Session::init();
@@ -147,7 +147,7 @@ class InstallModel {
         
         $sql[] = "INSERT INTO `et_option` VALUES(20, 'open_registration', '1');";
         
-        $sql[] = "INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://www.7mediaws.org/client/');";
+        $sql[] = "INSERT INTO `et_option` VALUES(21, 'help_desk', 'http://community.7mediaws.org/projects/edutrac');";
         
         $sql[] = "INSERT INTO `et_option` VALUES(22, 'enable_cron_jobs', 0);";
         

@@ -45,8 +45,8 @@ class Log {
     public function writeLog($action,$process,$record,$uname) {
         $create = date("Y-m-d H:i:s", time());
         $current_date = strtotime($create);
-        /* 10 days after creation date */
-        $expire = date("Y-m-d H:i:s",$current_date+=864000);
+        /* 20 days after creation date */
+        $expire = date("Y-m-d H:i:s",$current_date+=1728000);
         
         $bind = array( 
                        "action" => $action, "process" => $process, "record" => $record,

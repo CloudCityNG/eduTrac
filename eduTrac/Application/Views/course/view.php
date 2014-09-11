@@ -26,11 +26,14 @@
  * @package     eduTrac
  * @author      Joshua Parker <josh@7mediaws.org>
  */
+$message = new \eduTrac\Classes\Libraries\Messages;
 ?>
 
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 <script type="text/javascript">
 	tinymce.init({selector: "textarea"});
+$(".success-panel").show();
+setTimeout(function() { $(".success-panel").hide(); }, 5000);
 </script>
 
 <ul class="breadcrumb">
@@ -44,6 +47,8 @@
 
 <h3><?=_h($this->crse[0]['courseCode']);?></h3>
 <div class="innerLR">
+	
+	<?=$message->flashMessage();?>
 
 	<!-- Form -->
 	<form class="form-horizontal margin-none" action="<?=BASE_URL;?>course/runEditCourse/" id="validateSubmitForm" method="post" autocomplete="off">
